@@ -49,7 +49,7 @@ jobs:
           git checkout -b ${{ steps.extract_branch.outputs.branch }}
           rm -rf *
           cd ../
-          cp -avr ./doc/** ./target/
+          cp -avr ./docs-1/** ./target/
           cd target
           git add .
           git commit -m "Bot add"
