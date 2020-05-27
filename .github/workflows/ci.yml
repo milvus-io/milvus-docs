@@ -42,7 +42,7 @@ jobs:
       - name: Delete And Push
         run: |
           cd ../
-          git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/nameczz/a-project.git target
+          git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
           git config --global user.email "bot@zilliz.com"
           git config --global user.name "bot"
           cd target
