@@ -4,16 +4,19 @@ on:
   push:
     # file paths to consider in the event. Optional; defaults to all.
     paths:
-      - "doc_form/**"
+      - "site/**"
       - ".github/workflows/**"
       - "!**.md"
+    tags:
+      - v1.*
   pull_request:
     # file paths to consider in the event. Optional; defaults to all.
     paths:
-      - "doc_form/**"
+      - "site/**"
       - ".github/workflows/**"
       - "!**.md"
-
+    tags:
+      - v1.*
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
