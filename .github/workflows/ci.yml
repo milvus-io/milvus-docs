@@ -4,13 +4,13 @@ on:
   push:
     # file paths to consider in the event. Optional; defaults to all.
     paths:
-      - "src/**"
+      - "doc_form/**"
       - ".github/workflows/**"
       - "!**.md"
   pull_request:
     # file paths to consider in the event. Optional; defaults to all.
     paths:
-      - "src/**"
+      - "doc_form/**"
       - ".github/workflows/**"
       - "!**.md"
 
