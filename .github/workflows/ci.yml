@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-          echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF#refs/heads/})"
+          echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF})"
         id: extract_branch
 
       - name: Md2md
