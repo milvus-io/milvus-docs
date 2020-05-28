@@ -6,6 +6,24 @@ sidebar_label: Release Notes
 
 # Release Notes
 
+## v0.9.1
+
+**Release date**：2020-5-30
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.9.1          | 0.2.11             | 0.8.0            | 0.4.0          |
+
+#### Fixed issues
+
+- In a multi-partition situation, data is inserted twice after the server reboots. [#2378](https://github.com/milvus-io/milvus/issues/2378)
+- A `cudaMalloc` failure occurs with GPU IVF index when nq (number of queries) is high. [#2395](https://github.com/milvus-io/milvus/issues/2395). [#2395](https://github.com/milvus-io/milvus/issues/2395)
+- Deleted vectors are still found in GPU-enabled Milvus. [#2450](https://github.com/milvus-io/milvus/issues/2450)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.9.1/CHANGELOG.md) for more information.
+
 ## v0.9.0
 
 **Release date**：2020-5-15
