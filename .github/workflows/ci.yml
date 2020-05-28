@@ -16,9 +16,9 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Extract branch name
+      - name: Extract tag info
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
         id: extract_branch
 
       - name: Md2md
@@ -36,11 +36,11 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b ${{ steps.extract_branch.outputs.branch }}
+          git checkout -b ${{ GITHUB_HEAD_REF }}
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
-          git commit -m "Release new docs "
-          git push -f origin ${{ steps.extract_branch.outputs.branch }}
+          git commit -m "Release new docs  ${{ steps.extract_branch.outputs.tag }}"
+          git push -f origin ${{ GITHUB_HEAD_REF }}
