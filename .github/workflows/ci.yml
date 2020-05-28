@@ -1,8 +1,22 @@
 name: dev
 
 on:
-  release:
-    types: [published]
+  push:
+    # file paths to consider in the event. Optional; defaults to all.
+    paths:
+      - "doc_form/**"
+      - ".github/workflows/**"
+      - "!**.md"
+    tags:
+      - v1.*
+  pull_request:
+    # file paths to consider in the event. Optional; defaults to all.
+    paths:
+      - "doc_form/**"
+      - ".github/workflows/**"
+      - "!**.md"
+    tags:
+      - v1.*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -16,12 +30,9 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Extract tag info
+      - name: Extract branch name
         shell: bash
-        run: |
-          sudo apt install jq
-          echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-          echo "##[set-output name=branch;]$(echo jq .version version.json)"
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
 
       - name: Md2md
@@ -31,7 +42,6 @@ jobs:
           goover
           rm -rf doc_from/*
           mv doc_to site
-
       - name: Delete And Push
         run: |
           cd ../
@@ -39,13 +49,11 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-
           git checkout -b ${{ steps.extract_branch.outputs.branch }}
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
-          git commit -m "Release new docs  ${{ steps.extract_branch.outputs.tag }}"
-
-#          git push -f origin  ${{ github.base_ref }}
+          git commit -m "Update doc"
+          git push -f origin ${{ steps.extract_branch.outputs.branch }}
