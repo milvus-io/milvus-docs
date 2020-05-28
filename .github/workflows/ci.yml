@@ -37,11 +37,11 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b ${{ github.base_ref }}
+          git checkout -b ${{ GITHUB_BASE_REF }}
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
           git commit -m "Release new docs  ${{ steps.extract_branch.outputs.tag }}"
-          git push -f origin  ${{ github.base_ref }}
+#          git push -f origin  ${{ github.base_ref }}
