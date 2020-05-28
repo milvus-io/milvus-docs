@@ -42,5 +42,5 @@ jobs:
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
-          git commit -m "Release new docs ${{GITHUB_REF}}"
+          git commit -m "Release new docs "
           git push -f origin ${{ steps.extract_branch.outputs.branch }}
