@@ -18,7 +18,9 @@ jobs:
 
       - name: Extract tag info
         shell: bash
-        run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
+        run: |
+          echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
+          echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF#refs/heads/})"
         id: extract_branch
 
       - name: Md2md
@@ -36,12 +38,11 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          echo ${GITHUB_HEAD_REF}
-          git checkout -b ${ GITHUB_HEAD_REF }
+          git checkout -b ${{ steps.extract_branch.outputs.branch }}
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
           git commit -m "Release new docs  ${{ steps.extract_branch.outputs.tag }}"
-          git push -f origin ${{ GITHUB_HEAD_REF }}
+          git push -f origin  ${{ steps.extract_branch.outputs.branch }}
