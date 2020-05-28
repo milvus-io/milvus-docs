@@ -4,7 +4,7 @@ on:
   push:
     # file paths to consider in the event. Optional; defaults to all.
     paths:
-      - "doc_form/**"
+      - "site/**"
       - ".github/workflows/**"
       - "!**.md"
     tags:
@@ -12,7 +12,7 @@ on:
   pull_request:
     # file paths to consider in the event. Optional; defaults to all.
     paths:
-      - "doc_form/**"
+      - "site/**"
       - ".github/workflows/**"
       - "!**.md"
     tags:
@@ -42,6 +42,7 @@ jobs:
           goover
           rm -rf doc_from/*
           mv doc_to site
+
       - name: Delete And Push
         run: |
           cd ../
