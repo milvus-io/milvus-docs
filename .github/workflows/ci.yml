@@ -36,7 +36,8 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b ${{ GITHUB_HEAD_REF }}
+          echo ${GITHUB_HEAD_REF}
+          git checkout -b ${ GITHUB_HEAD_REF }
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
