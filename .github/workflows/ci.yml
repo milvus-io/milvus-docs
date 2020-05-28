@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo apt install jq
           echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-          echo "##[set-output name=branch;]$(echo jq .version version.json)"
+          echo "##[set-output name=branch;]$(echo ${jq .version version.json})"
         id: extract_branch
 
       - name: Md2md
