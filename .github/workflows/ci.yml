@@ -20,7 +20,6 @@ jobs:
         shell: bash
         run: |
           echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-          echo "##[set-output name=branch;]$(echo ${GITHUB_BASE_REF})"
         id: extract_branch
 
       - name: Md2md
@@ -38,7 +37,9 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b ${{ steps.extract_branch.outputs.branch }}
+          sudo apt install jq
+          
+          git checkout -b ${{ jq .version }}
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
