@@ -20,7 +20,6 @@ jobs:
         shell: bash
         run: |
           echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-          echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF})"
         id: extract_branch
 
       - name: Md2md
@@ -38,11 +37,11 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b ${{ steps.extract_branch.outputs.branch }}
+          git checkout -b ${{ github.base_ref }}
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
           git commit -m "Release new docs  ${{ steps.extract_branch.outputs.tag }}"
-          git push -f origin  ${{ steps.extract_branch.outputs.branch }}
+          git push -f origin  ${{ github.base_ref }}
