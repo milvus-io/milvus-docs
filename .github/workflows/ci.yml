@@ -33,8 +33,8 @@ jobs:
         run: |
           cd ../
           git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
-          git config --global user.email "bot@zilliz.com"
-          git config --global user.name "bot"
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
           cd target
           git checkout -b ${{ steps.extract_branch.outputs.branch }}
           rm -rf *
@@ -42,5 +42,5 @@ jobs:
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
-          git commit -m "Bot add"
+          git commit -m "Release new docs ${{GITHUB_REF}}"
           git push -f origin ${{ steps.extract_branch.outputs.branch }}
