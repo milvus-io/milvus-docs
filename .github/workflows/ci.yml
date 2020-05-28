@@ -1,22 +1,8 @@
 name: dev
 
 on:
-  push:
-    # file paths to consider in the event. Optional; defaults to all.
-    paths:
-      - "site/**"
-      - ".github/workflows/**"
-      - "!**.md"
-    tags:
-      - v1.*
-  pull_request:
-    # file paths to consider in the event. Optional; defaults to all.
-    paths:
-      - "site/**"
-      - ".github/workflows/**"
-      - "!**.md"
-    tags:
-      - v1.*
+  release:
+    types: [published]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,7 +28,6 @@ jobs:
           goover
           rm -rf doc_from/*
           mv doc_to site
-
       - name: Delete And Push
         run: |
           cd ../
@@ -50,11 +35,11 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b ${{ steps.extract_branch.outputs.branch }}
+          git checkout -b v0.10.0
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
-          git commit -m "Update doc"
-          git push -f origin ${{ steps.extract_branch.outputs.branch }}
+          git commit -m "Release new docs "
+          git push -f origin v0.10.0
