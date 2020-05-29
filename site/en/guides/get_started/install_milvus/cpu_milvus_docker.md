@@ -29,8 +29,8 @@ sidebar_label: Install CPU-only Milvus
 #### Milvus Docker requirements
 
 - If you're using Ubuntu or CentOS, [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
-- If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in **Settings -> Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
-- If you're installing Milvus on macOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in **Settings -> Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
+- If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in **Settings > Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
+- If you're installing Milvus on macOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in **Settings > Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
 
 ## Install Milvus on Ubuntu/CentOS
 
@@ -62,20 +62,19 @@ $ docker pull milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml).
+> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml).
 
 
 #### Step 4 Start Docker container
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
@@ -109,18 +108,17 @@ $ docker logs <milvus container id>
 
 ## Install Milvus on Windows
 
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 and Step 4**.
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3** and **Step 4**.
 
-For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
+For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
 
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v C:\milvus\db:/var/lib/milvus/db \
 -v C:\milvus\conf:/var/lib/milvus/conf \
 -v C:\milvus\logs:/var/lib/milvus/logs \
@@ -130,7 +128,7 @@ milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 
 ## Install Milvus on macOS
 
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 and Step 4**.
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3** and **Step 4**.
 
 For Step 3, the path has some minor differences:
 
@@ -138,17 +136,16 @@ For Step 3, the path has some minor differences:
 # Create Milvus file
 $ mkdir -p /Users/$USER/milvus/conf
 $ cd /Users/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
 ```
 
 For Step 4, start the docker by mapping Milvus files to the right path:
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \

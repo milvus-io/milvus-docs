@@ -29,8 +29,8 @@ sidebar_label: Install CPU-only Milvus on Docker
 #### Milvus Docker 要求
 
 - 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
-- 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
-- 如果在 macOS 上安装 Milvus，请安装[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 macOS 上安装 Milvus，请安装[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
 
 ## 在 Ubuntu/CentOS 上安装 Milvus
 
@@ -62,19 +62,18 @@ $ docker pull milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
 ```
 
-> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) 的内容。
+> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) 的内容。
 
 #### 第四步 启动 Milvus Docker 容器
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
@@ -109,16 +108,15 @@ $ docker logs <milvus container id>
 
 在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步** 和 **第四步** 略有不同。
 
-在第三步中，不同于使用 `wget` 来获取配置文件，使用 Windows 安装时，建议在 C 盘，或其它合适的位置创建 `milvus` 文件夹，下面包含 `db`，`conf`，`logs` 和 `wal` 等文件夹，然后复制 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) 的内容到您在 `C:\milvus\conf` 路径下创建的`server_config.yaml` 文件中。
+在第三步中，不同于使用 `wget` 来获取配置文件，使用 Windows 安装时，建议在 C 盘，或其它合适的位置创建 `milvus` 文件夹，下面包含 `db`，`conf`，`logs` 和 `wal` 等文件夹，然后复制 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) 的内容到您在 `C:\milvus\conf` 路径下创建的`server_config.yaml` 文件中。
 
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径。下面的命令是在命令提示符中运行的：
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v C:\milvus\db:/var/lib/milvus/db \
 -v C:\milvus\conf:/var/lib/milvus/conf \
 -v C:\milvus\logs:/var/lib/milvus/logs \
@@ -136,17 +134,16 @@ milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 # Create Milvus file
 $ mkdir -p /Users/$USER/milvus/conf
 $ cd /Users/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
 ```
 
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径：
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
@@ -169,4 +166,4 @@ milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
   
 - 如果您想使用针对大数据集搜索的 GPU 加速版 Milvus：
 
-  - [安装支持 GPU 的 Milvus](gpu_milvus_docker.md)
+  - [安装支持 GPU 加速版 Milvus](gpu_milvus_docker.md)
