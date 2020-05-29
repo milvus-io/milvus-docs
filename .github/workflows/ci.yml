@@ -30,16 +30,18 @@ jobs:
           mv doc_to site
       - name: Delete And Push
         run: |
+          sudo apt-get update
+          sudo apt-get install jq
           cd ../
           git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cd target
-          git checkout -b v0.10.0
+          git checkout -b `cat version.json | jq -r .version`
           rm -rf *
           cd ../
           cp -avr ./milvus-docs/** ./target/
           cd target
           git add .
           git commit -m "Release new docs "
-          git push -f origin v0.10.0
+          git push -f origin `cat version.json | jq -r .version`
