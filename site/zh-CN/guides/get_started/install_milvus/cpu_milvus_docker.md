@@ -28,9 +28,9 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 #### Milvus Docker 要求
 
-- 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
+- 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
 - 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
-- 如果在 macOS 上安装 Milvus，请安装[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 macOS 上安装 Milvus，请安装 [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
 
 ## 在 Ubuntu/CentOS 上安装 Milvus
 
@@ -51,7 +51,7 @@ $ docker info
 拉取仅需 CPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
+$ docker pull milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 ```
 
 > 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
@@ -78,7 +78,7 @@ $ docker run -d --name milvus_cpu_0.9.1 \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
+milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
@@ -121,7 +121,7 @@ $ docker run -d --name milvus_cpu_0.9.1 \
 -v C:\milvus\conf:/var/lib/milvus/conf \
 -v C:\milvus\logs:/var/lib/milvus/logs \
 -v C:\milvus\wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
+milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 ```
 
 ## 在 macOS 上安装 Milvus
@@ -148,7 +148,7 @@ $ docker run -d --name milvus_cpu_0.9.1 \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /Users/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
+milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 ```
 
 ## 接下来您可以
