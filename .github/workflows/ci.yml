@@ -44,4 +44,4 @@ jobs:
           cd target
           git add .
           git commit -m "Release new docs "
-          git push -f origin `cat version.json | jq -r .version`
+          git push -f origin HEAD:`cat version.json | jq -r .version`
