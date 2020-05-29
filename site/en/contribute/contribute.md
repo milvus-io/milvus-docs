@@ -8,7 +8,6 @@ sidebar_label: Contribute
 
 ## Contribute to Milvus
 
-{{asdasd::tip.collection}}
 We warmly welcome and greatly appreciate contributions to all our projects ([Milvus/pymilvus/milvus-sdk-java/docs/bootcamp](https://github.com/milvus-io)). For detailed contribution process, please refer to [our contribution guidelines](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md).
 
 To contribute to Milvus, please follow below steps to proceed:
