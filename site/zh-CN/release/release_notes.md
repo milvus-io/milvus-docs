@@ -6,6 +6,28 @@ sidebar_label: 发版说明
 
 # 发版说明
 
+- ## v0.9.1
+
+  **发布时间**：2020-5-29
+
+  #### 版本兼容
+
+  | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+  | :---------- | :-------------- | :------------ | :---------- |
+  | 0.9.1       | 0.2.12          | 0.8.1         | 0.4.1       |
+
+  #### 问题修复
+
+- 多分区情况下，服务器重启后数据会被重复插入两次。[#2378](https://github.com/milvus-io/milvus/issues/2378)
+
+- 使用 GPU IVF 索引时，如果查询次数 nq 过高，系统会报 `cudaMalloc` 错误。 [#2395](https://github.com/milvus-io/milvus/issues/2395)
+- 向量删除后依然会被 GPU 加速版 Milvus 找到。 [#2450](https://github.com/milvus-io/milvus/issues/2450)
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) 了解更多已修复问题。https://github.com/milvus-io/milvus/issues/2395)
+
+
+
+
 ## v0.9.0
 
 **发布时间**：2020-5-15
