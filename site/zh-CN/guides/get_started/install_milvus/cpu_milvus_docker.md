@@ -98,7 +98,7 @@ $ docker ps
 ```shell
 # 获得运行 Milvus 的 container ID。
 $ docker ps -a
-# 检查 docker 日志
+# 检查 docker 日志。
 $ docker logs <milvus container id>
 ```
 
