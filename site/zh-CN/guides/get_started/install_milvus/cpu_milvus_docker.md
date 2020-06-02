@@ -59,7 +59,6 @@ $ docker pull milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 #### 第三步 下载配置文件
 
 ```shell
-# Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
@@ -70,7 +69,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/
 #### 第四步 启动 Milvus Docker 容器
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
@@ -91,16 +89,15 @@ milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 最后，确认 Milvus 运行状态：
 
 ```shell
-# Confirm Milvus status
 $ docker ps
 ```
 
 如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
 
 ```shell
-# Get id of the container running Milvus
+# 获得运行 Milvus 的 container ID。
 $ docker ps -a
-# Check docker logs
+# 检查 docker 日志。
 $ docker logs <milvus container id>
 ```
 
@@ -113,7 +110,6 @@ $ docker logs <milvus container id>
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径。下面的命令是在命令提示符中运行的：
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
@@ -131,7 +127,6 @@ milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 第三步，安装路径有细微差别：
 
 ```shell
-# Create Milvus file
 $ mkdir -p /Users/$USER/milvus/conf
 $ cd /Users/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
@@ -140,7 +135,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径：
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
