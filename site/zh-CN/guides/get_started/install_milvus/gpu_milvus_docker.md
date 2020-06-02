@@ -99,9 +99,9 @@ $ docker ps
 如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
 
 ```shell
-# Get the ID of the container running Milvus
+# 获得运行 Milvus 的 container ID
 $ docker ps -a
-# Check docker logs
+# 检查 docker 日志
 $ docker logs <milvus container id>
 ```
 
