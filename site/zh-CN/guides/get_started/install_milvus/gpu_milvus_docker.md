@@ -27,9 +27,9 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 
 #### Milvus Docker 要求
 
-- 在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
+- 在您的宿主机上安装 [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
 - 安装 NVIDIA driver 418 或更高版本。
-- [安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)。
+- 安装 [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)。
 
 ## 第一步 确认 Docker 状态
 
@@ -48,10 +48,10 @@ $ docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
+$ docker pull milvusdb/milvus:0.9.1-gpu-d052920-e04ed5
 ```
 
-> 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
+> 注意：如果您在拉取镜像时速度过慢或一直失败，请参考 [操作常见问题](../../../faq/operational_faq.md) 中提供的解决办法。
 
 ## 第三步 下载并修改配置文件
 
@@ -61,10 +61,10 @@ $ docker pull milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
 ```
 
-> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) 的内容。
+> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) 的内容。
 
 配置文件下载完成后，您需要将 `server_config.yaml` 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
 
@@ -73,15 +73,14 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_gpu_0.9.0 --gpus all \
+$ docker run -d --name milvus_gpu_0.9.1 --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
+milvusdb/milvus:0.9.1-gpu-d052920-e04ed5
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
