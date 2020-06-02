@@ -59,7 +59,6 @@ $ docker pull milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 #### Step 3 Download configuration files
 
 ```shell
-# Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
@@ -71,7 +70,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/
 #### Step 4 Start Docker container
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.0 \
 -p 19530:19530 \
 -p 19121:19121 \
