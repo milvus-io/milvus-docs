@@ -4,7 +4,7 @@ title: Install CPU-only Milvus
 sidebar_label: Install CPU-only Milvus
 ---
 
-# Install CPU-on
+# Install CPU-only Milvus
 
 ## Prerequisites
 
