@@ -59,7 +59,6 @@ $ docker pull milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 #### Step 3 Download configuration files
 
 ```shell
-# Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
@@ -71,7 +70,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/
 #### Step 4 Start Docker container
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
@@ -93,16 +91,15 @@ The `docker run` options used in the above command are defined as follows:
 Finally confirm Milvus running status by the following command:
 
 ```shell
-# Confirm Milvus status
 $ docker ps
 ```
 
 If Milvus server is not successfully started, you can check the error logs by the following command.
 
 ```shell
-# Get id of the container running Milvus
+# Get the ID of the container running Milvus.
 $ docker ps -a
-# Check docker logs
+# Check docker logs.
 $ docker logs <milvus container id>
 ```
 
@@ -115,7 +112,6 @@ For Step 3, instead of using `wget` to obtain the files, it is suggested to crea
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
@@ -133,7 +129,6 @@ The procedures of installing Milvus on Windows are similar to the steps on Ubunt
 For Step 3, the path has some minor differences:
 
 ```shell
-# Create Milvus file
 $ mkdir -p /Users/$USER/milvus/conf
 $ cd /Users/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
@@ -142,7 +137,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/
 For Step 4, start the docker by mapping Milvus files to the right path:
 
 ```shell
-# Start Milvus
 $ docker run -d --name milvus_cpu_0.9.1 \
 -p 19530:19530 \
 -p 19121:19121 \
