@@ -23,7 +23,8 @@ sidebar_label: Index Types
 | `IVF_PQ`   | ✔️                      | ✔️              | ✔️                   | ❌                    |
 | `RNSG`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
 | `HNSW`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
-| `ANNOY`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `ANNOY`    | ✔️                      | ✔️              | ✔️                   | ❌                    |
+
 </div>
 
 ### Index types in Milvus with GPU support
@@ -39,7 +40,8 @@ sidebar_label: Index Types
 | `IVF_PQ`   | ✔️                      | ✔️              | ✔️ (GPU index building is supported only for Euclidean distance) | ✔️ (GPU search is supported only for Euclidean distance) | ✔️                   | ❌                    |
 | `RNSG`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
 | `HNSW`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
-| `ANNOY`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️               | ❌                    |
+| `ANNOY`    | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
+
 </div>
 
 > Note: Index building parameters and search parameters vary with index type. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
