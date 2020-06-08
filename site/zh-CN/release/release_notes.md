@@ -288,7 +288,7 @@ sidebar_label: 发版说明
 
 - **向量删除**
 
-  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在 CPU 上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/issues/861)
+  新增了对单条或多条向量的删除功能。如果你对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在 CPU 上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/issues/861)
 
 - **向量读取**
 
@@ -296,15 +296,15 @@ sidebar_label: 发版说明
 
 - **数据落盘与压缩**
 
-  新增了数据落盘与压缩功能。您可以设置定时落盘或者手动落盘，从而避免数据丢失。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。[#861](https://github.com/milvus-io/milvus/issues/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
+  新增了数据落盘与压缩功能。你可以设置定时落盘或者手动落盘，从而避免数据丢失。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。你可以对集合中的段进行压缩操作以释放多余空间。[#861](https://github.com/milvus-io/milvus/issues/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
 
 - **运行时更改 Milvus 服务端参数**
 
-  新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。[#665](https://github.com/milvus-io/milvus/issues/665)
+  新增了运行时更改 Milvus 服务端参数的功能。你可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。[#665](https://github.com/milvus-io/milvus/issues/665)
 
 - **预写式日志(Write-Ahead Logging, WAL)**
 
-  新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件（`server_config.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/issues/830)
+  新增了 WAL 功能，可以大大提高数据操作的可靠性。你可以在 Milvus 服务端配置文件（`server_config.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/issues/830)
 
 - **RESTful API**
 
@@ -394,7 +394,7 @@ sidebar_label: 发版说明
 
 - **多张 GPU 创建索引**
 
-  支持使用多张 GPU 来创建索引以减少创建索引和整体查询的时间。您可以通过对 Milvus 配置文件中的参数 `build_index_resources` 来指定用于创建索引的 GPU 卡。[#414](https://github.com/milvus-io/milvus/pull/414)
+  支持使用多张 GPU 来创建索引以减少创建索引和整体查询的时间。你可以通过对 Milvus 配置文件中的参数 `build_index_resources` 来指定用于创建索引的 GPU 卡。[#414](https://github.com/milvus-io/milvus/pull/414)
 
 #### Bug 修复
 
@@ -522,7 +522,7 @@ sidebar_label: 发版说明
 
 - 当磁盘空间不足时，可通过参数“db_slave_path"添加多个二级数据存储文件路径。
 - 通过参数"parallel_reduce"启用多线程向量归并。
-- 通过参数”insert_buffer_size"，您可以指定内存中的一部分作为数据插入的缓冲区。
+- 通过参数”insert_buffer_size"，你可以指定内存中的一部分作为数据插入的缓冲区。
 - 当缓存已满时，通过参数“cache_free_percent"来设置有多少数据将被保留。
 - 通过参数”insert_cache_immediately"来启用一边插一边查的功能。
 - 将原先以分数来评价搜索结果，改成对应的向量距离评价搜索结果。
