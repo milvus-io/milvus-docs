@@ -51,7 +51,7 @@ If you do not see the server listed, start the <b>Docker</b> daemon.
 Pull the CPU-only image:
 
 ```shell
-$ docker pull milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
+$ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 > Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
@@ -61,23 +61,23 @@ $ docker pull milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml).
+> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml).
 
 
 #### Step 4 Start Docker container
 
 ```shell
-$ docker run -d --name milvus_cpu_0.9.1 \
+$ docker run -d --name milvus_cpu_{{var.release_version}} \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
+milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -107,19 +107,19 @@ $ docker logs <milvus container id>
 
 The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for <b>Step 3</b> and <b>Step 4</b>.
 
-For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
+For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
 
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
 ```shell
-$ docker run -d --name milvus_cpu_0.9.1 \
+$ docker run -d --name milvus_cpu_{{var.release_version}} \
 -p 19530:19530 \
 -p 19121:19121 \
 -v C:\milvus\db:/var/lib/milvus/db \
 -v C:\milvus\conf:/var/lib/milvus/conf \
 -v C:\milvus\logs:/var/lib/milvus/logs \
 -v C:\milvus\wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
+milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 ## Install Milvus on macOS
@@ -131,20 +131,20 @@ For Step 3, the path has some minor differences:
 ```shell
 $ mkdir -p /Users/$USER/milvus/conf
 $ cd /Users/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.1/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
 For Step 4, start the docker by mapping Milvus files to the right path:
 
 ```shell
-$ docker run -d --name milvus_cpu_0.9.1 \
+$ docker run -d --name milvus_cpu_{{var.release_version}} \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /Users/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
+milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 ## What's next
