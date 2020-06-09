@@ -20,8 +20,8 @@ You can load as many collections as the memory permits in `preload_table` from `
 
 #### Why it is slow to insert data?
 
-- **(If WAL is on)** It is recommended that you set `insert_buffer_size` greater than half of `wal_buffer_size` and the inserted data size less than half of `wal_buffer_size`.
-- **(If WAL is not on)** It is recommended that you set the inserted data size smaller than `insert_buffer_size`.
+- <b>(If WAL is on)</b> It is recommended that you set `insert_buffer_size` greater than half of `wal_buffer_size` and the inserted data size less than half of `wal_buffer_size`.
+- <b>(If WAL is not on)</b> It is recommended that you set the inserted data size smaller than `insert_buffer_size`.
 
 #### Why the search speed is low?
 

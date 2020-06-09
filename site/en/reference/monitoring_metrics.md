@@ -22,31 +22,31 @@ The Milvus dashboard provides details about your application and database config
 
 | Metric                    | Description                                                  |
 | ------------------------- | ------------------------------------------------------------ |
-| **Insert per Second**     | Number of vectors that are inserted in a second. (Real-time display) |
-| **Queries per Minute**    | Number of queries that are run in a minute. (Real-time display) |
-| **Query Time per Vector** | Average time to query one vector. Divide the query elapsed time by the number of queried vectors. |
-| **Query Service Level**   | A system wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level. |
-| **Uptime**                | How long Milvus has been running. (Minutes)                  |
+| <b>Insert per Second</b>     | Number of vectors that are inserted in a second. (Real-time display) |
+| <b>Queries per Minute</b>    | Number of queries that are run in a minute. (Real-time display) |
+| <b>Query Time per Vector</b> | Average time to query one vector. Divide the query elapsed time by the number of queried vectors. |
+| <b>Query Service Level</b>   | A system wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level. |
+| <b>Uptime</b>                | How long Milvus has been running. (Minutes)                  |
 
 ## Hardware Metrics
 
 | Metric                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
-| **GPU Utilization**   | GPU utilization ratio (%).                                   |
-| **GPU Memory Usage**  | GPU memory (GB) currently consumed by Milvus.                |
-| **CPU Utilization**   | Divide the time that the server is busy by the total elapsed time. |
-| **Memory Usage**      | Memory (GB) currently consumed by Milvus.                    |
-| **Cache Utilization** | Cache utilization ratio (%).                                 |
-| **Network IO**        | Network IO read/write speed (per second).                    |
-| **Disk Read Speed**   | Disk read speed (GB/s).                                      |
-| **Disk Write Speed**  | Disk write speed (GB/s).                                     |
+| <b>GPU Utilization</b>   | GPU utilization ratio (%).                                   |
+| <b>GPU Memory Usage</b>  | GPU memory (GB) currently consumed by Milvus.                |
+| <b>CPU Utilization</b>   | Divide the time that the server is busy by the total elapsed time. |
+| <b>Memory Usage</b>      | Memory (GB) currently consumed by Milvus.                    |
+| <b>Cache Utilization</b> | Cache utilization ratio (%).                                 |
+| <b>Network IO</b>        | Network IO read/write speed (per second).                    |
+| <b>Disk Read Speed</b>   | Disk read speed (GB/s).                                      |
+| <b>Disk Write Speed</b>  | Disk write speed (GB/s).                                     |
 
 ## Storage Metrics
 
 | Metric         | Description                                      |
 | -------------- | ------------------------------------------------ |
-| **Data Size**  | Total amount of data stored in Milvus.           |
-| **Total File** | Number of data files currently stored in Milvus. |
+| <b>Data Size</b>  | Total amount of data stored in Milvus.           |
+| <b>Total File</b> | Number of data files currently stored in Milvus. |
 
 ## Related links
 [Monitoring and Alerting](../guides/monitor.md)

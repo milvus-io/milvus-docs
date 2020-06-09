@@ -39,7 +39,7 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 $ docker info
 ```
 
-如果无法正常打印 Docker 相关信息，请启动 **Docker** daemon.
+如果无法正常打印 Docker 相关信息，请启动 <b>Docker</b> daemon.
 
 > 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
 

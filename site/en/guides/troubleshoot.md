@@ -62,13 +62,13 @@ Milvus includes the following index building methods:
 
 #### Automatic index building
 
-- **(CPU-only Milvus)** Index building and search need to consume all CPU resources. Thus, when building indexes in the backend, the search operation starts running when index building is complete.
-- **(GPU-supported Milvus)** If you use GPU for index building, other GPU or CPU resources can still perform search operations.
+- <b>(CPU-only Milvus)</b> Index building and search need to consume all CPU resources. Thus, when building indexes in the backend, the search operation starts running when index building is complete.
+- <b>(GPU-supported Milvus)</b> If you use GPU for index building, other GPU or CPU resources can still perform search operations.
 
 #### Manual index building
 
-- **(CPU-only Milvus)** Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. If there are multiple clients available, you can use another client for search operations. Because both index building and search need to consume all CPU resources, search operations wait until index building is complete.
-- **(GPU-supported Milvus)** Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. Index building only uses one GPU. If there are multiple clients available, you can use another client for search operations with other GPU or CPU resources. Thus, index building can run asynchronously with search.
+- <b>(CPU-only Milvus)</b> Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. If there are multiple clients available, you can use another client for search operations. Because both index building and search need to consume all CPU resources, search operations wait until index building is complete.
+- <b>(GPU-supported Milvus)</b> Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. Index building only uses one GPU. If there are multiple clients available, you can use another client for search operations with other GPU or CPU resources. Thus, index building can run asynchronously with search.
 
 ### `compact` operation
 

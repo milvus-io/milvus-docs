@@ -10,16 +10,16 @@ Milvus Admin 是 Milvus 的图形化客户端。您可以通过 Milvus Admin 对
 
 ## v0.3.0
 
-**发布时间**：2020-5-15
+<b>发布时间</b>：2020-5-15
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus Version    | Milvus Admin Version  |
 | ---------------| -----------------|
 | 0.9.0          | 0.3.0           |
 
 
-**主要功能**
+<b>主要功能</b>
 
 - 一些界面设计修改，优化用户体验。
 - 在浏览器标签显示当前连接的 Milvus 地址。
@@ -29,15 +29,15 @@ Milvus Admin 是 Milvus 的图形化客户端。您可以通过 Milvus Admin 对
 
 ## v0.2.0
 
-**发布时间**：2020-4-17
+<b>发布时间</b>：2020-4-17
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus Version    | Milvus Admin Version  |
 | ---------------| -----------------|
 | 0.8.0          | 0.2.0           |
 
-**Bug修复**
+<b>Bug修复</b>
 
 - 修复向量数在插入向量后不更新的问题. #1853.
 - Milvus本身并不支持https，如果你在milvus之前放置https的代理，在milvus admin中，新增登录时输入https前缀来访问https的milvus.
@@ -46,15 +46,15 @@ Milvus Admin 是 Milvus 的图形化客户端。您可以通过 Milvus Admin 对
 
 ## v0.1.0
 
-**发布时间**：2020-3-14
+<b>发布时间</b>：2020-3-14
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus 版本    | Milvus Admin 版本  |
 | ---------------| -----------------|
 | 0.7.0          | 0.1.0           |
 
-**主要功能**
+<b>主要功能</b>
 
 - 支持对向量数据的插入、删除、查询、读取等操作。
 - 支持以下索引类型：FLAT、IVFLAT、IVF_SQ8、IVF_SQ8H、IVF_PQ、HNSW。

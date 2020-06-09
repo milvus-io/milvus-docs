@@ -8,7 +8,7 @@ sidebar_label: 发版说明
 
 - ## v0.9.1
 
-  **发布时间**：2020-5-29
+  <b>发布时间</b>：2020-5-29
 
   #### 版本兼容
 
@@ -30,7 +30,7 @@ sidebar_label: 发版说明
 
 ## v0.9.0
 
-**发布时间**：2020-5-15
+<b>发布时间</b>：2020-5-15
 
 #### 版本兼容
 
@@ -215,9 +215,9 @@ sidebar_label: 发版说明
 
 ## v0.8.0
 
-**发布时间**：2020-4-15
+<b>发布时间</b>：2020-4-15
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | ----------- | --------------- | ------------- | ----------- |
@@ -225,11 +225,11 @@ sidebar_label: 发版说明
 
 #### 新增功能
 
-- **ANNOY 索引的支持**
+- <b>ANNOY 索引的支持</b>
 
   增加 `ANNOY` 索引类型，关于 `ANNOY` 索引的详细介绍请参考[文档](../guides/index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
   
-- **向量删除**
+- <b>向量删除</b>
 
   新增下列索引类型支持删除操作。[#1655](https://github.com/milvus-io/milvus/issues/1655) [#1660](https://github.com/milvus-io/milvus/issues/1660) [#1661](https://github.com/milvus-io/milvus/issues/1661) [#1849](https://github.com/milvus-io/milvus/issues/1849)
   
@@ -248,9 +248,9 @@ sidebar_label: 发版说明
 
 ## v0.7.1
 
-**发布时间**：2020-3-30
+<b>发布时间</b>：2020-3-30
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | ----------- | --------------- | ------------- | ----------- |
@@ -276,9 +276,9 @@ sidebar_label: 发版说明
 
 ## v0.7.0
 
-**发布时间**：2020-3-10
+<b>发布时间</b>：2020-3-10
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | ----------- | --------------- | ------------- | ----------- |
@@ -286,61 +286,61 @@ sidebar_label: 发版说明
 
 #### 新增功能
 
-- **向量删除**
+- <b>向量删除</b>
 
   新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在 CPU 上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/issues/861)
 
-- **向量读取**
+- <b>向量读取</b>
 
   新增了通过向量 ID 读取对应的向量值的功能。[#861](https://github.com/milvus-io/milvus/issues/861)
 
-- **数据落盘与压缩**
+- <b>数据落盘与压缩</b>
 
   新增了数据落盘与压缩功能。您可以设置定时落盘或者手动落盘，从而避免数据丢失。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。[#861](https://github.com/milvus-io/milvus/issues/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
 
-- **运行时更改 Milvus 服务端参数**
+- <b>运行时更改 Milvus 服务端参数</b>
 
   新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。[#665](https://github.com/milvus-io/milvus/issues/665)
 
-- **预写式日志(Write-Ahead Logging, WAL)**
+- <b>预写式日志(Write-Ahead Logging, WAL)</b>
 
   新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件（`server_config.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/issues/830)
 
-- **RESTful API**
+- <b>RESTful API</b>
 
   新增了 RESTful API。详细信息请参考 [RESTful API Readme](https://github.com/milvus-io/milvus/blob/master/core/src/server/web_impl/README.md)。
 
-- **Go SDK**
+- <b>Go SDK</b>
 
   新增了 Go SDK，详细信息请参考 [https://github.com/milvus-io/milvus-sdk-go](https://github.com/milvus-io/milvus-sdk-go)。
 
-- **HNSW 索引的支持**
+- <b>HNSW 索引的支持</b>
 
   新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。[#853](https://github.com/milvus-io/milvus/issues/853)
 
-- **Jaccard/Hamming/Tanimoto 距离的支持**
+- <b>Jaccard/Hamming/Tanimoto 距离的支持</b>
 
   新增了对 Jaccard、Hamming、Tanimoto 距离的支持。[#823](https://github.com/milvus-io/milvus/issues/823)
 
-- **Prometheus 中 Pushgateway 的支持**
+- <b>Prometheus 中 Pushgateway 的支持</b>
 
   新增了在 Prometheus 中 Pushgateway 的支持。Pushgateway 使生命周期短、批量的 metric 能够被 Prometheus 提取。[#813](https://github.com/milvus-io/milvus/issues/813)
 
-- **AVX 512 指令集的支持**
+- <b>AVX 512 指令集的支持</b>
 
   新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。[#1122](https://github.com/milvus-io/milvus/issues/1122)
 
 #### 变更说明
 
-- **创建索引与搜索的接口更新**
+- <b>创建索引与搜索的接口更新</b>
 
   从 Milvus 0.7.0 开始，所有客户端创建索引与搜索的接口中的部分参数使用 JSON 字符串进行传值。
 
-- **Milvus 服务端配置文件更新**
+- <b>Milvus 服务端配置文件更新</b>
 
   从 Milvus 0.7.0 开始，Milvus 服务端配置文件（`server_config.yaml`）版本更新为 0.2。配置文件的参数也发生了变化。
 
-- **术语更新**
+- <b>术语更新</b>
 
   从 0.7.0 开始，Milvus 的 Table（表） 正式改名为 Collection（集合）。
 
@@ -352,9 +352,9 @@ sidebar_label: 发版说明
 
 ## v0.6.0
 
-**发布时间**：2019-12-07
+<b>发布时间</b>：2019-12-07
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 |
 | ----------- | --------------- | ------------- |
@@ -362,37 +362,37 @@ sidebar_label: 发版说明
 
 #### 新增功能
 
-- **仅支持 CPU 的 Milvus**
+- <b>仅支持 CPU 的 Milvus</b>
 
   Milvus v0.6.0 提供了仅支持 CPU 和支持 GPU 两个版本的 Milvus。同时支持在纯 CPU 和 GPU 环境下在 Docker 容器中编译 Milvus。[#192](https://github.com/milvus-io/milvus/pull/192)
 
-- **分区表**
+- <b>分区表</b>
 
   新增了分区表功能以确保增量数据的高性能查询。Python，Java 和 C++ SDK 中增加了表分区相关接口，支持创建/删除分区表，向量插入指定分区表，以及指定分区表的查询等。[#245](https://github.com/milvus-io/milvus/pull/245)
 
-- **实验功能**
+- <b>实验功能</b>
 
   Milvus 的实验功能仍在持续开发和更新中，可能包含未知的错误。这些功能主要用于测试和用户反馈收集。
 
-  - **Mishards**
+  - <b>Mishards</b>
 
     推出 Milvus 集群分片中间件 Mishards 作为分布式部署方案之一。Mishards 内部处理请求转发、读写分离、水平扩展、动态扩容，为用户提供内存和算力可以无限扩容的 Milvus 集群实例。[#232](https://github.com/milvus-io/milvus/pull/232/files)
 
-  - **新的索引类型**
+  - <b>新的索引类型</b>
 
     支持新的索引类型如 `SPTAG-KDT`，`SPTAG-BKT`，`RNSG` 和 `IVFPQ`。Milvus 集成了微软的 SPTAG 算法库，进而支持 `SPTAG-KDT` 和 `SPTAG-BKT` 两种索引类型。`RNSG` 是 Milvus 在 NSG 基础上做了优化之后自研的一种索引方式。`IVFPQ` 是倒排索引基础上进一步利用笛卡儿积对每个倒排文件中的向量进行编码的索引方式。[SPTAG#438](https://github.com/milvus-io/milvus/pull/438) [RNSG#554](https://github.com/milvus-io/milvus/pull/554) [IVFPQ#324](https://github.com/milvus-io/milvus/pull/324)
 
-- **Milvus 性能测试报告**
+- <b>Milvus 性能测试报告</b>
 
   提供了针对 `IVFFLAT`, `IVFSQ8` 和 `IVFSQ8H` 等索引类型的[性能测试报告](https://github.com/milvus-io/milvus/tree/master/docs)。
 
 #### 主要改进
 
-- **Milvus 优化过的 FAISS**
+- <b>Milvus 优化过的 FAISS</b>
 
   在原有 FAISS 的基础上， Milvus 做了一些深层代码的优化以获得更优的查询性能和支持更多类型的索引类型，比如 `IVFSQ8H`。现在，我们将这部分针对 FAISS 进行优化的代码开源了。[#585](https://github.com/milvus-io/milvus/pull/585)
 
-- **多张 GPU 创建索引**
+- <b>多张 GPU 创建索引</b>
 
   支持使用多张 GPU 来创建索引以减少创建索引和整体查询的时间。您可以通过对 Milvus 配置文件中的参数 `build_index_resources` 来指定用于创建索引的 GPU 卡。[#414](https://github.com/milvus-io/milvus/pull/414)
 
@@ -404,9 +404,9 @@ sidebar_label: 发版说明
 
 ## v0.5.3
 
-**发布时间**：2019-11-14
+<b>发布时间</b>：2019-11-14
 
-**版本兼容**
+<b>版本兼容</b>
 
 | Milvus 版本 | pymilvus 版本 | Java SDK 版本 |
 | ----------- | ------------- | ------------- |
@@ -448,7 +448,7 @@ sidebar_label: 发版说明
 
 ## v0.5.2
 
-**发布时间**：2019-11-07
+<b>发布时间</b>：2019-11-07
 
 #### Bug 修复
 
@@ -462,7 +462,7 @@ sidebar_label: 发版说明
 
 ## v0.5.1
 
-**发布时间**：2019-11-04
+<b>发布时间</b>：2019-11-04
 
 #### 新增功能
 
@@ -478,7 +478,7 @@ sidebar_label: 发版说明
 
 ## v0.5.0
 
-**发布时间**：2019-10-21
+<b>发布时间</b>：2019-10-21
 
 #### 新增功能
 
@@ -492,7 +492,7 @@ sidebar_label: 发版说明
 
 ## v0.4.0
 
-**发布时间**：2019-09-11
+<b>发布时间</b>：2019-09-11
 
 #### 新增功能
 
@@ -510,7 +510,7 @@ sidebar_label: 发版说明
 
 ## v0.3.1
 
-**发布时间**：2019-08-08
+<b>发布时间</b>：2019-08-08
 
 #### 新增功能
 
@@ -531,7 +531,7 @@ sidebar_label: 发版说明
 
 ## v0.3.0
 
-**发布时间**：2019-06-30
+<b>发布时间</b>：2019-06-30
 
 #### 新增功能
 
@@ -551,7 +551,7 @@ sidebar_label: 发版说明
 
 ## v0.2.1
 
-**发布时间**：2019-06-14
+<b>发布时间</b>：2019-06-14
 
 #### 新增功能
 
@@ -565,7 +565,7 @@ sidebar_label: 发版说明
 
 ## v0.2.0
 
-**发布时间**：2019-05-31
+<b>发布时间</b>：2019-05-31
 
 #### 新增功能
 

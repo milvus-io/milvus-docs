@@ -42,12 +42,12 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
 以下主要介绍需要创建报警规则的事件。
 
-**服务器宕机**
+<b>服务器宕机</b>
 
 - 报警规则：当 Milvus 服务器宕机时发送报警信息。
-- 如何判断：当 Milvus 服务器宕机时，监控仪表盘上各个指标会显示 **No Data**。
+- 如何判断：当 Milvus 服务器宕机时，监控仪表盘上各个指标会显示 <b>No Data</b>。
 
-**CPU/GPU 温度过高**
+<b>CPU/GPU 温度过高</b>
 
 - 报警规则：当 CPU/GPU 温度超过 80 摄氏度时发送报警信息。
 - 如何判断：查看监控仪表盘上的 `CPU Temperature` 和  `GPU Temperature` 两个指标。

@@ -29,8 +29,8 @@ sidebar_label: Install CPU-only Milvus on Docker
 #### Milvus Docker 要求
 
 - 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
-- 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
-- 如果在 macOS 上安装 Milvus，请安装 [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences > Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 <b>Settings > Advanced</b> 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 macOS 上安装 Milvus，请安装 [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 <b>Preferences > Advanced</b> 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
 
 ## 在 Ubuntu/CentOS 上安装 Milvus
 
@@ -42,7 +42,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 $ docker info
 ```
 
-如果无法正常打印 Docker 相关信息，请启动 **Docker** daemon.
+如果无法正常打印 Docker 相关信息，请启动 <b>Docker</b> daemon.
 
 > 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
 
@@ -103,7 +103,7 @@ $ docker logs <milvus container id>
 
 ## 在 Windows 上安装 Milvus
 
-在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步** 和 **第四步** 略有不同。
+在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 <b>第三步</b> 和 <b>第四步</b> 略有不同。
 
 在第三步中，不同于使用 `wget` 来获取配置文件，使用 Windows 安装时，建议在 C 盘，或其它合适的位置创建 `milvus` 文件夹，下面包含 `db`，`conf`，`logs` 和 `wal` 等文件夹，然后复制 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) 的内容到您在 `C:\milvus\conf` 路径下创建的`server_config.yaml` 文件中。
 
@@ -122,7 +122,7 @@ milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 
 ## 在 macOS 上安装 Milvus
 
-在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步** 和 **第四步** 略有不同。
+在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 <b>第三步</b> 和 <b>第四步</b> 略有不同。
 
 第三步，安装路径有细微差别：
 

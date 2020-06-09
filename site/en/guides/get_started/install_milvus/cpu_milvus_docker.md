@@ -29,8 +29,8 @@ sidebar_label: Install CPU-only Milvus
 #### Milvus Docker requirements
 
 - If you're using Ubuntu or CentOS, [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
-- If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in **Settings > Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
-- If you're installing Milvus on macOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in **Settings > Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
+- If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in <b>Settings > Advanced</b>. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
+- If you're installing Milvus on macOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in <b>Settings > Advanced</b>. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
 
 ## Install Milvus on Ubuntu/CentOS
 
@@ -42,7 +42,7 @@ Confirm that the Docker daemon is running in the background:
 $ docker info
 ```
 
-If you do not see the server listed, start the **Docker** daemon.
+If you do not see the server listed, start the <b>Docker</b> daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
@@ -105,7 +105,7 @@ $ docker logs <milvus container id>
 
 ## Install Milvus on Windows
 
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3** and **Step 4**.
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for <b>Step 3</b> and <b>Step 4</b>.
 
 For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.1/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
 
@@ -124,7 +124,7 @@ milvusdb/milvus:0.9.1-cpu-d052920-e04ed5
 
 ## Install Milvus on macOS
 
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3** and **Step 4**.
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for <b>Step 3</b> and <b>Step 4</b>.
 
 For Step 3, the path has some minor differences:
 

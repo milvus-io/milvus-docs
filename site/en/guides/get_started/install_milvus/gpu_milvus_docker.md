@@ -39,7 +39,7 @@ Confirm that the Docker daemon is running in the background:
 $ docker info
 ```
 
-If you do not see the server listed, start the **Docker** daemon.
+If you do not see the server listed, start the <b>Docker</b> daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 

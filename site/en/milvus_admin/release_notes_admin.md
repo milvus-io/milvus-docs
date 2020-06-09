@@ -10,15 +10,15 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 ## v0.3.0
 
-**Release Date**：2020-5-5
+<b>Release Date</b>：2020-5-5
 
-**Compatibility**
+<b>Compatibility</b>
 
 | Milvus Version | Milvus Admin Version  |
 | ---------------| -----------------|
 | 0.9.0          | 0.3.0           |
 
-**Features**
+<b>Features</b>
 
 - Makes some UI changes to improve user experience.
 - Displays connection infomation on top of the web page.
@@ -28,15 +28,15 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 ## v0.2.0
 
-**Release Date**：2020-4-17
+<b>Release Date</b>：2020-4-17
 
-**Compatibility**
+<b>Compatibility</b>
 
 | Milvus Version | Milvus Admin Version  |
 | ---------------| -----------------|
 | 0.8.0          | 0.2.0           |
 
-**Bug fix**
+<b>Bug fix</b>
 
 - Fix the count value does not change after inserting vector. #1853.
 - Support https connection for milvus restful api, if only you have https proxy in front of milvus.
@@ -45,15 +45,15 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 ## v0.1.0
 
-**Release Date**：2020-3-14
+<b>Release Date</b>：2020-3-14
 
-**Compatibility**
+<b>Compatibility</b>
 
 | Milvus Version    | Milvus Admin Version  |
 | ---------------| -----------------|
 | 0.7.0          | 0.1.0           |
 
-**Features**
+<b>Features</b>
 
 - Support vector insertion, deletion, query, and read.
 - Support the following index types: FLAT, IVFLAT, IVF_SQ8, IVF_SQ8H, IVF_PQ、HNSW.

@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Milvus documentation! :tada:
 
-If there's anything you'd like to change in the docs, you can click the **Edit** button located on the upper right of most pages in the [website](https://www.milvus.io/docs/guides/get_started/install_milvus/install_milvus.md), and then [file an issue](https://github.com/milvus-io/docs/issues/new/choose) in the Milvus docs repository. 
+If there's anything you'd like to change in the docs, you can click the <b>Edit</b> button located on the upper right of most pages in the [website](https://www.milvus.io/docs/guides/get_started/install_milvus/install_milvus.md), and then [file an issue](https://github.com/milvus-io/docs/issues/new/choose) in the Milvus docs repository. 
 
 ### Contributing to the Blog
 

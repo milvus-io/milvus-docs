@@ -8,7 +8,7 @@ sidebar_label: Release Notes
 
 ## v0.9.1
 
-**Release date**：2020-5-29
+<b>Release date</b>：2020-5-29
 
 #### Compatibility
 
@@ -26,7 +26,7 @@ sidebar_label: Release Notes
 
 ## v0.9.0
 
-**Release date**：2020-5-15
+<b>Release date</b>：2020-5-15
 
 #### Compatibility
 
@@ -216,9 +216,9 @@ sidebar_label: Release Notes
 
 ## v0.8.0
 
-**Release date**：2020-4-15
+<b>Release date</b>：2020-4-15
 
-**Compatibility**
+<b>Compatibility</b>
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | -------------- | ------------------ | ---------------- | -------------- |
@@ -226,11 +226,11 @@ sidebar_label: Release Notes
 
 #### New features
 
-- **ANNOY index support**
+- <b>ANNOY index support</b>
 
   Added support for ANNOY index type. See [our documentation](../guides/index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
 
-- **Vector deletion**
+- <b>Vector deletion</b>
 
   Added support to delete one or multiple vectors for more index types. [#1655](https://github.com/milvus-io/milvus/issues/1655) [#1660](https://github.com/milvus-io/milvus/issues/1660) [#1661](https://github.com/milvus-io/milvus/issues/1661) [#1849](https://github.com/milvus-io/milvus/issues/1849)
   
@@ -249,9 +249,9 @@ sidebar_label: Release Notes
 
 ## v0.7.1
 
-**Release date**：2020-3-30
+<b>Release date</b>：2020-3-30
 
-**Compatibility**
+<b>Compatibility</b>
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | -------------- | ------------------ | ---------------- | -------------- |
@@ -277,9 +277,9 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 ## v0.7.0
 
-**Release date**：2020-3-10
+<b>Release date</b>：2020-3-10
 
-**Compatibility**
+<b>Compatibility</b>
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | -------------- | ------------------ | ---------------- | -------------- |
@@ -287,61 +287,61 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 #### New features
 
-- **Vector deletion**
+- <b>Vector deletion</b>
 
   Added support to delete one or multiple vectors. If you performed vector deletion on a collection, later search operations for this collection are limited to part of the index types, including FLAT, IVFLAT, IVFSQ8, etc. Milvus is planned to support other index types in the upcoming versions.[#861](https://github.com/milvus-io/milvus/pull/861)
 
-- **Get vector by ID**
+- <b>Get vector by ID</b>
 
   Added support to get vector data by ID. [#861](https://github.com/milvus-io/milvus/pull/861)
 
-- **Flush and compact**
+- <b>Flush and compact</b>
 
   Added support to flushing and compaction. You can configure flushing at an interval or manual flushing to avoid data loss. If some vectors are deleted from a segment, the space taken by the deleted vectors cannot be released automatically. You can compact segments in a collection to release space. [#861](https://github.com/milvus-io/milvus/pull/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
 
-- **Change Milvus server configurations during runtime**
+- <b>Change Milvus server configurations during runtime</b>
 
   Added support to update Milvus server configurations during runtime. You can use Milvus clients to update the parameters. Changes to some parameters take effect immediately without restarting Milvus. [#665](https://github.com/milvus-io/milvus/pull/665)
 
-- **Write-Ahead logging (WAL)**
+- <b>Write-Ahead logging (WAL)</b>
 
   Added support for WAL, which significantly improves the reliability of data operations. You can configure WAL settings in the Milvus server configuration file (`server_config.yaml`). [#830](https://github.com/milvus-io/milvus/pull/830)
 
-- **RESTful API**
+- <b>RESTful API</b>
 
   Added RESTful API. Refer to [RESTful API Readme](https://github.com/milvus-io/milvus/blob/master/core/src/server/web_impl/README.md) for more information.
 
-- **Go SDK**
+- <b>Go SDK</b>
 
   Added Go SDK. Refer to [https://github.com/milvus-io/milvus-sdk-go](https://github.com/milvus-io/milvus-sdk-go) for more information.
 
-- **HNSW index support**
+- <b>HNSW index support</b>
 
   Added support for HNSW index type. Refer to [Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs](https://arxiv.org/abs/1603.09320) for more information about HNSW. [#853](https://github.com/milvus-io/milvus/pull/853)
 
-- **Jaccard/Hamming/Tanimoto distance support**
+- <b>Jaccard/Hamming/Tanimoto distance support</b>
 
   Added support for Jaccard distance, Hamming distance, and Tanimoto distance. [#823](https://github.com/milvus-io/milvus/pull/823)
 
-- **Pushgateway support in Prometheus**
+- <b>Pushgateway support in Prometheus</b>
 
   Added support for Pushgateway in Prometheus. Pushgateway makes it possible for short-lived, batch metrics to be acquired by Prometheus. [#813](https://github.com/milvus-io/milvus/pull/813)
 
-- **AVX 512**
+- <b>AVX 512</b>
 
   Added support for AVX 512 instruction set. Milvus theoretically supports all CPUs with AVX 512. [#1122](https://github.com/milvus-io/milvus/pull/1122)
 
 #### Changes
 
-- **Interface updates for index creation and vector search**
+- <b>Interface updates for index creation and vector search</b>
 
   Starting from Milvus 0.7.0, part of the Milvus client parameters for index creation and vector search use JSON strings as values.
 
-- **Milvus server configuration file updates**
+- <b>Milvus server configuration file updates</b>
 
   Starting from Milvus 0.7.0, the Milvus server configuration file (`server_config.yaml`) is updated to 0.2 with parameter changes.
 
-- **Term updates**
+- <b>Term updates</b>
 
   Starting from Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
 
@@ -353,9 +353,9 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 ## v0.6.0
 
-**Release date**: 2019-12-07
+<b>Release date</b>: 2019-12-07
 
-**Version Compatibility**
+<b>Version Compatibility</b>
 
 | Milvus version | pymilvus version | Java SDK version |
 | -------------- | ---------------- | ---------------- |
@@ -363,37 +363,37 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 #### New features
 
-- **CPU-only Milvus**
+- <b>CPU-only Milvus</b>
 
   Milvus v0.6.0 provides Docker images for both CPU-only and GPU support Milvus. Milvus compilation on Docker is also supported on machines with or without GPU. [#192](https://github.com/milvus-io/milvus/pull/192)
 
-- **Table partitioning**
+- <b>Table partitioning</b>
 
   Add table partitioning funtion to secure fast query performance for incremental data. Partitioning APIs are added to Python, Java and C++ SDK to support partition creation, vector insertion into a specified partition and query against a specified partition, etc. [#245](https://github.com/milvus-io/milvus/pull/245)
 
-- **Experimental features**
+- <b>Experimental features</b>
 
   The experimental features in Milvus are still under development and subject to change. They may contain unknown errors, and are intended for testing and user feedback gathering.
 
-  - **Mishards**
+  - <b>Mishards</b>
 
     Propose Mishards, a Milvus sharding middleware, as the distributed deployment solution. Mishards provides unlimited extension of memory and computation capacity through request forwarding, read/write splitting, horizontal scalability and dynamic extension. [#232](https://github.com/milvus-io/milvus/pull/232)
 
-  - **New index types**
+  - <b>New index types</b>
 
     Start supporting new experimental index types such as `SPTAG-KDT`, `SPTAG-BKT`, `RNSG` and `IVFPQ`. [SPTAG#438](https://github.com/milvus-io/milvus/pull/438) [RNSG#554](https://github.com/milvus-io/milvus/pull/554) [IVFPQ#324](https://github.com/milvus-io/milvus/pull/324)
 
-- **Index test reports**
+- <b>Index test reports</b>
 
   Provide performance [test reports](https://github.com/milvus-io/milvus/tree/master/docs) for `IVFFLAT`, `IVFSQ8` and `IVFSQ8H` indexes.
 
 #### Improvements
 
-- **Milvus internal FAISS**
+- <b>Milvus internal FAISS</b>
 
   In addition to original FAISS, Milvus has made deep optimizations to increase query performance and support more index types such as `IVFSQ8H`. Now this part of internal FAISS is open sourced. [#585](https://github.com/milvus-io/milvus/pull/585)
 
-- **Multiple GPUs for index building**
+- <b>Multiple GPUs for index building</b>
 
   Support index building by multiple GPUs to reduce index building and overall query time. You can specify multiple GPUs for index building process through Milvus configuration parameter `build_index_resources`. [#414](https://github.com/milvus-io/milvus/pull/414)
 
@@ -405,9 +405,9 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 ## v0.5.3
 
-**Release date**: 2019-11-14
+<b>Release date</b>: 2019-11-14
 
-**Version Compatibility**
+<b>Version Compatibility</b>
 
 | Milvus version | pymilvus version | Java SDK version |
 | -------------- | ---------------- | ---------------- |
@@ -449,7 +449,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 ## v0.5.2
 
-**Release date**: 2019-11-07
+<b>Release date</b>: 2019-11-07
 
 #### Fixed issues
 
@@ -463,7 +463,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ## v0.5.1
 
-**Release date**: 2019-11-04
+<b>Release date</b>: 2019-11-04
 
 #### Features
 
@@ -479,7 +479,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ## v0.5.0
 
-**Release date**: 2019-10-15
+<b>Release date</b>: 2019-10-15
 
 #### Features
 
@@ -493,7 +493,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ## v0.4.0
 
-**Release date**: 2019-09-11
+<b>Release date</b>: 2019-09-11
 
 #### Features
 
@@ -511,7 +511,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ## v0.3.1
 
-**Release date**: 2019-08-08
+<b>Release date</b>: 2019-08-08
 
 #### Features
 
@@ -532,7 +532,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ## v0.3.0
 
-**Release date**: 2019-06-30
+<b>Release date</b>: 2019-06-30
 
 #### Features
 
@@ -556,7 +556,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ## v0.2.1
 
-**Release date**: 2019-06-14
+<b>Release date</b>: 2019-06-14
 
 #### Features
 
@@ -570,7 +570,7 @@ You can now search data within a specific date range.
 
 ## v0.2.0
 
-**Release date**: 2019-05-31
+<b>Release date</b>: 2019-05-31
 
 #### Features
 

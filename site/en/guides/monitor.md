@@ -43,12 +43,12 @@ Active monitoring helps you identify problems early, but it is also essential to
 
 This section includes the most important events for which you must create alerting rules.
 
-**Server is down**
+<b>Server is down</b>
 
 - Rule: Send an alert when the Milvus server is down.
-- How to detect: If the Milvus server is down, **No Data** will be displayed on the monitoring dashboard.
+- How to detect: If the Milvus server is down, <b>No Data</b> will be displayed on the monitoring dashboard.
 
-**CPU/GPU temperature is too high**
+<b>CPU/GPU temperature is too high</b>
 
 - Rule: Send an alert when the CPU/GPU temperature exceeds 80 degrees Celsius.
 - How to detect: Check the metrics `CPU Temperature` and  `GPU Temperature` on the monitoring dashboard.
