@@ -35,17 +35,15 @@ You can update parameters in `server_config.yaml` from a Milvus client. See [Cli
 
 Updates to the following parameters take effect immediately.
 
- - section `cache_config`
-    - `cpu_cache_capacity`
-    - `cache_insert_data`
- - section `engine_config`
-    - `use_blas_threshold`
-    - `gpu_search_threshold`
- - section `gpu_resource_config`
+ - section `cache`
+    - `cache_size`
+    - `insert_buffer_size`
+ - section `gpu`
     - `enable`
-    - `cache_capacity`
-    - `search_resources`
-    - `build_index_resources`
+    - `cache_size`
+    - `gpu_search_threshold`
+    - `search_devices`
+    - `build_index_devices`
 
 For other parameters, you still need to restart Milvus for the changes to take effect.
 
@@ -60,7 +58,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `enable`               | If running with Mishards, set it as `true`, otherwise set it as `false`.   | Boolean   | `false`         |
-| `role`                | Milvus deployment role: rw / ro            | Role    | `rw`         |
+| `role`                | Milvus deployment role: `rw` / `ro`       | Role    | `rw`         |
 </div>
 
 ### Section `general`
@@ -69,8 +67,8 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
-| `timezone`               | Uses UTC-x or UTC+x to specify a time zone.    | Timezone   | `false`         |
-| `meta_url`                | URI for metadata storage, using SQLite (for single server Milvus) or MySQL (for distributed cluster Milvus). Format: dialect://username:password@host:port/database. Keep 'dialect://:@:/', 'dialect' can be either `sqlite` or `mysql`. Replace the other fields with the real values.             | URI    | `sqlite://:@:/`         |
+| `timezone`               | Uses UTC-x or UTC+x to specify a time zone.    | Timezone   | `UTC+8`       |
+| `meta_uri`                | URI for metadata storage, using SQLite (for single server Milvus) or MySQL (for distributed cluster Milvus). Format: `dialect://username:password@host:port/database`. Keep `dialect://:@:/`, `dialect` can be either `sqlite` or `mysql`. Replace the other fields with the real values.           | URI    | `sqlite://:@:/`         |
 
 </div>
 
@@ -86,7 +84,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | `http.port`                | Port that Milvus HTTP server monitors. Port range (1024, 65535).            | Integer    | `19121`         |
 </div>
 
-### Section `storage_config`
+### Section `storage`
 
 <div class="table-wrapper" markdown="block">
 
@@ -97,7 +95,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 </div>
 
-### Section `wal_config`
+### Section `wal`
 
 <div class="table-wrapper" markdown="block">
 
@@ -105,24 +103,23 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `enable`               |   Whether to enable write-ahead logging (WAL) in Milvus. If WAL is enabled, Milvus writes all data changes to log files in advance before implementing data changes. WAL ensures the atomicity and durability for Milvus operations.      |    Boolean          |   true      |
 |  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus fails to restart when there are errors in WAL log files.   |   Boolean           |   true      |
-|  `buffer_size`          |  Sum total of the read buffer and the write buffer in MBs. `buffer_size` must be in range `[64MB, 4096MB]`. If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.              |    String          |   `256MB`     |
+|  `buffer_size`          |  Sum total of the read buffer and the write buffer in Bytes. `buffer_size` must be in range `[64MB, 4096MB]`. If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.           |    String          |   `256MB`     |
 |  `wal_path`             |  Location of WAL log files.                                                            |    String          |    `/var/lib/milvus/wal`     |
 </div>
 
-### Section `cache_config`
+### Section `cache`
 
 <div class="table-wrapper" markdown="block">
 
 | Parameter            | Description                                                  | Type    | Default   |
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
-
-| `cache_size` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` must be less than the system memory size. | String | `4GB` |
-| `insert_buffer_size` | Buffer size used for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must be less than the system memory size. | String | `1GB`        |
+| `cache_size` | The size of the CPU memory for caching data for faster query. The sum of `cache_size` and `insert_buffer_size` must be less than the system memory size. | String | `4GB` |
+| `insert_buffer_size` | Buffer size used for data insertion. The sum of `insert_buffer_size` and `cache_size` must be less than the system memory size. | String | `1GB`        |
 | `preload_collection`  | A comma-separated list of collection names that need to be pre-loaded when Milvus server starts up. '*' means preload all existing tables (single-quote or double-quote required).  | StringList | N/A   |
 
 </div>
 
-### Section `gpu_config`
+### Section `gpu`
 
 This section determines whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets.
 
@@ -135,16 +132,16 @@ This section determines whether to enable GPU support/usage in Milvus. GPU suppo
 | `cache_size` | Size of the GPU memory for caching data.  | String | `1GB` |
 | `gpu_search_threshold` | A Milvus performance tuning parameter. This value will be compared with 'nq' to decide if the search computation will  be executed on GPUs only. If nq >= `gpu_search_threshold`, the search computation will be executed on GPUs only; otherwise, the search computation will be executed on both CPUs and GPUs. | Integer | `1000` |
 | `search_devices` | A list of GPU devices used for search computation. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`.  | DeviceList | `gpu0` |
-| `build_index_resources` | A list of GPU devices used for index building. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`. | DeviceList | `gpu0` |
+| `build_index_devices` | A list of GPU devices used for index building. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`. | DeviceList | `gpu0` |
 </div>
 
-> Note: In Milvus, index building and search computation are separate processes, which can be executed on `cpu`, `gpu`, or both. You can assign multiple GPUs to index building and search computation by adding GPUs under `search_resources` or `build_index_resources`. The following YAML code shows an example:
+> Note: In Milvus, index building and search computation are separate processes, which can be executed on `cpu`, `gpu`, or both. You can assign multiple GPUs to index building and search computation by adding GPUs under `search_devices` or `build_index_devices`. The following YAML code shows an example:
 
 ```yaml
-    search_resources:
+    search_devices:
       - gpu0
       - gpu1
-    build_index_resources:
+    build_index_devices:
       - gpu0
       - gpu1
 ```
@@ -158,11 +155,11 @@ This section determines whether to enable GPU support/usage in Milvus. GPU suppo
 |  `level`      |   Log level in Milvus. Must be one of `debug`, `info`, `warning`, `error`, `fatal`.           |   String   |  `debug` |
 |  `trace.enable`      |   Whether to enable trace level logging.           |    Boolean   |  `true` |
 |  `path`              |  Absolute path to the folder holding the log files.  |    String    |  `/var/lib/milvus/logs`   |
-|  `max_log_file_size` |  The maximum size of each log file. Range: [512MB, 4096MB]  |    String   | `1024` (MB) |
+|  `max_log_file_size` |  The maximum size of each log file. Range: [512MB, 4096MB]  |    String   | `1024MB` |
 |  `log_rotate_num`         | The maximum number of log files that Milvus keeps for each logging level. Range: [0, 1024]. `0` means that the number does not have an upper limit. |    Integer   | `0` |
 </div>
 
-### Section `metric_config`
+### Section `metric`
 
 <div class="table-wrapper" markdown="block">
 

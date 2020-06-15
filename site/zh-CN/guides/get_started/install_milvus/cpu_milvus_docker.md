@@ -110,14 +110,7 @@ $ docker logs <milvus container id>
 第四步，启动 Docker 容器，将 Milvus 文件映射到你本地的文件路径。下面的命令是在命令提示符中运行的：
 
 ```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} \
--p 19530:19530 \
--p 19121:19121 \
--v C:\milvus\db:/var/lib/milvus/db \
--v C:\milvus\conf:/var/lib/milvus/conf \
--v C:\milvus\logs:/var/lib/milvus/logs \
--v C:\milvus\wal:/var/lib/milvus/wal \
-milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
+$ docker run -d --name milvus_cpu_{{var.release_version}} -p 19530:19530 -p 19121:19121 -v C:\milvus\db:/var/lib/milvus/db -v C:\milvus\conf:/var/lib/milvus/conf -v C:\milvus\logs:/var/lib/milvus/logs -v C:\milvus\wal:/var/lib/milvus/wal milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 ## 在 macOS 上安装 Milvus

@@ -112,14 +112,7 @@ For Step 3, instead of using `wget` to obtain the files, it is suggested to crea
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
 ```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} \
--p 19530:19530 \
--p 19121:19121 \
--v C:\milvus\db:/var/lib/milvus/db \
--v C:\milvus\conf:/var/lib/milvus/conf \
--v C:\milvus\logs:/var/lib/milvus/logs \
--v C:\milvus\wal:/var/lib/milvus/wal \
-milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
+$ docker run -d --name milvus_cpu_{{var.release_version}} -p 19530:19530 -p 19121:19121 -v C:\milvus\db:/var/lib/milvus/db -v C:\milvus\conf:/var/lib/milvus/conf -v C:\milvus\logs:/var/lib/milvus/logs -v C:\milvus\wal:/var/lib/milvus/wal milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 ## Install Milvus on macOS
