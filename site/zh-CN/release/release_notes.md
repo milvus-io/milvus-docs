@@ -6,17 +6,45 @@ sidebar_label: 发版说明
 
 # 发版说明
 
-- ## v0.9.1
+## v0.10.0
 
-  **发布时间**：2020-5-29
+**发布时间**：2020-6-15
 
-  #### 版本兼容
+#### 版本兼容
 
-  | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
-  | :---------- | :-------------- | :------------ | :---------- |
-  | 0.9.1       | 0.2.12          | 0.8.1         | 0.4.1       |
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.0          | 0.2.13             | 0.8.2            | 0.4.2          |
 
-  #### 问题修复
+#### 兼容性改动
+
+- 更新了 Milvus 配置文件。[#2510](https://github.com/milvus-io/milvus/issues/2510)
+
+#### 主要改进
+
+- 优化了系统在存在多个小分段情况下的索引创建时间。 [#2373](https://github.com/milvus-io/milvus/issues/2373)
+- 将 FAISS 升级至 1.6.3。 [#2381](https://github.com/milvus-io/milvus/issues/2381)
+- 降低了系统在存在大量分区时删除集合需要的时间。[#2394](https://github.com/milvus-io/milvus/issues/2394)
+- 在 GPU 版 Milvus 上优化了 k-selection 算法的实现。[#2466](https://github.com/milvus-io/milvus/issues/2466)
+
+#### 问题修复
+
+- 修复了一个搜索性能降低的问题。[#2429](https://github.com/milvus-io/milvus/issues/2429)
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) 了解更多已修复问题。
+
+
+## v0.9.1
+
+**发布时间**：2020-5-29
+
+#### 版本兼容
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :---------- | :-------------- | :------------ | :---------- |
+| 0.9.1       | 0.2.12          | 0.8.1         | 0.4.1       |
+
+#### 问题修复
 
 - 多分区情况下，服务器重启后数据会被重复插入两次。[#2378](https://github.com/milvus-io/milvus/issues/2378)
 
