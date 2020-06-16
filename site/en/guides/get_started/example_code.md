@@ -17,7 +17,7 @@ After the Milvus server is successfully started, you can use this example progra
    $ pip3 install pymilvus=={{var.milvus_python_sdk_version}}
    ```
 
-   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md).
+   > <b>Note:</b> To learn more about Milvus Python SDK, go to [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md).
 
 3. Download Python example code.
 
@@ -26,7 +26,7 @@ After the Milvus server is successfully started, you can use this example progra
    $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/{{var.milvus_python_sdk_version}}/examples/example.py
    ```
    
-    > Note: If you cannot use `wget` to download the example code, you can also create `example.py` and copy the [example code](https://github.com/milvus-io/pymilvus/blob/{{var.milvus_python_sdk_version}}/examples/example.py).
+    > <b>Note:</b> If you cannot use `wget` to download the example code, you can also create `example.py` and copy the [example code](https://github.com/milvus-io/pymilvus/blob/{{var.milvus_python_sdk_version}}/examples/example.py).
    
 4. Run the example code.
 

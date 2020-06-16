@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-> Note: This repository is ONLY used to solve issues related to DOCS.
+> <b>Note:</b> This repository is ONLY used to solve issues related to DOCS.
 > For other issues, please move to [other repositories](https://github.com/milvus-io/).
 
 Before submitting your question, make sure you have:

@@ -10,7 +10,7 @@ This page walks you through some basic Milvus operations using the [Python clien
 
 You can also use other clients, including [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), and [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
-> Note: It is recommended that you use the [sizing tool](https://milvus.io/tools/sizing) to estimate required hardware resources for your data.
+> <b>Note:</b> It is recommended that you use the [sizing tool](https://milvus.io/tools/sizing) to estimate required hardware resources for your data.
 
 ## Connect to the Milvus server
 
@@ -28,7 +28,7 @@ You can also use other clients, including [Java](https://github.com/milvus-io/mi
    >>> milvus = Milvus(host='localhost', port='19530')
    ```
 
-   > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server.
+   > <b>Note:</b> In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server.
    
    ```python
    >>> milvus = Milvus(uri='tcp://localhost:19530')
@@ -60,7 +60,7 @@ You can use the following command to acquire the statistical information of a co
 >>> milvus.get_collection_stats('test01')
 ```
 
-> Note：Refer to [this link](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py) for more information.
+> <b>Note:</b> Refer to [this link](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py) for more information.
 
 #### Drop a collection
 
@@ -97,7 +97,7 @@ Use `show_partitions()` to verify whether the partition is created.
 
 #### Create an index
 Currently, a collection only supports one index type, and switching the index type will automatically delete the old index files. Before creating another index, FLAT is used as the default index type.
-> Note: `create_index` will specify the index type of the collection, and synchronously create an index for the previously inserted data. When the size of the subsequently inserted data reaches `index_file_size`, the index will be automatically created in the background. In the production environment, if it is streaming data, it is recommended to call `create_index` before inserting the vector so that the systems can automatically build it later; if it is static data, it is recommended to call `create_index` once after importing all the data. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
+> <b>Note:</b> `create_index` will specify the index type of the collection, and synchronously create an index for the previously inserted data. When the size of the subsequently inserted data reaches `index_file_size`, the index will be automatically created in the background. In the production environment, if it is streaming data, it is recommended to call `create_index` before inserting the vector so that the systems can automatically build it later; if it is static data, it is recommended to call `create_index` once after importing all the data. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
 1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters is a JSON string and represented by dict in Python.
 
@@ -106,7 +106,7 @@ Currently, a collection only supports one index type, and switching the index ty
    >>> ivf_param = {'nlist': 16384}
    ```
 
-   > Note: For different index types, the required parameters for index building also differ. You **must** specify values for all index parameters.
+   > <b>Note:</b> For different index types, the required parameters for index building also differ. You **must** specify values for all index parameters.
 
       | Index type    | Index parameters | Example                                                                | Value range               |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
@@ -209,7 +209,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
    >>> search_param = {'nprobe': 16}
    ```
 
-   > Note: For different index types, search parameters also differ. You **must** assign values to all search parameters.
+   > <b>Note:</b> For different index types, search parameters also differ. You **must** assign values to all search parameters.
 
       | Index type          | Search parameters     | Example                                                | Value range              |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
@@ -219,7 +219,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
       |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
       | `ANNOY`                 |  `search_k`: Affects the search performance. A larger value will give more accurate results, but will take longer time to return.</br>-1 indicates the default value which is 5% of the total data amount.  | `{"search_k": -1}`  | {-1} ∪ [topk, ∞) |
 
-   > Note: `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search. The value range of `top_k` is `(0, 2048]`.
+   > <b>Note:</b> `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search. The value range of `top_k` is `(0, 2048]`.
 
 2. Search vectors.
 
@@ -238,7 +238,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
-> Note: If you do not specify `partition_tags`, Milvus searches the whole collection.
+> <b>Note:</b> If you do not specify `partition_tags`, Milvus searches the whole collection.
 
 ## Close client
 

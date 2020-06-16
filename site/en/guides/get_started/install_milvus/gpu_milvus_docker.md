@@ -41,7 +41,7 @@ $ docker info
 
 If you do not see the server listed, start the **Docker** daemon.
 
-> Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
+> <b>Note:</b> On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
 ## Step 2 Pull Milvus image
 
@@ -51,7 +51,7 @@ Pull the GPU-enabled image:
 $ docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
 
-> Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
+> <b>Note:</b> If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
 
 ## Step 3 Download configuration files
 
@@ -61,7 +61,7 @@ $ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` file under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml).
+> <b>Note:</b> In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` file under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml).
 
 
 ## Step 4 Start Docker container

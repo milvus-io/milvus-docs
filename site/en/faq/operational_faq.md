@@ -65,7 +65,7 @@ The version of your Milvus server configuration file is incorrect. Milvus 0.7.0 
 
 Yes. You can refer to [Milvus Operations](../guides/milvus_operation.md) for details.
 
-> Note: Before 0.7.0, only insertion and search are supported.
+> <b>Note:</b> Before 0.7.0, only insertion and search are supported.
 
 #### Should I specify vector IDs or use auto-generated vector IDs?
 
@@ -90,7 +90,7 @@ Even if the data is a 2-dim array, this error can still occur if the data type i
 
 If the size of a data file is smaller than the value of the `index_file_size` parameter when creating a collection, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Operation](../guides/milvus_operation.md) for more information.
 
-> Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
+> <b>Note:</b> `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
 #### Why is my Milvus constantly having low accuracy?
 

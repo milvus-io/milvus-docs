@@ -84,7 +84,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 2. Configure the file to suit your requirements. Refer to [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) to learn more about the configuration file for Prometheus.
 
-   > Note: If you use distributed cluster, you must expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster.
+   > <b>Note:</b> If you use distributed cluster, you must expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster.
 
 3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory.
 
