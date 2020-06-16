@@ -65,7 +65,7 @@ $ docker restart <container id>
 | `port`      | Milvus 服务端监听的端口号，范围：(1024, 65535)。           | Integer | `19530`   |
 | `deploy_mode` | Milvus 部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | DeployMode | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，你可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
-| `web_enable` | 选择是否启用 Web 服务器。 | Boolean | `true` |
+| `web_enable` | <ul><li>`true`: 启用 Web 服务器。</li><li>`false`: 不启用 Web 服务器。</li></ul> | Boolean | `true` |
 | `web_port` | Milvus 网络服务端监听的端口号，范围：(1024, 65535)。你可以使用 Milvus 网络服务端与 [Milvus RESTful API](sdk.md) 通信。 | Integer | `19121`  |
 
 </div>
@@ -99,7 +99,7 @@ $ docker restart <container id>
 
 | 参数                      | 说明                           | 类型    | 默认值       |
 | ------------------------- | ------------------------------ | ------- | ------------ |
-| `enable_monitor` | 设置为 `true` 以启动监控功能。 | Boolean | `false`       |
+| `enable_monitor` | <ul><li>`true`: 启动监控功能。</li><li>`false`: 不启动监控功能。</li></ul> | Boolean | `false`       |
 | `address`                | 访问 Prometheus Pushgateway 的 IP 地址。       |   IP     |   127.0.0.1    |
 | `port`                    | 访问 Prometheus Pushgateway 的端口号。     | Integer | `9091`       |
 </div>
@@ -112,7 +112,7 @@ $ docker restart <container id>
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size` 之和不能超过内存总量。 | Integer | `4` (GB) |
 | `insert_buffer_size` | 用于数据导入的 buffer 所使用的最大内存量。`insert_buffer_size` 和 `cpu_cache_capacity` 之和不能超过内存总量。 | Integer     | `1` (GB)        |
-| `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。| Boolean | `false`  |
+| `cache_insert_data` | <ul><li>`true`: 新插入的数据会自动加载到缓存以备搜索。</li><li>`false`: 新插入的数据不会自动加载到缓存以备搜索。</li></ul>| Boolean | `false`  |
 </div>
 
 ### `engine_config` 区域
@@ -121,8 +121,8 @@ $ docker restart <container id>
 
 | 参数                 | 说明                                                         | 类型    | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------- | ------ |
-| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` &ge; `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间波动较小，但搜索速度较慢。如果 `nq` < `use_blas_threshold` ，则使用 AVX 或 SSE 指令集，搜索速度明显提升，但搜索响应时间波动较大。取值范围为 &ge; 0. | Integer | `1100`  |
-| `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` &ge; `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
+| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<ul><li>如果 `nq` &ge; `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间波动较小，但搜索速度较慢。</li><li>如果 `nq` < `use_blas_threshold` ，则使用 AVX 或 SSE 指令集，搜索速度明显提升，但搜索响应时间波动较大。</li></ul>取值范围为 &ge; 0. | Integer | `1100`  |
+| `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<ul><li>如果 `nq` &ge; `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。</li><li>如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。</li></ul>| Integer | `1000` |
 </div>
 
 ### `gpu_resource_config` 区域
@@ -135,7 +135,7 @@ $ docker restart <container id>
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `true` |
+| `enable` | <ul><li>`true`: 在 Milvus 里启用 GPU 用于搜索和索引创建。</li><li>`false`: 不在 Milvus 里启用 GPU 用于搜索和索引创建。</li></ul> | Boolean | `true` |
 | `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `1` (GB) |
 | `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | DeviceList        | `gpu0` |
 | `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | DeviceList | `gpu0` |
@@ -167,8 +167,8 @@ $ docker restart <container id>
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。如果开启，Milvus 会将所有数据变化预先写入日志文件，之后才会执行数据操作。WAL 可以保证 Milvus 操作的原子性和持久性。  |    Boolean          |   true      |
-|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 会启动失败。 |   Boolean           |   true      |
+|  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。<ul><li>`true`: 开启，Milvus 会将所有数据变化预先写入日志文件，之后才会执行数据操作。</li><li>`false`: 不开启，Milvus 不会将所有数据变化预先写入日志文件。</li></ul> WAL 可以保证 Milvus 操作的原子性和持久性。  |    Boolean          |   true      |
+|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。<ul><li>`true`: 当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。</li><li>`false`: 如果 WAL 日志中存在错误，则 Milvus 会启动失败。</li></ul> |   Boolean           |   true      |
 |  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为 MB。`buffer_size` 的值必须在 `[64, 4096]` 范围内。如果你设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。         |    Integer          |   `256` (MB)      |
 |  `wal_path`             |  预写式日志文件路径。                                                           |    String          |    ` `     |
 </div>
@@ -179,12 +179,12 @@ $ docker restart <container id>
 
 | 参数           | 说明                                                 | 类型         | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `trace.enable`      |   是否开启 trace 级别日志打印。           |    Boolean   |  `true` |
-|  `debug.enable`      |   是否开启 debug 级别日志打印。          |    Boolean   |  `true` |
-|  `info.enable`       |   是否开启 info 级别日志打印。         |    Boolean   |  `true` |
-|  `warning.enable`    |   是否开启 warning 级别日志打印。        |    Boolean   |  `true` |
-|  `error.enable`      |   是否开启 error 级别日志打印。         |    Boolean   |  `true` |
-|  `fatal.enable`      |   是否开启 fatal 级别日志打印。         |    Boolean   |  `true` |
+|  `trace.enable`      |   <ul><li>`true`: 开启 trace 级别日志打印。</li><li>`false`: 不开启 trace 级别日志打印。</li></ul>           |    Boolean   |  `true` |
+|  `debug.enable`      |   <ul><li>`true`: 开启 debug 级别日志打印。</li><li>`false`: 不开启 debug 级别日志打印。</li></ul>          |    Boolean   |  `true` |
+|  `info.enable`       |   <ul><li>`true`: 开启 info 级别日志打印。</li><li>`false`: 不开启 info 级别日志打印。</li></ul>         |    Boolean   |  `true` |
+|  `warning.enable`    |   <ul><li>`true`: 开启 warning 级别日志打印。</li><li>`false`: 不开启 warning 级别日志打印。</li></ul>        |    Boolean   |  `true` |
+|  `error.enable`      |   <ul><li>`true`: 开启 error 级别日志打印。</li><li>`false`: 不开启 error 级别日志打印。</li></ul>         |    Boolean   |  `true` |
+|  `fatal.enable`      |   <ul><li>`true`: 开启 fatal 级别日志打印。</li><li>`false`: 不开启 fatal 级别日志打印。</li></ul>         |    Boolean   |  `true` |
 |  `path`              |  日志文件绝对路径。  |    String    |   ` `   |
 |  `max_log_file_size` |  每份日志文件的最大值。范围： [1024, 4096]。  |    Integer   | `1024` (MB) |
 |  `logrotate`         | Milvus 为每个日志打印级别保存的最多文件数。范围： [0, 1024]。 `0` 代表日志文件数无上限。|    Integer   | `0` |

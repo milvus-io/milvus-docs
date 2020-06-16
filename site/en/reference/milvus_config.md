@@ -63,7 +63,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | `port`      | Port that Milvus server monitors. Port range: (1024, 65535). | Integer | `19530`    |
 | `deploy_mode` | Milvus deployment type. Options are `single`, `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
-| `web_enable` | Whether to enable web server. | Boolean |  `true` |
+| `web_enable` | <ul><li>`true`: enable web server.</li><li>`false`: not enable web server</li></ul> | Boolean |  `true` |
 | `web_port` | Port that Milvus web server monitors.  Port range: (1024, 65535). You can use the Milvus web server to communicate with the [Milvus RESTful API](sdk.md). | Integer |  `19121` |
 </div>
 
@@ -96,7 +96,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 | Parameter        | Description                                      | Type    | Default      |
 | ---------------- | ------------------------------------------------ | ------- | ------------ |
-| `enable_monitor` | Set to `true` to enable the monitoring function. | Boolean | `false`       |
+| `enable_monitor` | <ul><li>`true`: enable the monitoring function.</li><li>`false`: not enable the monitoring function.</li></ul> | Boolean | `false`       |
 | `address`        | IP address of the Pushgateway.      |   IP     |   `127.0.0.1`    |
 | `port`           | Port of the Pushgateway.                        | Integer | `9091`       |
 </div>
@@ -109,7 +109,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` must < the total CPU memory size. | Integer | `4` (GB) |
 | `insert_buffer_size` | The maximum memory size used by the buffer for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must < the total memory size. | Integer | `1` (GB)        |
-| `cache_insert_data`  | If set to `true` , the inserted data will be loaded to the cache immediately for hot query. | Boolean | `false`   |
+| `cache_insert_data`  | <ul><li>`true`: the inserted data will be loaded to the cache immediately for hot query.</li><li>`false`: the inserted data will not be loaded to the cache immediately for hot query.</li></ul> | Boolean | `false`   |
 
 </div>
 
@@ -119,8 +119,8 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 | Parameter            | Description                                                  | Type    | Default |
 | -------------------- | ------------------------------------------------------------ | ------- | ------- |
-| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide whether the usage of OpenBLAS library will be triggered. <br/>If `nq` &ge; `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow. <br/>If `nq` < `use_blas_threshold` , AVX or SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times. The value should be &ge; 0. | Integer | `1100`   |
-| `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<br/>If `nq` &ge; `gpu_search_threshold` , the search computation will be executed on GPUs only.<br/>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs. | Integer | `1000` |
+| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide whether the usage of OpenBLAS library will be triggered. <ul><li>If `nq` &ge; `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow.</li><li>If `nq` < `use_blas_threshold` , AVX or SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times.</li></ul> The value should be &ge; 0. | Integer | `1100`   |
+| `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<ul><li>If `nq` &ge; `gpu_search_threshold` , the search computation will be executed on GPUs only.</li><li>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs.</li></ul> | Integer | `1000` |
 </div>
 
 ### Section `gpu_resource_config`
@@ -133,7 +133,7 @@ To switch to CPU-only mode, just set `enable` to `false`.
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `enable` | Whether to enable GPU usage in Milvus. | Boolean | `true` |
+| `enable` | <ul><li>`true`: enable GPU usage in Milvus.</li><li>`false`: not enable GPU usage in Milvus.</li></ul> | Boolean | `true` |
 | `cache_capacity` | Size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `1` (GB) |
 | `search_resources` | GPU devices used for search computation in Milvus. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`. You can use multiple GPUs for search computation. | DeviceList | `gpu0` |
 | `build_index_resources` | GPU devices used for index building in Milvus. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`. You can use multiple GPUs for search computation. | DeviceList | `gpu0` |
@@ -165,8 +165,8 @@ To switch to CPU-only mode, just set `enable` to `false`.
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `enable`               |   Whether to enable write-ahead logging (WAL) in Milvus. If WAL is enabled, Milvus writes all data changes to log files in advance before implementing data changes. WAL ensures the atomicity and durability for Milvus operations.      |    Boolean          |   true      |
-|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus fails to restart when there are errors in WAL log files.   |   Boolean           |   true      |
+|  `enable`               |   Whether to enable write-ahead logging (WAL) in Milvus. <ul><li>`true`: Milvus writes all data changes to log files in advance before implementing data changes.</li><li>`false`: Milvus does not write all data changes to log files in advance before implementing data changes.</li></ul> WAL ensures the atomicity and durability for Milvus operations.      |    Boolean          |   true      |
+|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. <ul><li>`true`: when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored.</li> <li>`false`: Milvus fails to restart when there are errors in WAL log files.</li></ul>   |   Boolean           |   true      |
 |  `buffer_size`          |  Sum total of the read buffer and the write buffer in MBs. `buffer_size` must be in range `[64, 4096]` (MB) . If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.              |    Integer          |   `256` (MB)     |
 |  `wal_path`             |  Location of WAL log files.                                                            |    String          |    ` `     |
 </div>
@@ -177,12 +177,12 @@ To switch to CPU-only mode, just set `enable` to `false`.
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `trace.enable`      |   Whether to enable trace level logging.           |    Boolean   |  `true` |
-|  `debug.enable`      |   Whether to enable debug level logging.           |    Boolean   |  `true` |
-|  `info.enable`       |   Whether to enable info level logging.            |    Boolean   |  `true` |
-|  `warning.enable`    |   Whether to enable warning level logging.         |    Boolean   |  `true` |
-|  `error.enable`      |   Whether to enable error level logging.           |    Boolean   |  `true` |
-|  `fatal.enable`      |   Whether to enable fatal level logging.           |    Boolean   |  `true` |
+|  `trace.enable`      |   <ul><li>`true`: enable trace level logging.</li><li>`false`: not enable trace level logging.</li></ul>           |    Boolean   |  `true` |
+|  `debug.enable`      |   <ul><li>`true`: enable debug level logging.</li><li>`false`: not enable debug level logging.</li></ul>           |    Boolean   |  `true` |
+|  `info.enable`       |   <ul><li>`true`: enable info level logging.</li><li>`false`: not enable info level logging.</li></ul>            |    Boolean   |  `true` |
+|  `warning.enable`    |   <ul><li>`true`: enable warning level logging.</li><li>`false`: not enable warning level logging.</li><ul>         |    Boolean   |  `true` |
+|  `error.enable`      |   <ul><li>`true`: enable error level logging.</li><li>`false`: not enable error level logging.</li><ul>          |    Boolean   |  `true` |
+|  `fatal.enable`      |   <ul><li>`true`: enable fatal level logging.</li><li>`false`: not enable fatal level logging.</li></ul>           |    Boolean   |  `true` |
 |  `path`              |  Absolute path to the folder holding the log files.  |    String    |   ` `   |
 |  `max_log_file_size` |  The maximum size of each log file. Range: [1024, 4096]  |    Integer   | `1024` (MB) |
 |  `logrotate`         | The maximum number of log files that Milvus keeps for each logging level. Range: [0, 1024]. `0` means that the number does not have an upper limit. |    Integer   | `0` |
