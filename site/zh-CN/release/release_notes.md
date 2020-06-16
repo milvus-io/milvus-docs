@@ -51,7 +51,7 @@ sidebar_label: 发版说明
 - 使用 GPU IVF 索引时，如果查询次数 nq 过高，系统会报 `cudaMalloc` 错误。 [#2395](https://github.com/milvus-io/milvus/issues/2395)
 - 向量删除后依然会被 GPU 加速版 Milvus 找到。 [#2450](https://github.com/milvus-io/milvus/issues/2450)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) 了解更多已修复问题。https://github.com/milvus-io/milvus/issues/2395)
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) 了解更多已修复问题。
 
 
 

@@ -105,7 +105,7 @@ $ docker restart <container id>
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。如果开启，Milvus 会将所有数据变化预先写入日志文件，之后才会执行数据操作。WAL 可以保证 Milvus 操作的原子性和持久性。  |    Boolean          |   true      |
 |  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 会启动失败。 |   Boolean           |   true      |
-|  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为 MB。`buffer_size` 的值必须在 `[64, 4096]` 范围内。如果你设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。         |    String          |   `256MB`      |
+|  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为字节。`buffer_size` 的值必须在 `[64MB, 4096MB]` 范围内。如果你设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。     |    String          |   `256MB`      |
 |  `wal_path`             |  预写式日志文件路径。                                                           |    String          |    `/var/lib/milvus/wal `     |
 </div>
 
