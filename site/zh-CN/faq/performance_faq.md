@@ -25,7 +25,7 @@ sidebar_label: 性能常见问题
 
 #### 为什么搜索的速度很慢？
 
-- 将`cpu_cache_capacity` 设置为用户能提供的最大内存数。
+- 在确保 `insert_buffer_size` 和 `cache_size` 不超过内存 将`cache_size` 设置为用户能提供的最大内存数。
 - 调整 `use_blas_threhold`（根据硬件环境调整）:
   - 如果当前批量查询的 nq 数（向量条数）小于 `use_blas_threhold`，可以尝试将 `use_blas_threhold` 调整为 `nq - 1`, 反之把 `use_blas_threhold` 调整为 `nq + 1`。
 - 在创建 collection 时，`index_file_size` 参数应该尽量调大。
