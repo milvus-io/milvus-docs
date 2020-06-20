@@ -52,7 +52,7 @@ $ docker restart <container id>
 
 若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
-### Section `cluster`
+### `cluster` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -63,7 +63,7 @@ $ docker restart <container id>
 
 </div>
 
-### Section `general`
+### `general` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -74,7 +74,7 @@ $ docker restart <container id>
 
 </div>
 
-### Section `network`
+### `network` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -159,7 +159,7 @@ $ docker restart <container id>
 |  `level`      |   Milvus 日志等级。必须为 `debug`、 `info`、 `warning`、 `error` 和 `fatal` 其中之一。          |   String   |  `debug` |
 |  `trace.enable`      |   是否开启 trace 级别日志打印。           |    Boolean   |  `true` |
 |  `path`              |  日志文件绝对路径。  |    String    |   `/var/lib/milvus/logs`   |
-|  `max_log_file_size` |  每份日志文件的最大值。范围： [512MB, 4096MB]。  |    Integer   | `1024MB` (MB) |
+|  `max_log_file_size` |  每份日志文件的最大值。范围： [512MB, 4096MB]。  |    Integer   | `1024MB` |
 |  `log_rotate_num`         | Milvus 为每个日志打印级别保存的最多文件数。范围： [0, 1024]。 `0` 代表日志文件数无上限。|    Integer   | `0` |
 </div>
 
