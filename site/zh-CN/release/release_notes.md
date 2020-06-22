@@ -14,34 +14,17 @@ sidebar_label: 发版说明
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 0.8.1          | 0.2.xx             | 0.8.xx            | 0.4.xx          |
-
-#### 兼容性改动
-
-- 更新了 Milvus 配置文件。[#2510](https://github.com/milvus-io/milvus/issues/2510)
-
-#### 主要改进
-
-- 优化了系统在存在多个小分段情况下的索引创建时间。 [#2373](https://github.com/milvus-io/milvus/issues/2373)
-- 将 FAISS 升级至 1.6.3。 [#2381](https://github.com/milvus-io/milvus/issues/2381)
-- 降低了系统在存在大量分区时删除集合需要的时间。[#2394](https://github.com/milvus-io/milvus/issues/2394)
-- 在 GPU 版 Milvus 上优化了 k-selection 算法的实现。[#2466](https://github.com/milvus-io/milvus/issues/2466)
-- 重构了日志输出。 [#221](https://github.com/milvus-io/milvus/issues/221)
-- 升级了 OpenBLAS 版本以提高 Milvus 性能。 [#1796](https://github.com/milvus-io/milvus/issues/1796)
-- 统一了 FAISS、NSG、HNSW 和 ANNOY 的向量距离计算方法。[#1965](https://github.com/milvus-io/milvus/issues/1965)
-- 支持 SSE4.2 指令集。 [#2039](https://github.com/milvus-io/milvus/issues/2039)
-- 重构了配置文件。 [#2149](https://github.com/milvus-io/milvus/issues/2149) [#2167](https://github.com/milvus-io/milvus/issues/2167)
-- 采用了 Elkan K-means 算法提高 IVF 索引性能。 [#2178](https://github.com/milvus-io/milvus/issues/2178)
+| 0.8.1          | 0.2.10           | 0.7.0         | 0.3.0        |
 
 #### 问题修复
 
-- 修复了一个搜索性能降低的问题。[#2429](https://github.com/milvus-io/milvus/issues/2429)
-- 多分区情况下，服务器重启后数据会被重复插入两次。[#2378](https://github.com/milvus-io/milvus/issues/2378)
+- 进行一次 compact 操作后索引文件丢失。 [#1997](https://github.com/milvus-io/milvus/issues/1997)
+- `metric_config.enable_monitor` 设为 `true` 后过多句柄文件被打开。 [#2264](https://github.com/milvus-io/milvus/issues/2264)
+- 当多个客户端同事查询不同的表时服务器死机。 [#2266](https://github.com/milvus-io/milvus/issues/2266)
+- 用户设置的 `nlist` 不一定生效。 [#2399](https://github.com/milvus-io/milvus/issues/2399)
+- 向量删除后依然会被 GPU 版 Milvus 找到。 [#2450](https://github.com/milvus-io/milvus/issues/2450)
 
-- 使用 GPU IVF 索引时，如果查询次数 nq 过高，系统会报 `cudaMalloc` 错误。 [#2395](https://github.com/milvus-io/milvus/issues/2395)
-- 向量删除后依然会被 GPU 加速版 Milvus 找到。 [#2450](https://github.com/milvus-io/milvus/issues/2450)
-
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.8.1/CHANGELOG.md) 了解更多已修复问题。
 
 
 
