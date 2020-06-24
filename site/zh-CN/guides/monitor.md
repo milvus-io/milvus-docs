@@ -14,27 +14,24 @@ sidebar_label: Monitoring and Alerting
 
 Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafana 作为可视化组建进行数据展示。
 
-- Prometheus
+#### Prometheus
 
-  Prometheus 是一个拥有多维度数据模型、灵活的查询语句的监控报警系统。
+Prometheus 是一个拥有多维度数据模型和灵活查询语句的时序数据库。目前，Milvus 使用了以下 Prometheus 组件：
 
-  Prometheus 提供多个组件供用户使用。目前，Milvus 使用了以下组件：
+- Prometheus Server：收集和存储时序数据。
+- Client 代码库：定制监控指标。
+- Alertmanager：实现报警机制。
+- Pushgateway：推送指标数据，确保生命周期短且难以被及时提取的监控指标能够被 Prometheus 获取。
 
-  - Prometheus Server：用于收集和存储时间序列数据。
-  - Client 代码库：用于定制程序中需要的 metric。
-  - Alertmanager：用于实现报警机制。
-  - Pushgateway：使生命周期短、批量的 metric 能够被 Prometheus 提取。这些 metric 本身是难以及时提取的。
+Milvus 会收集监控数据并将其推送到 Pushgateway。同时，Prometheus 服务器会定期从 Pushgateway 中拉取数据并将其保存到它的时序数据库。具体工作流程如下：
 
-其工作流程如下图所示:
+![proxy](https://milvus.io/static/3d68d75d595d1af1c1f3acd780cb7044/8c557/monitoring.png)
 
-![1566787785125](../../../assets/monitoring/monitoring.png)
+#### Grafana
 
-- Grafana
+Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
-
-  ![prometheus.png](../../../assets/prometheus.png)
-
+![prometheus.png](../../../assets/prometheus.png)
 
 ### 需要报警的事件
 
@@ -63,7 +60,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 安装 Prometheus
 
-1. 下载 [Prometheus tarball](https://prometheus.io/download/) 。
+1. 下载 [Prometheus 二进制文件的压缩包](https://prometheus.io/download/) 。
 
 2. 确保 Prometheus 已经成功安装：
 
@@ -71,39 +68,103 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ prometheus --version
    ```
 
-   > 建议：你可以提取 Prometheus binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Prometheus。
+   <div class="alert info">
+   你可以提取 Prometheus binary 并添加到 <code>PATH</code> ，以便在任意 Shell 上都能快速启动 Prometheus。
+   </div>
 
-### 设置 Prometheus
+### 配置和启动 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/prometheus.yml) 。
+1. 启动 Pushgateway：
+
+    ```shell
+    ./pushgateway
+    ```
+
+    <div class="alert note">
+    必须在启动 Milvus Server 之前启动 Pushgateway 进程。
+    </div>
+    
+2. 在 **server_config.yaml** 中开启 Prometheus 监控，并设置 Pushgateway 的地址和端口号。
+
+    ```yaml
+    metric:
+      enable: true       # 将值设为 true 以开启 Prometheus 监控。
+      address: 127.0.0.1 # 设置 Pushgateway 的 IP 地址。
+      port: 9091         # 设置 Pushgateway 的端口号。
+    ```
+
+3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/prometheus.yml)：
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/v{{var.release_version}}/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-2. 根据你的需求编辑配置文件。参考 [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) 了解更多关于 Prometheus 配置文件的信息。
-
-   > 注意：如果你使用了分布式集群，则需要在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。
-
-3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录。
+4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
 
    ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v{{var.release_version}}/assets/monitoring/alert_rules.yml
    ```
 
-### 启动 Prometheus
+5. 根据你的需求编辑 Prometheus 配置文件：
 
-1. 启动 Prometheus 服务， `--config.file` 指向配置文件：
+   - global：配置 scrape_interval 和 evaluation_interval 等参数。
 
-   ```shell
-   $ ./prometheus --config.file=prometheus.yml
+   ```yaml
+   global:
+     scrape_interval:     2s # 设置抓取时间间隔为2s.
+     evaluation_interval: 2s # 设置评估时间间隔为2s.
    ```
 
-2. 将浏览器指向 `http://<hostname of machine running prometheus>:9090` ，进入 Prometheus 用户交互页面。
+   - alerting：设置 Alertmanager 的地址和端口。
 
-### 安装并启动 Pushgateway
+   ```yaml
+   alerting:
+   alertmanagers:
+   - static_configs:
+      - targets: ['localhost:9093']
+   ```
 
-参考 [https://github.com/prometheus/pushgateway](https://github.com/prometheus/pushgateway) 了解如何下载和启动 Pushgateway。
+   - rule_files：设置报警规则文件。
+
+   ```yaml
+   rule_files:
+      - "alert_rules.yml"
+   ```
+
+   - scrape_configs：设置抓取数据的 job_name 以及 targets 等信息。
+
+   ```yaml
+   scrape_configs:
+   - job_name: 'prometheus'
+      static_configs:
+      - targets: ['localhost:9090']
+
+   - job_name: 'pushgateway'
+      honor_labels: true
+      static_configs:
+      - targets: ['localhost:9091']
+   ```
+
+   <div class="alert info">
+    关于 Prometheus 的高级配置和功能的详细信息请见 <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/">配置 Prometheus</a>。
+   </div>
+   
+6. 启动 Prometheus：
+
+    ```shell
+    ./prometheus --config.file=prometheus.yml
+    ```
+
+### 在 Kubernetes 中配置 Prometheus
+
+首先启动 Pushgateway 和 Prometheus，然后将 Kubernetes 集群中需要监控的节点配置文件 **server_config.yaml** 的监控选项打开，并设置 Pushgateway 的 IP 地址和端口号。
+
+```yaml
+metric:
+  enable: true       # 将值设为 true 以开启 Prometheus 监控。
+  address: 127.0.0.1 # 设置 Pushgateway 的 IP 地址。
+  port: 9091         # 设置 Pushgateway 的端口号。
+```
 
 ### 使用 Grafana 实现 metrics 可视化展示
 
