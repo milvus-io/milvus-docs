@@ -221,7 +221,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version
 启动 Docker 容器，将本地的文件路径映射到容器中：
 
 ```shell
-$ sudo docker run -d --name milvus_cpu_{{var.release_version}} \
+$ docker run -d --name milvus_cpu_{{var.release_version}} \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
