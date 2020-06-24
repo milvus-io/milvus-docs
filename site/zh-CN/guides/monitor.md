@@ -166,40 +166,40 @@ metric:
   port: 9091         # 设置 Pushgateway 的端口号。
 ```
 
-### 使用 Grafana 实现 metrics 可视化展示
+### 使用 Grafana 实现监控指标可视化展示
 
-1. 使用以下命令安装并运行 Grafana：
+Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项监控指标。
 
-   ```
-   $ docker run -i -p 3000:3000 grafana/grafana
-   ```
+1. 运行 Grafana：
 
-2. 将浏览器指向 `http://<hostname of machine running grafana>:3000` ，使用默认的用户名/密码，`admin/admin`，登录 Grafana 用户交互页面。你也可以在此创建新的 Grafana 账号。
+```shell
+docker run -i -p 3000:3000 grafana/grafana
+```
 
-3. [添加 Prometheus 作为 data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/).
+2. 在浏览器中打开 `http://<提供 Grafana 服务的主机 IP>:3000` 网址，并登录 Grafana 用户交互页面。
 
-4. 对 data source 做如下设置：
+  <div class="alert info">
+  Grafana 的默认用户名和密码都是“admin”。你也可以在此创建新的 Grafana 账号。
+  </div>
 
-   | Field   | Definition                                             |
-   | :------ | :----------------------------------------------------- |
-   | Name    | Prometheus                                             |
-   | Default | True                                                   |
-   | URL     | `http://<hostname of machine running prometheus>:9090` |
-   | Access  | Browser                                                |
+3. [在 Prometheus 中添加数据源](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)。
 
-5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/dashboard.json) :
+4. 在 Grafana 用户交互页面中，点击 **Configuration > Data Sources > Prometheus**，然后设置以下数据源属性：
 
-   ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v{{var.release_version}}/assets/monitoring/dashboard.json
-   ```
+   | 名称    | 值                                          |
+   | :------ | :------------------------------------------ |
+   | Name    | Prometheus                                  |
+   | Default | True                                        |
+   | URL     | http://<提供 Prometheus 服务的主机 IP>:9090 |
+   | Access  | Browser                                     |
 
-6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
+5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.9.1/assets/monitoring/dashboard.json)。
 
-### 使用 Alertmanager 发送通知
+6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard)。
 
-在 Prometheus 配置，你已经下载了 Milvus 的报警规则文件。现在，你只需要下载、配置并启动 Alertmanager。
+### 配置 Alertmanager
 
-1. 下载 [最新 Alertmanager tarball](https://prometheus.io/download/#alertmanager) 。
+1. 下载 [Alertmanager 二进制文件的压缩包](https://prometheus.io/download/#alertmanager)。
 
 2. 确保 Alertmanager 已经成功安装：
 
@@ -207,17 +207,19 @@ metric:
    $ alertmanager --version
    ```
 
-   > 建议：你可以提取 Alertmanager binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Alertmanager。
+   <div class="alert info">
+   你可以提取 Alertmanager binary 并添加到 <code>PATH</code> ，以便在任意 Shell 上都能快速启动 Alertmanager。
+   </div>
 
-3. 创建 [Alertmanager 配置文件](https://prometheus.io/docs/alerting/configuration/) 来指定接受报警通知的邮箱/微信账户，并将配置文件添加到 Alertmanager 根目录下。
+3. 根据 [配置 Alertmanager](https://prometheus.io/docs/alerting/configuration/) 创建配置文件 **alertmanager.yml**，指定接受报警通知的邮箱或微信账号，并将配置文件添加到 Alertmanager 根目录下。
 
-4. 启动 Alertmanager 服务， `--config.file` 指向配置文件：
+4. 启动 Alertmanager 服务并指定配置文件：
 
-   ```shell
-   alertmanager --config.file=simple.yml
-   ```
+    ```shell
+    ./alertmanager --config.file=alertmanager.yml
+    ```
 
-5. 将浏览器指向 `http://<hostname of machine running alertmanager>:9093` ，进入 Alertmanager 用户交互页面。你可以在此定义 [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences) 的条件。
+5. 通过浏览器登录 `http://<提供 Alertmanager 服务的主机>:9093`，进入 Alertmanager 用户交互页面。你可以在此定义[报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
 
 ## 相关阅读
 
