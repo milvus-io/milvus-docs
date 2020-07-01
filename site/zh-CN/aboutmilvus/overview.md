@@ -14,7 +14,7 @@ Milvus 是一款开源向量相似度搜索引擎，建立在 Faiss、NMSLIB、A
 - 文本搜索、推荐和交互式问答系统等文本搜索领域
 - 新药搜索、基因筛选等生物医药领域
 
-除了提供核心的数据管理和搜索功能外，Milvus 还提供了：
+除了提供核心的数据管理和搜索功能外，Milvus 还提供了
 
 - 基于 JSON 的 DSL，提供用户灵活方便的搜索方式
 - 基于 Python / Java / Go / C++ 的 SDK 和 RESTful API
@@ -25,7 +25,7 @@ Milvus 是一款开源向量相似度搜索引擎，建立在 Faiss、NMSLIB、A
 
 Milvus 是开箱即用的产品，所有配置参数都有默认值。因此对初学者来说使用体验非常友好。随着深入了解 Milvus，你会发现整个 Milvus 都是灵活可配置的。你可以利用 Milvus 的高级特性来优化向量的存储与搜索，更好地服务于你的业务。
 
-Milvus 在 Apache 2.0 协议下发布，于 2019 年 10 月正式开源，是 [LF AI](https://lfai.foundation/) 基金会的孵化项目。Milvus 的源代码被托管于 GitHub 之上：[Milvus · 开源的特征向量相似度搜索引擎](https://github.com/milvus-io/milvus)。如果你想加入我们的开发者社区，欢迎访问：[Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus)。
+Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，是 [LF AI](https://lfai.foundation/) 基金会的孵化项目。Milvus 的源代码被托管于 Github 之上：[Milvus · 开源的特征向量相似度搜索引擎](https://github.com/milvus-io/milvus)。如果你想加入我们的开发者社区，欢迎访问：[Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus)。
 
 如果你对 Milvus 有任何与功能、SDK 等相关的问题，欢迎加入 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 参与讨论。
 
