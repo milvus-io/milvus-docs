@@ -34,9 +34,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 请确保可用内存大于你在 <b>milvus.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。
 </div>
 
-## 安装 Milvus
-
-#### 确认 Docker 状态
+## 确认 Docker 状态
 
 确认 Docker daemon 正在运行：
 
@@ -52,7 +50,7 @@ $ sudo docker info
 在 Linux 上需要使用 <code>sudo</code> 执行 Docker 命令。若要在没有 <code>sudo</code> 的情况下运行 Docker 命令，请创建 <code>docker</code> 组并添加用户，详见 <a href="https://docs.docker.com/install/linux/linux-postinstall/">Linux 安装步骤</a>。
 </div>
 
-#### 拉取 Milvus 镜像
+## 拉取 Milvus 镜像
 
 拉取 CPU 版本 的 Milvus 镜像：
 
@@ -64,7 +62,7 @@ $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="../../../faq/operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>
 
-#### 下载配置文件
+## 下载配置文件
 
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
@@ -76,7 +74,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version
 如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
-#### 启动 Milvus Docker 容器
+## 启动 Milvus Docker 容器
 
 启动 Docker 容器，将本地的文件路径映射到容器中：
 
