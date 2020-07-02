@@ -3,6 +3,6 @@ label: c++
 order: 1
 ---
 
-{{tab}}
+{{tab_cpu}}
 
 {{asdasd::tip.collection}}
