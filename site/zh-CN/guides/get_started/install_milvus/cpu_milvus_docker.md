@@ -14,8 +14,6 @@ sidebar_label: Install CPU-only Milvus on Docker
 | -------------- | ------------------------------------------------------------ |
 | CentOS         | 7.5 或以上                                                   |
 | Ubuntu LTS     | 18.04 或以上                                                 |
-| Windows        | 64 位 Windows 10 Pro/Enterprise/Education（Build 15063 或以上） |
-| macOS          | 10.13 或以上         |
 
 #### 硬件
 
@@ -33,14 +31,10 @@ sidebar_label: Install CPU-only Milvus on Docker
 | Docker  | 19.03 或以上                             |
 
 <div class="alert note">
-<ul>
-<li>如果在 Windows 上安装 Milvus，请安装 <a href="https://docs.docker.com/docker-for-windows/install/">Docker Desktop</a>，并进入 <b>Settings &gt; Advanced</b> 调整相关配置。</li>
-<li>如果在 macOS 上安装 Milvus，请安装 <a href="https://docs.docker.com/docker-for-mac/install/">Docker Desktop for Mac</a>，并进入 <b>Settings &gt; Advanced</b> 调整相关配置。</li>
-<li>请确保可用内存大于你在 <b>milvus.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。</li>
-</ul>
+请确保可用内存大于你在 <b>milvus.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。
 </div>
 
-## 在 Ubuntu/CentOS 上安装 Milvus
+## 安装 Milvus
 
 #### 确认 Docker 状态
 
@@ -117,137 +111,6 @@ $ sudo docker ps
 $ docker ps -a
 # 检查 docker 日志。
 $ docker logs <milvus container id>
-```
-
-## 在 Windows 上安装 Milvus
-
-#### 确认 Docker 状态
-
-确认 Docker daemon 正在运行：
-
-```shell
-$ docker info
-```
-
-<div class="alert note">
-如果无法正常打印 Docker 相关信息，请启动 Docker daemon。
-</div>
-
-#### 拉取 Milvus 镜像
-
-拉取 CPU 版本 的 Milvus 镜像：
-
-```shell
-$ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
-```
-
-<div class="alert note">
-如果拉取镜像的速度过慢或一直失败，请参考 <a href="../faq/index.md">常见问题</a> 中提供的解决办法。
-</div>
-
-#### 下载配置文件
-
-1. 在 C 盘创建 **milvus** 文件夹，并在其中创建子文件夹：**db**、**conf**、**logs** 和 **wal**。
-2. 在 **C:\milvus\conf** 目录下创建 <b>server_config.yaml</b> 文件。
-3. 将 [server config 文件](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml) 的内容复制到你创建的配置文件中。
-
-#### 启动 Milvus Docker 容器
-
-启动 Docker 容器，将本地的文件路径映射到容器中：
-
-```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} -p 19530:19530 -p 19121:19121 -v C:\milvus\db:/var/lib/milvus/db -v C:\milvus\conf:/var/lib/milvus/conf -v C:\milvus\logs:/var/lib/milvus/logs -v C:\milvus\wal:/var/lib/milvus/wal milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
-```
-
-上述命令中用到的参数定义如下：
-
-- `-d`: 在后台运行容器。
-- `--name`: 为容器指定一个名字。
-- `-p`: 映射宿主机端口到容器。
-- `-v`: 将宿主机路径挂载至容器。
-
-确认 Milvus 运行状态：
-
-```shell
-$ docker ps
-```
-
-如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
-
-```shell
-$ docker logs milvus_cpu_{{var.release_version}}
-```
-
-## 在 macOS 上安装 Milvus
-
-#### 确认 Docker 状态
-
-确认 Docker daemon 正在运行：
-
-```shell
-$ docker info
-```
-
-<div class="alert note">
-如果无法正常打印 Docker 相关信息，请启动 Docker daemon。
-</div>
-
-#### 拉取 Milvus 镜像
-
-拉取 CPU 版本 的 Milvus 镜像：
-
-```shell
-$ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
-```
-
-<div class="alert note">
-如果拉取镜像的速度过慢或一直失败，请参考 <a href="../faq/index.md">常见问题</a> 中提供的解决办法。
-</div>
-
-#### 下载配置文件
-
-```shell
-$ mkdir -p /Users/$USER/milvus/conf
-$ cd /Users/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
-```
-
-<div class="alert note">
-如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
-</div>
-
-#### 启动 Milvus Docker 容器
-
-启动 Docker 容器，将本地的文件路径映射到容器中：
-
-```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} \
--p 19530:19530 \
--p 19121:19121 \
--v /home/$USER/milvus/db:/var/lib/milvus/db \
--v /home/$USER/milvus/conf:/var/lib/milvus/conf \
--v /home/$USER/milvus/logs:/var/lib/milvus/logs \
--v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
-```
-
-上述命令中用到的参数定义如下：
-
-- `-d`: 在后台运行容器。
-- `--name`: 为容器指定一个名字。
-- `-p`: 映射宿主机端口到容器。
-- `-v`: 将宿主机路径挂载至容器。
-
-确认 Milvus 运行状态：
-
-```shell
-$ docker ps
-```
-
-如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
-
-```shell
-$ docker logs milvus_cpu_{{var.release_version}}
 ```
 
 ## 接下来你可以
