@@ -3,7 +3,6 @@
   {
       "id": "about_milvus",
       "title": "关于 Milvus",
-      "lang": "en",
       "label1": "",
       "label2": null,
       "label3": null,
@@ -13,7 +12,6 @@
   {
       "id": "overview.md",
       "title": "Milvus 简介",
-      "lang": "en",
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
@@ -22,7 +20,6 @@
   {
       "id": "vector.md",
       "title": "特征向量",
-      "lang": "en",
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
@@ -31,7 +28,6 @@
   {
       "id": "traditional_db.md",
       "title": "传统数据库与特征向量检索",
-      "lang": "en",
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
@@ -40,7 +36,6 @@
   {
       "id": "index_method.md",
       "title": "向量检索算法",
-      "lang": "en",
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
@@ -49,8 +44,7 @@
   {
       "id": "vector_db.md",
       "title": "其它特征向量检索工具",
-      "lang": "en",
-      "label1": "about_milvus",
+      "label1": "aboutmilvus",
       "label2": null,
       "label3": null,
       "order": 4
@@ -58,7 +52,6 @@
   {
       "id": "guides",
       "title": "用户指南",
-      "lang": "en",
       "label1": "",
       "label2": null,
       "label3": null,
@@ -68,7 +61,6 @@
   {
       "id": "get_started",
       "title": "快速入门",
-      "lang": "en",
       "label1": "guides",
       "label2": null,
       "label3": null,
@@ -78,7 +70,6 @@
     {
       "id": "install_milvus",
       "title": "安装 Milvus",
-      "lang": "en",
       "label1": "guides",
       "label2": "get_started",
       "label3": null,
@@ -88,7 +79,6 @@
     {
       "id": "install_milvus.md",
       "title": "安装概述",
-      "lang": "en",
       "label1": "guides",
       "label2": "get_started",
       "label3": "install_milvus",
@@ -97,7 +87,6 @@
     {
       "id": "cpu_milvus_docker.md",
       "title": "安装 CPU 版 Milvus",
-      "lang": "en",
       "label1": "guides",
       "label2": "get_started",
       "label3": "install_milvus",
@@ -106,7 +95,6 @@
     {
       "id": "gpu_milvus_docker.md",
       "title": "安装 GPU 版 Milvus",
-      "lang": "en",
       "label1": "guides",
       "label2": "get_started",
       "label3": "install_milvus",
@@ -115,7 +103,6 @@
     {
       "id": "example_code.md",
       "title": "运行示例程序",
-      "lang": "en",
       "label1": "guides",
       "label2": "get_started",
       "label3": "",
@@ -124,7 +111,6 @@
     {
       "id": "milvus_operation.md",
       "title": "Milvus 基本操作",
-      "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
@@ -133,7 +119,6 @@
     {
       "id": "metric.md",
       "title": "选择距离计算方式",
-      "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
@@ -142,7 +127,6 @@
     {
       "id": "index.md",
       "title": "索引类型",
-      "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
@@ -151,7 +135,6 @@
     {
       "id": "monitor.md",
       "title": "监控与报警",
-      "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
@@ -160,7 +143,6 @@
     {
       "id": "troubleshoot.md",
       "title": "故障诊断",
-      "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
@@ -170,7 +152,6 @@
     {
       "id": "reference",
       "title": "参考手册",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -180,7 +161,6 @@
     {
       "id": "milvus_config.md",
       "title": "Milvus 服务端配置",
-      "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
@@ -189,7 +169,6 @@
     {
       "id": "data_manage.md",
       "title": "数据管理",
-      "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
@@ -198,7 +177,6 @@
     {
       "id": "monitoring_metrics.md",
       "title": "监控指标",
-      "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
@@ -207,7 +185,6 @@
     {
       "id": "sdk.md",
       "title": "Milvus 客户端",
-      "lang": "en",
       "label1": "reference",
       "label2": null,
       "label3": null,
@@ -216,7 +193,6 @@
     {
       "id": "performance_tuning.md",
       "title": "配置 Milvus 以用于生产环境",
-      "lang": "en",
       "label1": "reference",
       "label2": null,
       "label3": null,
@@ -225,7 +201,6 @@
     {
       "id": "application.md",
       "title": "应用场景",
-      "lang": "en",
       "label1": "reference",
       "label2": "",
       "order": 6
@@ -242,7 +217,6 @@
     {
       "id": "faq",
       "title": "常见问题",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "order": 3,
@@ -250,7 +224,6 @@
     },{
       "id": "performance_faq.md",
       "title": "性能常见问题",
-      "lang": "en",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -259,7 +232,6 @@
     {
       "id": "product_faq.md",
       "title": "产品常见问题",
-      "lang": "en",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -268,7 +240,6 @@
     {
       "id": "operational_faq.md",
       "title": "操作常见问题",
-      "lang": "en",
       "label1": "faq",
       "label2": "",
       "order": 2
@@ -276,7 +247,6 @@
     {
       "id": "",
       "title": "在线训练营",
-      "lang": "en",
       "label1": "",
       "label2": null,
       "label3": null,
@@ -286,7 +256,6 @@
     {
       "id": "contribute.md",
       "title": "贡献",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "label3": null,
@@ -295,7 +264,6 @@
     {
       "id": "releases",
       "title": "发版说明",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "label3": null,
@@ -305,7 +273,6 @@
     {
       "id": "release_notes.md",
       "title": "发版说明",
-      "lang": "en",
       "label1": "releases",
       "label2": "",
       "label3": null,
@@ -314,7 +281,6 @@
     {
       "id": "Milvus Admin",
       "title": "Milvus Admin",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "label3": null,
@@ -324,7 +290,6 @@
     {
       "id": "release_notes_admin.md",
       "title": "Milvus Admin 发版说明",
-      "lang": "en",
       "label1": "Milvus Admin",
       "label2": "",
       "label3": null,
@@ -333,7 +298,6 @@
     {
       "id": "install_admin.md",
       "title": "安装 Milvus Admin",
-      "lang": "en",
       "label1": "Milvus Admin",
       "label2": "",
       "label3": null,
@@ -342,7 +306,6 @@
     {
       "id": "connect_to_admin.md",
       "title": "连接 Milvus Admin",
-      "lang": "en",
       "label1": "Milvus Admin",
       "label2": "",
       "label3": null,
@@ -351,7 +314,6 @@
     {
       "id": "admin_operations.md",
       "title": "Milvus Admin 基本操作",
-      "lang": "en",
       "label1": "Milvus Admin",
       "label2": "",
       "label3": null,

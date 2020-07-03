@@ -140,7 +140,7 @@ Currently, a collection only supports one index type, and switching the index ty
    ```python
    >>> import random
    # Generate 20 vectors of 256 dimension
-   >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+   >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. Insert the list of vectors. If you do not specify vector ids, Milvus automatically generates IDs for the vectors.
@@ -224,8 +224,8 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 2. Search vectors.
 
    ```python
-   # create 5 vectors of 32-dimension
-   >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   # create 5 vectors of 256-dimension
+   >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    # search vectors
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
@@ -233,8 +233,8 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 #### Search vectors in a partition
 
 ```python
-# create 5 vectors of 32-dimension
->>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+# create 5 vectors of 256-dimension
+>>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
