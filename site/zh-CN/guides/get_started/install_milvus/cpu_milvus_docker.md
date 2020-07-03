@@ -43,11 +43,10 @@ $ sudo docker info
 ```
 
 <div class="alert note">
-如果无法正常打印 Docker 相关信息，请启动 Docker daemon。
-</div>
-
-<div class="alert info">
-在 Linux 上需要使用 <code>sudo</code> 执行 Docker 命令。若要在没有 <code>sudo</code> 的情况下运行 Docker 命令，请创建 <code>docker</code> 组并添加用户，详见 <a href="https://docs.docker.com/install/linux/linux-postinstall/">Linux 安装步骤</a>。
+<ul>
+<li>如果无法正常打印 Docker 相关信息，请启动 Docker daemon。</li>
+<li>在 Linux 上需要使用 <code>sudo</code> 执行 Docker 命令。若要在没有 <code>sudo</code> 的情况下运行 Docker 命令，请创建 <code>docker</code> 组并添加用户，详见 <a href="https://docs.docker.com/install/linux/linux-postinstall/">Linux 安装步骤</a>。</li>
+</ul>
 </div>
 
 ## 拉取 Milvus 镜像
