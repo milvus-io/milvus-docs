@@ -66,7 +66,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
-| `enable`               | 【mishards是集群吗】If running with Mishards, set it as `true`, otherwise set it as `false`. 【】Whether to enable cluster mode. <ul><li><code>true</code>: Enable cluster mode.</li><li><code>false</code>: Not enable cluster mode.</li></ul>  | Boolean   | `false`         |
+| `enable`               | Whether to enable cluster mode. <ul><li><code>true</code>: Enable cluster mode.</li><li><code>false</code>: Not enable cluster mode.</li></ul>  | Boolean   | `false`         |
 | `role`                | Milvus deployment role: <ul><li><code>rw</code>: Read and write.</li><li><code>ro</code>: Read only.</li></ul>       | Role    | `rw`         |
 </div>
 
@@ -88,9 +88,9 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `bind.address`               | IP address that Milvus server monitors.   | IP   | `0.0.0.0`         |
-| `bind.port`                | Port that Milvus server monitors. Range: [1024, 65535]            | Integer    | `19530`         |
+| `bind.port`                | Port that Milvus server monitors. Range: [1024, 65535].            | Integer    | `19530`         |
 | `http.enable`                | Whether to enable HTTP server. <ul><li><code>true</code>: Enable HTTP server.</li><li><code>false</code>: Not enable HTTP server.</li></ul>           | Boolean    | `true`         |
-| `http.port`                | Port that Milvus HTTP server monitors. Range: [1024, 65535]            | Integer    | `19121`         |
+| `http.port`                | Port that Milvus HTTP server monitors. Range: [1024, 65535].            | Integer    | `19121`         |
 </div>
 
 ### Section `storage`
@@ -100,7 +100,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `path`         | Path to store Milvus data files, including vector data files, index files, and the metadata. | Path   | `/var/lib/milvus`    |
-| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. Range: [0, 3600]  `0` means disabling the regular flush.| Integer |    `1`    |
+| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. Range: [0, 3600].  `0` means disabling the regular flush.| Integer |    `1`    |
 
 </div>
 
@@ -145,7 +145,7 @@ This section determines whether to enable GPU support/usage in Milvus. GPU suppo
 </div>
 
 <div class="alert note">
-In Milvus, index building and search computation are separate processes, which can be executed on `cpu`, `gpu`, or both. You can assign index building and search computation to multiple GPUs by adding GPUs under <code>search_devices<code> or <code>build_index_devices</code>. Please refer to the following YAML sample code:
+In Milvus, index building and search computation are separate processes, which can be executed on `cpu`, `gpu`, or both. You can assign index building and search computation to multiple GPUs by adding GPUs under <code>search_devices</code> or <code>build_index_devices</code>. Please refer to the following YAML sample code:
 </div>
 
 ```yaml
@@ -164,10 +164,10 @@ In Milvus, index building and search computation are separate processes, which c
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `level`      |   Log level in Milvus. Log Levels: `debug` < `info` < `warning` < `error` < `fatal`.           |   String   |  `debug` |
-|  `trace.enable`      |   Whether to enable trace level logging.           |    Boolean   |  `true` |
+|  `trace.enable`      |   Whether to enable trace level logging. <ul><li><code>true</code>: Enable trace level logging.</li><li><code>false</code>: Not enable trace level logging.</li></ul>          |    Boolean   |  `true` |
 |  `path`              |  Absolute path to the folder holding the log files.  |    String    |  `/var/lib/milvus/logs`   |
-|  `max_log_file_size` |  The maximum size of each log file. Range: [512MB, 4096MB]  |    String   | `1024MB` |
-|  `log_rotate_num`         | The maximum number of log files that Milvus keeps for each logging level. Range: [0, 1024]. `0` means that the number does not have an upper limit. |    Integer   | `0` |
+|  `max_log_file_size` |  The maximum size of each log file. Range: 512MB ~ 4096MB.  |    String   | `1024MB` |
+|  `log_rotate_num`         | The maximum number of log files that Milvus keeps for each logging level. Range: [0, 1024]. `0` means that the number of stored log files does not have an upper limit. |    Integer   | `0` |
 </div>
 
 ### Section `metric`
@@ -176,10 +176,16 @@ In Milvus, index building and search computation are separate processes, which c
 
 | Parameter        | Description                                      | Type    | Default      |
 | ---------------- | ------------------------------------------------ | ------- | ------------ |
-| `enable` | Whether to enable the monitoring function. | Boolean | `false`       |
-| `address`        | IP address of the Pushgateway.      |   IP     |   `127.0.0.1`    |
-| `port`           | Port of the Pushgateway. Port range (1024, 65535).                       | Integer | `9091`       |
+| `enable` | Whether to enable the monitoring function of Prometheus. <ul><li><code>true</code>: Enable monitoring function.</li><li><code>false</code>: Not enable monitoring function.</li></ul> | Boolean | `false`       |
+| `address`        | IP address of Prometheus Pushgateway.      |   IP     |   `127.0.0.1`    |
+| `port`           | Port of Prometheus Pushgateway. Range: [1024, 65535].                       | Integer | `9091`       |
 </div>
 
-
-
+<div class="alert info" id="size">
+In the Milvus configuration file, space size should be written in the format of "number+unit", such as "4GB".
+<ul>
+<li>No spaces between numbers and units.</li>
+<li>The number must be an integer.</li>
+<li>Available units are GB, MB, and KB.</li>
+</ul>
+</div>

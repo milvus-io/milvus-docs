@@ -78,7 +78,7 @@ logs:
 | 参数             | 说明                                                         | 类型                                                       | 默认值                                                      |
 | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `timezone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，可以使用 UTC+8 来代表中国标准时间。 | Timezone | `UTC+8` |
-| `meta_uri` | 元数据存储的 URI。可以使用 SQLite【单机版】 或 MySQL（推荐）【分布式】来存储元数据。URI 格式为 dialect://username:password@host:port/database。其中，dialect 可以是 sqlite 或者 mysql，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
+| `meta_uri` | 元数据存储的 URI。可以使用 SQLite（Milvus 单机版本）或者 MySQL（Milvus 分布式版本）来存储元数据。URI 格式为 dialect://username:password@host:port/database。其中，dialect 可以是 sqlite 或者 mysql，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
 
 </div>
 
@@ -150,7 +150,7 @@ logs:
 </div>
 
 <div class="alert note">
-在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 CPU，或同时在 CPU 和 GPU 里进行。通过将 GPU 添加至 <code>search_devices<code> 或者 <code>build_index_devices</code> 下方，你可以指定多个 GPU 设备来进行创建索引或搜索。请参考下面的 YAML 示例代码：
+在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 CPU，或同时在 CPU 和 GPU 里进行。通过将 GPU 添加至 <code>search_devices</code> 或者 <code>build_index_devices</code> 下方，你可以指定多个 GPU 设备来进行创建索引或搜索。请参考下面的 YAML 示例代码：
 </div>
 
 ```yaml
@@ -184,17 +184,8 @@ logs:
 | ---------------- | ---------------------------------------- | ----------------------------------------- | ---------------------------------------- |
 | `enable`  | 是否开启 Prometheus 监控。<ul><li><code>true</code>：开启 Prometheus 监控。</li><li><code>false</code>：不开启 Prometheus 监控。</li></ul> | Boolean        | `false`        |
 | `address` | 访问 Prometheus Pushgateway 的 IP 地址。 | IP | `127.0.0.1` |
-| `port`    | 访问 Prometheus Pushgateway 的端口号。   | Integer | `9091` |
+| `port`    | 访问 Prometheus Pushgateway 的端口号。范围：[1024, 65535]。   | Integer | `9091` |
 
-</div>
-
-### `tracing_config` 区域
-
-<div class="table-wrapper" markdown="block">
-
-| 参数               | 说明                                                         | 类型    | 默认值     |
-| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `json_config_path` | 追踪系统配置文件的绝对路径。如果该值为空，则 Milvus 会创建一个空的追踪系统。  | Path | ` `  |
 </div>
 
 <div class="alert info" id="size">
