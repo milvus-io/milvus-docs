@@ -18,6 +18,7 @@ After successfully starting Milvus server, you can see a Milvus folder at `home/
 - `milvus/logs` (log storage)
 - `milvus/conf` (configuration file folder)
   - `server_config.yaml` (server configuration)
+  - `log_config.conf` (log configuration)
 
 ## Updating configurations
 

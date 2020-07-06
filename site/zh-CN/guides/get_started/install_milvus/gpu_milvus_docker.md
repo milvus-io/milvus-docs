@@ -8,70 +8,77 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 
 ## 安装前提
 
-#### 系统要求
+#### 操作系统
 
-| 操作系统   | 建议版本     |
-| ---------- | ------------ |
-| CentOS     | 7.5 或以上   |
-| Ubuntu LTS | 18.04 或以上 |
+| 操作系统    | 版本      |
+| -------------- | ------------ |
+| CentOS         | 7.5 或以上    |
+| Ubuntu LTS     | 18.04 或以上  |
 
-#### 硬件要求
+#### 硬件
 
-| 组件 | 建议配置                               |
-| ---- | -------------------------------------- |
-| CPU        | Intel CPU Sandy Bridge 或以上 |
+| 硬件  | 建议配置                               |
+| ---- | ------------------------------------- |
+| CPU  | Intel CPU Sandy Bridge 或以上          |
 | CPU 指令集 | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
 | GPU  | NVIDIA Pascal 或以上                   |
-| 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
-| 硬盘 | SATA 3.0 SSD 或以上                    |
+| 内存  | 8 GB 或以上（取决于具体向量数据规模）     |
+| 硬盘  | SATA 3.0 SSD 或以上                    |
 
-#### Milvus Docker 要求
+#### 软件
 
-- 在你的宿主机上安装 [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
-- 安装 NVIDIA driver 418 或更高版本。
-- 安装 [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)。
+| 软件            | 版本                                |
+| -------------- | -------------------------------------- |
+| Docker         | 19.03 或以上                            |
+| NVIDIA driver  | 418 或以上                              |
 
-## 第一步 确认 Docker 状态
+## 确认 Docker 状态
 
 确认 Docker daemon 正在运行：
 
 ```shell
-$ docker info
+$ sudo docker info
 ```
 
-如果无法正常打印 Docker 相关信息，请启动 **Docker** daemon.
+<div class="alert note">
+<ul>
+<li>如果无法正常打印 Docker 相关信息，请启动 Docker daemon。</li>
+<li>在 Linux 上需要使用 <code>sudo</code> 执行 Docker 命令。若要在没有 <code>sudo</code> 的情况下运行 Docker 命令，请创建 <code>docker</code> 组并添加用户，详见 <a href="https://docs.docker.com/install/linux/linux-postinstall/">Linux 安装步骤</a>。</li>
+</ul>
+</div>
 
-> 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
-
-## 第二步 拉取 Milvus 镜像
+## 拉取 Milvus 镜像
 
 拉取支持 GPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
+$ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
 
-> 注意：如果你在拉取镜像时速度过慢或一直失败，请参考 [操作常见问题](../../../faq/operational_faq.md) 中提供的解决办法。
+<div class="alert note">
+如果拉取镜像的速度过慢或一直失败，请参考 <a href="../../../faq/operational_faq.md">操作常见问题</a> 中提供的解决办法。
+</div>
 
-## 第三步 下载并修改配置文件
-
-你可以使用以下方法下载配置文件：
+## 下载并修改配置文件
 
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget http://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
-> 注意：万一你遇到无法通过 `wget` 命令正常下载配置文件的情况，你也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml) 的内容。
+<div class="alert note">
+如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+</div>
 
-配置文件下载完成后，你需要将 `server_config.yaml` 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
+配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
 
+## 启动 Milvus Docker 容器
 
-## 第四步 启动 Milvus Docker 容器
+启动 Docker 容器，将本地的文件路径映射到容器中：
 
 ```shell
-$ docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
+$ sudo docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
@@ -81,27 +88,24 @@ $ docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
 milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
 
-上述命令中用到的 `docker run` 参数定义如下：
+上述命令中用到的参数定义如下：
 
-- `-d`: 运行 container 到后台并打印 container id。
-- `--name`: 为 container 分配一个名字。
+- `-d`: 在后台运行 container。
+- `--name`: 为 container 指定一个名字。
 - `--gpus`: 指定可用的 GPU。如未填写任何值，则所有 GPU 都可用。
-- `-p`: 暴露 container 端口到 host。
-- `-v`: 将路径挂载至 container。
+- `-p`: 映射宿主机端口到 container。
+- `-v`: 将宿主机路径挂载至 container。
 
 最后，确认 Milvus 运行状态：
 
 ```shell
-$ docker ps
+$ sudo docker ps
 ```
 
-如果 Milvus 服务没有正常启动，你可以执行以下命令查询错误日志。
+如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
 
 ```shell
-# 获得运行 Milvus 的 container ID。
-$ docker ps -a
-# 检查 docker 日志。
-$ docker logs <milvus container id>
+$ sudo docker logs milvus_gpu_{{var.release_version}}
 ```
 
 ## 接下来你可以
