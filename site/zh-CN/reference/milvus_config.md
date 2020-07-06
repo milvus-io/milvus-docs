@@ -18,7 +18,6 @@ sidebar_label: Milvus Configuration
 - `milvus/logs`（日志存储）
 - `milvus/conf`（设置文件）
   - `server_config.yaml`（服务设置）
-  - `log_config.conf`（日志设置）
 
 ## 配置修改 
 
@@ -184,7 +183,7 @@ logs:
 | ---------------- | ---------------------------------------- | ----------------------------------------- | ---------------------------------------- |
 | `enable`  | 是否开启 Prometheus 监控。<ul><li><code>true</code>：开启 Prometheus 监控。</li><li><code>false</code>：不开启 Prometheus 监控。</li></ul> | Boolean        | `false`        |
 | `address` | 访问 Prometheus Pushgateway 的 IP 地址。 | IP | `127.0.0.1` |
-| `port`    | 访问 Prometheus Pushgateway 的端口号。范围：[1024, 65535]。   | Integer | `9091` |
+| `port`    | 访问 Prometheus Pushgateway 的端口号。范围：[1025, 65534]。   | Integer | `9091` |
 
 </div>
 
