@@ -39,7 +39,7 @@ logs:
 
 ### 运行时修改
 
-你可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考[客户端参考](sdk.md)。
+你可以使用 Milvus 客户端对 `server_config.yaml` 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
 

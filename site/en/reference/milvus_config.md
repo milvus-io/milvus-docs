@@ -40,9 +40,9 @@ logs:
 
 ### Updating configurations during runtime
 
-You can update parameters in `server_config.yaml` from a Milvus client. New changes are enabled without restarting Milvus after the modification. See [Client Reference](sdk.md) for more information.
+You can update parameters in `server_config.yaml` from a Milvus client. See [Client Reference](sdk.md) for more information.
 
-Updates to the following parameters during runtime take effect immediately.
+Changes to the following parameters take effect immediately without the need to restart Milvus.
 
  - Section `cache`
     - `cache_size`
@@ -99,7 +99,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
-| `path`         | Path to store Milvus data files, including vector data files, index files, and the metadata. | Path   | `/var/lib/milvus`    |
+| `path`         | path to Milvus data files, including vector data files, index files, and the metadata. | Path   | `/var/lib/milvus`    |
 | `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. Range: [0, 3600].  `0` means disabling the regular flush.| Integer |    `1`    |
 
 </div>
@@ -111,9 +111,9 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `enable`               |   Whether to enable write-ahead logging (WAL) in Milvus. If enabled, Milvus writes all data changes to log files in advance before implementing data changes. WAL ensures the atomicity and durability for Milvus operations.<ul><li><code>true</code>: Enable WAL.</li><li><code>false</code>: Disable WAL.</li></ul>      |    Boolean          |   true      |
-|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. <ul><li><code>true</code>: Ignore errors in log files during WAL recovery.</li><li><code>false</code>: Milvus will fail to restart if log files have any error.</li></ul>    |   Boolean           |   true      |
+|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. <ul><li><code>true</code>: Ignore errors in log files during WAL recovery.</li><li><code>false</code>: Milvus fails to restart if log files have any error.</li></ul>    |   Boolean           |   true      |
 |  `buffer_size`          |  Total size of the read and write WAL buffer in Bytes. Range: 64MB ~ 4096MB. If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.           |    String          |   `256MB`     |
-|  `wal_path`             |  Path to store WAL log files.                                                            |    String          |    `/var/lib/milvus/wal`     |
+|  `wal_path`             |  path to WAL log files.                                                            |    String          |    `/var/lib/milvus/wal`     |
 </div>
 
 ### Section `cache`
