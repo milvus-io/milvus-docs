@@ -1,6 +1,6 @@
 {
   "menuList": [
-  {
+    {
       "id": "about_milvus",
       "title": "About Milvus",
       "label1": "",
@@ -9,15 +9,15 @@
       "order": 0,
       "isMenu": true
     },
-  {
-       "id": "overview.md",
-       "title": "Milvus Overview",
-       "label1": "about_milvus",
-       "label2": "",
-       "label3": "",
-       "order": 0
+    {
+      "id": "overview.md",
+      "title": "Milvus Overview",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 0
     },
-  {
+    {
       "id": "vector.md",
       "title": "Feature Vector",
       "label1": "about_milvus",
@@ -25,7 +25,7 @@
       "label3": "",
       "order": 1
     },
-  {
+    {
       "id": "traditional_db.md",
       "title": "Traditional Databases",
       "label1": "about_milvus",
@@ -33,7 +33,7 @@
       "label3": "",
       "order": 2
     },
-  {
+    {
       "id": "index_method.md",
       "title": "Vector Search Methods",
       "label1": "about_milvus",
@@ -41,7 +41,7 @@
       "label3": "",
       "order": 3
     },
-  {
+    {
       "id": "vector_db.md",
       "title": "Other Feature Vector Search Tools",
       "label1": "about_milvus",
@@ -57,7 +57,7 @@
       "label3": "",
       "order": 1
     },
-  {
+    {
       "id": "guides",
       "title": "Guides",
       "label1": "",
@@ -66,7 +66,7 @@
       "order": 2,
       "isMenu": true
     },
-  {
+    {
       "id": "get_started",
       "title": "Get Started",
       "label1": "guides",
@@ -156,7 +156,7 @@
       "label3": "",
       "order": 6
     },
-    
+
     {
       "id": "reference",
       "title": "Reference",
@@ -212,7 +212,7 @@
       "label1": "reference",
       "label2": "",
       "order": 6
-    },    
+    },
     {
       "id": "terms.md",
       "title": "Milvus Terminology",
@@ -228,7 +228,8 @@
       "label2": "",
       "order": 4,
       "isMenu": true
-    },{
+    },
+    {
       "id": "performance_faq.md",
       "title": "Performance FAQ",
       "label1": "faq",
@@ -260,6 +261,5 @@
       "order": 5,
       "outLink": "https://github.com/milvus-io/bootcamp"
     }
-    
   ]
 }
