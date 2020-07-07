@@ -18,7 +18,6 @@ sidebar_label: Milvus Configuration
 - `milvus/logs`（日志存储）
 - `milvus/conf`（设置文件）
   - `server_config.yaml`（服务设置）
-  - `log_config.conf`（日志设置）
 
 ## 配置修改 
 
@@ -40,7 +39,7 @@ logs:
 
 ### 运行时修改
 
-你可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考[客户端参考](sdk.md)。
+你可以使用 Milvus 客户端对 `server_config.yaml` 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
 
@@ -78,7 +77,7 @@ logs:
 | 参数             | 说明                                                         | 类型                                                       | 默认值                                                      |
 | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `timezone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，可以使用 UTC+8 来代表中国标准时间。 | Timezone | `UTC+8` |
-| `meta_uri` | 元数据存储的 URI。可以使用 SQLite 或 MySQL（推荐）来存储元数据。URI 格式为 dialect://username:password@host:port/database。其中，dialect 可以是 sqlite 或者 mysql，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
+| `meta_uri` | 元数据存储的 URI。可以使用 SQLite（Milvus 单机版本）或者 MySQL（Milvus 分布式版本）来存储元数据。URI 格式为 dialect://username:password@host:port/database。其中，dialect 可以是 sqlite 或者 mysql，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
 
 </div>
 
@@ -112,7 +111,7 @@ logs:
 
 | 参数                      | 说明                                                         | 类型                                                       | 默认值                                                      |
 | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `enable`                | 是否开启 WAL（Write-Ahead Logging，预写式日志）。<ul><li><code>true</code>：开启 WAL。</li><li><code>false</code>：不开启 WAL。</li></ul> | Boolean     | `true`      |
+| `enable`                | 是否开启 WAL（Write-Ahead Logging，预写式日志）。如果启用 WAL，Milvus 会在更改数据之前将所有数据更改写入日志文件。WAL 确保 Milvus 操作的原子性和耐用性。<ul><li><code>true</code>：开启 WAL。</li><li><code>false</code>：不开启 WAL。</li></ul> | Boolean     | `true`      |
 | `recovery_error_ignore` | 在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。<ul><li><code>true</code>：Milvus 重启恢复时，忽略错误的日志。</li><li><code>false</code>：Milvus 重启恢复时，会因错误的日志启动失败。</li></ul> | Boolean | `false` |
 | `buffer_size`           | WAL 缓冲区大小，范围：64MB ~ 4096MB。建议该值大于单次插入的数据量两倍，以获取更好的性能。格式请见 [空间大小的格式](#size)。 | String  | `256MB` |
 | `path`                  | 预写式日志文件存储路径。                                     | String                               | `/var/lib/milvus/wal`                |
@@ -150,7 +149,7 @@ logs:
 </div>
 
 <div class="alert note">
-在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 CPU，或同时在 CPU 和 GPU 里进行。通过将 GPU 添加至 `search_devices` 或者 `build_index_devices` 下方，你可以指定多个 GPU 设备来进行创建索引或搜索。请参考下面的 YAML 示例代码：
+在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 CPU，或同时在 CPU 和 GPU 里进行。通过将 GPU 添加至 <code>search_devices</code> 或者 <code>build_index_devices</code> 下方，你可以指定多个 GPU 设备来进行创建索引或搜索。请参考下面的 YAML 示例代码：
 </div>
 
 ```yaml
@@ -184,17 +183,8 @@ logs:
 | ---------------- | ---------------------------------------- | ----------------------------------------- | ---------------------------------------- |
 | `enable`  | 是否开启 Prometheus 监控。<ul><li><code>true</code>：开启 Prometheus 监控。</li><li><code>false</code>：不开启 Prometheus 监控。</li></ul> | Boolean        | `false`        |
 | `address` | 访问 Prometheus Pushgateway 的 IP 地址。 | IP | `127.0.0.1` |
-| `port`    | 访问 Prometheus Pushgateway 的端口号。   | Integer | `9091` |
+| `port`    | 访问 Prometheus Pushgateway 的端口号。范围：[1025, 65534]。   | Integer | `9091` |
 
-</div>
-
-### `tracing_config` 区域
-
-<div class="table-wrapper" markdown="block">
-
-| 参数               | 说明                                                         | 类型    | 默认值     |
-| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `json_config_path` | 追踪系统配置文件的绝对路径。如果该值为空，则 Milvus 会创建一个空的追踪系统。  | Path | ` `  |
 </div>
 
 <div class="alert info" id="size">
