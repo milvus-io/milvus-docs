@@ -71,7 +71,7 @@ $ wget http://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}
 如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
-配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
+配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
 
 ## 启动 Milvus Docker 容器
 

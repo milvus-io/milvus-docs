@@ -66,7 +66,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version
 
 ## Step 4 Start Docker container
 
-Before starting the Docker container, you must set `enable` to `true` in `gpu_resource_config` section of `server_config.yaml`.
+Before starting the Docker container, you must set `enable` to `true` in `gpu` section of `server_config.yaml`.
 
 ```shell
 $ docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
