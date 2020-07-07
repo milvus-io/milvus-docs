@@ -73,7 +73,9 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 
 ## Start Docker container
 
-Before starting the Docker container, you must set `enable` to `true` in `gpu_resource_config` section of `server_config.yaml`.
+Before starting the Docker container, you must set `enable` to `true` in `gpu` section of `server_config.yaml`.
+
+Start the Docker container and map the paths of local files to the container:
 
 ```shell
 $ docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
