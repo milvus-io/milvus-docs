@@ -50,8 +50,8 @@
       "order": 1
     },
     {
-      "id": "guides",
-      "title": "GUIDES",
+      "id": "quick_start",
+      "title": "QUICK START",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -59,19 +59,10 @@
       "isMenu": true
     },
     {
-      "id": "get_started",
-      "title": "Get Started",
-      "label1": "guides",
-      "label2": "",
-      "label3": "",
-      "order": 0,
-      "isMenu": true
-    },
-    {
       "id": "install_milvus",
       "title": "Install Milvus",
-      "label1": "guides",
-      "label2": "get_started",
+      "label1": "quick_start",
+      "label2": "",
       "label3": "",
       "order": 0,
       "isMenu": true
@@ -79,42 +70,51 @@
     {
       "id": "install_milvus.md",
       "title": "Installation Overview",
-      "label1": "guides",
-      "label2": "get_started",
-      "label3": "install_milvus",
+      "label1": "quick_start",
+      "label2": "install_milvus",
+      "label3": "",
       "order": 0
     },
     {
       "id": "cpu_milvus_docker.md",
       "title": "Install CPU-only Milvus",
-      "label1": "guides",
-      "label2": "get_started",
-      "label3": "install_milvus",
+      "label1": "quick_start",
+      "label2": "install_milvus",
+      "label3": "",
       "order": 1
     },
     {
       "id": "gpu_milvus_docker.md",
       "title": "Install GPU-enabled Milvus",
-      "label1": "guides",
-      "label2": "get_started",
-      "label3": "install_milvus",
+      "label1": "quick_start",
+      "label2": "install_milvus",
+      "label3": "",
       "order": 2
     },
     {
       "id": "example_code.md",
-      "title": "Try an Example Program",
-      "label1": "guides",
-      "label2": "get_started",
+      "title": "Milvus Hello World",
+      "label1": "quick_start",
+      "label2": "",
       "label3": "",
       "order": 1
     },
     {
       "id": "milvus_operation.md",
-      "title": "Learn Milvus Operations",
-      "label1": "guides",
+      "title": "Get Started",
+      "label1": "quick_start",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 2
+    },
+    {
+      "id": "guides",
+      "title": "GUIDES",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 3,
+      "isMenu": true
     },
     {
       "id": "metric.md",
@@ -122,7 +122,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 0
     },
     {
       "id": "index.md",
@@ -130,7 +130,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 1
     },
     {
       "id": "monitor.md",
@@ -138,7 +138,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 2
     },
     {
       "id": "troubleshoot.md",
@@ -146,16 +146,15 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 3
     },
-
     {
       "id": "reference",
       "title": "REFERENCE",
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 3,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -196,7 +195,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -249,7 +248,7 @@
       "title": "FAQ",
       "label1": "",
       "label2": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -281,7 +280,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 7,
       "outLink": "https://github.com/milvus-io/bootcamp"
     },
     {
@@ -290,7 +289,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
