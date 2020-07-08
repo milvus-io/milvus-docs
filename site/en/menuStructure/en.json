@@ -2,7 +2,7 @@
   "menuList": [
     {
       "id": "about_milvus",
-      "title": "About Milvus",
+      "title": "ABOUT MILVUS",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -59,7 +59,7 @@
     },
     {
       "id": "guides",
-      "title": "Guides",
+      "title": "GUIDES",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -159,7 +159,7 @@
 
     {
       "id": "reference",
-      "title": "Reference",
+      "title": "REFERENCE",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -200,7 +200,7 @@
     },
     {
       "id": "API",
-      "title": "API Reference",
+      "title": "API REFERENCE",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -285,7 +285,7 @@
     },
     {
       "id": "",
-      "title": "Bootcamp",
+      "title": "BOOTCAMP",
       "label1": "",
       "label2": "",
       "label3": "",
