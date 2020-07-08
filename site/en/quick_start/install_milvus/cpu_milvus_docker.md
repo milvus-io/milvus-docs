@@ -45,7 +45,7 @@ $ sudo docker info
 <div class="alert note">
 <ul>
 <li>If you do not see the server listed, start the Docker daemon.</li>
-<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code>, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation steps for Linux</a> for details).</li>
+<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code> privileges, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation steps for Linux</a> for details).</li>
 </ul>
 </div>
 
@@ -58,7 +58,7 @@ $ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 <div class="alert note">
-If the pulling speed is too slow or the pulling process constantly fails, refer to <a href="../../../faq/operational_faq.md">Operational FAQ</a> for possible solutions.
+If the pulling is too slow or fails constantly, see <a href="../../../faq/operational_faq.md">Operational FAQ</a> for possible solutions.
 </div>
 
 ## Download configuration files
@@ -70,12 +70,12 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create the <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to your configuration file.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
 ## Start Docker container
 
-Start the Docker container and map the paths of local files to the container:
+Start Docker container and map the paths to the local files to the container:
 
 ```shell
 $ docker run -d --name milvus_cpu_{{var.release_version}} \
@@ -102,7 +102,7 @@ Confirm the running state of Milvus:
 $ docker ps
 ```
 
-If Milvus server cannot successfully start, check the error logs:
+If the Milvus server does not start up properly, check the error logs:
 
 ```shell
 # Get the ID of the container running Milvus.
