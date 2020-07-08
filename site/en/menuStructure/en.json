@@ -201,10 +201,11 @@
     {
       "id": "API",
       "title": "API Reference",
-      "label1": "API",
+      "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 4,
+      "isMenu": true
     },
     {
       "id": "Python",
