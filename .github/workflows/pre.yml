@@ -1,0 +1,47 @@
+name: dev
+
+on:
+  release:
+    types: [prereleased]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build "
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Md2md
+        run: |
+          mv site doc_from
+          sudo npm install md2md -g
+          goover
+          rm -rf doc_from/*
+          mv doc_to site
+      - name: Delete And Push
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq
+          cd ../
+          git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
+          cd target
+          git checkout -b preview
+          rm -rf *
+          cd ../
+          cp -avr ./milvus-docs/** ./target/
+          cd target
+          git add .
+          git commit -m "Preview in http://milvus-io.azurewebsites.net/"
+          git push -f origin preview
