@@ -25,7 +25,7 @@ Milvus uses Prometheus to store and monitor its metrics and Grafana to flexibly 
   - Alertmanager for alert handling.
   - Pushgateway to allow short-lived, batch metrics, which may not be scraped in time, to be exposed to Prometheus.
 
-Milvus collects monitoring data and pushes it to Pushgateway. At the same time, the Prometheus server will periodically pull data from Pushgateway and save it to its time-series database. The following graph shows how Prometheus works in Milvus:
+Milvus collects monitoring data and pushes it to Pushgateway. At the same time, the Prometheus server periodically pulls data from Pushgateway and save it to its time-series database. The following graph shows how Prometheus works in Milvus:
 
 ![prometheus](../../../assets/monitoring/monitoring.png)
 
@@ -45,7 +45,7 @@ This section includes the most important events for which you must create alerti
 **Server is down**
 
 - Rule: Send an alert when the Milvus server is down.
-- How to detect: If the Milvus server is down, **No Data** will be displayed on the monitoring dashboard.
+- How to detect: If the Milvus server is down, **No Data** is displayed on the monitoring dashboard.
 
 **CPU/GPU temperature is too high**
 
