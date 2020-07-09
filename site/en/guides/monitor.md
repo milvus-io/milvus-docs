@@ -151,7 +151,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
       - targets: ['localhost:9091']
    ```
 
-   <div class="alert info">
+   <div class="alert note">
     See <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/">Prometheus Configuration</a> for more information about the configuration file of Prometheus.
    </div>
    
@@ -182,7 +182,7 @@ metric:
 
 2. Point your browser to `http://<hostname of machine running grafana>:3000` and log into the Grafana UI.
 
-<div class="alert info">
+<div class="alert note">
 Grafana's default username and password are both "admin". You can also create a new Grafana account.
 </div>
 
