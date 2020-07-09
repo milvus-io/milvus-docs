@@ -145,7 +145,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
       - targets: ['localhost:9091']
    ```
 
-   <div class="alert info">
+   <div class="alert note">
     关于 Prometheus 的高级配置和功能的详细信息请见 <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/">配置 Prometheus</a>。
    </div>
    
@@ -178,7 +178,7 @@ docker run -i -p 3000:3000 grafana/grafana
 
 2. 在浏览器中打开 `http://<提供 Grafana 服务的主机 IP>:3000` 网址，并登录 Grafana 用户交互页面。
 
-  <div class="alert info">
+  <div class="alert note">
   Grafana 的默认用户名和密码都是“admin”。你也可以在此创建新的 Grafana 账号。
   </div>
 
