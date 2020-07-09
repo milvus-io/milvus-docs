@@ -57,7 +57,7 @@ If FLAT index is used, the vectors are stored in an array of float/binary data w
 
 FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when number of queries is small.
 
-### IVFLAT
+### IVF_FLAT
 
 IVF (Inverted File) is an index type based on quantization. It divides the points in space into `nlist` units by clustering method. At search time, it compares the distances between the target vector and the center of all the units, and then select the `nprobe` nearest unit. Then, it compares all the vectors in these selected cells to get the final result. 
 
@@ -75,7 +75,7 @@ IVF_FLAT is the most basic IVF index, and the encoding data stored in each unit 
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `nprobe` | Number of units to query | [1, nlist] |
+   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
    
    > Example: `{"nprobe": 8}`
 
@@ -111,7 +111,7 @@ IVF_PQ quantizes the product of vectors, and then performs IVF index clustering.
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}. |
+   | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>When IVF_PQ index is used in GPU, 'm' should not be greater than 48. |
    
    > Example: `{"nlist": 2048, "m": 16}`
 
