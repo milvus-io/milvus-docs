@@ -1,3 +1,9 @@
+---
+id: insert_and_create_index.md
+title: Insert and Create Index
+sidebar_label: Insert and Create Index
+---
+
 # 插入向量并创建索引
 
 创建并启动 Milvus 容器后，我们就可以使用 RESTful 接口轻松体验 Milvus 的各种功能。

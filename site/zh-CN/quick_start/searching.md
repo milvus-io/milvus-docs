@@ -1,3 +1,9 @@
+---
+id: searching.md
+title: Search Index
+sidebar_label: Search Index
+---
+
 # 向量搜索
 
 向量查询的请求路径为 `collections/<collection_name>/vectors`，其中 `<collection_name>` 为目标集合。
