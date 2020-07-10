@@ -52,7 +52,7 @@ Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，
 
 - 近实时搜索
 
-  近实时搜索指的是，插入 Milvus 的数据在默认 1 秒后即被存入存储设备并能被搜索到。详情请参阅 [Search](../search/index.md)。
+  近实时搜索指的是，插入 Milvus 的数据在默认 1 秒后即被存入存储设备并能被搜索到。详情请参阅 [Search](index.md)。
 
 - 高成本效益
   
@@ -76,28 +76,29 @@ Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，
 
 - 预写式日志
 
-  Milvus 实现了类似数据库系统的 WAL（预写式日志，Write Ahead Log）。任何对于数据的修改操作在进入 Milvus 之前会先存储成为日志，然后再写入 Milvus。一旦在写入 Milvus 过程中遭遇失败（如磁盘空间不足、内存耗尽），Milvus 重启时会从日志中恢复之前没有完成的操作，重新执行。详情请参阅 [预写式日志](../write-ahead-log/write-ahead-log.md)。
+  Milvus 实现了类似数据库系统的 WAL（预写式日志，Write Ahead Log）。任何对于数据的修改操作在进入 Milvus 之前会先存储成为日志，然后再写入 Milvus。一旦在写入 Milvus 过程中遭遇失败（如磁盘空间不足、内存耗尽），Milvus 重启时会从日志中恢复之前没有完成的操作，重新执行。详情请参阅 [预写式日志](write_ahead_log.md)。
 
 - DSL
 
-  Milvus 提供了基于 JSON 结构的 DSL（领域特定语言，Domain-specific language）。你可以使用 DSL 灵活地进行查询。详情请参阅 [API & DSL](../api/index.md)。
+  Milvus 提供了基于 JSON 结构的 DSL（领域特定语言，Domain-specific language）。你可以使用 DSL 灵活地进行查询。
 
 - Mishards
 
-  Mishards 是一个用 Python 开发的 Milvus 集群分片中间件，可处理请求转发、读写分离、水平扩展、动态扩容（使得内存和算力可以无限扩容）。详情请参阅 [Mishards](../mishards/index.md)。
+  Mishards 是一个用 Python 开发的 Milvus 集群分片中间件，可处理请求转发、读写分离、水平扩展、动态扩容（使得内存和算力可以无限扩容）。详情请参阅 [Mishards](mishards.md)。
 
 - 异构计算
 
-  Milvus 能够调度多个 GPU 进行向量搜索和索引建立。利用 GPU 强大的并行运算能力，Milvus 在大批量查询和向量索引建立等高耗时任务上性能表现优异。详情请参阅 [异构计算](../heterogeneous-computing/index.md)。
+  Milvus 能够调度多个 GPU 进行向量搜索和索引建立。利用 GPU 强大的并行运算能力，Milvus 在大批量查询和向量索引建立等高耗时任务上性能表现优异。
+  <!-- 详情请参阅 [异构计算](../heterogeneous-computing/index.md)。 -->
 
 - 向量索引
 
-  Milvus 支持基于 Faiss、NMSLIB 和 Annoy 的树、图和量化等多种索引。关于向量索引的详情，请参阅 [向量索引](../vector-index/overview.md)。
-而对于索引的选择和索引参数的选择，请参阅 [性能调优](../advanced-tuning/index.md)。
+  Milvus 支持基于 Faiss、NMSLIB 和 Annoy 的树、图和量化等多种索引。关于向量索引的详情，请参阅 [向量索引](index_overview.md)。
+而对于索引的选择和索引参数的选择，请参阅 [性能调优](tuning.md)。
 
 - 监控与告警
 
-  Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafana 作为可视化组件进行数据展示。详情请参阅 [监控](../metrics/prometheus-collection-metrics.md)。
+  Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafana 作为可视化组件进行数据展示。详情请参阅 [监控](monitor.md)。
 
 ## 术语
 
@@ -163,9 +164,9 @@ Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，
 
 ## 整体架构
 
-![Milvus 架构](../../../assets/milvus_arch.png)
+![Milvus 架构](milvus_arch.png)
 
 ## 接下来你可以
 
 - 了解 [特征向量](vector.md), [向量数据库](vector_db.md) 的发展现状和 [向量检索算法](index_method.md)
-- 几分钟轻易搞定 [Milvus 安装](../guides/get_started/install_milvus/install_milvus.md)
+- 几分钟轻易搞定 [Milvus 安装](install_milvus.md)

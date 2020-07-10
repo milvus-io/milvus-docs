@@ -109,7 +109,7 @@ sidebar_label: Learn Milvus Operations
    | `HNSW`                            | `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。 </br></br> `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。                                                                                                             | `{M: 16, efConstruction:500}`                                           | `M` :[5, 48]</br>`efConstruction` :[100, 500]                                                                                         |
    | `ANNOY`                           | `n_trees`: 影响建立索引的时间和索引大小。值越大，搜索结果越精确，但索引越大。                                                                                                                                                                                                                                                                        | `{"n_trees": 8}`                                                      | [1, 1024]                                                                                                                            |
 
-   关于详细信息请参考 [Milvus 索引类型](index.md)。
+   关于详细信息请参考 [Milvus 索引类型](index_type.md)。
 
 2. 为 collection 创建索引。
 

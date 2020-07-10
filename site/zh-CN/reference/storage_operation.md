@@ -6,6 +6,10 @@ sidebar_label: Storage Operation
 
 # 存储操作
 
+<div class="alert note">
+阅读本文前，请先阅读 [存储相关概念](storage_concept.md)。
+</div>
+
 ## 数据插入
 
 客户端通过调用 `insert` 接口来插入数据，单次插入的数据量不能大于 256 MB。插入数据的流程如下：
@@ -18,7 +22,7 @@ sidebar_label: Storage Operation
 每个集合都有独立的可写缓冲区。每个可写缓冲区的容量上限是 128 MB。所有集合的可写缓冲区总容量上限由系统参数 <code>insert_buffer_size</code> 决定，默认是 1 GB。
 </div>
 
-![insert](../assets/storage/insert.png)
+![insert](insert.png)
 
 ## 数据落盘
 
