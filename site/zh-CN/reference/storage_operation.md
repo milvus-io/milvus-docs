@@ -18,7 +18,7 @@ sidebar_label: Storage Operation
 每个集合都有独立的可写缓冲区。每个可写缓冲区的容量上限是 128 MB。所有集合的可写缓冲区总容量上限由系统参数 <code>insert_buffer_size</code> 决定，默认是 1 GB。
 </div>
 
-![insert](../assets/storage/insert.png)
+![insert](insert.png)
 
 ## 数据落盘
 

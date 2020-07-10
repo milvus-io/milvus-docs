@@ -18,16 +18,16 @@ sidebar_label: Performance Tunning
 
 - `wal_config.enable`
 
-该参数用于开启或关闭 [预写日志（WAL, Write Ahead Log）](../write-ahead-log/write-ahead-log.md) 功能（默认开启）。开启和关闭预写日志功能时，插入数据的流程分别如下：
+该参数用于开启或关闭 [预写日志（WAL, Write Ahead Log）](write_ahead_log.md) 功能（默认开启）。开启和关闭预写日志功能时，插入数据的流程分别如下：
 
 * 开启预写日志功能时，预写日志模块先将数据写入磁盘，然后返回插入操作。
 * 关闭预写日志功能时，数据插入速度更快。系统直接将数据写入内存中的可写缓冲区，并立即返回插入操作。
 
-但是对于 [删除操作](../storage/operation.md#删除) 来说，打开预写日志功能时速度更快。为了保证数据的可靠性，我们建议打开预写日志。
+但是对于 [删除操作](storage_operation.md#删除) 来说，打开预写日志功能时速度更快。为了保证数据的可靠性，我们建议打开预写日志。
 
 - `auto_flush_interval`
 
-该参数是指后台落盘任务的间隔时间，默认值为 1 秒。根据 Milvus [数据段合并策略](../storage/operation.md#数据合并)，增大该值可减少段合并的次数，减少磁盘 I/O，提高插入操作的吞吐量。
+该参数是指后台落盘任务的间隔时间，默认值为 1 秒。根据 Milvus [数据段合并策略](storage_operation.md#数据合并)，增大该值可减少段合并的次数，减少磁盘 I/O，提高插入操作的吞吐量。
 
 <div class="alert note">
 Milvus 无法搜索到在该时间间隔内未落盘的数据。
@@ -87,7 +87,7 @@ GPU 查询的性能取决于 CPU 将数据加载进显存的速度以及 GPU 的
 ### 索引
 
 <div class="alert info">
-向量索引的基本概念请参考 <a href="../vector-index/overview.md">向量索引概述</a>。
+向量索引的基本概念请参考 <a href="index_overview.md">向量索引概述</a>。
 </div>
 
 选择合适的索引需要在存储空间、查询性能、查询召回率等多个指标中权衡。
@@ -102,7 +102,7 @@ FLAT 是对向量的暴力搜索（brute-force search），速度最慢，但召
 
 IVF 系列索引包括 IVF_FLAT、IVF_SQ8／IVF_SQ8H 和 IVF_PQ。IVF_SQ8／IVF_SQ8H 和 IVF_PQ 索引对向量数据做了有损压缩，磁盘占用量较少。
   
-IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可参考 [索引介绍](../vector-index/index-type.md#索引介绍)。
+IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可参考 [索引介绍](index_type.md#索引介绍)。
 
 根据其原理，可估算出使用 IVF 索引进行查询时的计算量。
 
@@ -118,7 +118,7 @@ IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可�
 
 - HNSW / RNSG / ANNOY 索引
 
-HNSW、RNSG、ANNOY 的索引参数对查询性能的影响较为复杂，建议参考 [索引介绍](../vector-index/index-type.md#索引介绍)。
+HNSW、RNSG、ANNOY 的索引参数对查询性能的影响较为复杂，建议参考 [索引介绍](index_type.md#索引介绍)。
 
 ### 其他
 
@@ -136,10 +136,10 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 
 - 段数据整理
 
-在 [数据段整理](./storage/operation.md#数据段整理) 中提到，Milvus 在查询数据时将 **delete_docs** 读入内存以过滤被删除的实体。调用 `compact` 接口可清理被删除的实体，减少过滤操作，从而提高查询性能。
+在 [数据段整理](storage_operation.md#数据段整理) 中提到，Milvus 在查询数据时将 **delete_docs** 读入内存以过滤被删除的实体。调用 `compact` 接口可清理被删除的实体，减少过滤操作，从而提高查询性能。
 
 ## 存储优化
   
 - 数据段整理
 
-在 [数据段整理](../storage/operation.md#数据段整理) 中提到，被删除的实体不参与计算，并且占用磁盘空间。如果有大量的实体已被删除，你可以调用 `compact` 接口来释放磁盘空间。
+在 [数据段整理](storage_operation.md#数据段整理) 中提到，被删除的实体不参与计算，并且占用磁盘空间。如果有大量的实体已被删除，你可以调用 `compact` 接口来释放磁盘空间。
