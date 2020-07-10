@@ -41,7 +41,7 @@ sidebar_label: Index Types
 
 </div>
 
-<div class="alert info">
+<div class="alert note">
 <ul>
 <li>FLAT 类型不需要建索引。</li>
 <li>对于那些 CPU 和 GPU 同时支持的索引，Milvus 支持在创建和搜索时使用不同的设备。比如，你可以在 GPU 上创建索引后再在 CPU 上查询，也可以在 CPU 上创建索引后再在 GPU 上查询。</li>
@@ -55,7 +55,7 @@ sidebar_label: Index Types
 
 FLAT 索引类型是指对向量进行原始文件存储。搜索时，所有向量都会与目标向量进行距离计算和比较。
 
-FLAT 索引类型提供 100% 的检索召回率。
+FLAT 索引类型提供 100% 的检索召回率。与其他索引相比，当查询数量较少时，它是最有效的索引方法。
 
 ### IVF_FLAT
 
@@ -69,15 +69,15 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
    | ------- | -------- |----------- |
    | `nlist` | 聚类单元数 |[1, 65536] |
    
-   > 示例：`{"nlist": 2048}`
+   **示例：**`{"nlist": 2048}`
 
 - 查询参数
 
    | 参数    | 说明        | 取值范围    |
    | -------- | ----------- | ---------- |
-   | `nprobe` | 查询取的单元数 | [1, nlist] |
+   | `nprobe` | 查询取的单元数 | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
    
-   > 示例：`{"nprobe": 8}`
+   **示例：**`{"nprobe": 8}`
 
 ### IVF_SQ8
 
@@ -109,9 +109,9 @@ IVF_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索�
    | 参数   | 说明          | 取值范围     |
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
-   | `m`     | 乘积量化因子个数 | `m` 须在 {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96} 内，并且分解出的低维向量空间的维度须在 {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32} 内。 |
+   | `m`     | 乘积量化因子个数 | `m` 须在 {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96} 内，并且分解出的低维向量空间的维度须在 {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32} 内。<br>此外，用 GPU 计算时，m x 1024 的值还不能超过显卡的 `MaxSharedMemPerBlock`。 |
    
-   > 示例: `{"nlist": 2048, "m": 16}`
+   **示例：**`{"nlist": 2048, "m": 16}`
 
 - 查询参数同 IVF_FLAT
 
@@ -127,7 +127,7 @@ RNSG 的建图流程如下：
 
 RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `search_length` 次以得到最终结果。
 
-<div class="alert info">
+<div class="alert note">
 参考文献：<a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 </div>
 
@@ -140,7 +140,7 @@ RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `s
    | `search_length`       | 查询迭代次数        　| [10, 300] |
    | `knng`                | 预计算最近邻结点数   　| [５, 300] |
    
-   > 示例: `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
+   **示例：**`{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
 
 - 查询参数
 
@@ -148,7 +148,7 @@ RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `s
    | --------------- | ----------- | --------- |
    | `search_length` | 查询迭代次数  | [10, 300] |
 
-   > 示例: `{"search_length": 100}`
+   **示例：**`{"search_length": 100}`
 
 ### HNSW
 
@@ -156,7 +156,7 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
   
 为了提高性能，HNSW 限定了每层图上结点的最大度数 `M` 。此外，建索引时可以用 `efConstruction`，查询时可以用 `ef` 来指定搜索范围。
 
-<div class="alert info">
+<div class="alert note">
 参考文献：<a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
 </div>
 
@@ -164,10 +164,10 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
 
    | 参数            | 说明                | 取值范围   |
    | ---------------- | ------------------ | --------- |
-   | `M`              | 结点的最大度数        | [4, 64]  |
-   | `efConstruction` | 搜索范围      | [8, 512] |
+   | `M`              | 结点的最大度数        | [5, 48]  |
+   | `efConstruction` | 搜索范围      | [100, 500] |
 
-   > 示例: `{"M": 16, "efConstruction": 40}`
+   **示例：**`{"M": 16, "efConstruction": 40}`
 
 - 查询参数
 
@@ -175,7 +175,7 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
    | --------|--------------- | ------------ |
    | `ef`    | 搜索范围  | [topK, 4096] |
 
-   > 示例: `{"ef": 64}`
+   **示例：**`{"ef": 64}`
 
 ### ANNOY
 
@@ -183,7 +183,7 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 
 在查询时，ANNOY 会顺着树结构找到距离目标向量较近的一些子空间，然后比较这些子空间里的所有向量（要求比较的向量数不少于 `search_k` 个）以获得最终结果。显然，当目标向量靠近某个子空间的边缘时，有时需要大大增加搜索的子空间数以获得高召回率。因此，ANNOY 会使用 `n_trees` 次不同的方法来划分全空间，并同时搜索所有划分方法以减少目标向量总是处于子空间边缘的概率。
 
-<div class="alert info">
+<div class="alert note">
 参考文献：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
 </div>
 
@@ -193,7 +193,7 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
    | --------- |-------------- | -------- |
    | `n_trees` | 空间划分的方法数 | [1, 1024] |
 
-   > 示例: `{"n_trees": 8}`
+   **示例：**`{"n_trees": 8}`
 
 - 查询参数
 
@@ -201,7 +201,7 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | 搜索的结点数。`-1` 表示用全数据量的 5% | {-1} ∪ [topk, n × `n_trees`] |
 
-   > 示例: `{"search_k": -1}`
+   **示例：**`{"search_k": -1}`
 
 ## 如何选择索引
 

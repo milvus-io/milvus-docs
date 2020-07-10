@@ -4,7 +4,7 @@ title: Install GPU-enabled Milvus on Docker
 sidebar_label: Install GPU-enabled Milvus on Docker
 ---
 
-# 安装支持 GPU 的 Milvus
+# 安装 GPU 版本的 Milvus
 
 ## 安装前提
 
@@ -20,7 +20,7 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 | 硬件  | 建议配置                               |
 | ---- | ------------------------------------- |
 | CPU  | Intel CPU Sandy Bridge 或以上          |
-| CPU 指令集 | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
+| CPU 指令集 | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
 | GPU  | NVIDIA Pascal 或以上                   |
 | 内存  | 8 GB 或以上（取决于具体向量数据规模）     |
 | 硬盘  | SATA 3.0 SSD 或以上                    |
@@ -74,6 +74,8 @@ $ wget http://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}
 配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
 
 ## 启动 Milvus Docker 容器
+
+启动 Docker 容器之前，你必须将 `server_config.yaml` 中 `gpu` 部分的 `enable` 设为 `true`。
 
 启动 Docker 容器，将本地的文件路径映射到容器中：
 

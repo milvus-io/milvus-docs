@@ -14,39 +14,42 @@ sidebar_label: Install CPU-only Milvus
 | :--------------- | :----------------------------------------------------------- |
 | CentOS           | 7.5 or higher                                                |
 | Ubuntu LTS       | 18.04 or higher                                              |
-| Windows          | Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 or later) |
-| macOS            |  10.13 or higher      |
 
 #### Hardware requirements
 
 | Component | Recommended configuration             |
 | ---------- | ------------------------------------- |
 | CPU        | Intel CPU Sandy Bridge or higher. |
-| CPU instruction set | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
+| CPU instruction set | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
 | RAM        | 8 GB or more (depends on the data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
 
-#### Milvus Docker requirements
+#### Software requirements
 
-- If you're using Ubuntu or CentOS, [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
-- If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in **Settings > Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
-- If you're installing Milvus on macOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in **Settings > Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
+| Software     | Version                                |
+| ------- | -------------------------------------- |
+| Docker  | 19.03 or higher                             |
 
-## Install Milvus on Ubuntu/CentOS
+<div class="alert note">
+Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>milvus.yaml</b> file.
+</div>
 
-#### Step 1 Confirm Docker status
+#### Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
 ```shell
-$ docker info
+$ sudo docker info
 ```
 
-If you do not see the server listed, start the **Docker** daemon.
+<div class="alert note">
+<ul>
+<li>If you do not see the server listed, start the Docker daemon.</li>
+<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code> privileges, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation steps for Linux</a> for details).</li>
+</ul>
+</div>
 
-> Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
-
-#### Step 2 Pull Docker image
+## Pull Docker image
 
 Pull the CPU-only image:
 
@@ -54,9 +57,11 @@ Pull the CPU-only image:
 $ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
-> Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
+<div class="alert note">
+If the pulling is too slow or fails constantly, see <a href="../../../faq/operational_faq.md">Operational FAQ</a> for possible solutions.
+</div>
 
-#### Step 3 Download configuration files
+## Download configuration files
 
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
@@ -64,10 +69,13 @@ $ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml).
+<div class="alert note">
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
+</div>
 
+## Start Docker container
 
-#### Step 4 Start Docker container
+Start Docker container and map the paths to the local files to the container:
 
 ```shell
 $ docker run -d --name milvus_cpu_{{var.release_version}} \
@@ -82,68 +90,25 @@ milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 
 The `docker run` options used in the above command are defined as follows:
 
-- `-d`: Run container in background and print container ID
-- `--name`: Assign a name to the container
-- `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
-- `-p`: Publish a container’s port(s) to the host
-- `-v`: Mounts the directory into the container
+- `-d`: Runs container in the background and prints container ID.
+- `--name`: Assigns a name to the container.
+- `--gpus`: Assigns GPU devices to the container. ('all' represents all GPUs.)
+- `-p`: Publishes a container’s port(s) to the host.
+- `-v`: Mounts the directory into the container.
 
-Finally confirm Milvus running status by the following command:
+Confirm the running state of Milvus:
 
 ```shell
 $ docker ps
 ```
 
-If Milvus server is not successfully started, you can check the error logs by the following command.
+If the Milvus server does not start up properly, check the error logs:
 
 ```shell
 # Get the ID of the container running Milvus.
 $ docker ps -a
 # Check docker logs.
 $ docker logs <milvus container id>
-```
-
-## Install Milvus on Windows
-
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3** and **Step 4**.
-
-For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
-
-For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
-
-```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} \
--p 19530:19530 \
--p 19121:19121 \
--v C:\milvus\db:/var/lib/milvus/db \
--v C:\milvus\conf:/var/lib/milvus/conf \
--v C:\milvus\logs:/var/lib/milvus/logs \
--v C:\milvus\wal:/var/lib/milvus/wal milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
-```
-
-## Install Milvus on macOS
-
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3** and **Step 4**.
-
-For Step 3, the path has some minor differences:
-
-```shell
-$ mkdir -p /Users/$USER/milvus/conf
-$ cd /Users/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
-```
-
-For Step 4, start the docker by mapping Milvus files to the right path:
-
-```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} \
--p 19530:19530 \
--p 19121:19121 \
--v /Users/$USER/milvus/db:/var/lib/milvus/db \
--v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
--v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
--v /Users/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 ## What's next
