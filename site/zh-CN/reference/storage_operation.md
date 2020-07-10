@@ -6,6 +6,10 @@ sidebar_label: Storage Operation
 
 # 存储操作
 
+<div class="alert note">
+阅读本文前，请先阅读 [存储相关概念](storage_concept.md)。
+</div>
+
 ## 数据插入
 
 客户端通过调用 `insert` 接口来插入数据，单次插入的数据量不能大于 256 MB。插入数据的流程如下：
