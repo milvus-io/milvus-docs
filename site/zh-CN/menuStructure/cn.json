@@ -182,14 +182,6 @@
       "order": 0
     },
     {
-      "id": "index.md",
-      "title": "Milvus 索引类型",
-      "label1": "guides",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
       "id": "monitor.md",
       "title": "监控与报警",
       "label1": "guides",
