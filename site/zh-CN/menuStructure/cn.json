@@ -51,7 +51,7 @@
       "isMenu": true
     },
     {
-      "id": "index_overview",
+      "id": "index_overview.md",
       "title": "向量索引概述",
       "label1": "milvus_basics",
       "label2": "",
@@ -59,7 +59,7 @@
       "order": 0
     },
     {
-      "id": "index_types",
+      "id": "index_types.md",
       "title": "Milvus 索引类型",
       "label1": "milvus_basics",
       "label2": "",
@@ -67,7 +67,7 @@
       "order": 1
     },
     {
-      "id": "storage_concept",
+      "id": "storage_concept.md",
       "title": "存储相关概念",
       "label1": "milvus_basics",
       "label2": "",
@@ -75,7 +75,7 @@
       "order": 2
     },
     {
-      "id": "write_ahead_log",
+      "id": "write_ahead_log.md",
       "title": "预写式日志",
       "label1": "milvus_basics",
       "label2": "",
@@ -149,7 +149,7 @@
       "order": 2
     },
     {
-      "id": "insert_and_create_index",
+      "id": "insert_and_create_index.md",
       "title": "插入向量并创建索引",
       "label1": "quick_start",
       "label2": "",
@@ -157,7 +157,7 @@
       "order": 3
     },
     {
-      "id": "searching",
+      "id": "searching.md",
       "title": "向量搜索",
       "label1": "quick_start",
       "label2": "",
