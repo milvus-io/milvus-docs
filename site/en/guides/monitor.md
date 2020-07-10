@@ -12,7 +12,7 @@ Although Milvus is highly available, it is critical to actively monitor the over
 
 ### Monitoring solution
 
-Milvus uses Prometheus to store and monitor its metrics and Grafana to flexibly visulize data.
+Milvus uses Prometheus to store and monitor its metrics and Grafana to visulize data.
 
 #### Prometheus
 
@@ -70,8 +70,8 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    $ ./prometheus --version
    ```
 
-   <div class="alert info">
-   You can extract the Prometheus binary and add it to your <code>PATH</code>. This makes it easy to start Prometheus from any shell.
+   <div class="alert note">
+   You can add the path to Prometheus to <code>PATH</code>. This makes it easy to start Prometheus from any shell.
    </div>
 
 ### Configure and start Prometheus
@@ -130,7 +130,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
       - targets: ['localhost:9093']
    ```
 
-   - rule_files: Specifys the file that defines the alerting rules.
+   - rule_files: Specifies the file that defines the alerting rules.
 
    ```yaml
    rule_files:
@@ -163,7 +163,8 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Configure Prometheus in Kubernetes
 
-Start Pushgateway and Prometheus, and then open the monitoring option of the node configuration file **server_config.yaml** in the Kubernetes cluster and set the IP address and port number of Pushgateway.
+1. Start up Pushgateway and Prometheus.
+2. On the node to monitor in the Kubernetes cluster, set the following in **server_config.yaml**:
 
 ```yaml
 metric:
@@ -180,10 +181,10 @@ metric:
    $ docker run -i -p 3000:3000 grafana/grafana
    ```
 
-2. Point your browser to `http://<hostname of machine running grafana>:3000` and log into the Grafana UI.
+2. Open `http://<hostname of machine running grafana>:3000` in your browser and log into the Grafana UI.
 
 <div class="alert note">
-Grafana's default username and password are both "admin". You can also create a new Grafana account.
+Grafana's default username and password are both "admin". You can create a Grafana account of your own.
 </div>
 
 3. [Add Prometheus as a data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/).
@@ -215,8 +216,8 @@ Grafana's default username and password are both "admin". You can also create a 
    $ alertmanager --version
    ```
 
-   <div class="alert info">
-   You can extract the binary and add it to your <code>PATH</code>. This makes it easy to start Alertmanager from any shell.
+   <div class="alert note">
+   You can add the path to Alertmanager to <code>PATH</code>. This makes it easy to start Alertmanager from any shell.
    </div>
 
 3. Create the [Alertmanager configuration file](https://prometheus.io/docs/alerting/configuration/) to specify the desired receivers for notifications, and add it to Alertmanager root directory.
@@ -227,7 +228,7 @@ Grafana's default username and password are both "admin". You can also create a 
    alertmanager --config.file=simple.yml
    ```
 
-5. Point your browser to `http://<hostname of machine running alertmanager>:9093`, where you can use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
+5. Open `http://<hostname of machine running alertmanager>:9093` in your browser, where you can use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
 ## Related links
 

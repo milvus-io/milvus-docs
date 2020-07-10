@@ -68,7 +68,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ prometheus --version
    ```
 
-   <div class="alert info">
+   <div class="alert note">
    你可以提取 Prometheus binary 并添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Prometheus。
    </div>
 
@@ -157,7 +157,8 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 在 Kubernetes 中配置 Prometheus
 
-首先启动 Pushgateway 和 Prometheus，然后将 Kubernetes 集群中需要监控的节点配置文件 **server_config.yaml** 的监控选项打开，并设置 Pushgateway 的 IP 地址和端口号。
+1. 启动 Pushgateway 和 Prometheus。
+2. 在 Kubernetes 集群中需要监控的节点的配置文件 **server_config.yaml** 中，设置以下参数：
 
 ```yaml
 metric:
@@ -207,8 +208,8 @@ docker run -i -p 3000:3000 grafana/grafana
    $ alertmanager --version
    ```
 
-   <div class="alert info">
-   你可以提取 Alertmanager binary 并添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Alertmanager。
+   <div class="alert note">
+   你可以将 Alertmanager 的路径并添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Alertmanager。
    </div>
 
 3. 根据 [配置 Alertmanager](https://prometheus.io/docs/alerting/configuration/) 创建配置文件 **alertmanager.yml**，指定接受报警通知的邮箱或微信账号，并将配置文件添加到 Alertmanager 根目录下。

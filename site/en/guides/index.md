@@ -45,7 +45,7 @@ sidebar_label: Index Types
 <ul>
 <li>FLAT index does not need index building.</li>
 <li>For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU.</li>
-<li>Index building parameters and search parameters vary with index type. Refer to <a href="milvus_operation.md">Milvus Operations</a> for more information.</li>
+<li>Index building parameters and search parameters vary with index type. See <a href="milvus_operation.md">Milvus Operations</a> for more information.</li>
 </ul>
 </div>
 
@@ -53,23 +53,23 @@ sidebar_label: Index Types
 
 ### FLAT
 
-If FLAT index is used, the vectors are stored in an array of float/binary data without any compression. At search time, all indexed vectors are decoded sequentially and compared to the query vectors.
+If FLAT index is used, the vectors are stored in an array of float/binary data without any compression. during searching vectors, all indexed vectors are decoded sequentially and compared to the query vectors.
 
-FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when number of queries is small.
+FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when the number of queries is small.
 
 ### IVF_FLAT
 
-IVF (Inverted File) is an index type based on quantization. It divides the points in space into `nlist` units by clustering method. At search time, it compares the distances between the target vector and the center of all the units, and then select the `nprobe` nearest unit. Then, it compares all the vectors in these selected cells to get the final result. 
+IVF (Inverted File) is an index type based on quantization. It divides the points in space into `nlist` units by clustering method. during searching vectors, it compares the distances between the target vector and the center of all the units, and then select the `nprobe` nearest unit. Then, it compares all the vectors in these selected cells to get the final result. 
 
-IVF_FLAT is the most basic IVF index, and the encoding data stored in each unit is consistent with the original data.
+IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
 
-- Indexing building parameters
+- Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
    
-   > Example: `{"nlist": 2048}`
+   **Example:** `{"nlist": 2048}`
 
 - Search parameters
 
@@ -77,14 +77,14 @@ IVF_FLAT is the most basic IVF index, and the encoding data stored in each unit 
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
    
-   > Example: `{"nprobe": 8}`
+   **Example:** `{"nprobe": 8}`
 
 ### IVF_SQ8
 
-IVF_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the storage space occupied by the IVF_SQ8 index file is much smaller than IVF_FLAT. However, scalar quantization will result in a loss of accuracy at search time.
+IVF_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF_SQ8 index file occupies much less space than the IVF_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
-- Indexing building parameters are the same as IVF_FLAT.
-- Search parameters are the same as IVF_FLAT.
+- IVF_SQ8 has the same index building parameters as IVF_FLAT.
+- IVF_SQ8 has the same search parameters as IVF_FLAT.
 
 ### IVF_SQ8H
 
@@ -94,32 +94,32 @@ IVF_SQ8H is an IVF_SQ8 index that optimizes query execution.
 
 The query method is as follows:
 
-- If `NQ` &ge; `gpu_search_threshold`, the entire query process is executed on the GPU.
-- If `NQ` < `gpu_search_threshold`, GPU handles the task of finding the nprobe nearest unit in the IVF, and CPU handles other operations.
+- If `NQ` &ge; `gpu_search_threshold`, GPU handles the entire query task.
+- If `NQ` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
-- Indexing building parameters are the same as IVF_FLAT.
-- Search parameters are the same as IVF_FLAT.
+- IVF_SQ8H has the same index building parameters as IVF_FLAT.
+- IVF_SQ8H has the same search parameters as IVF_FLAT.
 
 ### IVF_PQ
 
-`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space, thereby greatly reducing the time complexity and space complexity of the algorithm.
+`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-IVF_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF_SQ8, but it will also cause a loss of accuracy at search time.
+IVF_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.
 
-- Indexing building parameters
+- Index building parameters
 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>When IVF_PQ index is used in GPU, 'm' should not be greater than 48. |
    
-   > Example: `{"nlist": 2048, "m": 16}`
+   **Example:** `{"nlist": 2048, "m": 16}`
 
-- Search parameters are the same as IVF_FLAT.
+- IVF_PQ has the same search parameters as IVF_FLAT.
 
 ### RNSG
 
-RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby at search time.
+RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
 
 The graph construction process of RNSG is as follows:
 
@@ -131,7 +131,7 @@ The graph construction process of RNSG is as follows:
 Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 </div>
 
-- Indexing building parameters
+- Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
@@ -140,7 +140,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | `search_length`       | Number of query iterations        　| [10, 300] |
    | `knng`                | Number of nearest neighbors   　| [５, 300] |
    
-   > Example: `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
+   **Example:** `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
 
 - Search parameters
 
@@ -148,7 +148,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | -------- | ----------- | ---------- |
    | `search_length` | Number of query iterations  | [10, 300] |
    
-   > Example: `{"search_length": 100}`
+   **Example:** `{"search_length": 100}`
 
 ### HNSW
 
@@ -160,14 +160,14 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
 </div>
 
-- Indexing building parameters
+- Index building parameters
 
    | Parameter   | Description     | Range     |
    | ---------------- | ------------------ | --------- |
    | `M`              | Maximum degree of the node        | [4, 64]  |
    | `efConstruction` | Search scope      | [8, 512] |
 
-   > Example: `{"M": 16, "efConstruction": 40}`
+   **Example:** `{"M": 16, "efConstruction": 40}`
 
 - Search parameters
 
@@ -175,25 +175,25 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | --------|--------------- | ------------ |
    | `ef`    | Search scope  | [topK, 4096] |
 
-   > Example: `{"ef": 64}`
+   **Example:** `{"ef": 64}`
 
 ### ANNOY
 
-ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores these subspaces in a tree structure.
+ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
-At search time, ANNOY follows the tree structure to find some subspaces that are closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
+during searching vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
 
 <div class="alert note">
 Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
 </div>
 
-- Indexing building parameters
+- Index building parameters
 
    | Parameter   | Description     | Range     |
    | --------- |-------------- | -------- |
    | `n_trees` | The number of methods of space division | [1, 1024] |
 
-   > Example:`{"n_trees": 8}`
+   **Example:**`{"n_trees": 8}`
 
 - Search parameters
 
@@ -201,10 +201,10 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [topk, n × `n_trees`] |
 
-   > Example:`{"search_k": -1}`
+   **Example:**`{"search_k": -1}`
 
 ## How to choose an index
 
 To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
-To learn how to choose an appropriate index for a metric, refer to [Distance Metrics](metric.md).
+To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
