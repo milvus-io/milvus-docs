@@ -20,7 +20,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 | 硬件 | 建议配置                               |
 | ---- | -------------------------------------- |
 | CPU        | Intel CPU Sandy Bridge 或以上 |
-| CPU 指令集 | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
+| CPU 指令集 | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
 | 内存 | 8 GB 或以上（取决于具体向量数据规模） |
 | 硬盘 | SATA 3.0 SSD 或以上                |
 
