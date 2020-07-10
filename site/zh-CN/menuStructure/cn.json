@@ -255,6 +255,22 @@
       "order": 4
     },
     {
+      "id": "mishards.md",
+      "title": "Mishards - Milvus 集群分片中间件",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 5
+    },
+    {
+      "id": "storage_operation.md",
+      "title": "存储操作",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 6
+    },
+    {
       "id": "API",
       "title": "API 参考",
       "label1": "",
