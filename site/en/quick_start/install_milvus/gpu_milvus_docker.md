@@ -56,7 +56,7 @@ $ docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
 
 <div class="alert note">
-If the pulling is too slow or fails constantly, see <a href="../../../faq/operational_faq.md">Operational FAQ</a> for possible solutions.
+If the pulling is too slow or fails constantly, see <a href="operational_faq.md">Operational FAQ</a> for possible solutions.
 </div>
 
 ## Download configuration files
