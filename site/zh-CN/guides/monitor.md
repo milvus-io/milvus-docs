@@ -69,7 +69,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    ```
 
    <div class="alert note">
-   你可以提取 Prometheus binary 并添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Prometheus。
+   你可以将 Prometheus 的路径添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Prometheus。
    </div>
 
 ### 配置和启动 Prometheus
