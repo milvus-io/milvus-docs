@@ -210,7 +210,7 @@ Grafana's default username and password are both "admin". You can create a Grafa
 
 1. Download the [latest Alertmanager tarball](https://prometheus.io/download/#alertmanager) for your OS.
 
-2. Make sure Alertmanager is installed successfully:
+2. Ensure that Alertmanager is properly installed:
 
    ```shell
    $ alertmanager --version
