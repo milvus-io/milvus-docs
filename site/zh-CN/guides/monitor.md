@@ -68,8 +68,8 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ prometheus --version
    ```
 
-   <div class="alert info">
-   你可以提取 Prometheus binary 并添加到 <code>PATH</code> ，以便在任意 Shell 上都能快速启动 Prometheus。
+   <div class="alert note">
+   你可以将 Prometheus 的路径添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Prometheus。
    </div>
 
 ### 配置和启动 Prometheus
@@ -107,12 +107,12 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 5. 根据你的需求编辑 Prometheus 配置文件：
 
-   - global：配置 scrape_interval 和 evaluation_interval 等参数。
+   - global：配置 `scrape_interval` 和 `evaluation_interval` 等参数。
 
    ```yaml
    global:
-     scrape_interval:     2s # 设置抓取时间间隔为2s.
-     evaluation_interval: 2s # 设置评估时间间隔为2s.
+     scrape_interval:     2s # 设置抓取时间间隔为2s。
+     evaluation_interval: 2s # 设置评估时间间隔为2s。
    ```
 
    - alerting：设置 Alertmanager 的地址和端口。
@@ -145,7 +145,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
       - targets: ['localhost:9091']
    ```
 
-   <div class="alert info">
+   <div class="alert note">
     关于 Prometheus 的高级配置和功能的详细信息请见 <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/">配置 Prometheus</a>。
    </div>
    
@@ -157,7 +157,8 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 在 Kubernetes 中配置 Prometheus
 
-首先启动 Pushgateway 和 Prometheus，然后将 Kubernetes 集群中需要监控的节点配置文件 **server_config.yaml** 的监控选项打开，并设置 Pushgateway 的 IP 地址和端口号。
+1. 启动 Pushgateway 和 Prometheus。
+2. 在 Kubernetes 集群中需要监控的节点的配置文件 **server_config.yaml** 中，设置以下参数：
 
 ```yaml
 metric:
@@ -178,11 +179,11 @@ docker run -i -p 3000:3000 grafana/grafana
 
 2. 在浏览器中打开 `http://<提供 Grafana 服务的主机 IP>:3000` 网址，并登录 Grafana 用户交互页面。
 
-  <div class="alert info">
+  <div class="alert note">
   Grafana 的默认用户名和密码都是“admin”。你也可以在此创建新的 Grafana 账号。
   </div>
 
-3. [在 Prometheus 中添加数据源](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)。
+3. [将 Prometheus 添加为数据源](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)。
 
 4. 在 Grafana 用户交互页面中，点击 **Configuration > Data Sources > Prometheus**，然后设置以下数据源属性：
 
@@ -207,8 +208,8 @@ docker run -i -p 3000:3000 grafana/grafana
    $ alertmanager --version
    ```
 
-   <div class="alert info">
-   你可以提取 Alertmanager binary 并添加到 <code>PATH</code> ，以便在任意 Shell 上都能快速启动 Alertmanager。
+   <div class="alert note">
+   你可以将 Alertmanager 的路径并添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Alertmanager。
    </div>
 
 3. 根据 [配置 Alertmanager](https://prometheus.io/docs/alerting/configuration/) 创建配置文件 **alertmanager.yml**，指定接受报警通知的邮箱或微信账号，并将配置文件添加到 Alertmanager 根目录下。
