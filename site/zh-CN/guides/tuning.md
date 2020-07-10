@@ -1,3 +1,11 @@
+---
+id: troubleshoot.md
+title: Performance Tunning
+sidebar_label: Performance Tunning
+---
+
+# 性能调优
+
 ## 插入性能调优
 
 <div class="alert info">
