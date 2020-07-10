@@ -117,5 +117,5 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 2. 服务端接收到请求后，通过布隆过滤器找到实体所在的段，返回该实体 ID 对应的数据。
 
 <div class="alert note">
-浮点型向量在 Milvus 中以单精度(float)方式存储。
+浮点型向量在 Milvus 中以单精度（float）方式存储。
 </div>
