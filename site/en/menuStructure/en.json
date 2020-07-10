@@ -41,15 +41,7 @@
       "label3": "",
       "order": 4
     },
-    {
-      "id": "milvus_basics",
-      "title": "MILVUS BASICS",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "isMenu": true
-    },
+    
     {
       "id": "release_notes.md",
       "title": "RELEASE NOTES",

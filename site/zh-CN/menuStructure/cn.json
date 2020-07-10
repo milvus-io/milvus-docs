@@ -42,15 +42,6 @@
       "order": 3
     },
     {
-      "id": "milvus_basics",
-      "title": "Milvus 基本概念",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "isMenu": true
-    },
-    {
       "id": "release_notes.md",
       "title": "发版说明",
       "label1": "",
@@ -285,7 +276,7 @@
     },
     {
       "id": "developer_tools",
-      "title": "开发者工具",
+      "title": "开发工具",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -294,7 +285,7 @@
     },
     {
       "id": "dt_overview.md",
-      "title": "Overview",
+      "title": "概述",
       "label1": "developer_tools",
       "label2": "",
       "label3": "",
