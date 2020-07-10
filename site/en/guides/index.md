@@ -164,8 +164,8 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
 
    | Parameter   | Description     | Range     |
    | ---------------- | ------------------ | --------- |
-   | `M`              | Maximum degree of the node        | [4, 64]  |
-   | `efConstruction` | Search scope      | [8, 512] |
+   | `M`              | Maximum degree of the node        | [5, 48]  |
+   | `efConstruction` | Search scope      | [100, 500] |
 
    **Example:** `{"M": 16, "efConstruction": 40}`
 
