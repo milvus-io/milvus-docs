@@ -1,3 +1,9 @@
+---
+id: write_ahead_log.md
+title: Write Ahead Log
+sidebar_label: Write Ahead Log
+---
+
 # 预写式日志
 
 ![wal_structure](../assets/wal/wal_workflow.jpg)
