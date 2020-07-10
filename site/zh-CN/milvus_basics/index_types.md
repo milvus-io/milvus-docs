@@ -6,6 +6,10 @@ sidebar_label: Index Types
 
 # Milvus 索引类型
 
+<div class="alert note">
+阅读本文前，请先阅读 [向量索引概述](index_overview.md)。
+</div>
+
 ## 索引概览
 
 ### CPU 版本 Milvus 支持的索引类型

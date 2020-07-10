@@ -19,7 +19,7 @@ sidebar_label: Index Overview
 - 基于哈希的索引
 - 基于量化的索引
 
-更详细地了解索引类型，请参见 [索引介绍](./index-types.md)。
+更详细地了解索引类型，请参见 [索引介绍](index_types.md)。
 
 ## 向量字段与索引
 

@@ -94,7 +94,7 @@ $ curl -X POST 'http://localhost:19121/collections/test/vectors' -d \
 
 ## 创建索引
 
-为集合创建索引可以加快搜索速度。Milvus 支持多种类型的向量索引，详情请参考 [支持的索引](../vector-index/index-types.md)。
+为集合创建索引可以加快搜索速度。Milvus 支持多种类型的向量索引，详情请参考 [支持的索引](index_types.md)。
 
 创建索引的请求路径为 `collections/<collection_name>/indexes`，其中 `<collection_name>` 为目标集合。在下方示例代码中，我们指定目标集合为 `test`。
 
