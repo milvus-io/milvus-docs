@@ -12,7 +12,7 @@ Although Milvus is highly available, it is critical to actively monitor the over
 
 ### Monitoring solution
 
-Milvus uses Prometheus to store and monitor its metrics and Grafana to visulize data.
+Milvus uses Prometheus to store and monitor its metrics and Grafana to visualize data.
 
 #### Prometheus
 
@@ -45,7 +45,7 @@ This section includes the most important events for which you must create alerti
 **Server is down**
 
 - Rule: Send an alert when the Milvus server is down.
-- How to detect: If the Milvus server is down, **No Data** is displayed on the monitoring dashboard.
+- How to detect: If the Milvus server is down, **No Data** displays on the monitoring dashboard.
 
 **CPU/GPU temperature is too high**
 
@@ -181,7 +181,7 @@ metric:
    $ docker run -i -p 3000:3000 grafana/grafana
    ```
 
-2. Open `http://<hostname of machine running grafana>:3000` in your browser and log into the Grafana UI.
+2. Use your browser to open `http://<hostname of machine running grafana>:3000` and log into the Grafana UI.
 
 <div class="alert note">
 Grafana's default username and password are both "admin". You can create a Grafana account of your own.
@@ -228,7 +228,7 @@ Grafana's default username and password are both "admin". You can create a Grafa
    alertmanager --config.file=simple.yml
    ```
 
-5. Open `http://<hostname of machine running alertmanager>:9093` in your browser, where you can use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
+5. Use your browser to open `http://<hostname of machine running alertmanager>:9093`, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
 ## Related links
 
