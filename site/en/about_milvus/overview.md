@@ -70,7 +70,7 @@ If you have any questions about the functions or SDK of Milvus, you are welcomed
 
 ## Overall architecture
 
-![Milvus architecture](milvus_arch.png)
+![Milvus architecture](../../../assets/milvus_arch.png)
 
 ## What's next
 

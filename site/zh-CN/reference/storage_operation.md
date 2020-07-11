@@ -7,7 +7,7 @@ sidebar_label: Storage Operation
 # 存储操作
 
 <div class="alert note">
-阅读本文前，请先阅读 [存储相关概念](storage_concept.md)。
+阅读本文前，请先阅读 <a href="storage_concept.md">存储相关概念</a>。
 </div>
 
 ## 数据插入
@@ -22,7 +22,7 @@ sidebar_label: Storage Operation
 每个集合都有独立的可写缓冲区。每个可写缓冲区的容量上限是 128 MB。所有集合的可写缓冲区总容量上限由系统参数 <code>insert_buffer_size</code> 决定，默认是 1 GB。
 </div>
 
-![insert](insert.png)
+![insert](../../../assets/storage/insert.png)
 
 ## 数据落盘
 
@@ -51,7 +51,7 @@ sidebar_label: Storage Operation
 每个分段的所有相关文件都被存放在以段 ID 命名的文件夹中，比如记录实体 ID 的 UID 文件、用于标记已被删除实体的 **delete_docs** 文件，以及用于快速查找实体的布隆过滤器（**bloom-filter**）文件。
 
 <div class="alert info">
-段内数据文件请参考 <a href="./concept.md#分区和段">分区和段</a> 中的示意图。
+段内数据文件请参考 <a href="concept.md#分区和段">分区和段</a> 中的示意图。
 </div>
 
 ## 数据合并

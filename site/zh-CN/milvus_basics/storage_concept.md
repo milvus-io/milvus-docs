@@ -32,7 +32,7 @@ sidebar_label: Storage Concepts
 
 集合、分区和段的关系如下所示：
 
-![file](hierarchy.png)
+![file](../../../assets/storage/hierarchy.png)
 
 <div class="alert info">
 每个集合都有一个 <code>_default</code> 分区。插入数据时如果没有指定分区，Milvus 会将数据插入该分区中。
@@ -46,5 +46,5 @@ sidebar_label: Storage Concepts
 
 元数据后端服务不负责存储实体数据和索引。
 
-![meta](meta.png)
+![meta](../../../assets/storage/meta.png)
 

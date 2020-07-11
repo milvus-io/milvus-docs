@@ -6,7 +6,7 @@ sidebar_label: Write Ahead Log
 
 # 预写式日志
 
-![wal_structure](wal_workflow.jpg)
+![wal_structure](../../../assets/wal/wal_workflow.jpg)
 
 预写式日志首先把用户的插入和删除请求记入日志文件，然后由后台线程写入系统。一旦将用户请求成功写入日志，服务端即会返回成功。开启该功能可以增强数据的可靠性，并减少对客户端的阻塞。
 
@@ -19,7 +19,7 @@ sidebar_label: Write Ahead Log
 预写式日志使用的缓冲区大小由系统参数 `wal.buffer_size` 决定。为保证预写式日志的写入性能，建议把缓冲区大小设为单批次导入数据量大小的 2 倍以上。
 
 <div class="alert info">
-    关于如何设置系统参数 <code>wal.buffer_size</code>，请见 <a href="../setup/configuration.md">Milvus 配置</a>。
+    关于如何设置系统参数 <code>wal.buffer_size</code>，请见 <a href="server_config.md">Milvus 配置</a>。
 </div>
 
 ## 旧日志删除
