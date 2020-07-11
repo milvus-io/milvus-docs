@@ -51,13 +51,13 @@ Milvus returns single-row reads in 0.6 ms or less and single-row writes in appro
 
 #### How to use Milvus?
 
-Milvus provides various [clients](../reference/sdk.md) and supports all gRPC communication types. 
+Milvus provides various [clients](sdk.md) and supports all gRPC communication types. 
 
 #### How easy is it to use Milvus?
 
-Milvus can be easily installed with docker images. You can use APIs for vector insertion, deletion, and search. For more details, see [Install Milvus](../guides/get_started/install_milvus/install_milvus.md).
+Milvus can be easily installed with docker images. You can use APIs for vector insertion, deletion, and search. For more details, see [Install Milvus](install_milvus.md).
 
-To start your first vector search program, please go to [Milvus example code](../guides/get_started/example_code.md).
+To start your first vector search program, please go to [Milvus example code](example_code.md).
 
 #### Is Milvus highly available?
 
@@ -73,7 +73,7 @@ When vectors are imported into Milvus, they will be stored and indexed. Each vec
 
 #### Which index methods are supported?
 
-Please refer to [Index Types](../guides/index.md) for supported index methods.
+Please refer to [Index Types](index.md) for supported index methods.
 
 #### Does Milvus support simultaneous inserting and searching?
 

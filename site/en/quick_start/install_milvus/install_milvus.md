@@ -48,11 +48,11 @@ Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/mas
 
 - If you're just getting started with Milvus:
 
-  - [Try an example program](../example_code.md)
-  - [Learn more about Milvus operations](../../milvus_operation.md)
+  - [Try an example program](example_code.md)
+  - [Learn more about Milvus operations](milvus_operation.md)
   - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
   
 - If you're ready to run Milvus in production:
 
-  - [Configure Milvus for Production](../../../reference/performance_tuning.md)
-  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance
+  - [Configure Milvus for Production](performance_tuning.md)
+  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance

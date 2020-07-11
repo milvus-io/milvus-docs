@@ -55,7 +55,7 @@ It is recommended that you use the docker images with the Milvus compilation env
 
 #### Is there a limitation for the number of collections and partitions in Milvus?
 
-Yes. If you use SQLite as the metadata management service, the sum of collection number and partition number must not exceed 50000. To create more collections and partitions, please [use MySQL](../reference/data_manage.md).
+Yes. If you use SQLite as the metadata management service, the sum of collection number and partition number must not exceed 50000. To create more collections and partitions, please [use MySQL](data_manage.md).
 
 #### Why does Milvus return config check error?
 
@@ -63,7 +63,7 @@ The version of your Milvus server configuration file is incorrect. Milvus 0.7.0 
 
 #### Does Milvus support insert, delete, update, and query operations for vectors?
 
-Yes. You can refer to [Milvus Operations](../guides/milvus_operation.md) for details.
+Yes. You can refer to [Milvus Operations](milvus_operation.md) for details.
 
 > Note: Before 0.7.0, only insertion and search are supported.
 
@@ -88,13 +88,13 @@ Even if the data is a 2-dim array, this error can still occur if the data type i
 
 #### Why sometimes it takes much longer for queries with smaller datasets?
 
-If the size of a data file is smaller than the value of the `index_file_size` parameter when creating a collection, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Operation](../guides/milvus_operation.md) for more information.
+If the size of a data file is smaller than the value of the `index_file_size` parameter when creating a collection, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Operation](milvus_operation.md) for more information.
 
 > Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
 #### Why is my Milvus constantly having low accuracy?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a collection. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a collection. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](milvus_operation.md) for more information.
 
 #### Why are my new configurations not working?
 

@@ -70,10 +70,10 @@ If you have any questions about the functions or SDK of Milvus, you are welcomed
 
 ## Overall architecture
 
-![Milvus architecture](../../../assets/milvus_arch.png)
+![Milvus architecture](milvus_arch.png)
 
 ## What's next
 
 - Explore more concepts of [vectors](vector.md), [vector search](index_method.md) and [vector database](vector_db.md)
-- [Install Milvus](../guides/get_started/install_milvus/install_milvus.md) and start to explore around
+- [Install Milvus](install_milvus.md) and start to explore around
 
