@@ -1,7 +1,5 @@
 ---
 id: overview.md
-title: Milvus Overview
-sidebar_label: Milvus Overview
 ---
 
 # Milvus 简介
@@ -89,7 +87,6 @@ Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，
 - 异构计算
 
   Milvus 能够调度多个 GPU 进行向量搜索和索引建立。利用 GPU 强大的并行运算能力，Milvus 在大批量查询和向量索引建立等高耗时任务上性能表现优异。
-  <!-- 详情请参阅 [异构计算](../heterogeneous-computing/index.md)。 -->
 
 - 向量索引
 

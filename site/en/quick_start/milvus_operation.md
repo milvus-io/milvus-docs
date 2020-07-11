@@ -1,7 +1,5 @@
 ---
 id: milvus_operation.md
-title: Learn Milvus Operations
-sidebar_label: Learn Milvus Operations
 ---
 
 # Milvus Hello World
@@ -116,7 +114,7 @@ Currently, a collection only supports one index type, and switching the index ty
    | `HNSW`                |   `M`：Affects index build time and index quality. The higher the value, the longer it costs to build an index, the higher the index quality, and the higher the memory usage.  </br></br> `efConstruction`：Affects index build time and index quality. The higher the value, the longer it costs to build and index, the higher the index quality, and the higher the memory usage.  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br></br>`efConstruction` :[100, 500]                |
    | `ANNOY`                 |  `n_trees`: Affects the build time and the index size. A larger value will give more accurate results, but larger indexes. | `{"n_trees": 8}`  |  [1, 1024]   |
 
-   Refer to [Milvus Indexes](index.md) for more information。
+   Refer to [Milvus Indexes](index.md) for more information.
 
 2. Create an index for the collection.
    After deleting the index, the collection uses the default index type FLAT again.
@@ -248,5 +246,5 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
 ## What's next
 
-- [Try Milvus bootcamp](https://github.com/milvus-io/bootcamp) to learn about more solutions
+- Try [Milvus bootcamp](https://github.com/milvus-io/bootcamp) to learn about more solutions.
 - [Troubleshoot API operations](troubleshoot.md)

@@ -1,7 +1,5 @@
 ---
 id: data_manage.md
-title: Data Management
-sidebar_label: Data Management
 ---
 
 # 数据管理

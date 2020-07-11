@@ -1,7 +1,5 @@
 ---
 id: storage_operation.md
-title: Storage Operation
-sidebar_label: Storage Operation
 ---
 
 # 存储操作
@@ -74,7 +72,7 @@ sidebar_label: Storage Operation
 未建立索引之前，Milvus 对集合的查询操作都是以暴力搜索（brute-force search）的方式完成的。为提高查询性能，你可以为集合建立合适的索引。索引建成后，每个段都会产生一个索引文件，此时元数据也会同步更新。
 
 <div class="alert info">
-更多索引相关信息，请参考 <a href="../vector-index/overview.md">向量索引</a>。
+更多索引相关信息，请参考 <a href="index_types.md">向量索引</a>。
 </div>
 
 ## 删除

@@ -1,7 +1,5 @@
 ---
 id: example_code.md
-title: Try an Example Program
-sidebar_label: Try an Example Program
 ---
 
 # Try an Example Program

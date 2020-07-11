@@ -1,7 +1,5 @@
 ---
 id: troubleshoot.md
-title: Performance Tunning
-sidebar_label: Performance Tunning
 ---
 
 # 性能调优
@@ -54,7 +52,7 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 ### 系统参数
 
 <div class="alert info">
-系统参数配置请参考 <a href="../setup/configuration.md">Milvus 服务端配置</a>。
+系统参数配置请参考 <a href="configuration.md">Milvus 服务端配置</a>。
 </div>
 
 - `cache_config.cpu_cache_capacity`

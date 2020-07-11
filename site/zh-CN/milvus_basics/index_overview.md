@@ -1,7 +1,5 @@
 ---
 id: index_overview.md
-title: Index Overview
-sidebar_label: Index Overview
 ---
 
 # 向量索引概述

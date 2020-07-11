@@ -1,7 +1,5 @@
 ---
 id: milvus_operation.md
-title: Learn Milvus Operations
-sidebar_label: Learn Milvus Operations
 ---
 
 # Milvus Hello World

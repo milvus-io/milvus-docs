@@ -1,7 +1,5 @@
 ---
 id: contribute.md
-title: Contribute
-sidebar_label: Contribute
 ---
 
 # 贡献

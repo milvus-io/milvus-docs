@@ -1,7 +1,5 @@
 ---
 id: performance_faq.md
-title: Performance FAQ
-sidebar_label: Performance FAQ
 ---
 
 # Performance FAQ

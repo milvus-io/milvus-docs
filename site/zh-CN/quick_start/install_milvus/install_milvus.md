@@ -1,7 +1,5 @@
 ---
 id: install_milvus.md
-title: Installation Overview
-sidebar_label: Installation Overview
 ---
 # 安装概述
 

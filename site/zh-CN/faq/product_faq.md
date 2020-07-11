@@ -1,7 +1,5 @@
 ---
 id: product_faq.md
-title: Product FAQ
-sidebar_label: Product FAQ
 ---
 
 # 产品常见问题
@@ -52,13 +50,13 @@ Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左�
 
 #### 如何使用 Milvus？
 
-Milvus 提供多种[客户端](../reference/sdk.md)。同时还支持所有基于 gRPC 的通信方式。
+Milvus 提供多种[客户端](sdk.md)。同时还支持所有基于 gRPC 的通信方式。
 
 #### Milvus 的易用性如何？
 
-Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 API 接口即可完成向量插入、删除、检索等操作。若要了解更多，请看 [安装 Milvus](../guides/get_started/install_milvus/install_milvus.md).
+Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 API 接口即可完成向量插入、删除、检索等操作。若要了解更多，请看 [安装 Milvus](install_milvus.md).
 
-想要开启你的第一次向量搜索？请阅读 [运行示例程序](../guides/get_started/example_code.md).
+想要开启你的第一次向量搜索？请阅读 [运行示例程序](example_code.md).
 
 #### Milvus 具备高可用特性吗？
 
@@ -74,7 +72,7 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 
 #### 如何选择向量索引的类型？
 
-请参考 [Milvus 索引类型](../guides/index.md) 获取更详细的信息。
+请参考 [Milvus 索引类型](index.md) 获取更详细的信息。
 
 #### Milvus 是否支持 “边插入边查询” ？
 

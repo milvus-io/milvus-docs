@@ -1,7 +1,5 @@
 ---
 id: sdk.md
-title: Supported Clients
-sidebar_label: Supported Clients
 ---
 
 # Supported Clients

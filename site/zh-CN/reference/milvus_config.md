@@ -1,7 +1,5 @@
 ---
 id: milvus_config.md
-title: Milvus Configuration
-sidebar_label: Milvus Configuration
 ---
 
 # Milvus 服务端配置

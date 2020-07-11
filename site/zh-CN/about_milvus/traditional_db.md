@@ -1,7 +1,5 @@
 ---
 id: traditional_db.md
-title: Traditional Database
-sidebar_label: Traditional Database
 ---
 
 # 传统数据库与特征向量检索

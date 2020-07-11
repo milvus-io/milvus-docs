@@ -1,7 +1,5 @@
 ---
 id: traditional_db.md
-title: Traditional Databases
-sidebar_label: Traditional Database
 ---
 
 # Traditional Databases

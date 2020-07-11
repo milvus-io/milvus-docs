@@ -1,7 +1,5 @@
 ---
 id: monitor.md
-title: Monitoring and Alerting
-sidebar_label: Monitoring and Alerting
 ---
 
 # Monitoring and Alerting
@@ -168,7 +166,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ```yaml
 metric:
-  enable: true       # Set the value to true to enable the Prometheus monitor.
+  enable: true       # Enable the Prometheus monitor.
   address: 127.0.0.1 # Set the IP address of Pushgateway.
   port: 9091         # Set the port number of Pushgateway.
 ```

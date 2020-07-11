@@ -1,7 +1,5 @@
 ---
 id: release_notes.md
-title: 发版说明
-sidebar_label: 发版说明
 ---
 
 # 发版说明
@@ -255,7 +253,7 @@ sidebar_label: 发版说明
 
 - **ANNOY 索引的支持**
 
-  增加 `ANNOY` 索引类型，关于 `ANNOY` 索引的详细介绍请参考[文档](../guides/index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
+  增加 `ANNOY` 索引类型，关于 `ANNOY` 索引的详细介绍请参考[文档](index_types.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
   
 - **向量删除**
 

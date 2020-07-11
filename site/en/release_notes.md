@@ -255,7 +255,7 @@ sidebar_label: Release Notes
 
 - **ANNOY index support**
 
-  Added support for ANNOY index type. See [our documentation](../guides/index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
+  Added support for ANNOY index type. See [our documentation](index_types.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
 
 - **Vector deletion**
 

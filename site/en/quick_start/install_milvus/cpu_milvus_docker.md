@@ -1,7 +1,5 @@
 ---
 id: cpu_milvus_docker.md
-title: Install CPU-only Milvus
-sidebar_label: Install CPU-only Milvus
 ---
 
 # Install CPU-only Milvus
@@ -58,7 +56,7 @@ $ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 <div class="alert note">
-If the pulling is too slow or fails constantly, see <a href="../../../faq/operational_faq.md">Operational FAQ</a> for possible solutions.
+If the pulling is too slow or fails constantly, see <a href="operational_faq.md">Operational FAQ</a> for possible solutions.
 </div>
 
 ## Download configuration files

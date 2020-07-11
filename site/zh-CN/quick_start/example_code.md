@@ -1,7 +1,5 @@
 ---
 id: example_code.md
-title: Try an Example Program
-sidebar_label: Try an Example Program
 ---
 # 运行示例程序
 

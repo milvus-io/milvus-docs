@@ -1,7 +1,5 @@
 ---
-id: index.md
-title: Index Types
-sidebar_label: Index Types
+id: index_types.md
 ---
 
 # Milvus 索引类型
@@ -142,7 +140,7 @@ RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `s
    | `out_degree`          | 结点的最大出度        | [5, 300]  |
    | `candidate_pool_size` | 结点出边候选池 　     | [50, 1000] |
    | `search_length`       | 查询迭代次数        　| [10, 300] |
-   | `knng`                | 预计算最近邻结点数   　| [５, 300] |
+   | `knng`                | 预计算最近邻结点数   　| [5, 300] |
    
    **示例：**`{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
 

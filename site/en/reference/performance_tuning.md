@@ -1,7 +1,5 @@
 ---
 id: performance_tuning.md
-title: Configure Milvus for Production
-sidebar_label: Configure Milvus for Production
 ---
 
 # Configure Milvus for Production

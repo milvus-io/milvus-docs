@@ -1,7 +1,5 @@
 ---
 id: troubleshoot.md
-title: Troubleshoot
-sidebar_label: Troubleshoot
 ---
 
 # 故障诊断

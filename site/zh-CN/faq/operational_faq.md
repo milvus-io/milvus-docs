@@ -1,7 +1,5 @@
 ---
 id: operational_faq.md
-title: Operational FAQ
-sidebar_label: Operational FAQ
 ---
 
 # 操作常见问题
@@ -54,7 +52,7 @@ sidebar_label: Operational FAQ
 
 #### Milvus 对 collection 和 分区的数量有限制吗？
 
-有。如果你使用 SQLite 作为元数据管理服务，则 Collection 和分区总数不能超过50000。如果你需要更多的 collection 和分区，请[使用 MySQL](../reference/data_manage.md)。
+有。如果你使用 SQLite 作为元数据管理服务，则 Collection 和分区总数不能超过50000。如果你需要更多的 collection 和分区，请[使用 MySQL](data_manage.md)。
 
 #### 为什么 Milvus 返回 config check error 的错误？
 
@@ -62,7 +60,7 @@ sidebar_label: Operational FAQ
 
 #### Milvus 支持对向量的插入、删除、更改和查询操作吗？
 
-是的。关于详细信息请参考[了解 Milvus 操作](../guides/milvus_operation.md)。
+是的。关于详细信息请参考[了解 Milvus 操作](milvus_operation.md)。
 
 > 注意：在 0.7.0 之前，Milvus 仅支持插入向量和查询向量。
 
@@ -87,12 +85,12 @@ sidebar_label: Operational FAQ
 
 #### 为什么有时候小的数据集查询时间反而更长？
 
-如果数据文件的大小小于创建 collection 时 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于`index_file_size` 参数的更多信息，请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+如果数据文件的大小小于创建 collection 时 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于`index_file_size` 参数的更多信息，请参考 [Milvus 基本操作](milvus_operation.md)。
 
 #### 为什么我的 Milvus 查询准确率一直不理想？
 
 在调用 SDK 进行向量搜索时，请检查调用函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。关于更多信息，请参考 [了解 Milvus 操作
-](../guides/milvus_operation.md)。
+](milvus_operation.md)。
 
 #### 为什么我更新过的设置没有生效？
 

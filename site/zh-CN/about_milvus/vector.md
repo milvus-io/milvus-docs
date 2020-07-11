@@ -1,7 +1,5 @@
 ---
 id: vector.md
-title: Feature Vector
-sidebar_label: Feature Vector
 ---
 
 # 特征向量

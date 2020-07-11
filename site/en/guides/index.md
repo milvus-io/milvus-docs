@@ -1,7 +1,5 @@
 ---
 id: index.md
-title: Index Types
-sidebar_label: Index Types
 ---
 
 # Milvus Indexes
@@ -138,7 +136,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | `out_degree`          | Maximum out-degree of the node        | [5, 300]  |
    | `candidate_pool_size` | Candidate pool size of the node 　     | [50, 1000] |
    | `search_length`       | Number of query iterations        　| [10, 300] |
-   | `knng`                | Number of nearest neighbors   　| [５, 300] |
+   | `knng`                | Number of nearest neighbors   　| [5, 300] |
    
    **Example:** `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
 

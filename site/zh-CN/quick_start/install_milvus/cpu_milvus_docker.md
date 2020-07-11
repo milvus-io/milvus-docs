@@ -1,7 +1,5 @@
 ---
 id: cpu_milvus_docker.md
-title: Install CPU-only Milvus on Docker
-sidebar_label: Install CPU-only Milvus on Docker
 ---
 
 # 安装 CPU 版本的 Milvus
@@ -58,7 +56,7 @@ $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 
 <div class="alert note">
-如果拉取镜像的速度过慢或一直失败，请参考 <a href="../../../faq/operational_faq.md">操作常见问题</a> 中提供的解决办法。
+如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>
 
 ## 下载配置文件

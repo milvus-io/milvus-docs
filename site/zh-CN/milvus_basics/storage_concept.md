@@ -1,7 +1,5 @@
 ---
 id: storage_concept.md
-title: Storage Concepts
-sidebar_label: Storage Concepts
 ---
 
 # 存储相关概念

@@ -1,7 +1,5 @@
 ---
 id: insert_and_create_index.md
-title: Insert and Create Index
-sidebar_label: Insert and Create Index
 ---
 
 # 插入向量并创建索引

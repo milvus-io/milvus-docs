@@ -1,7 +1,5 @@
 ---
 id: performance_tuning.md
-title: 配置 Milvus 以用于生产环境
-sidebar_label: 配置 Milvus 以用于生产环境
 ---
 
 # 配置 Milvus 以用于生产环境

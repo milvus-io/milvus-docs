@@ -1,7 +1,5 @@
 ---
 id: searching.md
-title: Search Index
-sidebar_label: Search Index
 ---
 
 # 向量搜索
