@@ -1,5 +1,5 @@
 ---
-id: index_types.md
+id: index.md
 ---
 
 # Milvus 索引类型
