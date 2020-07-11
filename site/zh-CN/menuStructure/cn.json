@@ -42,6 +42,14 @@
       "order": 3
     },
     {
+      "id": "release_notes.md",
+      "title": "发版说明",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "milvus_basics",
       "title": "基本概念",
       "label1": "",
@@ -78,14 +86,6 @@
       "id": "write_ahead_log.md",
       "title": "预写式日志",
       "label1": "milvus_basics",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "release_notes.md",
-      "title": "发版说明",
-      "label1": "",
       "label2": "",
       "label3": "",
       "order": 3
@@ -263,12 +263,43 @@
       "order": 6
     },
     {
+      "id": "faq",
+      "title": "常见问题",
+      "label1": "",
+      "label2": "",
+      "order": 7,
+      "isMenu": true
+    },
+    {
+      "id": "performance_faq.md",
+      "title": "性能常见问题",
+      "label1": "faq",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "product_faq.md",
+      "title": "产品常见问题",
+      "label1": "faq",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "operational_faq.md",
+      "title": "操作常见问题",
+      "label1": "faq",
+      "label2": "",
+      "order": 2
+    },
+    {
       "id": "API",
       "title": "API 参考",
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
@@ -315,37 +346,6 @@
       "label3": "",
       "order": 4,
       "outLink": "https://github.com/milvus-io/milvus/tree/master/sdk"
-    },
-    {
-      "id": "faq",
-      "title": "常见问题",
-      "label1": "",
-      "label2": "",
-      "order": 8,
-      "isMenu": true
-    },
-    {
-      "id": "performance_faq.md",
-      "title": "性能常见问题",
-      "label1": "faq",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "product_faq.md",
-      "title": "产品常见问题",
-      "label1": "faq",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
-      "id": "operational_faq.md",
-      "title": "操作常见问题",
-      "label1": "faq",
-      "label2": "",
-      "order": 2
     },
     {
       "id": "developer_tools",
