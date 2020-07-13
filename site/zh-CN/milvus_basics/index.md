@@ -2,10 +2,10 @@
 id: index.md
 ---
 
-# Milvus 索引类型
+# 索引类型
 
 <div class="alert note">
-阅读本文前，请先阅读 [向量索引概述](index_overview.md)。
+阅读本文前，请先阅读 <a href="index_overview.md">向量索引概述</a>。
 </div>
 
 ## 索引概览

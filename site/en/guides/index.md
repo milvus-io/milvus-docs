@@ -2,7 +2,11 @@
 id: index.md
 ---
 
-# Milvus Indexes
+# Index Types
+
+<div class="alert note">
+Please read <a href="index_overview.md">Index Overview</a> before reading this article.
+</div>
 
 ## Index Overview
 

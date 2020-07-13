@@ -2,7 +2,7 @@
 id: vector_db.md
 ---
 
-# Other Feature Vector Search Tools
+# Select Vector Search Tool
 
 Currently, there are already some tools that can perform feature vector search:
 
