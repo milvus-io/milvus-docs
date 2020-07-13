@@ -94,7 +94,7 @@ Mishards 适合大数据规模下的搜索场景。那么，怎么判断数据�
 
 Mishards 定义了相关的链路追踪接口，并通过插件模式提供了扩展的可能性。目前默认提供了基于 Jaeger 的插件。
 
-<div class="alert info">
+<div class="alert note">
 查阅 <a href="https://www.jaegertracing.io/docs/1.18/getting-started/">Jaeger Doc</a> 了解怎样集成 Jaeger。
 </div>
 
@@ -235,7 +235,7 @@ $ make clean_deploy
 - Kubernetes 版本 1.10 及以上
 - Helm 版本 2.12.0 及以上
 
-<div class="alert info">
+<div class="alert note">
 关于 Helm 的使用请参考 <a href="https://helm.sh/docs/">Helm 使用指南</a>。
 </div>
 
@@ -306,7 +306,7 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
    - 如果集群部署在 AWS，可以使用 [Elastic File System (EFS)](https://aws.amazon.com/efs/)。
    - 如果集群部署在 Azure，可以使用 [Azure File Storage (AFS)](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv)。
 
-<div class="alert info">
+<div class="alert note">
 <ul>
 <li>关于 PersistentVolume 的申请及管理，请参阅 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a>。</li>
 <li>关于 PersistentVolume 的访问模式，请参阅 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a>。</li>
@@ -332,7 +332,7 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
 
    这里通过 `mishards.replica` 和 `readonly.replica` 控制副本集数量，默认值为 1。
 
-   <div class="alert info">
+   <div class="alert note">
    Mishards 集群中的写节点暂时不支持扩展。
    </div>
 
@@ -369,9 +369,9 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
       milvus-release .
    ```
 
-   <div class="alert info">
+   <div class="alert note">
    <ul>
-   <li>更多 Milvus 配置参数，请参阅 <a href="../setup/configuration.md">Milvus 配置</a>。</li>
+   <li>更多 Milvus 配置参数，请参阅 <a href="milvus_config.md">Milvus 服务端配置</a>。</li>
    <li>更多 Milvus-Helm 配置参数，请参阅 <a href="https://github.com/milvus-io/milvus-helm/blob/master/README.md">Milvus Helm Charts</a>。</li>
    </ul>
    </div>
@@ -389,6 +389,6 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
       milvus-release .
    ```
 
-   <div class="alert info">
+   <div class="alert note">
    Kubernetes 集群中必须有可访问的 GPU 资源。关于 Kubernetes 中的 GPU 资源管理及调度，请参阅 <a href="https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/">Schedule GPUs</a>。
    </div>

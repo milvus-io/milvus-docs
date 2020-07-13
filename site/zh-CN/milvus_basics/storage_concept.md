@@ -32,7 +32,7 @@ id: storage_concept.md
 
 ![file](storage/hierarchy.png)
 
-<div class="alert info">
+<div class="alert note">
 每个集合都有一个 <code>_default</code> 分区。插入数据时如果没有指定分区，Milvus 会将数据插入该分区中。
 </div>
 
