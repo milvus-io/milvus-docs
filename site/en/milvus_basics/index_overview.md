@@ -1,7 +1,5 @@
 ---
 id: index_overview.md
-title: Index Overview
-sidebar_label: Index Overview
 ---
 
 # Vector Index Overview
