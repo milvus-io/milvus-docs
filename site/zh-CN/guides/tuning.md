@@ -1,5 +1,5 @@
 ---
-id: troubleshoot.md
+id: tuning.md
 ---
 
 # 性能调优
