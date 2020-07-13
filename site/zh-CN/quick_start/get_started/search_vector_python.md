@@ -1,5 +1,5 @@
 ---
-id: flush_python.md
+id: search_vector_python.md
 ---
 
 # 搜索向量

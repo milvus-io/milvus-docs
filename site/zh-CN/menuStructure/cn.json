@@ -149,12 +149,93 @@
       "order": 1
     },
     {
-      "id": "milvus_operation.md",
+      "id": "get_started",
       "title": "Milvus 基本操作",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
+      "order": 2,
+      "isMenu": true
+    },
+    {
+      "id": "milvus_operation.md",
+      "title": "概述",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "connect_milvus_python.md",
+      "title": "连接 Milvus 服务端",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "create_drop_collection_python.md",
+      "title": "创建或删除 collection",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
       "order": 2
+    },
+    {
+      "id": "create_drop_partition_python.md",
+      "title": "在 collection 中创建或删除分区",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "insert_delete_vector_python.md",
+      "title": "插入或删除向量",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "create_drop_index_python.md",
+      "title": "在 collection 中创建或删除索引",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 5
+    },
+    {
+      "id": "insert_delete_vector_python.md",
+      "title": "插入或删除向量",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 6
+    },
+    {
+      "id": "flush_python.md",
+      "title": "对 collection 中的数据执行 flush 操作",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 7
+    },
+    {
+      "id": "compact_python.md",
+      "title": "对 collection 中的 segment 执行 compact 操作",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 8
+    },
+    {
+      "id": "close_client_python.md",
+      "title": "关闭客户端",
+      "label1": "quick_start",
+      "label2": "get_started",
+      "label3": "",
+      "order": 9
     },
     {
       "id": "reference",
