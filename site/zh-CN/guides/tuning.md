@@ -1,13 +1,13 @@
 ---
-id: troubleshoot.md
+id: tuning.md
 ---
 
 # 性能调优
 
 ## 插入性能调优
 
-<div class="alert info">
-“数据插入”到“数据写入磁盘”的基本流程请参考 <a href="../storage/operation.md">存储原理</a>。
+<div class="alert note">
+“数据插入”到“数据写入磁盘”的基本流程请参考 <a href="storage_operation.md">存储原理</a>。
 </div>
 
 在不超出单次插入上限（256 MB）的前提下，批量插入比单条插入要高效得多。
@@ -27,7 +27,7 @@ id: troubleshoot.md
 
 该参数是指后台落盘任务的间隔时间，默认值为 1 秒。根据 Milvus [数据段合并策略](storage_operation.md#数据合并)，增大该值可减少段合并的次数，减少磁盘 I/O，提高插入操作的吞吐量。
 
-<div class="alert note">
+<div class="alert note">
 Milvus 无法搜索到在该时间间隔内未落盘的数据。
 </div>
 
@@ -43,7 +43,7 @@ Milvus 无法搜索到在该时间间隔内未落盘的数据。
 
 - 使用 CPU 计算时，查询性能取决于 CPU 的主频、核心数和支持的指令集。
 
-<div class="alert info">
+<div class="alert note">
 Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 </div>
 
@@ -51,7 +51,7 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 
 ### 系统参数
 
-<div class="alert info">
+<div class="alert note">
 系统参数配置请参考 <a href="configuration.md">Milvus 服务端配置</a>。
 </div>
 
@@ -68,7 +68,7 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 * IVFPQ 索引的数据量根据其参数变化，一般低于其原始向量总数据量的 10%。
 * HNSW／RNSG／ANNOY 索引的数据量都大于其原始向量总数据量。
 
-<div class="alert info">
+<div class="alert note">
 通过调用 <code>get_collection_stats</code> 接口，可准确获知查询一个集合所需的数据总量。
 </div>
 
@@ -84,7 +84,7 @@ GPU 查询的性能取决于 CPU 将数据加载进显存的速度以及 GPU 的
 
 ### 索引
 
-<div class="alert info">
+<div class="alert note">
 向量索引的基本概念请参考 <a href="index_overview.md">向量索引概述</a>。
 </div>
 
@@ -110,7 +110,7 @@ IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可�
 
 通过估算得出的计算总量越大，查询耗时越长。实际使用中可根据以上公式确定合理的参数，在满足召回率的前提下获得较高的查询性能。
 
-<div class="alert info">
+<div class="alert note">
 在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的分段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该分段向量总数。
 </div>
 

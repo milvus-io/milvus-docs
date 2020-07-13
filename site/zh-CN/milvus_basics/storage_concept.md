@@ -22,7 +22,7 @@ id: storage_concept.md
   
 分区以标签（tag）作为标识。插入向量数据时，你可以指定将数据插入到某个标签对应的分区中。查询向量数据时，你可以根据标签来指定在某个分区的数据中进行查询。Milvus 既支持对分区标签的精确匹配，也支持正则表达式匹配。
 
-<div class="alert note">
+<div class="alert note">
 每个集合的分区数量上限是 4096 个。
 </div>
 
@@ -30,9 +30,9 @@ id: storage_concept.md
 
 集合、分区和段的关系如下所示：
 
-![file](../../../assets/storage/hierarchy.png)
+![file](storage/hierarchy.png)
 
-<div class="alert info">
+<div class="alert note">
 每个集合都有一个 <code>_default</code> 分区。插入数据时如果没有指定分区，Milvus 会将数据插入该分区中。
 </div>
 
@@ -44,5 +44,5 @@ id: storage_concept.md
 
 元数据后端服务不负责存储实体数据和索引。
 
-![meta](../../../assets/storage/meta.png)
+![meta](storage/meta.png)
 
