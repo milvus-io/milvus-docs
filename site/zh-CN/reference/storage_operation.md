@@ -16,7 +16,7 @@ id: storage_operation.md
 2. 当预写日志成功记录后，返回插入操作。
 3. 将数据写入可写缓冲区（mutable buffer）。
 
-<div class="alert note">
+<div class="alert note">
 每个集合都有独立的可写缓冲区。每个可写缓冲区的容量上限是 128 MB。所有集合的可写缓冲区总容量上限由系统参数 <code>insert_buffer_size</code> 决定，默认是 1 GB。
 </div>
 
@@ -63,7 +63,7 @@ id: storage_operation.md
 - 建索引前
 - 删除索引后
 
-<div class="alert note">
+<div class="alert note">
 已经建立了索引的分段不会参与合并操作。
 </div>
 
@@ -109,7 +109,7 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 1. 客户端调用 `compact` 接口。
 2. 服务端接收到请求后，根据 **delete_docs** 所记录的信息，将段内未被删除的实体写入一个新的分段，并把旧分段标记为删除状态。之后将由后台清理任务负责清理被标记为删除状态的分段。如果旧分段已建立索引，新分段产生之后会重建索引。
 
-<div class="alert note">
+<div class="alert note">
 <code>compact<code> 操作会忽略被删除向量占比小于 10% 的分段。
 </div>
  
@@ -118,6 +118,6 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 1. 客户端调用 `get_entity_by_id` 接口读取原始实体数据。
 2. 服务端接收到请求后，通过布隆过滤器找到实体所在的段，返回该实体 ID 对应的数据。
 
-<div class="alert note">
+<div class="alert note">
 浮点型向量在 Milvus 中以单精度（float）方式存储。
 </div>

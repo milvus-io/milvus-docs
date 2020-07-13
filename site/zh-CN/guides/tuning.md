@@ -27,7 +27,7 @@ id: tuning.md
 
 该参数是指后台落盘任务的间隔时间，默认值为 1 秒。根据 Milvus [数据段合并策略](storage_operation.md#数据合并)，增大该值可减少段合并的次数，减少磁盘 I/O，提高插入操作的吞吐量。
 
-<div class="alert note">
+<div class="alert note">
 Milvus 无法搜索到在该时间间隔内未落盘的数据。
 </div>
 

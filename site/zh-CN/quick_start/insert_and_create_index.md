@@ -21,7 +21,7 @@ $ curl -X <VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>[?<QUERY_STRING>]' [-d '<BODY
   - `<QUERY_STRING>`: 查询请求参数。
   - `<BODY>`: 请求体。存放请求的具体内容。比如发送一个创建集合的请求，请求体中存放集合的各种参数。请求体内容是JSON格式。
 
-<div class="alert note">
+<div class="alert note">
 <code>[]</code> 表示可选参数。
 </div>
 

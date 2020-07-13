@@ -61,7 +61,7 @@ Mishards 适合大数据规模下的搜索场景。那么，怎么判断数据�
 
 元数据记录了底层数据的组织结构信息。在分布式系统中，Milvus 写节点是元数据唯一的生产者，而 Mishards 节点、Milvus 写节点和读节点都是元数据的消费者。目前版本的 Milvus 只支持 MySQL 和 SQLite 作为元数据的存储后端。
 
-<div class="alert note">
+<div class="alert note">
 在分布式系统中，元数据的存储后端只能是 MySQL。
 </div>
 

@@ -23,7 +23,7 @@ id: route.md
 
 ## 水平扩展
 
-<div class="alert note">
+<div class="alert note">
 目前，Milvus 已经提供了水平扩展的解决方案 Mishards，但是该方案目前仅仅是实验性质。
 </div>
 
