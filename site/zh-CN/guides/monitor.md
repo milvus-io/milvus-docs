@@ -29,7 +29,7 @@ Milvus 会收集监控数据并将其推送到 Pushgateway。同时，Prometheus
 
 Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-![prometheus.png](../../../assets/prometheus.png)
+![prometheus.png](prometheus.png)
 
 ### 需要报警的事件
 
@@ -78,7 +78,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
     ./pushgateway
     ```
 
-    <div class="alert note">
+    <div class="alert note">
     必须在启动 Milvus Server 之前启动 Pushgateway 进程。
     </div>
     

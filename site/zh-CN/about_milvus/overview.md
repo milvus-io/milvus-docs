@@ -16,7 +16,7 @@ id: overview.md
 
 - 实体标识（Entity ID）: 是用于唯一指代一个实体的 64 位非负整数。创建实体时，该标识可以由用户指定，也可以由 Milvus 自动生成。
 
-<div class="alert note">
+<div class="alert note">
 目前，Milvus 不支持标识去重，因此你需要保证插入实体标识的唯一性。
 </div>
 
@@ -32,7 +32,7 @@ id: overview.md
 
 - 向量（Vector）：一种由 N 维数组成的数据类型。是事物特征的抽象，可用于表征某个事物。
 
-<div class="alert note">
+<div class="alert note">
 注意：目前，一个实体最多只能包含一个向量。
 </div>
 

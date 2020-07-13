@@ -25,13 +25,13 @@ Milvus uses Prometheus to store and monitor its metrics and Grafana to visualize
 
 Milvus collects monitoring data and pushes it to Pushgateway. At the same time, the Prometheus server periodically pulls data from Pushgateway and save it to its time-series database. The following graph shows how Prometheus works in Milvus:
 
-![prometheus](../../../assets/monitoring.png)
+![prometheus](monitoring.png)
 
 #### Grafana
 
   Grafana is an open source platform for time-series analytics and used in Milvus to visualize various performance metrics:
 
-  ![dashboard](../../../assets/prometheus.png)
+  ![dashboard](prometheus.png)
 
 
 ### Events to create alert rules
@@ -68,7 +68,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    $ ./prometheus --version
    ```
 
-   <div class="alert note">
+   <div class="alert info">
    You can add the path to Prometheus to <code>PATH</code>. This makes it easy to start Prometheus from any shell.
    </div>
 
@@ -80,7 +80,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
     ./pushgateway
     ```
 
-    <div class="alert note">
+    <div class="alert note">
     You must start Pushgateway before starting the Milvus Server.
     </div>
     
