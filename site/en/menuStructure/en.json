@@ -190,45 +190,36 @@
       "order": 3
     },
     {
-      "id": "guides",
-      "title": "GUIDES",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 6,
-      "isMenu": true
-    },
-    {
       "id": "vector_db.md",
       "title": "Other Feature Vector Search Tools",
-      "label1": "guides",
+      "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 0
+      "order": 4
     },
     {
       "id": "metric.md",
       "title": "Choosing a Distance Metric",
-      "label1": "guides",
+      "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 5
     },
     {
       "id": "monitor.md",
       "title": "Monitoring and Alerting",
-      "label1": "guides",
+      "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 6
     },
     {
       "id": "tuning.md",
       "title": "Performance Tuning",
-      "label1": "guides",
+      "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 7
     },
     {
       "id": "mishards.md",
@@ -236,7 +227,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 8
     },
     {
       "id": "storage_operation.md",
@@ -244,7 +235,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 9
     },
     {
       "id": "faq",
