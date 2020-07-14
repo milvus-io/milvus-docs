@@ -19,7 +19,7 @@ Essentially, Euclidean distance measures the length of a segment that connects 2
 
 The formula for Euclidean distance is as follows:
 
-![euclidean](euclidean_metric.png)
+![euclidean](../../../assets/euclidean_metric.png)
 
 where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space
 
@@ -31,7 +31,7 @@ IP measures the cosine of the angle between 2 vectors, and returns the normalize
 
 So the formula for IP is:
 
-![ip](ip_metric.png)
+![ip](../../../assets/ip_metric.png)
 
 where A and B are vectors, `||A||` and `||B||` are the norms of A and B, and cosθ is the cosine of the angle between A and B.
 
@@ -43,23 +43,23 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-![Jaccard similarity coefficient](jaccard_coeff.png)
+![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
 Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient.
 
-![Jaccard distance](jaccard_dist.png)
+![Jaccard distance](../../../assets/jaccard_dist.png)
 
 ### Tanimoto distance
 
 For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
 
-![tanimoto coefficient](tanimoto_coeff.png)
+![tanimoto coefficient](../../../assets/tanimoto_coeff.png)
 
 In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
 
 For binary variables, the formula of Tanimoto distance is:
 
-![tanimoto distance](tanimoto_dist.png)
+![tanimoto distance](../../../assets/tanimoto_dist.png)
 
 The value ranges from 0 to +infinity.
 
@@ -77,7 +77,7 @@ Superstructure is used to measure the similarity of a chemical structure and its
 
 Superstructure similarity can be measured by:
 
-![superstructure](superstructure.png)
+![superstructure](../../../assets/superstructure.png)
 
 Where
 
@@ -92,7 +92,7 @@ Substructure is used to measure the similarity of a chemical structure and its s
 
 Substructure similarity can be measured by:
 
-![substructure](substructure.png)
+![substructure](../../../assets/substructure.png)
 
 Where
 

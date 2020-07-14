@@ -10,7 +10,7 @@
       "isMenu": true
     },
     {
-      "id": "what_is_milvus.md",
+      "id": "overview.md",
       "title": "Milvus 是什么",
       "label1": "about_milvus",
       "label2": "",
@@ -183,7 +183,7 @@
     },
     {
       "id": "create_drop_partition_python.md",
-      "title": "在 collection 中创建或删除分区",
+      "title": "创建或删除分区",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -199,7 +199,7 @@
     },
     {
       "id": "create_drop_index_python.md",
-      "title": "在 collection 中创建或删除索引",
+      "title": "创建或删除索引",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -215,7 +215,7 @@
     },
     {
       "id": "flush_python.md",
-      "title": "对 collection 中的数据执行 flush 操作",
+      "title": "执行 flush 操作",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -223,7 +223,7 @@
     },
     {
       "id": "compact_python.md",
-      "title": "对 collection 中的 segment 执行 compact 操作",
+      "title": "执行 compact 操作",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",

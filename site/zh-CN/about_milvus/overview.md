@@ -2,45 +2,32 @@
 id: overview.md
 ---
 
-# Milvus 简介
+# Milvus 是什么
 
+Milvus 是一款开源向量相似度搜索引擎，建立在 Faiss、NMSLIB、Annoy 等向量索引库基础之上，具有功能强大、稳定可靠以及易于使用等特点。Milvus 集成了这些向量索引库，隐藏了他们的复杂性，提供了一套简单而一致的 API。此外，Milvus 能够有效的管理向量数据，提供针对向量和非向量数据的增删改查的能力。除了提供针对向量的近实时搜索能力外，Milvus 可以对标量数据进行过滤。随着数据和查询规模的增加，Milvus 还提供了集群分片的解决方案，支持读写分离、水平扩展、动态扩容等功能，实现了对于超大数据规模的支持。目前，Milvus 是一个单节点主从式架构（Client-server model）的服务器，最高可以支持 TB 级特征数据的存储和搜索服务。对于有更大数据规模或者高并发需求的用户，可以使用目前尚在实验阶段的集群分片中间件 Mishards 进行部署。
 
+在服务端，Milvus 由两部分组成：Milvus server 和 Meta store。
 
+* Milvus server 提供了 Milvus 的主要功能，包括数据的存储与管理、数据的搜索等。
+* Meta store 则存储了 Milvus 的元数据。目前 Milvus 支持的元数据库可以是 MySQL 和 SQLite。
 
+这些能力使得 Milvus 可以广泛地应用于以下场景：
 
-## 术语
+- 图像、视频、音频等音视频搜索领域
+- 文本搜索、推荐和交互式问答系统等文本搜索领域
+- 新药搜索、基因筛选等生物医药领域
 
-- 实体（Entity）: 代表一个实际对象，由字段组成。
+除了提供核心的数据管理和搜索功能外，Milvus 还提供了
 
-- 字段（Field）：用于表示对象的某个属性。字段可以是结构化数据，也可以是向量。
+- 基于 JSON 的 DSL，提供用户灵活方便的搜索方式
+- 基于 Python / Java / Go / C++ 的 SDK 和 RESTful API
+- 对接基于 Prometheus 的监控与告警系统
+- 基于 Docker和 Kubernetes 的部署方式
 
-- 实体标识（Entity ID）: 是用于唯一指代一个实体的 64 位非负整数。创建实体时，该标识可以由用户指定，也可以由 Milvus 自动生成。
+以上功能都极大地增强了 Milvus 的易用性。
 
-<div class="alert note">
-目前，Milvus 不支持标识去重，因此你需要保证插入实体标识的唯一性。
-</div>
+Milvus 是开箱即用的产品，所有配置参数都有默认值。因此对初学者来说使用体验非常友好。随着深入了解 Milvus，你会发现整个 Milvus 都是灵活可配置的。你可以利用 Milvus 的高级特性来优化向量的存储与搜索，更好地服务于你的业务。
 
-- 集合（Collection）: 包含一组同类实体，可以理解为关系型数据库系统中的表。
+Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，是 [LF AI](https://lfai.foundation/) 基金会的孵化项目。Milvus 的源代码被托管于 Github 之上：[Milvus · 开源的特征向量相似度搜索引擎](https://github.com/milvus-io/milvus)。如果你想加入我们的开发者社区，欢迎访问：[Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus)。
 
-- 段（Segment）: 为了能处理大规模的数据，Milvus 会将数据分段。一个集合可以包含多个段。
-
-- 分区（Partition）: 用于将集合中的数据划分为几个独立的部分。
-
-- 索引（Index）：一种加速数据检索的数据结构。
-
-- 映射（Mapping）: 一个集合中数据的组织形式，可以理解为关系型数据库系统中的 Schema。
-
-- 向量（Vector）：一种由 N 维数组成的数据类型。是事物特征的抽象，可用于表征某个事物。
-
-<div class="alert note">
-注意：目前，一个实体最多只能包含一个向量。
-</div>
-
-
-
-
-
-## 接下来你可以
-
-- 了解 [特征向量](vector.md), [向量数据库](vector_db.md) 的发展现状和 [向量检索算法](index_method.md)
-- 几分钟轻易搞定 [Milvus 安装](install_milvus.md)
+如果你对 Milvus 有任何与功能、SDK 等相关的问题，欢迎加入 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 参与讨论。

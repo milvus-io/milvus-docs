@@ -4,4 +4,4 @@ id: architecture.md
 
 # Overall architecture
 
-![Milvus architecture](milvus_arch.png)
+![Milvus architecture](../../../assets/milvus_arch.png)
