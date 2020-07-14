@@ -2,7 +2,7 @@
 id: milvus_config.md
 ---
 
-# Milvus 服务端配置
+# 服务端配置
 
 ## 配置概述
 

@@ -2,7 +2,7 @@
 id: create_drop_partition_python.md
 ---
 
-# 创建或删除分区
+# 创建、删除分区
 
 本页提供创建或删除分区的 Python 示例代码。
 

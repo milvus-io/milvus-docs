@@ -2,7 +2,7 @@
 id: connect_milvus_python.md
 ---
 
-# 连接 Milvus 服务端
+# 连接服务端
 
 该页面将向你展示如何从 Python 客户端连接 Milvus 服务端。 
 
@@ -11,7 +11,6 @@ id: connect_milvus_python.md
 <li>建议你使用<a href="https://milvus.io/tools/sizing">资源评估工具</a>来估算数据所需的硬件资源。</li>
 </div>
 
-## 连接 Milvus 服务端
 
 1. 导入 pymilvus。
 

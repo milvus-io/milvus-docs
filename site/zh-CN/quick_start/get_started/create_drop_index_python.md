@@ -2,7 +2,7 @@
 id: create_drop_index_python.md
 ---
 
-# 在 collection 中创建或删除索引
+# 创建、删除索引
 
 本页提供创建或删除索引的 Python 示例代码。
 

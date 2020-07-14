@@ -3,7 +3,7 @@ id: insert_delete_vector_python.md
 ---
 
 
-# 插入或删除向量
+# 插入、删除向量
 
 你可以在 collection 或 collection 的分区中进行向量操作，本页提供以下内容：
 

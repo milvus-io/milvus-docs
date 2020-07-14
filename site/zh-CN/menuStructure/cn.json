@@ -159,7 +159,7 @@
     },
     {
       "id": "milvus_operation.md",
-      "title": "概述",
+      "title": "基本操作概述",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -167,7 +167,7 @@
     },
     {
       "id": "connect_milvus_python.md",
-      "title": "连接 Milvus 服务端",
+      "title": "连接服务端",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -175,7 +175,7 @@
     },
     {
       "id": "create_drop_collection_python.md",
-      "title": "创建或删除 collection",
+      "title": "创建、删除集合",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -183,7 +183,7 @@
     },
     {
       "id": "create_drop_partition_python.md",
-      "title": "创建或删除分区",
+      "title": "创建、删除分区",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -191,7 +191,7 @@
     },
     {
       "id": "insert_delete_vector_python.md",
-      "title": "插入或删除向量",
+      "title": "插入、删除向量",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -199,7 +199,7 @@
     },
     {
       "id": "create_drop_index_python.md",
-      "title": "创建或删除索引",
+      "title": "创建、删除索引",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -207,7 +207,7 @@
     },
     {
       "id": "insert_delete_vector_python.md",
-      "title": "插入或删除向量",
+      "title": "插入、删除向量",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -215,7 +215,7 @@
     },
     {
       "id": "flush_python.md",
-      "title": "执行 flush 操作",
+      "title": "数据落盘",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -223,7 +223,7 @@
     },
     {
       "id": "compact_python.md",
-      "title": "执行 compact 操作",
+      "title": "数据段整理",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -248,7 +248,7 @@
     },
     {
       "id": "milvus_config.md",
-      "title": "Milvus 服务端配置",
+      "title": "服务端配置",
       "label1": "reference",
       "label2": "",
       "label3": "",
