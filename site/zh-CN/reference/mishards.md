@@ -218,9 +218,9 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
 
 若要查看服务踪迹，使用浏览器打开 [Jaeger 页面](http://127.0.0.1:16686/)。
 
-![jaegerui](https://github.com/milvus-io/docs/blob/master/assets/jaegerui.png)
+![jaegerui](../../../assets/jaegerui.png)
 
-![jaegertraces](https://github.com/milvus-io/docs/blob/master/assets/jaegertraces.png)
+![jaegertraces](../../../assets/jaegertraces.png)
 
 若要清理所有服务，请使用如下命令：
 
@@ -318,7 +318,7 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
 你可以在 [Milvus Helm Charts](https://github.com/milvus-io/milvus-helm) 找到 Milvus-Helm 支持的所有参数。
 
 1. 配置有多个读节点和多个 Mishards 分片中间件的集群。
- 
+
    我们通常配置多个节点来保证服务的可用性以及提高吞吐率。下面的例子部署的 Mishards 集群包括：2 个分片中间件、2 个读节点、1 个写节点。
 
    ```bash

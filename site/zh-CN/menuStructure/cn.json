@@ -18,24 +18,24 @@
       "order": 0
     },
     {
-      "id": "features.md",
-      "title": "主要特性",
+      "id": "architecture.md",
+      "title": "整体架构",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 1
     },
     {
-      "id": "roadmap.md",
-      "title": "路线图",
+      "id": "features.md",
+      "title": "主要特性",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 2
     },
     {
-      "id": "architecture.md",
-      "title": "整体架构",
+      "id": "roadmap.md",
+      "title": "路线图",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
@@ -206,8 +206,8 @@
       "order": 5
     },
     {
-      "id": "insert_delete_vector_python.md",
-      "title": "插入、删除向量",
+      "id": "search_vector_python.md",
+      "title": "搜索向量",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
