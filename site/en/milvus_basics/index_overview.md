@@ -17,7 +17,7 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
-For more details on index types, see [Milvus Index Types](index_types.md).
+For more details on index types, see [Milvus Index Types](index.md).
 
 ## Vector field and index
 

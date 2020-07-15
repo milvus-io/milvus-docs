@@ -4,7 +4,7 @@ id: write_ahead_log.md
 
 # Write Ahead Log
 
-![wal_structure](wal_workflow.jpg)
+![wal_structure](../../../assets/wal/wal_workflow.jpg)
 
 Write ahead log records the insertion and deletion requests into the log file, and then the background thread writes it to the system. Once the requests are successfully written to the log file, the server returns success. This function enhances data reliability and reduce client blocking.
 
@@ -19,6 +19,7 @@ The buffer size of the write ahead log is determined by the `wal.buffer_size`. T
 <div class="alert note">
 For how to set <code>wal.buffer_size</code>, see <a href="configuration.md">Milvus configuration</a>.
 </div>
+
 
 
 ## Delete old log files
