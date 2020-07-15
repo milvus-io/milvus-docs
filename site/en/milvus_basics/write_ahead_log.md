@@ -16,7 +16,7 @@ Write ahead log guarantees the atomicity of modification requests. All requests 
 
 The buffer size of the write ahead log is determined by the `wal.buffer_size`. To ensure the write performance of the write ahead log, it is recommended to set the buffer size to at least twice the size of the data imported in a single batch.
 
-<div class="alert info">
+<div class="alert note">
 For how to set <code>wal.buffer_size</code>, see <a href="configuration.md">Milvus configuration</a>.
 </div>
 
