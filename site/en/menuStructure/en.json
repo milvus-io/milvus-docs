@@ -25,14 +25,8 @@
       "label3": "",
       "order": 1
     },
-    {
-      "id": "roadmap.md",
-      "title": "Roadmap",
-      "label1": "about_milvus",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
+
+    
     {
       "id": "architecture.md",
       "title": "Architecture",
