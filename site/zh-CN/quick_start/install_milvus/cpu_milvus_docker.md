@@ -29,7 +29,7 @@ id: cpu_milvus_docker.md
 | Docker  | 19.03 或以上                             |
 
 <div class="alert note">
-请确保可用内存大于你在 <b>milvus.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。
+请确保可用内存大于你在 <b>server_config.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。
 </div>
 
 ## 确认 Docker 状态
