@@ -147,7 +147,7 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
 1. 将 Milvus 仓库复制到本地：
 
    ```shell
-   git clone https://github.com/milvus-io/milvus
+   $ git clone https://github.com/milvus-io/milvus
    ```
 
 2. 安装 Mishards 的依赖库：
@@ -308,8 +308,8 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
 
 <div class="alert note">
 <ul>
-<li>关于 PersistentVolume 的申请及管理，请参阅 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a>。</li>
-<li>关于 PersistentVolume 的访问模式，请参阅 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a>。</li>
+<li>关于 Persistent Volume 的申请及管理，请参阅 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a>。</li>
+<li>关于 Persistent Volume 的访问模式，请参阅 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a>。</li>
 </ul>
 </div>
 
@@ -318,7 +318,7 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
 你可以在 [Milvus Helm Charts](https://github.com/milvus-io/milvus-helm) 找到 Milvus-Helm 支持的所有参数。
 
 1. 配置有多个读节点和多个 Mishards 分片中间件的集群。
- 
+
    我们通常配置多个节点来保证服务的可用性以及提高吞吐率。下面的例子部署的 Mishards 集群包括：2 个分片中间件、2 个读节点、1 个写节点。
 
    ```bash
