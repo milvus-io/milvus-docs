@@ -49,7 +49,7 @@ id: storage_operation.md
 每个分段的所有相关文件都被存放在以段 ID 命名的文件夹中，比如记录实体 ID 的 UID 文件、用于标记已被删除实体的 **delete_docs** 文件，以及用于快速查找实体的布隆过滤器（**bloom-filter**）文件。
 
 <div class="alert note">
-段内数据文件请参考 <a href="concept.md#分区和段">分区和段</a> 中的示意图。
+段内数据文件请参考 <a href="storage_concept.md#分区和段">分区和段</a> 中的示意图。
 </div>
 
 ## 数据合并
