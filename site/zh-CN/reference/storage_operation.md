@@ -49,7 +49,7 @@ id: storage_operation.md
 每个分段的所有相关文件都被存放在以段 ID 命名的文件夹中，比如记录实体 ID 的 UID 文件、用于标记已被删除实体的 **delete_docs** 文件，以及用于快速查找实体的布隆过滤器（**bloom-filter**）文件。
 
 <div class="alert note">
-段内数据文件请参考 <a href="concept.md#分区和段">分区和段</a> 中的示意图。
+段内数据文件请参考 <a href="storage_concept.md#分区和段">分区和段</a> 中的示意图。
 </div>
 
 ## 数据合并
@@ -103,7 +103,7 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
     * 否则，根据每个分段的布隆过滤器判断该实体所处的分段，然后更新该分段的 **delete_docs** 以及 **bloom_filter** 文件。
 
 ## 数据段整理
- 
+
 查询一个分段时，Milvus 会将该分段的实体数据以及 **delete_docs** 文件读入内存。虽然被删除的实体不参与计算，但它们也会被读入内存。所以，一个分段中被删除的实体越多，浪费的内存资源和磁盘空间越多。为了减少此类不必要的资源消耗，Milvus 提供了数据段整理（compact）的操作，流程如下：
 
 1. 客户端调用 `compact` 接口。
@@ -112,8 +112,10 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 <div class="alert note">
 <code>compact<code> 操作会忽略被删除向量占比小于 10% 的分段。
 </div>
- 
+
+
 ## 数据读取
+
 
 1. 客户端调用 `get_entity_by_id` 接口读取原始实体数据。
 2. 服务端接收到请求后，通过布隆过滤器找到实体所在的段，返回该实体 ID 对应的数据。
