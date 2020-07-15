@@ -105,7 +105,7 @@ As the number of target vectors increases, the time spent on using CPUs to perfo
 
 IVF indexes include IVF_FLAT, IVF_SQ8 / IVF_SQ8H, and IVF_PQ. The IVF_SQ8 / IVF_SQ8H and IVF_PQ indexes perform lossy compression on vector data to reduce the disk space occupied by index files.
 
-All types of IVF index have two parameters: `nlist` and `nprobe`. See [Index Introduction](index_type.md#index introduction) for details about these parameters.
+All types of IVF index have two parameters: `nlist` and `nprobe`. See [Milvus Indexes](index_type.md#Milvus-Indexes) for details about these parameters.
 
 You can use the following methods to estimate the amount of calculation when using IVF indexes for queries.
 
