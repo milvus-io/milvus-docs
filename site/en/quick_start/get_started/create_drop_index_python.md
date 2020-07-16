@@ -2,44 +2,49 @@
 id: create_drop_index_python.md
 ---
 
-# 创建、删除索引
+# Create and Drop Index
 
-本页提供创建或删除索引的 Python 示例代码。
+This article provides Python sample codes for creating or droping indexes.
 
-## 创建索引
+## Create Index
 
-目前，一个集合只支持一种索引类型，切换索引类型会自动删除旧的索引文件。在创建其它索引前，FLAT作为集合的默认索引类型。
-> 注意：`create_index()` 会指定该集合的索引类型，并同步为之前插入的数据建立索引，后续插入的数据在大小达到 `index_file_size` 时，索引会在后台自动建立。在实际生产环境中，如果是流式数据，建议在插入向量之前先创建索引，以便后续系统自动建立；如果是静态数据，建议所有数据导入后再一次性创建。更多索引用法请参考 [索引示例程序](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)。
+Currently, a collection only supports one index type. When you change the index type of a collection, Milvus automatically deletes the old index file. Before creating other indexes, a collection uses FLAT as the default index type.
 
-1. 准备创建索引所需参数(以 `IVF_FLAT` 为例)。索引参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
+<div class="alert note">
+<code>create_index()</code> specifies the index type of a collection and synchronously creates indexes for the previously inserted data. When the size of the subsequently inserted data reaches the <code>index_file_size</code>, Milvus automatically creates indexes in the background. For streaming data, it is recommended to create indexes before inserting the vector so that the system can automatically build indexes for the next data. For static data, it is recommended to import all the data at first and then create indexes. See the <a href="https://github.com/milvus-io/pymilvus/tree/master/examples/indexes">index sample program</a> for details about using index.
+</div>
+
+1. Prepare the parameters needed to create indexes (take `IVF_FLAT` as an example). The index parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 
    ```python
    # Prepare index param
    >>> ivf_param = {'nlist': 16384}
    ```
 
-   > 注意：对于不同的索引类型，创建索引所需参数也有区别。所有的索引参数都**必须赋值**。
+   <div class="alert note">
+   Different index types requires different parameters to create indexes. You must <b>assign values</b> to all index parameters.
+   </div>
 
-   | 索引类型                          | 索引参数                                                                                                                                                                                                                                                                                                                                             | 示例参数                                                                | 取值范围                                                                                                                              |
-   | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-   | `IVFLAT` / `SQ8`/ `SQ8H` | `nlist`：建立索引时对向量数据文件进行聚类运算的分簇数。索引文件会记录聚类运算后的结果，包括索引的类型，每个簇的中心向量，以及每个簇分别有哪些向量，以便于后期搜索。                                                                                                                                                                                  | `{nlist: 16384}`                                                        | `nlist`：[1, 999999]                                                                                                                  |
-   | `IVFPQ`                           | `nlist`：建立索引时对向量数据文件进行聚类运算的分簇数。索引文件会记录聚类运算后的结果，包括索引的类型，每个簇的中心向量，以及每个簇分别有哪些向量，以便于后期搜索。 </br></br> `m`：建立索引时数据的压缩率。m 越小压缩率越高。                                                                                                                       | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} 中的值                               |
-   | `NSG`                             | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，但速度也越慢。建议 `search_length` 小于 `candidate_pool` 的值，取值范围建议在 [40, 80]。</br></br> `out_degree`：值越大，则占用内存越大，搜索性能也越好。</br></br> `candidate_pool`：影响索引质量，建议取值范围 [200,500]。</br> `knng`：影响索引质量，建议取值为 `out_degree` + 20. | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` | `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300] |
-   | `HNSW`                            | `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。 </br></br> `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。                                                                                                             | `{M: 16, efConstruction:500}`                                           | `M` :[5, 48]</br>`efConstruction` :[100, 500]                                                                                         |
-   | `ANNOY`                           | `n_trees`: 影响建立索引的时间和索引大小。值越大，搜索结果越精确，但索引越大。                                                                                                                                                                                                                                                                        | `{"n_trees": 8}`                                                      | [1, 1024]                                                                                                                            |
+   | Index Type | Index Parameter | Exmaple Parameter | Range |
+   | ---------- | --------------- | ----------------- | ----- |
+   | `IVFLAT` / `SQ8`/ `SQ8H` | `nlist`: The number of clusters to perform clustering operations on vector data files during index building. To facilitate later search, the index file records the results of the clustering operation, including the type of index, the center vector of each cluster, and the vectors in cluster.| `{nlist: 16384}` | `nlist`: [1, 999999] |
+   | `IVFPQ`                           | `nlist`: The number of clusters to perform clustering operations on vector data files during index building. To facilitate later search, the index file records the results of the clustering operation, including the type of index, the center vector of each cluster, and the vectors in cluster. </br></br> `m`: The compression rate during index building. The smaller the `m`, the higher the compression rate. | `{nlist: 16384, m: 12}` | `nlist`: [1, 999999] </br></br> `m`: a value in {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1}                               |
+   | `NSG`                             | `search_length`: The larger the value, the more nodes searched in the graph, the higher the recall rate, but the slower the speed. `search_length` should be less than `candidate_pool` and within [40, 80].</br></br> `out_degree`: The larger the value, the greater the memory usage and the better the search performance.</br></br> `candidate_pool`: The value affects the index quality and should be within [200,500].</br></br> `knng`: The value affects the index quality and should equal to `out_degree` + 20. | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` | `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300] |
+   | `HNSW`                            | `M`: The value affects the build time and index quality. The larger the `M`, the longer it takes to build indexes, the higher the index quality, and the greater the memory footprint.</br></br> `efConstruction`: The value affects the build time and index quality. The larger the `efConstruction`, the longer it takes to build indexes, the higher the index quality, and the larger the memory footprint.                                                              | `{M: 16, efConstruction:500}`                                           | `M`: [5, 48]</br>`efConstruction`: [100, 500]                                                                                         |
+   | `ANNOY`                           | `n_trees`: The value affects the index building time and index size. The larger the value, the more accurate the search results, but the larger the index file.                   | `{"n_trees": 8}`                                                      | [1, 1024]                       |
 
-   关于详细信息请参考 [Milvus 索引类型](index.md)。
+   See [Milvus Index Type](index.md) for details.
 
-2. 为 collection 创建索引。
+2. Create index for the collection:
 
    ```python
    # Create index
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
-## 删除索引
+## Drop index
 
-删除索引后，集合再次使用默认索引类型FLAT。
+After deleting the index, the collection uses the default index type FLAT again.
 
 ```python
 >>> milvus.drop_index('test01')

@@ -15,7 +15,7 @@ id: insert_delete_vector_python.md
 ## 在 collection 中插入向量
 <a name="insert-vector-to-collection"></a>
 
-1. 随机生成 20 个 256 维的向量。
+1. 随机生成 20 个 256 维的向量：
 
    ```python
    >>> import random

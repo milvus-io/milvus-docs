@@ -2,33 +2,35 @@
 id: search_vector_python.md
 ---
 
-# 搜索向量
+# Search Vector
 
-Milvus 支持在 collection 或分区中搜索向量。
+Milvus supports searching vectors in a collection or partition.
 
-## 在 collection 中搜索向量
+## Search vectors in a collection
 
-1. 创建搜索参数。搜索参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
+1. Create search parameters. The search parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 
    ```python
    >>> search_param = {'nprobe': 16}
    ```
 
    <div class="alert note">
-   对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。
+   Different index types requires different search parameters. You must <b>assign values</b> to all search parameters.
    </div>
 
-   | 索引类型                             | 搜索参数                                                                                    | 示例参数              | 取值范围       |
-   | ------------------------------------ | ------------------------------------------------------------------------------------------- | --------------------- | -------------- |
+   | Index Type | Search Parameter | Exmaple Parameter | Range |
+   | ---------- | --------------- | ----------------- | ----- |
    | `FLAT` | - | | - |
-   | `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：查询时所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，速度越慢。         | `{nprobe: 32}`         | [1, `nlist`]   |
-   | `NSG`                                | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，速度越慢。                         | `{search_length:100}` | [10, 300]      |
-   | `HNSW`                               | `ef`：值越大，则在索引中搜索的数据越多，召回率越高，速度越慢。                                    | `{ef: 64}`            | [`topk`, 4096] |
-   | `ANNOY`                              | `search_k`: 影响搜索性能。值越大，搜索结果越精确，但搜索时间越长。</br>-1表示默认值，取总数据量的5%。 | `{"search_k": -1}`    | {-1} ∪ [topk, ∞) |
+   | `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`: The number of vector classes involved in the query. `nprobe` affects query accuracy. The larger the value, the higher the accuracy and the slower the speed.         | `{nprobe: 32}`         | [1, `nlist`]   |
+   | `NSG`                                | `search_length`: The larger the value, the more nodes to search in the graph, the higher the recall rate, and the slower the speed.                         | `{search_length:100}` | [10, 300]      |
+   | `HNSW`                               | `ef`: The larger the value, the more data to search in the index, the higher the recall rate, and the slower the speed.                                    | `{ef: 64}`            | [`topk`, 4096] |
+   | `ANNOY`                              | `search_k`: The value affects search performance. The larger the value, the more accurate the search results, but the longer the search time.</br>-1 represents the default value, taking 5% of the total data. | `{"search_k": -1}`    | {-1} ∪ [topk, ∞) |
 
-   > 注意：`top_k` 是与目标向量最相似的 k 条向量，在搜索时定义。`top_k` 的取值范围是 `(0, 2048]`。
+   <div class="alert note">
+   <code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search. The range of <code>top_k</code> is <code>(0, 2048]</code>.
+   </div>
 
-2. 创建随机向量作为 `query_records` 进行搜索。
+2. Create random vectors as `query_records` to search:
 
    ```python
    # create 5 vectors of 256-dimension
@@ -36,7 +38,7 @@ Milvus 支持在 collection 或分区中搜索向量。
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
 
-## 在分区中搜索向量
+## Search vectors in a partition
 
 ```python
 # create 5 vectors of 256-dimension
@@ -45,5 +47,5 @@ Milvus 支持在 collection 或分区中搜索向量。
 ```
 
 <div class="alert note">
-如果你不指定 <code>partition_tags</code>， Milvus 会在整个 collection 中搜索。
+If you do not specify the <code>partition_tags</code>, Milvus searches similar vectors in the entire collection.
 </div>

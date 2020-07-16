@@ -2,20 +2,20 @@
 id: create_drop_partition_python.md
 ---
 
-# 创建、删除分区
+# Create and Drop Partition
 
-本页提供创建或删除分区的 Python 示例代码。
+This article provides Python sample codes for creating or droping partitions.
 
-## 创建分区
+## Create partition
 
-你可以通过标签将 collection 分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个 collection。
+To improve search efficiency, you can divide a collection into several partitions by tags. In fact, each partition is a collection.
 
 ```python
 # Create partition
 >>> milvus.create_partition('test01', 'tag01')
 ```
 
-## 删除分区
+## Drop partition
 
 ```python
 >>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')

@@ -4,7 +4,7 @@ id: create_drop_collection_python.md
 
 # Create and Drop Collection
 
-This article provides Python sample codes for creating or deleting collections.
+This article provides Python sample codes for creating or droping collections.
 
 <div class="alert note">
 See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example program</a> for more detailed usage.
