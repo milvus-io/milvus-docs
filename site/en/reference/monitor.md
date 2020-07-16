@@ -68,7 +68,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    $ ./prometheus --version
    ```
 
-   <div class="alert info">
+   <div class="alert note">
    You can add the path to Prometheus to <code>PATH</code>. This makes it easy to start Prometheus from any shell.
    </div>
 

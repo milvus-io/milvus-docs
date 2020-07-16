@@ -45,5 +45,5 @@ Milvus 支持在 collection 或分区中搜索向量。
 ```
 
 <div class="alert note">
-如果你不指定 `partition_tags`， Milvus 会在整个 collection 中搜索。
+如果你不指定 <code>partition_tags</code>， Milvus 会在整个 collection 中搜索。
 </div>
