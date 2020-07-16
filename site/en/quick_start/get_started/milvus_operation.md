@@ -13,6 +13,6 @@ In Get Started, we take you through the following basic operations of the Milvus
 - [Create and Drop Index](create_drop_index_python.md)
 - [Search Vector](search_vector_python.md)
 - [Data Flushing](flush_python.md)
-- [Data Flushing](compact_python.md)
+- [Compact Segments](compact_python.md)
 - [Close Client](close_client_python.md)
 
