@@ -147,7 +147,7 @@
     },
     {
       "id": "connect_milvus_python.md",
-      "title": "Connect to A Server",
+      "title": "Connect to the Server",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -155,7 +155,7 @@
     },
     {
       "id": "create_drop_collection_python.md",
-      "title": "Create and Drop A Collection",
+      "title": "Create and Drop a Collection",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -163,7 +163,7 @@
     },
     {
       "id": "create_drop_partition_python.md",
-      "title": "Create and Drop A Partition",
+      "title": "Create and Drop a Partition",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "create_drop_index_python.md",
-      "title": "Create and Drop An Index",
+      "title": "Create and Drop an Index",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -211,7 +211,7 @@
     },
     {
       "id": "close_client_python.md",
-      "title": "Close A Client",
+      "title": "Close the Client",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",

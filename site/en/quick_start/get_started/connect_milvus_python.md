@@ -2,7 +2,7 @@
 id: connect_milvus_python.md
 ---
 
-# Connect to A Server
+# Connect to the Server
 
 This article decribes how to connect to a Milvus server from a Python client.
 

@@ -2,7 +2,7 @@
 id: create_drop_index_python.md
 ---
 
-# Create and Drop An Index
+# Create and Drop an Index
 
 This article provides Python sample codes for creating or droping indexes.
 

@@ -2,7 +2,7 @@
 id: create_drop_collection_python.md
 ---
 
-# Create and Drop A Collection
+# Create and Drop a Collection
 
 This article provides Python sample codes for creating or droping collections.
 
