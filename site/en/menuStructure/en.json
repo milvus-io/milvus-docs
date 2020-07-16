@@ -130,7 +130,7 @@
     },
     {
       "id": "get_started",
-      "title": "Milvus Basic Operations",
+      "title": "Basic Milvus Operations",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
@@ -147,7 +147,7 @@
     },
     {
       "id": "connect_milvus_python.md",
-      "title": "Connect to Server",
+      "title": "Connect to A Server",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -155,7 +155,7 @@
     },
     {
       "id": "create_drop_collection_python.md",
-      "title": "Create and Drop Collection",
+      "title": "Create and Drop A Collection",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -163,7 +163,7 @@
     },
     {
       "id": "create_drop_partition_python.md",
-      "title": "Create and Drop Partition",
+      "title": "Create and Drop A Partition",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -171,7 +171,7 @@
     },
     {
       "id": "insert_delete_vector_python.md",
-      "title": "Insert and Delete Vector",
+      "title": "Insert and Delete Vectors",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "create_drop_index_python.md",
-      "title": "Create and Drop Index",
+      "title": "Create and Drop An Index",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -187,7 +187,7 @@
     },
     {
       "id": "search_vector_python.md",
-      "title": "Search Vector",
+      "title": "Search Vectors",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -211,7 +211,7 @@
     },
     {
       "id": "close_client_python.md",
-      "title": "Close Client",
+      "title": "Close A Client",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",

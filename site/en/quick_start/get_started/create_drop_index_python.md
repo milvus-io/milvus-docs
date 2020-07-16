@@ -2,11 +2,11 @@
 id: create_drop_index_python.md
 ---
 
-# Create and Drop Index
+# Create and Drop An Index
 
 This article provides Python sample codes for creating or droping indexes.
 
-## Create Index
+## Create an index
 
 Currently, a collection only supports one index type. When you change the index type of a collection, Milvus automatically deletes the old index file. Before creating other indexes, a collection uses FLAT as the default index type.
 
@@ -42,7 +42,7 @@ Currently, a collection only supports one index type. When you change the index 
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
-## Drop index
+## Drop an index
 
 After deleting the index, the collection uses the default index type FLAT again.
 

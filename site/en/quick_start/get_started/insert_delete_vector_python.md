@@ -3,7 +3,7 @@ id: insert_delete_vector_python.md
 ---
 
 
-# Insert and Delete Vector
+# Insert and Delete Vectors
 
 You can perform vector operations on collections or partitions. This article talks about the following topics:
 

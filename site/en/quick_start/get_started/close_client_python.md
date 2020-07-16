@@ -2,7 +2,7 @@
 id: close_client_python.md
 ---
 
-# Close Client
+# Close A Client
 
 This article describes how to close a Python client.
 

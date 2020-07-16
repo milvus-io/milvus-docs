@@ -2,7 +2,7 @@
 id: search_vector_python.md
 ---
 
-# Search Vector
+# Search Vectors
 
 Milvus supports searching vectors in a collection or partition.
 
@@ -47,5 +47,5 @@ Milvus supports searching vectors in a collection or partition.
 ```
 
 <div class="alert note">
-If you do not specify the <code>partition_tags</code>, Milvus searches similar vectors in the entire collection.
+If you do not specify <code>partition_tags</code>, Milvus searches similar vectors in the entire collection.
 </div>
