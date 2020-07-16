@@ -43,7 +43,7 @@ You can perform vector operations on collections or partitions. This article tal
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-## Delete vectors by IDs
+## Delete vectors by ID
 <a name="delete-vector"></a>
 
 Suppose your collection contains the following vector IDs:
