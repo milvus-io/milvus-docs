@@ -26,7 +26,10 @@ const checkSameId = (ids, prefix = "") => {
   if (sameArr.size > 0) {
     let warning = "";
     sameArr.forEach(
-      (v) => (warning += `${prefix} - id: ${v || `\'\'`} is duplicate. \n`)
+      (v) =>
+        (warning += `Menustructure ${prefix}.json - id: ${
+          v || `\'\'`
+        } is duplicate. \n`)
     );
     throw new Error(warning);
   }
@@ -110,7 +113,6 @@ const checkInnerLink = (paths, validMds) => {
     const innerLinks = match
       ? match.filter((v) => v && v.includes(".md") && !v.includes("http"))
       : [];
-    console.log(match);
     innerLinks.forEach((link) => {
       let ignoreAnchorLink = link.split("#")[0];
       if (!validMds.includes(ignoreAnchorLink)) {
