@@ -16,7 +16,7 @@ id: write_ahead_log.md
 
 预写式日志使用的缓冲区大小由系统参数 `wal.buffer_size` 决定。为保证预写式日志的写入性能，建议把缓冲区大小设为单批次导入数据量大小的 2 倍以上。
 
-<div class="alert info">
+<div class="alert note">
     关于如何设置系统参数 <code>wal.buffer_size</code>，请见 <a href="milvus_config.md">Milvus 配置</a>。
 </div>
 
