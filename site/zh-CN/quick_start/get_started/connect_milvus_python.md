@@ -12,7 +12,7 @@ id: connect_milvus_python.md
 </div>
 
 
-1. 导入 pymilvus。
+1. 导入 pymilvus：
 
    ```python
    # Import pymilvus
@@ -27,7 +27,7 @@ id: connect_milvus_python.md
    ```
 
    <div class="alert note">
-   在上面的代码中，`host` 和 `port` 都使用了默认值。你可以将其更改为自己设定的 IP 地址和端口。
+   在上面的代码中，<code>host</code> 和 <code>port</code> 都使用了默认值。你可以将其更改为自己设定的 IP 地址和端口。
    </div>
 
    ```python
