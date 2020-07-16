@@ -2,9 +2,9 @@
 id: close_client_python.md
 ---
 
-# 关闭客户端
+# Close Client
 
-本页介绍如何关闭 Python 客户端。
+This article describes how to close a Python client.
 
 ```python
 >>> milvus.close()
