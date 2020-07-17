@@ -423,7 +423,7 @@
       "order": 0
     },
     {
-      "id": "",
+      "id": "em",
       "title": "Milvus Enterprise Manager",
       "label1": "developer_tools",
       "label2": "",
@@ -432,7 +432,7 @@
       "outLink": "https://zilliz.com/products/em/"
     },
     {
-      "id": "",
+      "id": "sizing",
       "title": "Milvus Sizing Tool",
       "label1": "developer_tools",
       "label2": "",
