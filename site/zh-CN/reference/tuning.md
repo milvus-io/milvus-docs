@@ -116,7 +116,7 @@ IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可�
 
 - HNSW / RNSG / ANNOY 索引
 
-HNSW、RNSG、ANNOY 的索引参数对查询性能的影响较为复杂，建议参考 [索引介绍](index_type.md#索引介绍)。
+HNSW、RNSG、ANNOY 的索引参数对查询性能的影响较为复杂，建议参考 [索引介绍](index.md#索引介绍)。
 
 ### 其他
 
