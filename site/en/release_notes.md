@@ -370,7 +370,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 - **Term updates**
 
-  Starting from Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
+  As of Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
 
 #### Fixed issues
 
