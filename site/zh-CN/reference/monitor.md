@@ -188,7 +188,7 @@ docker run -i -p 3000:3000 grafana/grafana
    | 名称    | 值                                          |
    | :------ | :------------------------------------------ |
    | Name    | Prometheus                                  |
-   | Default | True                                        |
+   | Default | `True`                                        |
    | URL     | http://<提供 Prometheus 服务的主机 IP>:9090 |
    | Access  | Browser                                     |
 

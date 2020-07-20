@@ -192,7 +192,7 @@ Grafana's default username and password are both "admin". You can create a Grafa
    | Field   | Definition                                             |
    | :------ | :----------------------------------------------------- |
    | Name    | Prometheus                                             |
-   | Default | True                                                   |
+   | Default | `True`                                                   |
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
