@@ -12,15 +12,15 @@ Before using Milvus for production, please check the following configurations to
 
 Refer to [Data Management](data_manage.md) for more information.
 
-### Move data storage locations out of the `tmp` folder
+### Move data storage locations out of the tmp folder
 
-Move data storage locations out of the `tmp` folder:
+Move data storage locations out of the **tmp** folder:
 
-- `storage_config`
-- `primary_path`
-- `wal_config`
-- `wal_path`
-- `log_path`
+- **storage_config**
+- **primary_path**
+- **wal_config**
+- **wal_path**
+- **log_path**
 
 ## Performance improvement
 

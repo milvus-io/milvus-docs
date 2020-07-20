@@ -45,7 +45,7 @@ Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 G
 **CPU/GPU 温度过高**
 
 - 报警规则：当 CPU/GPU 温度超过 80 摄氏度时发送报警信息。
-- 如何判断：查看监控仪表盘上的 `CPU Temperature` 和  `GPU Temperature` 两个指标。
+- 如何判断：查看监控仪表盘上的 **CPU Temperature** 和  **GPU Temperature** 两个指标。
 
 ## 使用 Prometheus 和 Alertmanager
 
@@ -218,7 +218,7 @@ docker run -i -p 3000:3000 grafana/grafana
     ./alertmanager --config.file=alertmanager.yml
     ```
 
-5. 通过浏览器登录 `http://<提供 Alertmanager 服务的主机>:9093`，进入 Alertmanager 用户交互页面。你可以在此定义[报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
+5. 通过浏览器登录 `http://<提供 Alertmanager 服务的主机>:9093`，进入 Alertmanager 用户交互页面。你可以在此定义 [报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
 
 ## 相关阅读
 

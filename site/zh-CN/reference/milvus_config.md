@@ -10,12 +10,12 @@ id: milvus_config.md
 
 #### Milvus 文件结构
 
-成功启动 Milvus 服务后，你可以在 `home/$USER/milvus` 的路径下看到 Milvus 的文件夹。其中包含以下文件：
+成功启动 Milvus 服务后，你可以在 **home/$USER/milvus** 的路径下看到 Milvus 的文件夹。其中包含以下文件：
 
-- `milvus/db`（数据库存储）
-- `milvus/logs`（日志存储）
-- `milvus/conf`（设置文件）
-  - `server_config.yaml`（服务设置）
+- **milvus/db**（数据库存储）
+- **milvus/logs**（日志存储）
+- **milvus/conf**（设置文件）
+  - **server_config.yaml**（服务设置）
 
 ## 配置修改 
 
@@ -37,7 +37,7 @@ logs:
 
 ### 运行时修改
 
-你可以使用 Milvus 客户端对 `server_config.yaml` 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
+你可以使用 Milvus 客户端对 **server_config.yaml** 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
 
@@ -75,7 +75,7 @@ logs:
 | 参数             | 说明                                                         | 类型                                                       | 默认值                                                      |
 | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `timezone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，可以使用 UTC+8 来代表中国标准时间。 | Timezone | `UTC+8` |
-| `meta_uri` | 元数据存储的 URI。可以使用 SQLite（Milvus 单机版本）或者 MySQL（Milvus 分布式版本）来存储元数据。URI 格式为 dialect://username:password@host:port/database。其中，dialect 可以是 sqlite 或者 mysql，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
+| `meta_uri` | 元数据存储的 URI。可以使用 SQLite（Milvus 单机版本）或者 MySQL（Milvus 分布式版本）来存储元数据。URI 格式为 `dialect://username:password@host:port/database`。其中，`dialect` 可以是 `sqlite` 或者 `mysql`，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
 
 </div>
 

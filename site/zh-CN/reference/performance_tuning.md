@@ -10,17 +10,17 @@ id: performance_tuning.md
 
 ### 使用 MySQL 作为元数据管理服务
 
-详细信息请参考[数据管理](data_manage.md)。
+详细信息请参考 [数据管理](data_manage.md)。
 
-### 将数据存储目录移动到 `tmp` 以外的目录
+### 将数据存储目录移动到 tmp 以外的目录
 
-把服务段配置文件中的以下目录移动到 `tmp` 以外的目录
+把服务段配置文件中的以下目录移动到 **tmp** 以外的目录
 
-- `storage_config`
-- `primary_path`
-- `wal_config`
-- `wal_path`
-- `log_path`
+- **storage_config**
+- **primary_path**
+- **wal_config**
+- **wal_path**
+- **log_path**
 
 ## 性能调优
 
@@ -31,7 +31,7 @@ id: performance_tuning.md
 - `preload_table`: 建议在内存允许的情况下尽可能多地加载 collection。这样在每次重启服务端之后，数据都会先载入到 Milvus 中，可以解决第一次搜索耗时很长的问题。
 - `buffer_size`: 影响插入性能。建议插入数据量为 `buffer_size` 的一半。
 - `insert_buffer_size`：
-  - （如果 WAL 开启了）建议 `insert_buffer_size` 大于 `wal_buffer_size` 的一半 且插入数据量小于 `wal_buffer_size`的一半。
+  - （如果 WAL 开启了）建议 `insert_buffer_size` 大于 `wal_buffer_size` 的一半 且插入数据量小于 `wal_buffer_size` 的一半。
   - （如果 WAL 没有开启）建议插入的数据量小于 `insert_buffer_size`。
 - `cpu_cache_capacity`：建议在内存允许的情况下尽可能调大。这样有助于确保数据全部在内存中，减少内存和磁盘的数据交换，从而提高查询性能。
 - `use_blas_threhold`: 影响的不同查询批量使用的距离计算函数。nq < `use_blas_threshold` 时使用 CPU 指令集进行查询，否则使用的是 OpenBLAS 来计算距离。大多数场景下，使用 CPU 指令集进行查询的性能会更好。
