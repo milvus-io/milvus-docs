@@ -227,8 +227,8 @@ A segment is a data file that Milvus automatically creates by merging inserted v
    |  `FLAT` | - | | - |
    |  `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
    |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
-   |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
-   | `ANNOY`                 |  `search_k`: Affects the search performance. A larger value will give more accurate results, but will take longer time to return.</br>-1 indicates the default value which is 5% of the total data amount.  | `{"search_k": -1}`  | {-1} ∪ [topk, ∞) |
+   |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`top_k`, 4096]   |
+   | `ANNOY`                 |  `search_k`: Affects the search performance. A larger value will give more accurate results, but will take longer time to return.</br>-1 indicates the default value which is 5% of the total data amount.  | `{"search_k": -1}`  | {-1} ∪ [`top_k`, ∞) |
 
    <div class="alert note">
    <code>top_k</code> stands for the number of vectors that are the most similar to the target vector. <code>top_k</code> is defined during search. The value range of <code>top_k</code> is (0, 2048].

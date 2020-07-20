@@ -116,7 +116,7 @@ $ docker logs <container ID>
 
 #### Why there are vectors with `-1` as IDs in my search result?
 
-When the number of vectors in the dataset is less than `topk`, Milvus automatically adds vectors with `-1` as IDs to the search result to ensure that the search result contains `topk` elements.
+When the number of vectors in the dataset is less than `top_k`, Milvus automatically adds vectors with `-1` as IDs to the search result to ensure that the search result contains `top_k` elements.
 
 #### Why does my Milvus return "Illegal instruction" during startup? 
 
