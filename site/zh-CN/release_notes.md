@@ -4,6 +4,32 @@ id: release_notes.md
 
 # 发版说明
 
+## v0.10.1
+
+**发布时间**：2020-7-20
+
+#### 版本兼容
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.1          | 0.2.14             | 0.8.3            | 0.4.3          |
+
+#### 问题修复
+
+- 修复了一个查询结果与查询行数不匹配的问题。[#2578](https://github.com/milvus-io/milvus/issues/2578)
+- 修复了一个 GPU 上 IVF_PQ 索引无法支持 IP 的问题。[#2585](https://github.com/milvus-io/milvus/issues/2585)
+- 修复了一些老的 CPU 上运行时出现 illegal instruction 的问题。[#2598](https://github.com/milvus-io/milvus/issues/2598)
+- 调整了 HNSW 参数范围。[#2637](https://github.com/milvus-io/milvus/issues/2637)
+- 修复了一个构建索引可能会导致 Milvus 进程崩溃退出的问题。[#2642](https://github.com/milvus-io/milvus/issues/2642)
+- 修复了一个 ANNOY 索引默认参数与文档不对应的问题。[#2649](https://github.com/milvus-io/milvus/issues/2649)
+- 修复了一个压力测试下出现的 Milvus 无响应的问题。[#2692](https://github.com/milvus-io/milvus/issues/2692)
+- 修复了一个 HTTP 接口返回向量精度错误的问题。[#2752](https://github.com/milvus-io/milvus/issues/2752)
+- 修复了一个 GPU 版本中 `nprobe` 上限错误的问题。[#2767](https://github.com/milvus-io/milvus/issues/2767)
+- 修复了一个构建索引后可能会导致集合中向量条数变化的问题。[#2768](https://github.com/milvus-io/milvus/issues/2768)
+
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) 了解更多已修复问题。
+
 ## v0.10.0
 
 **发布时间**：2020-6-15
