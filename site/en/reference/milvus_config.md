@@ -178,7 +178,7 @@ In Milvus, index building and search computation are separate processes, which c
 | `port`           | Port of Prometheus Pushgateway. Range: [1025, 65534].                       | Integer | `9091`       |
 </div>
 
-<div class="alert info" id="size">
+<div class="alert note" id="size">
 In the Milvus configuration file, space size should be written in the format of "number+unit", such as "4GB".
 <ul>
 <li>Do not add a space between the number and its unit.</li>

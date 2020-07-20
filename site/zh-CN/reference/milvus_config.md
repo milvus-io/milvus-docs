@@ -185,7 +185,7 @@ logs:
 
 </div>
 
-<div class="alert info" id="size">
+<div class="alert note" id="size">
 在 Milvus 配置文件中，空间大小的格式为“数字+单位”，如“4GB”。
 <ul>
 <li>数字和单位之间没有空格。</li>
