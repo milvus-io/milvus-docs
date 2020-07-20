@@ -27,6 +27,7 @@ jobs:
           sudo npm install md2md -g
           goover
           rm -rf doc_from/*
+          rm check-link.js
           mv doc_to site
       - name: Delete And Push
         run: |
