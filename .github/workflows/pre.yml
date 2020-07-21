@@ -2,7 +2,7 @@ name: dev
 
 on:
   release:
-    types: [prereleased]
+    types: [released]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,7 +27,9 @@ jobs:
           sudo npm install md2md -g
           goover
           rm -rf doc_from/*
+          rm check-link.js
           mv doc_to site
+
       - name: Delete And Push
         run: |
           sudo apt-get update
@@ -36,12 +38,11 @@ jobs:
           git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
+          cp ./milvus-docs/version.json ./target
           cd target
-          git checkout -b preview
-          rm -rf *
-          cd ../
-          cp -avr ./milvus-docs/** ./target/
-          cd target
+          rm -rf preview
+          mkdir preview
+          cp -avr ../milvus-docs/** ./preview
           git add .
-          git commit -m "Preview in http://milvus-io.azurewebsites.net/"
-          git push -f origin preview
+          git commit -m "Release new docs  preview"
+          git push -f origin master
