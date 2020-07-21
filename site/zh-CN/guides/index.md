@@ -8,7 +8,7 @@ sidebar_label: Index Types
 
 ## 索引概览
 
-> 注意：索引的实际构建方式（使用 CPU 或者 GPU）不影响索引本身对 CPU 或 GPU 搜索的支持。
+> 注意：对于那些 CPU 和 GPU 同时支持的索引，Milvus 支持在创建和搜索时使用不同的设备。比如，你可以在 GPU 上创建索引后再在 CPU 上查询。
 
 ### 仅支持 CPU 的 Milvus 包含的索引类型
 

@@ -8,7 +8,7 @@ sidebar_label: Index Types
 
 ## Index Overview
 
-> Note: How an index is built (whether with CPU or GPU) does not affect its support of CPU search or GPU search.
+> Note: For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU. 
 
 ### Index types in CPU-only Milvus
 
