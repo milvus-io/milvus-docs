@@ -119,8 +119,8 @@ $ docker logs <milvus container id>
   
 - If you're ready to run Milvus in production:
 
-  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
-  - Tune Milvus performance through [configuration](milvus_config.md)
+  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance.
+  - Tune Milvus performance through [configuration](milvus_config.md).
   
 - If you want to run Milvus on machines without an Nvidia GPU:
   

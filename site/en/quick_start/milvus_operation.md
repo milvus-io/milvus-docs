@@ -97,7 +97,7 @@ Use `show_partitions()` to verify whether the partition is created.
 Currently, a collection only supports one index type, and switching the index type will automatically delete the old index files. Before creating another index, FLAT is used as the default index type.
 > Note: `create_index` will specify the index type of the collection, and synchronously create an index for the previously inserted data. When the size of the subsequently inserted data reaches `index_file_size`, the index will be automatically created in the background. In the production environment, if it is streaming data, it is recommended to call `create_index` before inserting the vector so that the systems can automatically build it later; if it is static data, it is recommended to call `create_index` once after importing all the data. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
-1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters is a JSON string and represented by dict in Python.
+1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters are a JSON string and represented by dict in Python.
 
    ```python
    # Prepare index param
@@ -141,7 +141,7 @@ Currently, a collection only supports one index type, and switching the index ty
    >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
-2. Insert the list of vectors. If you do not specify vector ids, Milvus automatically generates IDs for the vectors.
+2. Insert the list of vectors. If you do not specify vector ids, Milvus will automatically generate IDs for the vectors.
 
    ```python
    # Insert vectors
@@ -236,7 +236,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
-> Note: If you do not specify `partition_tags`, Milvus searches the whole collection.
+> Note: If you do not specify `partition_tags`, Milvus will search the whole collection.
 
 ## Close client
 
