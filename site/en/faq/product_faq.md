@@ -31,11 +31,11 @@ No. Milvus 0.7.0 cannot directly use data files from previous versions of Milvus
 
 #### Does Milvus 0.7.0 support server configuration files from previous versions of Milvus?
 
-No, Milvus 0.7.0 does not support server configuration files (`server_config.yaml`) from previous versions of Milvus.
+No. Milvus 0.7.0 does not support server configuration files (`server_config.yaml`) from previous versions of Milvus.
 
 #### Does Milvus 0.7.0 support applications built by clients from previous versions of Milvus?
 
-No. The client interface in Milvus 0.7.0 have been updated. Applications based on previous versions of Milvus must also be updated before they can support Milvus 0.7.0.
+No. The client interface in Milvus 0.7.0 has been updated. Applications based on previous versions of Milvus must also be updated before they can support Milvus 0.7.0.
 
 #### What is Milvus?
 
@@ -43,7 +43,7 @@ Milvus is an open source similarity search engine for massive-scale feature vect
 
 #### When is Milvus a good choice?
 
-Milvus is best suited for applications that require reliable and efficient similarity search of large-scale vectors, and millisecond response times, regardless of scale. 
+Milvus is best suited for applications that require reliable and efficient similarity search of large-scale vectors, and millisecond response time, regardless of scale. 
 
 Milvus returns single-row reads in 0.6 ms or less and single-row writes in approximately 0.03 ms, and supports a variety of indexes for optimizing query performance. It can also be used in hybrid search for both structured and unstructured data.
 
