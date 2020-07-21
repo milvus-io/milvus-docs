@@ -37,7 +37,9 @@ where A and B are vectors, `||A||` and `||B||` are the norms of A and B, and cos
 
 IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
-> Note: If the vectors are normalized, IP is equivalent to cosine similarity. Thus, Milvus does not provide a metric for cosine similarity.
+<div class="alert note">
+If the vectors are normalized, IP is equivalent to cosine similarity. Thus, Milvus does not provide a metric for cosine similarity.
+</div>
 
 ### Jaccard distance
 

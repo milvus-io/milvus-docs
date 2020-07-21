@@ -82,7 +82,7 @@ Mishards 适合大数据规模下的搜索场景。那么，怎么判断数据�
 | `DISCOVERY_STATIC_PORT`               | 否       | Integer | `19530`  | `DISCOVERY_CLASS_NAME` 为 `static` 时，定义服务地址监听端口。 |
 | `DISCOVERY_PLUGIN_PATH`               | 否       | String  | ` `      | 用户自定义服务发现插件的搜索路径，默认使用系统搜索路径。     |
 | `DISCOVERY_CLASS_NAME`                | 否       | String  | `static` | 在插件搜索路径下，根据类名搜索类，并将其实例化。目前系统提供 `static` 和 `kubernetes` 两种类，默认使用 `static`。 |
-| `DISCOVERY_KUBERNETES_NAMESPACE`      | 否       | String  | ` `      | `DISCOVERY_CLASS_NAME` 为 `kubernetes`时，定义 Milvus 集群的 namespace。 |
+| `DISCOVERY_KUBERNETES_NAMESPACE`      | 否       | String  | ` `      | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，定义 Milvus 集群的 namespace。 |
 | `DISCOVERY_KUBERNETES_IN_CLUSTER`     | 否       | Boolean | `False`  | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，选择服务发现是否在集群中运行。 |
 | `DISCOVERY_KUBERNETES_POLL_INTERVAL`  | 否       | Integer | `5`      | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，定义服务发现监听周期（单位：秒）。 |
 | `DISCOVERY_KUBERNETES_POD_PATT`       | 否       | String  | ` `      | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，匹配 Milvus Pod 名字的正则表达式。 |

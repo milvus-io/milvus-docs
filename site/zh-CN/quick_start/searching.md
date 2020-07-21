@@ -10,7 +10,7 @@ id: searching.md
 $ curl -X PUT 'http://localhost:19121/collections/test/vectors' -d \
 '{
   "search": {
-    "topk": 2,
+    "top_k": 2,
     "vectors": [
       [0.72, 0.26, 0.43, 0.73, 0.79, 0.56, 0.45, 0.34]
     ],
@@ -22,7 +22,7 @@ $ curl -X PUT 'http://localhost:19121/collections/test/vectors' -d \
 ```
 所有的搜索参数放在 `search` 中：
 
-* `topk`：每次向量查询期望返回的结果数量。
+* `top_k`：每次向量查询期望返回的结果数量。
 * `vectors`：待查询的向量。
 * `params`：查询参数。
 

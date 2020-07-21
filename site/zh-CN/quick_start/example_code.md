@@ -14,7 +14,9 @@ id: example_code.md
    $ pip3 install pymilvus=={{var.milvus_python_sdk_version}}
    ```
 
-   > 提示：如果需要进一步了解 Milvus Python SDK，请参考 [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md)。
+   <div class="alert note">
+   如果需要进一步了解 Milvus Python SDK，请参考 <a href="https://github.com/milvus-io/pymilvus/blob/master/README.md">Milvus Python SDK Readme</a>。
+   </div>
    
 3. 下载 Python 示例代码。
    
@@ -23,7 +25,9 @@ id: example_code.md
    $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/{{var.milvus_python_sdk_version}}/examples/example.py
    ```
    
-   > 注意：万一你遇到无法通过 `wget` 命令正常下载示例代码的情况，你也可以创建 `example.py` 文件并复制粘贴[示例代码](https://github.com/milvus-io/pymilvus/blob/{{var.milvus_python_sdk_version}}/examples/example.py)的内容。
+   <div class="alert note">
+   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/{{var.milvus_python_sdk_version}}/examples/example.py">示例代码</a> 的内容。
+   </div>
 
 4. 运行示例代码。
 

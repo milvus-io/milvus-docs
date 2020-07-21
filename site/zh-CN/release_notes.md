@@ -476,7 +476,7 @@ id: release_notes.md
 
   - 不同的数组分开存储搜索结果的 ids 和 distances 以减少接口读取结果集的响应时间。
   - 新增了一种新的获取结果集里面某个目标向量的方式：`id = results.id_array[i][j], distance = results.distance_array[i][j]`
-  - 新增了一种数组遍历方式，在 `nq` 和 `topk` 很大的情况下处理时间大大缩短。
+  - 新增了一种数组遍历方式，在 `nq` 和 `top_k` 很大的情况下处理时间大大缩短。
 
     ```python
     >> for id_list, dis_list in zip(results.id_array, results.distance_array):

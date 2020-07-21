@@ -10,12 +10,12 @@ The configurations apply to both single server Milvus and all nodes of a distrib
 
 #### Milvus file structure
 
-After successfully starting Milvus server, you can see a Milvus folder at `home/$USER/milvus`, which contains the following files:
+After successfully starting Milvus server, you can see a Milvus folder at **home/$USER/milvus**, which contains the following files:
 
-- `milvus/db` (database storage)
-- `milvus/logs` (log storage)
-- `milvus/conf` (configuration file folder)
-  - `server_config.yaml` (server configuration)
+- **milvus/db** (database storage)
+- **milvus/logs** (log storage)
+- **milvus/conf** (configuration file folder)
+  - **server_config.yaml** (server configuration)
 
 ## Updating configurations
 
@@ -37,7 +37,7 @@ logs:
 
 ### Updating configurations during runtime
 
-You can update parameters in `server_config.yaml` from a Milvus client. See [Client Reference](sdk.md) for more information.
+You can update parameters in **server_config.yaml** from a Milvus client. See [Client Reference](sdk.md) for more information.
 
 Changes to the following parameters take effect immediately without the need to restart Milvus.
 
@@ -178,7 +178,7 @@ In Milvus, index building and search computation are separate processes, which c
 | `port`           | Port of Prometheus Pushgateway. Range: [1025, 65534].                       | Integer | `9091`       |
 </div>
 
-<div class="alert info" id="size">
+<div class="alert note" id="size">
 In the Milvus configuration file, space size should be written in the format of "number+unit", such as "4GB".
 <ul>
 <li>Do not add a space between the number and its unit.</li>

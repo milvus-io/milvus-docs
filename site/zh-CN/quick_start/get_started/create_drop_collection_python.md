@@ -7,7 +7,7 @@ id: create_drop_collection_python.md
 本页提供创建或删除集合的 Python 示例代码。
 
 <div class="alert note">
-参考<a href="https://github.com/milvus-io/pymilvus/tree/master/examples">示例程序</a>获取更详细的使用方式。
+参考 <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">示例程序</a> 获取更详细的使用方式。
 </div>
 
 ## 创建 collection

@@ -175,7 +175,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
 
    | Parameter   | Description     | Range     |
    | --------|--------------- | ------------ |
-   | `ef`    | Search scope  | [topK, 4096] |
+   | `ef`    | Search scope  | [`top_k`, 4096] |
 
    **Example:** `{"ef": 64}`
 
@@ -201,7 +201,7 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
 
    | Parameter   | Description     | Range     |
    | -----------|--------------------------------- | ---------------- |
-   | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [topk, n × `n_trees`] |
+   | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
    **Example:**`{"search_k": -1}`
 

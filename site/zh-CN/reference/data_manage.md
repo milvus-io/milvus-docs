@@ -8,7 +8,9 @@ id: data_manage.md
 
 Milvus 默认使用 SQLite 作为元数据后台管理服务，SQLite 内嵌于 Milvus 进程中，无需启动额外服务。但是在生产环境中，基于可靠性的考虑，我们强烈建议你使用 MySQL 作为元数据管理服务。
 
-> 注意：Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
+<div class="alert note">
+Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
+</div>
 
 请参考以下步骤使用 MySQL 作为元数据管理服务：
 
@@ -42,7 +44,7 @@ Milvus 默认使用 SQLite 作为元数据后台管理服务，SQLite 内嵌于 
     backend_url: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
     ```
 
-6. 使用修改过的 `server_config.yaml` 启动 Milvus 服务。
+6. 使用修改过的 **server_config.yaml** 启动 Milvus 服务。
 
 ## 数据管理相关博客
 

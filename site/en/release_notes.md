@@ -477,7 +477,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
   - Divide the storage of search result ids and distances into separate arrays, which reduces the API response time.
   - Add a new option to retrieve a specific target vector in search results: `id = results.id_array[i][j], distance = results.distance_array[i][j]`.
-  - Add a new option for looping over arrays, which takes much less time if `nq` and `topk` is large.
+  - Add a new option for looping over arrays, which takes much less time if `nq` and `top_k` is large.
 
     ```python
     >> for id_list, dis_list in zip(results.id_array, results.distance_array):

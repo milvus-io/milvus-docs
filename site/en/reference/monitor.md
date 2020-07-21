@@ -48,7 +48,7 @@ This section includes the most important events for which you must create alerti
 **CPU/GPU temperature is too high**
 
 - Rule: Send an alert when the CPU/GPU temperature exceeds 80 degrees Celsius.
-- How to detect: Check the metrics `CPU Temperature` and  `GPU Temperature` on the monitoring dashboard.
+- How to detect: Check the metrics **CPU Temperature** and **GPU Temperature** on the monitoring dashboard.
 
 ## Use Prometheus and Alertmanager
 
@@ -192,7 +192,7 @@ Grafana's default username and password are both "admin". You can create a Grafa
    | Field   | Definition                                             |
    | :------ | :----------------------------------------------------- |
    | Name    | Prometheus                                             |
-   | Default | True                                                   |
+   | Default | `True`                                                   |
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
