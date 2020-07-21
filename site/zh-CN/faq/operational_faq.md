@@ -114,7 +114,7 @@ $ docker logs <container ID>
 
 #### 为什么我的检索结果中出现 ID 为 `-1` 的向量？
 
-当数据集中的向量数目少于 `topk` 时，Milvus 会自动向结果中添加 ID 为 `-1` 的向量 以保证检索结果的数量等于 `topk`。
+当数据集中的向量数目少于 `top_k` 时，Milvus 会自动向结果中添加 ID 为 `-1` 的向量 以保证检索结果的数量等于 `top_k`。
 
 #### 为什么我的 Milvus 在启动时返回 “Illegal instruction”？
 

@@ -71,7 +71,7 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 
 ## Start Docker container
 
-Before starting Docker container, you must set `enable` to `true` in `gpu` section of `server_config.yaml`.
+Before starting Docker container, you must set `enable` to `true` in `gpu` section of **server_config.yaml**.
 
 Start Docker container and map the paths to the local files to the container:
 

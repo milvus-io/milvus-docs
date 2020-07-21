@@ -21,13 +21,13 @@ If you cannot use your host to acquire Docker images and configuration files onl
 
 #### Transfer Docker image offline
 
-  1. Save the Docker image to a tar file and use appropriate methods to transfer the tar file.
+  1. Save the Docker image to a TAR file and use appropriate methods to transfer the TAR file.
 
       ```shell
       $ docker save milvusdb/milvus > milvus_image.tar
       ```
 
-  2. After transferring the tar file, use the following command to load the tar file to a Docker image.  
+  2. After transferring the TAR file, use the following command to load the TAR file to a Docker image.  
 
       ```shell
       $ docker load < milvus_image.tar

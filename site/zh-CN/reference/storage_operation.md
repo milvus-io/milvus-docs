@@ -93,7 +93,7 @@ id: storage_operation.md
 
 Milvus 为每个分段建立了一个 **delete_docs** 文件，用来记录被删除向量在段内的位置。
 
-Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是否可能存在于某个分段中。因此，在每个分段下都创建了一个名为 bloom_filter 的文件。
+Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是否可能存在于某个分段中。因此，在每个分段下都创建了一个名为 **bloom_filter** 的文件。
 
 删除实体的流程如下：
 
@@ -110,7 +110,7 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 2. 服务端接收到请求后，根据 **delete_docs** 所记录的信息，将段内未被删除的实体写入一个新的分段，并把旧分段标记为删除状态。之后将由后台清理任务负责清理被标记为删除状态的分段。如果旧分段已建立索引，新分段产生之后会重建索引。
 
 <div class="alert note">
-<code>compact<code> 操作会忽略被删除向量占比小于 10% 的分段。
+<code>compact</code> 操作会忽略被删除向量占比小于 10% 的分段。
 </div>
 
 
