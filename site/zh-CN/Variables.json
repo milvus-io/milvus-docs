@@ -1,8 +1,0 @@
-{
-    "release_version": "0.10.1",
-    "cpu_milvus_docker_image_version": "0.10.1-cpu-d072020-bd02b1",
-    "gpu_milvus_docker_image_version": "0.10.1-gpu-d072020-bd02b1",
-    "milvus_python_sdk_version": "0.2.14",
-    "milvus_java_sdk_version": "0.8.3"
-
-}
