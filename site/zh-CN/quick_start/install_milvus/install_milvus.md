@@ -20,13 +20,13 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 #### 离线传输 Docker 镜像
 
-1. 将 Docker 镜像保存为 tar 文件再使用合适的方式传输。
+1. 将 Docker 镜像保存为 TAR 文件再使用合适的方式传输。
 
     ```shell
     $ docker save milvusdb/milvus > milvus_image.tar
     ```
 
-2. 将 tar 文件传输完成后使用以下命令重新加载成 Docker 镜像。
+2. 将 TAR 文件传输完成后使用以下命令重新加载成 Docker 镜像。
 
     ```shell
     $ docker load < milvus_image.tar

@@ -6,7 +6,7 @@ id: install_milvus.md
 
 Milvus runs on machines with or without GPU. To use Milvus on machines without a GPU, install CPU-only Milvus. Otherwise, if you have CUDA-enabled GPUs in your computer, it is recommended that you use GPU-enabled Milvus to achieve better search performance for larger queries.
 
-In Milvus, the vector search includes 2 separate processes: index building and search. For GPU-enabled Milvus, these two processes can run concurrently, which facilitates more efficient query, especially for incremental data. For CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
+In Milvus, the vector search includes two separate processes: index building and search. For GPU-enabled Milvus, these two processes can run concurrently, which facilitates more efficient query, especially for incremental data. For CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
 
 ## Install using Docker
 
@@ -21,13 +21,13 @@ If you cannot use your host to acquire Docker images and configuration files onl
 
 #### Transfer Docker image offline
 
-  1. Save the Docker image to a tar file and use appropriate methods to transfer the tar file.
+  1. Save the Docker image to a TAR file and use appropriate methods to transfer the TAR file.
 
       ```shell
       $ docker save milvusdb/milvus > milvus_image.tar
       ```
 
-  2. After transferring the tar file, use the following command to load the tar file to a Docker image.  
+  2. After transferring the TAR file, use the following command to load the TAR file to a Docker image.  
 
       ```shell
       $ docker load < milvus_image.tar

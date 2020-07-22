@@ -37,12 +37,11 @@ jobs:
           git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
+          cp ./milvus-docs/version.json ./target
           cd target
-          git checkout -b `cat version.json | jq -r .version`
-          rm -rf *
-          cd ../
-          cp -avr ./milvus-docs/** ./target/
-          cd target
+          rm -rf `cat version.json | jq -r .version`
+          mkdir `cat version.json | jq -r .version`
+          cp -avr ../milvus-docs/** ./`cat version.json | jq -r .version`
           git add .
           git commit -m "Release new docs "
-          git push -f origin HEAD:`cat version.json | jq -r .version`
+          git push -f origin master
