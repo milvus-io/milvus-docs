@@ -18,18 +18,24 @@
       "order": 0
     },
     {
-      "id": "features.md",
-      "title": "Key Features",
+      "id": "architecture.md",
+      "title": "Architecture",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 1
     },
-
-    
     {
-      "id": "architecture.md",
-      "title": "Architecture",
+      "id": "features.md",
+      "title": "Key Features",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "milvus_versions.md",
+      "title": "Milvus Versions",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
@@ -41,7 +47,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 2,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -84,7 +90,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -223,7 +229,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 5,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -232,23 +238,23 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "data_manage.md",
-      "title": "Data Management",
+      "title": "Manage metadata with MySQL",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "monitor.md",
+      "title": "Monitoring and Alerting",
       "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 2
-    },
-    {
-      "id": "monitoring_metrics.md",
-      "title": "Monitoring Metrics",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 3
     },
     {
       "id": "vector_db.md",
@@ -260,27 +266,20 @@
     },
     {
       "id": "metric.md",
-      "title": "Choosing a Distance Metric",
+      "title": "Choose a Distance Metric",
       "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 5
     },
-    {
-      "id": "monitor.md",
-      "title": "Monitoring and Alerting",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 6
-    },
+
 
     {
       "id": "faq",
       "title": "FAQ",
       "label1": "",
       "label2": "",
-      "order": 7,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -320,7 +319,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -374,7 +373,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 9,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -409,7 +408,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 10
+      "order": 7
     }
   ]
 }
