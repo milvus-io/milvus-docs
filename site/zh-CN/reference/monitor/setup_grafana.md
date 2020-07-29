@@ -40,7 +40,7 @@ docker run -i -p 3000:3000 grafana/grafana
 
 ## 监控指标概述
 
-你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/dashboard.json) 配置展示在 Grafana Dashboard 以下各种指标：
+你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/dashboard.json) 配置展示在 Grafana Dashboard 的以下各种指标：
 
 
 | 指标类型 | 说明                                     |

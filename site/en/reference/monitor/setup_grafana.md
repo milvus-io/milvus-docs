@@ -3,12 +3,11 @@ id: setup_grafana.md
 ---
 
 
-# Visualize metrics in Grafana
+# Visualize Metrics in Grafana
 
 ## Configure and start Grafana
 
-
-1. Use the following command to install and start Grafana for your OS:
+1. Start Grafana for your OS:
 
    ```shell
    $ docker run -i -p 3000:3000 grafana/grafana
@@ -20,9 +19,9 @@ id: setup_grafana.md
 Grafana's default username and password are both <code>admin</code>. You can create a Grafana account of your own.
 </div>
 
-3. [Add Prometheus as a data source](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)。
+3. [Add Prometheus as a data source](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/).
    
-4. In Grafana UI, click **Configuration > Data Sources > Prometheus**, and then configure the data source as follows:
+4. In Grafana UI, click **Configuration > Data Sources > Prometheus**, and configure the data source as follows:
 
    | Field   | Definition                                             |
    | :------ | :----------------------------------------------------- |
@@ -39,28 +38,28 @@ Grafana's default username and password are both <code>admin</code>. You can cre
    ![prometheus.png](../../../../assets/prometheus.png)
 
 
-## Metrics Overview
+## Metrics overview
 
 You can use the [Grafana dashboard](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/dashboard.json) for Milvus to configure the following metrics areas displayed on the dashboard:
 
 
 | Area             | Description                                                |
 | ---------------- | ---------------------------------------------------------- |
-| Milvus's Performance Metrics | Important metrics about Milvus performance.                |
-| System Performance Metrics | Metrics about CPU/GPU usage, network traffic, disk read speed, and more.              |
-| Hardware Storage Metrics  | Metrics about data size, storage capacity and total files. |
+| Milvus Performance Metrics | Important metrics about Milvus performance.                |
+| System Performance Metrics | Metrics about CPU/GPU usage, network traffic, and disk read speed.          |
+| Hardware Storage Metrics  | Metrics about data size, data files, and storage capacity. |
 
-## Milvus's Performance Metrics
+### Milvus performance metrics
 
 | Metric                    | Description                                                  |
 | ------------------------- | ------------------------------------------------------------ |
 | **Insert per Second**     | Number of vectors that are inserted in a second. (Real-time display) |
 | **Queries per Minute**    | Number of queries that are run in a minute. (Real-time display) |
 | **Query Time per Vector** | Average time to query one vector. Divide the query elapsed time by the number of queried vectors. |
-| **Query Service Level**   | Query service level = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level. |
+| **Query Service Level**   | Query service level = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2, and threshold3, to track the query service level. |
 | **Uptime**                | How long Milvus has been running. (Minutes)                  |
 
-## System Performance Metrics
+### System performance metrics
 
 | Metric                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
@@ -69,14 +68,14 @@ You can use the [Grafana dashboard](https://github.com/milvus-io/docs/blob/v{{va
 | **CPU Utilization**   | CPU utilization ratio (%). Divide the time that the server is busy by the total elapsed time. |
 | **Memory Usage**      | Memory (GB) currently consumed by Milvus.                    |
 | **Cache Utilization** | Cache utilization ratio (%).                                 |
-| **Network IO**        | Network IO read/write speed (GB/s).                    |
+| **Network IO**        | Network IO read/write speed (GB/s).                          |
 | **Disk Read Speed**   | Disk read speed (GB/s).                                      |
 | **Disk Write Speed**  | Disk write speed (GB/s).                                     |
 
-## Hardware Storage Metrics
+### Hardware storage metrics
 
 | Metric         | Description                                      |
 | -------------- | ------------------------------------------------ |
-| **Data Size**  | Total amount (GB) of data stored in Milvus.           |
+| **Data Size**  | Total amount (GB) of data stored in Milvus.      |
 | **Total File** | Number of data files currently stored in Milvus. |
 

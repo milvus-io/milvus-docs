@@ -8,15 +8,15 @@ id: monitor.md
 
 It is critical to actively monitor the overall performance of a system running in production, and to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
 
-The monitoring and alerting solutions Milvus uses are as follows:
+Milvus uses the following monitoring and alerting solutions:
 
-- Uses Prometheus to store and monitor its metrics:
+- Prometheus to store and monitor its metrics:
   - Prometheus server which scrapes and stores time series data.
-  - Client libraries for instrumenting application metrics.
-  - Pushgateway to allow short-lived, batch metrics, which may not be scraped in time, to be exposed to Prometheus.
+  - Client libraries for instrumenting monitoring metrics.
+  - Pushgateway to push metric data and ensure short-lived monitoring metrics, which may not be scraped in time, to be exposed to Prometheus.
   - Alertmanager for alert handling.
 
-- Uses Grafana, an open source platform for time-series analytics, to visualize various performance metrics.
+- Grafana, an open source platform for time-series analytics, to visualize various performance metrics.
 
 ## Workflow
 

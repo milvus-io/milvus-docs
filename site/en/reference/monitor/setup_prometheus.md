@@ -2,14 +2,14 @@
 id: setup_prometheus.md
 ---
 
-# Configure and start Prometheus
+# Configure and Start Prometheus
 Milvus generates detailed time series metrics. This page shows you how to pull these metrics into [Prometheus](https://prometheus.io/), and how to connect [Grafana](https://grafana.com/) and [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for flexible data visualizations and notifications.
 
-### Before you begin
+## Before you begin
 
-- Make sure you have already read [Monitoring and Alerting](monitor.md) and learnt about the monitoring and alerting solutions of Milvus.
+- Make sure you have already read [Monitoring and Alerting](monitor.md) and learned about the monitoring and alerting solutions of Milvus.
 
-### Install Prometheus
+## Install Prometheus
 
 1. Download the [Prometheus tarball](https://prometheus.io/download/) for your operating system.
 
@@ -23,7 +23,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    You can add the path to Prometheus to <code>PATH</code>. This makes it easy to start Prometheus from any shell.
    </div>
 
-### Configure and start Prometheus
+## Configure and start Prometheus
 
 1. Start Pushgateway:
 
@@ -115,14 +115,14 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Events to create alert rules
 
-Active monitoring helps you identify problems early, but it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
+Active monitoring helps you identify problems early. But it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
 
 This section includes the most important events for which you must create alerting rules.
 
 **Server is down**
 
 - Rule: Send an alert when the Milvus server is down.
-- How to detect: If the Milvus server is down, **No Data** will be displayed on the monitoring dashboard.
+- How to detect: If the Milvus server is down, **No Data** is displayed for various metrics on the monitoring dashboard.
 
 **CPU/GPU temperature is too high**
 
@@ -152,5 +152,5 @@ This section includes the most important events for which you must create alerti
    alertmanager --config.file=alertmanager.yml
    ```
 
-5. Use your browser to open *http://<*hostname of machine running alertmanager*>:9093*, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
+5. Use your browser to open *http://\<hostname of machine running alertmanager\>:9093*, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
