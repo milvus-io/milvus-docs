@@ -5,9 +5,10 @@ order: 0
 group: version
 ---
 
-{{tab}}
 
 # 安装 CPU 版的 Milvus
+
+{{tab}}
 
 ## 安装前提
 
@@ -128,4 +129,4 @@ $ docker logs <milvus container id>
   
 - 如果你想使用针对大数据集搜索的 GPU 加速版 Milvus：
 
-  - [安装支持 GPU 加速版 Milvus](gpu_milvus_docker.md)
+  - [安装支持 GPU 加速版 Milvus](milvus_docker-gpu.md)

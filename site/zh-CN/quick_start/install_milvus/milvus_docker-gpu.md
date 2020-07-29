@@ -5,10 +5,10 @@ order: 1
 group: version
 ---
 
+
+# 安装、启动 Milvus 服务
+
 {{tab}}
-
-
-# 安装 GPU 版的 Milvus
 
 ## 安装前提
 
@@ -130,5 +130,5 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
   
 - 如果你想在仅有 CPU 的环境下使用 Milvus：
 
-  - [安装仅需 CPU 的 Milvus](cpu_milvus_docker.md)
+  - [安装仅需 CPU 的 Milvus](milvus_docker-cpu.md)
 
