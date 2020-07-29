@@ -1,5 +1,5 @@
 ---
-id: cpu_milvus_docker.md
+id: milvus_docker-cpu.md
 label: CPU 版 Milvus
 order: 0
 group: version
