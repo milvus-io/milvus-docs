@@ -6,7 +6,7 @@ group: version
 ---
 
 
-# 安装 CPU 版的 Milvus
+# 安装、启动 Milvus 服务
 
 {{tab}}
 
