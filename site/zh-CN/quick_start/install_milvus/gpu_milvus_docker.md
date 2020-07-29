@@ -2,9 +2,10 @@
 id: gpu_milvus_docker.md
 label: GPU 版 Milvus
 order: 1
+group: version
 ---
 
-{{tab_milvus_version}}
+{{tab}}
 
 
 # 安装 GPU 版本的 Milvus
@@ -58,7 +59,7 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
-{{fragment/tar_workaround.md}}
+{{fragments/tar_workaround.md}}
 <div class="alert note">
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>
