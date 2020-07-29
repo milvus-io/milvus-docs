@@ -33,11 +33,9 @@ docker run -i -p 3000:3000 grafana/grafana
 
 5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v{{var.release_version}}/assets/monitoring/dashboard.json)。
 
-
-
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard)。
 
-   ![prometheus.png](../../../../assets/prometheus.png) 
+   ![prometheus.png](../../../../assets/prometheus.png)
 
 
 ## 监控指标概述
