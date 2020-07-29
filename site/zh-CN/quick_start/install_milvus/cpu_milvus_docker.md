@@ -7,7 +7,7 @@ group: version
 
 {{tab}}
 
-# 安装 CPU 版本的 Milvus
+# 安装 CPU 版的 Milvus
 
 ## 安装前提
 

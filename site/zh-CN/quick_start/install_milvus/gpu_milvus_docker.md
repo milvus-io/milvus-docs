@@ -8,7 +8,7 @@ group: version
 {{tab}}
 
 
-# 安装 GPU 版本的 Milvus
+# 安装 GPU 版的 Milvus
 
 ## 安装前提
 
