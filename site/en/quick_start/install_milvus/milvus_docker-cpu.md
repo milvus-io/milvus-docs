@@ -1,8 +1,13 @@
 ---
-id: cpu_milvus_docker.md
+id: milvus_docker-cpu.md
+label: CPU-only Milvus
+order: 0
+group: version
 ---
 
-# Install CPU-only Milvus
+# Install and Start Milvus
+
+{{tab}} 
 
 ## Prerequisites
 
@@ -29,7 +34,7 @@ id: cpu_milvus_docker.md
 | Docker  | 19.03 or higher                             |
 
 <div class="alert note">
-Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>milvus.yaml</b> file.
+Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>server_config.yaml</b> file.
 </div>
 
 #### Confirm Docker status
@@ -52,12 +57,10 @@ $ sudo docker info
 Pull the CPU-only image:
 
 ```shell
-$ docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
+$ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
+{{fragments/tar_workaround.md}}
 
-<div class="alert note">
-If the pulling is too slow or fails constantly, see <a href="operational_faq.md">Operational FAQ</a> for possible solutions.
-</div>
 
 ## Download configuration files
 
@@ -76,7 +79,7 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 Start Docker container and map the paths to the local files to the container:
 
 ```shell
-$ docker run -d --name milvus_cpu_{{var.release_version}} \
+$ sudo docker run -d --name milvus_cpu_{{var.release_version}} \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
@@ -90,14 +93,13 @@ The `docker run` options used in the above command are defined as follows:
 
 - `-d`: Runs container in the background and prints container ID.
 - `--name`: Assigns a name to the container.
-- `--gpus`: Assigns GPU devices to the container. ('all' represents all GPUs.)
 - `-p`: Publishes a container’s port(s) to the host.
 - `-v`: Mounts the directory into the container.
 
 Confirm the running state of Milvus:
 
 ```shell
-$ docker ps
+$ sudo docker ps
 ```
 
 If the Milvus server does not start up properly, check the error logs:
@@ -119,9 +121,9 @@ $ docker logs <milvus container id>
   
 - If you're ready to run Milvus in production:
 
-  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
-  - Tune Milvus performance through [configuration](milvus_config.md)
+  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance.
+  - Tune Milvus performance through [configuration](milvus_config.md).
   
 - If you want to use GPU-accelerated Milvus for search in large datasets:
   
-  - [Install GPU-enabled Milvus](gpu_milvus_docker.md)
+  - [Install GPU-enabled Milvus](milvus_docker-gpu.md)
