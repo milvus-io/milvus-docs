@@ -8,8 +8,8 @@ Ensure that you have read [Milvus Versions](milvus_versions.md) and understood t
 
 Docker is the easiest and recommended way to install and run Milvus.
 
-- [Install CPU-only Milvus on Docker](cpu_milvus_docker.md)
-- [Install GPU-enabled Milvus on Docker](gpu_milvus_docker.md)
+- [Install CPU-only Milvus on Docker](milvus_docker-cpu.md)
+- [Install GPU-enabled Milvus on Docker](milvus_docker-gpu.md)
 
 
   
