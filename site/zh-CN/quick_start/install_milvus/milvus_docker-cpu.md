@@ -61,9 +61,6 @@ $ sudo docker info
 $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
 {{fragments/tar_workaround.md}}
-<div class="alert note">
-如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
-</div>
 
 ## 下载配置文件
 
