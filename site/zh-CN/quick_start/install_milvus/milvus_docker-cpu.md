@@ -1,12 +1,14 @@
 ---
-id: cpu_milvus_docker.md
+id: milvus_docker-cpu.md
 label: CPU 版 Milvus
 order: 0
+group: version
 ---
 
-{{tab_milvus_version}}
 
-# 安装 CPU 版本的 Milvus
+# 安装、启动 Milvus 服务
+
+{{tab}}
 
 ## 安装前提
 
@@ -58,7 +60,7 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```
-{{fragment/tar_workaround.md}}
+{{fragments/tar_workaround.md}}
 <div class="alert note">
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>
@@ -127,4 +129,4 @@ $ docker logs <milvus container id>
   
 - 如果你想使用针对大数据集搜索的 GPU 加速版 Milvus：
 
-  - [安装支持 GPU 加速版 Milvus](gpu_milvus_docker.md)
+  - [安装支持 GPU 加速版 Milvus](milvus_docker-gpu.md)

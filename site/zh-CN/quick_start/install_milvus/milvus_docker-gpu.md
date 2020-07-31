@@ -1,13 +1,14 @@
 ---
-id: gpu_milvus_docker.md
+id: milvus_docker-gpu.md
 label: GPU 版 Milvus
 order: 1
+group: version
 ---
 
-{{tab_milvus_version}}
 
+# 安装、启动 Milvus 服务
 
-# 安装 GPU 版本的 Milvus
+{{tab}}
 
 ## 安装前提
 
@@ -58,7 +59,7 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
-{{fragment/tar_workaround.md}}
+{{fragments/tar_workaround.md}}
 <div class="alert note">
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>
@@ -129,5 +130,5 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
   
 - 如果你想在仅有 CPU 的环境下使用 Milvus：
 
-  - [安装仅需 CPU 的 Milvus](cpu_milvus_docker.md)
+  - [安装仅需 CPU 的 Milvus](milvus_docker-cpu.md)
 
