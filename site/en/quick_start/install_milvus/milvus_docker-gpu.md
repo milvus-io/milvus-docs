@@ -1,8 +1,13 @@
 ---
-id: gpu_milvus_docker.md
+id: milvus_docker-gpu.md
+label: GPU-enabled Milvus
+order: 1
+group: version
 ---
 
-# Install GPU-enabled Milvus
+# Install and Start Milvus
+
+{{tab}}
 
 ## Prerequisites
 
@@ -36,7 +41,7 @@ id: gpu_milvus_docker.md
 Confirm that the Docker daemon is running in the background:
 
 ```shell
-$ docker info
+$ sudo docker info
 ```
 
 <div class="alert note">
@@ -51,12 +56,11 @@ $ docker info
 Pull the GPU-enabled image:
 
 ```shell
-$ docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
+$ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```
 
-<div class="alert note">
-If the pulling is too slow or fails constantly, see <a href="operational_faq.md">Operational FAQ</a> for possible solutions.
-</div>
+{{fragments/tar_workaround.md}}
+
 
 ## Download configuration files
 
@@ -70,14 +74,17 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version
 If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
+After you downloaded the configuration file, you must set `enable` to `true` in `gpu` section of **server_config.yaml**.
+
 ## Start Docker container
 
-Before starting Docker container, you must set `enable` to `true` in `gpu` section of **server_config.yaml**.
+<div class="alert note">
+Before starting Docker container, you must set <code>enable</code> to <code>true</code> in <code>gpu</code> section of <b>server_config.yaml</b>.
 
 Start Docker container and map the paths to the local files to the container:
 
 ```shell
-$ docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
+$ sudo docker run -d --name milvus_gpu_{{var.release_version}} --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
@@ -91,23 +98,20 @@ The `docker run` options used in the above command are defined as follows:
 
 - `-d`: Runs container in the background and prints container ID.
 - `--name`: Assigns a name to the container.
-- `--gpus`: Assigns GPU devices to the container. ('all' represents all GPUs.)
+- `--gpus`: Assigns GPU devices to the container. (`all` represents all GPUs.)
 - `-p`: Publishes a container’s port(s) to the host.
 - `-v`: Mounts the directory into the container.
 
 Confirm the running state of Milvus:
 
 ```shell
-$ docker ps
+$ sudo docker ps
 ```
 
 If the Milvus server does not start up properly, check the error logs:
 
 ```shell
-# Get the ID of the container running Milvus.
-$ docker ps -a
-# Check docker logs.
-$ docker logs <milvus container id>
+$ sudo docker logs milvus_gpu_{{var.release_version}}
 ```
 
 ## What's next
@@ -125,4 +129,4 @@ $ docker logs <milvus container id>
   
 - If you want to run Milvus on machines without an Nvidia GPU:
   
-  - [Install CPU-only Milvus](cpu_milvus_docker.md)
+  - [Install CPU-only Milvus](milvus_docker-cpu.md)
