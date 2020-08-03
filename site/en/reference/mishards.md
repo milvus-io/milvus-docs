@@ -6,17 +6,17 @@ id: mishards.md
 
 ## What is Mishards
 
-Mishards is a Milvus cluster sharding middleware developed in Python. It internally handles request forwarding, read-write separation, horizontal and dynamic scalability. With the help of Mishards, you can use a Milvus instance that can be expanded by memory and computing power.
+Mishards is a Milvus cluster sharding middleware developed in Python. It handles request forwarding, read-write separation, horizontal and dynamic scaling, providing you with additional capabilities in terms of expanded memory and computing power.
 
 ## How Mishards works
 
-Mishards is responsible for splitting the upstream request, routing it to the internal sub-services, and summarizing and returning the results of the sub-services to the upstream.
+Mishards cascades a request from upstream down to its sub-modules splitting the upstream request, and then collects and returns the results of the sub-services to upstream.
 
 ![proxy](https://milvus.io/static/c00635f52b4cbe35ebd6bb9ce5af1db2/302a4/image_04.png)
 
 ## Target scenarios
 
-| Scenario classification | Concurrency | Latency | Data scale | Suitable for Mishards |
+| Scenarios | Concurrency | Latency | Data scale | Suitable for Mishards |
 | ----------------------- | ----------- | ---- | -------- | ----------------- |
 | 1                       | Low        | Low | Medium / Small | No               |
 | 2                       | High       | Low | Medium / Small | No               |
@@ -24,11 +24,11 @@ Mishards is responsible for splitting the upstream request, routing it to the in
 | 4                       | Low        | Low | Large  | Yes              |
 | 5                       | High       | Low | Large  | Yes              |
 
-Mishards is suitable for scenarios with large data scale. So how to judge the size of the data scale? There is no standard answer to this question because it depends on the hardware resources used in the practical production environment. Here is a simple way to judge the size of the data scale:
+Mishards is suitable for scenarios with large data scale. So how to judge the size of the data scale? There is no standard answer to this question because it depends on the hardware resources used in the actual production environment. Here is a simple way to determine the size of the data scale:
 
-1. If you don't care about the latency, you can assume that a scenario has a large data scale when its data size is larger than the available capacity of the hard disk on a single server. For example, the calculation time of the server to batch process 5000 query requests is greater than the time needed to load data from the hard disk to the memory, so the available capacity of the hard disk is used as the criterion for judging the size of the data.
+1. If you do not care about latency, you can assume that a scenario has a large data scale when its data size is larger than the available capacity of the hard disk on a single server. For example, the calculation time of the server to batch process 5000 query requests is greater than the time to load data from the hard disk to the memory, so the available hard disk is the criteria for determining the data scale.
 
-2. If you care about latency, you can assume that a scenario has a large data scale when its data size is larger than the available memory on a single server.
+2. Otherwise, you can assume that a scenario has a large data scale when its data size is larger than the available memory on a single server.
 
 ## Mishards-based cluster solution
 
@@ -38,13 +38,13 @@ Mishards is suitable for scenarios with large data scale. So how to judge the si
 
 ### Main components
 
-- Service discovery: Obtains the service address of the read and write nodes.
+- Service discovery: Obtains the service addresses of the read and write nodes.
 - Load balancer
 - **Mishards node: A stateless and scalable node.**
-- Milvus write node: A node that is not scalable. To avoid failure at a single node, a highly available HA solution needs to be deployed for this node.
+- Milvus write node: An unscalable node. To avoid failure at a single node, you need to deploy a high availability strategy.
 - Milvus read node: A stateful and scalable node.
 - Shared storage service: Milvus read and write nodes share data through the shared storage service. Available options include NAS and NFS.
-- Metadata service: Currently Milvus only supports MySQL. The production environment requires a MySQL solution with high availability.
+- Metadata service: Milvus supports only MySQL in the production environment.
 
 ## Mishards configurations
 
@@ -52,17 +52,17 @@ Mishards is suitable for scenarios with large data scale. So how to judge the si
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | ------------- | -------- | ------- | ------- | ------------------------------------------------------------ |
-| `Debug`       | No      | Boolean | `True`  | Whether to enable the debug mode. Currently, debug mode only affects the log level.<ul><li><code>True</code>: Enables the debug mode.</li><li><code>False</code>: Disables the debug mode.</li></ul> |
-| `TIMEZONE`    | No      | String  | `UTC`   | Time zone                                                |
+| `Debug`       | No      | Boolean | `True`  | Whether to enable the debug mode. Debug mode only affects the log level for now.<ul><li><code>True</code>: Enable debug mode.</li><li><code>False</code>: Disable debug mode.</li></ul> |
+| `TIMEZONE`    | No      | String  | `UTC`   | The time zone.                                                |
 | `SERVER_PORT` | No      | Integer | `19530` | Defines the service port of Mishards. |
 | `WOSERVER`    | Yes | String  | ` `     | The address of Milvus write node. Format: `tcp://127.0.0.1:19530` |
 
 ### Metadata
 
-Metadata records the structure information of the underlying data. In a distributed system, Milvus write nodes are the only producers of metadata, while Mishards nodes, Milvus write nodes, and read nodes are consumers of metadata. Currently, Milvus only supports MySQL or SQLite as its metadata storage backend.
+Metadata records the structure information of the underlying data. In a distributed system, Milvus write nodes are the only producers of metadata; Mishards nodes, Milvus write nodes, and Milvus read nodes are consumers of Metadata. 
 
 <div class="alert note">
-In a distributed system, the storage backend for metadata can only be MySQL.
+Milvus only supports MySQL or SQLite as its Metadata backend for now. In a distributed system, the storage backend for metadata can only be MySQL.
 </div>
 
 
@@ -73,13 +73,13 @@ In a distributed system, the storage backend for metadata can only be MySQL.
 
 ### Service discovery
 
-Service discovery provides Mishards with the address information of all Milvus read and write nodes. Mishards defines the relevant service discovery API `IServiceRegistryProvider`, and provides extensions in the extension mode. At present, two extensions are provided by default: **KubernetesProvider** corresponds to the Kubernetes cluster; **StaticProvider** corresponds to the static configuration. Also, you can mimic the implementation of these two extensions to customize your own service discovery extension.
+Service discovery provides Mishards with the address information of all Milvus read and write nodes. Mishards defines the relevant service discovery API `IServiceRegistryProvider`, and provides extensions in extension mode. Milvus provides two extensions by default: **KubernetesProvider** corresponds to Kubernetes cluster; **StaticProvider** corresponds to static configuration. You can customize your own service discovery extension based on these two extensions.
 
 ![discovery](https://milvus.io/static/63f649314b297b1fe0b07d2c8c0ba8ea/302a4/image_07.png)
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | ------------------------------------- | -------- | ------- | -------- | ------------------------------------------------------------ |
-| `DISCOVERY_STATIC_HOSTS`              | No       | List    | `[]`     | When `DISCOVERY_CLASS_NAME` is `static`, defines the service address list. The addresses in the list are separated by commas, for example, `192.168.1.188,192.168.1.190`. |
+| `DISCOVERY_STATIC_HOSTS`              | No       | List    | `[]`     | When `DISCOVERY_CLASS_NAME` is `static`, defines the service address list. The addresses in the list are separated by comma, for example, `192.168.1.188,192.168.1.190`. |
 | `DISCOVERY_STATIC_PORT`               | No       | Integer | `19530`  | When `DISCOVERY_CLASS_NAME` is `static`, defines the service address listening port. |
 | `DISCOVERY_PLUGIN_PATH`               | No       | String  | ` `      | The search path to the customized service discovery extension (uses the system search path by default).   |
 | `DISCOVERY_CLASS_NAME`                | No       | String  | `static` | In the extension search path, searches for the class based on its name and instantiates it. At present, the system provides two classes: `static` (default) and `kubernetes`. |
@@ -91,9 +91,9 @@ Service discovery provides Mishards with the address information of all Milvus r
 
 ### Chain tracking
 
-Distributed systems are intricate and complex. It often distributes requests to multiple internal service calls. To facilitate problem location, we need to track the call chains of internal services. The higher the complexity of the system, the more obvious the benefits of a viable chain tracking system. We chose [OpenTracing](https://opentracing.io/docs/), which is a distributed tracing standard that has entered CNCF. It provides APIs independent of platform and vendor and facilitates developers to implement a chain tracking system.
+A distributed systems often distributes requests to multiple internal services. To facilitate troubleshooting, we need to track the call chains of internal services. The higher the complexity of the system, the more obvious the benefits of a viable chain tracking system. We choose [OpenTracing](https://opentracing.io/docs/), which is a distributed tracing standard that has entered CNCF. It provides APIs independent of the platform or vendor to facilitate implementation of a chain tracking system.
 
-Mishards defines the chain tracking APIs and provides extensions in the extension mode. Currently, Jaeger-based extensions are provided by default.
+Mishards defines the chain tracking APIs and provides extensions in extension mode. It provides Jaeger-based extensions for now.
 
 <div class="alert info">
 See <a href="https://www.jaegertracing.io/docs/1.18/getting-started/">Jaeger Doc</a> to learn how to integrate Jaeger.
@@ -111,7 +111,7 @@ See <a href="https://www.jaegertracing.io/docs/1.18/getting-started/">Jaeger Doc
 
 ### Log
 
-The log files of the cluster service are distributed on different service nodes, so you need to log in to the relevant server to obtain log files for troubleshooting. It is recommended to use [ELK](https://www.elastic.co/what-is/elk-stack) log analysis component to collaboratively analyze multiple log files and troubleshoot problems.
+The log files of the cluster service are distributed on different nodes, so you need to log in to the relevant server to obtain log files for troubleshooting. It is recommended that you use [ELK](https://www.elastic.co/what-is/elk-stack) log analysis component to collaboratively analyze multiple log files and troubleshoot problems.
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | ----------- | -------- | ------ | --------------- | ------------------------------------------------------ |
@@ -121,9 +121,9 @@ The log files of the cluster service are distributed on different service nodes,
 
 ### Route
 
-Mishards obtains the addresses of Milvus read and write nodes from the service discovery center and obtains the underlying metadata information through the metadata service. Its routing strategy is to consume these materials. As shown in the figure, there are 10 data segments (s1, s2, s3, …, s10). We select a consistent hash routing strategy based on the name of data segments (`FileNameHashRingBased`). Mishards routes requests about s1, s4, s6, and s9 to the **Milvus 1** node, routes requests about s2, s3, and s5  to the **Milvus 2** node, and routes requests about s7, s8, and s10 to the **Milvus 3** node.
+Mishards obtains the addresses of Milvus read and write nodes from the service discovery center and obtains the underlying Metadata information through the Metadata service. Its routing strategy is to consume these materials. As shown in the figure, there are 10 data segments (s1, s2, s3, …, s10). We select a consistent hash routing strategy based on the name of data segments (`FileNameHashRingBased`). Mishards routes requests about s1, s4, s6, and s9 to the **Milvus 1** node, routes requests about s2, s3, and s5  to the **Milvus 2** node, and routes requests about s7, s8, and s10 to the **Milvus 3** node.
 
-Mishards defines APIs related to routing strategies and provides relevant extensions. You can mimic the default consistent hash routing extension to customize your routes according to the characteristics of your business.
+Mishards defines APIs related to routing strategies and provides relevant extensions. You can customize your routes according to your business scenario and based on the default consistent hash routing extension.
 
 ![router](https://milvus.io/static/84435d8783b7f4454b3667544ba2a4cf/302a4/image_08.png)
 
@@ -139,20 +139,20 @@ Mishards defines APIs related to routing strategies and provides relevant extens
 
 #### Prerequisites
 
-- Install Milvus
-- Python 3.6 and higher
+- Milvus properly installed
+- Python 3.6 or higher
 
 #### Start a Milvus and Mishards instance
 
 Follow these steps to start a Milvus instance and Mishards service on a machine:
 
-1. Clone the Milvus repository to the local machine:
+1. Clone the Milvus repository to your local machine:
 
    ```shell
    $ git clone https://github.com/milvus-io/milvus
    ```
 
-2. Install dependent libraries for Mishards:
+2. Install dependencies for Mishards:
 
    ```shell
    $ cd milvus/shards
@@ -161,13 +161,13 @@ Follow these steps to start a Milvus instance and Mishards service on a machine:
 
 3. Start the Milvus service:
 
-   - If your Docker version is lower than v19.03, run the following commands:
+   - If your Docker version is earlier than v19.03:
 
    ```shell
    $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
    ```
 
-   - Otherwise, run the following commands:
+   - Otherwise:
 
    ```shell
    $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
@@ -224,7 +224,7 @@ To view the service chain, open [Jaeger Page](http://127.0.0.1:16686/) in your b
 
 ![jaegertraces](https://github.com/milvus-io/docs/blob/master/assets/jaegertraces.png)
 
-To clean up all services, run the following command:
+To clean up all services:
 
 ```shell
 $ make clean_deploy
@@ -232,13 +232,13 @@ $ make clean_deploy
 
 ## Deploy Mishards cluster in Kubernetes
 
-### Installation prerequisites
+### Prerequisites
 
-- Kubernetes 1.10 or higher
-- Helm 2.12.0 or higher
+- Kubernetes 1.10 or later
+- Helm 2.12.0 or later
 
 <div class="alert info">
-See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about the use of Helm.
+See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about using Helm.
 </div>
 
 
@@ -288,7 +288,7 @@ See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about the
 
 [Milvus-Helm](https://github.com/milvus-io/milvus-helm) supports upgrading from standalone service to Mishards cluster.
 
-1. Deploy the standalone version of Milvus:
+1. Deploy a standalone version of Milvus:
 
    ```bash
    $ helm install --set persistence.enabled=true milvus-release .
@@ -302,24 +302,24 @@ See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about the
 
 ### Notes
 
-Mishards relies on shared storage, so the Kubernetes cluster must have available Persistent Volumes (PV). Also, ensure that the PV can be used by multiple pods at the same time. You can enable Persistent Volumes by setting `persistence.enabled=true`.
+Mishards is based on shared storage, so the Kubernetes cluster must have available Persistent Volumes (PV). Also, ensure that the PV can be used by multiple pods at the same time. You can enable Persistent Volumes by setting `persistence.enabled`.
 
 1. In order to share data, the PV access mode must be set to `ReadOnlyMany` or `ReadWriteMany`.
 2. Choose a file storage system:
    - If your cluster is deployed on AWS, use [Elastic File System (EFS)](https://aws.amazon.com/efs/).
-   - If your cluster is deployed in Azure, use [Azure File Storage (AFS)](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv).
+   - If your cluster is deployed on Azure, use [Azure File Storage (AFS)](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv).
 
 <div class="alert info">
 <ul>
-<li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a> for the application and management of Persistent Volume.</li>
-<li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a> for the access modes of Persistent Volume.</li>
+<li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a> for more information about applying for and managing Persistent Volume.</li>
+<li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a> for more information about the access modes of Persistent Volume.</li>
 </ul>
 </div>
 
 
-### Basic case
+### Usage
 
-You can find all the parameters supported by Milvus-Helm at [Milvus Helm Charts](https://github.com/milvus-io/milvus-helm).
+You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](https://github.com/milvus-io/milvus-helm).
 
 1. Configure a cluster with multiple read nodes and multiple Mishards sharding middleware.
 
@@ -340,7 +340,7 @@ You can find all the parameters supported by Milvus-Helm at [Milvus Helm Charts]
    Currently, the write nodes in the Mishards cluster cannot be expanded.
    </div>
 
-2. Use an externally configured MySQL cluster as the metadata database.
+2. Use an externally configured MySQL cluster as the Metadata database.
 
    Sometimes the support for external MySQL is needed to cooperate with local deployment. Although Milvus-Helm's internal MySQL service does not guarantee high availability, you can increase availability through an external MySQL cluster. The following example shows the deployment based on external MySQL.
 
@@ -380,9 +380,9 @@ You can find all the parameters supported by Milvus-Helm at [Milvus Helm Charts]
    </ul>
    </div>
 
-4. Configure GPU resources.
+4. Configure the GPU resources.
 
-   The use of GPU can effectively improve Milvus performance. In the following example, we allow write nodes to use GPU resources by setting `gpu.enabled=true` and prohibit read nodes from using GPU resources by setting `readonly.gpu.enabled=false`.
+   The use of GPU can effectively improve Milvus performance. In the following example, we allow write nodes to use GPU resources by setting `gpu.enabled=true` and prevent the read nodes from using GPU resources by setting `readonly.gpu.enabled=false`.
 
    ```bash
    $ helm install
