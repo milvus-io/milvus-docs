@@ -103,11 +103,6 @@ Milvus 支持 CUBA 6.0 架构以后的显卡。关于 Milvus 支持的架构，�
 
 #### 内网环境，即离线方式，能否部署 Milvus 服务？
 
-Milvus 是以 Docker 镜像形式发行的，是可以离线部署的。在有网的环境中拉取 Milvus 的镜像，使用 `docker save` 命令导出该镜像，拷贝该镜像到无网的环境中，然后用 `docker load` 命令导入该镜像。
-
-关于 Docker 的使用详见 [docs.docker.com](https://docs.docker.com/)。
-
-#### 在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？
 
 在 **prometheus.yaml** 里面加一个 Prometheus 的实例就可以。最后在 Prometheus 或者 Grafana 里面显示监控的时候，会指明数据是来自哪个 Milvus 实例。
 
