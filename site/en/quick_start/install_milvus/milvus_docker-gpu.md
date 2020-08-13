@@ -5,7 +5,7 @@ order: 1
 group: version
 ---
 
-# Install and Start Milvus
+# Install and Run Milvus
 
 {{tab}}
 
