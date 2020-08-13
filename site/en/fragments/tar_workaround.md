@@ -18,6 +18,6 @@
 </code>
 </li></ol>
 </details></li>
-<li>If pulling the docker image is too slow or it keeps failing, see <a href="operational_faq.md">Operational FAQ</a> for solutions.</li>
+<li>If pulling the docker image is too slow or keeps failing, see <a href="operational_faq.md">Operational FAQ</a> for solutions.</li>
 </ul>
 </div>
