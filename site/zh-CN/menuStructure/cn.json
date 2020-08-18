@@ -324,7 +324,7 @@
     },
     {
       "id": "performance_faq.md",
-      "title": "性能常见问题",
+      "title": "性能优化问题",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -332,7 +332,7 @@
     },
     {
       "id": "product_faq.md",
-      "title": "产品常见问题",
+      "title": "产品问题",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -340,7 +340,7 @@
     },
     {
       "id": "operational_faq.md",
-      "title": "操作常见问题",
+      "title": "部署运维问题",
       "label1": "faq",
       "label2": "",
       "order": 2
