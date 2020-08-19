@@ -61,7 +61,7 @@ id: setup_prometheus.md
 
 5. 根据实际需求编辑 Prometheus 配置文件：
 
-   - global：配置 `scrape_interval` 和 `evaluation_interval` 等参数。
+   - `global`：配置 `scrape_interval` 和 `evaluation_interval` 等参数。
 
    ```yaml
    global:
@@ -69,7 +69,7 @@ id: setup_prometheus.md
      evaluation_interval: 2s # 设置评估时间间隔为 2s。
    ```
 
-   - alerting：设置 Alertmanager 的地址和端口。
+   - `alerting`：设置 Alertmanager 的地址和端口。
 
    ```yaml
    alerting:
@@ -78,14 +78,14 @@ id: setup_prometheus.md
       - targets: ['localhost:9093']
    ```
 
-   - rule_files：设置报警规则文件。
+   - `rule_files`：设置报警规则文件。
 
    ```yaml
    rule_files:
       - "alert_rules.yml"
    ```
 
-   - scrape_configs：设置抓取数据的 <code>job_name</code> 及 <code>targets</code> 等信息。
+   - `scrape_configs`：设置抓取数据的 `job_name` 及 `targets` 等信息。
 
    ```yaml
    scrape_configs:
