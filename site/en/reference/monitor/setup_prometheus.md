@@ -118,7 +118,7 @@ This page describes how to configure and start up [Prometheus](https://prometheu
 
 ### Events to create alert rules
 
-Active monitoring helps you identify problems early. But it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
+Proactively monitoring metrics contributes to identification of emerging issues. Creating alerting rules for events requiring immediate intervention is essential as well.
 
 This section includes the most important events for which you must create alerting rules.
 
