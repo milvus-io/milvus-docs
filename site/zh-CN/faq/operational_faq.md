@@ -110,7 +110,7 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 3. 拷贝该镜像到无网的环境中；
 4. 用 `docker load` 命令导入该镜像。
 
-关于 Docker 的使用详见 [docs.docker.com](docs.docker.com)。
+关于 Docker 的使用详见 [docs.docker.com](https://docs.docker.com)。
 
 #### 在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？
 

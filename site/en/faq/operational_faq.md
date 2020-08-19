@@ -104,13 +104,13 @@ Try installing pymilvus in a Conda environment.
 
 #### Can I deploy Milvus service in an air-gapped environment?
 
-Milvus is released as a Docker image, and hence can be deployed from offline:
+Milvus is released as a Docker image. Follow these steps to deploy it from offline:
 
 1. Pull the latest Milvus Docker image when you have Internet access.
 
 2. Run `docker save` to save the Docker image as a TAR file.
 
-3. Transfer the TAR file to **the** air-gapped environment.
+3. Transfer the TAR file to the air-gapped environment.
 
 4. Run `docker load` to load the file as a Docker image.
 
