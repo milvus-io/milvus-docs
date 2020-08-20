@@ -6,9 +6,6 @@ id: setup_prometheus.md
 
 This page describes how to configure and start up [Prometheus](https://prometheus.io/), and how to connect [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for metrics visualization and early warning purposes.
 
-## Before you begin
-
-- Ensure that you have already read [Monitoring and Alerting](monitor.md) and learned about the monitoring and alerting solutions of Milvus.
 
 ## Install Prometheus
 
