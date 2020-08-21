@@ -30,6 +30,6 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
 ## Drop a collection
 
 ```python
-# Drop collection
+# Drop a collection
 >>> milvus.drop_collection(collection_name='test01')
 ```
