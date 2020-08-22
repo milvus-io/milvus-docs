@@ -22,7 +22,7 @@ id: connect_milvus_python.md
 2. 使用以下任意一种方法连接 Milvus 服务端：
 
    ```python
-   # Connect to Milvus server.
+   # Connect to the Milvus server.
    >>> milvus = Milvus(host='localhost', port='19530')
    ```
 

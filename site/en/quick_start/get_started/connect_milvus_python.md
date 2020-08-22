@@ -22,7 +22,7 @@ This article decribes how to connect to a Milvus server from a Python client.
 2. Use any of the following methods to connect to the Milvus server:
 
    ```python
-   # Connect to Milvus server.
+   # Connect to the Milvus server.
    >>> milvus = Milvus(host='localhost', port='19530')
    ```
 

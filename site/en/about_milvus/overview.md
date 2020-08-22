@@ -4,9 +4,9 @@ id: overview.md
 
 # What is Milvus 
 
-Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project of the [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
+Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
-As an open source vector similarity search engine, Milvus is easy-to-use, highly reliable, scalable, robust, and blazing fast. It integrates vector index libraries such as Faiss, NMSLIB, and Annoy, hides their complexity, and provides simple and consistent APIs. In addition, you can choose index types based on your scenario.
+Milvus is an embeddings similarity search engine that is highly reliable, scalable, and blazing fast. It encapsulates index libraries, such as Faiss, NMSLIB, and Annoy, providing a set of unified, easy-to-use APIs, and allowing you to choose index types based on your scenario.
 
 Milvus offers efficient means of managing vector data, including adding, deleting, and modifying vector and non-vector data. Aside from near real-time search for vectors, Milvus also supports filtering scalar data. With the increase of data and query scale, Milvus also provides a solution for cluster sharding, which supports functions such as read/write separation, horizontal scalability, and dynamic scalability, to cope with large data volume. Currently, Milvus is a single-node server based on the client-server model. It provides storage and search services for TB-level feature data. 
 
@@ -32,7 +32,7 @@ The above-mentioned capabilities facilitate the extensive use of Milvus in hundr
 - Text search, recommender system, interactive question answering system, and other text search fields.
 - Drug discovery, genetic screening, and other biomedical fields.
 
-See [Senarios](https://www.milvus.io/scenarios/) for more information. 
+See [Scenarios](https://www.milvus.io/scenarios/) for more information. 
 
 ## Key features
 
@@ -42,7 +42,7 @@ Milvus offers frequently used similarity metrics, including Euclidean distance, 
 
 ### Leading-edge performance
 
-Milvus is built on top of multiple optimized Approximate Nearest Neighbor Search (ANNS) indexing libraries, such as Faiss, Annoy, and hnswlib, ensuring that you always get the best performance across various scenarios.
+Milvus is built on top of multiple optimized Approximate Nearest Neighbor Search (ANNS) indexing libraries, such as Faiss, Annoy, and hnswlib, ensuring that you always get the best performance irrespective of your scenario.
 
 ### Dynamic data management
 
