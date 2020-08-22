@@ -17,7 +17,7 @@ id: create_drop_index_python.md
 1. 准备创建索引所需参数（以 `IVF_FLAT` 为例）。索引参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
    ```python
-   # Prepare index param
+   # Prepare index param.
    >>> ivf_param = {'nlist': 16384}
    ```
 
@@ -38,7 +38,7 @@ id: create_drop_index_python.md
 2. 为指定集合创建索引：
 
    ```python
-   # Create an index
+   # Create an index.
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 

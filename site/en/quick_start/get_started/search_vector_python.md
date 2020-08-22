@@ -33,7 +33,7 @@ Milvus supports searching vectors in a collection or partition.
 2. Create random vectors as `query_records` to search:
 
    ```python
-   # Create 5 vectors of 256 dimensions
+   # Create 5 vectors of 256 dimensions.
    >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
@@ -41,7 +41,7 @@ Milvus supports searching vectors in a collection or partition.
 ## Search vectors in a partition
 
 ```python
-# Create 5 vectors of 256 dimensions
+# Create 5 vectors of 256 dimensions.
 >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```

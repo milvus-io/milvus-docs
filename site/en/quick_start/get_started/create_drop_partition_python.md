@@ -11,7 +11,7 @@ This article provides Python sample codes for creating or dropping partitions.
 To improve search efficiency, you can divide a collection into several partitions by tags. In fact, each partition is a collection.
 
 ```python
-# Create a partition
+# Create a partition.
 >>> milvus.create_partition('test01', 'tag01')
 ```
 
