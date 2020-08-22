@@ -19,14 +19,14 @@ id: insert_delete_vector_python.md
 
    ```python
    >>> import random
-   # Generate 20 vectors of 256 dimensions
+   # Generate 20 vectors of 256 dimensions.
    >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. 插入向量列表。如果你不指定向量 ID，Milvus 自动为向量分配 ID。
 
    ```python
-   # Insert vectors
+   # Insert vectors.
    >>> milvus.insert(collection_name='test01', records=vectors)
    ```
 

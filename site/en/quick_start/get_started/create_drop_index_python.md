@@ -17,7 +17,7 @@ Currently, a collection only supports one index type. When you change the index 
 1. Prepare the parameters needed to create indexes (take `IVF_FLAT` as an example). The index parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 
    ```python
-   # Prepare index param
+   # Prepare index param.
    >>> ivf_param = {'nlist': 16384}
    ```
 
@@ -38,7 +38,7 @@ Currently, a collection only supports one index type. When you change the index 
 2. Create index for the collection:
 
    ```python
-   # Create an index
+   # Create an index.
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 

@@ -33,7 +33,7 @@ Milvus 支持在集合或分区中查询向量。
 2. 创建随机向量作为 `query_records` 进行搜索：
 
    ```python
-   # Create 5 vectors of 256 dimensions
+   # Create 5 vectors of 256 dimensions.
    >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
@@ -41,7 +41,7 @@ Milvus 支持在集合或分区中查询向量。
 ## 在分区中查询向量
 
 ```python
-# Create 5 vectors of 256 dimensions
+# Create 5 vectors of 256 dimensions.
 >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```

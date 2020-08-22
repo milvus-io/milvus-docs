@@ -18,14 +18,14 @@ You can perform vector operations on collections or partitions. This article tal
 
    ```python
    >>> import random
-   # Generate 20 vectors of 256 dimensions
+   # Generate 20 vectors of 256 dimensions.
    >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. Insert a list of vectors. If you do not specify vector IDs, Milvus automatically assigns IDs to the vectors.
 
    ```python
-   # Insert vectors
+   # Insert vectors.
    >>> milvus.insert(collection_name='test01', records=vectors)
    ```
 
