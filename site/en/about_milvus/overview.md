@@ -4,11 +4,11 @@ id: overview.md
 
 # What is Milvus 
 
-Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
-Milvus is an embeddings similarity search engine that is highly reliable, scalable, and blazing fast. It encapsulates index libraries, such as Faiss, NMSLIB, and Annoy, providing a set of unified, easy-to-use APIs, and allowing you to choose index types based on your scenario.
+Milvus is an embeddings similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, modifying, and near-real-time search of embedding vectors on a scale of trillion Bytes. By supporting filtering of scalar data, Milvus allows for customization of your embedding vector search. By encapsulating multiple mainstream index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario.
 
-Milvus offers efficient means of managing vector data, including adding, deleting, and modifying vector and non-vector data. Aside from near real-time search for vectors, Milvus also supports filtering scalar data. With the increase of data and query scale, Milvus also provides a solution for cluster sharding, which supports functions such as read/write separation, horizontal scalability, and dynamic scalability, to cope with large data volume. Currently, Milvus is a single-node server based on the client-server model. It provides storage and search services for TB-level feature data. 
+
+Milvus runs on the client-server model.
 
 - On the server side, Milvus consists of two parts: Milvus Server and Meta Store.
 
@@ -17,7 +17,9 @@ Milvus offers efficient means of managing vector data, including adding, deletin
 
 - On the client side, Milvus provides easy-to-use SDKs in Python, Java, Go, and C++, as well as RESTful APIs.
 
-For scenarios with large data size or high concurrency requirements, you can use Mishards, an experimental cluster sharding middleware, for deployment.
+> For now, the server is a standalone node. For scenarios involving large datasets or requiring high concurrency, you can deploy Mishards, a Milvus cluster sharding middleware that is currently under development. 
+
+Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
 ## Overall architecture
 
@@ -26,7 +28,7 @@ For scenarios with large data size or high concurrency requirements, you can use
 
 ## Scenarios
 
-The above-mentioned capabilities facilitate the extensive use of Milvus in hundreds of organizations and institutions worldwide in the following scenarios:
+Milvus in hundreds of organizations and institutions worldwide mainly in the following scenarios:
 
 - Image, video, and audio search.
 - Text search, recommender system, interactive question answering system, and other text search fields.
