@@ -4,15 +4,16 @@ id: overview.md
 
 # What is Milvus 
 
+## Overview
 
-Milvus is an embeddings (vector) similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near-real-time search of embeddings on a scale of trillion bytes. By encapsulating multiple mainstream index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario. By supporting filtering of scalar data, Milvus takes the recall rate even higher and adds more flexibility to your search. 
+Milvus is an embeddings similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near-real-time search of embeddings on a scale of trillion bytes. By encapsulating multiple mainstream index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario. By supporting filtering of scalar data, Milvus takes the recall rate even higher and adds more flexibility to your search. 
 
 
 Milvus runs on the client-server model.
 
 - The Milvus server comprises two parts: Milvus Core and Meta Store.
 
-    * Milvus Core stores and manages embeddings (vectors) and scalar data.
+    * Milvus Core stores and manages embeddings and scalar data.
     * Meta Store stores and manages metadata in SQLite for testing or MySQL for production. 
 
 - On the client side, Milvus provides SDKs in Python, Java, Go, and C++, as well as RESTful APIs. 
@@ -48,6 +49,6 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 ## Join our community
 
-Before joining our developer community, please take some time reading our code contribution guidelines, [Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
+Before joining our developer community, please take some time reading our code contribution guidelines [Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
 
 If you have questions about functions or SDKs of Milvus, you can join our [GitHub Discussions](https://github.com/milvus-io/milvus/discussions) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
