@@ -1,0 +1,1 @@
+It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).

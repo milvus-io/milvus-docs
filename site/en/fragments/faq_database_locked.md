@@ -1,0 +1,1 @@
+If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See [Manage Metadata with MySQL](data_manage.md).

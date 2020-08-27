@@ -18,6 +18,6 @@
 </code>
 </li></ol>
 </details></li>
-<li>如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。</li>
+<li>如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">部署运维问题</a> 中提供的解决办法。</li>
 </ul>
 </div>

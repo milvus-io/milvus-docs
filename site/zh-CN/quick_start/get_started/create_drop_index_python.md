@@ -49,3 +49,19 @@ id: create_drop_index_python.md
 ```python
 >>> milvus.drop_index('test01')
 ```
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">建索引参数 <code>nlist</code> 的大小该如何选择？</font></summary>
+{{fragments/faq_set_nlist.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 可以在同一个集合中的不同分区上建立不同索引吗？</font></summary>
+{{fragments/faq_collection_different_index.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 中支持新增向量后再建索引吗？</font></summary>
+{{fragments/faq_create_index_after_insertion.md}}
+</details>
+

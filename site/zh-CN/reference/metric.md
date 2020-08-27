@@ -10,8 +10,8 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 | 数据格式 | 距离计算方式                                                                                                       | 索引类型                                                       |
 | -------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 浮点型   | 欧氏距离（L2）、内积（IP）                                                                                         | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
-| 二值型   | 杰卡德距离（Jaccard）、谷本距离（Tanimoto）、汉明距离（Hamming）、超结构（superstructure）(仅 FLAT 支持)、子结构（substructure）(仅 FLAT 支持) | `FLAT`, `IVFLAT`                                               |
+| 浮点型   | 欧氏距离（L2）、内积（IP）                                                                                         | `FLAT`, `IVF_FLAT`, `IVF_SQ8`, `IVF_SQ8H`, `IVF_PQ`, `RNSG`, `HNSW` |
+| 二值型   | 杰卡德距离（Jaccard）、谷本距离（Tanimoto）、汉明距离（Hamming）、超结构（superstructure）(仅 FLAT 支持)、子结构（substructure）(仅 FLAT 支持) | `FLAT`, `IVF_FLAT`                                               |
 
 ### 欧氏距离（L2）
 
@@ -108,3 +108,20 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 - N<sub>A</sub> 表示分子式 A 的化学指纹中二进制位的数量。
 - N<sub>B</sub> 表示分子式 B 的化学指纹中二进制位的数量。
 - N<sub>AB</sub> 表示分子式 A 和 B 的化学指纹中共有的二进制位的数量。
+
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
+{{fragments/faq_top1_not_target.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
+{{fragments/faq_normalize_embeddings.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
+{{fragments/faq_euclidean_ip_different_results.md}}
+</details>

@@ -49,3 +49,43 @@ Milvus 支持在集合或分区中查询向量。
 <div class="alert note">
 如果你不指定 <code>partition_tags</code>， Milvus 会在整个集合中搜索。
 </div>
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">为什么 Milvus 查询召回率一直不理想？</font></summary>
+{{fragments/faq_poor_recall_rate.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 是否支持 “边插入边查询” ？</font></summary>
+{{fragments/faq_search_during_insert.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">对集合分区的查询是否会受到集合大小的影响，尤其在集合数据量高达一亿数据量时？</font></summary>
+{{fragments/faq_collection_affect_partition_search.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">如果只是搜索集合中的部分分区，整个集合的数据会全部加载到内存吗？</font></summary>
+{{fragments/faq_load_when_search_partition.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">各个数据段的检索是并行处理的吗？</font></summary>
+{{fragments/faq_search_segment_parallel.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">批量搜索时，用多线程的收益大吗？</font></summary>
+{{fragments/faq_multithreading_search.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">为什么搜索的速度非常慢？</font></summary>
+{{fragments/faq_search_slow.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">创建索引立即查询，为什么内存会突然增长？</font></summary>
+{{fragments/faq_search_increase_memory_usage.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">为什么重启 Milvus 服务端之后，第一次搜索时间非常长？</font></summary>
+{{fragments/faq_search_time_after_restart.md}}
+</details>

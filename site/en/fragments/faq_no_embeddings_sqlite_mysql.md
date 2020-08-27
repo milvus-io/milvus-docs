@@ -1,0 +1,1 @@
+Milvus stores vectors and indexes directly in the disk as files, not in SQLite or MySQL. It uses SQLite or MySQL to store metadata of the vectors instead. See [Storage Concepts](storage_concept.md) for more information.

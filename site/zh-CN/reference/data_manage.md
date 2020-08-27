@@ -45,6 +45,25 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 6. 使用修改过的 **server_config.yaml** 启动 Milvus 服务。
 
 
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">出现 <code>database is locked</code> 的报错怎么解决？</font></summary>
+{{fragments/faq_database_locked.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">为什么我在 SQLite / MySQL 找不到向量数据？</font></summary>
+{{fragments/faq_no_embeddings_sqlite_mysql.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
+{{fragments/faq_supported_meta_db.md}}
+</details>
+
+
+
+
 ## 数据管理相关博客
 
 从数据导入，数据存储到数据查询和调度，请参阅我们的博客深入了解 Milvus 数据管理方案。

@@ -49,3 +49,19 @@ After deleting the index, the collection uses the default index type FLAT again.
 ```python
 >>> milvus.drop_index('test01')
 ```
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">How to set the value of <code>nlist</code> when I build indexes?</font></summary>
+{{fragments/faq_set_nlist.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Can Milvus create different types of index for different partitions in the same collection?</font></summary>
+{{fragments/faq_collection_different_index.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Does Milvus create new indexes after vectors are inserted?</font></summary>
+{{fragments/faq_create_index_after_insertion.md}}
+</details>
+
