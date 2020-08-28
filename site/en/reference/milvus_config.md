@@ -191,6 +191,10 @@ In the Milvus configuration file, space size should be written in the format of 
 ## FAQ
 
 <details>
+<summary><font color="#3ab7f8">Besides the configuration file, how can I tell Milvus is using GPU for search?</font></summary>
+{{fragments/faq_confirm_search_gpu.md}}
+</details>
+<details>
 <summary><font color="#3ab7f8">If I have set <code>preload_collection</code>, does Milvus service start only after all collections are loaded to the memory?</font></summary>
 {{fragments/faq_preload_collection_till_available.md}}
 </details>
