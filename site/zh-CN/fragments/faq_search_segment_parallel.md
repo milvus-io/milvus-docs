@@ -5,4 +5,4 @@
 - CPU 版 Milvus 会对数据段读取任务和段内查询任务进行流水线处理。
 - GPU 版 Milvus 会在 CPU 版的基础上，将多个数据段分配给各个 GPU 处理。
 
-可参阅文章：[Milvus 开源向量搜索引擎 ANNS](https://zhuanlan.zhihu.com/p/110332250)。
+可参阅文章：<a href="https://zhuanlan.zhihu.com/p/110332250">Milvus 开源向量搜索引擎 ANNS</a>。

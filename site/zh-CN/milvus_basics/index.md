@@ -199,10 +199,10 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">索引 IVF_SQ8 和 IVF_SQ8H 在召回率上有区别吗？</font></summary>
+<summary><font color="#3f9cd1">索引 IVF_SQ8 和 IVF_SQ8H 在召回率上有区别吗？</font></summary>
 {{fragments/faq_recall_rate_sq8_sq8h.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</font></summary>
+<summary><font color="#3f9cd1">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</font></summary>
 {{fragments/faq_flat_ivfflat.md}}
 </details>

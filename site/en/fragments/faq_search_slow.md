@@ -1,1 +1,1 @@
-Check if the value of `cache.cache_size` in **server_config.yaml** is greater than the size of the collection.
+Check if the value of <code>cache.cache_size</code> in <strong>server_config.yaml</strong> is greater than the size of the collection.

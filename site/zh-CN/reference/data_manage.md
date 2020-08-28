@@ -49,15 +49,15 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">出现 <code>database is locked</code> 的报错怎么解决？</font></summary>
+<summary><font color="#3f9cd1">出现 <code>database is locked</code> 的报错怎么解决？</font></summary>
 {{fragments/faq_database_locked.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">为什么我在 SQLite / MySQL 找不到向量数据？</font></summary>
+<summary><font color="#3f9cd1">为什么我在 SQLite / MySQL 找不到向量数据？</font></summary>
 {{fragments/faq_no_embeddings_sqlite_mysql.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
+<summary><font color="#3f9cd1">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
 {{fragments/faq_supported_meta_db.md}}
 </details>
 

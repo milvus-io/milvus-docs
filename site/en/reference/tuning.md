@@ -156,22 +156,22 @@ Deleted entities do not participate in the calculation and takes up disk space. 
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why is my GPU always idle?</font></summary>
+<summary><font color="#3f9cd1">Why is my GPU always idle?</font></summary>
 {{fragments/faq_gpu_idle.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why the search is very slow?</font></summary>
+<summary><font color="#3f9cd1">Why the search is very slow?</font></summary>
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
+<summary><font color="#3f9cd1">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
 {{fragments/faq_index_file_size_best_practice.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
+<summary><font color="#3f9cd1">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
 {{fragments/faq_gpu_search_slow.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why sometimes the query time for a small dataset is longer?</font></summary>
+<summary><font color="#3f9cd1">Why sometimes the query time for a small dataset is longer?</font></summary>
 {{fragments/faq_search_time_small_dataset.md}}
 </details>

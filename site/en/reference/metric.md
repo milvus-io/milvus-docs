@@ -107,14 +107,14 @@ Where
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
+<summary><font color="#3f9cd1">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
 {{fragments/faq_top1_not_target.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">What is normalization? Why is normalization needed?</font></summary>
+<summary><font color="#3f9cd1">What is normalization? Why is normalization needed?</font></summary>
 {{fragments/faq_normalize_embeddings.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
+<summary><font color="#3f9cd1">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
 {{fragments/faq_euclidean_ip_different_results.md}}
 </details>

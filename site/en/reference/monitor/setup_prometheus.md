@@ -159,6 +159,6 @@ This section includes the most important events for which you must create alerti
 
 
 <details>
-<summary><font color="#3ab7f8">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
+<summary><font color="#3f9cd1">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
 {{fragments/faq_prometheus_differentiate_data_source.md}}
 </details>
