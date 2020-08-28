@@ -38,7 +38,6 @@ id: performance_faq.md
 #### 如何进行性能调优？
 
 - 确保配置文件中的参数 `cache.cache_size` 值大于集合中的数据量。
-- 调整 `use_blas_threhold` 的值（检查 `nq` 是否小于 `use_blas_threhold`）。
 - 确保所有数据文件都建立了索引。
 - 检查服务器上是否有其他进程在占用 CPU 资源。
 - 调整参数 `index_file_size` 和 `nlist` 的值。
