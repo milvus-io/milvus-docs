@@ -1,1 +1,1 @@
-该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引) 和 [如何设置 Milvus 参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
+该值需要根据具体的使用情况去设置。详见 <a href="tuning.md#索引">性能调优 > 索引</a> 和 <a href="https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md">如何设置 Milvus 参数</a>。

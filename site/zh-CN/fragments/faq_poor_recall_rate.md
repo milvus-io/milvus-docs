@@ -1,1 +1,1 @@
-在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [Milvus 基本操作](milvus_operation.md)。
+在调用 SDK 进行向量搜索时，可以增大函数中 <code>nprobe</code> 参数的值。值越大，结果越精确，但耗时也越久。详见 <a href="milvus_operation.md">Milvus 基本操作</a>。

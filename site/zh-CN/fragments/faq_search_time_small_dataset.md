@@ -1,1 +1,1 @@
-如果数据文件的大小小于创建集合时 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。你还可以调用 `create_index` 建立索引。
+如果数据文件的大小小于创建集合时 <code>index_file_size</code> 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。你还可以调用 <code>create_index</code> 建立索引。

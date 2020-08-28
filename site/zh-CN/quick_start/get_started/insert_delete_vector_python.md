@@ -66,14 +66,14 @@ id: insert_delete_vector_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">Milvus 中自定义 ID 有没有长度限制？</font></summary>
+<summary><font color="#3f9cd1">Milvus 中自定义 ID 有没有长度限制？</font></summary>
 {{fragments/faq_id_length.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Milvus 是否支持 “边插入边查询” ？</font></summary>
+<summary><font color="#3f9cd1">Milvus 是否支持 “边插入边查询” ？</font></summary>
 {{fragments/faq_search_during_insert.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Milvus 中单次插入数据有上限吗？</font></summary>
+<summary><font color="#3f9cd1">Milvus 中单次插入数据有上限吗？</font></summary>
 {{fragments/faq_data_volume_one_insertion.md}}
 </details>

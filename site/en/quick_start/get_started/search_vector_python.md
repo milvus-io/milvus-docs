@@ -54,38 +54,38 @@ If you do not specify <code>partition_tags</code>, Milvus searches similar vecto
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why is my recall rate unsatisfying?</font></summary>
+<summary><font color="#3f9cd1">Why is my recall rate unsatisfying?</font></summary>
 {{fragments/faq_poor_recall_rate.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Does Milvus support inserting while searching?</font></summary>
+<summary><font color="#3f9cd1">Does Milvus support inserting while searching?</font></summary>
 {{fragments/faq_search_during_insert.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?</font></summary>
+<summary><font color="#3f9cd1">Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?</font></summary>
 {{fragments/faq_collection_affect_partition_search.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?</font></summary>
+<summary><font color="#3f9cd1">Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?</font></summary>
 {{fragments/faq_load_when_search_partition.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Are queries in segments processed in parallel?</font></summary>
+<summary><font color="#3f9cd1">Are queries in segments processed in parallel?</font></summary>
 {{fragments/faq_search_segment_parallel.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Will a batch query benefit from multi-threading?</font></summary>
+<summary><font color="#3f9cd1">Will a batch query benefit from multi-threading?</font></summary>
 {{fragments/faq_multithreading_search.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why the search is very slow?</font></summary>
+<summary><font color="#3f9cd1">Why the search is very slow?</font></summary>
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</font></summary>
+<summary><font color="#3f9cd1">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</font></summary>
 {{fragments/faq_search_increase_memory_usage.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Why does the first search take a long time after Milvus restarts?</font></summary>
+<summary><font color="#3f9cd1">Why does the first search take a long time after Milvus restarts?</font></summary>
 {{fragments/faq_search_time_after_restart.md}}
 </details>

@@ -6,4 +6,4 @@ Suppose a collection has multiple segments, then when a query request comes in:
 
 - On top of the abovementioned pipeline mechanism, GPU-enabled Milvus distributes the segments among the available GPUs.
 
-See [How Does Milvus Schedule Query Tasks](https://medium.com/unstructured-data-service/how-does-milvus-schedule-query-tasks-2ca38d7bc2f2) for more information.
+See <a href="https://medium.com/unstructured-data-service/how-does-milvus-schedule-query-tasks-2ca38d7bc2f2">How Does Milvus Schedule Query Tasks</a> for more information.

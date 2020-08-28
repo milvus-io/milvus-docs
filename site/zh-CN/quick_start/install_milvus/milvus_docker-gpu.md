@@ -118,15 +118,15 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">可以在 Windows 上安装 Milvus 吗？</font></summary>
+<summary><font color="#3f9cd1">可以在 Windows 上安装 Milvus 吗？</font></summary>
 {{fragments/faq_install_windows.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
+<summary><font color="#3f9cd1">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
 {{fragments/faq_illegal_instruction_set.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">Milvus 中如何实现数据迁移？</font></summary>
+<summary><font color="#3f9cd1">Milvus 中如何实现数据迁移？</font></summary>
 {{fragments/faq_data_migration.md}}
 </details>
 

@@ -203,11 +203,11 @@ To learn how to choose an appropriate index for a metric, see [Distance Metrics]
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+<summary><font color="#3f9cd1">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
 </font></summary>
 {{fragments/faq_recall_rate_sq8_sq8h.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+<summary><font color="#3f9cd1">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
 {{fragments/faq_flat_ivfflat.md}}
 </details>

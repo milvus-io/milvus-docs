@@ -153,22 +153,22 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">为什么查询时 GPU 一直空闲？</font></summary>
+<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
 {{fragments/faq_gpu_idle.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">为什么搜索的速度非常慢？</font></summary>
+<summary><font color="#3f9cd1">为什么搜索的速度非常慢？</font></summary>
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
+<summary><font color="#3f9cd1">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
 {{fragments/faq_index_file_size_best_practice.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
+<summary><font color="#3f9cd1">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
 {{fragments/faq_gpu_search_slow.md}}
 </details>
 <details>
-<summary><font color="#3ab7f8">为什么有时候小的数据集查询时间反而更长？</font></summary>
+<summary><font color="#3f9cd1">为什么有时候小的数据集查询时间反而更长？</font></summary>
 {{fragments/faq_search_time_small_dataset.md}}
 </details>
