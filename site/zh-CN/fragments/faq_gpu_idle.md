@@ -1,0 +1,1 @@
+此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 `gpu_search_threshold` 的值设置为大于 `nq` (每次查询的向量条数) 。可以将 `gpu_search_threshold` 的值调整为期望开启 GPU 搜索的 `nq` 数。若 `nq` 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。

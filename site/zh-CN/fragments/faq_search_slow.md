@@ -1,0 +1,1 @@
+请首先检查 **server_config.yaml** 的 `cache.cache_size` 参数是否大于集合中的数据量。

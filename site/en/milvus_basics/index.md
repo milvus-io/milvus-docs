@@ -198,3 +198,16 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
 To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
 To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
+
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+</font></summary>
+{{fragments/faq_recall_rate_sq8_sq8h.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+{{fragments/faq_flat_ivfflat.md}}
+</details>

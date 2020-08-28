@@ -33,3 +33,18 @@ id: create_drop_collection_python.md
 # Drop a collection.
 >>> milvus.drop_collection(collection_name='test01')
 ```
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
+{{fragments/faq_index_file_size_best_practice.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">建立集合后，<code>index_file_size</code> 和 <code>metric_type</code> 还支持修改吗？</font></summary>
+{{fragments/faq_update_param_after_collection.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 对集合和分区的总数有限制吗？</font></summary>
+{{fragments/faq_collection_partition_numbers.md}}
+</details>

@@ -45,6 +45,23 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 6. Use the updated **server_config.yaml** to launch Milvus.
 
 
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Why does Milvus return <code>database is locked</code>?</font></summary>
+{{fragments/faq_database_locked.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Why can't I find vectors on SQLite or MySQL?</font></summary>
+{{fragments/faq_no_embeddings_sqlite_mysql.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+{{fragments/faq_supported_meta_db.md}}
+</details>
+
+
+
 ## Related blogs about data management
 
 From data import, data storage to data querying and scheduling, our blogs on Medium introduce detailed insights about the data management strategy in Milvus.

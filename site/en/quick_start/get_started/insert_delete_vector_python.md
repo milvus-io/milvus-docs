@@ -60,3 +60,19 @@ You can delete the vectors with the following command:
 <div class="alert note">
 After calling <code>delete</code>, you can call <code>flush</code> again to ensure that the newly inserted data is visible and the deleted data is no longer recoverable.
 </div>
+
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Is there a length limit on the self-defined entity IDs?</font></summary>
+{{fragments/faq_id_length.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Does Milvus support inserting while searching?</font></summary>
+{{fragments/faq_search_during_insert.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Is there a volume limit on the vectors inserted each time?</font></summary>
+{{fragments/faq_data_volume_one_insertion.md}}
+</details>

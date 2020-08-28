@@ -9,3 +9,14 @@ Milvus automatically merges the inserted vector data to segments. A collection c
 ```python
 >>> milvus.compact(collection_name='test01', timeout='1')
 ```
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Does Milvus' Python SDK have a connection pool?</font></summary>
+{{fragments/faq_pymilvus_connection_pool.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">How to fix the error when I install pymilvus on Windows?</font></summary>
+{{fragments/faq_pymilvus_install_error.md}}
+</details>

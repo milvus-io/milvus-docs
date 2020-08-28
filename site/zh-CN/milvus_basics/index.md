@@ -27,9 +27,9 @@ id: index.md
     当插入的数据段少于 4096 行时，Milvus 不会为其建立索引。
 </div>
 
-## 分段建索引
+## 数据段建索引
 
-Milvus 分段存储海量数据。在建立索引时，Milvus 为每个数据分段单独创建索引。
+Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据段单独创建索引。
 
 ## 闲时建索引
 
@@ -194,3 +194,15 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 
 - 若要为你的使用场景选择合适的索引，请参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
 - 关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">索引 IVF_SQ8 和 IVF_SQ8H 在召回率上有区别吗？</font></summary>
+{{fragments/faq_recall_rate_sq8_sq8h.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</font></summary>
+{{fragments/faq_flat_ivfflat.md}}
+</details>

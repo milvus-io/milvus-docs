@@ -1,0 +1,1 @@
+We do not have a dedicated tool as yet. You can call `get_entity_by_id` to get the intended vectors by ID.

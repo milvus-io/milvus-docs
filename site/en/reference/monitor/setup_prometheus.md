@@ -154,3 +154,11 @@ This section includes the most important events for which you must create alerti
 
 5. Use your browser to open http://&lt;hostname&nbsp;of&nbsp;machine&nbsp;running&nbsp;alertmanager&gt;:9093, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
+
+## FAQ
+
+
+<details>
+<summary><font color="#3ab7f8">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
+{{fragments/faq_prometheus_differentiate_data_source.md}}
+</details>

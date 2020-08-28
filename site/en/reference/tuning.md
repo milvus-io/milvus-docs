@@ -67,9 +67,9 @@ This parameter (4 GB by default) refers to the size of the cache space used for 
 
 After the indexes are created (FLAT is not included), the index files require additional disk space and the query only needs to load the index files.
 
-* The data volume of the IVFFLAT index is basically equal to the total data volume of its original vectors.
-* The data volume of the IVFSQ8 / IVFSQ8H index is equivalent to 25% to 30% of the total data volume of the original vectors.
-* The data volume of the IVFPQ index changes according to its parameters, which is generally lower than 10% of the total data volume of the original vectors.
+* The data volume of the IVF_FLAT index is basically equal to the total data volume of its original vectors.
+* The data volume of the IVF\_SQ8 / IVF\_SQ8H index is equivalent to 25% to 30% of the total data volume of the original vectors.
+* The data volume of the IVF_PQ index changes according to its parameters, which is generally lower than 10% of the total data volume of the original vectors.
 * The data volume of HNSW/RNSG/ANNOY index is greater than the total data volume of the original vectors.
 
 <div class="alert note">
@@ -107,7 +107,7 @@ As the number of target vectors increases, the time spent on using CPUs to perfo
 
 - IVF Indexes
 
-IVF indexes include IVF_FLAT, IVF_SQ8 / IVF_SQ8H, and IVF_PQ. The IVF_SQ8 / IVF_SQ8H and IVF_PQ indexes perform lossy compression on vector data to reduce the disk space occupied by index files.
+IVF indexes include IVF\_FLAT, IVF\_SQ8 / IVF\_SQ8H, and IVF\_PQ. The IVF\_SQ8 / IVF\_SQ8H and IVF\_PQ indexes perform lossy compression on vector data to reduce the disk space occupied by index files.
 
 All types of IVF index have two parameters: `nlist` and `nprobe`. See [Milvus Indexes](index.md#Indexes-that-Milvus-supports) for more information about these parameters.
 
@@ -151,3 +151,27 @@ To filter deleted entities, Milvus reads **delete_docs** into memory when queryi
 - Compact segments
 
 Deleted entities do not participate in the calculation and takes up disk space. If a large number of entities have been deleted, you can call `compact` to free up disk space.
+
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Why is my GPU always idle?</font></summary>
+{{fragments/faq_gpu_idle.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Why the search is very slow?</font></summary>
+{{fragments/faq_search_slow.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
+{{fragments/faq_index_file_size_best_practice.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
+{{fragments/faq_gpu_search_slow.md}}
+</details>
+<details>
+<summary><font color="#3ab7f8">Why sometimes the query time for a small dataset is longer?</font></summary>
+{{fragments/faq_search_time_small_dataset.md}}
+</details>
