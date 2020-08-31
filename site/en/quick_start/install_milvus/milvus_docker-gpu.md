@@ -129,6 +129,10 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 <summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
 {{fragments/faq_data_migration.md}}
 </details>
+<details>
+<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
+{{fragments/faq_install_from_source.md}}
+</details>
 
 
 

@@ -69,6 +69,10 @@ After calling <code>delete</code>, you can call <code>flush</code> again to ensu
 {{fragments/faq_id_length.md}}
 </details>
 <details>
+<summary><font color="#3f9cd1">Can I insert vectors with existing IDs?</font></summary>
+{{fragments/faq_duplicate_ids.md}}
+</details>
+<details>
 <summary><font color="#3f9cd1">Does Milvus support inserting while searching?</font></summary>
 {{fragments/faq_search_during_insert.md}}
 </details>

@@ -1,0 +1,1 @@
+Yes, you can. If you insert vectors with an existing ID, you would end up having duplicate IDs.
