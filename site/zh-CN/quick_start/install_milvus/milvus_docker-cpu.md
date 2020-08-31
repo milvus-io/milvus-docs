@@ -122,6 +122,10 @@ $ sudo docker logs milvus_cpu_{{var.release_version}}
 <summary><font color="#3f9cd1">Milvus 中如何实现数据迁移？</font></summary>
 {{fragments/faq_data_migration.md}}
 </details>
+<details>
+<summary><font color="#3f9cd1">Milvus 只能使用 Docker 部署吗？</font></summary>
+{{fragments/faq_install_from_source.md}}
+</details>
 
 
 

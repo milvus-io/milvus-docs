@@ -37,7 +37,7 @@ group: version
 Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>server_config.yaml</b> file.
 </div>
 
-#### Confirm Docker status
+## Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -121,6 +121,10 @@ $ sudo docker logs milvus_cpu_{{var.release_version}}
 <details>
 <summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
 {{fragments/faq_data_migration.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
+{{fragments/faq_install_from_source.md}}
 </details>
 
 

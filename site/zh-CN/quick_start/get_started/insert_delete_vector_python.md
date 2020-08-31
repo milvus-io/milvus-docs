@@ -70,6 +70,10 @@ id: insert_delete_vector_python.md
 {{fragments/faq_id_length.md}}
 </details>
 <details>
+<summary><font color="#3f9cd1">Milvus 可以插入重复 ID 的向量吗？</font></summary>
+{{fragments/faq_duplicate_ids.md}}
+</details>
+<details>
 <summary><font color="#3f9cd1">Milvus 是否支持 “边插入边查询” ？</font></summary>
 {{fragments/faq_search_during_insert.md}}
 </details>
