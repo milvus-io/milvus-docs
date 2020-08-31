@@ -1,0 +1,1 @@
+Vectors inserted each time must not exceed 256 MB.

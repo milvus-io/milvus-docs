@@ -1,0 +1,1 @@
+You can add a Prometheus instance in <strong>prometheus.yaml</strong>. Then Prometheus or Granafa will show the monitoring data, as well as the source node.

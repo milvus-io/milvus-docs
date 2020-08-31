@@ -1,0 +1,1 @@
+如果元数据管理用的是 SQLite，在有数据频繁写入的情况下会出现该错误。建议将 SQLite 更换为 MySQL。如何更换请参考文档 <a href="data_manage.md">使用 MySQL 管理元数据</a>。
