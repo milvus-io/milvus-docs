@@ -43,7 +43,6 @@ checkSameId(cnIds, "CN");
 checkSameId(enIds, "EN");
 
 const metaRegx = /(\S+)\s*?:\s*([\s\S]*?)(?=$|\n)/g;
-
 /**
  *
  * @param {*} dirPath
@@ -65,7 +64,7 @@ const generateValidIds = (dirPath, validMds = [], validPaths = []) => {
       //递归调用
       generateValidIds(filePath, validMds, validPaths);
     } else {
-      if (filesList[i].includes(".md")) {
+      if (filesList[i].includes(".md") && !dirPath.includes("fragments")) {
         const doc = fs.readFileSync(filePath);
         const content = doc.toString();
         const match = content.match(metaRegx);
@@ -98,6 +97,7 @@ const checkIsIdValid = (arr, validArr) => {
   arr.forEach((v) => {
     if (!validArr.includes(v)) {
       errors.push(`Id: ${v} in menustructor will be a broken link, because cant find markdown file by this id. `)
+
       // throw new Error(
       //   `Id: ${v} in menustructor will be a broken link, because cant find markdown file by this id. `
       // );

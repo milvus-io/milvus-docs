@@ -2,56 +2,44 @@
 id: index.md
 ---
 
-# Index Types
+# Vector index
+
+Vector index is a time-efficient and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
+
+Since accurate retrieval is usually very time-consuming, most of the vector index types of Milvus use ANNS (Approximate Nearest Neighbors Search). Compared with accurate retrieval, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
+
+According to the implementation methods, the ANNS vector index can be divided into four categories:
+
+- Tree-based index
+- Graph-based index
+- Hash-based index
+- Quantization-based index
+
+For more details on index types, see [Milvus Index Types](index.md).
+
+## Vector field and index
+
+To improve query performance, you can specify an index type for each vector field. Currently, a vector field only supports one index type, Milvus will automatically delete the old index when switching the index type.
+
+## Create indexes
+
+When the `create_index` API is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
 
 <div class="alert note">
-Please read <a href="index_overview.md">Index Overview</a> before reading this article.
+When the inserted data segment is less than 4096 rows, Milvus does not index it.
 </div>
 
-## Index Overview
+## Index by segment
 
-### Index types in CPU-only Milvus
+Milvus stores massive data in sections. When indexing, Milvus creates an index for each data segment separately.
 
-<div class="table-wrapper" markdown="block">
+## Build indexes during free time
 
-| Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
-| -------- | ----------------- | -------------- | -------------- | ---------------- |
-| FLAT     | -                 | ✔️             | ✔️             | ✔️         　   |
-| IVF_FLAT | ✔️                | ✔️            | ✔️             | ✔️          　  |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️             | ❌             |
-| IVF_PQ   | ✔️                | ✔️            | ✔️             | ❌             |
-| RNSG     | ✔️                | ✔️            | ✔️             | ❌             |
-| HNSW     | ✔️                | ✔️            | ✔️             | ❌             |
-| ANNOY    | ✔️                | ✔️            | ✔️             | ❌             |
+It is known that indexing is a resource-consuming and time-consuming task. When the query task and indexing task are concurrent, Milvus preferentially allocates computing resources to the query task, that is, any query command will interrupt the indexing task being executed in the background. After that, only when the user does not send the query task for 5 seconds, Milvus resumes the indexing task in the background. Besides, if the data segment specified by the query command has not been built into the specified index, Milvus will do a full search directly within the segment.
 
-</div>
 
-### Index types in Milvus with GPU support
 
-<div class="table-wrapper" markdown="block">
-
-| Name       | Index building with CPU | Search with CPU | Search with GPU                                                  | Search with GPU                                          | Float vector support | Binary vector support |
-| ---------- | ----------------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------------------------- | -------------------- | --------------------- |
-| FLAT     | -                | ✔️            | -                  | ✔️<br>(Only Supports floating point vectors) | ✔️             | ✔️            |
-| IVF_FLAT | ✔️                | ✔️            | ✔️<br>(Only Supports floating point vectors)  | ✔️<br>(Only Supports floating point vectors) | ✔️             | ✔️            |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️                  | ✔️                 | ✔️             | ❌           |
-| IVF_SQ8H | ✔️                | ✔️            | ✔️                  | ✔️                 | ✔️             | ❌           |
-| IVF_PQ   | ✔️                | ✔️            | ✔️<br>(Only Supports GPU index for Euclidean distance)                  | ✔️<br>(Only Supports GPU search for Euclidean distance)                 | ✔️             | ❌           |
-| RNSG     | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-| HNSW     | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-| ANNOY    | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-
-</div>
-
-<div class="alert note">
-<ul>
-<li>FLAT index does not need index building.</li>
-<li>For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU.</li>
-<li>Index building parameters and search parameters vary with index type. See <a href="milvus_operation.md">Milvus Operations</a> for more information.</li>
-</ul>
-</div>
-
-## Milvus Indexes
+## Indexes that Milvus supports
 
 ### FLAT
 
@@ -115,7 +103,7 @@ IVF_PQ quantizes the product of vectors, and then performs IVF index clustering.
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>Besides, when computing with GPU, ensure that the result of m x 1024 does not exceed `MaxSharedMemPerBlock` of your graphics card. |
    
-   **Example:** `{"nlist": 2048, "m": 16}`
+   **Example:** `{nlist: 2048, m: 16}`
 
 - IVF_PQ has the same search parameters as IVF_FLAT.
 
@@ -142,7 +130,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | `search_length`       | Number of query iterations        　| [10, 300] |
    | `knng`                | Number of nearest neighbors   　| [5, 300] |
    
-   **Example:** `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
+   **Example:** `{out_degree: 30, candidate_pool_size: 300, search_length: 60, knng: 50}`
 
 - Search parameters
 
@@ -150,7 +138,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | -------- | ----------- | ---------- |
    | `search_length` | Number of query iterations  | [10, 300] |
    
-   **Example:** `{"search_length": 100}`
+   **Example:** `{search_length: 100}`
 
 ### HNSW
 
@@ -169,15 +157,15 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | `M`              | Maximum degree of the node        | [5, 48]  |
    | `efConstruction` | Search scope      | [100, 500] |
 
-   **Example:** `{"M": 16, "efConstruction": 40}`
+   **Example:** `{M: 16, efConstruction: 40}`
 
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | --------|--------------- | ------------ |
-   | `ef`    | Search scope  | [topK, 4096] |
+   | `ef`    | Search scope  | [`top_k`, 4096] |
 
-   **Example:** `{"ef": 64}`
+   **Example:** `{ef: 64}`
 
 ### ANNOY
 
@@ -195,18 +183,31 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | --------- |-------------- | -------- |
    | `n_trees` | The number of methods of space division | [1, 1024] |
 
-   **Example:**`{"n_trees": 8}`
+   **Example:**`{n_trees: 8}`
 
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -----------|--------------------------------- | ---------------- |
-   | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [topk, n × `n_trees`] |
+   | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
-   **Example:**`{"search_k": -1}`
+   **Example:**`{search_k: -1}`
 
 ## How to choose an index
 
 To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
 To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+</font></summary>
+{{fragments/faq_recall_rate_sq8_sq8h.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+{{fragments/faq_flat_ivfflat.md}}
+</details>

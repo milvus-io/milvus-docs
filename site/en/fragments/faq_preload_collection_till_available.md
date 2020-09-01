@@ -1,0 +1,1 @@
+Yes. If you have set <code>preload_collection</code> in <strong>server_config.yaml</strong>, Milvus' service is not available until it loads all specified collections.

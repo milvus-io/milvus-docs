@@ -1,0 +1,1 @@
+是的。如果是在 <strong>server_config.yaml</strong> 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。

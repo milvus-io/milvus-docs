@@ -2,13 +2,13 @@
 id: data_manage.md
 ---
 
-# Data Management
-
-## Use MySQL as metadata management service
+# Manage Metadata with MySQL
 
 Milvus uses SQLite as metadata management service in the backend by default. SQLite is embedded in the Milvus process, so there is no need to run additional services. However, in production, it is strongly recommended that you use MySQL as metadata management service because of reliability.
 
-> Note: In CentOS, Milvus does not support MySQL 8.0 or higher.
+<div class="alert warning">
+In CentOS, Milvus does not support MySQL 8.0 or higher.
+</div>
 
 Follow the steps below to use MySQL as metadata management service in Linux:
 
@@ -36,13 +36,30 @@ Follow the steps below to use MySQL as metadata management service in Linux:
     create database milvus
     ```
 
-5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
+5. Quit MySQL client and update the `backend_url` parameter in **server_config.yaml**. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
 
     ```yaml
     backend_url: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
     ```
 
-6. Use the updated `server_config.yaml` to launch Milvus.
+6. Use the updated **server_config.yaml** to launch Milvus.
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Why does Milvus return <code>database is locked</code>?</font></summary>
+{{fragments/faq_database_locked.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">Why can't I find vectors on SQLite or MySQL?</font></summary>
+{{fragments/faq_no_embeddings_sqlite_mysql.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+{{fragments/faq_supported_meta_db.md}}
+</details>
+
 
 
 ## Related blogs about data management

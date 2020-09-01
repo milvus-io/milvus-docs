@@ -18,30 +18,20 @@
       "order": 0
     },
     {
-      "id": "features.md",
-      "title": "Key Features",
+      "id": "milvus_versions.md",
+      "title": "Milvus Versions",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 1
     },
-
-    
-    {
-      "id": "architecture.md",
-      "title": "Architecture",
-      "label1": "about_milvus",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
     {
       "id": "milvus_basics",
-      "title": "MILVUS GLOSSARY",
+      "title": "Concepts",
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 2,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -53,23 +43,37 @@
       "order": 0
     },
     {
-      "id": "index_overview.md",
-      "title": "Index Overview",
+      "id": "index.md",
+      "title": "Index Types",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
       "order": 1
     },
     {
-      "id": "index.md",
-      "title": "Index Types",
+      "id": "storage_concept.md",
+      "title": "Storage Concepts",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
       "order": 2
     },
-
-
+    {
+      "id": "storage_operation.md",
+      "title": "Storage Operations",
+      "label1": "milvus_basics",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "write_ahead_log.md",
+      "title": "Write Ahead Log",
+      "label1": "milvus_basics",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
     {
       "id": "terms.md",
       "title": "Milvus Terms",
@@ -84,7 +88,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -105,24 +109,17 @@
       "order": 0
     },
     {
-      "id": "cpu_milvus_docker.md",
-      "title": "Install CPU-only Milvus",
+      "id": "milvus_docker-cpu.md",
+      "title": "Install and Start Milvus",
       "label1": "quick_start",
       "label2": "install_milvus",
       "label3": "",
       "order": 1
     },
-    {
-      "id": "gpu_milvus_docker.md",
-      "title": "Install GPU-enabled Milvus",
-      "label1": "quick_start",
-      "label2": "install_milvus",
-      "label3": "",
-      "order": 2
-    },
+    
     {
       "id": "example_code.md",
-      "title": "Milvus Hello World",
+      "title": "Hello Milvus",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
@@ -130,7 +127,7 @@
     },
     {
       "id": "get_started",
-      "title": "Basic Milvus Operations",
+      "title": "Basic Operations",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
@@ -223,7 +220,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 5,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -232,21 +229,54 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "data_manage.md",
-      "title": "Data Management",
+      "title": "Manage metadata with MySQL",
       "label1": "reference",
       "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "monitor",
+      "title": "Monitoring and Alerting",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 2,
+      "isMenu": true
+    },
+    {
+      "id": "monitor.md",
+      "title": "Overview",
+      "label1": "reference",
+      "label2": "monitor",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "setup_prometheus.md",
+      "title": "Configure and Start Prometheus",
+      "label1": "reference",
+      "label2": "monitor",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "setup_grafana.md",
+      "title": "Visualize Metrics in Grafana",
+      "label1": "reference",
+      "label2": "monitor",
       "label3": "",
       "order": 2
     },
     {
-      "id": "monitoring_metrics.md",
-      "title": "Monitoring Metrics",
+      "id": "milvus_metrics.md",
+      "title": "Milvus Metrics",
       "label1": "reference",
-      "label2": "",
+      "label2": "monitor",
       "label3": "",
       "order": 3
     },
@@ -256,19 +286,27 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 3
     },
     {
       "id": "metric.md",
-      "title": "Choosing a Distance Metric",
+      "title": "Choose a Distance Metric",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "tuning.md",
+      "title": "Performancing Tuning",
       "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 5
     },
     {
-      "id": "monitor.md",
-      "title": "Monitoring and Alerting",
+      "id": "mishards.md",
+      "title": "Mishards: Cluster Sharding Middleware",
       "label1": "reference",
       "label2": "",
       "label3": "",
@@ -280,7 +318,7 @@
       "title": "FAQ",
       "label1": "",
       "label2": "",
-      "order": 7,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -320,7 +358,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -374,7 +412,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 9,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -409,7 +447,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 10
+      "order": 7
     }
   ]
 }
