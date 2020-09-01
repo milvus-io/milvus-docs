@@ -6,11 +6,12 @@ const CN_MENU_PATH = path.join(__dirname, "site/zh-CN/menuStructure/cn.json");
 const EN_MDS_PATH = path.join(__dirname, "site/en/");
 const CN_MDS_PATH = path.join(__dirname, "site/zh-CN/");
 
-const errors = [];
+const errors = []
 const getMenuJson = (path) => {
   const doc = fs.readFileSync(path);
   return JSON.parse(doc.toString());
 };
+
 
 const CN_MENU_CONTENT = getMenuJson(CN_MENU_PATH);
 const EN_MENU_CONTENT = getMenuJson(EN_MENU_PATH);
@@ -30,9 +31,9 @@ const checkSameId = (ids, prefix = "") => {
       (v) =>
         (warning += `Menustructure ${prefix}.json - id: ${
           v || `\'\'`
-        } is duplicate. \n`)
+          } is duplicate. \n`)
     );
-    errors.push(warning);
+    errors.push(warning)
     // throw new Error(warning);
   }
   return "";
@@ -70,7 +71,7 @@ const generateValidIds = (dirPath, validMds = [], validPaths = []) => {
         if (match && match[0].includes("id")) {
           const metaId = match[0].split(":")[1].trim();
           if (metaId !== filesList[i]) {
-            errors.push(`Filename: ${filesList[i]} need same with its id`);
+            errors.push(`Filename: ${filesList[i]} need same with its id`)
             // throw `Filename: ${filesList[i]} need same with its id`;
           }
           validMds.push(metaId);
@@ -95,9 +96,8 @@ const cnMenuMdIds = cnIds.filter((v) => v.includes(".md"));
 const checkIsIdValid = (arr, validArr) => {
   arr.forEach((v) => {
     if (!validArr.includes(v)) {
-      errors.push(
-        `Id: ${v} in menustructor will be a broken link, because cant find markdown file by this id. `
-      );
+      errors.push(`Id: ${v} in menustructor will be a broken link, because cant find markdown file by this id. `)
+
       // throw new Error(
       //   `Id: ${v} in menustructor will be a broken link, because cant find markdown file by this id. `
       // );
@@ -121,7 +121,7 @@ const checkInnerLink = (paths, validMds) => {
     innerLinks.forEach((link) => {
       let ignoreAnchorLink = link.split("#")[0];
       if (!validMds.includes(ignoreAnchorLink)) {
-        errors.push(`Check Link ${link} in ${v}`);
+        errors.push(`Check Link ${link} in ${v}`)
         // throw new Error(`Check Link ${link} in ${v}`);
       }
     });
@@ -133,6 +133,6 @@ checkInnerLink(enValidPaths, enValidMds);
 checkInnerLink(cnValidPaths, cnValidMds);
 
 if (errors.length) {
-  errors.forEach((v) => console.log(v));
-  throw new Error("Fail");
+  errors.forEach(v => console.log(v))
+  throw new Error('Fail')
 }
