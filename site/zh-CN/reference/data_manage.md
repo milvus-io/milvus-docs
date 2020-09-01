@@ -36,13 +36,33 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
     create database milvus
     ```
 
-5. 退出 MySQL 客户端, 修改 `server_config.yaml` 文件的 `backend_url` 参数。使用 MySQL 服务所在的主机 IP 作为 IP 地址（`<MySQL_server_host IP>`）。注意密码、IP 地址、端口以及 database 名称要和以上几步的设置一致。
+5. 退出 MySQL 客户端, 修改 **server_config.yaml** 文件的 `backend_url` 参数。使用 MySQL 服务所在的主机 IP 作为 IP 地址（`<MySQL_server_host IP>`）。注意密码、IP 地址、端口以及 database 名称要和以上几步的设置一致。
 
     ```yaml
     backend_url: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
     ```
 
 6. 使用修改过的 **server_config.yaml** 启动 Milvus 服务。
+
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">出现 <code>database is locked</code> 的报错怎么解决？</font></summary>
+{{fragments/faq_database_locked.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么我在 SQLite / MySQL 找不到向量数据？</font></summary>
+{{fragments/faq_no_embeddings_sqlite_mysql.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
+{{fragments/faq_supported_meta_db.md}}
+</details>
+
+
+
 
 ## 数据管理相关博客
 

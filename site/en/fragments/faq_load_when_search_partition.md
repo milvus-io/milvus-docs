@@ -1,0 +1,1 @@
+No, Milvus only loads the partitions to search.

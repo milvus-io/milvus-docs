@@ -67,11 +67,11 @@ $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
 ## 启动 Milvus Docker 容器
@@ -105,11 +105,30 @@ $ sudo docker ps
 如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
 
 ```shell
-# 获得运行 Milvus 的 container ID。
-$ docker ps -a
-# 检查 docker 日志。
-$ docker logs <milvus container id>
+$ sudo docker logs milvus_cpu_{{var.release_version}}
 ```
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">可以在 Windows 上安装 Milvus 吗？</font></summary>
+{{fragments/faq_install_windows.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
+{{fragments/faq_illegal_instruction_set.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">Milvus 中如何实现数据迁移？</font></summary>
+{{fragments/faq_data_migration.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">Milvus 只能使用 Docker 部署吗？</font></summary>
+{{fragments/faq_install_from_source.md}}
+</details>
+
+
+
 
 ## 接下来你可以
 

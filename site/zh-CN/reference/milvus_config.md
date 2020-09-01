@@ -53,7 +53,7 @@ logs:
 
 对于其它参数，你必须重新启动 Milvus 才能使改动生效。
 
-## `server_config.yaml` 参数说明
+## **server_config.yaml** 参数说明
 
 若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
@@ -193,3 +193,23 @@ logs:
 <li>可选单位为 GB、MB、KB。</li>
 </ul>
 </div>
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
+{{fragments/faq_confirm_search_gpu.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
+{{fragments/faq_preload_collection_till_available.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
+{{fragments/faq_gpu_idle.md}}
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么我的日志文件时间与系统时间不一致？</font></summary>
+{{fragments/faq_different_log_time.md}}
+</details>
