@@ -37,7 +37,7 @@ group: version
 Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>server_config.yaml</b> file.
 </div>
 
-## Confirm Docker status
+#### Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -67,11 +67,11 @@ $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
 ## Start Docker container
@@ -105,29 +105,11 @@ $ sudo docker ps
 If the Milvus server does not start up properly, check the error logs:
 
 ```shell
-$ sudo docker logs milvus_cpu_{{var.release_version}}
+# Get the ID of the container running Milvus.
+$ docker ps -a
+# Check docker logs.
+$ docker logs <milvus container id>
 ```
-
-## FAQ
-
-<details>
-<summary><font color="#3f9cd1">Can I install Milvus on Windows?</font></summary>
-{{fragments/faq_install_windows.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
-{{fragments/faq_illegal_instruction_set.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
-{{fragments/faq_data_migration.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
-{{fragments/faq_install_from_source.md}}
-</details>
-
-
 
 ## What's next
 

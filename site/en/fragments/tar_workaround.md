@@ -2,7 +2,7 @@
 <ul>
 <li>If you cannot use your host to acquire Docker images and configuration files online because of network restrictions, please acquire them online from another available host, save them as a TAR file, pass it on to your local machine, and then load the TAR file as a Docker image:
 <details>
-<summary><font color="#3ab7f8">Click here to view the sample code.</font></summary>
+<summary><font color="#3ab7f8">Sample code</font></summary>
 <ol>
  <li>Save the Docker image as a TAR file, and pass it on to your local machine:</br>
 

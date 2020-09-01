@@ -1,1 +1,0 @@
-如果你的 CPU 不支持 SSE42、AVX、AVX2、AVX512 其中任何一个指令集，则 Milvus 无法正常启动。可以通过 <code>cat /proc/cpuinfo</code> 查看 CPU 支持的指令集。

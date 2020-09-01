@@ -1,1 +1,0 @@
-No, you cannot. Milvus does not support this feature for now.

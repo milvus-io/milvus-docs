@@ -1,1 +1,0 @@
-Yes, so long as you have set up a Docker environment on your operating system.
