@@ -1,1 +1,0 @@
-No. A collection can have only one index type at a time.

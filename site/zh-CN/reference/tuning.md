@@ -66,9 +66,9 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 
 索引建立完成后（不包括 FLAT），索引文件需要额外占用磁盘空间，查询只需加载索引文件。
 
-* IVF_FLAT 索引的数据量和其原始向量总数据量基本相等。
-* IVF\_SQ8 / IVF\_SQ8H 索引的数据量相当于其原始向量总数据量的 25% ～ 30%。
-* IVF_PQ 索引的数据量根据其参数变化，一般低于其原始向量总数据量的 10%。
+* IVFFLAT 索引的数据量和其原始向量总数据量基本相等。
+* IVFSQ8 / IVFSQ8H 索引的数据量相当于其原始向量总数据量的 25% ～ 30%。
+* IVFPQ 索引的数据量根据其参数变化，一般低于其原始向量总数据量的 10%。
 * HNSW／RNSG／ANNOY 索引的数据量都大于其原始向量总数据量。
 
 <div class="alert note">
@@ -105,20 +105,20 @@ FLAT 是对向量的暴力搜索（brute-force search），速度最慢，但召
 
 - IVF 系列索引
 
-IVF 系列索引包括 IVF\_FLAT、IVF\_SQ8／IVF\_SQ8H 和 IVF\_PQ。IVF\_SQ8／IVF\_SQ8H 和 IVF_PQ 索引对向量数据做了有损压缩，磁盘占用量较少。
+IVF 系列索引包括 IVF_FLAT、IVF_SQ8／IVF_SQ8H 和 IVF_PQ。IVF_SQ8／IVF_SQ8H 和 IVF_PQ 索引对向量数据做了有损压缩，磁盘占用量较少。
 
 IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可参考 [索引概览](index.md#索引概览)。
 
 根据其原理，可估算出使用 IVF 索引进行查询时的计算量。
 
-* 单个数据段计算量可估算为：目标向量数量 × (`nlist` + （段内向量数 ÷ `nlist`）× `nprobe`)
-* 数据段的数量可估算为：集合数据总量 ÷ `index_file_size`
-* 对集合查询所需的计算总量则为：单个数据段计算量 × 数据段数量 
+* 单个分段计算量可估算为：目标向量数量 × (`nlist` + （段内向量数 ÷ `nlist`）× `nprobe`)
+* 分段的数量可估算为：集合数据总量 ÷ `index_file_size`
+* 对集合查询所需的计算总量则为：单个分段计算量 × 分段数量 
 
 通过估算得出的计算总量越大，查询耗时越长。实际使用中可根据以上公式确定合理的参数，在满足召回率的前提下获得较高的查询性能。
 
 <div class="alert note">
-在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的数据段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该数据段向量总数。
+在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的分段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该分段向量总数。
 </div>
 
 - HNSW / RNSG / ANNOY 索引
@@ -148,27 +148,3 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 - 数据段整理
 
 在 [数据段整理](storage_operation.md#数据段整理) 中提到，被删除的实体不参与计算，并且占用磁盘空间。如果有大量的实体已被删除，你可以调用 `compact` 接口来释放磁盘空间。
-
-
-## 常见问题
-
-<details>
-<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
-{{fragments/faq_gpu_idle.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">为什么搜索的速度非常慢？</font></summary>
-{{fragments/faq_search_slow.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
-{{fragments/faq_index_file_size_best_practice.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
-{{fragments/faq_gpu_search_slow.md}}
-</details>
-<details>
-<summary><font color="#3f9cd1">为什么有时候小的数据集查询时间反而更长？</font></summary>
-{{fragments/faq_search_time_small_dataset.md}}
-</details>

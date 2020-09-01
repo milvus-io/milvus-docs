@@ -1,1 +1,0 @@
-Try installing pymilvus in a Conda environment.
