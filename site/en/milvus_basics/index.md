@@ -78,7 +78,7 @@ IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IV
 
 ### IVF_SQ8H
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
+Optimized version of IVF\_SQ8 that requires both CPU and GPU to work. Unlike IVF\_SQ8, IVF\_SQ8H uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
 IVF\_SQ8H is an IVF\_SQ8 index that optimizes query execution.
 
@@ -105,7 +105,7 @@ IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering
    
    **Example:** `{"nlist": 2048, "m": 16}`
 
-- IVF_PQ has the same search parameters as IVF_FLAT.
+- IVF\_PQ has the same search parameters as IVF\_FLAT.
 
 ### RNSG
 
