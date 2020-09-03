@@ -49,7 +49,7 @@ Milvus 在全球范围内已被数百家组织和机构所采用，广泛应用�
 
 {{fragments/distributions.md}}
 
-详见：[Milvus Distributions](milvus_distributions.md)。
+详见：[Milvus Distributions](milvus_distributions-cpu.md)。
 
 ## 加入开发者社区
 

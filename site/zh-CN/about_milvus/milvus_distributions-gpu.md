@@ -1,8 +1,15 @@
 ---
-id: milvus_distributions.md
+id: milvus_distributions-gpu.md
+label: GPU 版 Milvus
+order: 1
+group: distribution
 ---
 
 # Milvus 版本比较
+
+{{tab}} 
+
+## 概述
 
 {{fragments/distributions.md}}
 

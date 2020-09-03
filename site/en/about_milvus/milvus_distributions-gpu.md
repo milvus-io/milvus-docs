@@ -1,38 +1,20 @@
 ---
-id: milvus_distributions.md
+id: milvus_distributions-gpu.md
+label: GPU-only Milvus
+order: 1
+group: distribution
 ---
 
 # Milvus Distributions
 
+{{tab}} 
+
+## Overview
+
 {{fragments/distributions.md}}
 
 
-
-## CPU-only Milvus vs. GPU-enabled Milvus
-
-In Milvus, a vector search includes two separate processes: index building and search. 
-
-- For GPU-enabled Milvus, these two processes can run concurrently, which facilitates more efficient query, especially for incremental data. 
-- For CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
-
-
-### Index types in CPU-only Milvus
-
-<div class="table-wrapper" markdown="block">
-
-| Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
-| -------- | ----------------- | -------------- | -------------- | ---------------- |
-| FLAT     | -                 | ✔️             | ✔️             | ✔️         　   |
-| IVF_FLAT | ✔️                | ✔️            | ✔️             | ✔️          　  |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️             | ❌             |
-| IVF_PQ   | ✔️                | ✔️            | ✔️             | ❌             |
-| RNSG     | ✔️                | ✔️            | ✔️             | ❌             |
-| HNSW     | ✔️                | ✔️            | ✔️             | ❌             |
-| ANNOY    | ✔️                | ✔️            | ✔️             | ❌             |
-
-</div>
-
-### Index types in Milvus with GPU support
+## Indexes for GPU-enabled Milvus
 
 <div class="table-wrapper" markdown="block">
 

@@ -52,7 +52,7 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 {{fragments/distributions.md}}
 
-For more information, see [Milvus Distributions](milvus_distributions.md).
+For more information, see [Milvus Distributions](milvus_distributions-cpu.md).
 
 ## Join our community
 
