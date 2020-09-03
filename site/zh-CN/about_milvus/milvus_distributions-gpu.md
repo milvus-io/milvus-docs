@@ -14,7 +14,7 @@ group: distribution
 {{fragments/distributions.md}}
 
 
-## CPU 版本 Milvus 支持的索引类型
+## GPU 版本 Milvus 支持的索引类型
 
 <div class="filter">
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
@@ -35,7 +35,6 @@ group: distribution
 
 </div>
 
-## GPU 版本 Milvus 支持的索引类型
 
 <div class="table-wrapper  filter-binary" markdown="block">
 

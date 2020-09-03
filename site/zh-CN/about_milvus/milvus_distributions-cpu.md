@@ -34,8 +34,6 @@ group: distribution
 
 </div>
 
-## GPU 版本 Milvus 支持的索引类型
-
 <div class="table-wrapper filter-binary" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索        |
