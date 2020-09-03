@@ -2,7 +2,7 @@
 id: milvus_distributions.md
 ---
 
-# Milvus Versions
+# Milvus Distributions
 
 {{fragments/distributions.md}}
 
