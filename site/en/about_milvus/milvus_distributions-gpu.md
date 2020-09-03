@@ -1,6 +1,6 @@
 ---
 id: milvus_distributions-gpu.md
-label: GPU-only Milvus
+label: GPU-enabled Milvus
 order: 1
 group: distribution
 ---
