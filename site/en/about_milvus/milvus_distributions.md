@@ -4,9 +4,7 @@ id: milvus_distributions.md
 
 # Milvus Versions
 
-<div>
 {{fragments/distributions.md}}
-</div>
 
 
 

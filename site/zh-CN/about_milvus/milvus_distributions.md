@@ -4,9 +4,7 @@ id: milvus_distributions.md
 
 # Milvus 版本比较
 
-<div>
 {{fragments/distributions.md}}
-</div>
 
 
 ## CPU 版本 Milvus 支持的索引类型

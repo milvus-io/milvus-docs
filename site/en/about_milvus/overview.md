@@ -50,9 +50,7 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 ## Milvus distributions
 <a name='distributions'></a>
 
-<div>
 {{fragments/distributions.md}}
-</div>
 
 For more information, see [Milvus Distributions](milvus_distributions.md).
 

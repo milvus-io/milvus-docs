@@ -47,9 +47,7 @@ Milvus 在全球范围内已被数百家组织和机构所采用，广泛应用�
 ## 发行版本
 <a name='distributions'></a>
 
-<div>
 {{fragments/distributions.md}}
-</div>
 
 详见：[Milvus Distributions](milvus_distributions.md)。
 
