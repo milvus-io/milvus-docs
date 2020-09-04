@@ -22,7 +22,7 @@ group: distribution
 <a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
 </div>
 
-<div class="table-wrapper filter-floating" markdown="block">
+<div class="filter-floating table-wrapper" markdown="block">
 
 | Index type       | Indexing with CPU | Search with CPU |
 | -------- | ----------------- | -------------- |
@@ -36,7 +36,7 @@ group: distribution
 
 </div>
 
-<div class="table-wrapper filter-binary" markdown="block">
+<div class="filter-binary table-wrapper" markdown="block">
 
 | Index type      | Index building with CPU | Search with CPU |
 | -------- | ----------------- | -------------- |

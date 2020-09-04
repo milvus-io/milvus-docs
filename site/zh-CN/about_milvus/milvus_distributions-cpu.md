@@ -20,7 +20,7 @@ group: distribution
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
 </div>
 
-<div class="table-wrapper filter-floating" markdown="block">
+<div class="filter-floating table-wrapper" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索       |
 | -------- | ----------------- | -------------- |
@@ -34,7 +34,7 @@ group: distribution
 
 </div>
 
-<div class="table-wrapper filter-binary" markdown="block">
+<div class="filter-binary table-wrapper" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索        |
 | -------- | ----------------- | -------------- |
