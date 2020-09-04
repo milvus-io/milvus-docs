@@ -22,26 +22,26 @@ group: distribution
 
 <div class="filter-floating table-wrapper" markdown="block">
 
-| 索引类型  | CPU 建索引        | CPU 搜索       | GPU 建索引           | GPU 搜索         |
-| -------- | ----------------- | ------------- | -------------------- | --------------- |
-| FLAT     | N/A                | ✔️            | N/A                  | ✔️            |
+| 索引类型  | CPU 建索引        | GPU 建索引      | CPU 搜索            | GPU 搜索         |
+| -------- | ----------------- | -------------  | -------------------- | --------------- |
+| FLAT     | N/A                | N/A           | ✔️                  | ✔️            |
 | IVF_FLAT | ✔️                | ✔️            | ✔️                  | ✔️             |
 | IVF_SQ8  | ✔️                | ✔️            | ✔️                  | ✔️             |
 | IVF_SQ8H | ✔️                | ✔️            | ✔️                  | ✔️             |
 | IVF_PQ   | ✔️                | ✔️            | ✔️                  | ✔️             |
-| RNSG     | ✔️                | ✔️            | ❌                 | ❌              |
-| HNSW     | ✔️                | ✔️            | ❌                 | ❌              |
-| ANNOY    | ✔️                | ✔️            | ❌                 | ❌              |
+| RNSG     | ✔️                | ❌            | ✔️                  | ❌              |
+| HNSW     | ✔️                | ❌            | ✔️                  | ❌              |
+| ANNOY    | ✔️                | ❌            | ✔️                  | ❌              |
 
 </div>
 
 
 <div class="filter-binary table-wrapper" markdown="block">
 
-| 索引类型  | CPU 建索引        | CPU 搜索       | GPU 建索引           | GPU 搜索        |
+| 索引类型  | CPU 建索引        | GPU 建索引      | CPU 搜索            | GPU 搜索        |
 | --------- | ---------------- | -------------- | ------------------- | --------------- |
-| FLAT       | N/A              | ✔️            | N/A                 | ❌             |
-| IVF_FLAT   | ✔️              | ✔️             | ❌                 | ❌             |
+| FLAT       | N/A             | N/A            | ✔️                 | ❌             |
+| IVF_FLAT   | ✔️              | ❌            | ✔️                 | ❌             |
 
 </div>
 <div class="alert note">
