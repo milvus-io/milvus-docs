@@ -22,24 +22,24 @@ group: distribution
 
 <div class="filter-floating table-wrapper" markdown="block">
 
-| 索引类型  | CPU 建索引        | CPU 搜索       |
-| -------- | ----------------- | -------------- |
-| FLAT     | N/A                | ✔️           |
-| IVF_FLAT | ✔️                | ✔️            |
-| IVF_SQ8  | ✔️                | ✔️            |
-| IVF_PQ   | ✔️                | ✔️            |
-| RNSG     | ✔️                | ✔️            |
-| HNSW     | ✔️                | ✔️            |
-| ANNOY    | ✔️                | ✔️            |
+| 索引类型  | CPU 建索引        | CPU 搜索       | GPU 建索引           | GPU 搜索        |
+| -------- | ----------------- | -------------- | ------------------- | --------------- |
+| FLAT     | N/A               | ✔️            | ❌                  | ❌              |
+| IVF_FLAT | ✔️                | ✔️            | ❌                  | ❌              |
+| IVF_SQ8  | ✔️                | ✔️            | ❌                  | ❌              |
+| IVF_PQ   | ✔️                | ✔️            | ❌                  | ❌              |
+| RNSG     | ✔️                | ✔️            | ❌                  | ❌              |
+| HNSW     | ✔️                | ✔️            | ❌                  | ❌              |
+| ANNOY    | ✔️                | ✔️            | ❌                  | ❌              |
 
 </div>
 
 <div class="filter-binary table-wrapper" markdown="block">
 
-| 索引类型  | CPU 建索引        | CPU 搜索        |
+| 索引类型  | CPU 建索引        | CPU 搜索        | GPU 建索引           | GPU 搜索        |
 | -------- | ----------------- | -------------- |
-| FLAT     | N/A               | ✔️             |
-| IVF_FLAT | ✔️                | ✔️            |
+| FLAT     | N/A               | ✔️             | ❌                  | ❌              |
+| IVF_FLAT | ✔️                | ✔️            | ❌                  | ❌              |
 
 </div>
 
