@@ -7,11 +7,11 @@ group: distribution
 
 # Milvus 版本比较
 
-{{tab}} 
-
 ## 概述
 
 {{fragments/distributions.md}}
+
+{{tab}} 
 
 
 ## GPU 版本 Milvus 支持的索引类型

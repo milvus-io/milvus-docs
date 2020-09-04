@@ -7,14 +7,14 @@ group: distribution
 
 # Milvus Distributions
 
-{{tab}} 
+
 
 ## Overview
 
 
 {{fragments/distributions.md}}
 
-
+{{tab}} 
 
 ## Indexes for CPU-only Milvus
 
@@ -26,7 +26,7 @@ group: distribution
 
 | Index type | Indexing with CPU | Search with CPU | Indexing with GPU        | Search with GPU |
 | ---------- | ----------------- | --------------- | ------------------------ | --------------- |
-| FLAT       | N/A               | ✔️              | ❌                      | ❌              |
+| FLAT       | N/A               | ✔️              | N/A                     | ❌              |
 | IVF_FLAT   | ✔️                | ✔️             | ❌                      | ❌              |
 | IVF_SQ8    | ✔️                | ✔️             | ❌                      | ❌              |
 | IVF_PQ     | ✔️                | ✔️             | ❌                      | ❌              |
@@ -40,7 +40,7 @@ group: distribution
 
 | Index type | Index building with CPU | Search with CPU | Indexing with GPU     | Search with GPU |
 | ---------- | ----------------------- | --------------- | --------------------- | --------------- |
-| FLAT       | N/A                     | ✔️             | ❌                    | ❌              |
+| FLAT       | N/A                     | ✔️             | N/A                   | ❌              |
 | IVF_FLAT   | ✔️                      | ✔️             | ❌                    | ❌              |
 
 </div>

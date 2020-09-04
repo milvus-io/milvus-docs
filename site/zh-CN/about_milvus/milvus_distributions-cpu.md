@@ -7,11 +7,11 @@ group: distribution
 
 # Milvus 版本比较
 
-{{tab}} 
-
 ## 概述
 
 {{fragments/distributions.md}}
+
+{{tab}} 
 
 
 ## CPU 版本 Milvus 支持的索引类型
@@ -24,7 +24,7 @@ group: distribution
 
 | 索引类型  | CPU 建索引        | CPU 搜索       | GPU 建索引           | GPU 搜索        |
 | -------- | ----------------- | -------------- | ------------------- | --------------- |
-| FLAT     | N/A               | ✔️            | ❌                  | ❌              |
+| FLAT     | N/A               | ✔️            | N/A                  | ❌              |
 | IVF_FLAT | ✔️                | ✔️            | ❌                  | ❌              |
 | IVF_SQ8  | ✔️                | ✔️            | ❌                  | ❌              |
 | IVF_PQ   | ✔️                | ✔️            | ❌                  | ❌              |
@@ -37,8 +37,8 @@ group: distribution
 <div class="filter-binary table-wrapper" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索        | GPU 建索引           | GPU 搜索        |
-| -------- | ----------------- | -------------- |
-| FLAT     | N/A               | ✔️             | ❌                  | ❌              |
+| -------- | ----------------- | -------------- | -------------------- | --------------- |
+| FLAT     | N/A               | ✔️             | N/A                 | ❌              |
 | IVF_FLAT | ✔️                | ✔️            | ❌                  | ❌              |
 
 </div>

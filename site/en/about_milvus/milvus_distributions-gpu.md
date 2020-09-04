@@ -7,12 +7,11 @@ group: distribution
 
 # Milvus Distributions
 
-{{tab}} 
-
 ## Overview
 
 {{fragments/distributions.md}}
 
+{{tab}} 
 
 ## Indexes for GPU-enabled Milvus
 
