@@ -10,8 +10,8 @@ Below table shows how these widely used distance metrics fit with various input 
 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | Euclidean distance (L2) and inner product (IP)              | FLAT, IVF\_FLAT, IVF\_SQ8, IVF\_SQ8H, IVF\_PQ, RNSG, HNSW |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | FLAT, IVF_FLAT                                               |
+| Float      | <ul><li>Euclidean distance (L2)</li> <li>Inner product (IP)</li></ul>             | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
+| Binary     | <ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li><li>Superstructure (FLAT only)</li><li>Substructure (FLAT only)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                              |
 
 ### Euclidean distance (L2)
 
