@@ -14,7 +14,7 @@ group: distribution
 {{tab}} 
 
 
-## CPU 版本 Milvus 支持的索引类型
+## CPU 版 Milvus 支持的索引类型
 
 <div class="filter">
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
