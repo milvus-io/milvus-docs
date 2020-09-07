@@ -29,7 +29,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 两条向量内积距离的计算公式为：
 
-![ip](../../../assets/IP.png)
+![ip](../../../assets/IP_formula.png)
 
 
 假设有 A 和 B 两条向量，则 `||A||` 与 `||B||` 分别代表 A 和 B 归一化后的值。
@@ -42,11 +42,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 假设 X' 是向量 X 的归一化向量：
 
-![normalize](../../../assets/normalize.png)
+![normalize](../../../assets/normalize_formula.png)
 
 两者之间的关系为：
 
-![normalization](../../../assets/normalization.png)
+![normalization](../../../assets/normalization_formula.png)
 
 ### 杰卡德距离
 

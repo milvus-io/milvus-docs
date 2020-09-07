@@ -29,7 +29,7 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 The IP distance between two embeddings are defined as follows: 
 
-![ip](../../../assets/IP.png)
+![ip](../../../assets/IP_formula.png)
 
 where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
@@ -42,11 +42,11 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Suppose X' is normalized from embedding X: 
 
-![normalize](../../../assets/normalize.png)
+![normalize](../../../assets/normalize_formula.png)
 
 The correlation between the two embeddings is as follows: 
 
-![normalization](../../../assets/normalization.png)
+![normalization](../../../assets/normalization_formula.png)
 
 ### Jaccard distance
 
