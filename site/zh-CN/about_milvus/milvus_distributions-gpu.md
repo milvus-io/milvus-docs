@@ -18,6 +18,7 @@ group: distribution
 
 <div class="filter">
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
+{{fragments/choose_embedding_type.md}}
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
@@ -33,6 +34,9 @@ group: distribution
 | HNSW     | ✔️                | ❌            | ✔️                  | ❌              |
 | ANNOY    | ✔️                | ❌            | ✔️                  | ❌              |
 
+<div class="alert note">
+对于那些 CPU 和 GPU 同时支持的索引，Milvus 支持在创建和搜索时使用不同的设备。比如，你可以在 GPU 上创建索引后再在 CPU 上查询，也可以在 CPU 上创建索引后再在 GPU 上查询。
+</div>
 </div>
 
 
@@ -43,7 +47,4 @@ group: distribution
 | FLAT       | N/A             | N/A            | ✔️                 | ❌             |
 | IVF_FLAT   | ✔️              | ❌            | ✔️                 | ❌             |
 
-</div>
-<div class="alert note">
-对于那些 CPU 和 GPU 同时支持的索引，Milvus 支持在创建和搜索时使用不同的设备。比如，你可以在 GPU 上创建索引后再在 CPU 上查询，也可以在 CPU 上创建索引后再在 GPU 上查询。
 </div>

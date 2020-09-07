@@ -17,6 +17,7 @@ group: distribution
 
 <div class="filter">
 <a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
+{{fragments/choose_embedding_type.md}}
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
@@ -32,6 +33,11 @@ group: distribution
 | HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
 | ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
 
+<div class="alert note">
+<ul>
+<li>For indexes supporting both CPU and GPU, you can create or search them using different devices. For example, you can create an index using CPU and conduct a vector search using GPU, and vice versa.</li>
+</ul>
+</div>
 </div>
 
 <div class="filter-binary table-wrapper" markdown="block">
@@ -44,8 +50,3 @@ group: distribution
 
 </div>
 
-<div class="alert note">
-<ul>
-<li>For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU.</li>
-</ul>
-</div>
