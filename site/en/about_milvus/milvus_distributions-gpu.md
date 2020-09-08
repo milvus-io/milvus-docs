@@ -15,9 +15,11 @@ group: distribution
 
 ## Indexes for GPU-enabled Milvus
 
+{{fragments/choose_embedding_type.md}}
+
 <div class="filter">
 <a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
-{{fragments/choose_embedding_type.md}}
+
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">

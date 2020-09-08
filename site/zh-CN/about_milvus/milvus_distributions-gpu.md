@@ -16,9 +16,11 @@ group: distribution
 
 ## GPU 版 Milvus 支持的索引类型
 
+{{fragments/choose_embedding_type.md}}
+
 <div class="filter">
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
-{{fragments/choose_embedding_type.md}}
+
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
