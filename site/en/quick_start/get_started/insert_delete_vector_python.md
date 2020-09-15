@@ -65,18 +65,18 @@ After calling <code>delete</code>, you can call <code>flush</code> again to ensu
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Is there a length limit on the self-defined entity IDs?</font></summary>
+<summary><font color="#4fc4f9">Is there a length limit on the self-defined entity IDs?</font></summary>
 {{fragments/faq_id_length.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">Can I insert vectors with existing IDs?</font></summary>
+<summary><font color="#4fc4f9">Can I insert vectors with existing IDs?</font></summary>
 {{fragments/faq_duplicate_ids.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">Does Milvus support inserting while searching?</font></summary>
+<summary><font color="#4fc4f9">Does Milvus support inserting while searching?</font></summary>
 {{fragments/faq_search_during_insert.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">Is there a volume limit on the vectors inserted each time?</font></summary>
+<summary><font color="#4fc4f9">Is there a volume limit on the vectors inserted each time?</font></summary>
 {{fragments/faq_data_volume_one_insertion.md}}
 </details>

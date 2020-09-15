@@ -198,18 +198,18 @@ logs:
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
+<summary><font color="#4fc4f9">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
 {{fragments/faq_confirm_search_gpu.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
+<summary><font color="#4fc4f9">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
 {{fragments/faq_preload_collection_till_available.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
+<summary><font color="#4fc4f9">为什么查询时 GPU 一直空闲？</font></summary>
 {{fragments/faq_gpu_idle.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么我的日志文件时间与系统时间不一致？</font></summary>
+<summary><font color="#4fc4f9">为什么我的日志文件时间与系统时间不一致？</font></summary>
 {{fragments/faq_different_log_time.md}}
 </details>

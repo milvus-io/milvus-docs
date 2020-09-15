@@ -17,6 +17,6 @@ After calling <code>delete</code>, you can call <code>flush</code> again to ensu
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Why my data cannot be searched immediately after insertion?</font></summary>
+<summary><font color="#4fc4f9">Why my data cannot be searched immediately after insertion?</font></summary>
 {{fragments/faq_inserted_data_unsearchable.md}}
 </details>

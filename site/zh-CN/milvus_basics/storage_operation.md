@@ -128,10 +128,10 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">Milvus 可以通过扩展某些接口（如 S3 接口、GlusterFS 接口）来扩展存储吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 可以通过扩展某些接口（如 S3 接口、GlusterFS 接口）来扩展存储吗？</font></summary>
 {{fragments/faq_expand_interface.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 有没有数据导出的功能？</font></summary>
+<summary><font color="#4fc4f9">Milvus 有没有数据导出的功能？</font></summary>
 {{fragments/faq_data_export.md}}
 </details>

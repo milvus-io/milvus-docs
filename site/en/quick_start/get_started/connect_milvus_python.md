@@ -37,10 +37,10 @@ This article decribes how to connect to a Milvus server from a Python client.
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Does Milvus' Python SDK have a connection pool?</font></summary>
+<summary><font color="#4fc4f9">Does Milvus' Python SDK have a connection pool?</font></summary>
 {{fragments/faq_pymilvus_connection_pool.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">How to fix the error when I install pymilvus on Windows?</font></summary>
+<summary><font color="#4fc4f9">How to fix the error when I install pymilvus on Windows?</font></summary>
 {{fragments/faq_pymilvus_install_error.md}}
 </details>

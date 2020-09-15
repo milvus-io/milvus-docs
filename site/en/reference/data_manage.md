@@ -48,15 +48,15 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Why does Milvus return <code>database is locked</code>?</font></summary>
+<summary><font color="#4fc4f9">Why does Milvus return <code>database is locked</code>?</font></summary>
 {{fragments/faq_database_locked.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">Why can't I find vectors on SQLite or MySQL?</font></summary>
+<summary><font color="#4fc4f9">Why can't I find vectors on SQLite or MySQL?</font></summary>
 {{fragments/faq_no_embeddings_sqlite_mysql.md}}
 </details>
 <details>
-<summary><font color="#3f9cd1">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+<summary><font color="#4fc4f9">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
 {{fragments/faq_supported_meta_db.md}}
 </details>
 

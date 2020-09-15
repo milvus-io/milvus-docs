@@ -19,6 +19,6 @@ id: flush_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">为什么数据插入后不能马上被搜索到？</font></summary>
+<summary><font color="#4fc4f9">为什么数据插入后不能马上被搜索到？</font></summary>
 {{fragments/faq_inserted_data_unsearchable.md}}
 </details>
