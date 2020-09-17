@@ -62,9 +62,9 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 
 
 
-## Related blogs about data management
+## Related blogs
 
-From data import, data storage to data querying and scheduling, our blogs on Medium introduce detailed insights about the data management strategy in Milvus.
+From data import, data storage to data querying and scheduling, our blogs on Medium provide detailed insights into the data management mechanism of Milvus.
 
 - [Managing Data in Massive-Scale Vector Search Engine](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
 - [Improvements of the Data File Cleanup Mechanism](https://github.com/milvus-io/community/blob/master/blog/en/2019-12-18-datafile-cleanup.md)
