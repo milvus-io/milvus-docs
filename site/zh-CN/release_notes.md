@@ -6,7 +6,7 @@ id: release_notes.md
 
 ## v0.10.3
 
-**发布时间**：2020-9-19
+**发布时间**：2020-9-21
 
 #### 版本兼容
 
@@ -21,10 +21,11 @@ id: release_notes.md
 - 增加了 IVF_PQ 索引的建索引参数 `m` 的有效值：能被向量维度 `dim` 整除的 `m` 值均为有效值。[#3254](https://github.com/milvus-io/milvus/issues/3254)
 - 将倒排文件（IVF）类索引的查询参数 `nprobe` 的有效范围增加至 [1, 16384]。[#3606](https://github.com/milvus-io/milvus/issues/3606)
 - 将查询语句中 `top_k` 的有效范围增加至 [1, 16384]。[#3639](https://github.com/milvus-io/milvus/issues/3639)
+- 优化了内存释放策略以避免内存过度使用。[#3536](https://github.com/milvus-io/milvus/issues/3536)
 
 #### 问题修复
 
-- 优化了内存释放策略以避免内存过度使用。[#3536](https://github.com/milvus-io/milvus/issues/3536)
+
 - 修复了在多 GPU 设备上采用 IVF_SQ8H 索引时若 GPU 缓存设置过小， Milvus 会崩溃的问题。[#3742](https://github.com/milvus-io/milvus/issues/3742)
 - 修复了在采用 IVF_SQ8H 索引时，Milvus 退出时报的一个 CUDA 错误。[#3760](https://github.com/milvus-io/milvus/issues/3760)
 
