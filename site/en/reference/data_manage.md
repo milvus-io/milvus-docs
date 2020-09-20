@@ -15,13 +15,13 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 1. Pull the latest image of MySQL:
 
     ```shell
-    $ docker pull mysql:latest
+    $ docker pull mysql:5.7
     ```
 
 2. Launch MySQL service. You can set your own password and port.
 
     ```shell
-    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
     ```
 
 3. Use root account and the IP of the host that runs MySQL service (`<MySQL_server_host IP>`) to log in MySQL. Press \<ENTER\> to enter the password you set in the previous step.

@@ -15,19 +15,7 @@ Milvus 支持在集合或分区中查询向量。
    ```
 
    <div class="alert note">
-   对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。
-   </div>
-
-   | 索引类型                             | 搜索参数                                                                                    | 示例参数              | 取值范围       |
-   | ------------------------------------ | ------------------------------------------------------------------------------------------- | --------------------- | -------------- |
-   | FLAT | - | | - |
-   | IVF\_FLAT / IVF\_SQ8 / IVF\_SQ8H / IVF\_PQ | `nprobe`：查询时所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，速度越慢。         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
-   | RNSG                                | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，速度越慢。                         | `{search_length: 100}` | [10, 300]      |
-   | HNSW                               | `ef`：值越大，则在索引中搜索的数据越多，召回率越高，速度越慢。                                    | `{ef: 64}`            | [`top_k`, 4096] |
-   | ANNOY                              | `search_k`: 影响搜索性能。值越大，搜索结果越精确，但搜索时间越长。</br>-1 表示默认值，取总数据量的5%。 | `{search_k: -1}`    | {-1} ∪ [`top_k`, n × n_trees] |
-
-   <div class="alert note">
-   <code>top_k</code> 是与目标向量最相似的 k 条向量，在搜索时定义。<code>top_k</code> 的取值范围是 (0, 2048]。
+   对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。详细信息请参考 <a href="index.md">Milvus 索引类型</a>。
    </div>
 
 2. 创建随机向量作为 `query_records` 进行搜索：
@@ -37,6 +25,12 @@ Milvus 支持在集合或分区中查询向量。
    >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
+
+   <div class="alert note">
+   <ul>
+   <li><code>top_k</code> 指的是向量空间中距离目标向量最近的 k 个向量。</li><li><code>top_k</code> 的范围为：[1, 16384]。</li>
+   </ul>
+   </div>
 
 ## 在分区中查询向量
 

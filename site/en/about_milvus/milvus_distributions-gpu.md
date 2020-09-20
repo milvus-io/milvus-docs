@@ -35,9 +35,15 @@ group: distribution
 | HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
 | ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
 
+
 <div class="alert note">
-An index built with CPU is the same as built with GPU. The only difference is that, for most of the time, the time to build the index using GPU is shorter than using CPU.
+<ul>
+<li>An index built with CPU is identical to built with CPU. The only difference is the time to build the index: GPU usually takes less time.</li>
+<li>If <code>top_k</code> > 2048, Milvus switches from GPU search to CPU search.</li>
+<li>If <code>nprobe</code> > 2048, Milvus switches from GPU search to CPU search.</li>
+</ul>
 </div>
+
 </div>
 
 <div class="filter-binary table-wrapper" markdown="block">

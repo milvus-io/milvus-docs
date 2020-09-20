@@ -15,13 +15,13 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 1. 拉取 MySQL 最新镜像。
 
     ```shell
-    $ docker pull mysql:latest
+    $ docker pull mysql:5.7
     ```
 
 2. 启动 MySQL 服务（密码和端口可自行设置）。
 
     ```shell
-    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
     ```
 
 3. 使用 root 账号和 MySQL 服务所在的主机 IP （`<MySQL_server_host IP>`）登录 MySQL，回车后系统提示输入密码。输入上一步设置的密码。

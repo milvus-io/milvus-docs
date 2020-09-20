@@ -15,20 +15,10 @@ Milvus supports searching vectors in a collection or partition.
    ```
 
    <div class="alert note">
-   Different index types requires different search parameters. You must <b>assign values</b> to all search parameters.
+   Different index types requires different search parameters. You must <b>assign values</b> to all search parameters. See <a href="index.md">Vector Indexes</a> for more information. 
    </div>
 
-   | Index Type | Search Parameter | Example Parameter | Range |
-   | ---------- | --------------- | ----------------- | ----- |
-   | FLAT | - | | - |
-   | IVF\_FLAT / IVF\_SQ8/ IVF\_SQ8H / IVF\_PQ | `nprobe`: The number of vector classes involved in the query. `nprobe` affects query accuracy. The larger the value, the higher the accuracy and the lower the speed.         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
-   | RNSG                                | `search_length`: The larger the value, the more nodes to search in the graph, the higher the recall rate, and the lower the speed.                         | `{search_length: 100}` | [10, 300]      |
-   | HNSW                               | `ef`: The larger the value, the more data to search in the index, the higher the recall rate, and the lower the speed.                                    | `{ef: 64}`            | [`top_k`, 4096] |
-   | ANNOY                              | `search_k`: The value affects search performance. The larger the value, the more accurate the search results, but the longer the search time.</br>-1 represents the default value, taking 5% of the total data. | `{search_k: -1}`    | {-1} ∪ [`top_k`, n × n_trees] |
 
-   <div class="alert note">
-   <code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search. The range of <code>top_k</code> is (0, 2048].
-   </div>
 
 2. Create random vectors as `query_records` to search:
 
@@ -37,6 +27,9 @@ Milvus supports searching vectors in a collection or partition.
    >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
+   <div class="alert note">
+   <ul><li><code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search.</li><li>The range of <code>top_k</code> is [1, 16384].</li></ul>
+   </div>
 
 ## Search vectors in a partition
 
