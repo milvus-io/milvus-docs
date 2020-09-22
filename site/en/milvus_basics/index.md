@@ -271,3 +271,9 @@ To learn how to choose an appropriate index for a metric, see [Distance Metrics]
 <summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
 {{fragments/faq_flat_ivfflat.md}}
 </details>
+
+## Bibliography
+
+- RNSG: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
+- HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
+- ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
