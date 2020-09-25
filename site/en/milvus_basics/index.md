@@ -30,7 +30,7 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
-        <li>Small dataset.</li>
+        <li>Has a relatively small dataset.</li>
         <li>Requires a 100% recall rate. </li>
         </ul></td>
   </tr>
@@ -38,14 +38,14 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td rowspan="4">Quantization-based index</td>
     <td><ul>
-        <li>High-performance query.</li>
+        <li>High-speed query.</li>
         <li>Requires a recall rate as high as possible.</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td><ul>
-        <li>High-performance query.</li>
+        <li>High-speed query.</li>
         <li>Limited disk and memory capacity. </li>
         <li>Has CPU resources only.</li>
         </ul></td>
@@ -53,7 +53,7 @@ The following table classifies the indexes that Milvus supports:
   <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
     <td><ul>
-        <li>High-performance query. </li>
+        <li>High-speed query. </li>
         <li>Limited disk, memory, and graphics memory capacities. </li>
         </ul></td>
   </tr>
