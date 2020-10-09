@@ -36,7 +36,7 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
-    <td rowspan="4">Quantization-based index</td>
+    <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
         <li>Requires a recall rate as high as possible.</li>
@@ -44,6 +44,7 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
+    <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
         <li>Limited disk and memory capacity. </li>
@@ -52,6 +53,7 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
+    <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query. </li>
         <li>Limited disk, memory, and graphics memory capacities. </li>
@@ -59,15 +61,17 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
+    <td>Quantization-based index</td>
     <td></td>
   </tr>
   <tr>
     <td><a href="#RNSG">RNSG</a></td>
-    <td rowspan="2">Graph-based index</td>
+    <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
+    <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
@@ -235,7 +239,7 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
 
    | Parameter   | Description     | Range     |
    | --------- |-------------- | -------- |
-   | `n_trees` | The number of methods of space division | [1, 1024] |
+   | `n_trees` | The number of methods of space division. | [1, 1024] |
 
 - Search parameters
 
