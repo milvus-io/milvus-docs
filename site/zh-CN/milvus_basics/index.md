@@ -72,7 +72,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
-    <td rowspan="2">基于图的索引</td>
+    <td>基于图的索引</td>
     <td></td>
   </tr>
   <tr>
