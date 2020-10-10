@@ -23,4 +23,8 @@ jobs:
           URL: ${{ secrets.VESION_URL }}
           VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
         run: |
-          node updateVersion.js $URL $VESION_TOKEN ${GITHUB_SHA::8}  ${GITHUB_REF#refs/heads/}
+          curl \
+          -X POST \
+          $URL \
+          -H "Content-Type: application/json" \
+          --data '{ "name": "milvus", "version": "'"${GITHUB_REF#refs/tags/}"'", "commit": "'"${GITHUB_SHA::8}"'", "token": "'"$VESION_TOKEN"'" }'
