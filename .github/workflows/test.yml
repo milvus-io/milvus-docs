@@ -1,7 +1,7 @@
-name: merge
+name: test
 
 on:
-  pull_request:
+  push:
     branches:
       - "*"
       - "!master"
@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
-      - name: Run Inner Link Check
+
+      - name: Update version
+        env:
+          URL: ${{ secrets.VESION_URL }}
+          VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
+          COMMIT: ${GITHUB_SHA::8}
+          BRANCH: ${GITHUB_REF#refs/heads/}
         run: |
-          node check-link.js
+          node updateVersion.js $URL $VESION_TOKEN $COMMIT $BRANCH
