@@ -22,7 +22,5 @@ jobs:
         env:
           URL: ${{ secrets.VESION_URL }}
           VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
-          COMMIT: ${GITHUB_SHA::8}
-          BRANCH: ${GITHUB_REF#refs/heads/}
         run: |
-          node updateVersion.js $URL $VESION_TOKEN $COMMIT $BRANCH
+          node updateVersion.js $URL $VESION_TOKEN ${GITHUB_SHA::8}  ${GITHUB_REF#refs/heads/}
