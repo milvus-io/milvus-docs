@@ -20,11 +20,3 @@ jobs:
       - name: Run Inner Link Check
         run: |
           node check-link.js
-      - name: Update version
-        env:
-          URL: ${{ secrets.VESION_URL }}
-          VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
-          COMMIT: ${GITHUB_SHA::8}
-          BRANCH: ${GITHUB_REF#refs/heads/}
-        run: |
-          node updateVersion.js $URL $VESION_TOKEN $COMMIT $BRANCH
