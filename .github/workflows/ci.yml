@@ -40,7 +40,7 @@ jobs:
           -X POST \
           $URL \
           -H "Content-Type: application/json" \
-          --data '{ "name": "milvus", "version": "'"${GITHUB_REF#refs/heads/}"'", "commit": "'"${GITHUB_SHA::8}"'", "token": "'"$VESION_TOKEN"'",from: "'milvus-docs'" }'
+          --data '{ "name": "milvus", "version": "'"${GITHUB_REF#refs/tags/}"'", "commit": "'"${GITHUB_SHA::8}"'", "token": "'"$VESION_TOKEN"'",from: "'milvus-docs'" }'
 
       # - name: Delete And Push
       #   run: |
