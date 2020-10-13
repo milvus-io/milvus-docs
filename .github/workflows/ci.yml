@@ -29,18 +29,18 @@ jobs:
           rm -rf doc_from/*
           rm check-link.js
           mv doc_to site
-        
+
       - name: Update version
-          env:
-            URL: ${{ secrets.VESION_URL }}
-            VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
-          run: |
-            curl \
-            -X POST \
-            $URL \
-            -H "Content-Type: application/json" \
-            --data '{ "name": "milvus", "version": "'"${GITHUB_REF#refs/heads/}"'", "commit": "'"${GITHUB_SHA::8}"'", "token": "'"$VESION_TOKEN"'" }'
-  
+        env:
+          URL: ${{ secrets.VESION_URL }}
+          VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
+        run: |
+          curl \
+          -X POST \
+          $URL \
+          -H "Content-Type: application/json" \
+          --data '{ "name": "milvus", "version": "'"${GITHUB_REF#refs/heads/}"'", "commit": "'"${GITHUB_SHA::8}"'", "token": "'"$VESION_TOKEN"'" }'
+
       - name: Delete And Push
         run: |
           sudo apt-get update
@@ -57,4 +57,3 @@ jobs:
           git add .
           git commit -m "Release new docs "
           git push -f origin master
-      
