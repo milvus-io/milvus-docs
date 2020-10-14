@@ -53,11 +53,7 @@ If the size of the dataset is smaller than the value of `index_file_size` that y
 
 #### Why is my GPU always idle?
 
-It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of `gpu_search_threshold` in **server_config.yaml** to be greater than `nq` (number of vectors per query).
-
-You can use `gpu_search_threshold` to set the threshold: when `nq` is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
-
-We do not recommend enabling GPU when the query number is small.
+{{fragments/faq_gpu_idle.md}}
 
 #### Why my data cannot be searched immediately after insertion?
 
