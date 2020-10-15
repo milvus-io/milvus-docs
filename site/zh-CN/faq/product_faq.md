@@ -33,7 +33,7 @@ id: product_faq.md
 - [索引 IVF\_SQ8 和 IVF\_SQ8H 在召回率上有区别吗?](#索引-IVF\_SQ8-和-IVF\_SQ8H-在召回率上有区别吗)
 - [Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？](#Milvus-中-FLAT-索引和-IVF_FLAT-索引的原理比较)
 - [创建索引立即查询，为什么内存会突然增长？](#创建索引立即查询为什么内存会突然增长)
-- [建立集合后，`index_file_size` 和 `metric_type` 还支持修改吗？](#建立集合后index_file_size-和-metric_type-还支持修改吗)
+- [建立集合后，`segment_row_limit` 和 `metric_type` 还支持修改吗？](#建立集合后segment_row_limit-和-metric_type-还支持修改吗)
 - [向量插入后自动落盘间隔时间是多少？](#向量插入后自动落盘间隔时间是多少)
 - [如果设置了 `preload_collection`，必须是等集合全部加载到内存，服务才能访问吗？](#如果设置了-preload_collection必须是等集合全部加载到内存服务才能访问吗)
 - [Milvus 的数据落盘逻辑是怎样的？](#Milvus-的数据落盘逻辑是怎样的)
@@ -179,7 +179,7 @@ ID 类型是非负的 64 位整型。
 这是因为 Milvus 在进行搜索时会将新生成的索引文件加载到内存，由于加载的索引文件和用于生成索引文件的原始向量文件总和小于 `cache.cache_size` 的上限，原始向量数据暂未被系统从内存释放。
 
 
-#### 建立集合后，`index_file_size` 和 `metric_type` 还支持修改吗？
+#### 建立集合后，`segment_row_limit` 和 `metric_type` 还支持修改吗？
 
 不支持。
 
@@ -189,7 +189,7 @@ ID 类型是非负的 64 位整型。
 
 #### 如果设置了 `preload_collection`，必须是等集合全部加载到内存，服务才能访问吗？
 
-是的。如果是在 **server_config.yaml** 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。
+是的。如果是在 **milvus.yaml** 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。
 
 
 #### Milvus 的数据落盘逻辑是怎样的？

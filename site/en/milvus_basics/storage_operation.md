@@ -57,7 +57,7 @@ Please see the diagram in <a href="storage_concept.md#Partition-and-segment">Par
 
 ## Merge data
 
-Too many small data segments cause poor query performance. To address this problem, Milvus triggers the segment merge task in the background when needed. In other words, Milvus merges small data segments into new data segments, deletes the small data segments, and updates the metadata. The size of new data segments should not be less than the `index_file_size`.
+Too many small data segments cause poor query performance. To address this problem, Milvus triggers the segment merge task in the background when needed. In other words, Milvus merges small data segments into new data segments, deletes the small data segments, and updates the metadata. The size of new data segments should not be less than the `segment_row_limit`.
 
 The timings to trigger the merge task are as follows:
 

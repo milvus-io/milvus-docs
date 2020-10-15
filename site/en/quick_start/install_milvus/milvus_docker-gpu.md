@@ -67,19 +67,19 @@ $ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/milvus.yaml
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>milvus.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/milvus.yaml">server config</a> to it.
 </div>
 
-After you downloaded the configuration file, you must set `enable` to `true` in `gpu` section of **server_config.yaml**.
+After you downloaded the configuration file, you must set `enable` to `true` in `gpu` section of **milvus.yaml**.
 
 ## Start Docker container
 
 <div class="alert note">
-Before starting Docker container, you must set <code>enable</code> to <code>true</code> in <code>gpu</code> section of <b>server_config.yaml</b>.
+Before starting Docker container, you must set <code>enable</code> to <code>true</code> in <code>gpu</code> section of <b>milvus.yaml</b>.
 </div>
 
 Start Docker container and map the paths to the local files to the container:

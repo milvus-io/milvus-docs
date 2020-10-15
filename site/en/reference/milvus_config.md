@@ -15,7 +15,7 @@ After successfully starting Milvus server, you can see a Milvus folder at **home
 - **milvus/db** (database storage)
 - **milvus/logs** (log storage)
 - **milvus/conf** (configuration file folder)
-  - **server_config.yaml** (server configuration)
+  - **milvus.yaml** (server configuration)
 
 ## Updating configurations
 
@@ -27,7 +27,7 @@ You can directly edit the configuration file. You must restart Milvus every time
 $ docker restart <container id>
 ```
 
-Here we use Milvus' system configuration file **server_config.yaml** as an example to demonstrate how to modify the log level and log path:
+Here we use Milvus' system configuration file **milvus.yaml** as an example to demonstrate how to modify the log level and log path:
 
 ```YAML
 logs:
@@ -37,7 +37,7 @@ logs:
 
 ### Updating configurations during runtime
 
-You can update parameters in **server_config.yaml** from a Milvus client. See [Client Reference](sdk.md) for more information.
+You can update parameters in **milvus.yaml** from a Milvus client. See [Client Reference](sdk.md) for more information.
 
 Changes to the following parameters take effect immediately without the need to restart Milvus.
 
@@ -53,7 +53,7 @@ Changes to the following parameters take effect immediately without the need to 
 
 For other parameters, you still need to restart Milvus for the changes to take effect.
 
-## `server_config.yaml` parameters
+## `milvus.yaml` parameters
 
 Before changing these settings, welcome to consult Milvus team on [GitHub issues](https://github.com/milvus-io/milvus/issues/new/choose) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 

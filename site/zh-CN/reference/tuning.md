@@ -32,7 +32,7 @@ id: tuning.md
 Milvus 无法搜索到在该时间间隔内未落盘的数据。
 </div>
 
-另外，建立集合时的参数 `index_file_size` 也对插入性能有影响。该参数的默认值为 1024 MB，最大值为 4096 MB。该参数越大，将文件合并到该值设定的大小所需的次数就越多，影响插入操作的吞吐量。该参数越小，则产生的数据段越多，查询性能可能会变差。
+另外，建立集合时的参数 `segment_row_limit` 也对插入性能有影响。该参数的默认值为 1024 MB，最大值为 4096 MB。该参数越大，将文件合并到该值设定的大小所需的次数就越多，影响插入操作的吞吐量。该参数越小，则产生的数据段越多，查询性能可能会变差。
 
 除了软件层面的因素外，网络带宽和存储介质对插入操作性能也有影响。
 
@@ -112,13 +112,13 @@ IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可�
 根据其原理，可估算出使用 IVF 索引进行查询时的计算量。
 
 * 单个数据段计算量可估算为：目标向量数量 × (`nlist` + （段内向量数 ÷ `nlist`）× `nprobe`)
-* 数据段的数量可估算为：集合数据总量 ÷ `index_file_size`
+* 数据段的数量可估算为：集合数据总量 ÷ `segment_row_limit`
 * 对集合查询所需的计算总量则为：单个数据段计算量 × 数据段数量 
 
 通过估算得出的计算总量越大，查询耗时越长。实际使用中可根据以上公式确定合理的参数，在满足召回率的前提下获得较高的查询性能。
 
 <div class="alert note">
-在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的数据段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该数据段向量总数。
+在持续插入数据的场景下，由于对大小未达到 <code>segment_row_limit</code> 的数据段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该数据段向量总数。
 </div>
 
 - HNSW / RNSG / ANNOY 索引
@@ -161,8 +161,8 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
-{{fragments/faq_index_file_size_best_practice.md}}
+<summary><font color="#4fc4f9">创建集合时 <code>segment_row_limit</code> 如何设置能达到性能最优？</font></summary>
+{{fragments/faq_segment_row_limit_best_practice.md}}
 </details>
 <details>
 <summary><font color="#4fc4f9">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>

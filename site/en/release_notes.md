@@ -411,7 +411,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 - **Write-Ahead logging (WAL)**
 
-  Added support for WAL, which significantly improves the reliability of data operations. You can configure WAL settings in the Milvus server configuration file (`server_config.yaml`). [#830](https://github.com/milvus-io/milvus/pull/830)
+  Added support for WAL, which significantly improves the reliability of data operations. You can configure WAL settings in the Milvus server configuration file (`milvus.yaml`). [#830](https://github.com/milvus-io/milvus/pull/830)
 
 - **RESTful API**
 
@@ -445,7 +445,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 - **Milvus server configuration file updates**
 
-  Starting from Milvus 0.7.0, the Milvus server configuration file (`server_config.yaml`) is updated to 0.2 with parameter changes.
+  Starting from Milvus 0.7.0, the Milvus server configuration file (`milvus.yaml`) is updated to 0.2 with parameter changes.
 
 - **Term updates**
 

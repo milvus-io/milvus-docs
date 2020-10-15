@@ -411,7 +411,7 @@ id: release_notes.md
 
 - **预写式日志(Write-Ahead Logging, WAL)**
 
-  新增了 WAL 功能，可以大大提高数据操作的可靠性。你可以在 Milvus 服务端配置文件（`server_config.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/issues/830)
+  新增了 WAL 功能，可以大大提高数据操作的可靠性。你可以在 Milvus 服务端配置文件（`milvus.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/issues/830)
 
 - **RESTful API**
 
@@ -445,7 +445,7 @@ id: release_notes.md
 
 - **Milvus 服务端配置文件更新**
 
-  从 Milvus 0.7.0 开始，Milvus 服务端配置文件（`server_config.yaml`）版本更新为 0.2。配置文件的参数也发生了变化。
+  从 Milvus 0.7.0 开始，Milvus 服务端配置文件（`milvus.yaml`）版本更新为 0.2。配置文件的参数也发生了变化。
 
 - **术语更新**
 

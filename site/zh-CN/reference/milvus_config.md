@@ -15,7 +15,7 @@ id: milvus_config.md
 - **milvus/db**（数据库存储）
 - **milvus/logs**（日志存储）
 - **milvus/conf**（设置文件）
-  - **server_config.yaml**（服务设置）
+  - **milvus.yaml**（服务设置）
 
 ## 配置修改 
 
@@ -27,7 +27,7 @@ id: milvus_config.md
 $ docker restart <container id>
 ```
 
-下面以 Milvus 的系统配置文件 **server_config.yaml** 为例，演示如何修改日志级别和日志存储路径：
+下面以 Milvus 的系统配置文件 **milvus.yaml** 为例，演示如何修改日志级别和日志存储路径：
 
 ```YAML
 logs:
@@ -37,7 +37,7 @@ logs:
 
 ### 运行时修改
 
-你可以使用 Milvus 客户端对 **server_config.yaml** 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
+你可以使用 Milvus 客户端对 **milvus.yaml** 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
 
@@ -53,7 +53,7 @@ logs:
 
 对于其它参数，你必须重新启动 Milvus 才能使改动生效。
 
-## **server_config.yaml** 参数说明
+## **milvus.yaml** 参数说明
 
 若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 

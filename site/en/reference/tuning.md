@@ -32,7 +32,7 @@ This parameter (1 second by default) refers to the interval time of the data flu
 Milvus cannot search for data that has not been flushed within this time interval.
 </div>
 
-Besides, the parameter `index_file_size`, which is used when creating collections, has an impact on the insertion performance. The value of this parameter is 1024 MB by default and 4096 MB at most. The larger the `index_file_size`, the more time it takes to merge data to the size set by this parameter, which affects the throughput rate of the insert operation. The smaller the parameter, the more data segments are generated. This may worsen query performance.
+Besides, the parameter `segment_row_limit`, which is used when creating collections, has an impact on the insertion performance. The value of this parameter is 1024 MB by default and 4096 MB at most. The larger the `segment_row_limit`, the more time it takes to merge data to the size set by this parameter, which affects the throughput rate of the insert operation. The smaller the parameter, the more data segments are generated. This may worsen query performance.
 
 Besides software-level elements, network bandwidth and storage media also play a role in the insertion performance.
 
@@ -114,13 +114,13 @@ All types of IVF index have two parameters: `nlist` and `nprobe`. See [Milvus In
 You can use the following methods to estimate the amount of calculation when using IVF indexes for queries.
 
 * The amount of calculation of a single segment = the number of target vectors × (`nlist` + (the number of vectors in a segment ÷ `nlist`) × `nprobe`)
-* The number of segments = the total amount of aggregate data ÷ `index_file_size`
+* The number of segments = the total amount of aggregate data ÷ `segment_row_limit`
 * The total amount of calculation of a collection = the amount of calculation of a single segment × the segment number
 
 The larger the estimated total amount of calculation, the longer the query takes. In practice, you can get reasonable parameters through the above formulas, which provides high query performance under the premise of an acceptable recall rate.
 
 <div class="alert note">
-In scenario with continuous data insertion, because Milvus does not index segments with a size less than <code>index_file_size</code>, it uses brute-force search as the query method. The amount of calculation can be estimated by multiplying the number of target vectors by the total number of segment vectors.
+In scenario with continuous data insertion, because Milvus does not index segments with a size less than <code>segment_row_limit</code>, it uses brute-force search as the query method. The amount of calculation can be estimated by multiplying the number of target vectors by the total number of segment vectors.
 </div>
 
 
@@ -164,8 +164,8 @@ Deleted entities do not participate in the calculation and takes up disk space. 
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
-{{fragments/faq_index_file_size_best_practice.md}}
+<summary><font color="#4fc4f9">How can I get the best performance from Milvus through setting <code>segment_row_limit</code>?</font></summary>
+{{fragments/faq_segment_row_limit_best_practice.md}}
 </details>
 <details>
 <summary><font color="#4fc4f9">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>

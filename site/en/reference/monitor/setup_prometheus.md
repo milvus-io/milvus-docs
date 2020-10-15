@@ -33,7 +33,7 @@ This page describes how to configure and start up [Prometheus](https://prometheu
     You <i>must</i> start Pushgateway before starting the Milvus Server.
     </div>
     
-2. Start the Prometheus monitor in **server_config.yaml** and set the address and port number of Pushgateway:
+2. Start the Prometheus monitor in **milvus.yaml** and set the address and port number of Pushgateway:
 
     ```yaml
     metric:
@@ -43,7 +43,7 @@ This page describes how to configure and start up [Prometheus](https://prometheu
     ```
 
     <div class="alert note">
-    In the Kubernetes cluster, you need to set the <b>server_config.yaml</b> for each node to monitor.
+    In the Kubernetes cluster, you need to set the <b>milvus.yaml</b> for each node to monitor.
     </div>
 
 3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/v{{var.release_version}}/assets/monitoring/prometheus.yml) for Milvus:

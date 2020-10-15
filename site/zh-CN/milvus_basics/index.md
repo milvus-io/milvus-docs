@@ -91,7 +91,7 @@ Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据
 
 ### 用户主动创建索引
 
-调用 `create_index` 接口时，Milvus 会对该字段上的已有数据同步建立索引。每当后续插入的数据的大小达到系统配置的 `index_file_size` 时，Milvus 会为其在后台自动创建索引。
+调用 `create_index` 接口时，Milvus 会对该字段上的已有数据同步建立索引。每当后续插入的数据的大小达到系统配置的 `segment_row_limit` 时，Milvus 会为其在后台自动创建索引。
 
 <div class="alert note">
     当插入的数据段少于 4096 行时，Milvus 不会为其建立索引。

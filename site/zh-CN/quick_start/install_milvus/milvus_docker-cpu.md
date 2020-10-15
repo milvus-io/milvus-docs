@@ -35,7 +35,7 @@ group: distribution
 | Docker  | 19.03 或以上                             |
 
 <div class="alert note">
-请确保可用内存大于你在 <b>server_config.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。
+请确保可用内存大于你在 <b>milvus.yaml</b> 文件中设置的 <code>cache.insert_buffer_size</code> 和 <code>cache.cache_size</code> 之和。
 </div>
 
 ## 确认 Docker 状态
@@ -67,11 +67,11 @@ $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/milvus.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>milvus.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/milvus.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
 ## 启动 Milvus Docker 容器

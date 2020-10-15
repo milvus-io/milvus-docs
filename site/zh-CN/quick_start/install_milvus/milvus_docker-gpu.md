@@ -67,19 +67,19 @@ $ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget http://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget http://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/milvus.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>milvus.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/milvus.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
-配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
+配置文件下载完成后，你需要将 **milvus.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
 
 ## 启动 Milvus Docker 容器
 
 <div class="alert note">
-启动 Docker 容器之前，你必须将 <b>server_config.yaml</b> 中 <code>gpu</code> 部分的 <code>enable</code> 设为 <code>true</code>。
+启动 Docker 容器之前，你必须将 <b>milvus.yaml</b> 中 <code>gpu</code> 部分的 <code>enable</code> 设为 <code>true</code>。
 </div>
 
 启动 Docker 容器，将本地的文件路径映射到容器中：

@@ -12,7 +12,7 @@ sidebar_label: Milvus Changelog
 - \#169, #177, #183 and #184 Update Product FAQ and Operational FAQ topics.
 - \#174 Update Install Milvus and Milvus Configuration topics.
         Add Index Types, Table Partition, Data Management and Contribute topics.
-        Update server_config.yaml.
+        Update milvus.yaml.
 - \#192 Add release note for v0.6.0.
         
 ## [v0.5.3] 2019-11-14
@@ -24,7 +24,7 @@ sidebar_label: Milvus Changelog
 ## [v0.5.1] 2019-11-04
 
 ### Improvements
-- \#129 Update some parameter descriptions in the `server_config.yaml` file for Milvus configuration.
+- \#129 Update some parameter descriptions in the `milvus.yaml` file for Milvus configuration.
 - \#132 a) Add a new parameter `gpu_search_threshold` in Milvus Configuration; b) Update Troubleshoot.
 - \#136 Add release note for v0.5.1.
 

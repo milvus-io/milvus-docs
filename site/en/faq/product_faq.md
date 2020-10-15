@@ -33,7 +33,7 @@ id: product_faq.md
 - [Does IVF\_SQ8 differ from IVF\_SQ8H in terms of recall rate?](#Does-IVF\_SQ8-differ-from-IVF\_SQ8H-in-terms-of-recall-rate)
 - [What is the difference between FLAT index and IVF_FLAT index?](#What-is-the-difference-between-FLAT-index-and-IVF_FLAT-index)
 - [Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?](#Why-do-I-see-a-surge-in-memory-usage-when-conducting-a-vector-search-immediately-after-an-index-is-created)
-- [Can I update `index_file_size` and `metric_type` after creating a collection?](#Can-I-update-index_file_size-and-metric_type-after-creating-a-collection)
+- [Can I update `segment_row_limit` and `metric_type` after creating a collection?](#Can-I-update-segment_row_limit-and-metric_type-after-creating-a-collection)
 - [What is the interval at which Milvus flushes data to the disk?](#What-is-the-interval-at-which-Milvus-flushes-data-to-the-disk)
 - [If I have set `preload_collection`, does Milvus service start only after all collections are loaded to the memory?](#If-I-have-set-preload_collection-does-Milvus-service-start-only-after-all-collections-are-loaded-to-the-memory)
 - [In what way does Milvus flush data?](#In-what-way-does-Milvus-flush-data)
@@ -177,7 +177,7 @@ This is because:
 
 - The original vector files used to create the index are not yet released from the memory, because the size of original vector files and the index file has not exceeded the upper limit specified by `cache.cache_size`.
 
-#### Can I update `index_file_size` and `metric_type` after creating a collection?
+#### Can I update `segment_row_limit` and `metric_type` after creating a collection?
 
 No, you cannot.
 
@@ -187,7 +187,7 @@ Milvus automatically flushes data to disk at intervals of one second.
 
 #### If I have set `preload_collection`, does Milvus service start only after all collections are loaded to the memory?
 
-Yes. If you have set `preload_collection` in **server_config.yaml**, Milvus' service is not available until it loads all specified collections.
+Yes. If you have set `preload_collection` in **milvus.yaml**, Milvus' service is not available until it loads all specified collections.
 
 #### In what way does Milvus flush data?
 

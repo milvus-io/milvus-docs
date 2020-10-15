@@ -34,7 +34,7 @@ id: setup_prometheus.md
     必须在启动 Milvus Server 之前启动 Pushgateway 进程。
     </div>
     
-2. 在 **server_config.yaml** 中开启 Prometheus 监控，并设置 Pushgateway 的地址和端口号。
+2. 在 **milvus.yaml** 中开启 Prometheus 监控，并设置 Pushgateway 的地址和端口号。
 
     ```yaml
     metric:
@@ -44,7 +44,7 @@ id: setup_prometheus.md
     ```
 
     <div class="alert note">
-    如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点配置 <b>server_config.yaml</b>。
+    如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点配置 <b>milvus.yaml</b>。
     </div>
 
 3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v{{var.release_version}}/assets/monitoring/prometheus.yml)：
