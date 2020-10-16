@@ -39,7 +39,6 @@ group: distribution
 <div class="alert note">
 <ul>
 <li>An index built with CPU is identical to built with CPU. The only difference is the time to build the index: GPU usually takes less time.</li>
-<li>If <code>top_k</code> > 2048, Milvus switches from GPU search to CPU search.</li>
 <li>If <code>nprobe</code> > 2048, Milvus switches from GPU search to CPU search.</li>
 </ul>
 </div>

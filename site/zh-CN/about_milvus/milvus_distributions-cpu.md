@@ -25,7 +25,7 @@ group: distribution
 
 <div class="filter-floating table-wrapper" markdown="block">
 
-| 索引类型  | CPU 建索引        | GPU 建索引      |  CPU 搜索           | GPU 搜索        |
+| 索引类型  | CPU 建索引        | GPU 建索引      |  CPU 查询           | GPU 查询        |
 | -------- | ----------------- | -------------- | ------------------- | --------------- |
 | FLAT     | N/A               |   N/A          |    ✔️               | ❌              |
 | IVF_FLAT | ✔️                |  ❌           |    ✔️               | ❌              |
@@ -39,9 +39,9 @@ group: distribution
 
 <div class="filter-binary table-wrapper" markdown="block">
 
-| 索引类型  | CPU 建索引        | GPU 建索引       |  CPU 搜索            | GPU 搜索        |
+| 索引类型  | CPU 建索引        | GPU 建索引       |  CPU 查询            | GPU 查询        |
 | -------- | ----------------- | --------------  | -------------------- | --------------- |
-| FLAT     | N/A               | N/A             | ✔️                  | ❌              |
-| IVF_FLAT | ✔️                | ❌             | ✔️                  | ❌              |
+| BIN_FLAT     | N/A               | N/A             | ✔️                  | ❌              |
+| BIN_IVF_FLAT | ✔️                | ❌             | ✔️                  | ❌              |
 
 </div>

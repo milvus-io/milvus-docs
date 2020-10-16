@@ -27,7 +27,7 @@ Each collection can have 4096 partitions at most.
 </div>
 
 
-#### The relationship between collections, partitions and segments
+#### The relationship between collections, partitions, and segments
 
 The relationship between collections, partitions, and segments is as follows:
 
@@ -40,11 +40,11 @@ Each collection has a <code>_default</code> section. If no partition is specifie
 
 ## Metadata
 
-Both the partition or segment are organizational forms of data in physical storage. When querying data, Milvus must know the location and status information of each data file on the physical storage, including the collection it belongs to, the number of entities it contains, the file size, the globally unique identifier, and the creation date, which are called metadata. In addition, the metadata also contains collection and partition information, including collection name, collection dimension, index type, partition label, and so on. 
+Both the partition or segment are organizational forms of data in physical storage. When querying data, Milvus must know the location and status information of each data file on the physical storage, including the collection it belongs to, the number of entities it contains, the file size, the globally unique identifier, and the creation date, which are called Metadata. In addition, the Metadata also contains collection and partition information, including collection name, collection dimension, index type, partition label, and more. 
 
-When data changes, the metadata should change accordingly and be easy to obtain. Therefore, it is an ideal choice to use a transactional database to manage metadata. Milvus provides SQLite or MySQL as a backend service for metadata and MySQL is recommended for production environments or distributed services.
+When data changes, the Metadata should change accordingly and be easy to obtain. Therefore, it is an ideal choice to use a transactional database to manage metadata. Milvus provides SQLite or MySQL as a backend service for Metadata and MySQL is recommended for production environments or distributed services.
 
-The metadata back-end service is not responsible for storing entity data and indexes.
+The Metadata back-end service is not responsible for storing entity data and indexes.
 
 ![meta](../../../assets/storage/meta.png)
 

@@ -36,7 +36,7 @@ The process of data flushing is as follows:
 
 1. The system opens up a new mutable buffer area to accommodate the data to be inserted.
 2. The system sets the previous mutable buffer as read-only (immutable buffer).
-3. The system writes the data in the immutable buffer to the disk and writes the description information of the new data segment to the metadata backend service.
+3. The system writes the data in the immutable buffer to the disk and writes the description information of the new data segment to the Metadata backend service.
 
 After completing the above process, the system has successfully created a segment.
 

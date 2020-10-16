@@ -43,8 +43,8 @@ group: distribution
 
 | Index type | Indexing with CPU | Indexing with GPU | Search with CPU       | Search with GPU |
 | ---------- | ----------------------- | ----------------- | --------------------- | --------------- |
-| FLAT       | N/A                     |  N/A              | ✔️                    | ❌              |
-| IVF_FLAT   | ✔️                      | ❌               | ✔️                    | ❌              |
+| BIN_FLAT       | N/A                     |  N/A              | ✔️                    | ❌              |
+| BIN_IVF_FLAT   | ✔️                      | ❌               | ✔️                    | ❌              |
 
 </div>
 
