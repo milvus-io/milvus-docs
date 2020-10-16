@@ -62,7 +62,7 @@ $ sudo docker pull milvusdb/milvus:{{var.cpu_milvus_docker_image_version}}
 {{fragments/tar_workaround.md}}
 
 
-## Download configuration files
+## Download configuration file
 
 ```shell
 $ mkdir -p /home/$USER/milvus/conf

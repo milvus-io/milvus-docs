@@ -49,7 +49,7 @@ No. You can also build Milvus from source code in Linux. See [Build Milvus from 
 
 #### Why does Milvus return `config check error`?
 
-The version of configuration file does not match the version your Milvus server.
+The version of configuration file does not match the version your Milvus server. It is very likely you have not downloaded the right version of **milvus.yaml**, see [Download Configuration File](milvus_docker-cpu.md#Download-configuration-file)
 
 #### Why do I get `no space left on device` when importing data to Milvus?
 

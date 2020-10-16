@@ -15,10 +15,6 @@ Milvus 服务器采用主从式架构 (Client-server model)。
 
 Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，是 [LF AI](https://lfai.foundation/) 基金会的孵化项目。Milvus 的源代码被托管于 [Github](https://github.com/milvus-io/milvus)。
 
-> 目前，Milvus 的服务器在单节点上运行。对于有更大数据规模或者高并发需求的用户，可以使用目前尚在开发阶段的集群分片中间件 Mishards 进行部署。
-
-
-
 ## 整体架构
 
 ![Milvus 架构](../../../assets/milvus_arch.png)

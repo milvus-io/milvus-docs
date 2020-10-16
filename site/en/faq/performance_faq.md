@@ -13,10 +13,8 @@ id: performance_faq.md
 - [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
 - [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
 - [Why does my CPU usage stay low?](#Why-does-my-CPU-usage-stay-low)
-- [How can I get the best performance from Milvus through setting `segment_row_limit`?](#How-can-I-get-the-best-performance-from-Milvus-through-setting-segment_row_limit)
 - [What is the importing performance of Milvus in practical terms?](#What-is-the-importing-performance-of-Milvus-in-practical-terms)
 - [Does searching while inserting affect the search speed?](#Does-searching-while-inserting-affect-the-search-speed)
-- [Will a batch query benefit from multi-threading?](#Will-a-batch-query-benefit-from-multi-threading)
 - [Why GPU-enabled query is sometimes slower than CPU-only query?](#Why-GPU-enabled-query-is-sometimes-slower-than-CPU-only-query)
 - [Still have questions?](#Still-have-questions)
 
@@ -63,13 +61,6 @@ This is because the data has not been flushed from memory to disk. To ensure tha
 
 Milvus processes queries in parallel. An `nq` less than 100 and data on a smaller scale do not require high level of parallelism, hence the CPU usage stays low.
 
-#### How can I get the best performance from Milvus through setting `segment_row_limit`?
-
-You need to set `segment_row_limit` when creating a collection from a client. This parameter specifies the size of each segment, and its default value is `1024` in MB. When the size of newly inserted vectors reaches the specified volume, Milvus packs these vectors into a new segment. In other words, newly inserted vectors do not go into a segment until they grow to the specified volume. When it comes to creating indexes, Milvus creates one index file for each segment. When conducting a vector search, Milvus searches all index files one by one.
-
-As a rule of thumb, we would see a 30% ~ 50% increase in the search performance after changing the value of `segment_row_limit` from 1024 to 2048. Note that an overly large `segment_row_limit` value may cause failure to load a segment into the memory or graphics memory. Suppose the graphics memory is 2 GB and `segment_row_limit` 3 GB, each segment is obviously too large.
-
-In situations where vectors are not frequently inserted, we recommend setting the value of `segment_row_limit` to 1024 MB or 2048 MB. Otherwise, we recommend setting the value to 256 MB or 512 MB to keep unindexed files from getting too large.
 
 See [Performance Tuning > Index](tuning.md#Index) for more information.
 
@@ -81,12 +72,6 @@ When the client and the server are running on the same physical machine, it take
 
 - If the newly inserted vectors have not grown to the specified volume to trigger index creation, Milvus needs to load these data directly from disk to memory for a vector search.
 - As of v0.9.0, if Milvus has started creating indexes for the newly inserted vectors, an incoming vector search interrupts the index creation process, causing a delay of about one second.
-
-#### Will a batch query benefit from multi-threading?
-
-If your batch query is on a small scale (`nq` < 64), Milvus combines the query requests, in which case multi-threading helps.
-
-Otherwise, the resources are already exhausted, hence multi-threading does not help much.
 
 #### Why GPU-enabled query is sometimes slower than CPU-only query?
 

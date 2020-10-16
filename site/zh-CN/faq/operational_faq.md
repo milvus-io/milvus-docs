@@ -27,7 +27,6 @@ id: operational_faq.md
 - [如何根据数据量计算需要多大的内存？](#如何根据数据量计算需要多大的内存)
 - [Milvus 中如何实现数据迁移？](#Milvus-中如何实现数据迁移)
 - [Milvus 可以通过扩展某些接口 (如 S3 接口或 GlusterFS 接口) 来扩展存储吗？](#Milvus-可以通过扩展某些接口-如-S3-接口或-GlusterFS-接口-来扩展存储吗)
-- [Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)`？](#Milvus-日志中为什么会出现这个警告-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-queryadd-size-alloc-307200000-B-highwater-0-B)
 - [出现 `database is locked` 的报错怎么解决？](#出现-database-is-locked-的报错怎么解决)
 - [仍有问题没有得到解答？](#仍有问题没有得到解答)
 
@@ -50,7 +49,7 @@ Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 [从源�
 
 #### 为什么 Milvus 返回 `config check error` 的错误？
 
-Milvus 和服务端配置文件的版本不对应。
+Milvus 和服务端配置文件的版本不对应。很可能是因为你没有下载正确版本的**milvus.yaml**配置文件，详见 [下载配置文件](milvus_docker-cpu.md#下载配置文件)。
 
 
 #### 为什么在导入数据时 Milvus 显示 `no space left on device` 的错误？
@@ -138,10 +137,6 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 #### Milvus 可以通过扩展某些接口 (如 S3 接口或 GlusterFS 接口) 来扩展存储吗？
 
 目前暂不支持。
-
-#### Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)`？
-
-在 Milvus 中，如果单次申请的显存量大于它预先开辟的一段显存空间，就会报这个警告。不过没有影响，Milvus 中会扩大它使用的显存空间来满足这个显存的申请。这个警告的意思就是要使用更多显存空间了。
 
 #### 出现 `database is locked` 的报错怎么解决？
 

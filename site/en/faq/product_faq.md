@@ -9,7 +9,6 @@ id: product_faq.md
 - [Is Milvus free of charge?](#Is-Milvus-free-of-charge)
 - [Does Milvus support non-x86 architecture?](#Does-Milvus-support-non-x86-architecture)
 - [Does Milvus support CRUD operations on vectors?](#Does-Milvus-support-CRUD-operations-on-vectors)
-- [Can Milvus handle datasets of up to a 100-billion scale?](#Can-Milvus-handle-datasets-of-up-to-a-100-billion-scale)
 - [Where does Milvus store imported data?](#Where-does-Milvus-store-imported-data)
 - [Why can't I find vectors on SQLite or MySQL?](#Why-cant-I-find-vectors-on-SQLite-or-MySQL)
 - [Can I use SQL Server or PostgreSQL to store metadata in Milvus?](#Can-I-use-SQL-Server-or-PostgreSQL-to-store-metadata-in-Milvus)
@@ -18,9 +17,9 @@ id: product_faq.md
 - [Is there a graphical tool for managing Milvus?](#Is-there-a-graphical-tool-for-managing-Milvus)
 - [Can I export data from Milvus?](#Can-I-export-data-from-Milvus)
 - [Why do the retrieved vectors suffer precision loss after the `get_entity_by_id` method call?](#Why-do-the-retrieved-vectors-suffer-precision-loss-after-the-get_entity_by_id-method-call)
-- [Should I specify entity IDs when importing vectors or have Milvus generate them for me?](#Should-I-specify-entity-IDs-when-importing-vectors-or-have-Milvus-generate-them-for-me)
+- [Should I specify Entity IDs when importing vectors or have Milvus generate them for me?](#Should-I-specify-Entity-IDs-when-importing-vectors-or-have-Milvus-generate-them-for-me)
 - [Can I insert vectors with existing IDs?](#Can-I-insert-vectors-with-existing-IDs)
-- [Is there a length limit on the self-defined entity IDs?](#Is-there-a-length-limit-on-the-self-defined-entity-IDs)
+- [Is there a length limit on the self-defined Entity IDs?](#Is-there-a-length-limit-on-the-self-defined-Entity-IDs)
 - [Is there a volume limit on the vectors inserted each time?](#Is-there-a-volume-limit-on-the-vectors-inserted-each-time)
 - [Why is the `top1` result of a vector search not the search vector itself, if the metric type is inner product?](#Why-is-the-top1-result-of-a-vector-search-not-the-search-vector-itself-if-the-metric-type-is-inner-product)
 - [Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?](#Does-the-size-of-a-collection-affect-vector-searches-in-one-of-its-partitions-especially-when-it-holds-up-to-100-million-vectors)
@@ -37,8 +36,6 @@ id: product_faq.md
 - [What is the interval at which Milvus flushes data to the disk?](#What-is-the-interval-at-which-Milvus-flushes-data-to-the-disk)
 - [If I have set `preload_collection`, does Milvus service start only after all collections are loaded to the memory?](#If-I-have-set-preload_collection-does-Milvus-service-start-only-after-all-collections-are-loaded-to-the-memory)
 - [In what way does Milvus flush data?](#In-what-way-does-Milvus-flush-data)
-- [What is the recommended configuration for Mishards?](#What-is-the-recommended-configuration-for-Mishards)
-- [Does Mishards support RESTful APIs?](#Does-Mishards-support-RESTful-APIs)
 - [What is normalization? Why is normalization needed?](#What-is-normalization-Why-is-normalization-needed)
 - [Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?](#Why-do-I-get-different-results-using-Euclidean-distance-L2-and-inner-product-IP-as-the-distance-metric)
 - [Is there a limit on the total number of collections and partitions?](#Is-there-a-limit-on-the-total-number-of-collections-and-partitions)
@@ -62,15 +59,11 @@ No, it does not.
 
 Yes. To update a vector, you can delete it and then insert a new one.
 
-#### Can Milvus handle datasets of up to a 100-billion scale?
-
-By deploying Mishards, a cluster sharding middleware for Milvus, you can process datasets of up to a 100-billion scale.
-
 #### Where does Milvus store imported data?
 
-Vectors imported into Milvus are stored locally at **milvus/db/tables/**.
+When starting up, Milvus maps the **/var/lib/milvus/db** directory in the container to the corresponding directory on the local drive for storing all imported data, **/home/$USER/milvus/db** for example. 
 
-Metadata can be stored in either MySQL or SQLite. See [Manage Metadata with MySQL](http://192.168.1.105:8090/data_manage.md) for more information.
+Metadata can be stored in either MySQL or SQLite. See [Manage Metadata with MySQL](data_manage.md) for more information.
 
 #### Why can't I find vectors on SQLite or MySQL?
 
@@ -101,15 +94,15 @@ We do not have a dedicated tool as yet. You can call `get_entity_by_id` to get t
 
 Milvus stores and processes each dimension of a vector in single-precision floating-point format (accurate to seven decimal places). Therefore, if the original format of each dimension is double-precision floating-point (accurate to sixteen decimal places), you will see a precision loss.
 
-#### Should I specify entity IDs when importing vectors or have Milvus generate them for me?
+#### Should I specify Entity IDs when importing vectors or have Milvus generate them for me?
 
-Either way is fine. But please note that entity IDs in the same collection must be either user-generated or Milvus-generated. Can't be both. 
+Either way is fine. But please note that Entity IDs in the same collection must be either user-generated or Milvus-generated. Can't be both. 
 
 #### Can I insert vectors with existing IDs?
 
 Yes, you can. If you insert vectors with an existing ID, you would end up having duplicate IDs.
 
-#### Is there a length limit on the self-defined entity IDs?
+#### Is there a length limit on the self-defined Entity IDs?
 
 Entity IDs must be non-negative 64-bit integers.
 
@@ -192,14 +185,6 @@ Yes. If you have set `preload_collection` in **milvus.yaml**, Milvus' service is
 #### In what way does Milvus flush data?
 
 Milvus loads inserted data to the memory and automatically flushes data from memory to the disk at fixed intervals. You can call `flush` to <i>manually</i> trigger this operation. 
-
-#### What is the recommended configuration for Mishards?
-
-We recommend that you configure write nodes to using GPU-enabled Milvus and read nodes to using CPU-only Milvus. If you can have only one write node, you can configure this node to using GPU-enabled Milvus for creating indexes and configure read nodes to using CPU-only Milvus.
-
-#### Does Mishards support RESTful APIs?
-
-No, it does not.
 
 #### What is normalization? Why is normalization needed?
 
