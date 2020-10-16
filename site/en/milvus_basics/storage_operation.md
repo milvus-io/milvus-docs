@@ -42,12 +42,12 @@ After completing the above process, the system has successfully created a segmen
 
 #### Client trigger
 
-The client calls the `flush` API to trigger the data flushing task.
+The client calls the `flush` method to trigger the data flushing task.
 #### Trigger when the buffer reaches the upper limit
 
 When the accumulated data reaches the upper limit of the mutable buffer (128MB), the data flushing task is triggered.
 
-All relevant files of each segment are stored in a folder named by the segment ID, such as a UID file that records the entity ID, a **delete_docs** file used to mark deleted entities, and a **bloom-filter** file used for quick entity search.
+All relevant files of each segment are stored in a folder named by the segment ID, such as a **delete_docs** file marking up deleted entities and a **bloom-filter** file for facilitating search.
 
 <div class="alert info">
 Please see the diagram in <a href="storage_concept.md#Partition-and-segment">Partition and Segment</a> for data files within the segment.

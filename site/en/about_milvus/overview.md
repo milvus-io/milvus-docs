@@ -55,7 +55,7 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 - Inserted datasets are searchable in one second.
 
-#### Scalar field filtering (coming soon)
+#### Scalar field filtering
 
 - Supports embeddings and scalar data. 
 - Adds more flexibility to your search by supporting filtering of scalar data.

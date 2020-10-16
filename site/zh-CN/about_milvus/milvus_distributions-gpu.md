@@ -39,6 +39,7 @@ group: distribution
 <div class="alert note">
 <ul>
 <li>CPU 和 GPU 创建的索引完全一致，只是一般情况下 GPU 的创建索引速度快于 CPU 的创建速度。</li>
+<li><code>top_k</code> > 2048 时，Milvus 由 GPU 查询切换为 CPU 查询。</li>
 <li><code>nprobe</code> > 2048 时，Milvus 由 GPU 查询切换为 CPU 查询。</li>
 </ul>
 </div>
