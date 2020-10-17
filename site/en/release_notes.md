@@ -107,7 +107,7 @@ For IVF_FLAT and HNSW, **index_file** no longer holds raw data and uses offsets 
 
 
 <div class="filter">
-<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#C++">C++</a>
+<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#CPP">C++</a>
 </div>
 
 <div class="filter-RESTful" markdown="block">
@@ -160,7 +160,7 @@ For IVF_FLAT and HNSW, **index_file** no longer holds raw data and uses offsets 
 
 </div>
 
-<div class="filter-C++" markdown="block">
+<div class="filter-CPP" markdown="block">
 
 ##### Deleted method
 
