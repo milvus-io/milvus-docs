@@ -29,7 +29,7 @@ id: release_notes.md
 3. 调整了二值型向量支持索引名称：
 
    - `IVF_FLAT` 变更为 `BIN_IVF_FLAT`，
-   - `FLAT`变更为为 `BIN_FLAT`。
+   - `FLAT`变更为 `BIN_FLAT`。
 
 4. 移除原有的 `CreateCollection()` 方法。
 
