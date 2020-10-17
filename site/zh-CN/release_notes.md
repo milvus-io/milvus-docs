@@ -104,7 +104,7 @@ IVF_FLAT 和 HNSW 两种索引的 **index_file** 文件不再包含原始向量�
 
 
 <div class="filter">
-<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#Go">Go</a> <a href="#C++">C++</a>
+<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#C++">C++</a>
 </div>
 
 <div class="filter-RESTful" markdown="block">
