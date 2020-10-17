@@ -45,7 +45,7 @@ id: release_notes.md
 
 7. v0.11.0 Milvus 暂不支持 Mishards 分布式方案。
 
-8. Python SDK 操作失败会抛出异常。
+8. Python SDK 和 Java SDK 操作失败会抛出异常。
 9. RESTful API 支持分页读取实体。
    
    详见 `collections/{collection_name}/entities (GET)`。
