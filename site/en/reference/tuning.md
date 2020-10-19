@@ -164,9 +164,6 @@ Deleted entities do not participate in the calculation and takes up disk space. 
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">How can I get the best performance from Milvus through setting <code>segment_row_limit</code>?</font></summary>
-{{fragments/faq_segment_row_limit_best_practice.md}}
-</details>
 <details>
 <summary><font color="#4fc4f9">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
 {{fragments/faq_gpu_search_slow.md}}

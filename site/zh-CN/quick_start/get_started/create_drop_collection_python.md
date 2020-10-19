@@ -37,10 +37,6 @@ id: create_drop_collection_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#4fc4f9">创建集合时 <code>segment_row_limit</code> 如何设置能达到性能最优？</font></summary>
-{{fragments/faq_segment_row_limit_best_practice.md}}
-</details>
-<details>
 <summary><font color="#4fc4f9">建立集合后，<code>segment_row_limit</code> 和 <code>metric_type</code> 还支持修改吗？</font></summary>
 {{fragments/faq_update_param_after_collection.md}}
 </details>

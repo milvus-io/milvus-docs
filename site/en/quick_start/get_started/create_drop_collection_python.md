@@ -4,7 +4,7 @@ id: create_drop_collection_python.md
 
 # Create and Drop a Collection
 
-This article provides Python sample codes for creating or droping collections.
+This article provides Python sample codes for creating or dropping collections.
 
 <div class="alert note">
 See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example program</a> for more detailed usage.
@@ -36,10 +36,6 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
 
 ## FAQ
 
-<details>
-<summary><font color="#4fc4f9">How can I get the best performance from Milvus through setting <code>segment_row_limit</code>?</font></summary>
-{{fragments/faq_segment_row_limit_best_practice.md}}
-</details>
 <details>
 <summary><font color="#4fc4f9">Can I update <code>segment_row_limit</code> and <code>metric_type</code> after creating a collection?</font></summary>
 {{fragments/faq_update_param_after_collection.md}}

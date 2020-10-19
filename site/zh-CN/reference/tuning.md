@@ -161,10 +161,6 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 {{fragments/faq_search_slow.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">创建集合时 <code>segment_row_limit</code> 如何设置能达到性能最优？</font></summary>
-{{fragments/faq_segment_row_limit_best_practice.md}}
-</details>
-<details>
 <summary><font color="#4fc4f9">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
 {{fragments/faq_gpu_search_slow.md}}
 </details>
