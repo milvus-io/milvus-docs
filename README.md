@@ -15,7 +15,7 @@ Generally, we follow the "[fork](https://docs.github.com/en/free-pro-team@latest
 Flag issues and request improvements using the links below:
 
 - [Make change requests, report errors, or submit questions about this repository.](https://github.com/milvus-io/docs/issues/new/choose) 
-- [File technical documentation issues or request new technical documentation for Milvus.](
+- [File technical documentation issues or request new technical documentation for Milvus.](https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=[DOC])
 
 ### Writing style
 
