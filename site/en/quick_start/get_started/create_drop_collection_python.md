@@ -33,7 +33,7 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/{{var.milvus_python_sdk_
    ... }
    ```
 
-2. Create a collection named `test01`.
+2. Create a collection with a name `test01`.
 
    ```python
    # Create a collection.

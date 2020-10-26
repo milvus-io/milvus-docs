@@ -3,6 +3,7 @@ id: milvus_distributions-gpu.md
 label: GPU 版 Milvus
 order: 1
 group: distribution
+icon: tab-icon-gpu
 ---
 
 # Milvus 版本比较

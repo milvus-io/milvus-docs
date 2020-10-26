@@ -3,6 +3,7 @@ id: milvus_distributions-cpu.md
 label: CPU-only Milvus
 order: 0
 group: distribution
+icon: tab-icon-cpu
 ---
 
 # Milvus Distributions
