@@ -3,6 +3,7 @@ id: milvus_docker-cpu.md
 label: CPU 版 Milvus
 order: 0
 group: distribution
+icon: tab-icon-cpu
 ---
 
 

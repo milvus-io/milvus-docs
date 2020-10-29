@@ -3,6 +3,7 @@ id: milvus_docker-gpu.md
 label: GPU-enabled Milvus
 order: 1
 group: distribution
+icon: tab-icon-gpu
 ---
 
 # Install and Start Milvus
