@@ -1,0 +1,1 @@
+The value of `segment_row_limit` determines the maximum number of entities a segment can hold. You can set `segment_row_limit` when creating a collection, its default value being 512 &times; 1024 rows and maximum value being 4 &times; 1024 &times; 1024 rows. 

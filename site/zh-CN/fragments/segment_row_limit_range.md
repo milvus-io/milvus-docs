@@ -1,0 +1,1 @@
+`segment_row_limit` 的值决定数据段文件能高能存储的 Entity 的行数。你可以在创建集合时设置 `segment_row_limit`。 `segment_row_limit` 的默认值为 512 &times; 1024 行，最高可设为 4 &times; 1024 &times; 1024 行。
