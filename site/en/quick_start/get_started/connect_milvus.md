@@ -4,7 +4,7 @@ id: connect_milvus.md
 
 # Connect to the Server
 
-This article decribes how to connect to a Milvus server.
+This article decribes how to connect to the Milvus server.
 
 <div class="alert note">
 <li>See <a href="https://github.com/milvus-io/pymilvus">Python API documentation</a> for details about APIs.</li>
