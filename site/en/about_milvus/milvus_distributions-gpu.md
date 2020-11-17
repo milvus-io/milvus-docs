@@ -39,7 +39,7 @@ icon: tab-icon-gpu
 
 <div class="alert note">
 <ul>
-<li>An index built with GPU is identical to that built with CPU. The only difference is that GPU usually takes less time to build the index.</li>
+<li>An index built with GPU is identical to that built with CPU. The only difference is that GPU usually takes less time to build index.</li>
 <li>If <code>top_k</code> > 2048, Milvus switches from GPU search to CPU search.</li>
 <li>If <code>nprobe</code> > 2048, Milvus switches from GPU search to CPU search.</li>
 </ul>
