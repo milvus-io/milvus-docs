@@ -62,9 +62,7 @@ id: connect_milvus.md
 2. 连接 Milvus 服务端：
 
    ```java
-    /*
-     *   You can call withLogging() to enable logging framework.
-     */
+    // You can call withLogging() to enable logging framework.
     ConnectParam connectParam = new ConnectParam.Builder().withHost("127.0.0.1").withPort(19530).build();
     MilvusClient client = new MilvusGrpcClient(connectParam);
     ```
