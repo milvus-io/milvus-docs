@@ -100,7 +100,7 @@
       "isMenu": true
     },
     {
-      "id": "install_milvus_docker-cpu",
+      "id": "milvus_docker-cpu.md",
       "title": "Install Milvus",
       "label1": "quick_start",
       "label2": "",

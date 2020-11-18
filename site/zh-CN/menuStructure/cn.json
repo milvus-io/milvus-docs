@@ -100,7 +100,7 @@
       "isMenu": true
     },
     {
-      "id": "install_milvus_docker-cpu",
+      "id": "milvus_docker-cpu.md",
       "title": "安装 Milvus",
       "label1": "quick_start",
       "label2": "",
@@ -109,7 +109,7 @@
       "isMenu": true
     },
     {
-      "id": "install_milvus_docker-cpu.md",
+      "id": "milvus_docker-cpu.md",
       "title": "安装概述",
       "label1": "quick_start",
       "label2": "install_milvus",
