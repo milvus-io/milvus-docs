@@ -16,8 +16,6 @@ The following table shows how these widely used distance metrics fit with variou
 
 </div>
 
-<div class="filter-floating table-wrapper" markdown="block">
-
 <table class="tg">
 <thead>
   <tr>
@@ -37,8 +35,6 @@ The following table shows how these widely used distance metrics fit with variou
 </table>
 
 </div>
-
-<div class="filter-floating table-wrapper" markdown="block">
 
 ### Euclidean distance (L2)
 
@@ -77,9 +73,6 @@ The correlation between the two embeddings is as follows:
 
 </div>
 
-<div class="filter-binary table-wrapper" markdown="block">
-
-</div>
 
 ## FAQ
 

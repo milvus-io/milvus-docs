@@ -16,7 +16,6 @@ The following table shows how these widely used distance metrics fit with variou
 
 </div>
 
-<div class="filter-binary table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
@@ -38,7 +37,6 @@ The following table shows how these widely used distance metrics fit with variou
 
 </div>
 
-<div class="filter-floating table-wrapper" markdown="block">
 
 ### Jaccard distance
 
