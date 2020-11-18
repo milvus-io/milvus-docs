@@ -1,5 +1,5 @@
 ---
-id: metric-binary embeddings.md
+id: metric-binary.md
 ---
 
 # Distance Metrics
