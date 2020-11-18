@@ -1,5 +1,9 @@
 ---
 id: Metric-floatingpoint.md
+label: Floating point vectors
+order: 0
+group: vectors
+icon: tab-icon-floatingpoint
 ---
 
 # Distance Metrics

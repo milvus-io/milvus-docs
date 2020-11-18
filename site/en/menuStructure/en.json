@@ -75,14 +75,6 @@
       "order": 4
     },
     {
-      "id": "Metric-binary.md",
-      "title": "Distance Metrics",
-      "label1": "milvus_basics",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "write_ahead_log.md",
       "title": "Write Ahead Log",
       "label1": "milvus_basics",
