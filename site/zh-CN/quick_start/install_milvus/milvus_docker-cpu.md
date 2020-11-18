@@ -9,6 +9,14 @@ icon: tab-icon-cpu
 
 # 安装、启动 Milvus 服务
 
+在开始前请确保已经阅读[发行版本](milvus_distributions-cpu.md#)了解 Milvus 的两个发行版本的性能差异和适用场景。
+
+我们推荐使用 Docker 启动 Milvus 服务。请根据你的 Milvus 版本选择相应的安装指南。
+
+<div class="alert note">
+如果你没有安装 Docker 环境，你可以参考<a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">从源代码编译 Milvus</a>。
+</div>
+
 {{tab}}
 
 ## 安装前提
