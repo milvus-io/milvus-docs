@@ -67,7 +67,7 @@
       "order": 3
     },
     {
-      "id": "metric.md",
+      "id": "metric-floating.md",
       "title": "Distance Metrics",
       "label1": "milvus_basics",
       "label2": "",
