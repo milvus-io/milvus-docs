@@ -1,5 +1,5 @@
 ---
-id: metric-floatingpoint.md
+id: Metric-floatingpoint.md
 ---
 
 # Distance Metrics

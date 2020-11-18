@@ -1,5 +1,5 @@
 ---
-id: metric-binary.md
+id: Metric-binary.md
 ---
 
 # Distance Metrics
