@@ -7,6 +7,7 @@ group: vectors
 
 {{fragments/metrics.md}}
 
+{{tab}} 
 
 <table class="tg">
 <thead>

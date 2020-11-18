@@ -7,6 +7,7 @@ group: vectors
 
 {{fragments/metrics.md}}
 
+{{tab}} 
 
 <div class="filter-binary table-wrapper" markdown="block">
 
