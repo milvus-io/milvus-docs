@@ -117,7 +117,7 @@ FLAT index provides 100% query recall rate. Compared to other indexes, it is the
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `metric_type` | [Optional] The chosen distance metric.   | See [Supported Metrics](metric.md#floating). |
+   | `metric_type` | [Optional] The chosen distance metric.   | See [Supported Metrics](metric-floatingpoint.md). |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
