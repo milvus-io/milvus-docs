@@ -1,9 +1,8 @@
 ---
-id: Metric-binary.md
+id: metric-binary.md
 label: Binary vectors
 order: 1
 group: vectors
-icon: tab-icon-binary
 ---
 
 # Distance Metrics
