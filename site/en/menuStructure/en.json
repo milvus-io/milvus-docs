@@ -67,7 +67,7 @@
       "order": 3
     },
     {
-      "id": "metric-floatingpoint.md",
+      "id": "Metric-floatingpoint.md",
       "title": "Distance Metrics",
       "label1": "milvus_basics",
       "label2": "",
@@ -75,7 +75,7 @@
       "order": 4
     },
     {
-      "id": "metric-binary.md",
+      "id": "Metric-binary.md",
       "title": "Distance Metrics",
       "label1": "milvus_basics",
       "label2": "",
