@@ -6,6 +6,7 @@ group: distribution
 icon: tab-icon-gpu
 ---
 
+{{fragments/install.md}}
 
 # 安装、启动 Milvus 服务
 
