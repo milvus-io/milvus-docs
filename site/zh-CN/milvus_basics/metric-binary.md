@@ -8,7 +8,6 @@ group: vector
 
 {{tab}} 
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 <table class="tg">
 <thead>
@@ -29,8 +28,6 @@ group: vector
 </tbody>
 </table>
 
-
-<div class="filter-binary" markdown="block">
 
 ### 杰卡德距离
 
@@ -100,7 +97,6 @@ group: vector
 - N<sub>B</sub> 表示分子式 B 的化学指纹中二进制位的数量。
 - N<sub>AB</sub> 表示分子式 A 和 B 的化学指纹中共有的二进制位的数量。
 
-</div>
 
 ## 常见问题
 
