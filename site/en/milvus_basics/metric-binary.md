@@ -9,7 +9,6 @@ group: vectors
 
 {{tab}} 
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 <table class="tg">
 <thead>
@@ -30,7 +29,6 @@ group: vectors
 </tbody>
 </table>
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 ### Jaccard distance
 

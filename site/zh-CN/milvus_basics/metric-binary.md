@@ -8,8 +8,6 @@ group: vector
 
 {{tab}} 
 
-<div class="filter-binary table-wrapper" markdown="block">
-
 <table class="tg">
 <thead>
   <tr>
@@ -28,9 +26,6 @@ group: vector
   </tr>
 </tbody>
 </table>
-
-
-<div class="filter-binary" markdown="block">
 
 ### 杰卡德距离
 

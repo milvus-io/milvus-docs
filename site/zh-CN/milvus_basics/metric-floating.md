@@ -28,7 +28,6 @@ group: vector
 </tbody>
 </table>
 
-<div class="filter-floating" markdown="block">
 
 ### 欧氏距离（L2）
 

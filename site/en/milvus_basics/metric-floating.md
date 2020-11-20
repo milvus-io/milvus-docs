@@ -28,7 +28,7 @@ group: vectors
 </table>
 
 
-<div class="filter-floating table-wrapper" markdown="block">
+
 
 ### Euclidean distance (L2)
 
