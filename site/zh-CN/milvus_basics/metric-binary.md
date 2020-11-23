@@ -8,10 +8,6 @@ group: vector
 
 {{tab}} 
 
-<<<<<<< HEAD:site/zh-CN/milvus_basics/metric-binary.md
-<div class="filter-binary table-wrapper" markdown="block">
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9:site/zh-CN/milvus_basics/metric.md
 
 <table class="tg">
 <thead>
@@ -32,11 +28,6 @@ group: vector
 </tbody>
 </table>
 
-<<<<<<< HEAD:site/zh-CN/milvus_basics/metric-binary.md
-
-<div class="filter-binary" markdown="block">
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9:site/zh-CN/milvus_basics/metric.md
 
 ### 杰卡德距离
 

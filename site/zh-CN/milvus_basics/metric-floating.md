@@ -8,11 +8,7 @@ group: vector
 {{tab}} 
 
 
-<<<<<<< HEAD
-<div class="filter-floating table-wrapper" markdown="block">
 
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9
 <table class="tg">
 <thead>
   <tr>
@@ -31,11 +27,6 @@ group: vector
 </tbody>
 </table>
 
-<<<<<<< HEAD
-<div class="filter-floating" markdown="block">
-
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9
 ### 欧氏距离（L2）
 
 欧氏距离计算的是两点之间最短的直线距离。
@@ -71,10 +62,6 @@ group: vector
 
 ![normalization](../../../assets/normalization_formula.png)
 
-<<<<<<< HEAD
-</div>
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9
 
 ## 常见问题
 

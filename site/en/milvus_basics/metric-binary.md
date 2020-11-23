@@ -9,10 +9,6 @@ group: vectors
 
 {{tab}} 
 
-<<<<<<< HEAD:site/en/milvus_basics/metric-binary.md
-<div class="filter-binary table-wrapper" markdown="block">
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9:site/en/milvus_basics/metric.md
 
 <table class="tg">
 <thead>
@@ -32,11 +28,6 @@ group: vectors
   </tr>
 </tbody>
 </table>
-
-<<<<<<< HEAD:site/en/milvus_basics/metric-binary.md
-<div class="filter-binary table-wrapper" markdown="block">
-=======
->>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9:site/en/milvus_basics/metric.md
 
 ### Jaccard distance
 
