@@ -6,7 +6,11 @@ group: distribution
 icon: tab-icon-gpu
 ---
 
+<<<<<<< HEAD:site/en/quick_start/install_milvus/milvus_docker-gpu.md
 {{fragments/install_overview.md}}
+=======
+{{fragments/install.md}}
+>>>>>>> a8c4ae2dbd71bf35881a051610ad23772111eda9:site/en/quick_start/milvus_docker-gpu.md
 
 # Install and Start Milvus
 
