@@ -6,7 +6,7 @@ group: distribution
 icon: tab-icon-cpu
 ---
 
-{{fragments/install.md}}
+{{fragments/install_overview.md}}
 
 # 安装、启动 Milvus 服务
 
