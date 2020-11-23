@@ -100,7 +100,6 @@
       "isMenu": true
     },
     {
-<<<<<<< HEAD
       "id": "install_milvus",
       "title": "Install Milvus",
       "label1": "quick_start",
