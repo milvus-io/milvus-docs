@@ -126,18 +126,9 @@ IVF（Inverted File，倒排文件）是一种基于量化的索引类型。它�
 
 IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与原始数据一致。
 
-- 建索引参数
+{{fragments/index_building.md}}
 
-   | 参数   | 说明     | 取值范围     |
-   | ------- | -------- |----------- |
-   | `nlist` | 聚类单元数 |[1, 65536] |
-   
-
-- 查询参数
-
-   | 参数     | 说明        | 取值范围    |
-   | -------- | ----------- | ---------- |
-   | `nprobe` | 查询取的单元数 | [1, 65536] <br> GPU 版 Milvus 在 `nprobe` > 2048 时由 GPU 查询切换为 CPU 查询。|
+{{fragments/index_search.md}}
 
 
 ### IVF_SQ8
@@ -145,8 +136,9 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
 
 IVF\_SQ8 是在 IVF 的基础上对放入单元里的每条向量做一次标量量化（Scalar Quantization）。标量量化会把原始向量的每个维度从 4 个字节的浮点数转为 1 个字节的无符号整数，因此 IVF\_SQ8 索引文件占用的存储空间远小于 IVF\_FLAT。但是，标量量化会导致查询时的精度损失。
 
-- 建索引参数同 IVF\_FLAT
-- 查询参数同 IVF\_FLAT
+{{fragments/index_building.md}}
+
+{{fragments/index_search.md}}
 
 ### IVF_SQ8H
 <a name="IVF_SQ8H"></a>
@@ -158,8 +150,9 @@ IVF\_SQ8H 是一种优化查询执行的 IVF\_SQ8 索引类型。
 - `nq` &ge; `gpu_search_threshold`：整个查询过程都在 GPU 上执行。
 - `nq` < `gpu_search_threshold`：在 GPU 上执行在 IVF 里寻找 `nprobe` 个最近单元的运算，在 CPU 上执行其它运算。
 
-- 建索引参数同 IVF\_FLAT
-- 查询参数同 IVF\_FLAT
+{{fragments/index_building.md}}
+
+{{fragments/index_search.md}}
 
 ### IVF_PQ
 <a name="IVF_PQ"></a>
@@ -170,17 +163,38 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 
 - 建索引参数
 
+<div class="filter">
+<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
+</div>
+
+<div class="filter-CPU" markdown="block">
+
+
    | 参数   | 说明          | 取值范围     |
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
-   | `m`     | 乘积量化因子个数 | CPU 版 Milvus：`m` ≡ dim (mod m)；GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
-   
+   | `m`     | 乘积量化因子个数 | CPU 版 Milvus：`m` ≡ dim (mod m) |
+</div>
+
+
+<div class="filter-GPU" markdown="block">
+
+
+   | 参数   | 说明          | 取值范围     |
+   | --------| ------------- | ----------- |
+   | `nlist` | 聚类单元数　    | [1, 65536] |
+   | `m`     | 乘积量化因子个数 | GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
+</div>
+
+
+
 <div class="alert note">
 如果 GPU 版 Milvus 不支持设置的 <code>m</code> 值，Milvus 会自动由 GPU 检索切换为 CPU 检索。
 </div>
    
 
-- 查询参数同 IVF_FLAT
+{{fragments/index_search.md}}
+
 
 ### RNSG
 <a name="RNSG"></a>
