@@ -27,9 +27,6 @@ group: vectors
 </tbody>
 </table>
 
-
-<div class="filter-floating table-wrapper" markdown="block">
-
 ### Euclidean distance (L2)
 
 Essentially, Euclidean distance measures the length of a segment that connects 2 points.
@@ -64,8 +61,6 @@ Suppose X' is normalized from embedding X:
 The correlation between the two embeddings is as follows: 
 
 ![normalization](../../../assets/normalization_formula.png)
-
-</div>
 
 
 ## FAQ

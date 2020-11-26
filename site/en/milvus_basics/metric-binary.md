@@ -9,7 +9,6 @@ group: vectors
 
 {{tab}} 
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 <table class="tg">
 <thead>
@@ -29,8 +28,6 @@ group: vectors
   </tr>
 </tbody>
 </table>
-
-<div class="filter-binary table-wrapper" markdown="block">
 
 ### Jaccard distance
 
@@ -94,7 +91,6 @@ Where:
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
 
-</div>
 
 ## FAQ
 

@@ -4,7 +4,7 @@ id: index.md
 
 # Vector index
 
-Vector index is a time-efficient and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
+Vector index is a time- and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
 
 Since accurate retrieval is usually very time-consuming, most of the vector index types of Milvus use ANNS (Approximate Nearest Neighbors Search). Compared with accurate retrieval, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
 
@@ -126,26 +126,18 @@ IVF (Inverted File) is an index type based on quantization. It divides the point
 
 IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
 
-- Index building parameters
+{{fragments/index_building.md}}
 
-   | Parameter   | Description     | Range     |
-   | ------- | -------- |----------- |
-   | `nlist` | Number of cluster units |[1, 65536] |
-   
-
-- Search parameters
-
-   | Parameter   | Description     | Range     |
-   | -------- | ----------- | ---------- |
-   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+{{fragments/index_search.md}}
 
 ### IVF_SQ8
 <a name="IVF_SQ8"></a>
 
 IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
-- IVF\_SQ8 has the same index building parameters as IVF\_FLAT.
-- IVF\_SQ8 has the same search parameters as IVF\_FLAT.
+{{fragments/index_building.md}}
+
+{{fragments/index_search.md}}
 
 ### IVF_SQ8H
 <a name="IVF_SQ8H"></a>
@@ -159,8 +151,9 @@ The query method is as follows:
 - If `nq` &ge; `gpu_search_threshold`, GPU handles the entire query task.
 - If `nq` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
-- IVF\_SQ8H has the same index building parameters as IVF\_FLAT.
-- IVF\_SQ8H has the same search parameters as IVF\_FLAT.
+{{fragments/index_building.md}}
+
+{{fragments/index_search.md}}
 
 ### IVF_PQ
 <a name="IVF_PQ"></a>
@@ -170,17 +163,32 @@ The query method is as follows:
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 - Index building parameters
+<div class="filter">
+<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
+</div>
+
+<div class="filter-CPU" markdown="block">
 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m); GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
-   
+   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m) |
+</div>
+
+
+<div class="filter-GPU" markdown="block">
+
+   | Parameter   | Description     | Range     |
+   | --------| ------------- | ----------- |
+   | `nlist` | Number of cluster units　    | [1, 65536] |
+   | `m`     | Number of factors of product quantization |  GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+</div>
+
 <div class="alert note">
 Milvus automatically switches from GPU search to CPU search if <code>m</code> is not supported.
 </div>
 
-- IVF\_PQ has the same search parameters as IVF\_FLAT.
+{{fragments/index_search.md}}
 
 ### RNSG
 <a name="RNSG"></a>

@@ -8,7 +8,6 @@ group: vector
 {{tab}} 
 
 
-<div class="filter-floating table-wrapper" markdown="block">
 
 <table class="tg">
 <thead>
@@ -27,8 +26,6 @@ group: vector
   </tr>
 </tbody>
 </table>
-
-<div class="filter-floating" markdown="block">
 
 ### 欧氏距离（L2）
 
@@ -65,7 +62,6 @@ group: vector
 
 ![normalization](../../../assets/normalization_formula.png)
 
-</div>
 
 ## 常见问题
 
