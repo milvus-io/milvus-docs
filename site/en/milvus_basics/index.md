@@ -164,7 +164,7 @@ IVF\_PQ performs IVF index clustering before quantizing the product of vectors. 
 
 - Index building parameters
 
-Index building parameters vary according to Milvus distribution. Please select your Milvus distribution first.
+Index building parameters may vary with Milvus distribution. Please select your Milvus distribution first.
 
 <div class="filter">
 <a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>

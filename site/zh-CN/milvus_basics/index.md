@@ -163,7 +163,7 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 
 - 建索引参数
 
-请根据您的Milvus版本选择相应的建索引参数。
+请根据你的 Milvus 版本查看相应的建索引参数。
 
 <div class="filter">
 <a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
