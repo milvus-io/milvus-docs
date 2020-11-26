@@ -1,4 +1,5 @@
- Index building parameters
+ 
+ - Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
