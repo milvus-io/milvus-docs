@@ -163,6 +163,8 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 
 - 建索引参数
 
+请根据您的Milvus版本选择相应的建索引参数。
+
 <div class="filter">
 <a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
 </div>
@@ -184,14 +186,11 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
    | `m`     | 乘积量化因子个数 | GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
-</div>
-
-
 
 <div class="alert note">
 如果 GPU 版 Milvus 不支持设置的 <code>m</code> 值，Milvus 会自动由 GPU 检索切换为 CPU 检索。
 </div>
-   
+</div>   
 
 {{fragments/index_search.md}}
 
