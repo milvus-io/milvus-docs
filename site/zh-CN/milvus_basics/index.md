@@ -202,7 +202,6 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 <li>如果 <code>m</code> 值不在 GPU 和 CPU 版 Milvus 的取值范围内,Milvus 检索报错。</li>
 </ul>
 </div>
-</div>
 
 - 查询参数
 
