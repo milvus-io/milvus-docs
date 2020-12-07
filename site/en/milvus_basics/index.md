@@ -163,7 +163,7 @@ The query method is as follows:
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 <div class="alert note">
-<li>Index building parameters may vary with Milvus distribution. Please select your Milvus distribution first.</li>
+Index building parameters may vary with Milvus distribution. Please select your Milvus distribution first.
 </div>
 
 <div class="filter">
