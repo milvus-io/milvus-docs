@@ -199,7 +199,7 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 <div class="alert note">
 <ul>
 <li>如果 <code>m</code> 值不在指定区间，但是只要 <code>m</code> 值是 CPU 版 Milvus 支持的，Milvus 会自动由 GPU 建索引切换为 CPU 建索引。</li>
-<li>如果 <code>m</code> 值不在 GPU 和 CPU 版 Milvus 的取值范围内,Milvus 检索报错。</li>
+<li>如果 <code>m</code> 值不在指定区间，也不在 GPU 版 Milvus 的指定范围内，Milvus 会报错。</li>
 </ul>
 </div>
 
@@ -212,7 +212,7 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 <div class="alert note">
 <ul>
 <li> 如果 <code>nprobe</code> 值不在指定区间，但是只要 <code>nprobe</code> 值是 CPU 版 Milvus 支持的，Milvus 会自动由 GPU 查询切换为 CPU 查询。</li> 
-<li> 如果 <code>nprobe</code> 值不在 GPU 和 CPU 版 Milvus 的取值范围内，Milvus 查询报错。</li> 
+<li> 如果 <code>nprobe</code> 值不在指定区间，也不在 CPU 版 Milvus 的取值范围内，Milvus 查询报错。</li> 
 </ul>
 </div>
 </div>   
