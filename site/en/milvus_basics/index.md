@@ -167,7 +167,7 @@ Index building parameters and search parameters may vary with Milvus distributio
 </div>
 
 <div class="filter">
-<a href="#CPU">CPU-enabled Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
+<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
 </div>
 
 <div class="filter-CPU" markdown="block">
