@@ -162,9 +162,9 @@ The query method is as follows:
 
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
-- Index building parameters
-
-Index building parameters may vary with Milvus distribution. Please select your Milvus distribution first.
+<div class="alert note">
+<li>Index building parameters may vary with Milvus distribution. Please select your Milvus distribution first.</li>
+</div>
 
 <div class="filter">
 <a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
@@ -172,19 +172,35 @@ Index building parameters may vary with Milvus distribution. Please select your 
 
 <div class="filter-CPU" markdown="block">
 
+- Index building parameters
+
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | CPU-only Milvus: dim ≡ 0 (mod m) |
+
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | CPU: [1, nlist] |
 </div>
 
 
 <div class="filter-GPU" markdown="block">
 
+- Index building parameters
+
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization |  GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | GPU: [1, min(2048, nlist)] |
 <div class="alert note">
 Milvus automatically switches from GPU search to CPU search if <code>m</code> is not supported.
 </div>
