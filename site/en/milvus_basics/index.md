@@ -194,13 +194,13 @@ IVF\_PQ performs IVF index clustering before quantizing the product of vectors. 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization |  GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+   | `m`     | Number of factors of product quantization |  CPU-only Milvus: dim ≡ 0 (mod m)<br>GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
 
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `nprobe` | Number of units to query | GPU: [1, min(2048, nlist)] |
+   | `nprobe` | Number of units to query | CPU: [1, nlist]<br>GPU: [1, min(2048, nlist)] |
 <div class="alert note">
 Milvus automatically switches from GPU search to CPU search if <code>m</code> is not supported.
 </div>
