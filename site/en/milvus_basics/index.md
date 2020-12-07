@@ -196,13 +196,24 @@ Index building parameters and search parameters may vary with Milvus distributio
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization |  CPU: dim ≡ 0 (mod m)<br>GPU:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
 
+<div class="alert note">
+<ul>
+<li> If the value of <code>m</code> does not fall into the specified range for GPU indexing but falls into the range of CPU indexing, Milvus switches to using CPU to build index. </li>
+<li> If the value of <code>m</code> does not fall into either the range of GPU indexing or CPU indexing, Milvus reports an error.</li>
+</ul>
+</div>
+
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist]<br>GPU: [1, min(2048, nlist)] |
+
 <div class="alert note">
-Milvus automatically switches from GPU to CPU if <code>m</code> or <code>nprobe</code>  is in the range of CPU.
+<ul>
+<li> If the value of <code>nprobe</code> does not fall into the specified range for GPU search but falls into the range of CPU search, Milvus switches to CPU search. </li>
+<li> If the value of <code>nprobe</code> does not fall into either the range of GPU search or CPU search, Milvus reports an error.</li>
+</ul>
 </div>
 </div>
 
