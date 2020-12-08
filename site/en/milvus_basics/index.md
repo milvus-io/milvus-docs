@@ -207,7 +207,6 @@ If the value of <code>m</code> does not fall into the specified range for GPU in
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | [1, min(2048, nlist)] |
 
-
 <div class="alert note">
 If the value of <code>nprobe</code> does not fall into the specified range but falls into the range for CPU search, Milvus switches to CPU search (click the button above to view the range supported by CPU-enabled Milvus).
 </div>
