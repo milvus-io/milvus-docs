@@ -48,7 +48,7 @@ Milvus v0.11.0 does not support the Mishards clustering solution.
 
    Uses `GetCollectionInfo()` instead to retrieve the corresponding information. 
 
-7. For Python and Java platforms, the SDK throws an exception when an operation fails. 
+7. The Python or Java SDK throws an exception when an operation fails. 
 
 8. [RESTful] Supports retrieving entities by offset and page size. 
    
