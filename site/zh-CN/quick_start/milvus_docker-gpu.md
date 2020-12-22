@@ -101,7 +101,7 @@ milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 
 - `-d`: 在后台运行容器。
 - `--name`: 为容器指定一个名字。
-- `--gpus`: 指定可用的 GPU。如未填写任何值，则所有 GPU 都可用。
+- `--gpus`: 指定可用的 GPU。如填写 `all` 则表示所有 GPU 均可用。
 - `-p`: 指定端口映射。
 - `-v`: 将宿主机路径挂载至容器。
 
