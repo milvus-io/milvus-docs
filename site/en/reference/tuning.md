@@ -111,29 +111,7 @@ IVF indexes include IVF\_FLAT, IVF\_SQ8 / IVF\_SQ8H, and IVF\_PQ. The IVF\_SQ8 /
 
 All types of IVF indexes have two parameters: `nlist` and `nprobe`. `nlist` is the indexing parameter, `nprobe` the searching parameter.
 
-You can choose the recommended values through the following methods:
-
-The recommended value of `nlist` is `4 * sqrt(n)`, where n is the total number of vectors in the dataset. 
-
-Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
-
-The following charts are from a test running on the sift50m dataset and IVF\_SQ8 index. The test compares search performance and recall rate between different `nlist`/`nprobe` pairs.
-
-<div class="alert note">
-
-We only show the results of GPU-enabled Milvus here, because the two distributions of Milvus show similar results.
-
-</div>
-
-![Accuracy](../../../assets/accuracy_nlist_nprobe.png)
-
-The takeaway: This test shows that the recall rate increases with the nlist/ nprobe pair.
-
-![Performance](../../../assets/performance_nlist_nprobe.png)
-
-The takeaway: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best search performance.
-
-You can estimate the amount of calculation when using IVF indexes for querie through the following methods:
+The following section provides formulae for estimating the calculation amount for queries on IVF indexes.
 
 * The amount of calculation of a single segment = the number of target vectors × (`nlist` + (the number of vectors in a segment ÷ `nlist`) × `nprobe`)
 * The number of segments = the total amount of aggregate data ÷ `segment_row_limit`

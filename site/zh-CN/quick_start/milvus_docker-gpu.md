@@ -135,6 +135,10 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 <summary><font color="#4fc4f9">Milvus 只能使用 Docker 部署吗？</font></summary>
 {{fragments/faq_install_from_source.md}}
 </details>
+<details>
+<summary><font color="#4fc4f9">建立索引时需要设置 <code>nlist</code> 或 <code>nprobe</code> 值，如何选择该值大小？</font></summary>
+{{fragments/faq_recommendedvalue_nlist_nprobe.md}}
+</details>
 
 
 
