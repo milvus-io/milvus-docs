@@ -111,7 +111,7 @@ IVF indexes include IVF\_FLAT, IVF\_SQ8 / IVF\_SQ8H, and IVF\_PQ. The IVF\_SQ8 /
 
 All types of IVF indexes have two parameters: `nlist` and `nprobe`. `nlist` is the indexing parameter, `nprobe` the searching parameter. For more information about the recommended values, see [Performance FAQ > How to set the value of `nlist` or `nprobe` when I build indexes?](/faq/performance_faq.md#how-to-set-the-value-of-nlist-or-nprobe-when-i-build-indexes-4).
 
-The following section provides formulae for estimating the calculation amount for queries on IVF indexes.
+The following section provides formulae for estimating the calculation amount for queries on IVF indexes:
 
 * The amount of calculation of a single segment = the number of target vectors × (`nlist` + (the number of vectors in a segment ÷ `nlist`) × `nprobe`)
 * The number of segments = the total amount of aggregate data ÷ `segment_row_limit`
