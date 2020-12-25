@@ -109,7 +109,7 @@ As the number of target vectors increases, the time spent on using CPUs to perfo
 
 IVF indexes include IVF\_FLAT, IVF\_SQ8 / IVF\_SQ8H, and IVF\_PQ. The IVF\_SQ8 / IVF\_SQ8H and IVF\_PQ indexes perform lossy compression on vector data to reduce the disk space occupied by index files.
 
-All types of IVF indexes have two parameters: `nlist` and `nprobe`. `nlist` is the indexing parameter, `nprobe` the searching parameter.
+All types of IVF indexes have two parameters: `nlist` and `nprobe`. `nlist` is the indexing parameter, `nprobe` the searching parameter. For more information about the recommended values, see [Performance FAQ > How to set the value of `nlist` or `nprobe` when I build indexes?](performance_faq.md#how-to-set-the-value-of-nlist-or-nprobe-when-i-build-indexes-4)
 
 The following section provides formulae for estimating the calculation amount for queries on IVF indexes.
 
