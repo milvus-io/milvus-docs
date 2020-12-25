@@ -1,6 +1,5 @@
 In general terms, the recommended value of <code>nprobe</code> is <code>4 * sqrt(n)</code>, where n is the total number of vectors in the dataset. 
 
-
 Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
 
 The following charts are from a test running on the sift50m dataset and IVF\_SQ8 index. The test compares search performance and recall rate between different `nlist`/`nprobe` pairs.
