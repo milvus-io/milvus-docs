@@ -44,7 +44,7 @@ See [Performance tuning](tuning.md) for more information.
 
 #### How to set the value of `nlist` when I build indexes?
 
-It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).
+{{fragments/faq_set_nlist_nprobe.md}}
 
 #### Why sometimes the query time for a small dataset is longer?
 

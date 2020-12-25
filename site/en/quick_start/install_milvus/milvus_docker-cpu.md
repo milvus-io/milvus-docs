@@ -126,6 +126,10 @@ $ sudo docker logs milvus_cpu_{{var.release_version}}
 <summary><font color="#4fc4f9">Is Docker the only way to install and run Milvus?</font></summary>
 {{fragments/faq_install_from_source.md}}
 </details>
+<details>
+<summary><font color="#4fc4f9">How to set <code>nlist</code> or <code>nprobe</code> for IVF indexes?</font></summary>
+{{fragments/faq_set_nlist_nprobe.md}}
+</details>
 
 
 
