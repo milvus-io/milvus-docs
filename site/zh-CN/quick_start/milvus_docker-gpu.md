@@ -136,8 +136,8 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 {{fragments/faq_install_from_source.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">建立索引时需要设置 <code>nlist</code> 或 <code>nprobe</code> 值，如何选择该值大小？</font></summary>
-{{fragments/faq_recommendedvalue_nlist_nprobe.md}}
+<summary><font color="#4fc4f9">应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？</font></summary>
+{{fragments/faq_set_nlist_nprobe.md}}
 </details>
 
 

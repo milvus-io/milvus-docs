@@ -25,9 +25,9 @@ id: performance_faq.md
 详见 [性能调优](tuning.md)。
 
 
-## 建立索引时需要设置 <code>nlist</code> 或 <code>nprobe</code> 值，如何选择该值大小？{#4}
+## 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？{#4}
 
-{{fragments/faq_recommendedvalue_nlist_nprobe.md}}
+{{fragments/faq_set_nlist_nprobe.md}}
 
 ## 为什么有时候小的数据集查询时间反而更长？{#5}
 
