@@ -1,5 +1,3 @@
-The following section provides information on determining value for these two parameters.
-
 The recommended value of `nlist` is `4 * sqrt(n)`, where n is the total number of vectors in the dataset. 
 
 Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
@@ -14,7 +12,7 @@ We only show the results of GPU-enabled Milvus here, because the two distributio
 
 ![Accuracy](../../../assets/accuracy_nlist_nprobe.png)
 
-Key takeaways: This test shows that the recall rate increases with the nlist/ nprobe pair.
+Key takeaways: This test shows that the recall rate increases with the `nlist`/`nprobe` pair.
 
 ![Performance](../../../assets/performance_nlist_nprobe.png)
 
