@@ -24,9 +24,9 @@ Check if the value of `cache.cache_size` in **milvus.yaml** is greater than the 
 
 See [Performance tuning](tuning.md) for more information. 
 
-## How to set the value of <code>nlist</code> when I build indexes? {#4}
+## How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes? {#4}
 
-It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).
+{{fragments/faq_set_nlist_nprobe.md}}
 
 ## Why sometimes the query time for a small dataset is longer? {#5}
 

@@ -135,6 +135,10 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 <summary><font color="#4fc4f9">Milvus 只能使用 Docker 部署吗？</font></summary>
 {{fragments/faq_install_from_source.md}}
 </details>
+<details>
+<summary><font color="#4fc4f9">应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？</font></summary>
+{{fragments/faq_set_nlist_nprobe.md}}
+</details>
 
 
 
