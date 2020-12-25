@@ -138,7 +138,8 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 </details>
 <details>
 <summary><font color="#4fc4f9">How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?</font></summary>
-{{fragments/faq_recommendedvalue_nlist_nprobe.md}}
+{{fragments/faq_set_nlist_nprobe.md}}
+
 </details>
 
 
