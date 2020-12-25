@@ -130,7 +130,7 @@ $ sudo docker logs milvus_cpu_{{var.release_version}}
 {{fragments/faq_install_from_source.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">How to set the value of <code>nlist</code> and <code>nprobe</code> when I build indexes?</font></summary>
+<summary><font color="#4fc4f9">How to set the value of <code>nlist</code> or <code>nprobe</code> when I build indexes?</font></summary>
 {{fragments/faq_recommendedvalue_nlist_nprobe.md}}
 </details>
 
