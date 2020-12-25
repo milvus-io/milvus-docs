@@ -24,7 +24,7 @@ Check if the value of `cache.cache_size` in **milvus.yaml** is greater than the 
 
 See [Performance tuning](tuning.md) for more information. 
 
-## How to set the value of <code>nlist</code> and <code>nprobe</code> when I build indexes? {#4}
+## How to set the value of <code>nlist</code> or <code>nprobe</code> when I build indexes? {#4}
 
 {{fragments/faq_recommendedvalue_nlist_nprobe.md}}
 
