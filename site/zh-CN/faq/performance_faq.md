@@ -46,7 +46,7 @@ id: performance_faq.md
 详见 [性能调优](tuning.md)。
 
 
-## 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？{#4}
+#### 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？{#4}
 
 {{fragments/faq_set_nlist_nprobe.md}}
 
