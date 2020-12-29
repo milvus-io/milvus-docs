@@ -42,7 +42,7 @@ Check if the value of `cache.cache_size` in **server_config.yaml** is greater th
 
 See [Performance tuning](tuning.md) for more information. 
 
-#### How to set the value of `nlist` when I build indexes? {#4}
+#### How to set the value of `nlist` when I build indexes?
 
 {{fragments/faq_set_nlist_nprobe.md}}
 
