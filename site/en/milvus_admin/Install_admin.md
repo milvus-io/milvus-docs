@@ -1,5 +1,5 @@
 ---
-id: install_admin.md
+id: Install_admin.md
 title: Install Milvus Admin
 sidebar_label: Install Milvus Admin
 ---
