@@ -47,8 +47,3 @@ Milvus 是一款开源的、针对海量特征向量的相似性搜索引擎。�
 ## 整体架构
 
 ![Milvus 架构](https://raw.githubusercontent.com/milvus-io/docs/master/assets/milvus_arch.png)
-
-## 接下来您可以
-
-- 了解 [特征向量](vector.md), [向量数据库](vector_db.md) 的发展现状和 [向量检索算法](index_method.md)
-- 几分钟轻易搞定 [Milvus 安装](../guides/get_started/install_milvus/install_milvus.md)
