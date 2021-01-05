@@ -231,6 +231,15 @@
       "order": 6
     },
     {
+      "id": "compatibility_information.md",
+      "title": "版本兼容性说明",
+      "lang": "en",
+      "label1": "reference",
+      "label2": null,
+      "label3": null,
+      "order": 7
+    },    
+    {
       "id": "faq",
       "title": "常见问题",
       "lang": "en",
