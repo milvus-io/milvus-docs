@@ -9,27 +9,28 @@ sidebar_label: Migrate Data to Milvus v.0.10.x
 Milvus v{{var.release_version}} is no longer supported. We highly recommend migrating your data to v0.10.x. For demonstration purposes, this tutorial covers migrating data to v0.10.3.
 
 <div class="alert warning">
-This version is *incompatible* with  v0.11.0.
+This version is <i>incompatible</i> with v0.11.0.
 </div>
 
 ## Step 1: Stop Milvus v{{var.release_version}} 
 
 1. Stop the current version of Milvus:
 
-```
-docker stop [Your_milvus_container_id]
-```
+    ```
+    docker stop [Your_milvus_container_id]
+    ```
 
 2. Delete **/conf**, **/logs,** and **/wal** under **/milvus**: 
 
-```
-cd ~/milvus
-sudo rm -rf ./conf
-sudo rm -rf ./logs
-sudo rm -rf ./wal
-```
+    ```
+    cd ~/milvus
+    sudo rm -rf ./conf
+    sudo rm -rf ./logs
+    sudo rm -rf ./wal
+    ```
+
 <div class="alert note">
-Save a copy of the **logs** folder if you want to retain log files.
+Save a copy of the <b>logs</b> folder if you want to retain log files.
 </div>
 
 ## Step 2: Download the v0.10.3 configuration file
@@ -42,7 +43,9 @@ cd conf
 wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.3/core/conf/demo/server_config.yaml
 ```
 
-If the download is unsuccessful, you can open the download URL with the web page, create a new file of the same name in the conf directory, and paste the content of the web page into the file to save.
+<div class="alert note">
+If the download is unsuccessful, you can open the download URL with the web page, create a new file of the same name in the <b>conf</b> directory, and paste the content of the web page into the file to save.
+</div>
 
 ## Step 3: Update the server address of MySQL/SQLite 
 
@@ -50,7 +53,7 @@ If the download is unsuccessful, you can open the download URL with the web page
 vim ./server_config.yaml
 ```
 
-Ensure that the MySQL/SQLite server address specified in general.meta_uri matches the server address specified in db_config.backend_url. If you use MySQL to manage metadata, the configuration information appears as follows:
+Ensure that the MySQL/SQLite server address specified in `general.meta_uri` matches the server address specified in `db_config.backend_url`. If you use MySQL to manage metadata, the configuration information appears as follows:
 
 ```
  general:
