@@ -31,7 +31,9 @@ sudo rm -rf ./logs
 sudo rm -rf ./wal
 ```
 
+<div class="alert note">
 如需保留日志文件，请将 **logs** 文件夹备份到其他目录。
+</div>
 
 ### 第 2 步：下载配置文件
 
