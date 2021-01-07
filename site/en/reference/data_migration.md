@@ -1,7 +1,5 @@
 ---
 id: data_migration.md
-title: Migrate Data to Milvus v.0.10.x
-sidebar_label: Migrate Data to Milvus v.0.10.x
 ---
 
 # Migrate Data to Milvus v.0.10.x
@@ -63,7 +61,7 @@ Ensure that the MySQL/SQLite server address specified in `general.meta_uri` matc
 
 ## Step 4: Download and start Milvus v0.10.3
 
-Download and run a Milvus v0.10.3 docker image using the same mapping path settings defined in Step 1, Part 4:
+Download and run a Milvus v0.10.3 docker image using the same mapping path settings as in the current version:
 
 ```
 docker pull milvusdb/milvus:0.10.3-cpu-d091720-f962e8

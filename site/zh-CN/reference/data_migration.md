@@ -1,12 +1,8 @@
 ---
 id: data_migration.md
-title: 迁移数据至 Milvus v0.10.x
-sidebar_label: 迁移数据至 Milvus v0.10.x
 ---
 
 # 迁移数据至 Milvus v0.10.x
-
-## 版本兼容性信息
 
 本版已不再维护。建议将数据迁移至 v0.10.x。本文以迁移至 v0.10.3 为例。
 
@@ -65,7 +61,7 @@ vim ./server_config.yaml
 
 ### 第 4 步：下载并启动新版 Milvus
 
-使用相同的映射路径下载并启动 v0.10.3 Milvus 容器：
+使用与当前版本相同的映射路径下载并启动 v0.10.3 Milvus 容器：
 
 ```
 docker pull milvusdb/milvus:0.10.3-cpu-d091720-f962e8
