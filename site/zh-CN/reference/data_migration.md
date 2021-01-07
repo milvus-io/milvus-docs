@@ -18,7 +18,7 @@ id: data_migration.md
     docker stop [Your_milvus_container_id]
     ```
 
-2. 删除 **/milvus** 下的 **/conf**、**/logs** 和 **/wal** 文件夹：
+2. 删除 **/milvus** 下 **/conf**、**/logs** 和 **/wal** 文件夹：
 
     ```
     cd ~/milvus
