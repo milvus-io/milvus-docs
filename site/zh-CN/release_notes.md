@@ -4,57 +4,6 @@ id: release_notes.md
 
 # 发版说明
 
-## v0.10.5
-
-**发布时间**：2020-01-07
-
-#### 版本兼容
-
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.5         | 0.2.15             | 0.8.6            | 0.4.5          |
-
-#### 升级必看
-
-- `load_collection()` 方法支持预加载指定分区。[#4307](https://github.com/milvus-io/milvus/issues/4307)
-
-#### 主要改进
-
-- 优化了系统建索引和查询的过程。[#4454](https://github.com/milvus-io/milvus/issues/4454)
-
-#### 问题修复
-
-- 在多线程中调用 `load_collection()` 和 `search()` 方法会造成 Milvus 死机。[#4378](https://github.com/milvus-io/milvus/issues/4378)
-- Milvus 在搜索参数 `partition_tags` 包含 `_default` 字样时仅搜索默认分区。[#4484](https://github.com/milvus-io/milvus/issues/4484)
-
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) 了解更多已修复问题。
-
-## v0.10.4
-
-**发布时间**：2020-12-03
-
-#### 版本兼容
-
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.4         | 0.2.14             | 0.8.5            | 0.4.4          |
-
-#### 主要改进
-
-- 提高了无 Entity 被删除的场景下的查询性能。 [#3775](https://github.com/milvus-io/milvus/issues/3775)
-- 减少了创建大量分区所需时间。[#4318](https://github.com/milvus-io/milvus/issues/4318)
-
-#### 问题修复
-
-- 修复了一个基于 IVF_PQ 索引采用 GPU 查询时服务端崩溃的问题。[#3626](https://github.com/milvus-io/milvus/issues/3626)
-- 修复了一个基于 IVF_SQ8H 索引查询性能恶化的问题。[#3903](https://github.com/milvus-io/milvus/issues/3903)
-- 修复了一个服务端在删除 Entity 时崩溃的问题。[#3906](https://github.com/milvus-io/milvus/issues/3906)
-- 修复了一个偶现的在持续创建、删除分区时服务端死机的问题。[#4012](https://github.com/milvus-io/milvus/issues/4012)
-- 修复了一个使用 GPU 搜索时出现的 out-of-memory 报错。[#4174](https://github.com/milvus-io/milvus/issues/4174)
-- 修复了一个创建 IVF 索引时出现内存泄漏的问题。[#4318](https://github.com/milvus-io/milvus/issues/4318)
-
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) 了解更多已修复问题。
-
 ## v0.11.0
 
 **发布时间**：2020-10-16
