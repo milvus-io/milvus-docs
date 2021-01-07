@@ -16,7 +16,7 @@ id: release_notes.md
 
 #### 升级必看
 
-1. `load_collection()` 方法支持预加载指定分区。[#4307](https://github.com/milvus-io/milvus/issues/4307)
+- `load_collection()` 方法支持预加载指定分区。[#4307](https://github.com/milvus-io/milvus/issues/4307)
 
 #### 主要改进
 

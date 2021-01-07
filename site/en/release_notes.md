@@ -16,7 +16,7 @@ id: release_notes.md
 
 #### Compatibility changes
 
-1. The `load_collection()` method supports preloading specified partitions. [#4307](https://github.com/milvus-io/milvus/issues/4307)
+- The `load_collection()` method supports preloading specified partitions. [#4307](https://github.com/milvus-io/milvus/issues/4307)
 
 #### Improvements
 
