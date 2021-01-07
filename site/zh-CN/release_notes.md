@@ -4,6 +4,31 @@ id: release_notes.md
 
 # 发版说明
 
+## v0.10.5
+
+**发布时间**：2020-01-07
+
+#### 版本兼容
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.5         | 0.2.15             | 0.8.6            | 0.4.5          |
+
+#### 升级必看
+
+1. `load_collection()` 方法支持预加载指定分区。[#4307](https://github.com/milvus-io/milvus/issues/4307)
+
+#### 主要改进
+
+- 优化了系统建索引和查询的过程。[#4454](https://github.com/milvus-io/milvus/issues/4454)
+
+#### 问题修复
+
+- 在多线程中调用 `load_collection()` 和 `search()` 方法会造成 Milvus 死机。[#4378](https://github.com/milvus-io/milvus/issues/4378)
+- Milvus 在搜索参数 `partition_tags` 包含 `_default` 字样时仅搜索默认分区。[#4484](https://github.com/milvus-io/milvus/issues/4484)
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) 了解更多已修复问题。
+
 ## v0.10.4
 
 **发布时间**：2020-12-03
