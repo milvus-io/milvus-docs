@@ -2,7 +2,7 @@
     "release_version": "0.10.5",
     "cpu_milvus_docker_image_version": "0.10.5-cpu-d010621-4eda95",
     "gpu_milvus_docker_image_version": "0.10.5-gpu-d010621-4eda95",
-    "milvus_python_sdk_version": "0.2.14",
+    "milvus_python_sdk_version": "0.2.15",
     "milvus_java_sdk_version": "0.8.6",
     "milvus_go_sdk_version": "0.4.5"
 
