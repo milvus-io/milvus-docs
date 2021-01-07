@@ -29,9 +29,9 @@ This version is <i>incompatible</i> with v0.11.0.
     sudo rm -rf ./wal
     ```
 
-<div class="alert note">
-Save a copy of the <b>logs</b> folder if you want to retain log files.
-</div>
+    <div class="alert note">
+    Save a copy of the <b>logs</b> folder if you want to retain log files.
+    </div>
 
 ## Step 2: Download the v0.10.3 configuration file
 
