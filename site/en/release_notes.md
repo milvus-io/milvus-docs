@@ -93,7 +93,7 @@ You can use scalar field filtering in an embedding search.
    - Greater than or equal to: `gte`
    - Less than: `lt`
    - Less than or equal to: `lte`
-- Supports `MUST`, `MUST_NOT`, and `SHOULD` operations between the vector field and scalar fields. 
+- Supports `MUST`, `MUST_NOT`, and `SHOULD` operations between the vector and scalar fields. 
 - Supports returning scalar fields related to the search result. 
 - Supports creating index for scalar fields to speed up searches for structured data. 
 
