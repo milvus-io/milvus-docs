@@ -128,10 +128,6 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 {{fragments/faq_illegal_instruction_set.md}}
 </details>
 <details>
-<summary><font color="#4fc4f9">Milvus 中如何实现数据迁移？</font></summary>
-{{fragments/faq_data_migration.md}}
-</details>
-<details>
 <summary><font color="#4fc4f9">Milvus 只能使用 Docker 部署吗？</font></summary>
 {{fragments/faq_install_from_source.md}}
 </details>
