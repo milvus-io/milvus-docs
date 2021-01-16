@@ -1,1 +1,1 @@
-有。二者之和不能超过 4,096。
+collection 数量没有限制。每个 collection 内的 partition 总数不能超过 4096个。
