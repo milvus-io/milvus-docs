@@ -139,7 +139,7 @@ $ sudo docker logs milvus_cpu_{{var.release_version}}
 
   - [Try an example program](example_code.md)
   - [Learn more about Milvus operations](milvus_operation.md)
-  - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
+  - [Try Milvus Bootcamp](https://github.com/zilliz-bootcamp)
   
 - If you're ready to run Milvus in production:
 
