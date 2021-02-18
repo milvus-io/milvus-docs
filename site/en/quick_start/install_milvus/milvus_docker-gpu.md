@@ -119,8 +119,8 @@ $ sudo docker logs milvus_gpu_{{var.release_version}}
 - If you're just getting started with Milvus:
 
   - [Try an example program](example_code.md)
-  - [Learn more about Milvus operations](milvus_operation.md)
-  - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
+  - [Learn basic Milvus operations](connect_milvus_python.md)
+  - [Try Milvus Bootcamp](https://github.com/zilliz-bootcamp)
   
 - If you're ready to run Milvus in production:
 
