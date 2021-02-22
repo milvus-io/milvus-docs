@@ -167,7 +167,7 @@ The query method is as follows:
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
+IVF\_PQ quantizes the products of vectors before IVF index clustering. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 <div class="alert note">
 Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
@@ -185,6 +185,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | dim ≡ 0 (mod m) |
+   | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
 
 - Search parameters
 
@@ -203,9 +204,13 @@ Index building parameters and search parameters vary with Milvus distribution. S
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization |  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+   | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | 8 |
 
 <div class="alert note">
-If the value of <code>m</code> does not fall into the specified range for GPU indexing but falls into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).
+<ul>
+  <li>If the value of <code>m</code> does not fall into the specified range for GPU indexing but into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).</li>
+  <li>If the specified value of <code>nbits</code> is between 1 and 16 but not 8, the system switches back to CPU-only Milvus.</li> 
+</ul>
 </div>
 
 - Search parameters
