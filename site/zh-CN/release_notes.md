@@ -18,7 +18,7 @@ id: release_notes.md
 
 - 在 `create_index()` 方法中增加了可选参数 `nbits`，用于 IVF\_PQ 索引。[#3920](https://github.com/milvus-io/milvus/issues/3920)
 
-<div class="alert note">IVF_PQ 参数信息，详见 <a href="https://www.milvus.io/docs/index.md#CPU">Vector index</a> 。</div>
+<div class="alert note">IVF_PQ 参数信息，详见 <a href="https://milvus.io/cn/docs/v0.10.5/index.md#CPU">向量索引</a> 。</div>
 
 #### 主要改进
 
