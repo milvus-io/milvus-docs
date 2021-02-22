@@ -32,7 +32,7 @@ id: release_notes.md
 - A FLAT search on binary vectors causes the server to crash, if the dimension of the vectors is not multiple of 2.[#4678](https://github.com/milvus-io/milvus/issues/4678)
 - The GPU cache holds more data than specified.[#4720](https://github.com/milvus-io/milvus/issues/4720)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.6/CHANGELOG.md) for more information.
 
 ## v0.10.5
 
