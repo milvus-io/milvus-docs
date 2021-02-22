@@ -4,6 +4,33 @@ id: release_notes.md
 
 # Release notes
 
+## v0.10.6
+
+**Release date**：2021-02-20
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.6         | 0.2.15             | 0.8.6            | 0.4.5          |
+
+#### Compatibility changes
+
+- Adds an optional argument `nbits` to the `create_index(`) method for the IVF\_PQ index. [#3920](https://github.com/milvus-io/milvus/issues/3920)
+
+<div class="alert note">For more information about setting IVF_PQ parameters, see <a href="https://www.milvus.io/docs/index.md#CPU">Vector index</a>.</div>
+
+#### Improvements
+
+- Optimizes the process of indexing and querying. [#4454](https://github.com/milvus-io/milvus/issues/4454)
+
+#### Fixed issues
+
+- Calling `load_collection()` and `search()` in multiple threads causes Milvus to hang. [#4378](https://github.com/milvus-io/milvus/issues/4378)
+- Milvus only searches the default partition if the search parameter `partition_tags` contains `_default`. [#4484](https://github.com/milvus-io/milvus/issues/4484)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) for more information.
+
 ## v0.10.5
 
 **Release date**：2021-01-07
