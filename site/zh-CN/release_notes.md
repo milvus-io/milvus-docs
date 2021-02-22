@@ -12,7 +12,7 @@ id: release_notes.md
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.6         | 0.2.15             | 0.8.6            | 0.4.6          |
+| 0.10.6         | 0.4.0             | 0.8.6            | 0.4.6          |
 
 #### 升级必看
 
