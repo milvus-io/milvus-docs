@@ -4,6 +4,6 @@
     "gpu_milvus_docker_image_version": "0.10.6-gpu-d022221-64ddc2",
     "milvus_python_sdk_version": "0.2.15",
     "milvus_java_sdk_version": "0.8.6",
-    "milvus_go_sdk_version": "0.4.5"
+    "milvus_go_sdk_version": "0.4.6"
 
 }

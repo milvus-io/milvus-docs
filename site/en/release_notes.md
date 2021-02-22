@@ -12,7 +12,7 @@ id: release_notes.md
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.6         | 0.2.15             | 0.8.6            | 0.4.5          |
+| 0.10.6         | 0.2.15             | 0.8.6            | 0.4.6          |
 
 #### Compatibility changes
 
@@ -22,12 +22,15 @@ id: release_notes.md
 
 #### Improvements
 
-- Optimizes the process of indexing and querying. [#4454](https://github.com/milvus-io/milvus/issues/4454)
+- Improves the FLAT search performance on binary vectors using the AVX2 instruction set.[#1970](https://github.com/milvus-io/milvus/issues/1970)
+- Adds an optional parameter `nbits` to the `create_index()` method for the IVF\_PQ index. [#3920](https://github.com/milvus-io/milvus/issues/3920)
+- Supports configuring Prometheus labels `cluster_label` and `instance_label` under `metric`.[#4614](https://github.com/milvus-io/milvus/issues/4614)
 
 #### Fixed issues
 
-- Calling `load_collection()` and `search()` in multiple threads causes Milvus to hang. [#4378](https://github.com/milvus-io/milvus/issues/4378)
-- Milvus only searches the default partition if the search parameter `partition_tags` contains `_default`. [#4484](https://github.com/milvus-io/milvus/issues/4484)
+- The system returns a `-0` distance, if metric type is tanimoto.[#4683](https://github.com/milvus-io/milvus/issues/4683)
+- A FLAT search on binary vectors causes the server to crash, if the dimension of the vectors is not multiple of 2.[#4678](https://github.com/milvus-io/milvus/issues/4678)
+- The GPU cache holds more data than specified.[#4720](https://github.com/milvus-io/milvus/issues/4720)
 
 > See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) for more information.
 
