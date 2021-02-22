@@ -210,6 +210,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
 <ul>
   <li>If the value of <code>m</code> does not fall into the specified range for GPU indexing but into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).</li>
   <li>If the specified value of <code>nbits</code> is between 1 and 16 but not 8, the system switches back to CPU-only Milvus.</li> 
+</ul>
 </div>
 
 - Search parameters
