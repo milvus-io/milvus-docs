@@ -22,7 +22,7 @@ id: release_notes.md
 
 #### 主要改进
 
-- 用 AVX2 指令集优化了 FLAT 索引在二值型向量的查询性能。[#1970](https://github.com/milvus-io/milvus/issues/1970)
+- 用 AVX2 指令集优化了 FLAT 索引在二值型向量上的查询性能。[#1970](https://github.com/milvus-io/milvus/issues/1970)
 - 在 `create_index()` 方法中增加了可选参数 `nbits`，用于 IVF\_PQ 索引。[#3920](https://github.com/milvus-io/milvus/issues/3920)
 - 支持在 `metric` 中设置 Prometheus 的配置项 `cluster_label` 和 `instance_label` （由爱奇艺实现）。[#4614](https://github.com/milvus-io/milvus/issues/4614)
 
