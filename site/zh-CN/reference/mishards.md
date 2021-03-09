@@ -251,7 +251,7 @@ $ make clean_deploy
    
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    $ helm dep update
    ```
 
@@ -345,7 +345,7 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
       --set cluster.enabled=true             \
       --set persistence.enabled=true         \
       --set mysql.enabled=false              \
-      --set externalMysql.enable=true        \
+      --set externalMysql.enabled=true       \
       --set externalMysql.ip=192.168.1.xx    \
       --set externalMysql.port=3306          \
       --set externalMysql.user=root          \

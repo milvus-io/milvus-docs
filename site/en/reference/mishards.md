@@ -254,7 +254,7 @@ See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about usi
    
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    $ helm dep update
    ```
 
@@ -349,7 +349,7 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
       --set cluster.enabled=true             \
       --set persistence.enabled=true         \
       --set mysql.enabled=false              \
-      --set externalMysql.enable=true        \
+      --set externalMysql.enabled=true       \
       --set externalMysql.ip=192.168.1.xx    \
       --set externalMysql.port=3306          \
       --set externalMysql.user=root          \
