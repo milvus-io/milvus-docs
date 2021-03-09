@@ -8,7 +8,7 @@ id: performance_faq.md
 - [Why does the first search take a long time after Milvus restarts?](#Why-does-the-first-search-take-a-long-time-after-Milvus-restarts)
 - [Why the search is very slow?](#Why-the-search-is-very-slow)
 - [How do I improve Milvus' performance?](#How-do-I-improve-Milvus-performance)
-- [How to set the value of `nlist` when I build indexes?](#How-to-set-the-value-of-nlist-when-I-build-indexes)
+- [How to set `nlist` and `nprobe` for IVF indexes?](#how-to-set-nlist-and-nprobe-for-ivf-indexes)
 - [Why sometimes the query time for a small dataset is longer?](#Why-sometimes-the-query-time-for-a-small-dataset-is-longer)
 - [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
 - [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
@@ -42,9 +42,9 @@ Check if the value of `cache.cache_size` in **server_config.yaml** is greater th
 
 See [Performance tuning](tuning.md) for more information. 
 
-#### How to set the value of `nlist` when I build indexes?
+#### How to set `nlist` and `nprobe` for IVF indexes?
 
-It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).
+{{fragments/faq_set_nlist_nprobe.md}}
 
 #### Why sometimes the query time for a small dataset is longer?
 

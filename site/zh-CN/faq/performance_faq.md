@@ -9,7 +9,7 @@ id: performance_faq.md
 - [为什么重启 Milvus 服务端之后，第一次搜索时间非常长？](#为什么重启-Milvus-服务端之后第一次搜索时间非常长)            
 - [为什么搜索的速度非常慢？](#为什么搜索的速度非常慢)            
 - [如何进行性能调优？](#如何进行性能调优)           
-- [建立索引时需要设置 `nlist` 值，如何选择该值大小？](#建立索引时需要设置-nlist-值如何选择该值大小)            
+- [应如何设置 IVF 索引的 `nlist` 和 `nprobe` 参数？](#应如何设置-ivf-索引的-nlist-和-nprobe-参数)            
 - [为什么有时候小的数据集查询时间反而更长？](#为什么有时候小的数据集查询时间反而更长)             
 - [为什么查询时 GPU 一直空闲？](#为什么查询时-GPU-一直空闲)            
 - [为什么数据插入后不能马上被搜索到？](#为什么数据插入后不能马上被搜索到)          
@@ -46,10 +46,9 @@ id: performance_faq.md
 详见 [性能调优](tuning.md)。
 
 
-#### 建立索引时需要设置 `nlist` 值，如何选择该值大小？
+#### 应如何设置 IVF 索引的 `nlist` 和 `nprobes` 参数？
 
-该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引) 和 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
-
+{{fragments/faq_set_nlist_nprobe.md}}
 
 #### 为什么有时候小的数据集查询时间反而更长？
 
@@ -112,4 +111,3 @@ id: performance_faq.md
 
 - 在 GitHub 上访问 [Milvus](https://github.com/milvus-io/milvus/issues)，提问、分享、交流，帮助其他用户。
 - 加入我们的 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，与其他用户讨论交流。
-
