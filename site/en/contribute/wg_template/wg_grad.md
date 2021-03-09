@@ -1,5 +1,5 @@
 ---
-id: wg_release.md
+id: wg_grad.md
 ---
 # The Graduation Working Group
 ## About the Graduation Working Group

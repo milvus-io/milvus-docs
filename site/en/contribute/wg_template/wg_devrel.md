@@ -1,5 +1,5 @@
 ---
-id: wg_release.md
+id: wg_devrel.md
 ---
 # The DevRel Working Group
 ## About the DevRel Working Group

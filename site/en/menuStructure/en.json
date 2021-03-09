@@ -448,7 +448,7 @@
     },
     {
 
-      "id": "sigs_engine.md",
+      "id": "sig_engine.md",
       "title": "The Engine SIG",
       "label1": "milvus_community_charters",
       "label2": "sigs",
@@ -458,7 +458,7 @@
     },
     {
 
-      "id": "sigs_testing.md",
+      "id": "sig_testing.md",
       "title": "The Testing SIG",
       "label1": "milvus_community_charters",
       "label2": "sigs",
@@ -468,7 +468,7 @@
     },
     {
 
-      "id": "sigs_tool.md",
+      "id": "sig_tool.md",
       "title": "The Toolchain SIG",
       "label1": "milvus_community_charters",
       "label2": "sigs",
