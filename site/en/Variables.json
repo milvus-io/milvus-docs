@@ -1,9 +1,9 @@
 {
-    "release_version": "0.10.6",
-    "cpu_milvus_docker_image_version": "0.10.6-cpu-d022221-64ddc2",
-    "gpu_milvus_docker_image_version": "0.10.6-gpu-d022221-64ddc2",
-    "milvus_python_sdk_version": "0.4.0",
-    "milvus_java_sdk_version": "0.8.6",
-    "milvus_go_sdk_version": "0.4.6"
+    "release_version": "1.0.0",
+    "cpu_milvus_docker_image_version": "1.0.0-cpu-d030521-1ea92e",
+    "gpu_milvus_docker_image_version": "1.0.0-gpu-d030521-1ea92e",
+    "milvus_python_sdk_version": "1.0.1",
+    "milvus_java_sdk_version": "1.0.0",
+    "milvus_go_sdk_version": "1.0.0"
 
 }
