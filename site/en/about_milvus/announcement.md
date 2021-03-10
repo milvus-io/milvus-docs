@@ -12,7 +12,7 @@ What you can expect in Milvus V1.0 includes
 - Scale-out capability thru Mishards sharding proxy 
 - Support common processors used in AI scenarios, including X86, Nvidia GPU, Xilinx FPGA, etc.
 
-(Please refer to https://milvus.io for details.)
+(Please refer to [release notes](release_notes.md) for details.)
 
 <br/>
 
