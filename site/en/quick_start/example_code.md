@@ -23,7 +23,7 @@ After the Milvus server is successfully started, you can use this example progra
 
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/{{var.milvus_python_sdk_version}}/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/example.py
    ```
 
    <div class="alert note">
