@@ -4,6 +4,28 @@ id: release_notes.md
 
 # Release notes
 
+## v1.0.0
+
+**Release date**：2021-03-09
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 1.0.0         | 1.0.1             | 1.0.0            | 1.0.0          |
+
+#### New Features
+
+- Supports writing log to stdout. [#3977](https://github.com/milvus-io/milvus/issues/3977)
+
+#### Improvements
+
+- Reduces the package size of grpc-milvus for the C++ SDK. [#4754](https://github.com/milvus-io/milvus/issues/4754)
+
+#### Fixed issues
+
+- Memory leaks during indexing or querying operations. [#4749](https://github.com/milvus-io/milvus/issues/4749), [#4757](https://github.com/milvus-io/milvus/issues/4757), [#4765](https://github.com/milvus-io/milvus/issues/4765), [#4766](https://github.com/milvus-io/milvus/issues/4766)
+
 ## v0.10.6
 
 **Release date**：2021-02-23

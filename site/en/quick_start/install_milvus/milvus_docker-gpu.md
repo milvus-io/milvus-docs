@@ -67,11 +67,11 @@ $ sudo docker pull milvusdb/milvus:{{var.gpu_milvus_docker_image_version}}
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.release_version}}/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.release_version}}/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v{{var.release_version}}/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
 After you downloaded the configuration file, you must set `enable` to `true` in `gpu` section of **server_config.yaml**.

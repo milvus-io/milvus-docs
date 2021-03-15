@@ -22,11 +22,11 @@ id: example_code.md
    
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/{{var.milvus_python_sdk_version}}/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/example.py
    ```
    
    <div class="alert note">
-   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/{{var.milvus_python_sdk_version}}/examples/example.py">示例代码</a> 的内容。
+   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/v{{var.milvus_python_sdk_version}}/examples/example.py">示例代码</a> 的内容。
    </div>
 
 4. 运行示例代码。
