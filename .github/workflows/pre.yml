@@ -24,11 +24,12 @@ jobs:
       - name: Md2md
         run: |
           mv site doc_from
-          sudo npm install md2md -g
+          sudo npm install @zilliz/mdtomd -g
           goover
           rm -rf doc_from/*
           rm check-link.js
           mv doc_to site
+
       - name: Delete And Push
         run: |
           sudo apt-get update
