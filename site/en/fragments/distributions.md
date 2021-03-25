@@ -1,9 +1,9 @@
-Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
+Milvus is available in CPU-only and GPU-enabled distributions:
 
 <ul>
-<li>CPU-only Milvus only supports using CPU to search or build index. 
+<li>The CPU-only Milvus distribution relies on CPU exclusively to search and build indexes. 
 </li> 
-<li>GPU-enabled Milvus supports GPU acceleration for searching and index building: You can use CPU for searching and GPU for index building at the same time to improve query efficiency.</li>
+<li>The GPU-enabled Milvus distribution supports GPU acceleration for search and index building. For example, CPU can be used for search while GPU is used for index building, improving query efficiency.</li>
 </ul>
 
-If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
+For GPUs that support CUDA, the GPU-enabled Milvus distribution can be used to achieve much better search performance when working with large-scale datasets.
