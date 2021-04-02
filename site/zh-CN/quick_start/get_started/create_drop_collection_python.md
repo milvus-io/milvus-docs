@@ -48,3 +48,7 @@ id: create_drop_collection_python.md
 <summary><font color="#4fc4f9">Milvus 对集合和分区的总数有限制吗？</font></summary>
 {{fragments/faq_collection_partition_numbers.md}}
 </details>
+<details>
+<summary><font color="#4fc4f9">Milvus 支持的向量维度的最大值是多少? </font></summary>
+{{fragments/faq_max_vector_dimension.md}}
+</details>

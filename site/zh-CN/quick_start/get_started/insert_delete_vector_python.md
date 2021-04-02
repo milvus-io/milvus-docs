@@ -81,3 +81,7 @@ id: insert_delete_vector_python.md
 <summary><font color="#4fc4f9">Milvus 中单次插入数据有上限吗？</font></summary>
 {{fragments/faq_data_volume_one_insertion.md}}
 </details>
+<details>
+<summary><font color="#4fc4f9">Milvus 支持的向量维度的最大值是多少? </font></summary>
+{{fragments/faq_max_vector_dimension.md}}
+</details>
