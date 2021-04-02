@@ -1,0 +1,1 @@
+Milvus can support vectors with up to 32,768 dimensions.  

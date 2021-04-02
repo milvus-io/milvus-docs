@@ -48,3 +48,7 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
 <summary><font color="#4fc4f9">Is there a limit on the total number of collections and partitions?</font></summary>
 {{fragments/faq_collection_partition_numbers.md}}
 </details>
+<details>
+<summary><font color="#4fc4f9">What is the maximum dimension of a vector in Milvus?</font></summary>
+{{fragments/faq_max_vector_dimension.md}}
+</details>

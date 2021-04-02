@@ -7,9 +7,11 @@ id: insert_delete_vector_python.md
 
 You can perform vector operations on collections or partitions. This article talks about the following topics:
 
-- [Insert vectors to a collection](#insert-vector-to-collection)
-- [Insert vectors to a partition](#insert-vector-to-partition)
-- [Delete vectors by ID](#delete-vector)
+- [Insert and Delete Vectors](#insert-and-delete-vectors)
+  - [Insert vectors to a collection](#insert-vectors-to-a-collection)
+  - [Insert vectors to a partition](#insert-vectors-to-a-partition)
+  - [Delete vectors by ID](#delete-vectors-by-id)
+  - [FAQ](#faq)
 
 ## Insert vectors to a collection
 <a name="insert-vector-to-collection"></a>
@@ -79,4 +81,8 @@ After calling <code>delete</code>, you can call <code>flush</code> again to ensu
 <details>
 <summary><font color="#4fc4f9">Is there a volume limit on the vectors inserted each time?</font></summary>
 {{fragments/faq_data_volume_one_insertion.md}}
+</details>
+<details>
+<summary><font color="#4fc4f9">What is the maximum dimension of a vector in Milvus?</font></summary>
+{{fragments/faq_max_vector_dimension.md}}
 </details>
