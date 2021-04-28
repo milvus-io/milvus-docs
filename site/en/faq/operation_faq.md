@@ -1,6 +1,6 @@
 ---
-id: operational_faq.md
-title: Operational FAQ
+id: operations_faq.md
+title: Operations FAQ
 ---
 
 # Operational FAQ

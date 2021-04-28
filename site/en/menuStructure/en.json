@@ -141,12 +141,20 @@
       "order": 1
     },
     {
-      "id": "operational_faq.md",
-      "title": "Operational FAQs",
+      "id": "operations_faq.md",
+      "title": "Operations FAQs",
       "lang": "en",
       "label1": "faq",
       "label2": "milvusfaq",
       "order": 2
+    },
+    {
+      "id": "troubleshooting.md",
+      "title": "Troubleshooting",
+      "lang": "en",
+      "label1": "faq",
+      "label2": "milvusfaq",
+      "order": 3
     },
     {
       "id": "pymilvus_faq.md",
