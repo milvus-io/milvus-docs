@@ -1,7 +1,6 @@
 ---
 id: operational_faq.md
 title: Operational FAQ
-sidebar_label: Operational FAQ
 ---
 
 # Operational FAQ
