@@ -43,15 +43,6 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
-    <td>Quantization-based index</td>
-    <td><ul>
-        <li>High-speed query.</li>
-        <li>Limited disk and memory capacity. </li>
-        <li>Has CPU resources only.</li>
-        </ul></td>
-  </tr>
-  <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
     <td>Quantization-based index</td>
     <td><ul>
@@ -144,32 +135,6 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 <a name="IVF_SQ8"></a>
 
 IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
-
- 
- - Index building parameters
-
-   | Parameter   | Description     | Range     |
-   | ------- | -------- |----------- |
-   | `nlist` | Number of cluster units |[1, 65536] |
-
-
-- Search parameters
-
-   | Parameter   | Description     | Range     |
-   | -------- | ----------- | ---------- |
-   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
-
-### IVF_SQ8H
-<a name="IVF_SQ8H"></a>
-
-Optimized version of IVF\_SQ8 that requires both CPU and GPU to work. Unlike IVF\_SQ8, IVF\_SQ8H uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
-
-IVF\_SQ8H is an IVF\_SQ8 index that optimizes query execution.
-
-The query method is as follows:
-
-- If `nq` &ge; `gpu_search_threshold`, GPU handles the entire query task.
-- If `nq` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
  
  - Index building parameters
