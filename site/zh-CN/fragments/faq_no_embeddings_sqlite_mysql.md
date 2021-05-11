@@ -1,1 +1,0 @@
-SQLite / MySQL 只是存放原始向量数据的元数据。向量和索引直接以文件的形式存在磁盘上，不存放在 SQLite 或 MySQL里。详见 <a href="storage_concept.md">存储相关概念</a>。

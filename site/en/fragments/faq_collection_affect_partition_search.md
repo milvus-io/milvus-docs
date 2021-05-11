@@ -1,1 +1,0 @@
-No. If you have specified partitions when conducting a vector search, Milvus searches the specified partitions only.

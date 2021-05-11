@@ -1,1 +1,0 @@
-No, we only support storing metadata using SQLite or MySQL.
