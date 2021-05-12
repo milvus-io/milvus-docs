@@ -1,1 +1,0 @@
-不可以，目前仅支持 SQLite 和 MySQL。

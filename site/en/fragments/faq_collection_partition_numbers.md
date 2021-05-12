@@ -1,1 +1,0 @@
-Yes. The total number of collections and partitions must not exceed 4,096.
