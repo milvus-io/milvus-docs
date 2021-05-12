@@ -24,23 +24,11 @@ jobs:
       - name: Md2md
         run: |
           mv site doc_from
-          sudo npm install mdtomd -g
+          sudo npm install @zilliz/mdtomd -g
           goover
           rm -rf doc_from/*
           rm check-link.js
           mv doc_to site
-
-      - name: Update version
-        env:
-          URL: ${{ secrets.VESION_URL }}
-          VESION_TOKEN: ${{ secrets.VESION_TOKEN }}
-        run: |
-          echo
-          curl \
-          -X POST \
-          $URL \
-          -H "Content-Type: application/json" \
-          --data '{ "name": "milvus", "version": "'"${GITHUB_REF#refs/tags/}"'", "commit": "'"${GITHUB_SHA::8}"'", "token": "'"$VESION_TOKEN"'",from: "'milvus-docs'" }'
 
       - name: Delete And Push
         run: |
