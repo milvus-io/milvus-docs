@@ -50,7 +50,7 @@ MilvusDM is hosted on Github and can be easily installed by running the command 
 
 ```
 F2M:
-  milvus_version: 1.0.0
+  milvus_version: {{var.release_version}}
   data_path: '/home/data/faiss.index'
   dest_host: '127.0.0.1'
   dest_port: 19530

@@ -38,7 +38,7 @@ id: milvusdm.md
 
     ```
     F2M:
-  milvus_version: 0.10.5
+  milvus_version: {{var.release_version}}
   data_path: '/home/data/faiss.index'
   dest_host: '127.0.0.1'
   dest_port: 19530
