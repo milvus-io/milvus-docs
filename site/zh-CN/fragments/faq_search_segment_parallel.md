@@ -7,5 +7,5 @@
 </ul>
 </p>
 <p>
-可参阅文章：<a href="https://zhuanlan.zhihu.com/p/110332250">Milvus 开源向量搜索引擎 ANNS</a>。
+可参阅文章：<a href="https://zhuanlan.zhihu.com/p/110332250">Milvus 开源向量数据库 ANNS</a>。
 </p>
