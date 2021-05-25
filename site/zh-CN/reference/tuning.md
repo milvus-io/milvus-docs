@@ -53,7 +53,7 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 ### 系统参数
 
 <div class="alert note">
-系统参数配置请参考 <a href="configuration.md">Milvus 服务端配置</a>。
+系统参数配置请参考 <a href="milvus_config.md">Milvus 服务端配置</a>。
 </div>
 
 - `cache.cache_size`
