@@ -29,6 +29,7 @@ jobs:
           rm -rf doc_from/*
           rm check-link.js
           mv doc_to site
+
       - name: Delete And Push
         run: |
           sudo apt-get update
