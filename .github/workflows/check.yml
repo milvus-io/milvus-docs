@@ -20,4 +20,3 @@ jobs:
       - name: Run Inner Link Check
         run: |
           node check-link.js
-©
