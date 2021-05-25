@@ -92,7 +92,7 @@ GPU 查询的性能取决于 CPU 将数据加载进显存的速度以及 GPU 的
 ### 索引
 
 <div class="alert note">
-向量索引的基本概念请参考 <a href="index_overview.md">向量索引概述</a>。
+向量索引的基本概念请参考 <a href="index.md">向量索引概述</a>。
 </div>
 
 选择合适的索引需要在存储空间、查询性能、查询召回率等多个指标中权衡。
