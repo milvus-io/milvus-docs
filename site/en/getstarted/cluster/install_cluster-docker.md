@@ -19,7 +19,7 @@ Before moving forward to installation, you must check the eligibility of your ha
 <br/>
 
 ### Check your GPU’s eligibility
- 
+Milvus Cluster supports GPU acceleration on floating vectors. 
 {{fragments/gpu_support.md}}
 
 ## Install Milvus Cluster

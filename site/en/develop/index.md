@@ -2,7 +2,7 @@
 id: index.md
 ---
 
-# Vector index
+# Vector Index
 
 Vector index is a time- and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
 

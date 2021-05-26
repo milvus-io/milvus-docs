@@ -1,5 +1,3 @@
-Milvus Standalone supports GPU acceleration on floating vectors.
-
 - Supported Nvidia GPU versions are 6.0, 6.1, 7.0, and 7.5.
 
 <div class="alert note">
