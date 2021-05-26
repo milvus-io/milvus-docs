@@ -38,7 +38,7 @@ A collection in Milvus is equivalent to a table in a relational database. Collec
             "type": DataType.FLOAT_VECTOR,
             "metric_type": "L2",
             "params": {"dim": 8},
-            "indexes": [{"metric_type": "L2"}]
+            "indices": [{"metric_type": "L2"}]
         }]}
 ```
 

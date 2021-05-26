@@ -1,11 +1,30 @@
 ---
 id: install_cluster-docker.md
-title: Install Milvus Cluster
+label: Install with Docker
+order: 0
+group: cluster
 ---
 
 # Install Milvus Cluster
 
-## Install Milvus Cluster with Docker Compose
+## Before You Begin
+
+Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
+
+<br/>
+
+### Check whether your CPU supports SIMD extension instruction set
+
+{{fragments/cpu_support.md}}
+<br/>
+
+### Check your GPU’s eligibility
+ 
+{{fragments/gpu_support.md}}
+
+## Install Milvus Cluster
+
+{{tab}}
 
 1. Docker version 19.03 or higher is required. Check Docker version:
 
