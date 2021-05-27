@@ -1,13 +1,33 @@
 ---
 id: install_standalone-docker.md
-label: Install with Docker Compose
+title: Install Milvus Standalone
+label: Install with Docker
 order: 0
-group: install_standalone 
+group: standalone
 ---
 
 # Install Milvus Standalone
 
-## Install Milvus Standalone with Docker Compose
+## Before You Begin
+
+Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
+
+<br/>
+
+<a href="#cpu_support"></a>
+
+### Check whether your CPU supports SIMD extension instruction set
+
+{{fragments/cpu_support.md}}
+<br/>
+
+### Check your GPU’s eligibility
+Milvus Standalone supports GPU acceleration on floating vectors.
+{{fragments/gpu_support.md}}
+
+## Install Milvus Standalone
+
+{{tab}}
 
 1. Docker version 19.03 or higher is required. Check Docker version:
 

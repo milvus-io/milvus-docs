@@ -1,13 +1,30 @@
 ---
 id: install_cluster-source.md
-label: Build from Source Code
+label: Install from Source Code
 order: 1
-group: install_cluster 
+group: cluster
 ---
 
-# Install Milvus Clusters
+# Install Milvus Cluster
 
-## Build Milvus Cluster from source code
+## Before You Begin
+
+Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
+
+<br/>
+
+### Check whether your CPU supports SIMD extension instruction set
+
+{{fragments/cpu_support.md}}
+<br/>
+
+### Check your GPU’s eligibility
+Milvus Cluster supports GPU acceleration on floating vectors. 
+{{fragments/gpu_support.md}}
+
+## Install Milvus Cluster
+
+{{tab}}
 
 1. Prerequisites
 
