@@ -1,6 +1,6 @@
 ---
 id: install_standalone-source.md
-label: 从源码安装单机版 Milvus
+label: 从源码安装
 order: 0
 group: standalone
 ---
