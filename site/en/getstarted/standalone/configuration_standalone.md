@@ -1,6 +1,6 @@
 ---
 id: configuration_standalone.md
-title: Milvus Standalone System Configuration
+title: System Configuration
 ---
 # System Configurations
 

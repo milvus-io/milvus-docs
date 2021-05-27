@@ -1,5 +1,6 @@
 ---
 id: install_cluster-docker.md
+title: Install Milvus Cluster
 label: Install with Docker
 order: 0
 group: cluster

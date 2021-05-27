@@ -1,5 +1,6 @@
 ---
 id: install_standalone-docker.md
+title: Install Milvus Standalone
 label: Install with Docker
 order: 0
 group: standalone
