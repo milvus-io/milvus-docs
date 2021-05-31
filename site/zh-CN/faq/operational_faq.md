@@ -29,7 +29,7 @@ title: Operational FAQ
 
 召回率主要受索引类型和查询参数影响。
 
-对于 FLAT 索引，Milvus 会在 collection 内做全量搜索，召回率为100%。
+对于 FLAT 索引，Milvus 会在 collection 内做全量搜索，召回率为 100%。
 
 对于 IVF 索引，nprobe 参数决定了搜索范围——nprobe 越大，搜索的数据比例越高，召回率也就越高，但查询性能会相应降低。
 
