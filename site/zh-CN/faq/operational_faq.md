@@ -56,7 +56,7 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。因此，如果主�
 
 #### 如何确认我的 CPU 支持 Milvus？
 
-[fragment] 详见 [CPU 对 SIMD 指令集的支持]()。
+{{fragments/cpu_support.md}} 详见 [CPU 对 SIMD 指令集的支持]()。
 
 #### 为什么 Milvus 在启动时返回 `Illegal instruction`？
 
