@@ -12,6 +12,8 @@ group: cluster
 
 Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
 
+<br/>
+
 <details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 {{fragments/cpu_support.md}}
