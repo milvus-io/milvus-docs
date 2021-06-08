@@ -16,14 +16,15 @@ Before moving forward to installation, you must check the eligibility of your ha
 
 <a href="#cpu_support"></a>
 
-### Check whether your CPU supports SIMD extension instruction set
+<details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 {{fragments/cpu_support.md}}
-<br/>
+</details>
 
-### Check your GPU’s eligibility
-Milvus Standalone supports GPU acceleration on floating vectors.
+<details><summary>Check your GPU’s eligibility</summary>
+Milvus Standalone supports GPU acceleration on floating vectors. 
 {{fragments/gpu_support.md}}
+</details>
 
 ## Install Milvus Standalone
 
