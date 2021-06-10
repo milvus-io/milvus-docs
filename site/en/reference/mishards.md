@@ -149,7 +149,7 @@ Follow these steps to start a Milvus instance and Mishards service on a machine:
 1. Clone the Milvus repository to your local machine:
 
    ```shell
-   $ git clone https://github.com/milvus-io/milvus
+   $ git clone https://github.com/milvus-io/milvus -b 1.1
    ```
 
 2. Install dependencies for Mishards:
