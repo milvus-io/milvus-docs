@@ -34,7 +34,7 @@ group: distribution
 | IVF_PQ   | ✔️                | ✔️            | ✔️                  | ✔️             |
 | RNSG     | ✔️                | ❌            | ✔️                  | ❌              |
 | HNSW     | ✔️                | ❌            | ✔️                  | ❌              |
-| ANNOY    | ✔️                | ❌            | ✔️                  | ❌              |
+| Annoy    | ✔️                | ❌            | ✔️                  | ❌              |
 
 <div class="alert note">
 <ul>
