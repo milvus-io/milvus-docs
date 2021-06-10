@@ -24,7 +24,7 @@ After successfully starting Milvus server, you can see a Milvus folder at **home
 You can directly edit the configuration file. You must restart Milvus every time a configuration file is updated.
 
 ```shell
-$ docker restart <container id>
+$ docker restart <container_id>
 ```
 
 Here we use Milvus' system configuration file **server_config.yaml** as an example to demonstrate how to modify the log level and log path:
