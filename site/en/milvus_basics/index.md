@@ -88,7 +88,7 @@ To improve query performance, you can specify an index type for each vector fiel
 
 ## Create indexes
 
-When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
+When the `create_index()` method is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
 
 <div class="alert note">
 When the inserted data segment is less than 4096 rows, Milvus does not index it.
