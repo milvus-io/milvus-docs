@@ -34,4 +34,4 @@ Milvus combines stream and batch processing for data storage to balance timeline
 
 ## Community supported, industry recognized
 
-With over 1,000 enterprise users, 6000+ stars on GitHub, and an active open-source community, you’re not alone when you use Milvus. As an incubation graduated project under the LF AI & Data Foundation, Milvus has institutional support.
+With over 1,000 enterprise users, 6,000+ stars on GitHub, and an active open-source community, you’re not alone when you use Milvus. As a graduate project under the LF AI & Data Foundation, Milvus has institutional support.
