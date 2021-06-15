@@ -32,7 +32,7 @@ Recall is affected mainly by index type and search parameters.
 
 For FLAT index, Milvus takes an exhaustive scan within a collection, with a 100% return.
 
-For IVF indices, the nprobe parameter determines the scope of a search within the collection. Increasing nprobe increases the proportion of vectors searched and recall, but diminishes query performance.
+For IVF indexes, the nprobe parameter determines the scope of a search within the collection. Increasing nprobe increases the proportion of vectors searched and recall, but diminishes query performance.
 
 For HNSW index, the ef parameter determines the breadth of the graph search. Increasing ef increases the number of points searched on the graph and recall, but diminishes query performance.
 
