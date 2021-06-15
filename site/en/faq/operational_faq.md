@@ -60,9 +60,9 @@ The log files inside the Docker image use UTC by default. If your host machine d
 
 {{fragments/cpu_support.md}}
 
-#### Why does Milvus return `Illegal instruction` during startup?
+#### Why does Milvus return `illegal instruction` during startup?
 
-Milvus requires your CPU to support a SIMD instruction set: SSE4.2, AVX, AVX2, or AVX512. CPU must support at least one of these to ensure that Milvus operates normally. An `Illegal instruction` error returned during startup suggests that your CPU does not support any of the above four instruction sets.
+Milvus requires your CPU to support a SIMD instruction set: SSE4.2, AVX, AVX2, or AVX512. CPU must support at least one of these to ensure that Milvus operates normally. An `illegal instruction` error returned during startup suggests that your CPU does not support any of the above four instruction sets.
 
 See [CPU’s support for SIMD Instruction Set](install_standalone-docker.md#cpu_support).
 
