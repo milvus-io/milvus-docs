@@ -10,11 +10,11 @@ Average latency measured in milliseconds on trillion vector datasets.
 
 ## Simplified unstructured data management
 
-Rich APIs designed for data science workflows.
+- Rich APIs designed for data science workflows.
 
-Consistent user experience across laptop, local cluster, and cloud.
+- Consistent user experience across laptop, local cluster, and cloud.
 
-Embed real-time search and analytics into virtually any application.
+- Embed real-time search and analytics into virtually any application.
 
 ## Reliable, always on vector database
 
