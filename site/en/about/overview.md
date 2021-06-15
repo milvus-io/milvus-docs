@@ -7,6 +7,8 @@ related_key: Milvus Overview
 # What is Milvus
 Milvus is an open-source vector database built to power AI applications and vector similarity search. 
 
+Milvus [Standalone](overview_standalone.md) and Milvus [Cluster](overview_cluster.md) are both available now.
+
 ## Key Concepts
 
 ### Unstructured data
