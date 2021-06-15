@@ -9,7 +9,7 @@ Milvus is an open-source vector database built to power AI applications and vect
 
 <table id="overview_links">
     <tr>
-        <td><img src="../../../assets/link_standalone.png" alt="Miluvs Standalone"></td>
+        <td><img src="../../../assets/link_standalone.png" alt="Miluvs Standalone" align="middle"></td>
         <td><img src="../../../assets/link_cluster.png" alt="Miluvs Cluster"></td>
     </tr>
     <tr>
