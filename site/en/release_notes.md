@@ -4,6 +4,37 @@ id: release_notes.md
 
 # Release notes
 
+## v1.1.1
+
+**Release date**：2021-06-18
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 1.1.0         | 1.1.0             | 1.1.0            | 1.1.0          |
+
+#### New Features
+
+- [#1434](https://github.com/milvus-io/milvus/issues/1434) Supports S3 storage (implemented by Unisinsight).
+- [#5142](https://github.com/milvus-io/milvus/issues/5142) Supports caching indices in GPU memory.
+
+#### Bug Fixes
+
+- [#4897](https://github.com/milvus-io/milvus/issues/4897) Deleted entities reappear in new search results.
+- [#5164](https://github.com/milvus-io/milvus/issues/5164) No error returns when inserting or deleting entities on a partition that does not exist.
+- [#5191](https://github.com/milvus-io/milvus/issues/5191) Continuous insert and search operations cause Mishards to return the index out of range error.
+- [#5398](https://github.com/milvus-io/milvus/issues/5398) Server crashes sporadically after executing requests.
+- [#5537](https://github.com/milvus-io/milvus/issues/5537) Server fails to load Bloom filter after rebooting from a sudden shutdown.
+- [#5574](https://github.com/milvus-io/milvus/issues/5574) Indexes IVF_SQ8 and IVF_PQ cannot be built simultaneously on multiple GPUs.
+- [#5747](https://github.com/milvus-io/milvus/issues/5747) Server crashes if the product of the search parameters nq and TopK exceeds system capabilities.
+
+#### Other Improvements
+
+- [#5115](https://github.com/milvus-io/milvus/issues/5115) Increases the upper limit of TopK from 16,384 to 1,048,576 for CPU searches.
+- [#5204](https://github.com/milvus-io/milvus/issues/5204) Improves IVF search performance for GPU-enabled Milvus when no entity has been deleted.
+- [#5544](https://github.com/milvus-io/milvus/issues/5544) Increases the upper limit of index_file_size to 128 GB.
+
 ## v1.1.0
 
 **Release date**：2021-05-07
