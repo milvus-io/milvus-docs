@@ -18,4 +18,4 @@ Milvus is trusted by over 1,000 organizations worldwide and has applications in 
 | [Tokopedia](https://en.wikipedia.org/wiki/Tokopedia)         | Online Retail          | [How we used semantic search to make our search 10x smarter](https://zilliz.com/blog/How-we-used-semantic-search-to-make-our-search-10-x-smarter) |
 | [The Cleveland Museum of Art](https://en.wikipedia.org/wiki/Cleveland_Museum_of_Art) | Arts                   | [ArtLens AI: Share Your View](https://zilliz.com/blog/ArtLens-AI-Share-Your-View) |
 | [EnjoyMusic Technology](https://enjoymusic.ai/about)         | Entertainment          | [Item-based Collaborative Filtering for Music Recommender System](https://zilliz.com/blog/music-recommender-system-item-based-collaborative-filtering-milvus) |
-| [Kingsoft](https://en.wikipedia.org/wiki/Kingsoft)           | Software               | [Building an AI-Powered Writing Assistant for WPS Office](   |
+| [Kingsoft](https://en.wikipedia.org/wiki/Kingsoft)           | Software               | [Building an AI-Powered Writing Assistant for WPS Office](https://zilliz.com/blog/Building-an-AI-Powered-Writing-Assistant-with-WPS-Office)   |
