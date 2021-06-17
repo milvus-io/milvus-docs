@@ -31,7 +31,7 @@ id: release_notes.md
 #### 主要改进
 
 - [#5115](https://github.com/milvus-io/milvus/issues/5115) 将使用 CPU 查询的 `TopK` 上限从 16384 提高至 1048576。
-- [#5204](https://github.com/milvus-io/milvus/issues/5204) 在未删除任何 entity 的情况下，优化 IVF 索引在 GPU 版 Milvus 上的查询性能。
+- [#5204](https://github.com/milvus-io/milvus/issues/5204) 在未删除任何 entity 的情况下，优化了 IVF 索引在 GPU 版 Milvus 上的查询性能。
 - [#5544](https://github.com/milvus-io/milvus/issues/5544) 将 `index_file_size` 上限提高至 128 GB。
 
 ## v1.1.0
