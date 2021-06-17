@@ -27,7 +27,7 @@ id: release_notes.md
 - [#5398](https://github.com/milvus-io/milvus/issues/5398) Server crashes sporadically after executing requests.
 - [#5537](https://github.com/milvus-io/milvus/issues/5537) Server fails to load Bloom filter after rebooting from a sudden shutdown.
 - [#5574](https://github.com/milvus-io/milvus/issues/5574) Indexes IVF_SQ8 and IVF_PQ cannot be built simultaneously on multiple GPUs.
-- [#5747](https://github.com/milvus-io/milvus/issues/5747) Server crashes if the product of the search parameters `nq` and `TopK` exceeds system capabilities.
+- [#5747](https://github.com/milvus-io/milvus/issues/5747) Server hangs if the product of the search parameters `nq` and `TopK` exceeds system capabilities.
 
 #### Other Improvements
 
