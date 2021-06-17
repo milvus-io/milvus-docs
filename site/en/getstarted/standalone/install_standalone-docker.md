@@ -8,7 +8,7 @@ group: standalone
 
 # Install Milvus Standalone
 
-## Before You Begin <a href="#cpu_support"></a>
+## Before You Begin
 
 Before moving forward to installation, you must check the eligibility of your Docker, Docker Compose, and hardware in line with Milvus' requirement.
 
