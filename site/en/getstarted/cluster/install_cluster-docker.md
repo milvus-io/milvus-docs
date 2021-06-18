@@ -64,7 +64,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/doc
 $ sudo docker-compose up -d 
 ```
 
-*If Docker Compose boots successfully, 12 running docker containers will appear (nine infrastructure services and three Milvus services):*
+*If Docker Compose boots successfully, 11 running docker containers will appear (eight infrastructure services and three Milvus services):*
 
 ```
 $ sudo docker ps 

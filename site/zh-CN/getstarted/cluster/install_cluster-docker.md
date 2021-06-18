@@ -79,7 +79,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/doc
 $ sudo docker-compose up -d 
 ```
 
-*如果所有服务启动正常，可以看到有 12 个 docker 容器在运行（9 个为基础服务，3 个为 Milvus 服务）*
+*如果所有服务启动正常，可以看到有 11 个 docker 容器在运行（8 个为基础服务，3 个为 Milvus 服务）*
 
 ```
 $ sudo docker ps 
