@@ -15,7 +15,13 @@
           "key": "Cluster",
           "btnLabel": "Learn to build",
           "link": "overview_cluster.md"
-        }
+        },
+        {
+        "title": "Milvus Bootcamp",
+        "key": "bootcamps",
+        "btnLabel": "Learn More",
+        "link": "/bootcamp"
+      }
       ]
     },
   "section2": {
