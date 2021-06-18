@@ -104,5 +104,8 @@ $ sudo docker-compose up -d
 ```
 
 *如果 Docker Compose 启动正常，可以看到有 3 个 Docker 容器在运行（2 个为基础服务，1 个为 Milvus 服务）：*
+```
+$ sudo docker ps 
+```
 
 > 运行 `$ sudo docker-compose down` 停止 Docker Compose。
