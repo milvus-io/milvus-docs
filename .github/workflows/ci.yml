@@ -23,6 +23,7 @@ jobs:
 
       - name: Md2md
         run: |
+          cp site/en/Variables.json ./
           mv site doc_from
           sudo npm install md2md -g
           goover
