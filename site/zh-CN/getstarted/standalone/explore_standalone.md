@@ -105,7 +105,7 @@ True
 >>> pymilvus_orm.utility.get_connection().flush([collection_name])
 ```
 ## 创建索引
-为提高向量搜索的效率，你可以为 collection 中的某一列 field 创建索引。具体索引参数设置详见[向量索引]（index.md)。
+为提高向量搜索的效率，你可以为 collection 中的某一列 field 创建索引。具体索引参数设置详见[向量索引](index.md)。
 
 1. 准备相关参数：
 
