@@ -92,8 +92,11 @@ $ sudo docker-compose up -d
 ```
 *If Docker Compose boots successfully, three running docker containers will appear (two infrastructure services and one Milvus service):*
 
-<code>
+```
 $ docker ps 
+```
+
+<code>
 <table>
     <tr>
         <td>CONTAINER ID</td>
