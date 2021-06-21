@@ -85,7 +85,7 @@
       "order": 1
     },    
     {
-      "id": "helloworld_standalone.md",
+      "id": "hellomilvus.md",
       "title": "Hello Milvus",
       "label1": "getstarted",
       "label2": "",
@@ -93,8 +93,8 @@
       "order": 2
     },
     {
-      "id": "explore_standalone.md",
-      "title": "Explore Pymilvus",
+      "id": "explore_pymilvus.md",
+      "title": "Explore PyMilvus",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
