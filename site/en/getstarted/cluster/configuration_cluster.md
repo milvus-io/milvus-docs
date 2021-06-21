@@ -7,9 +7,6 @@ title: Milvus Cluster System Configuration
 Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually in the **.yaml** file before server startup. Each system configuration has a default value, which can be used directly.
 
 
-
-{tab}
-
 ## For Beginners
 
 If you are an entry-level user of a Milvus Cluster, you only need to change the following two configurations to primarily adapt Milvus to your test / development / production environment.
