@@ -8,7 +8,7 @@ group: cluster
 
 # Install Milvus Cluster
 
-You can install Milvus Cluster with Docker-Compose or on Kubernetes with Helm Chart
+You can install Milvus Cluster with Docker-Compose or Kubernetes.
 
 {{tab}}
 ## Before You Begin
