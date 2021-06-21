@@ -33,30 +33,15 @@ Docker Compose is the recommended way to install Milvus.
 
 ## Install Milvus Cluster
 
-1. Docker version 19.03 or higher is required. Check Docker version:
 
-```
-$ sudo docker info
-```
-
-> Follow [Get Docker](https://docs.docker.com/get-docker/) to install Docker on your system.
-
-2. Docker Compose version 1.25.1 or higher is required. Check Docker Compose version:
-
-```
-$ sudo docker-compose version
-```
-
-> See [Install Docker Compose](https://docs.docker.com/compose/install/) for Docker Compose installation guide.
-
-3. Download **docker-compose.yml**.
+1. Download **docker-compose.yml**.
 
 ```
 $ mkdir -p /home/$USER/milvus
 $ cd home/$USER/milvus
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/distributed/docker-compose.yml
 ```
-4. Start Docker Compose.
+2. Start Docker Compose.
 ```
 $ sudo docker-compose up -d 
 ```
