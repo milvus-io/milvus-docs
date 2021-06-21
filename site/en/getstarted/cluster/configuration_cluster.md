@@ -193,19 +193,6 @@ Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub 
 
 This session configures the IP address and port of the monitor request from Milvus service.
 
-Milvus Cluster consists of three layers in terms of architecture: 
-
-- Coordinator service layer
-  - Root coordinator (RootCoord)
-  - Query coordinator (QueryCoord)
-  - Index coordinator (IndexCoord)
-  - Data coordinator (DataCoord)
-- Worker node layer
-  - Query node
-  - Data node
-  - Index node
-- Access layer
-  - Proxy
 
 <table id="server_address">
 	<tr>
