@@ -1,4 +1,4 @@
 ---
-id: configuration_cluster.md
+id: architecture_overview.md.md
 title: Architecture Overview
 ---
