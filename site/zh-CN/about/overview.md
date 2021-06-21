@@ -7,15 +7,7 @@ title: Milvus 是什么
 
 Milvus 是一款开源向量数据库，赋能 AI 应用和向量相似度搜索。
 
-<table id="overview_links">
-    <tr>
-        <td><img src="../../../assets/link_standalone.png" alt="Miluvs Standalone"></td>
-        <td><img src="../../../assets/link_cluster.png" alt="Miluvs Cluster"></td>
-    </tr>
-    <tr>
-        <td><a href="overview_standalone.md">单机版 Milvus</a></td>
-        <td><a href="overview_cluster.md">分布式版 Milvus</a></td>
-</table>
+Milvus 提供 [单机版](overview_standalone.md) 与 [分布式版](overview_cluster.md)。
 
 ## Milvus 概念
 
@@ -32,8 +24,8 @@ Milvus 是一款开源向量数据库，赋能 AI 应用和向量相似度搜索
 
 如果你有任何建议、意见或问题，欢迎加入 Milvus 的 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 社区与我们的工程师团队交流。
 
-<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">
-    <img src="../../../assets/slack.jpg" alt="Miluvs Slack Channel">
+<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ" display="block">
+    <img src="../../../assets/slack.png" alt="Miluvs Slack Channel" height="150" width="500">
 </a>
 
 你也可以访问 [常见问题](https://milvus.io/cn/docs/v1.1.0/performance_faq.md) 页面查看相关问题。
