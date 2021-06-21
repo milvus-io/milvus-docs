@@ -6,8 +6,11 @@ order: 0
 group: cluster
 ---
 
-# Install Milvus Cluster
+# Install Milvus Cluste
 
+You can install Milvus Cluster with Docker-Compose or on Kubernetes with Helm Chart
+
+{{tab}}
 ## Before You Begin
 
 Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
@@ -27,14 +30,8 @@ Docker Compose is the recommended way to install Milvus.
 {{fragments/cpu_support.md}}
 </details>
 
-<details><summary>Check your GPU’s eligibility</summary>
-Milvus Cluster supports GPU acceleration on floating vectors. 
-{{fragments/gpu_support.md}}
-</details>
 
 ## Install Milvus Cluster
-
-{{tab}}
 
 1. Docker version 19.03 or higher is required. Check Docker version:
 
