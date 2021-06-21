@@ -6,7 +6,7 @@ order: 0
 group: cluster
 ---
 
-# Install Milvus Cluste
+# Install Milvus Cluster
 
 You can install Milvus Cluster with Docker-Compose or on Kubernetes with Helm Chart
 
