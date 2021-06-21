@@ -1,4 +1,4 @@
 ---
-id: architecture_overview.md.md
+id: architecture_overview.md
 title: Architecture Overview
 ---
