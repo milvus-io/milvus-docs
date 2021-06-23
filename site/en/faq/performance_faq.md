@@ -27,18 +27,8 @@ The following charts are results from a test running on the sift50m dataset and 
 
 Query operations are conducted on segments. indexes reduce the amount of time it takes to query a segment. If a segment has not been indexed, Milvus resorts to brute-force search on the raw data—drastically increasing query time.
 
-Therefore, it usually takes longer to query on a small dataset (collection) because it has not built index. This is because the sizes of its segments have not reached the index-building threshold set by `master.minSegmentSizeToEnable`. Call `create_index()` to force Milvus to index segments that do not meet the threshold, significantly improving query performance.
+Therefore, it usually takes longer to query on a small dataset (collection) because it has not built index. This is because the sizes of its segments have not reached the index-building threshold set by `rootCoord.minSegmentSizeToEnableindex`. Call `create_index()` to force Milvus to index segments that has meet the threshold and not been automatically indexed yet, significantly improving query performance.
 
-#### Why isn’t recently inserted data immediately searchable?
-
-Recently inserted data cannot be searched until it is loaded to the query node.
-
-Inserted data is loaded into the query node in two stages:
-
-1. Data is inserted to the message queue. Completion of this step indicates successful data insertion.
-2. Inserted data is consumed and loaded to the query node.
-
-You can call `flush()` and then `load_collection()` to ensure inserted data is immediately searchable. Note that calling these two methods frequently creates a large number of small segments, diminishing query performance.
 
 #### What factors impact CPU usage?
 
