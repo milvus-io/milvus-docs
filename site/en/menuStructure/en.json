@@ -50,7 +50,7 @@
       "order": 1,
       "isMenu": true
     },
-     {
+    {
       "id": "architecture_overview.md",
       "title": "Architecture Overview",
       "label1": "getstarted",
@@ -108,7 +108,6 @@
       "label3": null,
       "order": 4,
       "isMenu": true
-
     },
     {
       "id": "configuration_standalone.md",
@@ -156,7 +155,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "faq",
