@@ -24,6 +24,7 @@ Docker Compose is the recommended way to install Milvus.
 <li>Docker version 19.03 or higher is required. </li>
 <li>Docker Compose version 1.25.1 or higher is required. </li>
 </details>
+
 <details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 {{fragments/cpu_support.md}}

@@ -27,7 +27,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ## Create a collection
 Collections can only be created after successfully connecting to the Milvus server.
 
-> The created collection must contain a column of primary  keys. Int64 is the only supported data type for this column for now.
+> The created collection must contain a field of primary  keys. Int64 is the only supported data type for this field for now.
 
 1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus-orm.readthedocs.io/en/latest/) for a detailed description of these parameters.
 
