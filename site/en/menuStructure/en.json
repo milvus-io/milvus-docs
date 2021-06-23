@@ -112,7 +112,7 @@
     },
     {
       "id": "configuration_standalone.md",
-      "title": "System Configuration",
+      "title": "Milvus Stanalone",
       "label1": "getstarted",
       "label2": "systemconfigurations",
       "label3": "",
@@ -120,7 +120,7 @@
     },
     {
       "id": "configuration_cluster.md",
-      "title": "System Configuration",
+      "title": "Milvus Cluster",
       "label1": "getstarted",
       "label2": "systemconfigurations",
       "label3": "",
