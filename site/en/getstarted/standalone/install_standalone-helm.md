@@ -1,12 +1,12 @@
 ---
 id: install_standalone-helm.md
-label: Install with Helm Chart
+label: Install with Helm 
 order: 1
 group: standalone
 ---
 
 # Install Milvus Standalone
-You can install Milvus Standalone with Docker-Compose or Kubernetes.
+You can install Milvus Standalone with Docker Compose or Helm.
 
 {{tab}}
 

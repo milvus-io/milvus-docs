@@ -1,16 +1,17 @@
 ---
 id: install_cluster-docker.md
 title: Install Milvus Cluster
-label: Install with Docker
+label: Install with Docker Compose
 order: 0
 group: cluster
 ---
 
 # Install Milvus Cluster
 
-You can install Milvus Cluster with Docker-Compose or Kubernetes.
+You can install Milvus Cluster with Docker Compose or Helm.
 
 {{tab}}
+
 ## Before You Begin
 
 Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
