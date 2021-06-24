@@ -37,7 +37,7 @@ title: What is New in Milvus 2.0
 	<tr>
 		<th>Data consistency</th>
 		<td>Eventual consistency</td>
-		<td>Three levels of consistency:<li>Strong</li><li>Session</li><li>Consistent prefix</li></td>
+		<td>Three levels of consistency:<li>Strong</li><li>Bounded Staleness</li><li>Session</li><li>Consistent prefix</li></td>
 	</tr>
 	<tr>
 		<th>Data types supported</th>
