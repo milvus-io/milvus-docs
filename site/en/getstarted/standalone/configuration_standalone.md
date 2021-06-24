@@ -2,10 +2,7 @@
 id: configuration_standalone.md
 title: System Configuration
 ---
----
-id: configuration_cluster.md
-title: Milvus Cluster System Configuration
----
+
 # System Configurations
 
 Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
