@@ -24,11 +24,14 @@ If you are an entry-level user of a Milvus Cluster, you only need to change the 
 This session configures the system log output. Using Milvus generates a collection of logs. By default, Milvus uses logs to record information at `debug` or even higher level for standard output (stdout) and standard error (stderr). You can set these configurations in **milvus.yaml**.
 
 <table id="casual_user">
+<thead>
   <tr>     
-    <th>Configuration</th>     
-    <th>Description</th>     
-    <th>Default Value</th>   
+    <th class="width20">Configuration</th>     
+    <th class="width70">Description</th>     
+    <th class="width10">Default Value</th>   
   </tr>
+</thead>
+<tbody>
   <tr>     
     <td><code>log.level</code></td>
     <td>
@@ -62,6 +65,7 @@ This session configures the system log output. Using Milvus generates a collecti
     </td>     
     <td>""</td>
   </tr>
+</tbody>
 </table>
 </div>
 
@@ -78,11 +82,14 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
 <table id="etcd">
-	<tr>
-		<th>Configuration</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
+<thead>
+  <tr>     
+    <th class="width20">Configuration</th>     
+    <th class="width70">Description</th>     
+    <th class="width10">Default Value</th>   
+  </tr>
+</thead>
+<tbody>
 	<tr>
 		<td><code>etcd.endpoints</code></td>
 		<td><details>
@@ -105,6 +112,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
       </details></td>
 		<td>"by-dev"</td>
 	</tr>
+</tbody>
 </table>
 
 
@@ -115,11 +123,14 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
 <table id="minio">
-	<tr>
-		<th>Configuration</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
+<thead>
+  <tr>     
+    <th class="width20">Configuration</th>     
+    <th class="width70">Description</th>     
+    <th class="width10">Default Value</th>   
+  </tr>
+</thead>
+<tbody>
   <tr>
 		<td><code>minio.address</code></td>
 		<td><details>
@@ -162,6 +173,7 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
       </details></td>
 		<td>minioadmin</td>
 	</tr>
+</tbody>
 </table>
 
 
@@ -172,11 +184,14 @@ Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub 
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
 <table id="pulsar">
-	<tr>
-		<th>Configuration</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
+<thead>
+  <tr>     
+    <th class="width20">Configuration</th>     
+    <th class="width70">Description</th>     
+    <th class="width10">Default Value</th>   
+  </tr>
+</thead>
+<tbody>
   <tr>
 		<td><code>pulsar.address</code></td>
 		<td><details>
@@ -196,6 +211,7 @@ Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub 
       </details></td>
 		<td>6650</td>
 	</tr>
+</tbody>
 </table>
 
 
@@ -204,11 +220,14 @@ Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub 
 This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml**.
 
 <table id="server_address">
-	<tr>
-		<th>Configuration</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
+<thead>
+  <tr>     
+    <th class="width20">Configuration</th>     
+    <th class="width70">Description</th>     
+    <th class="width10">Default Value</th>   
+  </tr>
+</thead>
+<tbody>
   <tr>
 		<td><code>rootCoord.address</code></td>
 		<td><details>
@@ -307,6 +326,7 @@ This session configures the IP address and port of the monitor request from Milv
       </details></td>
 		<td>21124</td>
 	</tr>
+</tbody>
 </table>
 
 
@@ -315,11 +335,14 @@ This session configures the IP address and port of the monitor request from Milv
 This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml**, **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml**.
 
 <table id="system_behavior">
-	<tr>
-		<th>Configuration</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
+<thead>
+  <tr>     
+    <th class="width20">Configuration</th>     
+    <th class="width70">Description</th>     
+    <th class="width10">Default Value</th>   
+  </tr>
+</thead>
+<tbody>
   <tr>
 		<td><code>queryNode.gracefulTime</code></td>
 		<td><details>
@@ -365,5 +388,6 @@ This session configures the system behaviors of Milvus. You can set these config
       </details></td>
 		<td>32000</td>
 	</tr>
+</tbody>
 </table>
 </div>
