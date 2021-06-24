@@ -5,11 +5,14 @@ title: Milvus 2.0 新增功能
 # Milvus 2.0 vs. 1.x
 
 <table class="demo">
+	<thead>
 	<tr>
 		<th>&nbsp;</th>
 		<th>Milvus 1.x</th>
 		<th>Milvus 2.0</th>
 	</tr>
+	</thead>
+	<tbody>
 	<tr>
 		<th>架构</th>
 		<td>共享存储</td>
@@ -65,4 +68,5 @@ title: Milvus 2.0 新增功能
 		<td>长期支持（LTS）版本</td>
 		<td>预览版本。预计 2021 年 8 月发布稳定版本。</td>
 	</tr>
+	</tbody>
 </table>
