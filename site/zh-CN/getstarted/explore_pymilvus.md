@@ -60,13 +60,13 @@ True
 ```
 
 ## 创建 partition（可选）
-随着一个 collection 的数据增加，查询性能会逐渐下降。如果只需要查询一部分数据，可以考虑将数据进行分区（partitioning）。给 partition 加上 tag 后，搜索时就只需要搜索一部分数据，从而能够提升搜索性能。
+随着一个 collection 的数据增加，查询性能会逐渐下降。如果只需要查询一部分数据，可以考虑将数据进行分区（partitioning）。给 partition 加上 partition name 后，搜索时就只需要搜索一部分数据，从而能够提升搜索性能。
 ```
->>> partition_tag = "example_partition"
->>> partition = collection.create_partition(partition_tag)
+>>> partition_name = "example_partition"
+>>> partition = collection.create_partition(partition_name)
 ```
 
-Milvus 会在创建 collection 时创建一个默认的 partition，tag 为 `_default`。在创建新 partition 后，便有两个 partition——一个的 tag 为 `tag01`，另一个的为 `_default` 。我们可以调用 `list_partitions()` 的方法查看一个 collection 中的所有 partition。
+Milvus 会在创建 collection 时创建一个默认的 partition，name 为 `_default`。在创建新 partition 后，便有两个 partition——一个的 partition name 为 `example_partition`，另一个的为 `_default` 。我们可以调用 `list_partitions()` 的方法查看一个 collection 中的所有 partition。
 ```
 >>> collection.partitions
 [{"name": "_default", "description": "", "num_entities": 0}, {"name": "example_partition", "description": "", "num_entities": 0}]
@@ -75,7 +75,7 @@ Milvus 会在创建 collection 时创建一个默认的 partition，tag 为 `_de
 调用 `has_partition()`  查看 partition 是否创建成功:
 
 ```
->>> collection.has_partition(partition_tag)
+>>> collection.has_partition(partition_name)
 True
 ```
 
@@ -99,9 +99,9 @@ True
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
 ```
 
-3. 调用 insert() 函数时指定 partitiont_tag 可以将向量插入到指定的 Partition 中：
+3. 调用 insert() 函数时指定 `partitiont_name` 可以将向量插入到指定的 Partition 中：
 ```
->>> collection.insert(data=entities, partition_name=partition_tag)
+>>> collection.insert(data=entities, partition_name=partition_name)
 ```
 
 4. 插入的数据将存储在 Milvus 内存中。调用 `flush()` 函数将数据落盘：
@@ -154,9 +154,9 @@ Status(code=0, message='')
 [0.0, 1.0862197875976562, 1.1029295921325684, ...]
 ```
 
-如果要在指定分区或者指定列查询，则可以在调用 `search()` 时设置`partition_tags` 和 `fields` 参数
+如果要在指定分区或者指定列查询，则可以在调用 `search()` 时设置`partition_names` 和 `fields` 参数
 ```
->>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_tag])
+>>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_name])
 ```
 
 4. 查询完成后，可以调用 `release_collection()` 将 Milvus 中加载的 collection 从内存中释放，以减少内存消耗。查询其他 collection：
@@ -179,7 +179,7 @@ Status(code=0, message='')
 ### 删除 partition
 调用 `drop_partition()` 删除指定 partition 及其中的数据：
 ```
->>> collection.drop_partition(partition_name=partition_tag)
+>>> collection.drop_partition(partition_name=partition_name)
 ```
 
 ### 删除 collection
