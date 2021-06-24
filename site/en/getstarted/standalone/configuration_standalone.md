@@ -166,38 +166,6 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
 </table>
 
 
-### Pulsar Configurations
-
-Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in **milvus.yaml**.
-
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
-
-<table id="pulsar">
-	<tr>
-		<th>Configuration</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
-  <tr>
-		<td><code>pulsar.address</code></td>
-		<td><details>
-       <summary>IP address of Pulsar</summary>
-       <li>Environment variable: <code>PULSAR_ADDRESS</code></li>
-       <li>Access Pulsar service with <code>pulsar.address</code>. <code>pulsar.address</code> and <code>pulsar.port</code> together generates the valid access to Pulsar. Pulsar preferentially acquires the valid address from the environment variable <code>PULSAR_ADDRESS</code> when Milvus is booted up.</li>
-       <li>The default value applies when Pulsar and Milvus are running on the same network.</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>pulsar.port</code></td>
-		<td><details>
-       <summary>Port of Pulsar</summary>
-       <li>Environment variable: <code>PULSAR_ADDRESS</code></li>
-       <li>Access Pulsar service with <code>pulsar.port</code>. <code>pulsar.address</code> and <code>pulsar.port</code> together generates the valid access to Pulsar. Pulsar preferentially acquires the valid address from the environment variable <code>PULSAR_ADDRESS</code> when Milvus is booted up.</li>
-      </details></td>
-		<td>6650</td>
-	</tr>
-</table>
 
 
 ### Server Address Configurations
