@@ -5,7 +5,7 @@ order: 1
 group: cluster
 ---
 
-# Install Milvus Standalone
+# Install Milvus Cluster
 
 You can install Milvus cluster with Docker Compose or Helm.
 
