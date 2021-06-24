@@ -7,7 +7,7 @@ group: standalone
 ---
 
 # 安装 Milvus 单机版
-你可以使用 Docker-Compose 或 Kubernetes 安装 Milvus 单机版。
+你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 单机版。
 {{tab}}
 
 
