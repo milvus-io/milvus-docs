@@ -33,7 +33,7 @@ title: Milvus 2.0 新增功能
 	<tr>
 		<th>数据一致性</th>
 		<td>最终一致</td>
-		<td>多种一致性<li>Strong</li><li>Session</li><li>Consistent prefix</li></td>
+		<td>多种一致性<li>Strong</li><li>Bounded Staleness</li><li>Session</li><li>Consistent prefix</li></td>
 	</tr>
 	<tr>
 		<th>数据类型支持</th>
