@@ -41,6 +41,14 @@
           "label": "Get started",
           "list": [
             {
+              "text": "Start a Milvus Standlone",
+              "link": "install_standalone-docker.md"
+            },
+            {
+              "text": "Start a Milvus Cluster",
+              "link": "install_cluster-docker.md"
+            },
+            {
               "text": "Hello Milvus",
               "link": "hellomilvus.md"
             },
