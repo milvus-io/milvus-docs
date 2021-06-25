@@ -29,6 +29,7 @@ The standalone mode of Milvus includes three components:
 </div>
 
 <div class="filter-cluster table-wrapper" markdown="block">
+
 ## Distributed architecture 
 
 ![Distributed_architecture](../../../assets/distributed_architecture.jpeg)
