@@ -41,12 +41,12 @@
           "label": "Get started",
           "list": [
             {
-              "text": "Start a Milvus Standalone",
-              "link": "overview_standalone.md"
+              "text": "Hello Milvus",
+              "link": "hellomilvus.md"
             },
             {
-              "text": "Start a Milvus Cluster",
-              "link": "overview_cluster.md"
+              "text": "Explore PyMilvus",
+              "link": "explore_pymilvus.md"
             }
           ]
         },
@@ -56,6 +56,14 @@
             {
               "text": "Pymilvus API Reference",
               "link": "pymilvusapireference.md"
+            },
+            {
+              "text": "Vector Index",
+              "link": "index.md"
+            },
+            {
+              "text": "Similarity Metrics",
+              "link": "metrics.md"
             }
           ]
         },
