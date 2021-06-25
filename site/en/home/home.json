@@ -7,7 +7,7 @@
           "title": "Start a Milvus Standalone",
           "key": "stand-alone",
           "btnLabel": "Learn to build",
-          "link": "overview_standalone.md"
+          "link": "install_standalone-docker.md"
         },
     
   
@@ -15,7 +15,7 @@
           "title": "Start a Milvus Cluster",
           "key": "Cluster",
           "btnLabel": "Learn to build",
-          "link": "overview_cluster.md"
+          "link": "install_cluster-docker.md"
         },
         {
         "title": "Milvus Bootcamp",
