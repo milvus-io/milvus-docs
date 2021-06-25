@@ -1,13 +1,19 @@
 ---
 id: install_cluster-helm.md
 title: 安装分布式版 Milvus
-label: 使用 Kubernetes 安装
+label: 使用 Helm 安装
 order: 1
 group: cluster
 ---
 # 安装 Milvus 分布式版
 你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 分布式版。
+
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
+
+<div class="alert note">
+Docker Compose 部署方式只用作测试使用，不能用于生产环境。
+</div>
+
 {{tab}}
 
 ## 安装前提
