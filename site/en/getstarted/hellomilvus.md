@@ -75,7 +75,9 @@ $ python3 hello_pymilvus_orm.py
 
 *The returned results and query latency show as follows*:
 
-![Returned results](../../../../assets/returned_results_and_query_latency.png)
+![Returned results](../../../../assets/returned_results.png)
+
+<br/>
 
 *Congratulations! You have successfully booted Milvus Standalone and run your first vector similarity search.*
 

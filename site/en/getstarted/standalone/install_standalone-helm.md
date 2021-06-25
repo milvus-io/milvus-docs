@@ -48,6 +48,7 @@ This tutorial uses `my-release` as the release name. To use a different release 
 ```
 $ helm install my-release milvus/milvus
 ```
+
 > For more details, see [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus).
 
 *If Milvus boots successfully, each Milvus’ pod shows `1/1` under `READY`:*
@@ -76,6 +77,7 @@ To shut down the minikube virtual machine but preserve all the resources you’v
 ```
 $ minikube stop
 ```
+
 > To restart the cluster:
 ```
 minikube start
