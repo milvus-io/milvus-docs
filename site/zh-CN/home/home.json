@@ -48,7 +48,7 @@
           "label": "开发文档",
           "list": [
             {
-              "text": "Pymilvus API 参考",
+              "text": "PyMilvus API 参考",
               "link": "pymilvusapireference.md"
             },
             {
