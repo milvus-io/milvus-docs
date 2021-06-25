@@ -6,14 +6,14 @@
         {
           "title": "启动单机版 Milvus",
           "key": "stand-alone",
-          "btnLabel": "Learn to build",
-          "link": "overview_standalone.md"
+          "btnLabel": "了解更多",
+          "link": "install_standalone-docker.md"
         },
         {
           "title": "启动分布式版 Milvus",
           "key": "Cluster",
-          "btnLabel": "Learn to build",
-          "link": "overview_cluster.md"
+          "btnLabel": "了解更多",
+          "link": "install_cluster-docker.md"
         },
           {
         "title": "Milvus 训练营",
@@ -35,12 +35,12 @@
           "label": "Get started",
           "list": [
             {
-              "text": "启动单机版 Milvus",
-              "link": "overview_standalone.md"
+              "text": "Hello Milvus",
+              "link": "hellomilvus.md"
             },
             {
-              "text": "启动分布式版 Milvus",
-              "link": "overview_cluster.md"
+               "text": "PyMilvus 上手",
+              "link": "explore_pymilvus.md"
             }
           ]
         },
@@ -50,6 +50,14 @@
             {
               "text": "Pymilvus API 参考",
               "link": "pymilvusapireference.md"
+            },
+            {
+              "text": "向量索引",
+              "link": "index.md"
+            },
+            {
+              "text": "相似度计算方式",
+              "link": "metrics.md"
             }
           ]
         },
