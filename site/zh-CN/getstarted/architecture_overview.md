@@ -6,7 +6,6 @@ title: 系统架构
 # Milvus 系统架构
 
 Milvus 支持两种部署模式，单机模式（standalone）和分布式模式（cluster）。两种模式具备完全相同的能力，用户可以根据数据规模、访问量等因素选择适合自己的模式。Standalone 模式部署的 Milvus 暂时不支持在线升级为 cluster 模式。
-> 建议阅读本文前先熟悉 [术语表](glossary.md) 内容。
 
 ## 单机架构
 
