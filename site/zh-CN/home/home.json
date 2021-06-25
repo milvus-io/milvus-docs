@@ -81,7 +81,7 @@
                 "link": "troubleshooting.md"
               },
               {
-                "text": "Pymilvus 问题",
+                "text": "PyMilvus 问题",
                 "link": "pymilvus_faq.md"
               }
             ]
