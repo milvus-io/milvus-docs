@@ -41,7 +41,7 @@ $ helm repo update
 Provide a release name for identifying your Milvus deployment.
 
 <div class="alert note">
-This tutorial uses `my-release` as the release name. To use a different release name, adjust the release name in subsequent commands.
+This tutorial uses <code> my-release</code> as the release name. To use a different release name, adjust the release name in subsequent commands.
 </div>
 
 #### Install Milvus standalone:
