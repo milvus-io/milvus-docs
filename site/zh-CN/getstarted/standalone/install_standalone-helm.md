@@ -1,7 +1,7 @@
 ---
 id: install_standalone-helm.md
 label: 使用 Helm 安装
-order: 0
+order: 1
 group: standalone
 ---
 # 安装 Milvus 单机版
