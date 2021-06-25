@@ -6,11 +6,11 @@ title: Milvus 2.0 新增功能
 
 <table class="demo">
 	<thead>
-	<tr>
-		<th>&nbsp;</th>
-		<th>Milvus 1.x</th>
-		<th>Milvus 2.0</th>
-	</tr>
+  <tr>     
+    <th class="width20">&nbsp;</th>     
+    <th class="width40">Milvus 1.x</th>     
+    <th class="width40">Milvus 2.0</th>   
+  </tr>
 	</thead>
 	<tbody>
 	<tr>
