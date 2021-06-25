@@ -8,8 +8,8 @@ title: Milvus 是什么
 Milvus 是一款开源向量数据库，赋能 AI 应用和向量相似度搜索。
 
 Milvus 提供以下 2 个版本：
-- [Milvus 单机版](overview_standalone.md) 
-- [Milvus 分布式版](overview_cluster.md)。
+- [Milvus 单机版](install_standalone-docker.md) 
+- [Milvus 分布式版](install_cluster-docker.md)。
 
 版本兼容: 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
