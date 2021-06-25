@@ -7,6 +7,16 @@ title: Architecture Overview
 
 Milvus supports standalone and cluster deployments. Each deployment has identical capabilities however, users may find a specific one better suits their scenario depending on factors such as dataset size, database traffic, and more. Presently, Milvus deployed using the standalone mode cannot be dynamically upgraded to the cluster mode.
 
+
+<div class="filter">
+<a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
+
+</div>
+
+<div class="filter-standalone table-wrapper" markdown="block">
+
+
+
 ## Standalone architecture
 
 ![Standalone_architecture](../../../assets/standalone_architecture.jpeg)
@@ -16,7 +26,9 @@ The standalone mode of Milvus includes three components:
 - **Milvus:** Provides core system functions.
 - **Etcd:** Metadata engine used for managing metadata access and storage for Milvus' internal components, including proxies nodes, index nodes, and more.
 - **MinIO:** A storage engine that maintains data persistence for Milvus' internal components, including proxy nodes, index nodes, and more.
+</div>
 
+<div class="filter-cluster table-wrapper" markdown="block">
 ## Distributed architecture 
 
 ![Distributed_architecture](../../../assets/distributed_architecture.jpeg)
@@ -39,6 +51,8 @@ Milvus cluster include eight microservice components and three third-party infra
 - Etcd: Stores metadata for various cluster components.
 - MinIO: Handles data persistence for large cluster files, such as index and full binary log files.
 - Pulsar: Manages recent collection update operation logs, and provides streaming log output and log subscription services.
+
+</div>
 
 ## Advantages over traditional database architectures
 
