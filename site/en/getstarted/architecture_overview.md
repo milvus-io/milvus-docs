@@ -51,14 +51,6 @@ Milvus 2.0 was built from the ground up as a cloud-native vector database that o
 - Enhanced elasticity and availability thanks to stateless worker nodes.
 - Unified Lambada structure that combines stream and batch processing for data storage, balancing efficiency and data consistency. 
 
-Designed specifically for cloud-native, Milvus 2.0 has the following advanced features compared with traditional designs:
-
-- 100% distributed design with support for horizontal scalability.
-- The micro-service design is adaptable to the ever-changing load, and minimizes dependency between nodes through decoupling. 
-- Separation of storage and computation. All worker nodes are stateless, enhancing elasticity and availability.
-
-Unified Lambda structure that combines stream and batch processing for data storage, balancing timeliness and data consistency.
-
 Milvus is designed around logs as the core, following the log-as-data guidelines. In Milvus 2.0, physical tables are not maintained, but data reliability is guaranteed through log persistence and log snapshots. 
 
 ![Log_mechanism](../../../assets/log_mechanism.png)
