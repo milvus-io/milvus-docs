@@ -7,9 +7,13 @@ group: cluster
 ---
 # 安装 Milvus 分布式版
 你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 分布式版。
+
+你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
+
 <div class="alert note">
 Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 </div>
+
 {{tab}}
 
 ## 开始之前
