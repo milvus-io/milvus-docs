@@ -3,7 +3,7 @@ id: hellomilvus.md
 title: Hello Milvus
 ---
 
-# Run Milvus Standalone using Python
+# Run Milvus using Python
 
 After the Milvus server boots successfully, test the platform using our Python sample code.
 
