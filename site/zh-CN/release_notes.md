@@ -2,6 +2,7 @@
 id: release_notes.md
 title: 发版说明
 ---
+
 # 发版说明
 
 ## v2.0.0-RC1
@@ -29,7 +30,7 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 - 执行节点（Worker Node）
 - 存储服务 （Storage）
 
-**接入层（Access Layer)**：系统的门面，包含了一组对等的 proxy 节点。接入层是暴露给用户的统一 endpoint，负责转发请求并收集执行结果。
+**接入层Access Layer**：系统的门面，包含了一组对等的 proxy 节点。接入层是暴露给用户的统一 endpoint，负责转发请求并收集执行结果。
 
 **协调服务（Coordinator Service）**：系统的大脑，负责分配任务给执行节点。总共有四类协调者角色，分别为 root 协调者、data 协调者、query 协调者和 index 协调者。
 
