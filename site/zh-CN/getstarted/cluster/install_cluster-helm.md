@@ -27,24 +27,24 @@ $ minikube start
 ## 2. 启动 Milvus
 > 使用 Kubernetes 包管理工具 Helm 能够简化本步骤。
 
-### 使用 Kubernetes 包管理工具 Helm 添加 Milvus chart 仓库：
+#### 使用 Kubernetes 包管理工具 Helm 添加 Milvus chart 仓库：
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-### 将 Milvus chart 更新至最新版本：
+#### 将 Milvus chart 更新至最新版本：
 ```
 $ helm repo update
 ```
 
-### 安装 Milvus Helm chart：
+#### 安装 Milvus Helm chart：
 设置发布命名（release name）以标记或追踪该 chart 部署。
 
 <div class="alert note">
 本教程使用 my-release 作为 release name。如需使用不同的 release name, 请在以下命令中修改相应的 release name。
 </div>
 
-### 安装 Milvus 分布式版：
+#### 安装 Milvus 分布式版：
 ```
 $ helm install my-release milvus/milvus
 ```
