@@ -11,6 +11,10 @@ You can install Milvus standalone with Docker Compose or Helm.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md).
 
+<div class="alert note">
+Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
+</div>
+
 {{tab}}
 
 ## Before You Begin
@@ -28,10 +32,6 @@ Before moving forward to installation, you must check the eligibility of your Do
 {{fragments/cpu_support.md}}
 </details>
 
-
-<div class="alert note">
-Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
-</div>
 
 
 ## Install Milvus Standalone
@@ -60,4 +60,6 @@ $ sudo docker-compose ps
 ```
 ![Running Docker containers](../../../../assets/install_standalone.png)
 
-> To stop Milvus Standalone, run ```$ sudo docker-compose down```.
+<div class="alert note">
+To stop Milvus Standalone, run <code> $ sudo docker-compose down</code>.
+</div>
