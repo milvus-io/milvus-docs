@@ -106,7 +106,7 @@ In addition to insert and delete operations, data definition operations are also
 
 ![Channels](../../../assets/channels.png)
 
-The physical node of the log broker's underlying engine serves as the vchannel. Each channel is not physically split further, so a single vchannel will not span multiple physical nodes and different vchannels can be can be deployed in different physical nodes. If a data insertion bottleneck occurs, consider whether the log broker load is too high and needs to be expanded or whether there are enough shards to ensure each log broker load is sufficiently balanced.
+Multiple vchannles are served on top of the underlying log broker nodes. Each channel is not physically split further, so a single vchannel will not span multiple physical nodes and different vchannels can be can be deployed in different physical nodes. If a data insertion bottleneck occurs, consider whether the log broker load is too high and needs to be expanded or whether there are enough shards to ensure each log broker load is sufficiently balanced.
 
 ![Insertion_process](../../../assets/insertion_process.png)
 
