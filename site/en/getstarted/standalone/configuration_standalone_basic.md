@@ -3,7 +3,7 @@ id: configuration_standalone_basic.md
 title: Milvus Standalone System Configurations
 label: Basic Configurations
 order: 0
-group: standalone
+group: standalone_sys
 ---
 
 # Milvus Standalone System Configurations
