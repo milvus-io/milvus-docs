@@ -125,7 +125,7 @@ You can insert vectors to a specified partition within a specific collection.
 ```
 
 ## Build an index
-Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index] (index.md) for more information about setting index parameters.
+Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index](index.md) for more information about setting index parameters.
 
 1. Prepare the index parameters:
 ```
