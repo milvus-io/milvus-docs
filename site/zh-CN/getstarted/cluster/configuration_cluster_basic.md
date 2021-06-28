@@ -3,7 +3,7 @@ id: configuration_cluster_basic.md
 title: Milvus Cluster System Configurations
 label: Basic Configurations
 order: 0
-group: cluster
+group: cluster_sys
 ---
 # Milvus Cluster System Configurations
 
