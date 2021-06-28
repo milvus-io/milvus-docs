@@ -154,4 +154,4 @@ In the process described above, each query node is unaware of the other query no
 
 Segments have two states, growing and sealed, which are called incremental data and historical data respectively. For growing segments, the query node obtains recent updates of data by subscribing to vchannel. When the size of a growing segment data increases to a fixed threshold, the data coord initiates the seal operation. Sealed segments are built with an index, and then trigger the query coord handoff operation to convert incremental data into historical data. Query coord then distributes the sealed segments as evenly as possible to all query nodes. To achieve even segment placement, factors such as memory usage, CPU occupation, and the number of segments are taken into consideration.
 
-![architecture_01](../../../assets/architecture_01.jpeg)
+![Architecture_01](../../../assets/architecture_01.jpg)
