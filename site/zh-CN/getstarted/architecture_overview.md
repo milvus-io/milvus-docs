@@ -156,3 +156,4 @@ Collection A 中的数据被分为多个 segment，query node 以 segment 为粒
 
 Segment 存在两种状态——growing 和 sealed——分别对应增量数据和历史数据。对于 growing segment，query node 通过订阅 vchannel 获取数据的近期更新，当 growing segment 数据量增多到固定阈值时，会由 data coord 发起 seal 操作。Sealed segment 会进行索引构建，之后触发 query coord的 handoff 操作，将增量数据转换为历史数据。对于 sealed segment，query coord 会会综合考虑内存使用、CPU 开销、segment 数目等因素，尽可能均匀分配给所有的 query node。
 
+![Architecture_01](../../../assets/architecture_01.jpg)
