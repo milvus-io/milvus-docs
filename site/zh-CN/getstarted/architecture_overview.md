@@ -96,7 +96,7 @@ Milvus 支持两种部署模式，单机模式（standalone）和分布式模式
 
 用户可以为每个 collection 指定 shard 数量，每个 shard 对应一个虚拟通道 vchannel。在 Milvus2.0 中，shard 是数据的粗粒度划分，每个 shard 进⼀步细分为若⼲个 segments。如下图所示，在 log broker 内，每个 vchanel 被分配了一个对应的物理通道 pchannel，用于处理各类⽇志序列的发布—订阅，当前版本中 vchannel 和 pchannel 是一一对应的。增删请求进入哪个 shard 由 proxy 决定，目前是基于主键哈希来决定的。
 
-由于没有复杂事务，增删请求的检查与确认⼯作被提前至 proxy。每个 proxy 拥有⼀个库表元信息缓存，用于本地的动态检查。对于所有的增删请求，proxy 会先通过请求位于 root coord 的 TSO 中心授时模块获取时间戳，这个时间戳决定了数据最终可见和相互覆盖的顺序。Proxy 通过批量的方式从data coord 获取数据的所处的 segment 和 rowID，批量有助于提升系统的吞吐，降低中心节点的压力。
+由于没有复杂事务，增删请求的检查与确认⼯作被提前至 proxy。每个 proxy 拥有⼀个库表元信息缓存，用于本地的动态检查。对于所有的增删请求，proxy 会先通过请求位于 root coord 的 TSO 中心授时模块获取时间戳，这个时间戳决定了数据最终可见和相互覆盖的顺序。Proxy 通过批量的方式从 data coord 获取数据的所处的 segment 和 rowID，批量有助于提升系统的吞吐，降低中心节点的压力。
 
 
 ![Log_broker](../../../assets/log_broker.png)
@@ -113,7 +113,7 @@ Vchannel 由消息存储底层引擎的物理节点承担。每个 channel 在�
 
 ![Insertion_process](../../../assets/insertion_process.png)
 
-上图总结了⽇志序列的写⼊过程。负载主要由 proxy、log broker、data node、object storage 承担。 整体共四部分⼯作:请求的检查与发送、日志序列的发布—订阅、流式⽇志到日志快照的转换、日志快照的持久化存储。在 Milvus 2.0 中，对这四部分⼯作进行了解耦，做到同类型节点之间的对等。面向不同的⼊库负载，特别是大规模⾼波动的流式负载，各环节的系统组件可以做到独⽴的弹性伸缩。 
+上图总结了⽇志序列的写⼊过程。负载主要由 proxy、log broker、data node、object storage 承担。 整体共四部分⼯作：请求的检查与发送、日志序列的发布—订阅、流式⽇志到日志快照的转换、日志快照的持久化存储。在 Milvus 2.0 中，对这四部分⼯作进行了解耦，做到同类型节点之间的对等。面向不同的⼊库负载，特别是大规模⾼波动的流式负载，各环节的系统组件可以做到独⽴的弹性伸缩。 
 
 #### 索引构建
 
