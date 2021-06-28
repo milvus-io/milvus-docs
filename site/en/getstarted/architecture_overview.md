@@ -50,14 +50,13 @@ Storage is the cornerstone of Milvus, responsible for data persistence. The stor
 - **Object storage:** Stores snapshot files of logs, scalar/vector index files, and intermediate query processing results. Milvus supports AWS S3 and Azure Blog, two of the most widely used and economical public clouds for their cloud-native elasticity and on-demand billing, as well as MinIO, a lightweight, open-source object storage service. Due to the high access latency and billing per query of object storage services, Milvus will soon support memory/SSD-based cache pools and hot/cold data separation to improve performance and reduce costs.
 
 
-Milvus supports standalone and cluster deployments. Each deployment has identical capabilities; however, users may find a specific one better suits their scenario depending on factors such as dataset size, database traffic, and more. Presently, Milvus deployed using the standalone mode cannot be dynamically upgraded to the cluster mode.
-
-
 ### Main components
+
+Milvus supports standalone and cluster deployments. Each deployment has identical capabilities; however, users may find a specific one better suits their scenario depending on factors such as dataset size, database traffic, and more. Presently, Milvus deployed using the standalone mode cannot be dynamically upgraded to the cluster mode.
 
 The **standalone** mode of Milvus includes three components:
 - **Milvus:** Provides core system functions.
-- **Etcd:** Metadata engine used for managing metadata access and storage for Milvus' internal components, including proxies nodes, index nodes, and more.
+- **etcd:** Metadata engine used for managing metadata access and storage for Milvus' internal components, including proxies nodes, index nodes, and more.
 - **MinIO:** A storage engine that maintains data persistence for Milvus' internal components, including proxy nodes, index nodes, and more.
 
 ![Standalone_architecture](../../../assets/standalone_architecture.jpeg)
@@ -77,7 +76,7 @@ The **standalone** mode of Milvus includes three components:
 
 **Third-party infrastructure components:**
 
-- Etcd: Stores metadata for various cluster components.
+- etcd: Stores metadata for various cluster components.
 - MinIO: Handles data persistence for large cluster files, such as index and full binary log files.
 - Pulsar: Manages recent collection update operation logs, and provides streaming log output and log subscription services.
 
