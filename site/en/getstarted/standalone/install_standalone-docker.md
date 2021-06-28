@@ -37,7 +37,7 @@ Before moving forward to installation, you must check the eligibility of your Do
 ## Install Milvus Standalone
 
 
-1. Pull the Docker image:
+1. Download and save **docker-compose.standalone.yml** as **docker-compose.yml**
 
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
@@ -46,7 +46,7 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docke
 2. Start Milvus Standalone:
 
 ```
-$ sudo docker-compose up -d
+$ docker-compose up -d
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done

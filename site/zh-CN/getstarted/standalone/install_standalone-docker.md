@@ -58,14 +58,14 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ## 安装 Milvus 单机版
 
 
-1. 拉取 Milvus 镜像：
+1. 下载 **docker-compose.standalone.yml** 配置文件并保存为 **docker-compose.yml**
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 2. 启动 Milvus 单机版：
 
 ```
-$ sudo docker-compose up -d
+$ docker-compose up -d
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done
