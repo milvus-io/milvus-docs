@@ -142,7 +142,7 @@ Create an index for a specified field in a collection to accelerate vector simil
 Status(code=0, message='')
 ```
 
-Call `describe_index()` to view more details of the new index:
+3. Call `describe_index()` to view more details of the new index:
 
 ```
 >>> collection.index().params
