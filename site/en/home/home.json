@@ -62,7 +62,7 @@
           "label": "Develop",
           "list": [
             {
-              "text": "Pymilvus API Reference",
+              "text": "PyMilvus API Reference",
               "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
             },
             {
