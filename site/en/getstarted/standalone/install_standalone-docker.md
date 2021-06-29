@@ -47,7 +47,7 @@ See <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a
 ## Install Milvus Standalone
 
 
-1. Download and save **docker-compose.standalone.yml** as **docker-compose.yml**
+1. Download and save **docker-compose.standalone.yml** as **docker-compose.yml**:
 
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
@@ -63,7 +63,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
 
-*If Milvus Standalone boots successfully, three running docker containers appear (two infrastructure services and one Milvus service):*
+*If Milvus Standalone boots successfully, three running docker containers appear (two infrastructure services and one Milvus service):* 
 
 ```
 $ sudo docker-compose ps
