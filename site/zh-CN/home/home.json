@@ -5,13 +5,13 @@
       "items": [
         {
           "title": "启动 CPU 版 Milvus",
-          "key": "cpu-only",
+          "key": "stand-alone",
           "btnLabel": "Learn to build",
           "link": "milvus_docker-cpu.md"
         },
         {
           "title": "启动 GPU 版 Milvus",
-          "key": "gpu-enabled",
+          "key": "Cluster",
           "btnLabel": "Learn to build",
           "link": "milvus_docker-gpu.md"
         },
