@@ -1,5 +1,5 @@
 ---
-id: configuration_cluster_basic.md
+id: configuration_cluster-basic.md
 title: Milvus Cluster System Configurations
 label: Basic Configurations
 order: 0

@@ -1,12 +1,11 @@
 ---
-id: configuration_standalone_basic.md
-title: Milvus Standalone System Configurations
+id: configuration_cluster-basic.md
+title: Milvus Cluster System Configurations
 label: Basic Configurations
 order: 0
-group: standalone_sys
+group: cluster_sys
 ---
-
-# Milvus Standalone System Configurations
+# Milvus Cluster System Configurations
 
 Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
@@ -65,3 +64,4 @@ This session configures the system log output. Using Milvus generates a collecti
   </tr>
 </tbody>
 </table>
+

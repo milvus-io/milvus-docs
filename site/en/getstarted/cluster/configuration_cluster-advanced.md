@@ -1,5 +1,5 @@
 ---
-id: configuration_cluster_advanced.md
+id: configuration_cluster-advanced.md
 title: Milvus Cluster System Configurations
 label: Advanced Configurations
 order: 1

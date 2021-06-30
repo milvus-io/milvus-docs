@@ -1,5 +1,5 @@
 ---
-id: configuration_standalone_advanced.md
+id: configuration_standalone-advanced.md
 title: Milvus Standalone System Configurations
 label: Advanced Configurations
 order: 1
