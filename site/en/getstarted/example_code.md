@@ -1,5 +1,5 @@
 ---
-id: hellomilvus.md
+id: example_code.md
 title: Hello Milvus
 ---
 
