@@ -1,5 +1,5 @@
 ---
-id: configuration_standalone_basic.md
+id: configuration_standalone-basic.md
 title: Milvus Standalone System Configurations
 label: Basic Configurations
 order: 0
