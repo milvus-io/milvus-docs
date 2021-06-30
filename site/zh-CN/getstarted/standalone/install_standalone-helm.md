@@ -1,12 +1,12 @@
 ---
 id: install_standalone-helm.md
-label: 使用 Helm 安装
+label: 使用 Kubernetes 安装
 order: 1
 group: standalone
 ---
 # 安装 Milvus 单机版
 
-你可以使用 Docker Compose 或 Helm 安装 Milvus 单机版。
+你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 单机版。
 
 
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。

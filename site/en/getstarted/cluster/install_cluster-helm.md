@@ -1,13 +1,13 @@
 ---
 id: install_cluster-helm.md
-label: Install with Helm
+label: Install with Kubernetes
 order: 1
 group: cluster
 ---
 
 # Install Milvus Cluster
 
-You can install Milvus cluster with Docker Compose or Helm.
+You can install Milvus cluster with Docker Compose or Kubernetes.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
