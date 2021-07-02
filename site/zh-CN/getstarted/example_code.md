@@ -83,7 +83,7 @@ $ python3 hello_milvus.py
 ```
 *运行结果及查询等待时间如下：*
 
-![Returned results](../../../assets/returned_results.png)
+![Returned results](../../../assets/hello_waorld.png)
 
 
 
