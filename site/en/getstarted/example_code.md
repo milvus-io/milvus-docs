@@ -89,7 +89,7 @@ $ python3 hello_pymilvus.py
 *The returned results and query latency show as follows:*
 
 
-![Returned results](../../../assets/returned_results.png)
+![Returned results](../../../assets/hello_world.png)
 
 <br/>
 
