@@ -1,7 +1,7 @@
 ---
 id: install_standalone-docker.md
 title: Install Milvus Standalone
-label: Install on Docker Compose
+label: Install with Docker Compose
 order: 0
 group: standalone
 ---
