@@ -81,7 +81,7 @@ res = collection.search(
 
 4. Run **hello_milvus.py**:
 ```
-$ python3 hello_pymilvus_orm.py
+$ python3 hello_pymilvus.py
 ```
 
 *The returned results and query latency show as follows:*
