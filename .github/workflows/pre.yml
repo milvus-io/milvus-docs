@@ -35,7 +35,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install jq
           cd ../
-          git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
+          git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/web-content.git target
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           cp ./milvus-docs/version.json ./target
