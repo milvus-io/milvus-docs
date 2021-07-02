@@ -7,33 +7,58 @@ sidebar_label: 性能常见问题
 # 性能常见问题
 
 <!-- TOC -->
-- [为什么重启 Milvus 服务端之后，第一次搜索时间非常长？](#为什么重启-Milvus-服务端之后第一次搜索时间非常长)
-- [为什么插入数据的速度很慢？](#为什么插入数据的速度很慢)
-- [为什么搜索的速度很慢？](#为什么搜索的速度很慢)
-- [为什么 GPU 一直空闲？](#为什么-GPU-一直空闲)
-- [为什么我的数据插入后不可以马上被搜索到？](#为什么我的数据插入后不可以马上被搜索到)
+
 <!-- /TOC -->
 
-#### 为什么重启 Milvus 服务端之后，第一次搜索时间非常长？
+#### 如何设置 IVF 索引的 `nlist` 和 `nprobe` 参数？
 
-您需要在 `server_config.yaml` 中开启 `preload_table`。在内存允许的情况下尽可能多地加载 collection。这样在每次重启服务端之后，数据都会先载入到 Milvus 中，可以解决第一次搜索耗时很长的问题。
+IVF 索引的 `nlist` 值应根据具体使用情况设置。一般来说，建议值为 `4 × sqrt(n)`，其中 `n` 指 segment 最多包含的 entity 条数。
 
-#### 为什么插入数据的速度很慢？
+每个 segment 的大小由参数 `dataservice.segment.size` 决定，默认为 512 MB。Segment 内的 entity 条数可通过将 dataservice.segment.size 除以每条 entity 的大小估算得出。
 
-- （如果 WAL 开启了）建议 `insert_buffer_size` 大于 `wal_buffer_size` 的一半 且插入数据量小于 `wal_buffer_size`的一半。
-- （如果 WAL 没有开启）建议插入的数据量小于 `insert_buffer_size`。
+`nprobe` 值的选取需要根据数据总量和实际场景在查询性能和准确率之间进行取舍。建议通过多次实验确定合理取值。
 
-#### 为什么搜索的速度很慢？
+以下是使用公开测试数据集 sift50m 针对 `nlist` 和 `nprobe` 的一个测试。以索引类型 IVF_SQ8 为例，测试对比了不同 `nlist`/`nprobe` 组合的搜索时间和召回率。
 
-- 将`cpu_cache_capacity` 设置为用户能提供的最大内存数。
-- 调整 `use_blas_threhold`（根据硬件环境调整）:
-  - 如果当前批量查询的 nq 数（向量条数）小于 `use_blas_threhold`，可以尝试将 `use_blas_threhold` 调整为 `nq - 1`, 反之把 `use_blas_threhold` 调整为 `nq + 1`。
-- 在创建 collection 时，`index_file_size` 参数应该尽量调大。
+![accuracy_nlist_nprobe.png](../../../assets/accuracy_nlist_nprobe.png)
 
-#### 为什么 GPU 一直空闲？
+测试显示，召回率与 `nlist`/`nprobe` 值呈正相关。
 
-将 `gpu_search_threshold` 的值调整为您期望开启 GPU 搜索的批量查询的 nq 数（向量条数）。不建议在搜索量较小时使用 GPU 搜索。
+![performance_nlist_nprobe.png](../../../assets/performance_nlist_nprobe.png)
 
-#### 为什么我的数据插入后不可以马上被搜索到？
+ 
 
-要确保数据插入后立刻能搜索到，可以手动调用 flush 接口。但是频繁调用 flush 接口可能会产生大量小数据文件，从而导致查询变慢。
+#### 为什么有时小数据集查询时间反而更长？
+
+查询操作在 segment 上进行，有索引时查询性能更高。如果 segment 尚未构建索引，Milvus 将对原始数据进行暴力搜索，大大增加查询时长。
+
+因此，当小数据集（collection）尚未创建索引时，就有可能出现查询时间更长的情况。这是因为其 segment 的大小没有达到 `master.minSegmentSizeToEnableIndex` 所设定的索引构建阈值。调用 `create_index()` 方法可对已达到该阈值但没有构建索引的 segment 强制构建索引以加快查询速度。
+
+ 
+
+ 
+
+#### CPU 利用率受哪些因素的影响？
+
+Milvus 构建索引和执行查询操作时，CPU 利用率提高。一般来说，除了 ANNOY 索引是单线程运行之外，索引构建都会占用大量 CPU 资源。
+
+向量查询时， CPU 利用率受参数 `nq` 和 `nprobe` 影响，当 `nq` 和 `nprobe` 都较小时，程序并发度较小，故 CPU 利用率不高。
+
+ 
+
+ 
+
+ 
+
+#### 边插入边搜索会影响搜索性能吗？
+
+数据插入本身并不是一个 CPU 密集型操作，但是由于新插入的数据所在 segment 的大小可能还未达到自动创建索引的阈值，在查询时只能对其采用暴搜的方式，查询性能就会降低。
+
+ 参数 `dataservice.segment.size` 决定了 segment 自动构建索引的阈值，默认值为 512 MB。
+
+#### 仍有问题没有得到解答？
+
+如果仍有其他问题，你可以：
+
+- 访问我们的 [GitHub 主页](https://github.com/milvus-io/milvus/issues)，与我们分享你的问题和想法，或帮助其他用户。
+- 加入我们的 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，参与开源社区的讨论交流。

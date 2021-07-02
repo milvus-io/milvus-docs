@@ -2,11 +2,11 @@ name: dev
 
 on:
   release:
-    types: [published]
+    types: [released]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "build "
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -23,11 +23,14 @@ jobs:
 
       - name: Md2md
         run: |
+          cp site/en/Variables.json ./
           mv site doc_from
-          sudo npm install md2md -g
+          sudo npm install @zilliz/mdtomd -g
           goover
           rm -rf doc_from/*
+          rm check-link.js
           mv doc_to site
+
       - name: Delete And Push
         run: |
           sudo apt-get update
@@ -36,12 +39,11 @@ jobs:
           git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/docs.git target
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
+          cp ./milvus-docs/version.json ./target
           cd target
-          git checkout -b `cat version.json | jq -r .version`
-          rm -rf *
-          cd ../
-          cp -avr ./milvus-docs/** ./target/
-          cd target
+          rm -rf `cat version.json | jq -r .version`
+          mkdir `cat version.json | jq -r .version`
+          cp -avr ../milvus-docs/** ./`cat version.json | jq -r .version`
           git add .
           git commit -m "Release new docs "
-          git push -f origin HEAD:`cat version.json | jq -r .version`
+          git push -f origin master
