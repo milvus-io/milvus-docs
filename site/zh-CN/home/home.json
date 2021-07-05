@@ -36,7 +36,7 @@
           "title": "推荐阅读",
           "items": [
             {
-              "label": "Get started",
+              "label": "快速开始",
               "list": [
                 {
                   "text": "启动 CPU 版 Milvus",
