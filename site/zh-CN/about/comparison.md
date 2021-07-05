@@ -48,9 +48,9 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 <table class="demo">
 	<thead>
 	<tr>
-		<th>&nbsp;</th>
-		<th>Milvus 2.0</th>
-		<th>Milvus 1.x</th>
+		<th class="width20">&nbsp;</th>
+		<th class="width40">Milvus 2.0</th>
+		<th class="width40">Milvus 1.x</th>
 	</tr>
 	</thead>
 	<tbody>
