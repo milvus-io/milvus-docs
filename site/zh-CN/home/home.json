@@ -98,7 +98,7 @@
     },
     "section4": {
       "loadBtn": {
-        "label": "See More Blogs",
+        "label": "更多内容",
         "isExternal": true,
         "link": "https://zilliz.com/blog"
       },
