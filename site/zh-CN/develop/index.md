@@ -248,6 +248,15 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 - 关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
 
 
+## 常见问题
+
+
+<details>
+<summary><font color="#4fc4f9">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</font></summary>
+{{fragments/faq_flat_ivfflat.md}}
+</details>
+
+
 ## 参考文献
 
 
