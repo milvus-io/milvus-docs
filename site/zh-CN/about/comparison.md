@@ -4,7 +4,7 @@ title: Milvus 2.0 概述
 ---
 # Milvus 2.0 概述
 
-随着新需求的出现，Milvus 2.0 横空出世，与此同时 Milvus 之前版本将逐渐淡出视野。为获得最佳使用体验，我们强烈建议启用最新版本的 Milvus。
+为获得最佳使用体验，我们强烈建议启用最新版本的 Milvus。
 
 ## 设计理念
 围绕以下三个理念，我们重新定义下一代云原生向量数据库：
@@ -48,9 +48,9 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 <table class="demo">
 	<thead>
 	<tr>
-		<th>&nbsp;</th>
-		<th>Milvus 2.0</th>
-		<th>Milvus 1.x</th>
+		<th class="width20">&nbsp;</th>
+		<th class="width40">Milvus 2.0</th>
+		<th class="width40">Milvus 1.x</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -101,7 +101,7 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 	</tr>
 	<tr>
 		<th>SDK</th>
-		<td><li>Python</li><li>Go (开发中)</li><li>RESTful (开发中)</li><li>C++ (开发中)</li></td>
+		<td><li>Python</li><li>Go (开发中)</li><li>Java (开发中)</li><li>RESTful (开发中)</li><li>C++ (开发中)</li></td>
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 	</tr>
 	<tr>

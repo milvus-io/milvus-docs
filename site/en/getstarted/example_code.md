@@ -10,7 +10,7 @@ After the Milvus server boots successfully, test the platform using our Python s
 1. Install pymilvus_orm and its dependencies:
 
 ```
-pip install pymilvus-orm==2.0.0rc1
+pip install pymilvus-orm==2.0.0rc2
 ```
 <div class="alert note">
 Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
@@ -19,14 +19,14 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 2. Download sample code **hello_milvus.py**:
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc2/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
 
 - Imports the pymilvus package:
 ```
-from pymilvus_orm import *
+from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - Connects to the Milvus server:
@@ -36,15 +36,16 @@ connections.connect()
 
 - Creates a collection:
 ```
-from pymilvus_orm import schema, DataType, Collection
 dim = 128
 default_fields = [
-    schema.FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
-    schema.FieldSchema(name="score", dtype=DataType.FLOAT),
-    schema.FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
+    FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="random_value", dtype=DataType.DOUBLE),
+    FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
 ]
-default_schema = schema.CollectionSchema(fields=default_fields, description="test collection")
-collection = Collection(name="hello_milvus", data=None, schema=default_schema)
+default_schema = CollectionSchema(fields=default_fields, description="test collection")
+
+print(f"\nCreate collection...")
+collection = Collection(name="hello_milvus", schema=default_schema)
 ```
 
 - Inserts vectors in the new collection:
@@ -81,13 +82,13 @@ res = collection.search(
 
 4. Run **hello_milvus.py**:
 ```
-$ python3 hello_pymilvus_orm.py
+$ python3 hello_pymilvus.py
 ```
 
 *The returned results and query latency show as follows:*
 
 
-![Returned results](../../../assets/returned_results.png)
+![Returned results](../../../assets/hello_world.png)
 
 <br/>
 

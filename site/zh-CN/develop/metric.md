@@ -26,11 +26,8 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky">欧氏距离 (L2)</td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li><li>ANNOY</li></ul></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">内积 (IP)</td>
+    <td class="tg-0pky"><li>欧氏距离 (L2)</li><li>内积 (IP)</li></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>HNSW</li><li>ANNOY</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -166,3 +163,17 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 - N<sub>AB</sub> 表示分子式 A 和 B 的化学指纹中共有的二进制位的数量。
 
 
+## 常见问题
+
+<details>
+<summary><font color="#4fc4f9">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
+{{fragments/faq_top1_not_target.md}}
+</details>
+<details>
+<summary><font color="#4fc4f9">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
+{{fragments/faq_normalize_embeddings.md}}
+</details>
+<details>
+<summary><font color="#4fc4f9">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
+{{fragments/faq_euclidean_ip_different_results.md}}
+</details>

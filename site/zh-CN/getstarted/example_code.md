@@ -9,7 +9,7 @@ title: Hello Milvus
 
 1. 安装 pymilvus_orm 及依赖库:
 ```
-pip install pymilvus-orm==2.0.0rc1
+pip install pymilvus-orm==2.0.0rc2
 ```
 
 <div class="alert note">
@@ -19,12 +19,12 @@ pymilvus_orm 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.py
 
 2. 下载 **hello_milvus.py** 示例代码:
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc2/examples/hello_milvus.py
 ```
 3. 浏览 **hello_milvus.py**，这个示例程序将：
 - 导入 pymilvus 包
 ```
-from pymilvus_orm import *
+from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - 连接 Milvus 服务端
@@ -34,15 +34,16 @@ connections.connect()
 
 - 创建一个 collection：
 ```
-from pymilvus_orm import schema, DataType, Collection
 dim = 128
 default_fields = [
-    schema.FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
-    schema.FieldSchema(name="score", dtype=DataType.FLOAT),
-    schema.FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
+    FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="random_value", dtype=DataType.DOUBLE),
+    FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
 ]
-default_schema = schema.CollectionSchema(fields=default_fields, description="test collection")
-collection = Collection(name="hello_milvus", data=None, schema=default_schema)
+default_schema = CollectionSchema(fields=default_fields, description="test collection")
+
+print(f"\nCreate collection...")
+collection = Collection(name="hello_milvus", schema=default_schema)
 ```
 - 向创建的 collection 中插入数据：
 ```
@@ -81,7 +82,8 @@ $ python3 hello_milvus.py
 ```
 *运行结果及查询等待时间如下：*
 
-![Returned results](../../../assets/returned_results.png)
+![Returned results](../../../assets/hello_world.png)
+
 
 
 <br/>
