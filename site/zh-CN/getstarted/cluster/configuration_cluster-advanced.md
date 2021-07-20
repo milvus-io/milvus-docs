@@ -6,7 +6,7 @@ order: 1
 group: cluster_sys
 ---
 
-# 分布式 Milvus 系统设置
+# Milvus 分布式版系统设置
 
 分布式 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
@@ -276,7 +276,7 @@ Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发�
 
 ## 系统行为配置
 
-系统行为配置用于设定 Milvus 运行时的系统行为。你可以在 **milvus.yaml**、**root_coord.yaml**、**data_coord.yaml 以及 data_node.yaml** 中设置这些参数。
+系统行为配置用于设定 Milvus 运行时的系统行为。你可以在 **milvus.yaml**、**root_coord.yaml**、**data_coord.yaml** 以及 **data_node.yaml** 中设置这些参数。
 
 <table id="system_behavior">
 <thead>
