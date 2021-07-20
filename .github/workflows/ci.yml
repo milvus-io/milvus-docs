@@ -18,7 +18,8 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
-        ref: v2.0.0
+        with:
+          ref: v2.0.0
 
       - name: Extract branch name
         shell: bash
