@@ -1,13 +1,13 @@
 ---
 id: configuration_cluster-basic.md
-title: 分布式 Milvus 系统设置
+title: 分布式版 Milvus 系统配置
 label: 基本配置
 order: 0
 group: cluster_sys
 ---
-# 分布式 Milvus 系统设置
+# 分布式版 Milvus 系统配置
 
-分布式 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
+分布式版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
 
 
