@@ -1,12 +1,12 @@
 ---
 id: configuration_standalone-advanced.md
-title: Milvus 单机版系统设置
+title: Milvus 单机版系统配置
 label: 高级配置
 order: 1
 group: standalone_sys
 ---
 
-# Milvus 单机版系统设置
+# Milvus 单机版系统配置
 
 Milvus 单机通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
