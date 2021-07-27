@@ -1,6 +1,6 @@
 ---
 id: prerequisite-helm.md
-label: prerequisite
+title: Before you Begin
 order: 1
 ---
 
