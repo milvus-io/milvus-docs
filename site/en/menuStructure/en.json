@@ -61,7 +61,7 @@
     {
       "id": "prerequisite-docker.md",
       "title": "Before you Begin",
-      "label1": "prerequisite",
+      "label1": "getstarted",
       "label2": null,
       "label3": null,
       "order": 1
@@ -237,12 +237,28 @@
       "outLink": "https://github.com/milvus-io/milvus-insight"
     },
     {
+      "id": "release",
+      "title": "Release",
+      "label1": null,
+      "label2": null,
+      "order": 6,
+      "isMenu": true
+    },
+    {
       "id": "release_notes.md",
       "title": "Release Notes",
-      "label1": "",
+      "label1": "release",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 0
+    },
+    {
+      "id": "limitations.md",
+      "title": "Milvus Limitations",
+      "label1": "release",
+      "label2": "",
+      "label3": "",
+      "order": 1
     }
     
   ]
