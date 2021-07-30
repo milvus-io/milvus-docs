@@ -224,7 +224,7 @@
     },
     {
       "id": "m2h.md",
-      "title": "Migrate from HDF5 to Milvus",
+      "title": "Migrate from Milvus to HDF5",
       "label1": "migrate",
       "label2": "",
       "label3": "",
