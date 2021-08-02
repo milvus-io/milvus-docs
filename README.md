@@ -38,7 +38,7 @@ In general, the folder structure of the milvus-docs repository aligns with the m
 
 *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
-> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folder each contains a Variables.json file.
+> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contains a Variables.json file.
 
 ### Languages
 
