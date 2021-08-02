@@ -26,7 +26,7 @@ Currently, we maintain the following versions of Milvus documentation in differe
 
 ## Documentation structure
 
-![img](https://zilliverse.feishu.cn/space/api/box/stream/download/asynccode/?code=YjNlYjdkOGIxMWViYTNlODE0NDJkZDMzZGYxMzdmYWFfQ2VRUkwwMFNJUGFPb05mM09XUEdhZURBN1pPbGFmUENfVG9rZW46Ym94Y25nRXpnSkN4bkw2dHo2WUV2SWk2SHBnXzE2Mjc4NzAyNjE6MTYyNzg3Mzg2MV9WNA)
+{{images.Assets/<folder-structure>.jpg}}
 
 In general, the folder structure of the milvus-docs repository aligns with the menu structure of Milvus documentation on [milvus.io](https://milvus.io/).
 
@@ -77,7 +77,7 @@ See [Contributing Guide](CONTRIBUTING.md) for details.
 
 Reference to cite when you use Milvus in a research paper:
 
-\```
+```
 
 @inproceedings{2021milvus,
 
@@ -93,7 +93,7 @@ Reference to cite when you use Milvus in a research paper:
 
 }
 
-\```
+```
 
 
 
@@ -119,11 +119,11 @@ Subscribe to Milvus mailing lists:
 
 
 
-\- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
+- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
 
-\- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
+- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
 
-\- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
+- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
 
 
 
@@ -131,6 +131,6 @@ Follow Milvus on social media:
 
 
 
-\- [Medium](https://medium.com/@milvusio)
+- [Medium](https://medium.com/@milvusio)
 
-\- [Twitter](https://twitter.com/milvusio)
+- [Twitter](https://twitter.com/milvusio)
