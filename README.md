@@ -26,13 +26,13 @@ Currently, we maintain the following versions of Milvus documentation in differe
 
 ## Documentation structure
 
-{{images.Assets/<folder-structure>.jpg}}
+{{images.Assets/folder-structure.png}}
 
 In general, the folder structure of the milvus-docs repository aligns with the menu structure of Milvus documentation on [milvus.io](https://milvus.io/).
 
 ### Documentation directory
 
-*Images* are housed under the **/assets** folder and can be referenced with **{{images.Assets/<image-name>.jpg/png}}**.
+*Images* are housed under the **/assets** folder and can be referenced with **{{images.Assets/image-name.jpg/png}}**.
 
 *Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
 
@@ -42,14 +42,14 @@ In general, the folder structure of the milvus-docs repository aligns with the m
 
 ### Languages
 
-All documentation is originally written in English and translated into other language(s). Currently we only support two language versions: English and Chinese, stored in their corresponding folders in each branch. 
+All documentation is originally written in English and translated into other language(s). Currently we only support two language versions: English and Chinese, stored in their corresponding folders in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know!
 
 ## API references
 
 To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
 
-- [PyMilvus](https://github.com/milvus-io/pymilvus-orm)
-- (Coming Auguest 5) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
+- [PyMilvus ORM](https://github.com/milvus-io/pymilvus-orm)
+- (Coming soon) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
 
 
 
@@ -57,7 +57,7 @@ To make contributions to the Milvus SDK reference documentation, visit the progr
 
 
 
-To make contributions to the Milvus community, visit the [community documentation repository](https://github.com/milvus-io/web-content).
+To make contributions to the Milvus community, visit the [community *documentation* repository](https://github.com/milvus-io/web-content).
 
 
 
