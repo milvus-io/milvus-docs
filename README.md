@@ -32,7 +32,7 @@ In general, the folder structure of the milvus-docs repository aligns with the m
 
 ### Documentation directory
 
-*Images* are housed under the **/assets** folder and can be referenced with **{{images.Assets/<image-name>.jpg}}**.
+*Images* are housed under the **/assets** folder and can be referenced with **{{images.Assets/<image-name>.jpg/png}}**.
 
 *Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
 
@@ -57,7 +57,7 @@ To make contributions to the Milvus SDK reference documentation, visit the progr
 
 
 
-To make contributions to the Milvus community, visit the [community repository](https://github.com/milvus-io/web-content).
+To make contributions to the Milvus community, visit the [community documentation repository](https://github.com/milvus-io/web-content).
 
 
 
