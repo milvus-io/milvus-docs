@@ -8,14 +8,6 @@ Contributions to the Milvus documentation are welcome from everyone. The Milvus 
 
 
 
-[TOC]
-
-
-
-[/TOC]
-
-
-
 # What contributions can I make?
 
 Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straighforward exmaples:
