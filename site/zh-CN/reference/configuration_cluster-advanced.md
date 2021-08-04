@@ -10,7 +10,9 @@ group: cluster_sys
 
 分布式版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
-
+<div class="alert note">
+所有参数只有在 Milvus 启动时设置生效。
+</div>
 
 {{tab}}
 
@@ -176,98 +178,66 @@ Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发�
 		<td><code>rootCoord.address</code></td>
 		<td><details>
        <summary>root coordinator 的 TCP/IP 地址</summary>
-       <li>如果将该参数设置为 <code>0.0.0.0</code>，root coordinator 将会在所有 IPv4 地址监听。</li>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
+       如果将该参数设置为 <code>0.0.0.0</code>，root coordinator 将会在所有 IPv4 地址监听。
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>rootCoord.port</code></td>
-		<td><details>
-       <summary>root coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>root coordinator 的 TCP 端口</td>
 		<td>53100</td>
 	</tr>
   <tr>
 		<td><code>proxy.port</code></td>
-		<td><details>
-       <summary>监听 Milvus 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>监听 Milvus 的 TCP 端口</td>
 		<td>19530</td>
 	</tr>
   <tr>
 		<td><code>queryCoord.address</code></td>
 		<td><details>
        <summary>query coordinator 的 TCP/IP 地址</summary>
-       <li>如果将该参数设置为 <code>0.0.0.0</code>，query coordinator 将会在所有 IPv4 地址监听。</li>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
+       如果将该参数设置为 <code>0.0.0.0</code>，query coordinator 将会在所有 IPv4 地址监听。
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>queryCoord.port</code></td>
-		<td><details>
-       <summary>query coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>query coordinator 的 TCP 端口</td>
 		<td>19531</td>
 	</tr>
   <tr>
 		<td><code>queryNode.port</code></td>
-		<td><details>
-       <summary>query node 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>query node 的 TCP 端口</td>
 		<td>21123</td>
 	</tr>
   <tr>
 		<td><code>indexCoord.address</code></td>
-		<td><details>
-       <summary>index coordinator 的 TCP/IP 地址</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>index coordinator 的 TCP/IP 地址</td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>indexCoord.port</code></td>
-		<td><details>
-       <summary>index coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>index coordinator 的 TCP 端口</td>
 		<td>31000</td>
 	</tr>
   <tr>
 		<td><code>indexNode.port</code></td>
-		<td><details>
-       <summary>index node 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>index node 的 TCP 端口</td>
 		<td>21121</td>
 	</tr>
   <tr>
 		<td><code>dataCoord.address</code></td>
-		<td><details>
-       <summary>data coordinator 的 TCP/IP 地址</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>data coordinator 的 TCP/IP 地址</td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>dataCoord.port</code></td>
-		<td><details>
-       <summary>data coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>data coordinator 的 TCP 端口</td>
 		<td>13333</td>
 	</tr>
   <tr>
 		<td><code>dataNode.port</code></td>
-		<td><details>
-       <summary>data node 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>data node 的 TCP 端口</td>
 		<td>21124</td>
 	</tr>
 </tbody>

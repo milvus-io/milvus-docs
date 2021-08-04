@@ -10,7 +10,9 @@ group: standalone_sys
 
 单机版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
-
+<div class="alert note">
+所有参数只有在 Milvus 启动时设置生效。
+</div>
 
 {{tab}}
 
@@ -136,10 +138,7 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
 <tbody>
   <tr>
 		<td><code>proxy.port</code></td>
-		<td><details>
-       <summary>监听 Milvus 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
+		<td>监听 Milvus 的 TCP 端口</td>
 		<td>19530</td>
 	</tr>
 </tbody>

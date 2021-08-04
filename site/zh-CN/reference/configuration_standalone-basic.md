@@ -1,15 +1,18 @@
 ---
-id: configuration_cluster-basic.md
-title: 分布式版 Milvus 系统配置
+id: configuration_standalone-basic.md
+title: Milvus 单机版系统配置
 label: 基本配置
 order: 0
-group: cluster_sys
+group: standalone_sys
 ---
-# 分布式版 Milvus 系统配置
 
-分布式版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
+# Milvus 单机版系统配置
 
+Milvus 单机版通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
+<div class="alert note">
+所有参数只有在 Milvus 启动时设置生效。
+</div>
 
 {{tab}}
 
@@ -64,4 +67,3 @@ group: cluster_sys
   </tr>
 </tbody>
 </table>
-
