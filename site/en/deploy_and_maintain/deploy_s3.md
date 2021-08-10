@@ -4,7 +4,7 @@ id: deploy_s3.md
 
 # Deploy Amazon S3 Storage
 
-Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and ndex files. This page show you how to deploy S3 storage for Milvus. 
+Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and ndex files. This page shows you how to deploy S3 storage for Milvus. 
 
 ## Deploy S3 on Milvus installed with Docker Compose
 
