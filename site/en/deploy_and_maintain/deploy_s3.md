@@ -58,7 +58,7 @@ Compile the `minio` section in the **values.yaml** file as follow:
 
 ```yaml
 minio:
-  enabled: fales
+  enabled: false
 ```
 
 Compile the `externalS3` section in the **values.yaml** file as follow:
