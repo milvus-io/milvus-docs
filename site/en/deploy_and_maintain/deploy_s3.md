@@ -14,10 +14,10 @@ Whereas MinIO is the de facto standard for S3 compatibility, you can configure S
 
 ```yaml
 minio:
-  address: <s3_ip_address>
-  port: <s3_port>
-  accessKeyID: <s3_access_key_id>
-  secretAccessKey: <s3_secret_access_key>
+  address: <your_s3_endpoint>
+  port: <your_s3_port>
+  accessKeyID: <your_s3_access_key_id>
+  secretAccessKey: <your_s3_secret_access_key>
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
 ```
