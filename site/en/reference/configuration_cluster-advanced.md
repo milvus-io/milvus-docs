@@ -62,7 +62,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 
 ## MinIO/S3 Configurations
 
-Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under MinIO section. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
+Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under `MinIO` section. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
