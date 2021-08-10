@@ -60,7 +60,7 @@ etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你
 </table>
 
 
-## MinIO 配置
+## MinIO/S3 配置
 
 Milvus 支持 MinIO 以及 Amazon S3 作为系统的存储引擎，支撑日志文件与索引文件的持久化存储。由于 MinIO 兼容 S3，你可以将以下配置项直接修改为你的 S3 服务配置。你可以在 **milvus/configs** 路径下的 **milvus.yaml** 中设置这些参数。
 
