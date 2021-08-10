@@ -92,7 +92,7 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 		<td><details>
        <summary>Port of MinIO/S3</summary>
        <li>Environment variable: <code>MINIO_ADDRESS</code></li>
-       <li>Access MinIO/S3 service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generates the valid access to MinIO/S3.</li>
+       <li>Access MinIO/S3 service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generate the valid access to MinIO/S3.</li>
        <li>MinIO preferentially acquires the valid port from the environment variable <code>MINIO_ADDRESS</code> when Milvus is booted up.</li>
       </details></td>
 		<td>9000</td>
@@ -102,7 +102,7 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 		<td><details>
        <summary>MinIO/S3 key ID for authorized user access</summary>
        <li>Environment variable: <code>MINIO_ACCESS_KEY</code></li>
-       <li>Access key ID that MinIO/S3 issued to authorized users. <code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together is used for identity authentication to access the MinIO/S3 service.</li>
+       <li>Access key ID that MinIO/S3 issues to authorized users. <code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together are used for identity authentication to access the MinIO/S3 service.</li>
        <li>This configuration must be set identical to the environment variable <code>MINIO_ACCESS_KEY</code>, which is necessary for booting up MinIO/S3. The default value applies to the MinIO/S3 service that booted up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
       </details></td>
 		<td>minioadmin</td>
