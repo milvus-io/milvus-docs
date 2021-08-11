@@ -1,9 +1,9 @@
 ---
 id: four_layers.md
-title: Four Layers
+title: Storage/Computing
 ---
 
-# Four Layers
+# Storage/Computing Disaggregation
 
 
 
