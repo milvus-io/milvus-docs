@@ -294,7 +294,7 @@
       "id": "architecture_overview.md",
       "title": "概述",
       "label1": "reference",
-      "label2": “architecture”,
+      "label2": "architecture",
       "label3": null,
       "order": 0
     },
@@ -302,7 +302,7 @@
       "id": "four_layers.md",
       "title": "存储计算分离",
       "label1": "reference",
-      "label2": “architecture”,
+      "label2": "architecture",
       "label3": null,
       "order": 1
     },
@@ -310,7 +310,7 @@
       "id": "main_components.md",
       "title": "主要组件",
       "label1": "reference",
-      "label2": “architecture”,
+      "label2": "architecture",
       "label3": null,
       "order": 2
     },
