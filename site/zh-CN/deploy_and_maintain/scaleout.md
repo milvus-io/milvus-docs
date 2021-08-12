@@ -44,7 +44,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running      0          
 my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          1m
 ```
 
-## 分布式版扩容 Milvus 执行节点
+## 对分布式版 Milvus 执行节点进行扩容
 
 ### 扩容 query node
 ```
@@ -143,7 +143,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 
 可以看到有 3 个 proxy pod 在运行。
 
-## 缩容分布式版 Milvus 执行节点
+## 对分布式版 Milvus 执行节点进行缩容
 ### 缩容 query node
 
 ```
