@@ -1,6 +1,5 @@
 ---
 id: deploy_s3.md
-
 ---
 
 # 为 Milvus 配置 S3 存储
