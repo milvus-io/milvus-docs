@@ -12,7 +12,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/F2M.y
 ```
 
 2. 配置参数：
-- `data_path`：Faiss 中文件路径。
+- `data_path`：Faiss 中数据路径。
 - `dest_host`：目标 Milvus 服务器地址。
 - `dest_port`：目标 Milvus 服务器端口。
 - `mode`：数据迁移模式
