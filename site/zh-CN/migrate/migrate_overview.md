@@ -45,7 +45,9 @@ MilvusDM 文件结构：
   - **main.py**：根据 .yaml 文件执行相关任务
   - **setting.py**：执行代码时的相关配置参数
 - **setup.py**：将 pymilvusdm 打包并上传到 PyPI（Python Package Index）
-</br>
+
+## 开发计划
+
 我们计划在下个版本的 MilvusDM 中添加以下功能：
 
 - 支持将 Faiss 的 binary 数据文件导入 Milvus
