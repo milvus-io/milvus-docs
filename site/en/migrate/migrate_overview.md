@@ -5,7 +5,7 @@ id: migrate_overview.md
 # Data Migration
 [MilvusDM](https://github.com/milvus-io/milvus-tools) (Milvus Data Migration) is an open-source tool designed specifically for importing and exporting data with Milvus. MilvusDM allows you to migrate data in a specific collection or partition. To substantially improve data management efficiency and reduce DevOps costs, MilvusDM supports the following migration channels: 
 
-- [Milvus to Milvus](m2m.md): Migrates data from a lower version of Milvus to a higher version.
+- [Milvus to Milvus](m2m.md): Migrates data between instances of Milvus.
 - [Faiss to Milvus](f2m.md): Imports unzipped data from Faiss to Milvus.
 - [HDF5 to Milvus](h2m.md): Imports HDF5 files into Milvus.
 - [Milvus to HDF5](m2h.md): Saves the data in Milvus as HDF5 files.
