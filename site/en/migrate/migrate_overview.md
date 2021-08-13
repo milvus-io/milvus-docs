@@ -18,7 +18,7 @@ pip3 install pymilvusdm
 ```
 
 ## MilvusDM File Structure
-The flow chart below shows how MilvusDM performs different tasks according to the YAML file it receives:
+The flow chart below shows how MilvusDM performs different tasks according to the .yaml file it receives:
 
 ![File structure](../../../assets/file_structure.png)
 
@@ -31,14 +31,14 @@ MilvusDM file structure:
     - **read_faiss_data.py**: Reads Faiss data files. 
     - **read_milvus_data.py**: Reads Milvus data files. 
     - **read_milvus_meta.py**: Reads Milvus metadata. 
-    - **data_to_milvus.py**: Creates collections or partitions as specified in YAML files and imports vectors and the corresponding IDs into Milvus.
+    - **data_to_milvus.py**: Creates collections or partitions as specified in .yaml files and imports vectors and the corresponding IDs into Milvus.
     - **save_data.py**: Saves data as HDF5 files.
     - **write_logs.py**: Writes `debug`/`info`/`error` logs during runtime.
   - **faiss_to_milvus.py**: Imports Faiss data into Milvus.
   - **hdf5_to_milvus.py**: Imports HDF5 files into Milvus.
   - **milvus_to_milvus.py**: Migrates data from a source Milvus to a target Milvus.
   - **milvus_to_hdf5.py**: Saves Milvus data as HDF5 files.
-  - **main.py**: Executes tasks as specified by the received YAML file.
+  - **main.py**: Executes tasks as specified by the received .yaml file.
   - **setting.py**: Stores configurations for MilvusDM operation.
 - **setup.py**: Creates and uploads pymilvusdm file packages to PyPI (Python Package Index).
 
