@@ -40,7 +40,7 @@ $ milvusdm --yaml M2H.yaml
 ```
 
 ## Sample Code
-1. Read the data files under **milvus/db** on your local drive, and retrieve vectors and their corresponding IDs from Milvus according to the metadata of the specified collection or partitions:
+1. Read the data under **milvus/db** on your local drive, and retrieve vectors and their corresponding IDs from Milvus according to the metadata of the specified collection or partitions:
 
 ```
 collection_parameter, version = milvus_meta.get_collection_info(collection_name)
