@@ -23,7 +23,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/H2M.y
 - `dest_partition_name`：导入数据的 partition 名称。
 - `collection_parameter`：collection 相关信息，包括向量维度、索引文件大小、相似度计算方式等。
 
-<div class="alert note">
+<div class="alert warning">
   <code>data_path</code> 参数可指定多个文件路径，<code>data_dir</code> 参数指定文件目录。两个参数只能配置一个。
 </div>
 
