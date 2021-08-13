@@ -58,7 +58,7 @@ $ milvusdm --yaml H2M.yaml
 ```
 vectors, ids = self.file.read_hdf5_data()
 ```
-2. 将返回特征向量和对应的 ID 导入 Milvus：
+2. 将返回的数据导入 Milvus：
 
 ```
 ids = insert_milvus.insert_data(vectors, self.c_name, self.c_param, self.mode, ids,self.p_name)
