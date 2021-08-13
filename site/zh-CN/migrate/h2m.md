@@ -53,10 +53,14 @@ $ milvusdm --yaml H2M.yaml
 
 ## 示例代码
 
-读取 HDF5 格式的文件，返回特征向量和对应的 ID 并导入 Milvus：
+1. 读取 HDF5 文件，返回特征向量和对应的 ID：
 
 ```
 vectors, ids = self.file.read_hdf5_data()
+```
+2. 将返回特征向量和对应的 ID 导入 Milvus：
+
+```
 ids = insert_milvus.insert_data(vectors, self.c_name, self.c_param, self.mode, ids,self.p_name)
 ```
 
