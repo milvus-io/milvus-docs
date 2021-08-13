@@ -46,5 +46,5 @@ In future releases, MilvusDM will provide more new features including MilvusDump
 
 
 <div class="alert note">
-The MilvusDM project is open sourced on [GitHub](https://github.com/milvus-io/milvus-tools). Any contribution to the project is welcome. Give it a star 🌟, and feel free to [file an issue](https://github.com/milvus-io/milvus-tools/issues) or submit your own code! 
+The MilvusDM project is open sourced on <a href="https://github.com/milvus-io/milvus-tools">GitHub</a>. Any contribution to the project is welcome. Give it a star 🌟, and feel free to <a href="https://github.com/milvus-io/milvus-tools/issues">file an issue</a> or submit your own code! 
 </div>
