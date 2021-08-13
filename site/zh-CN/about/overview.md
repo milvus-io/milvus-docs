@@ -32,7 +32,7 @@ Milvus 提供以下 2 个版本：
 	</tbody>
 </table>
 
-Milvus {{var.milvus_python_orm_sdk_version}} 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
+Milvus {{var.milvus_release_version}} 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
 
 ## 系统架构
 
