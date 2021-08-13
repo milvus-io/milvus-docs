@@ -16,6 +16,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2H.y
 - `source_collection`：Milvus 中 collection 与 partition 名称。
 - `data_dir`：导出的 HDF5 文件保存目录。
 
+示例：
 ```Yaml
 M2H:
   milvus_version: 2.x
