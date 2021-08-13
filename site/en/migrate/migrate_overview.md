@@ -43,6 +43,8 @@ MilvusDM file structure:
 - **setup.py**: Creates and uploads pymilvusdm file packages to PyPI (Python Package Index).
 ## Enhancement Plan
 In future releases, MilvusDM will provide more new features including MilvusDump and MilvusRestore to support exporting all Milvus data, restoring data in specified collections and partitions, resuming interrupted download and more.
-</br>
-The MilvusDM project is open sourced on [GitHub](https://github.com/milvus-io/milvus-tools). Any contribution to the project is welcome. Give it a star 🌟, and feel free to [file an issue](https://github.com/milvus-io/milvus-tools/issues) or submit your own code! 
 
+
+<div class="alert note">
+The MilvusDM project is open sourced on [GitHub](https://github.com/milvus-io/milvus-tools). Any contribution to the project is welcome. Give it a star 🌟, and feel free to [file an issue](https://github.com/milvus-io/milvus-tools/issues) or submit your own code! 
+</div>
