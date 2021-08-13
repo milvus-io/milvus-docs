@@ -58,7 +58,7 @@ MilvusDM 文件结构：
 我们十分欢迎大家为开源项目 MilvusDM 贡献代码。你可以通过代码文件结构了解 MilvusDM 工具的设计构思。如有新的数据迁移需求，你还可以通过修改源码，为社区贡献代码。
 
 <div class="alert note">
-MilvusDM 项目地址：https://github.com/milvus-io/milvus-tools
+MilvusDM 在 <a href="https://github.com/milvus-io/milvus-tools">GitHub</a> 上开源。
 
 欢迎贡献代码👏，也请给本项目点 star 🌟
 </div>
