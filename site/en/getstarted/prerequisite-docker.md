@@ -25,7 +25,7 @@ Run the lscpu command to check if your CPU supports the SIMD instruction sets me
 lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
 
-Also, you can check wikipedia: [CPU with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more details.
+Check Wikipedia [CPU with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more details.
 
 ## Check your Docker and Docker Compose version 
 
