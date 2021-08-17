@@ -14,7 +14,7 @@ Similarity search engines work by comparing an input to a database to find objec
 
 ## Vector field and index
 
-To improve query performance, you can specify an [index type](index_selection.md) for each vector field. Currently, a vector field only supports one index type, Milvus will automatically delete the old index when switching the index type.
+To improve query performance, you can specify an [index type](index_selection.md) for each vector field. Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 
 ## Create indexes
 
@@ -27,7 +27,7 @@ When the inserted data segment is less than 4,096 rows, Milvus does not index it
 
 ### Index by segment
 
-Milvus stores massive data in sections. When indexing, Milvus creates an index for each data segment separately.
+Milvus stores massive data in segments. When indexing, Milvus creates an index for each data segment separately.
 
 ### Build indexes during free time
 
@@ -37,5 +37,5 @@ It is known that indexing is a resource-consuming and time-consuming task. When 
 
 To learn about the index types supported by Milvus and how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](index_selection.md).
 
-To learn how to choose an appropriate index for a metric, see [Similarity Metrics](metric.md).
+To learn how to choose an appropriate metric for an index, see [Similarity Metrics](metric.md).
 
