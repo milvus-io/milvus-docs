@@ -81,10 +81,12 @@ The following table lists the description of each symbol in the above Boolean ex
 
 ### Logical operators:
 
+
 | **Symbol**| **Operation** | **Example** | **Description**           |
 | ----------| ------------- | ----------- | ------------------------- |
 | 'and' &&  | and           | expr1 && expr2   | True if both expr1 and expr2 are true. |
 | 'or' \|\|  | or           | expr1 \|\| expr2     | True if either expr1 or expr2 are true.  |
+
 
 
 
@@ -115,6 +117,7 @@ The following table lists the description of each symbol in the above Boolean ex
 ## Operator precedence and associativity
 
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
+
 
 | Precedence | Operator  | Description   | Associativity |
 |------------|-----------|---------------|---------------|
