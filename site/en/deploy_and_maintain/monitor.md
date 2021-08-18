@@ -1,6 +1,6 @@
 ---
 id: monitor.md
-title: Monitor
+title: Monitor and Alert
 ---
 
 # Monitor Milvus2.0 with Prometheus Operator on Kubernetes
@@ -48,7 +48,7 @@ The ServiceMonitor is not enabled for Miluvs Helm by default. After installing P
 helm install my-release milvus/milvus --set cluster.enabled=true --set metrics.serviceMonitor.enabled=true
 ```
 
-When Helm installation completes, use kubectl to check the ServiceMonitor resource.
+When Helm installation completes, use `kubectl` to check the ServiceMonitor resource.
 
 ```
 kubectl get servicemonitor
@@ -80,3 +80,34 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monit
 You can see the Milvus components panel.
 
 ![Grafana_panel](../../../assets/grafana_panel.png)
+
+### Add an alert in Grafana
+
+<<<<<<< HEAD
+To add an alert for the memory usage of Milvus components, edit the `Memory` panel, and add a new query with the following metric `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`:
+=======
+To add an alert for the memory usage of Milvus components, edit the Memory panel, and add a new query with the following metrics: 
+
+- `process_resident_memory_bytes{app_kubernetes_io_name="milvus"`
+- `app_kubernetes_io_instance=~"my-release", namespace="default"}`
+>>>>>>> a3564edeebfd0e7dd12bef99331e4417da45f56b
+
+![Alert_metric](../../../assets/alert_metric.png)
+
+Save the dashboard, and wait a few minutes to see the alert.
+
+![Alert_dashboard](../../../assets/alert_dashboard.png)
+
+<div class="alert note">
+
+<<<<<<< HEAD
+1. Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels and rename the second query as `A`.
+=======
+1. Garfana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels and rename the second query as `A`.
+>>>>>>> a3564edeebfd0e7dd12bef99331e4417da45f56b
+
+![Alert_query](../../../assets/alert_query.png)
+
+2. To receive alert notifications, add a `notification channel`, and then specify the channel in the field `Send to`.
+
+</div>

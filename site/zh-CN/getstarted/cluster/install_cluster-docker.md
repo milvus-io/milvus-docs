@@ -21,7 +21,7 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 1. 下载 Docker Compose 配置文件 **docker-compose.yml**：
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.cpu_milvus_docker_image_version}}/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
 ```
 
 <div class="alert note">
