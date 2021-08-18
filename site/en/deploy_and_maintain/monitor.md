@@ -83,10 +83,7 @@ You can see the Milvus components panel.
 
 ### Add an alert in Grafana
 
-To add an alert for the memory usage of Milvus components, edit the Memory panel, and add a new query with the following metrics: 
-
-- `process_resident_memory_bytes{app_kubernetes_io_name="milvus"`
-- `app_kubernetes_io_instance=~"my-release", namespace="default"}`
+To add an alert for the memory usage of Milvus components, edit the `Memory` panel, and add a new query with the following metric `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`:
 
 ![Alert_metric](../../../assets/alert_metric.png)
 
@@ -96,7 +93,7 @@ Save the dashboard, and wait a few minutes to see the alert.
 
 <div class="alert note">
 
-1. Garfana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels and rename the second query as `A`.
+1. Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels and rename the second query as `A`.
 
 ![Alert_query](../../../assets/alert_query.png)
 
