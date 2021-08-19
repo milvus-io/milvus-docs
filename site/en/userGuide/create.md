@@ -13,7 +13,7 @@ The created collection must contain a primary key field. Int64 is the only suppo
 
 1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus-orm.readthedocs.io/en/latest/) for a detailed description of these parameters.
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ````python
 >>> collection_name = "example_collection"
@@ -56,7 +56,7 @@ const params = {
 
 2. Call `create_collection()` provided by the Milvus instance to create a collection:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection = Collection(name=collection_name, schema=schema)
@@ -68,7 +68,7 @@ await milvusClient.collectionManager.createCollection(params);
 
 3. Check if the collection is created successfully:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> import pymilvus_orm
@@ -84,7 +84,7 @@ await milvusClient.collectionManager.hasCollection({
 
 4. List all created collections:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> pymilvus_orm.utility.get_connection().list_collections()
@@ -97,7 +97,9 @@ await milvusClient.collectionManager.showCollections();
 
 5. View collection statistics, such as row count:
 
-{{fragments/mutiple_code.md}}
+
+{{fragments/multiple_code.md}}
+
 
 ```python
 >>> collection.num_entities

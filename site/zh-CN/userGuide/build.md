@@ -8,7 +8,9 @@ title: 创建索引
 
 1. 准备相关参数：
 
-{{fragments/mutiple_code.md}}
+
+{{fragments/multiple_code.md}}
+
 
 ```python
 >>> index_param = {
@@ -37,7 +39,8 @@ const index_param = [
 
 2. 创建索引：
 
-{{fragments/mutiple_code.md}}
+
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.create_index(field_name=field_name, index_params=index_param)
@@ -54,7 +57,8 @@ await milvusClient.indexManager.createIndex({
 
 3. 调用 `describe_index()` 查看创建的索引相关信息：
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
+
 
 ```python
 >>> collection.index().params
