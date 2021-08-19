@@ -19,7 +19,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Connect to the Milvus server
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> from pymilvus_orm import connections
@@ -35,7 +35,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 When you no longer need Milvus services, you can call `close()` to release all connection resources to the Milvus server:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> connections.disconnect("default")

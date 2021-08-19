@@ -13,7 +13,7 @@ A hybrid search is a vector similarity search, during which you can filter the s
 
 1. Connect to the Milvus server:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus_orm import connections
@@ -27,7 +27,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 2. Prepare collection parameters and create a collection:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> from pymilvus_orm import Collection, FieldSchema, CollectionSchema, DataType
@@ -68,7 +68,7 @@ milvusClient.collectionManager.createCollection({
 
 3. Insert the random vectors to the newly created collection:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> import random
@@ -96,7 +96,7 @@ await milvusClient.collectionManager.insert({
 
 4. Load the collection to memory and conduct a vector similarity search:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.load()
@@ -131,7 +131,7 @@ await milvusClient.dataManager.search({
 
 5. Check the returned results:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> assert len(res) == 1

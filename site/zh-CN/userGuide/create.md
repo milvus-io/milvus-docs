@@ -10,7 +10,7 @@ title: 创建 Collection、Partition
 
 1. 准备 collection 参数，包括 collection 名字、collection 字段参数等。具体参数详见 [API 文档](https://pymilvus-orm.readthedocs.io/en/latest/)。
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ````python
 >>> collection_name = "example_collection"
@@ -54,7 +54,7 @@ const params = {
 
 2. 调用 Milvus 实例的 create_collection() 方法创建 collection：
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection = Collection(name=collection_name, schema=schema)
@@ -66,7 +66,7 @@ await milvusClient.collectionManager.createCollection(params);
 
 3. 调用 `milvus.has_collection` 查看 collection 是否创建成功：
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> import pymilvus_orm
@@ -82,7 +82,7 @@ await milvusClient.collectionManager.hasCollection({
 
 4. 调用 `milvus.list_collections()` 查看所有创建成功的 collection：
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> pymilvus_orm.utility.get_connection().list_collections()
@@ -95,7 +95,7 @@ await milvusClient.collectionManager.showCollections();
 
 5. 查看 collection 相关数据，例如行数：
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.num_entities
@@ -111,7 +111,7 @@ await milvusClient.collectionManager.getCollectionStatistics({
 # 创建 partition（可选）
 随着一个 collection 的数据增加，查询性能会逐渐下降。如果只需要查询一部分数据，可以考虑将数据进行分区（partitioning）。给 partition 加上 partition name 后，搜索时就只需要搜索一部分数据，从而能够提升搜索性能。
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> partition_name = "example_partition"
@@ -127,7 +127,7 @@ await milvusClient.partitionManager.createPartition({
 
 Milvus 会在创建 collection 时创建一个默认的 partition，name 为 `_default`。在创建新 partition 后，便有两个 partition——一个的 partition name 为 `example_partition`，另一个的为 `_default` 。我们可以调用 `list_partitions()` 的方法查看一个 collection 中的所有 partition。
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.partitions
@@ -142,7 +142,7 @@ await milvusClient.partitionManager.showPartitions({
 
 调用 `has_partition()`  查看 partition 是否创建成功:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.has_partition(partition_name)

@@ -9,7 +9,7 @@ Create an index for a specified field in a collection to accelerate vector simil
 
 1. Prepare the index parameters:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> index_param = {
@@ -38,7 +38,7 @@ const index_param = [
 
 2. Build an index:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.create_index(field_name=field_name, index_params=index_param)
@@ -55,7 +55,7 @@ await milvusClient.indexManager.createIndex({
 
 3. Call `describe_index()` to view more details of the new index:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.index().params
