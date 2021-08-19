@@ -8,7 +8,9 @@ title: 插入数据
 
 1.随机生成待插入的数据:
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 >>> import random
@@ -26,7 +28,9 @@ const entities = Array.from({ length: 10 }, () => ({
 
 *Milvus 将返回 `MutationResult`，其中包含插入数据对应的主键列 `primary_keys`。*
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 >>> mr = collection.insert(entities)
@@ -44,7 +48,9 @@ await milvusClient.dataManager.insert({{
 
 3. 调用 insert() 函数时指定 `partitiont_name` 可以将向量插入到指定的 Partition 中：
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 >>> collection.insert(data=entities, partition_name=partition_name)
@@ -60,7 +66,9 @@ await milvusClient.dataManager.insert({{
 
 4. 插入的数据将存储在 Milvus 内存中。调用 `flush()` 函数将数据落盘：
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 >>> pymilvus_orm.utility.get_connection().flush([collection_name])

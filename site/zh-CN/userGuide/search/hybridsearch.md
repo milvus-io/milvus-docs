@@ -11,7 +11,9 @@ title: 混合查询
 
 1. 连接至 Milvus 服务器：
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 from pymilvus_orm import connections
@@ -24,6 +26,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 ```
 
 2. 准备 collection 参数并创建 collection：
+
 
 {{fragments/multiple_code.md}}
 
@@ -69,6 +72,7 @@ milvusClient.collectionManager.createCollection({
 
 {{fragments/multiple_code.md}}
 
+
 ```python
 >>> import random
 >>> data = [
@@ -95,7 +99,9 @@ await milvusClient.collectionManager.insert({
 
 4. 将集合加载到内存中并进行向量相似度检索：
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 >>> collection.load()
@@ -130,7 +136,9 @@ await milvusClient.dataManager.search({
 
 5. 检查返回结果：
 
+
 {{fragments/multiple_code.md}}
+
 
 ```python
 >>> assert len(res) == 1
