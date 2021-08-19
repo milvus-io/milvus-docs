@@ -116,7 +116,7 @@ await milvusClient.collectionManager.getCollectionStatistics({
 
 Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition names narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by name.
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> partition_name = "example_partition"
@@ -132,7 +132,7 @@ await milvusClient.partitionManager.createPartition({
 
 Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. Call `list_partitons()` to list all partitions in a collection.
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.partitions
@@ -147,7 +147,7 @@ await milvusClient.partitionManager.showPartitions({
 
 Call `has_partition()` to check if a partition is successfully created.
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.has_partition(partition_name)
