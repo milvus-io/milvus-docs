@@ -119,7 +119,6 @@ const checkInnerLink = (paths, validMds) => {
             v && v.includes(".md") && !v.includes("http") && !v.includes("\n")
         )
       : [];
-    console.log(innerLinks);
     innerLinks.forEach((link) => {
       let ignoreAnchorLink = link.split("#")[0];
       if (!validMds.includes(ignoreAnchorLink)) {
