@@ -147,6 +147,6 @@ True
 ```javascript
 await milvusClient.partitionManager.hasPartition({
   collection_name: COLLECTION_NAME,
-  partition_name: "123",
+  partition_name: "example_partition",
 });
 ```
