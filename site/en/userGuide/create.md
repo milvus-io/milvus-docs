@@ -97,9 +97,17 @@ await milvusClient.collectionManager.showCollections();
 
 5. View collection statistics, such as row count:
 
-```
+{{fragments/mutiple_code.md}}
+
+```python
 >>> collection.num_entities
 0
+```
+
+```javascript
+await milvusClient.collectionManager.getCollectionStatistics({
+  collection_name: COLLECTION_NAME,
+});
 ```
 
 # Create a partition (optional)
