@@ -82,12 +82,10 @@ const generateValidIds = (dirPath, validMds = [], validPaths = []) => {
   return { validMds, validPaths };
 };
 
-const { validMds: enValidMds, validPaths: enValidPaths } = generateValidIds(
-  EN_MDS_PATH
-);
-const { validMds: cnValidMds, validPaths: cnValidPaths } = generateValidIds(
-  CN_MDS_PATH
-);
+const { validMds: enValidMds, validPaths: enValidPaths } =
+  generateValidIds(EN_MDS_PATH);
+const { validMds: cnValidMds, validPaths: cnValidPaths } =
+  generateValidIds(CN_MDS_PATH);
 
 const enMenuMdIds = enIds.filter((v) => v.includes(".md"));
 const cnMenuMdIds = cnIds.filter((v) => v.includes(".md"));
@@ -116,8 +114,12 @@ const checkInnerLink = (paths, validMds) => {
     const content = doc.toString();
     const match = content.match(linkRegx);
     const innerLinks = match
-      ? match.filter((v) => v && v.includes(".md") && !v.includes("http"))
+      ? match.filter(
+          (v) =>
+            v && v.includes(".md") && !v.includes("http") && !v.includes("\n")
+        )
       : [];
+    console.log(innerLinks);
     innerLinks.forEach((link) => {
       let ignoreAnchorLink = link.split("#")[0];
       if (!validMds.includes(ignoreAnchorLink)) {
