@@ -25,7 +25,7 @@ Milvus 提供以下 2 个版本：
 	<tbody>
 	<tr>
 		<td><a href="install_standalone-docker.md">{{var.milvus_release_version}}</a></td>
-		<td><a href="explore_pymilvus.md">{{var.milvus_python_orm_sdk_version}}</a></td>
+		<td><a href="example_code.md">{{var.milvus_python_orm_sdk_version}}</a></td>
 		<td>即将上线</td>
 		<td>即将上线</td>
 	</tr>
