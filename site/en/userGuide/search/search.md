@@ -7,7 +7,7 @@ title: Conduct a Search
 
 1. Create search parameters:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -24,7 +24,7 @@ const searchParams = [
 
 2. Load the collection to memory before conducting a vector similarity search:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.load()
@@ -40,7 +40,7 @@ await milvusClient.collectionManager.loadCollection({
 
 _Milvus returns the IDs of the most similar vectors and their distances._
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> results = collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None)
@@ -63,7 +63,7 @@ await milvusClient.dataManager.search({
 
 To search in a specific partition or field, set the parameters `partition_names` and fields when calling `search()`.
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_name])
@@ -82,7 +82,7 @@ await milvusClient.dataManager.search({
 
 4. Release the collections loaded in Milvus to reduce memory consumption when the search is completed. Query other collections:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.release()

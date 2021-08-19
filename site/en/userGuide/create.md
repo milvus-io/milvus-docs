@@ -13,7 +13,7 @@ The created collection must contain a primary key field. Int64 is the only suppo
 
 1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus-orm.readthedocs.io/en/latest/) for a detailed description of these parameters.
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ````python
 >>> collection_name = "example_collection"
@@ -56,7 +56,7 @@ const params = {
 
 2. Call `create_collection()` provided by the Milvus instance to create a collection:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection = Collection(name=collection_name, schema=schema)
@@ -68,7 +68,7 @@ await milvusClient.collectionManager.createCollection(params);
 
 3. Check if the collection is created successfully:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> import pymilvus_orm
@@ -84,7 +84,7 @@ await milvusClient.collectionManager.hasCollection({
 
 4. List all created collections:
 
-{{fragments/mutiple_code.md}}
+{{fragments/multiple_code.md}}
 
 ```python
 >>> pymilvus_orm.utility.get_connection().list_collections()
@@ -97,30 +97,66 @@ await milvusClient.collectionManager.showCollections();
 
 5. View collection statistics, such as row count:
 
-```
+
+{{fragments/multiple_code.md}}
+
+
+```python
 >>> collection.num_entities
 0
+```
+
+```javascript
+await milvusClient.collectionManager.getCollectionStatistics({
+  collection_name: COLLECTION_NAME,
+});
 ```
 
 # Create a partition (optional)
 
 Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition names narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by name.
 
-```
+{{fragments/mutiple_code.md}}
+
+```python
 >>> partition_name = "example_partition"
 >>> partition = collection.create_partition(partition_name)
 ```
 
+```javascript
+await milvusClient.partitionManager.createPartition({
+  collection_name: COLLECTION_NAME,
+  partition_name: "example_partition",
+});
+```
+
 Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. Call `list_partitons()` to list all partitions in a collection.
 
-```
+{{fragments/mutiple_code.md}}
+
+```python
 >>> collection.partitions
 [{"name": "_default", "description": "", "num_entities": 0}, {"name": "example_partition", "description": "", "num_entities": 0}]
 ```
 
+```javascript
+await milvusClient.partitionManager.showPartitions({
+  collection_name: COLLECTION_NAME,
+});
+```
+
 Call `has_partition()` to check if a partition is successfully created.
 
-```
+{{fragments/mutiple_code.md}}
+
+```python
 >>> collection.has_partition(partition_name)
 True
+```
+
+```javascript
+await milvusClient.partitionManager.hasPartition({
+  collection_name: COLLECTION_NAME,
+  partition_name: "example_partition",
+});
 ```
