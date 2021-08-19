@@ -27,6 +27,8 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/{{var.cpu_milvus_docker_image_version}}/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
+> 你可以在 GitHub 直接 [下载](https://raw.githubusercontent.com/milvus-io/milvus/{{var.cpu_milvus_docker_image_version}}/deployments/docker/cluster/docker-compose.yml) **docker-compose.yml**。
+
 <div class="alert note">
 如果你使用原始 <b>docker-compose.yml</b> 文件安装 Milvus, 数据将会被存储在 <b>./volume</b> 路径下。如需修改映射路径，你可以直接修改 <b>docker-compose.yml</b> 文件，或运行 <code>$ export DOCKER_VOLUME_DIRECTORY=</code>。
 </div>
@@ -57,4 +59,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 <div class="alert note">
 运行 <code>$ sudo docker-compose down</code> 停止 Milvus 单机版。
+
+如果你想在停止Milvus后清理数据，运行 <code>$ sudo rm -rf  volume</code>。
+
 </div>
