@@ -60,14 +60,7 @@ When Helm installation completes, use `kubectl` to check the ServiceMonitor reso
 ```
 kubectl get servicemonitor
 NAME                           AGE
-my-release-milvus-datacoord    54s
-my-release-milvus-datanode     54s
-my-release-milvus-indexcoord   54s
-my-release-milvus-indexnode    54s
-my-release-milvus-proxy        54s
-my-release-milvus-querycoord   54s
-my-release-milvus-querynode    54s
-my-release-milvus-rootcoord    54s
+my-release-milvus              54s
 ```
 
 ## Visualize metrics in Grafana
