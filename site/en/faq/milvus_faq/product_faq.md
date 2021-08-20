@@ -129,6 +129,10 @@ See [Index](index.md) for more information.
 
 Milvus can manage vectors with up to 32,768 dimensions.
 
+#### Does Milvus support Apple M1 CPU?
+
+Current Milvus release does not support Apple M1 CPU.
+
 #### Still have questions?
 
 You can:
