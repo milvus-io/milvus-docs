@@ -53,7 +53,7 @@ const params = {
 ```
 
 
-2. 调用 Milvus 实例的 create_collection() 方法创建 collection：
+2. 调用 Milvus 实例的 Collection() 方法创建 collection：
 
 
 {{fragments/multiple_code.md}}
