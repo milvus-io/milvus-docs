@@ -47,5 +47,5 @@ Milvus Insight 提供以下功能：
 
 欢迎向开源项目 Milvus Insight 贡献代码。贡献代码前，请先阅读[贡献指南](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)。
 
-请通过创建 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose) 来提交 bug 或建议新功能。请不要重复创建相同的 issue。
+请通过创建 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose) 来反馈 bug 或建议新功能。请不要重复创建相同的 issue。
 
