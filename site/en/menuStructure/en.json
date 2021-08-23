@@ -243,6 +243,15 @@
       "outLink": "https://zilliz.com/sizing-tool"
     },
     {
+      "id": "cli",
+      "title": "Milvus CLI",
+      "label1": "userguide",
+      "label2": "tools",
+      "label3": "",
+      "order": 2,
+      "outLink": "https://github.com/milvus-io/milvus_cli#overview"
+    },
+    {
       "id": "bootcamp_userguide",
       "title": "Bootcamp",
       "label1": "userguide",
@@ -397,6 +406,14 @@
       "label2": "architecture",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "data_processing.md",
+      "title": "Data Processing",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "systemconfigurations",
