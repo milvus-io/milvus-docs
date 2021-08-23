@@ -219,7 +219,7 @@
     },
     {
       "id": "insight_overview.md",
-      "title": "Overview",
+      "title": "简介",
       "label1": "userguide",
       "label2": "tools",
       "label3": "milvus_insight",
@@ -227,7 +227,7 @@
     },
     {
       "id": "insight_install.md",
-      "title": "Install Milvus Insight",
+      "title": "安装 Milvus Insight",
       "label1": "userguide",
       "label2": "tools",
       "label3": "milvus_insight",
