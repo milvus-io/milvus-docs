@@ -7,7 +7,7 @@ title: Data Processing
 
 This article provides a detailed description of the implementation of data insertion, index building, and data query in Milvus.
 
-### Data insertion
+## Data insertion
 
 You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (*vchannel*). As the following figure shows, Milvus 2.0 assigns each vchannel in the log broker a physical channel (*pchannel*). Any incoming insert/delete request is routed to shards based on the hash value of primary key.
 
@@ -25,7 +25,7 @@ Both DML (data manipulation language) operations and DDL (data definition langua
 
 The above diagram encapsulates four components involved in the process of writing log sequence: proxy, log broker, data node, and object storage. The process involves four tasks: validation of DML requests, publication-subscription of log sequence, conversion from streaming log to log snapshots, and persistence of log snapshots. The four tasks are decoupled from each other to make sure each task is handled by its corresponding node type. Nodes of the same type are made equal and can be scaled elastically and independently to accommodate various data loads, massive and highly fluctuating streaming data in particular.
 
-### Index building
+## Index building
 
 Index building is performed by index node. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.
 
@@ -39,7 +39,7 @@ Unlike indexing for scalar data, building vector index has to take full advantag
 
 Besides, Milvus also supports scalar filtering and primary field query. It has inbuilt indexes to improve query efficiency, e.g., Bloom filter indexes, hash indexes, tree-based indexes, and inverted indexes, and plans to introduce more external indexes, e.g., bitmap indexes and rough indexes. 
 
-### Data query
+## Data query
 
 Data query refers to the process of searching a specified collection for *k* number of vectors nearest to a target vector or for *all* vectors within a specified distance range to the vector. Vectors are returned together with their corresponding rowID and fields. 
 
