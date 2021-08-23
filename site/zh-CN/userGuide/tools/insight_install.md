@@ -6,11 +6,7 @@ title: 安装 Milvus Insight
 # 安装 Milvus Insight
 
 ## 安装前提
-<<<<<<< HEAD
-安装 Milvus Insight 前，请确保你已经安装[单机版 Milvus](https://milvus.io/docs/install_standalone-docker.md) 或[分布式版 Milvus](https://milvus.io/docs/install_cluster-docker.md)。
-=======
 安装 Milvus Insight 前，请先确保你已安装[单机版 Milvus](https://milvus.io/docs/install_standalone-docker.md) 或[分布式版 Milvus](https://milvus.io/docs/install_cluster-docker.md)。
->>>>>>> 1d687444fe92b91af5b4120f60cd4120f462ecf8
 
 <div class="alert note">
 Milvus Insight 仅支持 Milvus 2.0 或以上版本。
