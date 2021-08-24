@@ -9,23 +9,19 @@ Milvus 除了支持存储向量数据外，还支持存储 bool、int、float �
 
 1. 连接至 Milvus 服务器：
 
-
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> from pymilvus_orm import connections
 >>> connections.connect("default", host='localhost', port='19530')
 ```
 
-
-
 ```javascript
-//TODO
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+const milvusClient = new MilvusClient("localhost:19530");
 ```
 
 2. 准备 collection 参数并创建 collection：
-
 
 {{fragments/multiple_code.md}}
 
@@ -40,17 +36,41 @@ Milvus 除了支持存储向量数据外，还支持存储 bool、int、float �
 >>> collection = Collection(collection_name, schema)
 ```
 
-
-
 ```javascript
-//TODO
+const COLLECTION_NAME = "example_collection";
+const FIELD_NAME = "example_field";
+
+const params = {
+  collection_name: COLLECTION_NAME,
+  fields: [
+    {
+      name: "films",
+      description: "vector field",
+      data_type: DataType.FloatVector,
+
+      type_params: [
+        {
+          key: "dim",
+          value: "8",
+        },
+      ],
+    },
+    {
+      name: "film_id",
+      data_type: DataType.Int64,
+      autoID: false,
+      is_primary_key: true,
+      description: "",
+    },
+  ],
+};
+
+await milvusClient.collectionManager.createCollection(params);
 ```
 
 3. 随机生成向量数据并插入新建 collection 中：
 
-
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> import random
@@ -64,17 +84,22 @@ Milvus 除了支持存储向量数据外，还支持存储 bool、int、float �
 10
 ```
 
-
-
 ```javascript
-//TODO
+let id = 1;
+const entities = Array.from({ length: 10 }, () => ({
+  films: Array.from({ length: 2 }, () => Math.random() * 10),
+  film_id: id++,
+}));
+
+await milvusClient.dataManager.insert({{
+  collection_name: COLLECTION_NAME,
+  fields_data: entities,
+});
 ```
 
 4. 将集合加载到内存中并进行结构化匹配：
 
-
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> collection.load()
@@ -83,19 +108,24 @@ Milvus 除了支持存储向量数据外，还支持存储 bool、int、float �
 >>> res = collection.query(expr, output_fields)
 ```
 
-
-
 ```javascript
-//TODO
+await milvusClient.collectionManager.loadCollection({
+  collection_name: COLLECTION_NAME,
+});
+
+await milvusClient.dataManager.query({
+  collection_name: COLLECTION_NAME,
+  expr: "film_id in [2,4,6,8]",
+  output_fields: ["film_id"],
+});
 ```
 
 5. 检查返回结果：
 
-
 {{fragments/multiple_code.md}}
 
 ```python
->>> sorted_res = sorted(res, key=lambda k: k['film_id']) 
+>>> sorted_res = sorted(res, key=lambda k: k['film_id'])
 >>> sorted_res
 [{'film_id': 2, 'film_date': 1992},
  {'film_id': 4, 'film_date': 1994},
@@ -103,9 +133,7 @@ Milvus 除了支持存储向量数据外，还支持存储 bool、int、float �
  {'film_id': 8, 'film_date': 1998}]
 ```
 
-
-
 ```javascript
-//TODO
+// query result
+[{ film_id: "2" }, { film_id: "4" }, { film_id: "6" }, { film_id: "8" }];
 ```
-
