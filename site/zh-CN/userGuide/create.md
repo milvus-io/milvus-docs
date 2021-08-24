@@ -1,6 +1,5 @@
 ---
 id: create.md
-title: 创建 Collection、Partition
 ---
 
 # 创建 Collection
