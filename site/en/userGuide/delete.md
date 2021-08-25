@@ -57,3 +57,8 @@ await milvusClient.collectionManager.dropCollection({
   collection_name: COLLECTION_NAME,
 });
 ```
+
+
+## Delete entities
+
+This feature is still under development and will be available when a stable version of Milvus 2.0 is released.

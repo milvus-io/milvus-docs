@@ -109,7 +109,15 @@
       "label2": "installmilvus",
       "label3": null,
       "order": 1
-    },    
+    }, 
+    {
+      "id": "install_offline-docker.md",
+      "title": "Install Offline",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": null,
+      "order": 2
+    }, 
     {
       "id": "example_code.md",
       "title": "Hello Milvus",
@@ -168,7 +176,7 @@
     },
     {
       "id": "search",
-      "title": "Search",
+      "title": "Search and query",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -198,6 +206,14 @@
       "label2": "search",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "query.md",
+      "title": "Query",
+      "label1": "userguide",
+      "label2": "search",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "tools",
@@ -300,6 +316,14 @@
       "label2": "cloud",
       "label3": "",
       "order": 0
+    },
+    {
+      "id": "eks.md",
+      "title": "EKS",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "",
+      "order": 1
     },
     {
       "id": "monitor.md",
