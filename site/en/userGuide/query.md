@@ -1,6 +1,5 @@
 ---
 id: query.md
-title: 结构化匹配
 ---
 
 # Query
