@@ -61,7 +61,7 @@ docker-compose -f docker-compose.yml up -d
 To Uninstall Milvus, run:
 
 ```bash
-kubectl delete -f milvus_manifest.yaml
+docker-compose -f docker-compose.yml down
 ```
 
 
