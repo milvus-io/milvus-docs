@@ -168,7 +168,7 @@
     },
     {
       "id": "search",
-      "title": "查询",
+      "title": "查询与检索",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -198,6 +198,14 @@
       "label2": "search",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "query.md",
+      "title": "结构化匹配",
+      "label1": "userguide",
+      "label2": "search",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "tools",
