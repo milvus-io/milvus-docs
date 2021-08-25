@@ -14,7 +14,7 @@ Release date: 2021-08-25
 | ------------------ | ------------------------------------- | -------------------- | ------------------ | ------------------------------- |
 | 2.0.0-RC5          | {{var.milvus_python_orm_sdk_version}} | Coming soon          | Coming soon        | {{var.milvus_node_sdk_version}} |
 
-Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixing log issues. It offers feature that allow users to search vector data using memory and filter segment. It also exposes the important metrics information of Milvus to users. 
+Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixing log issues. It offers features that allow users to search vector data using memory and filter segment. It also exposes the important metrics information of Milvus to users. 
 
 ### Improvements
 
