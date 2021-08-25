@@ -66,7 +66,7 @@ milvusClient.collectionManager.createCollection({
 });
 ```
 
-3. Insert the random vectors to the newly created collection:
+3. Insert random vectors to the newly created collection:
 
 {{fragments/multiple_code.md}}
 
