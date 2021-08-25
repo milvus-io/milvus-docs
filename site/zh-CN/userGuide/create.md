@@ -5,6 +5,7 @@ id: create.md
 # 创建 collection 或 partition
 
 ## 创建 collection
+
 连接 Milvus 服务器后，可通过以下步骤创建 collection。
 
 > 创建 collection 必须包含一列主键字段，目前主键字段只支持 int64 类型。
@@ -12,7 +13,6 @@ id: create.md
 1. 准备 collection 参数，包括 collection 名字、collection 字段参数等。具体参数详见 [API 文档](https://pymilvus-orm.readthedocs.io/en/latest/)。
 
 {{fragments/multiple_code.md}}
-
 
 ````python
 >>> collection_name = "example_collection"
@@ -35,12 +35,9 @@ const params = {
       description: "vector field",
       data_type: DataType.FloatVector,
 
-      type_params: [
-        {
-          key: "dim",
-          value: "8",
-        },
-      ],
+      type_params: {
+        dim: "8",
+      },
     },
     {
       name: "age",
@@ -53,12 +50,9 @@ const params = {
 };
 ```
 
-
 2. 调用 Milvus 实例的 Collection() 方法创建 collection：
 
-
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> collection = Collection(name=collection_name, schema=schema)
@@ -71,7 +65,6 @@ await milvusClient.collectionManager.createCollection(params);
 3. 调用 `milvus.has_collection` 查看 collection 是否创建成功：
 
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> import pymilvus_orm
@@ -87,9 +80,7 @@ await milvusClient.collectionManager.hasCollection({
 
 4. 调用 `milvus.list_collections()` 查看所有创建成功的 collection：
 
-
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> pymilvus_orm.utility.get_connection().list_collections()
@@ -101,7 +92,6 @@ await milvusClient.collectionManager.showCollections();
 ```
 
 5. 查看 collection 相关数据，例如行数：
-
 
 {{fragments/multiple_code.md}}
 
@@ -117,11 +107,10 @@ await milvusClient.collectionManager.getCollectionStatistics({
 ```
 
 ## 创建 partition
+
 随着一个 collection 的数据增加，查询性能会逐渐下降。如果只需要查询一部分数据，可以考虑将数据进行分区（partitioning）。给 partition 加上 partition name 后，搜索时就只需要搜索一部分数据，从而能够提升搜索性能。
 
-
 {{fragments/multiple_code.md}}
-
 
 ```python
 >>> partition_name = "example_partition"
@@ -139,7 +128,6 @@ Milvus 会在创建 collection 时创建一个默认的 partition，name 为 `_d
 
 {{fragments/multiple_code.md}}
 
-
 ```python
 >>> collection.partitions
 [{"name": "_default", "description": "", "num_entities": 0}, {"name": "example_partition", "description": "", "num_entities": 0}]
@@ -151,8 +139,7 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
-调用 `has_partition()`  查看 partition 是否创建成功:
-
+调用 `has_partition()` 查看 partition 是否创建成功:
 
 {{fragments/multiple_code.md}}
 
