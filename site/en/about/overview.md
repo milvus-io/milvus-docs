@@ -20,6 +20,7 @@ Compatibility:
 		<th>Python SDK version</th>
 		<th>Java SDK version</th>
 		<th>Go SDK version</th>
+		<th>Node SDK version</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -28,6 +29,7 @@ Compatibility:
 		<td><a href="example_code.md">{{var.milvus_python_orm_sdk_version}}</a></td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
+		<td><a href="https://github.com/milvus-io/milvus-sdk-node">{{var.milvus_node_sdk_version}}</a></td>
 	</tr>
 	</tbody>
 </table>
