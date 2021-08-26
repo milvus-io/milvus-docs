@@ -108,7 +108,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 - [#7044](https://github.com/milvus-io/milvus/pull/7044) Lack of check on unindexed vectors in memory before retriving vectors in local storage.
 
-- [#6862](https://github.com/milvus-io/milvus/pull/6862) Memory leaks in flush cache of data node.
+- [#6862](https://github.com/milvus-io/milvus/pull/6862) Memory leaks in flush `cache` of data node.
 
 
 
