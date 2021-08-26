@@ -59,6 +59,7 @@ const params = {
 
 ```python
 >>> collection = Collection(name=collection_name, schema=schema)
+
 # Get an existing collection by its name.
 collection=Collection(name=collection_name)
 ```

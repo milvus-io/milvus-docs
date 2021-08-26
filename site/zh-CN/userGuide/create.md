@@ -59,6 +59,7 @@ const params = {
 # 根据 collection 名称获取指定 collection。
 collection=Collection(name=collection_name)
 ```
+你还可以运行指令 `collection=Collection(name=collection_name)` 根据 collection 名称获取已创建的 collection。
 
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
