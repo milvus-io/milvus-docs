@@ -1,6 +1,6 @@
 ---
 id: install_offline-docker.md
-label: Install with Docker Compose
+label: 使用 Docker Compose 安装
 order: 0
 group: offline
 ---
