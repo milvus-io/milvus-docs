@@ -108,6 +108,14 @@ await milvusClient.collectionManager.getCollectionStatistics({
   collection_name: COLLECTION_NAME,
 });
 ```
+6. You can also get an existing collection by its name:
+
+
+```python
+collection=Collection(name=collection_name)
+```
+
+
 
 ## Create a partition
 
