@@ -1,6 +1,6 @@
 ---
 id: eks.md
-title: Deploy on an EKS Cluster with Terraform
+title: Deploy Milvus on Amazon EKS with Terraform
 ---
 
 # Deploy on an EKS Cluster with Terraform
