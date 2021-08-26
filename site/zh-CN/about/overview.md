@@ -19,6 +19,7 @@ Milvus 提供以下 2 个版本：
 		<th>Python SDK 版本</th>
 		<th>Java SDK 版本</th>
 		<th>Go SDK 版本</th>
+		<th>Node SDK 版本</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -27,6 +28,7 @@ Milvus 提供以下 2 个版本：
 		<td><a href="example_code.md">{{var.milvus_python_orm_sdk_version}}</a></td>
 		<td>即将上线</td>
 		<td>即将上线</td>
+		<td><a href="https://github.com/milvus-io/milvus-sdk-node">{{var.milvus_node_sdk_version}}</a></td>
 	</tr>
 	</tbody>
 </table>
