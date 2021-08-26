@@ -43,7 +43,7 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
-3. 调用 `describe_index()` 查看创建的索引相关信息：
+3. 查看创建的索引相关信息：
 
 {{fragments/multiple_code.md}}
 
