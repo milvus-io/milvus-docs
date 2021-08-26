@@ -16,20 +16,18 @@ Installation of Milvus may fail when images are not properly loaded from public 
 
 1. Download Milvus **docker-compose.yml**:
 
-<div class="multipleCode">
-  <a href="?standalone">Standalone</a>
-  <a href="?cluster">Cluster</a>
-</div>
-		<div class="multipleCode-standalone" markdown="block">
-```standalone
+- For Milvus Standalone
+
+```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
-		</div>
-		<div class="multipleCode-cluster" markdown="block">
-```cluster
+
+- For Milvus Cluster
+
+```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
 ```
-		</div>
+
 
 2. Pull and save the Docker images:
 
@@ -39,7 +37,7 @@ python3 save_image.py --manifest docker-compose.yml
 ```
 
 <div class="alert note">
-The Docker images will be stored under images directory.
+The Docker images will be stored under **images** directory.
 </div>
 
 3. Load the Docker images:
