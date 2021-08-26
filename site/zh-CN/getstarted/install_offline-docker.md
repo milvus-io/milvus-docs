@@ -4,7 +4,7 @@ label: Install with Docker Compose
 order: 0
 group: offline
 ---
-# 离线安装 Milvus - Docker
+# 离线安装 Milvus
 
 本篇文档将展示如何在离线环境中部署 Milvus。
 
