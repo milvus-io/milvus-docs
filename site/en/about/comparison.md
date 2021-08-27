@@ -42,7 +42,7 @@ Object relational mapping (ORM) allows users to focus more on the upper-level bu
 #### Support tools
 - **Milvus Insight** is Milvus' graphical user interface offering practical functionalities such as cluster state management, meta management, and data query. The source code of Milvus Insight will also be open sourced as an independent project. We are looking for more contributors to join this effort.
 
-- **Milvus CLI** is Milvus' command-line interface based on [Milvus Python SDK](https://github.com/milvus-io/pymilvus), supporting database connection, data operations, and data export/import.
+- [**Milvus CLI**](https://github.com/milvus-io/milvus_cli#overview) is Milvus' command-line interface based on [Milvus Python SDK](https://github.com/milvus-io/pymilvus), supporting database connection, data operations, and data export/import.
 
 - **Out-of-box experience (OOBE), faster deployment:** Milvus 2.0 can be deployed using helm or Docker Compose.
 
