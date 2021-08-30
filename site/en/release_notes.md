@@ -3,7 +3,6 @@ id: release_notes.md
 title: Release Notes
 ---
 # Release Notes
-
 ## v2.0.0-RC5
 
 Release date: 2021-08-30
@@ -32,6 +31,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 - [#6993](https://github.com/milvus-io/milvus/pull/6993) Enhances the log when parsing gRPC recv/send parameters.
 - [#7331](https://github.com/milvus-io/milvus/pull/7331) Changes context to correct package. 
 - [#7278](https://github.com/milvus-io/milvus/pull/7278) Enables etcd auto compaction for every 1000 revision.
+- [#7355](https://github.com/milvus-io/milvus/pull/7355) Clean `fmt.Println `in util/flowgraph.
 
 ### Features
 
@@ -49,14 +49,14 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 
 ### Bug Fixes
 
-- [#7272](https://github.com/milvus-io/milvus/pull/7272) Failure to start new docker container with existing volumes if index was created: proxy is not healthy.
+- [#7272](https://github.com/milvus-io/milvus/pull/7272) [#7352](https://github.com/milvus-io/milvus/pull/7352) [#7335](https://github.com/milvus-io/milvus/pull/7335) Failure to start new docker container with existing volumes if index was created: proxy is not healthy.
 - [#7243](https://github.com/milvus-io/milvus/pull/7243) Failure to create index in a new version of Milvus for data that were inserted in an old version.
 - [#7253](https://github.com/milvus-io/milvus/pull/7253) Search gets empty results after releasing a different partition.
 - [#7244](https://github.com/milvus-io/milvus/pull/7244) [#7227](https://github.com/milvus-io/milvus/pull/7227) Proxy crashes when receiving empty search results.
 - [#7203](https://github.com/milvus-io/milvus/pull/7203) Connection gets stuck when gRPC server is down.
 - [#7188](https://github.com/milvus-io/milvus/pull/7188) Incomplete unit test logics.
 - [#7175](https://github.com/milvus-io/milvus/pull/7175) Unspecific error message returns when calculating distances using collection IDs without loading.
-- [#7151](https://github.com/milvus-io/milvus/pull/7151) Data node flowgraph does not close caused by missing DropCollection.
+- [#7151](https://github.com/milvus-io/milvus/pull/7151) Data node flowgraph does not close caused by missing `DropCollection`.
 - [#7167](https://github.com/milvus-io/milvus/pull/7167) Failure to load IVF_FLAT index.
 - [#7123](https://github.com/milvus-io/milvus/pull/7123) Timestamp go back for `timeticksync`.
 - [#7140](https://github.com/milvus-io/milvus/pull/7140) `calc_distance` returns wrong results for binary vectors when using TANIMOTO metrics.
@@ -69,7 +69,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 - [#7074](https://github.com/milvus-io/milvus/pull/7074) Index nodes wait for index coord to start to complete.
 - [#7061](https://github.com/milvus-io/milvus/pull/7061) Segment allocation does not expire if data coord does not receive timetick message from data node.
 - [#7059](https://github.com/milvus-io/milvus/pull/7059) Query nodes get producer leakage.
-- [#7005](https://github.com/milvus-io/milvus/pull/7005) Query nodes do not return error to querycoord when `loadSegmentInternal` fails.
+- [#7005](https://github.com/milvus-io/milvus/pull/7005) Query nodes do not return error to query coord when `loadSegmentInternal` fails.
 - [#7054](https://github.com/milvus-io/milvus/pull/7054) Query nodes return incorrect IDs when `topk` is larger than `row_num.`
 - [#7053](https://github.com/milvus-io/milvus/pull/7053) Incomplete allocation logics.
 - [#7044](https://github.com/milvus-io/milvus/pull/7044) Lack of check on unindexed vectors in memory before retriving vectors in local storage.
@@ -80,8 +80,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 - [#7266](https://github.com/milvus-io/milvus/pull/7266) Flowgraph released incorrectly.
 - [#7310](https://github.com/milvus-io/milvus/pull/7310) Excessive timeout when searching after releasing and loading a partition.
 - [#7320](https://github.com/milvus-io/milvus/pull/7320) Port conflicts between embedded etcd and external etcd.
-
-
+- [#7336](https://github.com/milvus-io/milvus/pull/7336) Data node corner cases.
 
 
 
