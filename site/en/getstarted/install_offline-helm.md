@@ -6,7 +6,7 @@ group: offline
 ---
 # Install Milvus Offline
 
-This page will show you how to install Milvus in offline environment.
+This page will show you how to install Milvus in offline environment. Relevant files can be downloaded at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
 
 {{tab}}
 
@@ -43,7 +43,7 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-The Docker images will be stored under **images** directory.
+The Docker images will be stored under <b>images</b> directory.
 </div>
 
 4. Load the Docker images:

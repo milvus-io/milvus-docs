@@ -6,7 +6,7 @@ group: offline
 ---
 # 离线安装 Milvus
 
-本篇文档将展示如何在离线环境中部署 Milvus。
+本篇文档将展示如何在离线环境中部署 Milvus。相关文件可在 [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline) 下载。
 
 {{tab}}
 
@@ -36,11 +36,11 @@ python3 save_image.py --manifest docker-compose.yml
 ```
 
 <div class="alert note">
-Docker 镜像文件将存储在 **images** 路径下。
+  Docker 镜像文件将存储在 <b>images</b> 路径下。
 </div>
 
 
-3. 加载 Docker 镜像：
+3. 加载 Docker 镜像
 
 ```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
