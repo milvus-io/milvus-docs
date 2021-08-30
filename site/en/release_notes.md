@@ -6,7 +6,7 @@ title: Release Notes
 
 ## v2.0.0-RC5
 
-Release date: 2021-08-25
+Release date: 2021-08-30
 
 ### Compatibility
 
@@ -14,101 +14,73 @@ Release date: 2021-08-25
 | ------------------ | ------------------------------------- | -------------------- | ------------------ | ------------------------------- |
 | 2.0.0-RC5          | {{var.milvus_python_orm_sdk_version}} | Coming soon          | Coming soon        | {{var.milvus_node_sdk_version}} |
 
-Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixing log issues. It offers features that allow users to search vector data using memory and filter segment. It also exposes the important metrics information of Milvus to users. 
+Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues. It offers feature that allow users to search vector data using memory and filter segment. It also exposes the important metrics information of Milvus to users. 
 
 ### Improvements
 
 - [#7226](https://github.com/milvus-io/milvus/pull/7226) Refactors data coord allocator.
-
 - [#6867](https://github.com/milvus-io/milvus/pull/6867) Adds connection manager.
-
 - [#7172](https://github.com/milvus-io/milvus/pull/7172) Adds a seal policy to restrict the lifetime of a segment.
-
 - [#7163](https://github.com/milvus-io/milvus/pull/7163) Increases the timeout for gRPC connection when creating index.
-
 - [#6996](https://github.com/milvus-io/milvus/pull/6996) Adds a minimum interval for segment flush.
-
 - [#6590](https://github.com/milvus-io/milvus/pull/6590) Saves binlog path in `SegmentInfo`.
-
 - [#6848](https://github.com/milvus-io/milvus/pull/6848) Removes `RetrieveRequest` and `RetrieveTask.`
-
 - [#7102](https://github.com/milvus-io/milvus/pull/7102) Supports vector field as output.
-
 - [#7075](https://github.com/milvus-io/milvus/pull/7075) Refactors `NewEtcdKV` API.
-
 - [#6965](https://github.com/milvus-io/milvus/pull/6965) Adds channel for data node to watch etcd.
-
 - [#7066](https://github.com/milvus-io/milvus/pull/7066) Optimizes search reduce logics.
-
 - [#6993](https://github.com/milvus-io/milvus/pull/6993) Enhances the log when parsing gRPC recv/send parameters.
+- [#7331](https://github.com/milvus-io/milvus/pull/7331) Change context to correct package. 
+- [#7278](https://github.com/milvus-io/milvus/pull/7278) Enable etcd auto compaction for every 1000 revision.
 
 ### Features
 
 - [#7112](https://github.com/milvus-io/milvus/pull/7112) [#7174](https://github.com/milvus-io/milvus/pull/7174) Imports an embedded etcdKV (part 1).
-
 - [#7231](https://github.com/milvus-io/milvus/pull/7231) Adds a segment filter interface.
-
 - [#7157](https://github.com/milvus-io/milvus/pull/7157) Exposes metrics of index coord and index nodes.
-
 - [#7137](https://github.com/milvus-io/milvus/pull/7137) [#7157](https://github.com/milvus-io/milvus/pull/7157) Exposes system topology information by proxy.
-
 - [#7113](https://github.com/milvus-io/milvus/pull/7113) [#7157](https://github.com/milvus-io/milvus/pull/7157) Exposes metrics of query coord and query nodes.
-
 - [#7134](https://github.com/milvus-io/milvus/pull/7134) Allows users to get vectors using memory instead of local storage.
-
 - [#6617](https://github.com/milvus-io/milvus/pull/6617) Supports retention for rocksmq.
+- [#7303](https://github.com/milvus-io/milvus/pull/7303) Add query node segment filter.
+- [#7304](https://github.com/milvus-io/milvus/pull/7304) Add `delete` API into proto.
+- [#7261](https://github.com/milvus-io/milvus/pull/7261) Add delete node.
+- [#7268](https://github.com/milvus-io/milvus/pull/7268) Construct bloom filter when inserting.
 
 ### Bug Fixes
 
 - [#7272](https://github.com/milvus-io/milvus/pull/7272) Failure to start new docker container with existing volumes if index was created: proxy is not healthy.
-
 - [#7243](https://github.com/milvus-io/milvus/pull/7243) Failure to create index in a new version of Milvus for data that were inserted in an old version.
-
 - [#7253](https://github.com/milvus-io/milvus/pull/7253) Search gets empty results after releasing a different partition.
-
 - [#7244](https://github.com/milvus-io/milvus/pull/7244) [#7227](https://github.com/milvus-io/milvus/pull/7227) Proxy crashes when receiving empty search results.
-
 - [#7203](https://github.com/milvus-io/milvus/pull/7203) Connection gets stuck when gRPC server is down.
-
 - [#7188](https://github.com/milvus-io/milvus/pull/7188) Incomplete unit test logics.
-
 - [#7175](https://github.com/milvus-io/milvus/pull/7175) Unspecific error message returns when calculating distances using collection IDs without loading.
-
 - [#7151](https://github.com/milvus-io/milvus/pull/7151) Data node flowgraph does not close caused by missing DropCollection.
-
 - [#7167](https://github.com/milvus-io/milvus/pull/7167) Failure to load IVF_FLAT index.
-
 - [#7123](https://github.com/milvus-io/milvus/pull/7123) Timestamp go back for `timeticksync`.
-
 - [#7140](https://github.com/milvus-io/milvus/pull/7140) `calc_distance` returns wrong results for binary vectors when using TANIMOTO metrics.
-
 - [#7143](https://github.com/milvus-io/milvus/pull/7143) The state of memory and etcd is inconsistent if KV operation fails.
-
 - [#7141](https://github.com/milvus-io/milvus/pull/7141) [#7136](https://github.com/milvus-io/milvus/pull/7136) Index building gets stuck when the index node pod is frequently killed and pulled up.
-
 - [#7119](https://github.com/milvus-io/milvus/pull/7119) Pulsar `msgStream` may get stuck when subscribed with the same topic and sub name.
-
 - [#6971](https://github.com/milvus-io/milvus/pull/6971) Exception occurs when searching with index (HNSW).
-
 - [#7104](https://github.com/milvus-io/milvus/pull/7104) Search gets stuck if query nodes only load sealed segment without watching insert channels.
-
 - [#7085](https://github.com/milvus-io/milvus/pull/7085) Segments do not auto flush.
-
 - [#7074](https://github.com/milvus-io/milvus/pull/7074) Index nodes wait for index coord to start to complete.
-
 - [#7061](https://github.com/milvus-io/milvus/pull/7061) Segment allocation does not expire if data coord does not receive timetick message from data node.
-
 - [#7059](https://github.com/milvus-io/milvus/pull/7059) Query nodes get producer leakage.
-
 - [#7005](https://github.com/milvus-io/milvus/pull/7005) Query nodes do not return error to querycoord when `loadSegmentInternal` fails.
-
 - [#7054](https://github.com/milvus-io/milvus/pull/7054) Query nodes return incorrect IDs when `topk` is larger than `row_num.`
-
 - [#7053](https://github.com/milvus-io/milvus/pull/7053) Incomplete allocation logics.
-
 - [#7044](https://github.com/milvus-io/milvus/pull/7044) Lack of check on unindexed vectors in memory before retriving vectors in local storage.
+- [#6862](https://github.com/milvus-io/milvus/pull/6862) Memory leaks in flush cache of data node.
+- [#7346](https://github.com/milvus-io/milvus/pull/7346) Fix query coord panic when stopping nil conn of `queryNodeClient`.
+- [#7339](https://github.com/milvus-io/milvus/pull/7339) Incorrect expression boundary.
+- [#7311](https://github.com/milvus-io/milvus/pull/7311) Collection nil when adding query collection.
+- [#7266](https://github.com/milvus-io/milvus/pull/7266) Flowgraph released incorrectly.
+- [#7310](https://github.com/milvus-io/milvus/pull/7310) Excessive timeout when searching after releasing and load a partition.
+- [#7320](https://github.com/milvus-io/milvus/pull/7320) Ports conflict between embedded etcd and external etcd.
 
-- [#6862](https://github.com/milvus-io/milvus/pull/6862) Memory leaks in flush `cache` of data node.
 
 
 
