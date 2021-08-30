@@ -32,6 +32,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 - [#6993](https://github.com/milvus-io/milvus/pull/6993) 针对解析 gRPC 收发参数增强日志系统。
 - [#7331](https://github.com/milvus-io/milvus/pull/7331) 修改 context 至正确的 package。
 - [#7278](https://github.com/milvus-io/milvus/pull/7278) 每 1000 次修订后启用 etcd 自动压缩。
+- [#7355](https://github.com/milvus-io/milvus/pull/7355) 从 util/flowgraph 中清除 `fmt.Println `。
 
 ### 新增功能
 
@@ -49,7 +50,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 
 ### 问题修复
 
-- [#7272](https://github.com/milvus-io/milvus/pull/7272) 若已创建索引，则无法使用现有 volume 启动新的 Docker 容器：proxy 不健康。
+- [#7272](https://github.com/milvus-io/milvus/pull/7272) [#7352](https://github.com/milvus-io/milvus/pull/7352) [#7335](https://github.com/milvus-io/milvus/pull/7335) 若已创建索引，则无法使用现有 volume 启动新的 Docker 容器：proxy 不健康。
 - [#7243](https://github.com/milvus-io/milvus/pull/7243) 旧版本插入的数据在新版本 Milvus 中创建索引失败。
 - [#7253](https://github.com/milvus-io/milvus/pull/7253) 释放不同的 partition 后，搜索结果为空。
 - [#7244](https://github.com/milvus-io/milvus/pull/7244) [#7227](https://github.com/milvus-io/milvus/pull/7227) 收到空搜索结果时 proxy 崩溃。
@@ -80,6 +81,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 - [#7266](https://github.com/milvus-io/milvus/pull/7266) Flowgraph 内存释放错误。
 - [#7310](https://github.com/milvus-io/milvus/pull/7310) 释放和加载 partition 后搜索时 timeout 过长。
 - [#7320](https://github.com/milvus-io/milvus/pull/7320) 嵌入式 etcd 和外部 etcd 之间的端口冲突。
+- [#7336](https://github.com/milvus-io/milvus/pull/7336) Data node 边界情况。
 
 
 
