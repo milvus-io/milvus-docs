@@ -6,7 +6,7 @@ id: release_notes.md
 
 ## v2.0.0-RC5
 
-发布时间：2021-08-25
+发布时间：2021-08-30
 
 ### 版本兼容
 
@@ -14,101 +14,73 @@ id: release_notes.md
 | --------------- | ------------------------------------- | ----------------- | --------------- | ------------------------------- |
 | 2.0.0-RC5       | {{var.milvus_python_orm_sdk_version}} | Coming soon       | Coming soon     | {{var.milvus_node_sdk_version}} |
 
-Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本主要修复了稳定性问题，并新增从在内存执行搜索以及筛选 segment 的功能。同时该版本将 Milvus 的重要 metrics 信息暴露给用户。
+Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数据保留机制和 etcd 数据清理，通过 API 暴露分布式版指标，并为后续支持删除操作做准备。 RC5 在系统稳定性方面也取得了很大的进步。 该版本修复了一系列资源泄露、操作卡死、 以及 Milvus 集群下单机 Pulsar 的配置错误等问题。
 
 ### 主要改进
 
 - [#7226](https://github.com/milvus-io/milvus/pull/7226) 重构 data coord allocator。
-
 - [#6867](https://github.com/milvus-io/milvus/pull/6867) 添加 connection manager。
-
 - [#7172](https://github.com/milvus-io/milvus/pull/7172) 添加 seal 策略以限制 segment 的生命周期。
-
 - [#7163](https://github.com/milvus-io/milvus/pull/7163) 增加创建索引时 gRPC 连接的超时时间。
-
 - [#6996](https://github.com/milvus-io/milvus/pull/6996) 添加 segment flush 的最小间隔。
-
 - [#6590](https://github.com/milvus-io/milvus/pull/6590) 在 `SegmentInfo` 中保存 binlog 路径。
-
 - [#6848](https://github.com/milvus-io/milvus/pull/6848) 移除 `RetrieveRequest` 和 `RetrieveTask`。
-
 - [#7102](https://github.com/milvus-io/milvus/pull/7102) 支持搜索输出向量 field。
-
 - [#7075](https://github.com/milvus-io/milvus/pull/7075) 重构 `NewEtcdKV` API.
-
 - [#6965](https://github.com/milvus-io/milvus/pull/6965) 为 data node 添加 channel 以监听 etcd。
-
 - [#7066](https://github.com/milvus-io/milvus/pull/7066) 优化搜索聚合逻辑。
-
 - [#6993](https://github.com/milvus-io/milvus/pull/6993) 针对解析 gRPC 收发参数增强日志系统。
+- [#7331](https://github.com/milvus-io/milvus/pull/7331) 修改 context 至正确的 package。
+- [#7278](https://github.com/milvus-io/milvus/pull/7278) 每 1000 次修订后启用 etcd 自动压缩。
 
 ### 新增功能
 
 - [#7112](https://github.com/milvus-io/milvus/pull/7112) [#7174](https://github.com/milvus-io/milvus/pull/7174) 引入嵌入式 etcdKV（第一阶段完成）。
-
-- [#7231](https://github.com/milvus-io/milvus/pull/7231) 添加 segment 筛选接口。
-
+- [#7231](https://github.com/milvus-io/milvus/pull/7231) 添加 segment filter 接口。
 - [#7157](https://github.com/milvus-io/milvus/pull/7157) 暴露 index coord 和 index nodes 的 metrics 信息。
-
 - [#7137](https://github.com/milvus-io/milvus/pull/7137) [#7157](https://github.com/milvus-io/milvus/pull/7157) 通过 proxy 暴露系统拓扑信息。
-
-- [#7113](https://github.com/milvus-io/milvus/pull/7113) [#7157](https://github.com/milvus-io/milvus/pull/7157) 暴露 query coord 和 query nodes 的 metrics 信息。
-
+- [#7113](https://github.com/milvus-io/milvus/pull/7113) [#7157](https://github.com/milvus-io/milvus/pull/7157) 暴露 query coord 和 query nodes 的指标信息。
 - [#7134](https://github.com/milvus-io/milvus/pull/7134) 允许用户仅使用内存执行向量搜索。
-
 - [#6617](https://github.com/milvus-io/milvus/pull/6617) 为 Rocksmq 添加 log 保留策略。
+- [#7303](https://github.com/milvus-io/milvus/pull/7303) 添加 query node segment filter。
+- [#7304](https://github.com/milvus-io/milvus/pull/7304) 在 proto 中添加 `delete` API。
+- [#7261](https://github.com/milvus-io/milvus/pull/7261) 添加 delete node。
+- [#7268](https://github.com/milvus-io/milvus/pull/7268) 插入数据时搭建 Bloom filter。
 
 ### 问题修复
 
 - [#7272](https://github.com/milvus-io/milvus/pull/7272) 若已创建索引，则无法使用现有 volume 启动新的 Docker 容器：proxy 不健康。
-
 - [#7243](https://github.com/milvus-io/milvus/pull/7243) 旧版本插入的数据在新版本 Milvus 中创建索引失败。
-
 - [#7253](https://github.com/milvus-io/milvus/pull/7253) 释放不同的 partition 后，搜索结果为空。
-
 - [#7244](https://github.com/milvus-io/milvus/pull/7244) [#7227](https://github.com/milvus-io/milvus/pull/7227) 收到空搜索结果时 proxy 崩溃。
-
 - [#7203](https://github.com/milvus-io/milvus/pull/7203) gRPC 服务器关闭时连接卡住。
-
 - [#7188](https://github.com/milvus-io/milvus/pull/7188) 单元测试逻辑不完整。
-
 - [#7175](https://github.com/milvus-io/milvus/pull/7175) 未加载的情况下使用 collection ID 计算距离时返回的错误消息不明确。
-
 - [#7151](https://github.com/milvus-io/milvus/pull/7151) 由于缺少 `DropCollection` 导致 data node flowgraph 不关闭。
-
 - [#7167](https://github.com/milvus-io/milvus/pull/7167) 无法加载 IVF_FLAT 索引。
-
 - [#7123](https://github.com/milvus-io/milvus/pull/7123) “Timestamp go back” 问题。
-
 - [#7140](https://github.com/milvus-io/milvus/pull/7140) 使用谷本距离计算相似度时，`calc_distance` 会返回错误的二元向量结果。
-
 - [#7143](https://github.com/milvus-io/milvus/pull/7143) KV 操作失败时，内存和 etcd 的状态不一致。
-
 - [#7141](https://github.com/milvus-io/milvus/pull/7141) [#7136](https://github.com/milvus-io/milvus/pull/7136) 当 index node pod 频繁重启时，索引构建会卡住。
-
 - [#7119](https://github.com/milvus-io/milvus/pull/7119) 当使用相同的 topic 和 sub name 订阅时，Pulsar `msgStream` 可能会卡住。
-
 - [#6971](https://github.com/milvus-io/milvus/pull/6971) 使用 HNSW 索引搜索时发生异常。
-
 - [#7104](https://github.com/milvus-io/milvus/pull/7104) 如果 query node 只加载 sealed segment 而未监听 insert channel，搜索会卡住。
-
 - [#7085](https://github.com/milvus-io/milvus/pull/7085) Segment 无法自动 flush。
-
 - [#7074](https://github.com/milvus-io/milvus/pull/7074) Index node 等待至 index coord 启动后完成操作。
-
 - [#7061](https://github.com/milvus-io/milvus/pull/7061) 如果 data coord 没有收到来自 data node 的 timetick 消息，则 segment allocation 不会过期。
-
 - [#7059](https://github.com/milvus-io/milvus/pull/7059) Query nodes 发生 producer 泄漏。
-
 - [#7005](https://github.com/milvus-io/milvus/pull/7005) 当 `loadSegmentInternal` 失败时，query node 不会向 query coord 返回错误。
-
 - [#7054](https://github.com/milvus-io/milvus/pull/7054) 当 `topk` 大于 `row_num.` 时，query node 返回错误的 ID。
-
 - [#7053](https://github.com/milvus-io/milvus/pull/7053) Allocation 逻辑不完整。
-
 - [#7044](https://github.com/milvus-io/milvus/pull/7044) 在检索本地存储中的向量之前，未对内存中未建索引向量的检查。
-
 - [#6862](https://github.com/milvus-io/milvus/pull/6862) Data node 的 flush `cache` 内存泄露。
+- [#7346](https://github.com/milvus-io/milvus/pull/7346) 重启分布式版 Milvus 后 query coord 容器在一分钟内退出。
+- [#7339](https://github.com/milvus-io/milvus/pull/7339) 表达式边界问题。
+- [#7311](https://github.com/milvus-io/milvus/pull/7311) 添加 `queryCollection` 时 collection 为空。
+- [#7266](https://github.com/milvus-io/milvus/pull/7266) Flowgraph 内存释放错误。
+- [#7310](https://github.com/milvus-io/milvus/pull/7310) 释放和加载 partition 后搜索时 timeout 过长。
+- [#7320](https://github.com/milvus-io/milvus/pull/7320) 嵌入式 etcd 和外部 etcd 之间的端口冲突。
+
 
 
 
