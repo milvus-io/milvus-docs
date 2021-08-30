@@ -29,7 +29,7 @@ helm repo update
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
 
-- For Milvus Cluster
+- For Milvus cluster
 
 ```cluster
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
