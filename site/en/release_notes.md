@@ -74,7 +74,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 - [#7053](https://github.com/milvus-io/milvus/pull/7053) Incomplete allocation logics.
 - [#7044](https://github.com/milvus-io/milvus/pull/7044) Lack of check on unindexed vectors in memory before retriving vectors in local storage.
 - [#6862](https://github.com/milvus-io/milvus/pull/6862) Memory leaks in flush cache of data node.
-- [#7346](https://github.com/milvus-io/milvus/pull/7346) Fix query coord panic when stopping nil conn of `queryNodeClient`.
+- [#7346](https://github.com/milvus-io/milvus/pull/7346) Query coord panic when stopping nil conn of `queryNodeClient`.
 - [#7339](https://github.com/milvus-io/milvus/pull/7339) Incorrect expression boundary.
 - [#7311](https://github.com/milvus-io/milvus/pull/7311) Collection nil when adding query collection.
 - [#7266](https://github.com/milvus-io/milvus/pull/7266) Flowgraph released incorrectly.
