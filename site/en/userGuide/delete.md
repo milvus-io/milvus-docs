@@ -11,7 +11,7 @@ The delete operations affect data already inserted into Milvus. Think twice befo
 
 ## Drop an index
 
-Drop the index of a specified field in a specified collection.
+Drop the index of a specified field in a specified collection:
 
 {{fragments/multiple_code.md}}
 
@@ -27,7 +27,7 @@ await milvusClient.indexManager.dropIndex({
 
 ## Drop a partition
 
-The `drop_partition()` method removes a partition and all vectors under it.
+Remove a partition and all vectors under it:
 
 {{fragments/multiple_code.md}}
 
@@ -44,7 +44,7 @@ await milvusClient.partitionManager.dropPartition({
 
 ## Drop a collection
 
-When you no longer need a collection, you can call `drop_collection()` to delete it.
+When you no longer need a collection, you can delete it.
 
 {{fragments/multiple_code.md}}
 
