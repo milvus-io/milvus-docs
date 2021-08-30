@@ -14,7 +14,7 @@ Release date: 2021-08-30
 | ------------------ | ------------------------------------- | -------------------- | ------------------ | ------------------------------- |
 | 2.0.0-RC5          | {{var.milvus_python_orm_sdk_version}} | Coming soon          | Coming soon        | {{var.milvus_node_sdk_version}} |
 
-Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues. It offers feature that allow users to search vector data using memory and filter segment. It also exposes the important metrics information of Milvus to users. 
+Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue data retention mechanism and etcd data cleanup,  exposes cluster metrics through API, and prepares for delete operation support. RC5 also made great progress on system stability. We fixed a series of resource leakage, operation hang and the misconfiguration of standalone Pulsar under Milvus cluster.
 
 ### Improvements
 
@@ -30,8 +30,8 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 - [#6965](https://github.com/milvus-io/milvus/pull/6965) Adds channel for data node to watch etcd.
 - [#7066](https://github.com/milvus-io/milvus/pull/7066) Optimizes search reduce logics.
 - [#6993](https://github.com/milvus-io/milvus/pull/6993) Enhances the log when parsing gRPC recv/send parameters.
-- [#7331](https://github.com/milvus-io/milvus/pull/7331) Change context to correct package. 
-- [#7278](https://github.com/milvus-io/milvus/pull/7278) Enable etcd auto compaction for every 1000 revision.
+- [#7331](https://github.com/milvus-io/milvus/pull/7331) Changes context to correct package. 
+- [#7278](https://github.com/milvus-io/milvus/pull/7278) Enables etcd auto compaction for every 1000 revision.
 
 ### Features
 
@@ -42,10 +42,10 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 - [#7113](https://github.com/milvus-io/milvus/pull/7113) [#7157](https://github.com/milvus-io/milvus/pull/7157) Exposes metrics of query coord and query nodes.
 - [#7134](https://github.com/milvus-io/milvus/pull/7134) Allows users to get vectors using memory instead of local storage.
 - [#6617](https://github.com/milvus-io/milvus/pull/6617) Supports retention for rocksmq.
-- [#7303](https://github.com/milvus-io/milvus/pull/7303) Add query node segment filter.
-- [#7304](https://github.com/milvus-io/milvus/pull/7304) Add `delete` API into proto.
-- [#7261](https://github.com/milvus-io/milvus/pull/7261) Add delete node.
-- [#7268](https://github.com/milvus-io/milvus/pull/7268) Construct bloom filter when inserting.
+- [#7303](https://github.com/milvus-io/milvus/pull/7303) Adds query node segment filter.
+- [#7304](https://github.com/milvus-io/milvus/pull/7304) Adds `delete` API into proto.
+- [#7261](https://github.com/milvus-io/milvus/pull/7261) Adds delete node.
+- [#7268](https://github.com/milvus-io/milvus/pull/7268) Constructs Bloom filter when inserting.
 
 ### Bug Fixes
 
@@ -74,12 +74,14 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 - [#7053](https://github.com/milvus-io/milvus/pull/7053) Incomplete allocation logics.
 - [#7044](https://github.com/milvus-io/milvus/pull/7044) Lack of check on unindexed vectors in memory before retriving vectors in local storage.
 - [#6862](https://github.com/milvus-io/milvus/pull/6862) Memory leaks in flush cache of data node.
-- [#7346](https://github.com/milvus-io/milvus/pull/7346) Query coord panic when stopping nil conn of `queryNodeClient`.
+- [#7346](https://github.com/milvus-io/milvus/pull/7346) Query coord container exited in less than 1 minute when re-installing Milvus cluster.
 - [#7339](https://github.com/milvus-io/milvus/pull/7339) Incorrect expression boundary.
 - [#7311](https://github.com/milvus-io/milvus/pull/7311) Collection nil when adding query collection.
 - [#7266](https://github.com/milvus-io/milvus/pull/7266) Flowgraph released incorrectly.
-- [#7310](https://github.com/milvus-io/milvus/pull/7310) Excessive timeout when searching after releasing and load a partition.
-- [#7320](https://github.com/milvus-io/milvus/pull/7320) Ports conflict between embedded etcd and external etcd.
+- [#7310](https://github.com/milvus-io/milvus/pull/7310) Excessive timeout when searching after releasing and loading a partition.
+- [#7320](https://github.com/milvus-io/milvus/pull/7320) Port conflicts between embedded etcd and external etcd.
+
+
 
 
 
