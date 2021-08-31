@@ -22,7 +22,7 @@ Release date: 2021-08-30
 	<tbody>
 	<tr>
 		<td>2.0.0-RC5</td>
-		<td>{{var.milvus_python_orm_sdk_version}}</td>
+		<td>{{var.milvus_python_sdk_version}}</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td>{{var.milvus_node_sdk_version}}</td>
@@ -110,7 +110,7 @@ Release date: 2021-08-13
 
 | **Milvus version** | **Python SDK version**                | **Java SDK version** | **Go SDK version** |
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
-| 2.0.0-RC4          | {{var.milvus_python_orm_sdk_version}} | Coming soon          | Coming soon        |
+| 2.0.0-RC4          | {{var.milvus_python_sdk_version}} | Coming soon          | Coming soon        |
 
 Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
 
@@ -235,7 +235,7 @@ Release date: 2021-07-13
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC2 | {{var.milvus_python_orm_sdk_version}} | Coming soon            | Coming soon          |
+| 2.0.0-RC2 | {{var.milvus_python_sdk_version}} | Coming soon            | Coming soon          |
 
 Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
 
@@ -277,7 +277,7 @@ Release date: 2021-06-28
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1 | {{var.milvus_python_orm_sdk_version}} | Coming soon            | Coming soon          |
+| 2.0.0-RC1 | {{var.milvus_python_sdk_version}} | Coming soon            | Coming soon          |
 
 
 
@@ -310,7 +310,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 - Object-relational mapping (ORM) PyMilvus
 
-  The PyMilvus-ORM APIs operate directly on collections, partitions, and indexes, helping users focus on the building of an effective data model rather than the detailed implementation. 
+  The PyMilvus APIs operate directly on collections, partitions, and indexes, helping users focus on the building of an effective data model rather than the detailed implementation. 
 
 **Core Features**
 

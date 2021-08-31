@@ -23,7 +23,7 @@ id: release_notes.md
 	<tbody>
 	<tr>
 		<td>2.0.0-RC5</td>
-		<td>{{var.milvus_python_orm_sdk_version}}</td>
+		<td>{{var.milvus_python_sdk_version}}</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
 		<td>{{var.milvus_node_sdk_version}}</td>
@@ -111,7 +111,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 
 | **Milvus 版本** | **Python SDK 版本**                   | **Java SDK 版本** | **Go SDK 版本** |
 | --------------- | ------------------------------------- | ----------------- | --------------- |
-| 2.0.0-RC4       | {{var.milvus_python_orm_sdk_version}} | 即将上线          | 即将上线        |
+| 2.0.0-RC4       | {{var.milvus_python_sdk_version}} | 即将上线          | 即将上线        |
 
 Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性问题，并新增从对象存储中检索向量数据以及通过通配符匹配指定输出 field 的功能。
 
@@ -233,7 +233,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC2         | {{var.milvus_python_orm_sdk_version}}              | 即将上线            | 即将上线          |
+| 2.0.0-RC2         | {{var.milvus_python_sdk_version}}              | 即将上线            | 即将上线          |
 
 Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳定性和性能问题，并针对节点和存储管理进行了代码重构。
 
@@ -270,7 +270,7 @@ Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1 | {{var.milvus_python_orm_sdk_version}} | 即将上线            | 即将上线          |
+| 2.0.0-RC1 | {{var.milvus_python_sdk_version}} | 即将上线            | 即将上线          |
 
 
 Milvus 2.0.0-RC1 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
@@ -301,9 +301,9 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 
 **SDK**
 
-- PyMilvus-ORM
+- PyMilvus
 
-  PyMilvus-ORM API 直接在 collection、partion 和 index 对象上进行操作。用户可专注于搭建业务数据模型，而不必担心具体实现。
+  PyMilvus API 直接在 collection、partion 和 index 对象上进行操作。用户可专注于搭建业务数据模型，而不必担心具体实现。
 
 **核心功能**
 
@@ -343,7 +343,7 @@ Milvus 2.0 使用的编程语言、数据格式以及分布式架构都与之前
 
 - 暂不支持删除和更新操作。
 
-- PyMilvus-ORM 不支持 force flush。
+- PyMilvus 不支持 force flush。
 
 - 数据格式与之前版本不兼容。
 
