@@ -15,7 +15,7 @@ If you choose to operate in the Python interactive mode, type `python3` in your 
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus_orm import connections
+>>> from pymilvus import connections
 >>> connections.connect("default", host='localhost', port='19530')
 ```
 
