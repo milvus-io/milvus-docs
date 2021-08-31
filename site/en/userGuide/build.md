@@ -44,7 +44,7 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
-3. View Index details:
+3. View index details:
 
 {{fragments/multiple_code.md}}
 

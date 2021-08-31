@@ -5,7 +5,7 @@ title: Boolean Expression Rules
 
 # Boolean Expression Rules
 
-[EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describes boolean expressions rules. Boolean expression rules are as follows:
+[EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules. Boolean expression rules are as follows:
 
 ```
 Expr = LogicalExpr | NIL
@@ -45,7 +45,7 @@ CmpOpRestricted = "<" | "<=";
 CmpOp = ">" | ">=" | "<" | "<=" | "=="| "!=";
 ```
 
-The following table lists the description of each symbol in the above Boolean expression rules.
+The following table lists the description of each symbol mentioned in the above Boolean expression rules.
 
 
 | **Notation**      | **Description** |
@@ -53,7 +53,7 @@ The following table lists the description of each symbol in the above Boolean ex
 | =      | Definition.       |
 | ,      | Concatenation.       |
 | ;      | Termination.        |
-| |      | Alternation.       |
+| \|      | Alternation.       |
 | {...}   | Repetition.        |
 | (...)      | Grouping.       |
 | NIL   | Empty. The expression can be an empty string.        |

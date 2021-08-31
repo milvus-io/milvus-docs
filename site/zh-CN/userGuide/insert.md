@@ -33,7 +33,7 @@ const entities = Array.from({ length: 10 }, () => ({
 
 ```python
 >>> mr = collection.insert(entities)
-<pymilvus_orm.search.MutationResult object at 0x7fcfe8255550>
+<pymilvus.search.MutationResult object at 0x7fcfe8255550>
 >>> mr.primary_keys
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
 ```
@@ -70,7 +70,7 @@ await milvusClient.dataManager.insert({{
 
 
 ```python
->>> pymilvus_orm.utility.get_connection().flush([collection_name])
+>>> pymilvus.utility.get_connection().flush([collection_name])
 ```
 
 ```javascript
