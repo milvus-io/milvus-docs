@@ -16,6 +16,7 @@ Audio retrieval can be used to search and monitor online media in real-time to c
 
 Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search) to learn how to build an audio similarity search engine using Milvus paired with PANNs for audio pattern recognition.
 
+
 <br/>
 
 You can also learn more about how to use Milvus to build other systems for various application scenarios in our [bootcamp repo](https://github.com/milvus-io/bootcamp) on Github.
