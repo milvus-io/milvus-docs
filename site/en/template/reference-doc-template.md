@@ -5,7 +5,7 @@ id: reference-doc-template.md
 
 # Template for Reference Docs 
 
-Please provide the general information of the reference you elaboorate on.
+Please provide the general information of the reference you elaborate on.
 
 ## Reference Docs should be comprehensive and accurate
 
