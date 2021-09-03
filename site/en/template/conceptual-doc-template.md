@@ -41,7 +41,7 @@ This is an ordered list:
 
 
 
-## Use graphs, charts, and picture when words are insufficient to explain
+## Use graphs, charts, and pictures when words are insufficient to explain
 
 `![an explanatory image](path/name.jpg)`
 
