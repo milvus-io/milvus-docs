@@ -1,5 +1,5 @@
 ---
-id: a-unique-id-for-how-to-page.md
+id: how-to-doc-template.md
 ---
 
 # Template for How-to Docs (State an Actionable Goal for the user)
