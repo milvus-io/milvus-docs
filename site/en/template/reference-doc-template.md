@@ -37,8 +37,6 @@ This is an unordered list:
 This is an ordered list:
 
 1. First thing
-   1. First point
-   2. Second point
 2. Second thing
 3. ...
 
