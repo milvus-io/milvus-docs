@@ -11,7 +11,7 @@ Please provide the general information of the reference you elaborate on.
 
 as it is the foundation and source of truth of other docs.
 
-## Use plain and succinct sentence in reference docs
+## Use plain and succinct sentences in reference docs
 
 to make it more understandable to users.
 
