@@ -1,5 +1,5 @@
 ---
-id: a-unique-id-for-reference-page.md
+id: reference-doc-template.md
 
 ---
 
