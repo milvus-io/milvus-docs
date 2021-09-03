@@ -1,7 +1,5 @@
 ---
-id: a-unique-id-for-conceptual-page.md
-
-
+id: conceptual-doc-template.md
 ---
 
 # Template for Conceptual Docs 
