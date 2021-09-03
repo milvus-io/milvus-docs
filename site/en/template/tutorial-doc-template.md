@@ -1,5 +1,5 @@
 ---
-id: a-unique-id-for-tutorial-page.md
+id: tutorial-doc-template.md
 ---
 
 # Template for Tutorial Docs (Build a demo/solution with Milvus)
