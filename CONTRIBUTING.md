@@ -118,21 +118,14 @@ In the JSON file for a version's sidebar, there are six possible fields:
 
 
 
-Field | Type | Description
-
-------|------|------------
-
-`id` | String | The unique ID (within en/zh-CN folder)  given to a page (defined in the front-matter of the corresponding Markdown file) or a section. 
-
-`title` | String | This field defines the title for a section of the sidenav, e.g., "Get Started", for a subsection, e.g., "Install Milvus", or for a page, e.g., "Milvus Standalone". See the [JSON Example](#json-example) below for more clarity.
-
-`label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  
-
-`order` | Integar | The sorting order of pages and sections under current label, starting from 0. 
-
-`isMenu` | Boolean | This field defines whether it is a section/subsection of the sidenav.
-
-`outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** respository.
+| Field | Type | Description |
+| ------|------|------------ |
+| `id` | String | The unique ID (within en/zh-CN folder)  given to a page (defined in the front-matter of the corresponding Markdown file) or a section. |
+| `title` | String | This field defines the title for a section of the sidenav, e.g., "Get Started", for a subsection, e.g., "Install Milvus", or for a page, e.g., "Milvus Standalone". See the [JSON Example](#json-example) below for more clarity. |
+| `label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  |
+| `order` | Integar | The sorting order of pages and sections under current label, starting from 0. |
+| `isMenu` | Boolean | This field defines whether it is a section/subsection of the sidenav. |
+| `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** respository. |
 
 
 
