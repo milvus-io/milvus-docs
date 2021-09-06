@@ -122,6 +122,7 @@
       "id": "install_macos.md",
       "title": "Install on macOS",
       "label1": "getstarted",
+
       "label2": "installmilvus",
       "label3": "",
       "order": 3
