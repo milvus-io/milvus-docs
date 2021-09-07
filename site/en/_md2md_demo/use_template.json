@@ -1,8 +1,0 @@
-{
-  "useTemplate": true,
-  "path": "template/example.md",
-  "var": {
-    "title": "Use Template",
-    "content": "this is a example use Template"
-  }
-}
