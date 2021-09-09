@@ -85,6 +85,7 @@ for raw_result in res:
     for result in raw_result:
         id = result.id  # result id
         distance = result.distance
+        print(id, distance)
 ```
 Refer to [API Reference](/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/results.html) for more details.
 
