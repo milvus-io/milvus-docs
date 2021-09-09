@@ -36,7 +36,7 @@ Installing minikube will also install hypervisor and kubectl. Kubectl is a comma
 </div>
 
 <div class="alert note">
-  Minikube requires <ahref="https://docs.docker.com/get-docker/">Docker</a> as a dependency. Make sure install Docker before deploying Milvus using Helm.
+  Minikube requires <a href="https://docs.docker.com/get-docker/">Docker</a> as a dependency. Make sure install Docker before deploying Milvus using Helm.
 </div>
 
 - Helm version 3.0.0 or higher is required. See [Helm docs](https://helm.sh/docs/).
