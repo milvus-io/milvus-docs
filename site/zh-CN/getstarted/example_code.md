@@ -8,7 +8,7 @@ id: example_code.md
 
 1. 安装 PyMilvus 及依赖库:
 ```Python
-pip install pymilvus=={{var.milvus_python_sdk_version}}
+pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 
 <div class="alert note">
