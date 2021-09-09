@@ -4,6 +4,7 @@ title: Install Milvus Cluster
 label: Install with Docker Compose
 order: 0
 group: cluster
+summary: Installation instructions for the standalone version of Milvus.
 ---
 
 # Install Milvus Cluster
