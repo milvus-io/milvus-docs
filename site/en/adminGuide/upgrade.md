@@ -1,6 +1,6 @@
 ---
 id: upgrade.md
-summary: Learn how to upgrade Milvus
+summary: Learn how to upgrade Milvus.
 ---
 
 # Upgrade Milvus Using Helm Chart
