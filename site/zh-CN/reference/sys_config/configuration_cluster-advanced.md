@@ -287,7 +287,7 @@ Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发�
 		<td><code>datacoord.segment.sealProportion</code></td>
 		<td><details>
        <summary>单个 segment 的真实数据大小占 <code>datacoord.segment.size</code>的最大比例</summary>
-       <li>当单个 segment 的真实数据大小与 <code>datacoord.segment.size</code>的比例超过该参数，此 segment 可以被关闭（sealed）。</li>
+       <li>当单个 segment 的真实数据大小与 <code>datacoord.segment.maxSize</code>的比例超过该参数，此 segment 可以被关闭（sealed）。</li>
       </details></td>
 		<td>0.75</td>
 	</tr>
