@@ -34,7 +34,7 @@ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 </div>
 
 <div class="alert note">
-  Minikube 需要 <ahref="https://docs.docker.com/get-docker/">Docker</a> 作为依赖。使用 Helm 部署 Milvus 前需安装 Docker。
+  Minikube 需要 <a href="https://docs.docker.com/get-docker/">Docker</a> 作为依赖。使用 Helm 部署 Milvus 前需安装 Docker。
 </div>
 
 - Kubernetes 包管理工具 Helm: 3.0.0 或以上。详见[Helm 官方文档](https://helm.sh/docs/).
