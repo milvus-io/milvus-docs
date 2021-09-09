@@ -1,6 +1,6 @@
 ---
 id: dna_sequence_classification.md
-title: DNA Sequence Classification
+summary: Build an audio similarity search system with Milvus. 
 ---
 
 # DNA Sequence Classification 
