@@ -22,7 +22,7 @@ Release date: 2021-09-10
 	</thead>
 	<tbody>
 	<tr>
-		<td>2.0.0-RC5</td>
+		<td>2.0.0-RC6</td>
 		<td>{{var.milvus_python_sdk_version}}</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
