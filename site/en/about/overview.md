@@ -223,18 +223,20 @@ With over 1,000 enterprise users, 7,000+ stars on [GitHub](https://github.com/mi
 
 Milvus [forum](https://discuss.milvus.io/) is now available! Post in the forum to share your insights and Milvus best practices or get answers to your questions.
 
-You can also join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
+Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
 
 [![Milvus Slack Channel](../../../assets/slack.png)](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ)
 
 You can also check out our [FAQ page](https://milvus.io/docs/v1.0.0/performance_faq.md) to discover solutions or answers to your issues or questions.
+
+Visit the [Milvus Confluence](https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=22249603) page to learn about Milvus community calendar, Milvus enhancement proposals (MEP), and Milvus technical meeting agenda and minutes.  
 
 Subscribe to Milvus mailing lists:
 
 - [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
 - [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
 - [Announcement](https://lists.lfai.foundation/g/milvus-announce)
-- [Milvus Confluence](https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=22249603)
+
 
 Follow Milvus on social media:
 
