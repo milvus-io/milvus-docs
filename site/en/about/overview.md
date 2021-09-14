@@ -39,61 +39,44 @@ Milvus {{var.milvus_release_version}} is the preview version of 2.0.0. It introd
 
 ## Applications
 
-<table>
-  <tr>
-    <td width="30%">
-      <a href="https://zilliz.com/milvus-demos">
-        <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/image_search_59a64e4f22.gif" />
-      </a>
-    </td>
-    <td width="30%">
-<a href="https://zilliz.com/milvus-demos">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/2021_09_14_16_18_29_2abb89952d.png?3565470.7000000477" />
-</a>
-    </td>
-    <td width="30%">
-<a href="https://zilliz.com/milvus-demos">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/mole_search_76f8340572.gif" />
-</a>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search">Image similarity search</a>
-    </th>
-    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/question_answering_system">Question answering system</a>
-    </th>
-    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/molecular_similarity_search">Molecular similarity search </a>
-    </th>
-  </tr>
-</table>
-
-</br>
-
-#### Image similarity search
+#### [Image similarity search](image_similarity_search.md)
 Images made searchable. Instantaneously return the most similar images from a massive database.
 
-#### Video similarity search
+![image_search_demo](../../../assets/image_search_demo.jpeg)
+
+#### [Video similarity search](video_similarity_search.md)
 By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real time.
 
-#### Audio similarity search
+![video_search_demo](../../../assets/video_search_demo.gif)
+
+#### [Audio similarity search](audio_similarity_search.md)
 Speech, music, sound effects, and other types of audio search makes it possible to quickly query massive volumes of audio data and surface similar sounds. 
 
-#### Molecular similarity search
+![Audio_search_demo](../../../assets/audio_search_demo.png)
+
+#### [Molecular similarity search](molecular_similarity_search.md)
 Blazing fast similarity search, substructure search, or superstructure search for a specified molecule.
 
-#### Recommender system
+![molecular](../../../assets/molecular_demo.jpeg)
+
+#### [Recommender system](recommendation_system.md)
 The recommender system discovers the user’s personalized needs and interests by analyzing and mining user behaviors, and recommends information or products that may be of interest to the user.
 
-#### Question answering system
+![recommender_system](../../../assets/recommendation_system.png)
+
+#### [Question answering system](question_answering_system.md)
 Interactive digital customer service that saves users time and businesses money.
 
-#### DNA sequence classification
+![QA_chatbot_demo](../../../assets/milmil.png)
+
+#### [DNA sequence classification](dna_sequence_classification.md)
 The DNA sequence classification system built on Milvus can manage gene classification in milliseconds with high accuracy.
 
+![dna](../../../assets/dna.png)
+
 For more Milvus application scenarios, refer to [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutions) and [Milvus Adopters](milvus_adopters.md).
+
+
 
 ## Key concepts
 
