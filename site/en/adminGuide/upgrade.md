@@ -1,6 +1,6 @@
 ---
 id: upgrade.md
-title: Upgrade Milvus Using Helm Chart 
+summary: Learn how to upgrade Milvus.
 ---
 
 # Upgrade Milvus Using Helm Chart
@@ -87,7 +87,7 @@ my-release-minio-744dd9586f-drjnr               1/1     Running   0          31m
 To upgrade Milvus standalone, old pods first will be deleted first. Therefore, the service may be offline for a short period of time.
 </div>
 
-6. Check the image version and you can see it is **v2.0.0-rc5**.
+6. Check the image version and you can see it is **v2.0.0-rc5-hotfix1**.
 
 ```
 kubectl get pods my-release-milvus-standalone-546649bcdf-xqjd5 -o=jsonpath='{$.spec.containers[0].image}'

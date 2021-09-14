@@ -1,11 +1,11 @@
 ---
 id: video_similarity_search.md
-title: Video Similarity Search
+summary: Build a video similarity search system with Milvus. 
 ---
 
 # Video Similarity Search
 
-Major online video platforms like YouTube, which receives 500 hours of user generated content each minute, present unique demands when it comes to content recommendation. In order to make relevant, real-time recommendations that take into consideration new uploads, video recommendation systems must offer lightning-fast query time and efficient dynamic data handling. By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real time.
+Major online video platforms like YouTube, which receives 500 hours of user generated content each minute, present unique demands when it comes to content recommendation. In order to make relevant, real-time recommendations that take into consideration new uploads, video recommender systems must offer lightning-fast query time and efficient dynamic data handling. By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real time.
 
 ![video_search](../../../assets/video_search.png)
 

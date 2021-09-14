@@ -4,6 +4,7 @@ title: Install Milvus Standalone
 label: Install with Docker Compose
 order: 0
 group: standalone
+summary: Installation instructions for the standalone version of Milvus.
 ---
 
 # Install Milvus Standalone
@@ -67,5 +68,5 @@ If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  vo
 
 
 <div class="alert note">
-If you want to upgrade your Milvus 2.0 version, please refer to [Upgrade Milvus 2.0](upgrade.md)
+If you want to upgrade your Milvus 2.0 version, please refer to <a href="upgrade.md">Upgrade Milvus 2.0</a>.
 </div>

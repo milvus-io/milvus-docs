@@ -8,7 +8,7 @@ id: example_code.md
 
 1. 安装 PyMilvus 及依赖库:
 ```Python
-pip install pymilvus=={{var.milvus_python_sdk_version}}
+pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 
 <div class="alert note">
@@ -81,6 +81,7 @@ for raw_result in res:
     for result in raw_result:
         id = result.id  # result id
         distance = result.distance
+        print(id, distance)
 ```
 更多详情，参考 [API Reference](/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/results.html)。
 

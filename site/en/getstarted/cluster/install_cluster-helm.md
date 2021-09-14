@@ -3,6 +3,7 @@ id: install_cluster-helm.md
 label: Install on Kubernetes
 order: 1
 group: cluster
+summary: Installation instructions for the cluster version of Milvus.
 ---
 
 # Install Milvus Cluster
@@ -104,5 +105,5 @@ To retain logs,  copy them from each pod's <code>stderr</code> before deleting t
 </br>
 
 <div class="alert note">
-If you want to upgrade your Milvus 2.0 version, please refer to [Upgrade Milvus 2.0](upgrade.md)
+If you want to upgrade your Milvus 2.0 version, please refer to <a href="upgrade.md">Upgrade Milvus 2.0</a>.
 </div>
