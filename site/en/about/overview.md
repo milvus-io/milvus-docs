@@ -48,7 +48,7 @@ Milvus {{var.milvus_release_version}} is the preview version of 2.0.0. It introd
     </td>
     <td width="30%">
 <a href="https://zilliz.com/milvus-demos">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/small_chatbot_UI_0f4a7655d4.png?78061.70000004768" />
+<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/2021_09_14_16_18_29_2abb89952d.png?3565470.7000000477" />
 </a>
     </td>
     <td width="30%">
@@ -66,45 +66,6 @@ Milvus {{var.milvus_release_version}} is the preview version of 2.0.0. It introd
     </th>
     <th>
       <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/molecular_similarity_search">Molecular similarity search </a>
-    </th>
-  </tr>
-</table>
-
-<table>
-  <tr>
-    <td width="25%">
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/video_similarity_search">
-        <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/header_3a822736b3.gif?470922.89999997616" />
-      </a>
-    </td>
-    <td width="25%">
-<a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/small_audio_e5ff144e44.png?423764.5" />
-</a>
-    </td>
-    <td width="25%">
-<a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/recommendation_system">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/small_stylepedia_jacket_outfit_e84914da9e.png?78077.29999995232" />
-</a>
-    </td>
-    <td width="25%">
-<a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/dna_sequence_classification">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/1_ebd89660f6.png?514358.7000000477" />
-</a>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/video_similarity_search">Video similarity search</a>
-    </th>
-    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search">Audio similarity search</a>
-    </th>
-    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/recommendation_syste">Recommender system </a>
-    </th>
-	    <th>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions/dna_sequence_classification">DNA sequence classification </a>
     </th>
   </tr>
 </table>
@@ -223,11 +184,13 @@ With over 1,000 enterprise users, 7,000+ stars on [GitHub](https://github.com/mi
 
 Milvus [forum](https://discuss.milvus.io/) is now available! Post in the forum to share your insights and Milvus best practices or get answers to your questions.
 
-You can also join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
+Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
 
 [![Milvus Slack Channel](../../../assets/slack.png)](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ)
 
 You can also check out our [FAQ page](https://milvus.io/docs/v1.0.0/performance_faq.md) to discover solutions or answers to your issues or questions.
+
+Visit the [Milvus Confluence](https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=22249603) page to learn about Milvus community calendar, Milvus enhancement proposals (MEP), and Milvus technical meeting agenda and minutes.  
 
 Subscribe to Milvus mailing lists:
 
@@ -235,6 +198,7 @@ Subscribe to Milvus mailing lists:
 - [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
 - [Announcement](https://lists.lfai.foundation/g/milvus-announce)
 - [Milvus Confluence](https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=22249603)
+
 
 Follow Milvus on social media:
 
