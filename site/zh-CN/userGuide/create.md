@@ -56,7 +56,7 @@ const params = {
 {{fragments/multiple_code.md}}
 
 ```python
->>> collection = Collection(name=collection_name, schema=schema)
+>>> collection = Collection(name=collection_name, schema=schema, using='default', shards_num=2)
 
 # 根据 collection 名称获取指定 collection。
 collection=Collection(name=collection_name)
