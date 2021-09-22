@@ -9,8 +9,8 @@ Milvus is trusted by over 1,000 organizations worldwide and has applications in 
 | **Company**                                                  | **Industry**           | **User Story**                                               |
 | ------------------------------------------------------------ | ---------------------- | ------------------------------------------------------------ |
 | [Beike](https://investors.ke.com/about-us/default.aspx)                                                | Real estate           | [Making With Milvus: AI-Infused Proptech for Personalized Real Estate Search](https://zilliz.com/blog/Making-With-Milvus-AI-Infused-Proptech-for-Personalized-Real-Estate-Search)                                              |
-| [DXY.cn](https://en.wikipedia.org/wiki/DXY.cn)                                                  | Medical           |                                             |
 |[Deepset.ai](https://deepset.ai/)                                                    | Software         | [Semantic Search with Milvus, Knowledge Graph QA, Web Crawlers and more!](https://medium.com/deepset-ai/semantic-search-with-milvus-knowledge-graph-qa-web-crawlers-and-more-837451eae9fa)                                             |
+| [DXY.cn](https://en.wikipedia.org/wiki/DXY.cn)                                                  | Medical           |                                             |
 | [EnjoyMusic Technology](https://enjoymusic.ai/about)                                                 | Entertainment          |[Item-based Collaborative Filtering for Music Recommender System](https://zilliz.com/blog/music-recommender-system-item-based-collaborative-filtering-milvus)                                          |
 | [Getir](https://getir.com/) | Instant Grocery | |
 | [Hewlett-Packard (HP)](https://en.wikipedia.org/wiki/Hewlett-Packard)   | 	Information technology          |                                        |
