@@ -30,10 +30,11 @@ const searchParams = {
 >>> collection.load()
 ```
 
-````javascript
+```javascript
 await milvusClient.collectionManager.loadCollection({
   collection_name: COLLECTION_NAME,
 });
+```
 
 3. 创建随机向量作为 `query_records` 并调用 `search()` 进行搜索。
 *Milvus 将返回搜索结果的 ID 和距离：*
@@ -47,7 +48,7 @@ await milvusClient.collectionManager.loadCollection({
 [424363819726212428, 424363819726212436, ...]
 >>> results[0].distances
 [0.0, 1.0862197875976562, 1.1029295921325684, ...]
-````
+```
 
 ```javascript
 await milvusClient.dataManager.search({
