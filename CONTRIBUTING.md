@@ -8,7 +8,7 @@ The Milvus docs are open-source just like the database itself and welcome contri
 
 ## What contributions can I make?
 
-Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straighforward exmaples:
+Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straightforward examples:
 
 - Fix a typo or a grammatical error.
 
@@ -54,7 +54,7 @@ All documentation is originally written in English and translated into other lan
 
 We provide documentation for each major version of Milvus. The pages for each version are found in a directory named for the version. For example, docs for Milvus v2.0.0 are in the `v2.0.0` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
 
-Within each version directory, each page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words, and should be brief but descriptive.
+Within each version directory, each page must be a **.md** file written in Markdown. File names should be lowercase with an underscore between words, and should be brief but descriptive.
 
 Example:
 
