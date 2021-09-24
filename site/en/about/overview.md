@@ -10,7 +10,7 @@ Milvus is an open-source vector database built to power AI applications and vect
 
 It is available in:
 - [Milvus standalone](install_standalone-docker.md)
-- [Milvus cluster](install_cluster-docker.md)
+
 
 Compatibility: 
 

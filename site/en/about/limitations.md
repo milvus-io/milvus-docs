@@ -16,8 +16,6 @@ summary: Learn about the limitations while using Milvus.
 
 ## Rules on naming identifiers
 
-The name of an identifier can only contain numbers, letters, dollar signs ($), and underscores (__). The first character in an identifier must be a letter or the underscore sign.
-
 ## Limitations on the number of collections and connections
 
 | **Identifier type**      | **Maximum number** |
