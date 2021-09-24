@@ -1,16 +1,16 @@
 ---
 id: text_search_engine.md
-summary: Build a text search engine with Milvus. 
+总结：使用 Milvus 搭建文本搜索引擎。 
 ---
 
-# Text Search Engine
+# 文字搜索引擎
 
-Text search engine is great tool that can help you and your users find the information you are looking for. It can even surface information that is hard to find. The text search engines will compare the keywords or semantics you input against a database of texts, and then return the results that meet certain criteria. To build an intelligent and lightning-fast text search engine, you need to use machine learning (ML) and artificial intelligence (AI) models to convert these texts into vectors and then store the vectors in Milvus, the open-source vector database. Then, you can use Milvus to easily conduct a vector similarity search.
+文本搜索引擎是一个很好的工具，可以帮助您和您的用户找到您正在寻找的信息。它甚至可以显示很难找到的信息。文本搜索引擎将您输入的关键字或语义与文本数据库进行比较，然后返回符合特定条件的结果。要构建一个智能的、闪电般快速的文本搜索引擎，您需要使用机器学习（ML）和人工智能（AI）模型将这些文本转换为向量，然后将这些向量存储在开源向量数据库 Milvus 中。然后，您可以使用 Milvus 轻松执行矢量相似性搜索。
 
 <br/>
 
-Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/text_search_engine) to learn how to build a text search engine using Milvus and the BERT model.
+访问 [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/text_search_engine) 了解如何使用 Milvus 和 BERT 模型构建文本搜索引擎。
 
 ![text_search_engine](../../../assets/text_search_engine_demo.png)
 
-You can also learn more about how to use Milvus to build other systems for various application scenarios in our [bootcamp repo](https://github.com/milvus-io/bootcamp) on Github.
+您还可以在我们的 Github 上的 [bootcamp repo](https://github.com/milvus-io/bootcamp) 中了解更多关于如何使用 Milvus 为各种应用场景构建其他系统。
