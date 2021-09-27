@@ -28,7 +28,7 @@ id: release_notes.md
 - 修复了一个构建索引后可能会导致集合中向量条数变化的问题。[#2768](https://github.com/milvus-io/milvus/issues/2768)
 
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.1/CHANGELOG.md) 了解更多已修复问题。
 
 ## v0.10.0
 
@@ -55,7 +55,7 @@ id: release_notes.md
 
 - 修复了一个搜索性能降低的问题。[#2429](https://github.com/milvus-io/milvus/issues/2429)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.0/CHANGELOG.md) 了解更多已修复问题。
 
 
 ## v0.9.1
