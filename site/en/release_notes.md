@@ -32,7 +32,7 @@ id: release_notes.md
 - A FLAT search on binary vectors causes the server to crash, if the dimension of the vectors is not multiple of 2. [#4678](https://github.com/milvus-io/milvus/issues/4678)
 - The GPU cache holds more data than specified. [#4719](https://github.com/milvus-io/milvus/issues/4719)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.6/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.6/CHANGELOG.md) for more information.
 
 ## v0.10.5
 
@@ -57,7 +57,7 @@ id: release_notes.md
 - Calling `load_collection()` and `search()` in multiple threads causes Milvus to hang. [#4378](https://github.com/milvus-io/milvus/issues/4378)
 - Milvus only searches the default partition if the search parameter `partition_tags` contains `_default`. [#4484](https://github.com/milvus-io/milvus/issues/4484)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.5/CHANGELOG.md) for more information.
 
 ## v0.10.4
 
@@ -83,7 +83,7 @@ id: release_notes.md
 - An out-of-memory error occurs when searching on GPU. [#4174](https://github.com/milvus-io/milvus/issues/4174)
 - Memory leaks when building an IVF index. [#4318](https://github.com/milvus-io/milvus/issues/4318)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.4/CHANGELOG.md) for more information.
 
 ## v0.10.3
 
@@ -110,7 +110,7 @@ id: release_notes.md
 - Milvus running on multiple GPU devices and using IVF_SQ8H crashes if GPU cache is set too low. [#3742](https://github.com/milvus-io/milvus/issues/3742)
 - Milvus reports a CUDA error when quitting, if the index is IVF_SQ8H. [#3760](https://github.com/milvus-io/milvus/issues/3760)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.3/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.3/CHANGELOG.md) for more information.
 
 ## v0.10.2
 
@@ -136,7 +136,7 @@ id: release_notes.md
 - The server crashes if you set `cache.cache_size` smaller than the size of an index file in a multi-GPU scenario. [#3012](https://github.com/milvus-io/milvus/issues/3012)
 - Search result sets based on IP metric are incorrectly merged, if you insert vectors to multiple partitions in Mishards. [#3133](https://github.com/milvus-io/milvus/issues/3133)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.2/CHANGELOG.md) for more information.
 
 
 ## v0.10.1
@@ -162,7 +162,7 @@ id: release_notes.md
 - The upper limit of `nprobe` is incorrect on the GPU-enabled Milvus. [#2767](https://github.com/milvus-io/milvus/issues/2767)
 - The number of the vectors changes occasionally after building an index. [#2768](https://github.com/milvus-io/milvus/issues/2768)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.1/CHANGELOG.md) for more information.
 
 ## v0.10.0
 
@@ -189,7 +189,7 @@ id: release_notes.md
 
 - The search performance degrades on Milvus 0.9.1. [#2429](https://github.com/milvus-io/milvus/issues/2429)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.0/CHANGELOG.md) for more information.
 
 ## v0.9.1
 
@@ -207,7 +207,7 @@ id: release_notes.md
 - A `cudaMalloc` failure occurs with GPU IVF index when nq (number of queries) is high. [#2395](https://github.com/milvus-io/milvus/issues/2395). 
 - Deleted vectors are still found in GPU-enabled Milvus. [#2450](https://github.com/milvus-io/milvus/issues/2450)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.9.1/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.9.1/CHANGELOG.md) for more information.
 
 ## v0.9.0
 
