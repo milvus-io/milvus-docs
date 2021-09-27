@@ -24,7 +24,7 @@ sidebar_label: 发版说明
 - 用户设置的 `nlist` 不一定生效。 [#2399](https://github.com/milvus-io/milvus/issues/2399)
 - 向量删除后依然会被 GPU 版 Milvus 找到。 [#2450](https://github.com/milvus-io/milvus/issues/2450)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.8.1/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.8.1/CHANGELOG.md) 了解更多已修复问题。
 
 
 
