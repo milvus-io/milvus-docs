@@ -28,7 +28,7 @@ id: release_notes.md
 - 修复了多 GPU 场景下，如果 `cache.cache_size` 设置小于单个索引文件大小，搜索时会造成系统崩溃的问题。[#3012](https://github.com/milvus-io/milvus/issues/3012)
 - 修复了在 Mishards 中插入数据至多个分区，IP 距离结果归并不正确的问题。[#3133](https://github.com/milvus-io/milvus/issues/3133)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.2/CHANGELOG.md) 了解更多已修复问题。
 
 
 
@@ -56,7 +56,7 @@ id: release_notes.md
 - 修复了一个构建索引后可能会导致集合中向量条数变化的问题。[#2768](https://github.com/milvus-io/milvus/issues/2768)
 
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.1/CHANGELOG.md) 了解更多已修复问题。
 
 ## v0.10.0
 
@@ -83,7 +83,7 @@ id: release_notes.md
 
 - 修复了一个搜索性能降低的问题。[#2429](https://github.com/milvus-io/milvus/issues/2429)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.0/CHANGELOG.md) 了解更多已修复问题。
 
 
 ## v0.9.1
