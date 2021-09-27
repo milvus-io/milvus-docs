@@ -29,7 +29,7 @@ sidebar_label: Release Notes
 - The upper limit of `nprobe` is incorrect on the GPU-enabled Milvus. [#2767](https://github.com/milvus-io/milvus/issues/2767)
 - The number of the vectors changes occasionally after building an index. [#2768](https://github.com/milvus-io/milvus/issues/2768)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.1/CHANGELOG.md) for more information.
 
 ## v0.10.0
 
@@ -56,7 +56,7 @@ sidebar_label: Release Notes
 
 - The search performance degrades on Milvus 0.9.1. [#2429](https://github.com/milvus-io/milvus/issues/2429)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.0/CHANGELOG.md) for more information.
 
 ## v0.9.1
 
@@ -74,7 +74,7 @@ sidebar_label: Release Notes
 - A `cudaMalloc` failure occurs with GPU IVF index when nq (number of queries) is high. [#2395](https://github.com/milvus-io/milvus/issues/2395). 
 - Deleted vectors are still found in GPU-enabled Milvus. [#2450](https://github.com/milvus-io/milvus/issues/2450)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.9.1/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.9.1/CHANGELOG.md) for more information.
 
 ## v0.9.0
 
