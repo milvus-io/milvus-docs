@@ -28,7 +28,7 @@ id: release_notes.md
 - 修复了一个使用 GPU 搜索时出现的 out-of-memory 报错。[#4174](https://github.com/milvus-io/milvus/issues/4174)
 - 修复了一个创建 IVF 索引时出现内存泄漏的问题。[#4318](https://github.com/milvus-io/milvus/issues/4318)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.4/CHANGELOG.md) 了解更多已修复问题。
 
 ## v0.11.0
 
@@ -219,7 +219,7 @@ Milvus v0.11.0 暂不支持 Mishards 分布式方案。
 - 修复了在多 GPU 设备上采用 IVF_SQ8H 索引时若 GPU 缓存设置过小， Milvus 会崩溃的问题。[#3742](https://github.com/milvus-io/milvus/issues/3742)
 - 修复了在采用 IVF_SQ8H 索引时，Milvus 退出时报的一个 CUDA 错误。[#3760](https://github.com/milvus-io/milvus/issues/3760)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.3/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.3/CHANGELOG.md) 了解更多已修复问题。
 
 ## v0.10.2
 
@@ -245,7 +245,7 @@ Milvus v0.11.0 暂不支持 Mishards 分布式方案。
 - 修复了多 GPU 场景下，如果 `cache.cache_size` 设置小于单个索引文件大小，搜索时会造成系统崩溃的问题。[#3012](https://github.com/milvus-io/milvus/issues/3012)
 - 修复了在 Mishards 中插入数据至多个分区，IP 距离结果归并不正确的问题。[#3133](https://github.com/milvus-io/milvus/issues/3133)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.2/CHANGELOG.md) 了解更多已修复问题。
 
 
 
@@ -273,7 +273,7 @@ Milvus v0.11.0 暂不支持 Mishards 分布式方案。
 - 修复了一个构建索引后可能会导致集合中向量条数变化的问题。[#2768](https://github.com/milvus-io/milvus/issues/2768)
 
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.1/CHANGELOG.md) 了解更多已修复问题。
 
 ## v0.10.0
 
@@ -300,7 +300,7 @@ Milvus v0.11.0 暂不支持 Mishards 分布式方案。
 
 - 修复了一个搜索性能降低的问题。[#2429](https://github.com/milvus-io/milvus/issues/2429)
 
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) 了解更多已修复问题。
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.10.0/CHANGELOG.md) 了解更多已修复问题。
 
 
 ## v0.9.1
