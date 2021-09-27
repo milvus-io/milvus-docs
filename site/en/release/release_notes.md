@@ -26,7 +26,7 @@ sidebar_label: Release Notes
 - `nlist` set by the user may not take effect. [#2399](https://github.com/milvus-io/milvus/issues/2399)
 - Deleted vectors are still found in GPU-enabled Milvus. [#2450](https://github.com/milvus-io/milvus/issues/2450)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.8.1/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/v0.8.1/CHANGELOG.md) for more information.
 
 
 
