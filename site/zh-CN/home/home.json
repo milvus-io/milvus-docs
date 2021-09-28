@@ -60,16 +60,16 @@
           "label": "开发文档",
           "list": [
             {
-              "text": "PyMilvus-ORM API 参考",
-              "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
-            },
-            {
               "text": "向量索引",
               "link": "index.md"
             },
             {
               "text": "相似度计算方式",
               "link": "metric.md"
+            },
+            {
+                "text": "PyMilvus API Reference",
+                "link": "/api-reference/pymilvus/{{python_version}}/install.html"
             }
           ]
         },
