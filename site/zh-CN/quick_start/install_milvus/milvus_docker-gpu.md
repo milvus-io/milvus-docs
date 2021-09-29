@@ -155,6 +155,10 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 
 在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
 </details>
+<details>
+<summary><font color="#4fc4f9">如何为建立索引和检索分配GPU？</font></summary>
+{{fragments/faq_assign_gpu.md}}
+</details>
 
 
 
