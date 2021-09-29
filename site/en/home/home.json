@@ -101,7 +101,7 @@
       "loadBtn": {
         "label": "See More Blogs",
         "isExternal": true,
-        "link": "blog"
+        "link": "/blog"
       },
       "title": "Blog",
       "items": [
