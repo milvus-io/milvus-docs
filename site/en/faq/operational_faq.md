@@ -142,6 +142,10 @@ pip install grpcio-tools==1.37.0
 
 Yes, PyMilvus v1.1.2 supports specifying the server connection timeout.
 
+#### How to assign GPU devices to index/search?
+
+{{fragments/faq_assign_gpu.md}}
+
 
 #### Still have questions?
 
