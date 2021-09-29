@@ -157,6 +157,10 @@ Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best 
 
 </details>
 
+<details>
+<summary><font color="#4fc4f9">How to assign GPU devices to index/search?</font></summary>
+{{fragments/faq_assign_gpu.md}}
+</details>
 
 
 ## What's next

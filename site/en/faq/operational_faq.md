@@ -133,6 +133,9 @@ If you use SQLite to manage Metadata, you receive this error message when write 
 
 Yes, PyMilvus v1.1.2 supports specifying the server connection timeout.
 
+#### How to assign GPU devices to index/search?
+{{fragments/faq_assign_gpu.md}}
+
 #### Still have questions?
 
 You can:
