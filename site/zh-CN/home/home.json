@@ -103,7 +103,7 @@
       "loadBtn": {
         "label": "See More Blogs",
         "isExternal": true,
-        "link": "blog"
+        "link": "/blog"
       },
       "title": "博客文章",
       "items": [
