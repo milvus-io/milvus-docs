@@ -1,4 +1,4 @@
-在/home/$USER/milvus/conf路径下的**server_config.yaml**文件中，你可以为建立索引以及检索分配GPU。如下代码所示：
+在 /home/$USER/milvus/conf 路径下的 <b>server_config.yaml</b> 文件中，你可以为建立索引以及检索分配 GPU。如下代码所示：
 
 ```
 gpu:
@@ -13,5 +13,5 @@ gpu:
     - gpu3
 ```
 <div class="alert note">
-gpu0, 1, 2, 3是分配给Docker容器的GPU中的前四个。
+gpu 0, 1, 2, 3 是分配给 Docker 容器的 GPU 中的前四个。
 </div>
