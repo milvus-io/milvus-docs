@@ -3,6 +3,8 @@ id: boolean.md
 ---
 # 布尔表达式语法规则
 
+谓词表达式输出一个布尔值。 Milvus 通过谓词搜索进行标量过滤。谓词表达式在求值时返回 TRUE 或 FALSE。查看 [Python SDK API]((/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/api/collection.html)) 参考以获取有关使用谓词表达式的说明。
+
 [扩展巴科斯范式（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)语法规则中定义了 布尔表达式的语法规则。布尔表达式的语法规则如下所示：
 
 ```
