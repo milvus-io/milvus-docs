@@ -7,13 +7,13 @@ assignees: ''
 
 ---
 
-> Note: This repository is ONLY used to solve issues related to DOCS.
+> Note: This request is for USER DOCS ONLY.
 > For other issues, please move to [other repositories](https://github.com/milvus-io/).
 
 Before submitting your question, make sure you have:
 
 - Googled your question.
 - Searched the [GitHub issues](https://github.com/milvus-io/docs/issues).
-- Read the [documentation](https://github.com/milvus-io/docs)
+- Read the [documentation](https://milvus.io/docs).
 
 "What is your question?"

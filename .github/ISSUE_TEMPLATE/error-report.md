@@ -7,13 +7,12 @@ assignees: ''
 
 ---
 
-> Note: This repository is ONLY used to solve issues related to DOCS.
+> Note: This request is for USER DOCS ONLY.
 > For other issues, please move to [other repositories](https://github.com/milvus-io/).
 
-**Where is the error**
-What is the URL/path of the document related to this issue?
+**Issue**
 
-**How would you like to improve it**
+**Suggestion**
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+*If applicable, add screenshots to help explain your problem.*
