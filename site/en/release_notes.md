@@ -171,7 +171,7 @@ Release date: 2021-08-13
 
 ### Compatibility
 
-| **Milvus version** | **Python SDK version**                | **Java SDK version** | **Go SDK version** |
+| Milvus version | Python SDK version                | Java SDK version | Go SDK version |
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
 | 2.0.0-RC4          | {{var.milvus_python_sdk_version}} | Coming soon          | Coming soon        |
 
