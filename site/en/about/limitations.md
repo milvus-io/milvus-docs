@@ -5,6 +5,8 @@ summary: Learn about the limitations while using Milvus.
 ---
 # Milvus limitations
 
+Milvus is completely committed to providing the best vector databases to power AI applications and similarity search. However, the team is continuously working to bring in more features and the best utilities to enhance the customer experience. This page lists out some known limitations that the users may encounter when using Milvus.
+
 ## Limitations on the length of an identifier
 
 | Identifier type      | Maximum length (number of characters allowed) |
