@@ -11,14 +11,14 @@ sidebar_label: Milvus Changelog
 ### Improvements
 - \#169, #177, #183 and #184 Update Product FAQ and Operational FAQ topics.
 - \#174 Update Install Milvus and Milvus Configuration topics.
-        Add Index Types, Table Partition, Data Management and Contribute topics.
-        Update server_config.yaml.
+        Add Index Types, Table Partition, Data Management, and Contribute topics.
+        Update server_config.yaml.
 - \#192 Add release note for v0.6.0.
-        
+        
 ## [v0.5.3] 2019-11-14
 
 ### Improvements
-- \#155 Add the `nprobe` argument which is missing in search result filter command in Learn Milvus Operations topic.
+- \#155 Add the `nprobe` argument which is missing in the search result filter command in Learn Milvus Operations topic.
 - \#157 Add release note for v0.5.3.
 
 ## [v0.5.1] 2019-11-04
@@ -43,4 +43,3 @@ sidebar_label: Milvus Changelog
 - \#93 Update README and create CONTRIBUTING.md.
 - \#100 Update Milvus config file to remove doc about GPU-only search 
 - \#107 Remove "Delete vectors by range" in Milvus operations
-
