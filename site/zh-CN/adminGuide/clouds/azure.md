@@ -1,65 +1,68 @@
 ---
 id: azure.md
-title: Guide to Deploying Milvus on Microsoft Azure With Kubernetes
-summary: Learn how to deploy Milvus cluster on Azure.
+title: 使用 Kubernetes 在 Microsoft Azure 上部署 Milvus 的指南
+summary: 了解如何在 Azure 上部署 Milvus 集群。
 ---
 
-# Guide to Deploying Milvus on Microsoft Azure With Kubernetes
+# 使用 Kubernetes 在 Microsoft Azure 上部署 Milvus 的指南
 
-This guide is a set of instructions for deploying Milvus cluster on Microsoft Azure.
+本指南是一套在 Microsoft Azure 上部署 Milvus 集群的说明
 
-## Prerequisites
+## 先决条件
 
-1. Confirm that your Azure project is set up properly and that you have access to the resources you would like to use. Contact your Azure administrator if you are unsure about your permissions. 
-2. Install Azure CLI and confirm that you are properly authenticated. 
-3. Install kubectl and helm. You can also use the Azure Cloud Shell from your browser, which offers a choice of Bash or PowerShell. 
+1. 确认您的 Azure 项目设置正确，并且您有权访问要使用的资源。如果不确定自己的权限，请联系 Azure 管理员。
+
+2. 安装 Azure CLI 并确认您已正确进行身份验证。
+
+3. 安装 kubectl 和 helm。还可以从浏览器使用 Azure Cloud Shell，它提供了 Bash 或 PowerShell 选项。
 
 <div class="alert note">
-Azure Cloud Shell has Azure CLI, kubectl, and helm all pre-installed. 
+Azure Cloud Shell 预装了 Azure CLI、kubectl 和 helm。 
 </div>
 
-## Provision a Kubernetes cluster with Azure Kubernetes Service (AKS)
-This guide uses [Azure Portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal) to create a cluster and AKS to provision a Kubernetes cluster. You can access the AKS creation interface [here](https://portal.azure.com/#create/microsoft.aks).
+## 使用 Azure Kubernetes 服务 (AKS) 预配 Kubernetes 群集
 
-1. Select the appropriate options.
+本指南使用 [Azure 门户](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal) 创建集群和 AKS 以预配 Kubernetes 集群。可以访问AKS创建界面 [这里](https://portal.azure.com/#create/microsoft.aks).
 
-**Basics**
+1. 选择合适的选项.
 
-- Project Details
-  - Subscription: Contact your organization's Azure Administrator to determine which subscription you should use.
+**基本**
 
-  - Resource group: Contact your organization's Azure Administrator to determine which resource group you should use.
+- **Project 细节**
+  - `Subscription`: 请联系您组织的 Azure 管理员以确定您应该使用哪个订阅。
 
-- Cluster Details
-  - Kubernetes cluster name: A cluster name of your own choice.
+  - `Resource group`: 请联系您组织的 Azure 管理员以确定您应该使用哪个资源组。
 
-  - Region: A region of your own choice. 
+- **Cluster 细节**
+  - `Kubernetes cluster name`: 您自己选择的 cluster 名称。
 
-  - Availability zones: Pick a number of [availability zones](https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters) based on your needs. For production clusters, we recommend you to use multiple availability zones. But for testing purposes, it is unnecessary to use more than one availability zone.
+  - `Region`: 您自己选择的地区。 
 
-- Primary Node Pool
+  - `Availability zones`: [选择多个可用区](https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters) 根据您的需求。对于生产集群，我们建议您使用多个可用区。但出于测试目的，没有必要使用多个可用区。
 
-  - Node size: We strongly recommend choosing a node type with at least **16 GiB of RAM** available. Depending on your data scale, you can also pick a node type with more resources.
-  
+- **Primary Node Pool**
+
+  - `Node size`: 我们强烈建议选择具有至少 **16 GiB 可用 RAM** 的节点类型。根据您的数据规模，您还可以选择具有更多资源的节点类型。
+
     <div class="alert note">    
-    You may select different machine types to better suit your work case, but we strongly recommend that worker nodes all have at least 16 GB of memory to ensure minimum stable operation.
+    您可以选择不同的机器类型以更好地适应您的工作情况，但我们强烈建议工作节点都具有至少 16 GB 的内存，以确保最低限度的稳定运行。
     </div>
 
-  - Scale Method: A scaling method of your own choice.
+  - `Scale Method`: 您自己选择的 **scaling method**
 
-  - Node Count: The number of nodes of your own choice.
+  - `Node Count`: 您自己选择的nodes数量。
 
 **Node Pools**
 
-- Enable Virtual Nodes: Whether to enable virtual nodes is of your own choice.
+- `Enable Virtual Nodes`: 是否启用 virtual nodes 由您自己选择。
 
-- Enable Virtual Machine Scale Sets: We recommend choosing `enabled`.
+- `Enable Virtual Machine Scale Sets`: 我们建议选择 `enabled`.
 
 **Networking**
 
-- Network configuration: We recommend choosing `Kubenet`.
+- Network configuration: 我们建议选择 `Kubenet`.
 
-- DNS name prefix: A DNS name prefix of your own choice.
+- DNS name prefix: 您自己选择的 DNS name prefix.
 
 - Traffic Routing
 
@@ -67,20 +70,20 @@ This guide uses [Azure Portal](https://docs.microsoft.com/en-us/azure/aks/kubern
 
   - HTTP application routing: `Not Needed`
 
-2. After selecting the appropriate options, review and create a cluster. Allow several minutes for the cluster to spin up before proceeding to the next step. 
+2. 选择适当的选项后，查看并创建一个 cluster。在继续下一步之前，让 cluster 旋转几分钟。 
 
-## Deploy Milvus with Helm
+## 使用 Helm 部署 Milvus
 
-After setting up the cluster, we can now deploy Milvus with Helm. 
+设置 cluster 后，我们现在可以使用 Helm 部署 Milvus。
 
-#### Before you begin
+#### 在你开始之前
 
-1. Connect your shell to the newly created Kubernetes cluster. 
-Navigate to your Kubernetes Cluster under the Azure resources panel. Get the requisite connection info by selecting the "connect button" under the "overview" tab. See screenshot below. 
+1. 将您的 shell 连接到新创建的 Kubernetes cluster。 
+导航到 Azure 资源面板下的 Kubernetes cluster。通过选择“概览”选项卡下的“连接按钮”获取必要的连接信息。请参阅下面的屏幕截图。 
 
 ![Azure](../../../../assets/azure.png)
 
-2. Use the Azure Cloud Shell or Azure CLI to set your subscription and configure your cluster credentials with the information in the "connect" tab.
+2. 使用 Azure Cloud Shell 或 Azure CLI 设置订阅并使用“connect”选项卡中的信息配置 cluster 凭据。
 
 ```
 az account set --subscription EXAMPLE-SUBSCRIPTION-ID
@@ -91,76 +94,84 @@ az aks get-credentials --resource-group YOUR-RESOURCE-GROUP --name YOUR-CLUSTER-
 ```
 
 <div class="alert note">
-Use the same shell for helm deployment. If you change or close your shell, repeat the above two commands before proceeding to deployment.
+
+对 helm 部署使用相同的 shell。如果您更改或关闭您的 shell，请在继续部署之前重复上述两个命令。
+
 </div>
 
-#### Deploy
+#### 部署
 
-1. Add the Milvus chart repository.
+1. 添加 Milvus chart repository。
 
 ```
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-2. Update your Milvus chart.
+2. 更新您的 Milvus chart。
 
 ```
 helm repo update
 ```
 
-3. Run helm to deploy Milvus. 
+3. 运行 helm 部署 Milvus. 
 
 <div class="alert note">
-In this guide, we pick the name <code>my-release</code>, but you can change the name.
+在本指南中，我们选择名称 <code>my-release</code>, 但您可以更改名称。
 </div>
 
 ```
 helm install my-release milvus/milvus --set cluster.enabled=true --set service.type=LoadBalancer
 ```
 
-Allow several minutes for the pods to start up. Run `kubectl get services` to check on the services. If the services are successfully booted, you can see a set of services listed out. 
+等待几分钟让 pods 启动. 执行 `kubectl get services` 检查服务。如果服务成功启动，您可以看到列出的一组服务。
 
 ![Results](../../../../assets/azure_results.png)
 
 <div class="alert note">
-Note that the IP listed under the EXTERNAL-IP column for the load blanacer is the IP for connecting to Milvus. The default Milvus port is 19530. 
+
+请注意，负载均衡器的 EXTERNAL-IP 列下列出的 IP 是连接 Milvus 的 IP。 Milvus 的默认端口是 19530。
+
 </div>
 
-## Use Azure Blob Storage
+## 用 Azure Blob Storage
 
-#### Overview
+#### 概述
 
-Azure Blob Storage is one of Microsoft Azure's cloud storage offerings, sharing many features with competitors such as AWS's S3 storage.
+Azure Blob 存储是 Microsoft Azure 的云存储产品之一，与竞争对手共享许多功能，例如 AWS 的 S3 存储。
 
-The Azure gateway node is an alternative running method for the MinIO server which behaves the same from the client's perspective, but translates and forwards all connections to Azure Blob Storage with the according Azure connection API.
 
-#### How to use
+Azure gateway node 是 MinIO 服务器的替代运行方法，从客户端的角度来看，其行为相同，但根据 Azure 连接 API 将所有连接转换并转发到 Azure Blob 存储。
 
-You need to set a number of variables before using the Azure gateway node. Most of the variables are set to appropriate default settings, but you still need to alter some variables.
+#### 如何使用
 
-**Metadata that you must set**
 
-- `minio.azuregateway.enabled`: Must be set to `true` to enable operation.
+在使用 Azure gate node 之前，您需要设置一些变量。大多数变量都设置为适当的默认设置，但您仍然需要更改一些变量。
 
-  -  Default is false. 
+**您必须设置的 Metadata**
 
-- `minio.accessKey`: Name of the Azure storage account to use.
+- `minio.azuregateway.enabled`: 必须设置为`true`才能启用操作。
 
-- `minio.secretKey`: Access key for the Azure storage account.
+  -  默认为 `false`. 
 
-- `externalAzure.bucketName`: Name of the Azure storage bucket to use. Unlike S3/MinIO buckets, Azure buckets must be *globally* unique. Therefore the default value is unset.
+- `minio.accessKey`: 要使用的 Azure storage account 的名称.
 
-  - Default is unset.
+- `minio.secretKey`: Azure cloud storage 的访问密钥。
 
-**Metadata that should be left as default**
+- `externalAzure.bucketName`: 
+要使用的 Azure storage bucket 的名称。与 S3/MinIO buckets 不同，AzureB 必须全局 唯一。因此默认值是未设置的。
 
-- `minio.azuregateway.replicas`: Number of replica nodes to use for the Azure gateway. We highly recommend using only one replica node because MinIO does not have good support for higher numbers. 
+  - 默认未设置.
 
-  - Default is 1.
+**Metadata 应该保留为默认值**
 
-- You should also inherit all of the normal MinIO metadata variables.
+- `minio.azuregateway.replicas`: 
+用于 Azure gateway 的 replica node 数。我们强烈建议只使用一个 replica node，因为 MinIO 对更高的数字没有很好的支持。 
 
-Example helm install:
+  - 默认为 1.
+
+- 您还应该继承所有正常的 MinIO metadata variables.
+
+示例 helm 安装:
 
 ```
 helm install my-release ./milvus --set cluster.enabled=true --set service.type=LoadBalancer --set minio.persistence.enabled=false --set externalAzure.bucketName=milvusbuckettwo --set minio.azuregateway.enabled=true --set minio.azuregateway.replicas=1 --set minio.accessKey=milvusstorage --set minio.secretKey=your-azure-key
