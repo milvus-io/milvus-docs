@@ -1,18 +1,19 @@
 ---
 id: recommendation_system.md
-summary: Build a personalized recommender system with Milvus. 
+summary: 使用 Milvus 构建个性化推荐系统。 
 ---
 
-# Recommender System 
+# 推荐系统
 
-The recommender system is a subset of the information filtering system, which can be used in various scenarios including movie, music, product, and feed stream recommendations. The recommender system discovers the user’s personalized needs and interests by analyzing and mining user behaviors, and recommends information or products that may be of interest to the user. Unlike search engines, recommender system do not require users to accurately describe their needs, but model their historical behavior to proactively provide information that meets user interests and needs.
+推荐系统是信息过滤系统的一个子集，可用于电影、音乐、产品和流媒体推荐等各种场景。推荐系统通过分析和挖掘用户行为，发现用户的个性化需求和兴趣，推荐用户可能感兴趣的信息或产品。与搜索引擎不同，推荐系统不要求用户准确描述他们的需求，而是对他们的历史行为进行建模，以主动提供满足用户兴趣和需求的信息。
 
 ![recommender_system](../../../assets/recommendation_system.png)
 
 <br/>
 
-Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/recommendation_system) to learn how to build an AI-powered movie recommender system using Milvus paired with PaddlePaddle's deep learning framework.
+访问 [github](https://github.com/milvus-io/bootcamp/tree/master/solutions/recommendation_system) 存储库，了解如何使用 Milvus 和 PaddlePaddle 的深度学习框架构建一个 AI 驱动的电影推荐系统。
 
 <br/>
 
-You can also learn more about how to use Milvus to build other systems for various application scenarios in our [bootcamp repo](https://github.com/milvus-io/bootcamp) on Github.
+
+您还可以在 Github 上的 [Bootcamp](https://github.com/milvus-io/bootcamp) 存储库中了解有关如何使用 Milvus 为各种应用场景构建其他系统的更多信息。
