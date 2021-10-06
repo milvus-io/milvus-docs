@@ -8,7 +8,7 @@ The Milvus docs are open-source just like the database itself and welcome contri
 
 ## What contributions can I make?
 
-Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straighforward exmaples:
+Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straightforward examples:
 
 - Fix a typo or a grammatical error.
 
@@ -20,7 +20,7 @@ Basically anything you can think of to improve our documentation and make it mor
 
 ## Before you start
 
-Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
+Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent, and inclusive documentation.
 
 ## Get started
 
@@ -48,13 +48,13 @@ For detailed information on this workflow, see [Make Your First Contribution](ht
 
 ### Languages
 
-All documentation is originally written in English and translated into other language(s). Currently the official website only supports two language versions: English and Chinese, stored in their corresponding **site/en** and **site/zh-CN** directories in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know! 
+All documentation is originally written in English and translated into other language(s). Currently, the official website only supports two language versions: English and Chinese, stored in their corresponding **site/en** and **site/zh-CN** directories in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know! 
 
 ### Pages
 
 We provide documentation for each major version of Milvus. The pages for each version are found in a directory named for the version. For example, docs for Milvus v2.0.0 are in the `v2.0.0` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
 
-Within each version directory, each page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words, and should be brief but descriptive.
+Within each version directory, each page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words and should be brief but descriptive.
 
 Example:
 
@@ -85,7 +85,7 @@ related_key: keyword
 
 #### Templates 
 
-In general there are four types of documentation: 
+In general, there are four types of documentation: 
 
 - [How-to docs](how-to-doc-template.md)
 - [Conceptual docs](conceptual-doc-template.md)
@@ -106,7 +106,7 @@ When drafting a document, you should follow these type definitions with a degree
 
 *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
-> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contains a Variables.json file.
+> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a Variables.json file.
 
 ### Sidebar
 
@@ -125,7 +125,7 @@ In the JSON file for a version's sidebar, there are six possible fields:
 | `label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  |
 | `order` | Integar | The sorting order of pages and sections under current label, starting from 0. |
 | `isMenu` | Boolean | This field defines whether it is a section/subsection of the sidenav. |
-| `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** respository. |
+| `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** repository. |
 
 
 
