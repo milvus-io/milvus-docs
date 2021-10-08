@@ -48,10 +48,11 @@ This tutorial uses <code> my-release</code> as the release name. To use a differ
 
 #### Install Milvus standalone:
 ```
-$ helm install my-release milvus/milvus
+$ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false
 ```
 
 <div class="alert note">
+The default command line installs cluster version of Milvus while installing with Helm. Further setting is needed while installing Milvus standalone.
 For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm chart</a>.
 </div>
 
