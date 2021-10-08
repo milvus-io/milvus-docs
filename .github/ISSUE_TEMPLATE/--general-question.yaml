@@ -9,7 +9,7 @@ body:
       > For other issues, please move to [other repositories](https://github.com/milvus-io/).
 - type: checkboxes
   attributes:
-    label: Is your question answered somewhere?
+    label: Is your question answered elsewhere?
     description: Before submitting your question, please make sure you have:
     options:
     - label: searched the existing issues.
