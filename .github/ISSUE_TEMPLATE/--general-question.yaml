@@ -14,9 +14,9 @@ body:
     options:
     - label: searched the existing issues.
       required: true
-    - label: asked MilMil.
+      label: asked MilMil.
       required: true
-    - label: read the [documentation](https://milvus.io/docs).
+      label: read the [documentation](https://milvus.io/docs).
       required: true
 - type: textarea
   attributes:
