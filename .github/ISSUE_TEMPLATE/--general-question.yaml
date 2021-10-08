@@ -7,19 +7,16 @@ body:
     value: |
       > Note: This request is for USER DOCS ONLY.
       > For other issues, please move to [other repositories](https://github.com/milvus-io/).
-- type: markdown
-  attributes:
-    value: |
-      Before submitting your question, make sure you have:
-      - Googled your question.
-      - Searched the [GitHub issues](https://github.com/milvus-io/docs/issues).
-      - Read the [documentation](https://milvus.io/docs).
 - type: checkboxes
   attributes:
-    label: Is there an existing issue for this?
-    description: Please search to see if an issue realted to this already exists.
+    label: Is your question answered somewhere?
+    description: Before submitting your question, please make sure you have:
     options:
-    - label: I have searched the existing issues
+    - label: searched the existing issues.
+      required: true
+    - label: asked MilMil.
+      required: true
+    - label: read the [documentation](https://milvus.io/docs).
       required: true
 - type: textarea
   attributes:
