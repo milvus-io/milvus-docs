@@ -28,7 +28,8 @@ If you are just correcting a typo or grammatical error, feel free to go ahead an
 
 For more substantial changes, please follow the following steps:
 
-1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself by commenting `/assign` or `/assign @your_github_id`. 
+1. - [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself by commenting `/assign` or `/assign @your_github_id`. 
+   - Or if you want to fix an existing issue then go to [Issues](https://github.com/milvus-io/milvus-docs/issues), choose one issue and assign it to yourself by commenting `/assign` or `/assign @your_github_id`.
 
 2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
 
