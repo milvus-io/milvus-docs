@@ -6,7 +6,7 @@ summary: Learn how to create a collection in Milvus.
 
 # Create a Collection or Partition
 
-This page will show you how to create a collection or a partition in Milvus.
+This topic describes how to create a collection or a partition in Milvus.
 
 ## Create a collection
 
