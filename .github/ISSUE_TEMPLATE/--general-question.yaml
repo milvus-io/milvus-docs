@@ -12,11 +12,11 @@ body:
     label: Is your question answered elsewhere?
     description: Before submitting your question, please make sure you have
     options:
-      label: searched the existing issues.
+    - label: searched the existing issues.
       required: true
-      label: asked MilMil.
+    - label: asked MilMil.
       required: true
-      label: read the [documentation](https://milvus.io/docs).
+    - label: read the [documentation](https://milvus.io/docs).
       required: true
 - type: textarea
   attributes:
