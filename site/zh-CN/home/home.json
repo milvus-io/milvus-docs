@@ -50,8 +50,8 @@
               "link": "example_code.md"
             },
             {
-               "text": "PyMilvus API Reference",
-              "link": "/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/install.html"
+              "text": "PyMilvus API 参考",
+              "link": "/api-reference/pymilvus/{{pymilvus_version}}/install.html"
             }
           ]
         },
@@ -103,7 +103,7 @@
       "loadBtn": {
         "label": "See More Blogs",
         "isExternal": true,
-        "link": "https://zilliz.com/blog"
+        "link": "/blog"
       },
       "title": "博客文章",
       "items": [

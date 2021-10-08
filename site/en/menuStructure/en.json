@@ -193,7 +193,7 @@
     },
     {
       "id": "search.md",
-      "title": "Conduct a Search",
+      "title": "Search",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
@@ -201,19 +201,11 @@
     },
     {
       "id": "hybridsearch.md",
-      "title": "Conduct a Hybrid Search",
+      "title": "Hybrid Search",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
       "order": 1
-    },
-    {
-      "id": "expression.md",
-      "title": "Predicate Expressions",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 2
     },
     {
       "id": "query.md",

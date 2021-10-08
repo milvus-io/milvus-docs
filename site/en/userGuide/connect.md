@@ -9,9 +9,10 @@ summary: Learn how to connect Milvus server.
 This section covers operations to connect to and disconnect from a Milvus server.
 
 If you choose to operate in the Python interactive mode, type `python3` in your terminal.
-
-> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
-
+ 
+<div class="alert note">
+Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
 
 ## Connect to the Milvus server
 
@@ -66,7 +67,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 ## Disconnect from the Milvus server
 
-When you no longer need Milvus services, you can release all connection resources of the Milvus server:
+When you no longer need Milvus services, you can disconnect from Milvus server:
 
 {{fragments/multiple_code.md}}
 
