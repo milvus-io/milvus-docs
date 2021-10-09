@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docke
 ```
 
 
-2. To pull and save Docker images, follow these steps:
+2. Pull and save the Docker images:
 
 ```
 pip3 install -r requirements.txt
@@ -50,7 +50,7 @@ cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image 
 
 ## Install Milvus
 
-Offline installation of Milvus, run:
+To install Milvus offline, run:
 
 ```
 docker-compose -f docker-compose.yml up -d
@@ -58,7 +58,7 @@ docker-compose -f docker-compose.yml up -d
 
 ## Uninstall Milvus
 
-The instructions for uninstalling Milvus, run:
+To Uninstall Milvus, run:
 
 ```
 docker-compose -f docker-compose.yml down
