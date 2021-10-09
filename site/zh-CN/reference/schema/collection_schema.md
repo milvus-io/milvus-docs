@@ -7,15 +7,14 @@ summary: 学习如何在 Milvus 中定义 collection schema。
 
 Collection schema 是 collection 的逻辑定义。通常你需要在定义 collection schema 和 [创建 collection](create.md) 之前定义 [field schema](field_schema.md)。
 
-
-## Field schema 属性
+## Collection schema 属性
 
 <table class="properties">
 	<thead>
 	<tr>
 		<th>属性</td>
 		<th>描述</th>
-		<th>Note</th>
+		<th>备注</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -31,7 +30,7 @@ Collection schema 是 collection 的逻辑定义。通常你需要在定义 coll
 	</tr>
     <tr>
 		<td>auto_id</td>
-		<td>是否启用自动分配ID</td>
+		<td>是否启用自动分配 ID</td>
 		<td>数据类型：Boolean (<code>true</code> 或 <code>false</code>)。<br/>可选</td>
 	</tr>
 	</tbody>
@@ -40,7 +39,7 @@ Collection schema 是 collection 的逻辑定义。通常你需要在定义 coll
 ## 创建 collection schema
 
 <div class="alert note">
-  先定义 field schema，再定义 collection schema
+  先定义 field schema，再定义 collection schema。
 </div>
 
 ```python
@@ -59,12 +58,12 @@ collection_name1 = "tutorial_1"
 collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
 ```
 <div class="alert note">
-  你可以使用 <code>shards_num</code> 定义分片编号，并在 <code>using</code> 中指定别名来定义在哪个 Milvus 服务器中创建 collection。
+  你可以使用 <code>shards_num</code> 参数定义分片编号，并在 <code>using</code> 中指定别名来定义在哪个 Milvus 服务器中创建 collection。
 </div>
 
 <br/>
 
-你也可以使用 `Collection.construct_from_dataframe` 创建一个 collection，自动从 DataFrame 生成一个 collection schema 并创建一个 collection。
+你也可以使用 `Collection.construct_from_dataframe` 自动从 DataFrame 生成一个 collection schema 并创建一个 collection。
 
 ```python
 import pandas as pd
