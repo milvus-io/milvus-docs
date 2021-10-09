@@ -1,11 +1,13 @@
 ---
 id: deploy_s3.md
+title: Set up S3 Storage for Milvus
+related_key: S3 storage for Milvus
 summary: Learn how to set up S3 storage for Milvus.
 ---
 
 # Set up S3 Storage for Milvus
 
-Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and index files. This page shows you how to set up S3 storage for Milvus. 
+Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and index files. This topic describes how to set up S3 for Milvus. 
 
 ## Set Up S3 with Docker Compose
 
@@ -44,7 +46,7 @@ Below are S3 configurations for Helm Charts installation:
 | externalS3.bucketName | S3 bucket name                       |                                      |
 | minio.enabled         | Enable or disable MinIO              | <code>true</code>/<code>false</code> |
 
-#### Set up S3 using command line at startup
+### Set up S3 using command line at startup
 
 To set up S3 for Milvus at the startup, run:
 
@@ -52,7 +54,7 @@ To set up S3 for Milvus at the startup, run:
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='<your_s3_endpoint>' --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name> --set minio.enabled=false
 ```
 
-#### Set up S3 via configuring **values.yaml**
+### Set up S3 via configuring **values.yaml**
 
 Configure the `minio` section in the **values.yaml** file as follow:
 

@@ -1,11 +1,12 @@
 ---
 id: connect.md
+related_key: connect Milvus
 summary: Learn how to connect Milvus server.
 ---
 
 # Connect to Milvus Server
 
-This section covers operations to connect to and disconnect from a Milvus server.
+This topic describes how to connect to and disconnect from a Milvus server.
 
 If you choose to operate in the Python interactive mode, type `python3` in your terminal.
  

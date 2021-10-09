@@ -1,10 +1,13 @@
 ---
 id: query.md
+related_key: query vectors
 summary: Learn how to query vectors in Milvus.
 
 ---
 
 # Query
+
+This topic describes how to conduct a query.
 
 In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
 

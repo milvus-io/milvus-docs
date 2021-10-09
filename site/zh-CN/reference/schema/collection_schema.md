@@ -1,11 +1,12 @@
 ---
 id: collection_schema.md
 summary: 学习如何在 Milvus 中定义 collection schema。
----
+
 
 # Collection Schema
 
 Collection schema 是 collection 的逻辑定义。通常你需要在定义 collection schema 和 [创建 collection](create.md) 之前定义 [field schema](field_schema.md)。
+
 
 ## Collection schema 属性
 
@@ -63,7 +64,9 @@ collection1 = Collection(name=collection_name1, schema=schema, using='default', 
 
 <br/>
 
+
 你也可以使用 `Collection.construct_from_dataframe` 自动从 DataFrame 生成一个 collection schema 并创建一个 collection。
+
 
 ```python
 import pandas as pd
