@@ -1,10 +1,13 @@
 ---
 id: delete.md
+related_key: delete
 summary: Learn how to drop index, partition, and collection in Milvus.
 
 ---
 
 # Delete Operations
+
+This topic describes how to delete an index, partition, collection, or entity.
 
 The delete operations affect data already inserted into Milvus. Think twice before you delete.
 

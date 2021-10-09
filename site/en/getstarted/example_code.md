@@ -1,11 +1,12 @@
 ---
 id: example_code.md
+related_key: pymilvus
 summary: Get started with Milvus faster using this Python example code.
 ---
 
 # Run Milvus using Python
 
-After the Milvus server boots successfully, test the platform using our Python sample code.
+This topic describes how to run Milvus using Python.
 
 1. Install PyMilvus and its dependencies:
 

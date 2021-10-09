@@ -1,12 +1,13 @@
 ---
 id: search.md
+related_key: search
 summary: Conduct a vector similarity search with Milvus.
 
 ---
 
 # Conduct a Vector Similarity Search
 
-This page will show you how to conduct a similarity search in Milvus.
+This topic describes how to conduct a vector similarity search.
 
 <div class="alert note">
 Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.

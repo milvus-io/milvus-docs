@@ -1,0 +1,30 @@
+name: 🤔 General question
+description: Any question that isn't answered in the docs
+title: "[QUESTION]: " 
+body:
+- type: markdown
+  attributes:
+    value: |
+      > Note: This request is for USER DOCS ONLY.
+      > For other issues, please move to [other repositories](https://github.com/milvus-io/).
+- type: checkboxes
+  attributes:
+    label: Is your question answered elsewhere?
+    description: Before submitting your question, please make sure you have
+    options:
+    - label: searched the existing issues.
+      required: true
+    - label: asked MilMil.
+      required: true
+    - label: read the [documentation](https://milvus.io/docs).
+      required: true
+- type: textarea
+  attributes:
+    label: What is your question?
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: |
+      Links? References? Anything that will give us more context about the issue you are encountering!
+  validations:
+    required: false
