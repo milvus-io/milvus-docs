@@ -58,7 +58,7 @@ collection_name1 = "tutorial_1"
 collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
 ```
 <div class="alert note">
-  你可以使用 <code>shards_num</code> 参数定义分片编号，并在 <code>using</code> 中指定别名来定义在哪个 Milvus 服务器中创建 collection。
+  你可以使用 <code>shards_num</code> 参数定义分片编号，并在 <code>using</code> 中指定 alias 来定义在哪个 Milvus server 中创建 collection。
 </div>
 
 <br/>
