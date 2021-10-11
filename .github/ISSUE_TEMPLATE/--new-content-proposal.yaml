@@ -1,0 +1,40 @@
+name: 🚀 New Content Proposal
+description: Want to add a new section or a new doc?
+title: "[Suggestion]: "
+body:
+- type: markdown
+  attributes:
+    value: |
+      Note: This request is for USER DOCS ONLY.
+      For other issues, please move to [other repositories](https://github.com/milvus-io/).
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue related to this already exists.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: textarea
+  attributes:
+    label: Topic
+    description: Let us know the doc you would like to elaborate or the name of the new doc.
+  validations:
+    required: true
+- type: dropdown
+  id: doc-type
+  attributes:
+    label: Type
+    description: Generally speaking, we divide our documentation into four categories. If you would like to add a new doc, choose one from the categories given below.
+    options:
+      - how-to doc
+      - conceptual doc
+      - reference doc
+      - tutorials
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Outline
+    description: Provide an outline for the to-be-added doc.
+  validations:
+    required: false

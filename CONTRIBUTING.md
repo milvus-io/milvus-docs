@@ -20,7 +20,7 @@ Basically anything you can think of to improve our documentation and make it mor
 
 ## Before you start
 
-Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
+Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](https://github.com/milvus-io/milvus/blob/master/CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
 
 ## Get started
 
@@ -29,6 +29,8 @@ If you are just correcting a typo or grammatical error, feel free to go ahead an
 For more substantial changes, please follow the following steps:
 
 1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself by commenting `/assign` or `/assign @your_github_id`. 
+   
+   Or, if you want to fix an existing issue then go to [Issues](https://github.com/milvus-io/milvus-docs/issues), choose one issue and assign it to yourself by commenting `/assign` or `/assign @your_github_id`.
 
 2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
 
@@ -88,10 +90,10 @@ related_key: keyword
 
 In general there are four types of documentation: 
 
-- [How-to docs](how-to-doc-template.md)
-- [Conceptual docs](conceptual-doc-template.md)
-- [Reference docs](reference-doc-template.md)
-- [Tutorials](tutorial-doc-template.md)
+- [How-to docs](site/template/how-to-doc-template.md)
+- [Conceptual docs](site/template/conceptual-doc-template.md)
+- [Reference docs](site/template/reference-doc-template.md)
+- [Tutorials](site/template/tutorial-doc-template.md)
 
 When drafting a document, you should follow these types of definitions with a degree of flexibility, as there is some amount of cross-over between them. 
 
@@ -107,7 +109,7 @@ When drafting a document, you should follow these types of definitions with a de
 
 *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
-> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a Variables.json file.
+> The defined variables are implemented within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a Variables.json file.
 
 ### Sidebar
 
@@ -136,136 +138,69 @@ This example shows some of the "Get Started" section of the sidenav:
 
 
 
-\``` json
-
+```
 {
-
      "menuList": [
-
      ...,
-
      {
-
       "id": "getstarted",
-
       "title": "Get Started",
-
       "label1": "",
-
       "label2": null,
-
       "label3": null,
-
       "order": 1,
-
       "isMenu": true
-
-},
-
+     },
      {
-
        "id": "prerequisite-docker.md",
-
        "title": "Before you Begin",
-
        "label1": "getstarted",
-
        "label2": null,
-
        "label3": null,
-
        "order": 0
-
      },  
-
      {
-
       "id": "installmilvus",
-
       "title": "Install Milvus",
-
       "label1": "getstarted",
-
       "label2": null,
-
       "label3": null,
-
       "order": 1,
-
       "isMenu": true
-
-
-
     },
-
     {
-
       "id": "install_standalone-docker.md",
-
       "title": "Milvus Standalone",
-
       "label1": "getstarted",
-
       "label2": "installmilvus",
-
       "label3": null,
-
       "order": 0
-
     },
-
     {
-
       "id": "install_cluster-docker.md",
-
       "title": "Milvus Cluster",
-
       "label1": "getstarted",
-
       "label2": "installmilvus",
-
       "label3": null,
-
       "order": 1
-
     }, 
-
     {
-
       "id": "install_offline-docker.md",
-
       "title": "Install Offline",
-
       "label1": "getstarted",
-
       "label2": "installmilvus",
-
       "label3": null,
-
       "order": 2
-
     }, 
-
     {
-
       "id": "example_code.md",
-
       "title": "Hello Milvus",
-
       "label1": "getstarted",
-
       "label2": "",
-
       "label3": "",
-
       "order": 2
-
     },
-
      ...
-
      ]
-
 }
-
-\```
+```

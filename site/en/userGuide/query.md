@@ -7,12 +7,14 @@ summary: Learn how to query vectors in Milvus.
 
 # Query
 
+This topic describes how to conduct a query.
+
 In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
 
 A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
 
 <div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
 
 
@@ -42,22 +44,22 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</thead>
 	<tbody>
 	<tr>
-		<td>alias*</td>
+		<td><code>alias*</code></td>
 		<td>Alias for the Milvus server</td>
     <td>Data type: String<br/>Mandatory</td>
 	</tr>
 	<tr>
-		<td>host*</td>
+		<td><code>host*</code></td>
 		<td>IP address of the Milvus server</td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>
-		<td>port*</td>
+		<td><code>port*</code></td>
 		<td>Port of the Milvus server</td>
 		<td>Mandatory</td>
 	</tr>
     <tr>
-		<td>address**</td>
+		<td><code>address**</code></td>
 		<td>Address of the Milvus server.</td>
 		<td><code>"server_IP:server_port"</code><br/>Mandatory</td>
 	</tr>

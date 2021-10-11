@@ -55,7 +55,7 @@ The default command line installs cluster version of Milvus while installing wit
 For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>.
 </div>
 
-*If Milvus boots successfully, each Milvus’ pod shows `1/1` under `READY`:*
+*If Milvus starts successfully, each Milvus’ pod shows `1/1` under `READY`:*
 ```
 $ kubectl get pods
 NAME                                              READY   STATUS    RESTARTS   AGE

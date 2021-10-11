@@ -7,10 +7,10 @@ summary: Learn how to insert data to Milvus.
 
 # Insert Vectors
 
-You can insert vectors to a specific collection or a specified partition within the collection.
+This topic describes how to insert vectors into a collection or partition.
 
 <div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
 
 1. Generate random vectors:
@@ -61,17 +61,17 @@ await milvusClient.dataManager.insert({{
 	</thead>
 	<tbody>
 	<tr>
-		<td>data</td>
+		<td><code>data</code></td>
 		<td>Data to insert into Milvus</td>
 		<td>Mandatory</td>
 	</tr>
  	<tr>
-		<td>collection_name**</td>
+		<td><code>collection_name**</code></td>
 		<td>Name of the collection to insert data into</td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>
-		<td>partition_name</td>
+		<td><code>partition_name</code></td>
 		<td>Name of the partition to insert data into</td>
 		<td>Optional</td>
 	</tr>

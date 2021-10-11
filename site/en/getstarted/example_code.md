@@ -6,7 +6,7 @@ summary: Get started with Milvus faster using this Python example code.
 
 # Run Milvus using Python
 
-After the Milvus server boots successfully, test the platform using our Python sample code.
+This topic describes how to run Milvus using Python.
 
 1. Install PyMilvus and its dependencies:
 
@@ -88,7 +88,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Refer to [API Reference](/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/results.html) for more details.
+Refer to [API Reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) for more details.
 
 - Conducts a hybrid search：
 <div class="alert note">
