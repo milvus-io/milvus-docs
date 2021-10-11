@@ -123,7 +123,7 @@ await milvusClient.dataManager.search({
 });
 ```
 <div class="alert warning">
-在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，以预留内存资源给执行引擎。
+在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，从而为执行引擎预留内存资源。
 </div>
 
 5. 检查返回结果：
