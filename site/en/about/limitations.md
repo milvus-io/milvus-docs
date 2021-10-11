@@ -58,6 +58,9 @@ VARCHAR will be supported in the 2.0 stable version. More string data types will
 | Search   | 512 MB     |
 | Query   | 512 MB      |
 
+## Load limits
+To reserve memory resources for execution engine, data to be load must be under 70% of the total memory resources of all query nodes.
+
 ## Search limits
 | Vectors      | Limit |
 | ----------- | ----------- |
