@@ -122,6 +122,9 @@ await milvusClient.dataManager.search({
   vector_type: 100, // float vector -> 100
 });
 ```
+<div class="alert warning">
+在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，以预留内存资源给执行引擎。
+</div>
 
 5. 检查返回结果：
 
