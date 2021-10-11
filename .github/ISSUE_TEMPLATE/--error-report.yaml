@@ -1,0 +1,34 @@
+name: 🐞 Bug report
+description: Typos, grammatical errors, terminology misuse, ambiguity, etc.
+title: "[ERROR]: " 
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to fill out this bug report! 
+      > Note: This request is for USER DOCS ONLY.
+      > For other issues, please move to [other repositories](https://github.com/milvus-io/).
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue already exists for the bug you encountered.
+    options:
+    - label: I have searched the existing issues.
+      required: true
+- type: textarea
+  attributes:
+    label: Issue 
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Suggestion 
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: |
+      Screenshots? Links? References? Anything that will give us more context about the issue you are encountering!
+  validations:
+    required: false

@@ -3,11 +3,12 @@ id: install_offline-docker.md
 label: Install with Docker Compose
 order: 0
 group: offline
+related_key: offline
 summary: Learn how to install Milvus offline.
 ---
 # Install Milvus Offline
 
-This page will show you how to install Milvus in offline environment. Relevant files can be downloaded at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
+This topic describes how to install Milvus in an offline environment. You can download relevant files at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
 
 {{tab}}
 
@@ -38,7 +39,9 @@ python3 save_image.py --manifest docker-compose.yml
 ```
 
 <div class="alert note">
-The Docker images will be stored under the <b>images</b> directory.
+
+The Docker images will be stored in the <b>images</b> directory.
+
 </div>
 
 3. Load the Docker images:
