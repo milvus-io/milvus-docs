@@ -104,6 +104,10 @@ await milvusClient.collectionManager.loadCollection({
 </table>
 </details>
 
+<div class="alert warning">
+In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+</div>
+
 3. Search with newly created random vectors:
 
 _Milvus returns the IDs of the most similar vectors and their distances._
