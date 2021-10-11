@@ -35,6 +35,9 @@ await milvusClient.collectionManager.loadCollection({
   collection_name: COLLECTION_NAME,
 });
 ```
+<div class="alert warning">
+在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，以预留内存资源给执行引擎。
+</div>
 
 3. 创建随机向量作为 `query_records` 并调用 `search()` 进行搜索。
 *Milvus 将返回搜索结果的 ID 和距离：*
