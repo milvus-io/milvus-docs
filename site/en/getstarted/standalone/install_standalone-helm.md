@@ -19,7 +19,7 @@ Installing Milvus with Docker Compose is for testing purposes only.
 {{tab}}
 
 
-## 1. Start a cluster:
+## 1. Start a cluster
 ```
 $ minikube start
 ```
