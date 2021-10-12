@@ -1,7 +1,7 @@
 ---
 id: delete.md
 ---
-# 删除 Entity
+# 删除向量
 
 <div class="alert note">
 
