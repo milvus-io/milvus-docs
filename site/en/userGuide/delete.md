@@ -1,7 +1,7 @@
 ---
 id: delete.md
 related_key: delete
-summary: Learn how to drop index, partition, and collection in Milvus.
+summary: Learn how to delete an entity in Milvus.
 ---
 
 # Delete an Entity
