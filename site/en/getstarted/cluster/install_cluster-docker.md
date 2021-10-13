@@ -13,9 +13,6 @@ This topic describes how to install Milvus cluster with Docker Compose or on Kub
 
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
-<div class="alert note">
-Installing Milvus with Docker Compose is for testing purposes only.
-</div>
 
 {{tab}}
 
