@@ -4,6 +4,8 @@ summary: Milvus Release Notes
 ---
 # Release Notes
 
+Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
+
 ## v2.0.0-RC7
 
 Release date: 2021-10-11
@@ -188,6 +190,8 @@ It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous version
 - [#7730](https://github.com/milvus-io/milvus/pull/7730) Topic and ConsumerGroup remain after `CloseRocksMQ`.
 
 - [#8188](https://github.com/milvus-io/milvus/pull/8188) Logic error in releasing collections.
+
+
 
 ## v2.0.0-RC6
 
