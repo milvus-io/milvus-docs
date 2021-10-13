@@ -13,10 +13,6 @@ This topic describes how to install Milvus standalone with Docker Compose or on 
 
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
-<div class="alert note">
-Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
-</div>
-
 {{tab}}
 
 ## 1. Download an installation file
