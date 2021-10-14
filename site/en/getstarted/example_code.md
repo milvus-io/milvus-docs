@@ -155,16 +155,14 @@ $ python3 hello_milvus.py
 </div>
 
 
-----
-
-# Run Milvus using **NodeJS**
-
-
 <br/>
 
 
 *Congratulations! You have successfully booted Milvus Standalone and run your first vector similarity search.*
 
+----
+
+# Run Milvus using **NodeJS**
 
 This topic describes how to run Milvus using NodeJS.
 
@@ -332,6 +330,13 @@ const generateInsertData = function generateInsertData(
 ```bash
     tsc MilvusHello.ts
 ```
+
+
+
+<br/>
+
+
+*Congratulations! You have successfully booted Milvus Standalone and created your first collection.*
 
 6. Run the example
 ```bash
