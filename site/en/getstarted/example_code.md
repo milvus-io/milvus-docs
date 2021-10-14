@@ -182,7 +182,7 @@ Node version 12 or higher is required. View <a href="https://www.cloudbees.com/b
 
 2.  Install TypeScript and Node Milvus SDK and its dependencies:
 ```bash
-   npm install @zilliz/milvus2-sdk-node typescript
+   npm install @zilliz/milvus2-sdk-node typescript --save
 ```
 
 
