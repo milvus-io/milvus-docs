@@ -6,7 +6,7 @@ title: Develop Milvus 2.0 on macOs
 # Develop Milvus 2.0 on macOs
 
 ## Prerequisites
-|**Operating system**|**Requirements**|
+|Operating system|Requirements|
 | -------------------|----------------|
 |CentOS              |Version 7.5 or higher|
 |Ubuntu LTS          |Version 16.04 or higher|
@@ -14,7 +14,7 @@ title: Develop Milvus 2.0 on macOs
 
 </br>
 
-|**Hardware**|**Recommended**|
+|Hardware|Recommended|
 | -------------------|----------------|
 |CPU              | x86_64 </br> >= Intel CPU Sandy Bridge </br> CPU Instruction set:</br> - SSE42</br> - AVX</br> - AVX2</br> -AVX512 |
 |Memory         |At least 16 GB |
@@ -70,7 +70,7 @@ By using VS Code, you can mount the local file system to the workspace inside th
 
 Taking the Milvus project as an example, there is a file named **.devcontainer.json** in the root directory of the project. This file describes how VS Code accesses or creates a development container environment and defines the container environment, working directory, extension tool set, and more.
 
-**Preprequisites**
+**Prerequisites**
 
 - Install [Visual Studio Code](https://code.visualstudio.com/).
 - Install [Remote Development extension pack](https://aka.ms/vscode-remote/download/extension).
