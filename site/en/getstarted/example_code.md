@@ -332,14 +332,13 @@ const generateInsertData = function generateInsertData(
 ```
 
 
-
-<br/>
-
-
-*Congratulations! You have successfully booted Milvus Standalone and created your first collection.*
-
 6. Run the example
 ```bash
     node MilvusHello.ts
 ```
 
+
+<br/>
+
+
+*Congratulations! You have successfully booted Milvus Standalone and created your first collection.*
