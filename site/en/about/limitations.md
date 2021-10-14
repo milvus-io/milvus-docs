@@ -6,6 +6,8 @@ summary: Learn about the limits while using Milvus.
 ---
 # Milvus Limits
 
+Milvus is committed to providing the best vector databases to power AI applications and vector similarity search. However, the team is continuously working to bring in more features and the best utilities to enhance user experience. This page lists out some known limitations that the users may encounter when using Milvus.
+
 ## Length of a resource name
 
 | Resource      | Limit  |
@@ -57,6 +59,9 @@ VARCHAR will be supported in the 2.0 stable version. More string data types will
 | Insert      | 512 MB    |
 | Search   | 512 MB     |
 | Query   | 512 MB      |
+
+## Load limits
+In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
 
 ## Search limits
 | Vectors      | Limit |

@@ -6,16 +6,19 @@ summary: Roadmap and enhancement plan of Milvus.
 ---
 # Milvus Roadmap
 
+This page provides an overview of new benefits and feature upgrades we hope to provide for users in our upcoming releases, as well as our long-term goals. It is driven by user priorities and may change as their requirement or demand changes.
+
 ![Roadmap](../../../assets/roadmap.jpg)
 
 
 ## Milvus 2.0 time schedule
 
-### Next few big releases:
-- Milvus 2.1: 2021.11
-- Milvus 2.2: 2022.2
+### Upcoming major releases:
+- Milvus 2.1: November 2021
+- Milvus 2.2: February 2022
 
 ### Roadmap features
+
 #### DDL
 | Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- | 
@@ -51,9 +54,9 @@ summary: Roadmap and enhancement plan of Milvus.
 | 2.0.0-RC   | Offers three levels of tunable consistency: strong, session, consistent prefix        |         | done        |         |
 | 2.0      | Segment compaction       | sunby       | in progress       |        |
 | 2.0   | Implements dynamic load balancing        | sunby, xige-16        | in progress        |         |
-| 2.0      | mplements dynamic handoff       | xige-16, bigsheeper       | in progress       |        |
+| 2.0      | Implements dynamic handoff       | xige-16, bigsheeper       | in progress       |        |
 | 2.0   | Calculate distance between embeddings        |         | done	        |         |
-| 2.1      | Multi tenant support and access control       |        | pending       |        |
+| 2.1      | Multi-tenant support and access control       |        | pending       |        |
 | 2.2   | Change data capture        |         | pending        |         |
 | Long Term      | Adopts incremental backup       |        | pending       |        |
 | Long Term   | Supports static data encryption        |         | pending        |         |
@@ -96,7 +99,7 @@ summary: Roadmap and enhancement plan of Milvus.
 | 2.0.0-RC    | Helm installation       |        | done       |        |
 | 2.0.0-RC    | Support of Milvus Insight, a Milvus visual management tool        |         | in progress        |         |
 | 2.0      | Prometheus, Grafana and Jaeger support       | 	zwd1208       | in progress       |        |
-| 2.0   | Milvus Kuberbetes operator        | 	zwd1208, jeffoverflow        | pending        |         |
+| 2.0   | Milvus Kubernetes operator        | 	zwd1208, jeffoverflow        | pending        |         |
 | 2.1      | Multi datacenter deployment and multi-cloud integration       |        | pending       |        |
 | 2.2   | Embedded Milvus that runs on laptops	        |         | pending        |         |
 | Long Term      | Dynamic cluster expansion/shrink       |        | pending      |      |
@@ -109,13 +112,13 @@ summary: Roadmap and enhancement plan of Milvus.
 | Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC     | Python ORM-style APIs	       |        | done       |        |
-| 2.0   | Merge Pymilvus ORM and Pymilvus        |         | done        |         |
+| 2.0   | Merge PyMilvus ORM and PyMilvus        |         | done        |         |
 | 2.0      | Supports NodeJs APIs       |        | done       |     |
 | 2.0   | Supports Java SDK        |     xiaofan-luan    | in progress         |         |
 | 2.0      | Supports Go SDK       | congqixia       | in progress       |        |
-| 2.1   | Supports Restful APIs        |         | pending        |         |
+| 2.1   | Supports RESTful APIs        |         | pending        |         |
 | 2.1      | Supports C++ SDK       |        | pending        |        |
-| Long Term   | SQL-like Query Language        |         | pending        |         |
+| Long Term   | SQL-like query language        |         | pending        |         |
 
 
 #### Integration
