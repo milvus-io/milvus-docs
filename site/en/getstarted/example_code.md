@@ -4,7 +4,7 @@ related_key: pymilvus
 summary: Get started with Milvus faster using this Python example code.
 ---
 
-# Run Milvus using Python
+# Run Milvus using **Python**
 
 This topic describes how to run Milvus using Python.
 
@@ -155,8 +155,47 @@ $ python3 hello_milvus.py
 </div>
 
 
+----
+
+# Run Milvus using **NodeJS**
+
+
 <br/>
 
 
 *Congratulations! You have successfully booted Milvus Standalone and run your first vector similarity search.*
+
+
+This topic describes how to run Milvus using NodeJS.
+
+
+1.  Initialize NodeJS Project
+```bash
+   npm init
+```  
+<div class="alert note">
+Node version 12 or higher is required. View <a href="https://www.cloudbees.com/blog/node-js-tutorial">NodeJS Beginners Guide</a> for information about installing the correct version for your system.
+</div>
+
+2.  Install TypeScript and Node Milvus SDK and its dependencies:
+```bash
+   npm install @zilliz/milvus2-sdk-node typescript
+```
+
+
+3. Download sample code **hello_milvus.py**:
+
+```bash
+$ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/MilvusHello.ts
+```
+
+4. Compile the file
+```bash
+    tsc MilvusHello.ts
+```
+
+5. Run the example
+```bash
+    node MilvusHello.ts
+```
 
