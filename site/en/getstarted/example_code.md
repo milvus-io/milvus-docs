@@ -7,11 +7,11 @@ group: example
 summary: Get started with Milvus faster using this Python example code.
 ---
 
+{{tab}}
+
 # Run Milvus using Python
 
 This topic describes how to run Milvus using Python.
-
-{{tab}}
 
 ## 1. Install PyMilvus
 
