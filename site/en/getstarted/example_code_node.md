@@ -85,15 +85,6 @@ const collectionName = "hello_milvus";
     console.log("--- Create collection ---", createRes, collectionName);
 ```
 
-- Creates a partition in the collection:
-```ts
-    await milvusClient.partitionManager.createPartition({
-      collection_name: collectionName,
-      partition_name: "test",
-    });
-
-    console.log("--- Create Partition in Collection ---", collectionName, "test");
-```
 
 - Inserts vectors in the new collection:
 ```ts
@@ -146,14 +137,44 @@ const generateInsertData = function generateInsertData(
     console.log("--- Insert Data to Collection ---");
 ```
 
-- Queries the collection
-```ts
-    const queryRes = await milvusClient.dataManager.query({
+- Creates index on the collection (need to load first)
+``` ts
+    await milvusClient.indexManager.createIndex({
       collection_name: collectionName,
-      expr: "count < 10",
-      output_fields: ["count", "random_value", "float_vector"]
+      field_name: "float_vector",
+      extra_params: {
+        index_type: "IVF_FLAT",
+        metric_type: "L2",
+        params: JSON.stringify({ nlist: 10 }),
+      },
     });
-    console.log("--- Query Collection ---", queryRes);
+    console.log("--- Create Index in Collection ---");
+```
+
+- Searches the collection
+```ts
+        // need load collection before search
+    const loadCollectionRes = await collectionManager.loadCollectionSync({
+      collection_name: collectionName,
+    });
+    console.log("--- Load collection (" + collectionName + ") ---", loadCollectionRes);
+
+
+    const result = await milvusClient.dataManager.search({
+      collection_name: collectionName,
+      vectors: [vectorsData[0]["float_vector"]],
+      search_params: {
+        anns_field: "float_vector",
+        topk: "4",
+        metric_type: "L2",
+        params: JSON.stringify({ nprobe: 1024 }),
+        round_decimal: 4,
+      },
+      output_fields: ["count"],
+      vector_type: DataType.FloatVector,
+    });
+
+    console.log("--- Search collection (" + collectionName + ") ---", result);
 ```
 
 - Releases the collection
