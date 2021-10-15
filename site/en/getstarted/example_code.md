@@ -1,8 +1,13 @@
 ---
 id: example_code.md
 related_key: pymilvus
+label: Python
+order: 0
+group: example
 summary: Get started with Milvus faster using this Python example code.
 ---
+
+{{tab}}
 
 # Run Milvus using Python
 
