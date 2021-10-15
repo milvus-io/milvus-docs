@@ -7,6 +7,7 @@ group: example
 summary: Get started with Milvus faster using this Node.js example code.
 ---
 
+{{tab}}
 
 # Run Milvus using **NodeJS**
 
@@ -33,7 +34,7 @@ Node version 12 or higher is required. View <a href="https://www.cloudbees.com/b
 3. Download sample code **hello_milvus.py**:
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/MilvusHello.ts
+$ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/HelloMilvus.ts
 ```
 
 4. Scan hello_milvus.py. This sample code does the following:
