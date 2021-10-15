@@ -5,12 +5,15 @@ order: 1
 group: cluster
 ---
 # 安装 Milvus 分布式版
-你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 分布式版。
 
-你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
+{{fragments/installation_guide.md}}
 
 
 {{tab}}
+
+我们推荐使用 minikube 在 Kubernetes 上安装 Milvus。 如下图所示，Minikube 默认安装 storageclass 组件。 如需使用其他方式安装 Milvus，请手动配置 storageclass。 详见[改变默认 StorageClass](https://kubernetes.io/zh/docs/tasks/administer-cluster/change-default-storage-class/)。
+
+![Storageclass](../../../../assets/storageclass.png)
 
 ## 1.启动本地 Kubernetes 集群
 ```

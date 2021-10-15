@@ -8,15 +8,16 @@ summary: Installation instructions for the standalone version of Milvus.
 
 # Install Milvus Standalone
 
-This topic describes how to install Milvus standalone with Docker Compose or on Kubernetes.
-
-You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
+{{fragments/installation_guide.md}}
 
 
 {{tab}}
 
+We recommend using minikube to install Milvus on Kubernetes. Minikube has a dependency on default storageclass when installed (see screenshot below). Installation in other methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
-## 1. Start a cluster
+![Storageclass](../../../../assets/storageclass.png)
+
+## 1. Start a K8s cluster
 ```
 $ minikube start
 ```
@@ -79,7 +80,7 @@ Forwarding from 127.0.0.1:19530 -> 19530
 $ helm uninstall my-release
 ```
 
-## 5. Stop the cluster
+## 5. Stop the K8s cluster
 
 Run the following command to stop the cluster and the minikube VM without deleting created resources.
 ```
@@ -90,7 +91,7 @@ $ minikube stop
 Run <code>minikube start</code> to restart the cluster.
 </div>
 
-## 6. Delete the cluster
+## 6. Delete the K8s cluster
 
 Run the following command to delete the cluster, the minikube VM, and all created resources including persistent volumes.
 ```
