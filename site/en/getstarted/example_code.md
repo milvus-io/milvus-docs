@@ -160,4 +160,4 @@ $ python3 hello_milvus.py
 
 
 *Congratulations! You have started Milvus standalone and performed your first vector similarity search.*
- 
+
