@@ -1,3 +1,11 @@
+---
+id: example_code_node.md
+title: Run Milvus with Node.js
+label: Node.js
+order: 1
+group: example
+summary: Get started with Milvus faster using this Node.js example code.
+---
 
 
 # Run Milvus using **NodeJS**
