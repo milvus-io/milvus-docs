@@ -9,34 +9,38 @@ summary: Get started with Milvus faster using this Node.js example code.
 
 {{tab}}
 
-# Run Milvus using **NodeJS**
+# Run Milvus using Node.js
 
-This topic describes how to run Milvus using NodeJS.
+This topic describes how to run Milvus using Node.js.
 
 
-1.  Initialize NodeJS Project:
+## 1.  Initialize a Node.js Project
 ```bash
    npm init
 ```  
 
 <div class="alert note">
-Node version 12 or higher is required. View <a href="https://www.cloudbees.com/blog/node-js-tutorial">NodeJS Beginners Guide</a> for information about installing the correct version for your system.
+Node.js version 12 or later is required. View <a href="https://www.cloudbees.com/blog/node-js-tutorial">Node.js Beginners Guide</a> for information about installing the correct version for your system.
 </div>
 
 
 
-2.  Install TypeScript and Node Milvus SDK and its dependencies:
+## 2.  Install TypeScript and Node Milvus SDK and its dependencies
+
 ```bash
    npm install @zilliz/milvus2-sdk-node typescript --save
 ```
 
 
-3. Download sample code HelloMilvus.ts:
+## 3. Download sample code HelloMilvus.ts
 ```bash
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/HelloMilvus.ts
 ```
 
-4. Scan HelloMilvus.ts. This sample code does the following:
+## 4. Scan HelloMilvus.ts
+
+This sample code does the following:
+
 - Imports the Node.js SDK package:
 ```ts
 import { MilvusClient } from "@zilliz/milvus2-sdk-node"
@@ -190,13 +194,13 @@ const generateInsertData = function generateInsertData(
     console.log("--- Drop Collection ---", dropRes);
 ```
 
-5. Compile the file:
+## 5. Compile the file
 ```bash
     tsc MilvusHello.ts
 ```
 
 
-6. Run the example:
+## 6. Run the example
 ```bash
     node MilvusHello.ts
 ```
