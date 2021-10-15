@@ -14,7 +14,7 @@ summary: Get started with Milvus faster using this Node.js example code.
 This topic describes how to run Milvus using NodeJS.
 
 
-1.  Initialize NodeJS Project
+1.  Initialize NodeJS Project:
 ```bash
    npm init
 ```  
@@ -31,14 +31,13 @@ Node version 12 or higher is required. View <a href="https://www.cloudbees.com/b
 ```
 
 
-3. Download sample code **hello_milvus.py**:
-
+3. Download sample code HelloMilvus.ts:
 ```bash
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/HelloMilvus.ts
 ```
 
-4. Scan hello_milvus.py. This sample code does the following:
-- Imports the PyMilvus package:
+4. Scan HelloMilvus.ts. This sample code does the following:
+- Imports the Node.js SDK package:
 ```ts
 import { MilvusClient } from "@zilliz/milvus2-sdk-node"
 import { DataType } from "@zilliz/milvus2-sdk-node/dist/milvus/types/Common";
@@ -112,9 +111,6 @@ const generateInsertData = function generateInsertData(
     return results;
 }
 
-...
-...
-
     const fields = [
       {
         isVector: true,
@@ -138,7 +134,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Insert Data to Collection ---");
 ```
 
-- Creates index on the collection (need to load first)
+- Loads the collection and builds index on it:
 ``` ts
     await milvusClient.indexManager.createIndex({
       collection_name: collectionName,
@@ -152,7 +148,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Create Index in Collection ---");
 ```
 
-- Searches the collection
+- Searches the collection:
 ```ts
         // need load collection before search
     const loadCollectionRes = await collectionManager.loadCollectionSync({
@@ -178,7 +174,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Search collection (" + collectionName + ") ---", result);
 ```
 
-- Releases the collection
+- Releases the collection:
 ```ts
     const releaseRes = await collectionManager.releaseCollection({
       collection_name: collectionName,
@@ -186,21 +182,21 @@ const generateInsertData = function generateInsertData(
     console.log("--- Release Collection ---", releaseRes);
 ``` 
 
-- Drops the collection
-```
+- Drops the collection:
+```tw
     const dropRes = await collectionManager.dropCollection({
       collection_name: collectionName,
     });
     console.log("--- Drop Collection ---", dropRes);
 ```
 
-5. Compile the file
+5. Compile the file:
 ```bash
     tsc MilvusHello.ts
 ```
 
 
-6. Run the example
+6. Run the example:
 ```bash
     node MilvusHello.ts
 ```
