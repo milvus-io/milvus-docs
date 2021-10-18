@@ -6,7 +6,7 @@ group: cluster
 ---
 # 安装 Milvus 分布式版
 
-{{fragments/installation_guide.md}}
+{{fragments/installation_guide_cluster.md}}
 
 {{tab}}
 
