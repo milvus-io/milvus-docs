@@ -9,7 +9,7 @@ summary: Installation instructions for the cluster version of Milvus.
 
 # Install Milvus Cluster
 
-{{fragments/installation_guide.md}}
+{{fragments/installation_guide_cluster.md}}
 
 {{tab}}
 
