@@ -51,11 +51,7 @@ connections.connect(host='localhost', port='19530')
 ```
 
 - Creates a collection:
-<<<<<<< HEAD
-```Python
-=======
 ```
->>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 dim = 128
 default_fields = [
     FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
