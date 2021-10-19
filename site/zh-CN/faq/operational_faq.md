@@ -94,6 +94,10 @@ Milvus 的日志默认输出在标准输出（standard output）和标准误差�
 
 支持。但我们推荐分批次插入数据，每次插入数据量不超过 256 MB，插入完成后统一创建索引。
 
+#### Milvus 日志打印在哪里？
+
+Milvus 的日志默认输出在标准输出（standard output）和标准误差（standard error）流中，实际生产中建议用户重定向目录到持久卷已便于问题的排查。重定向日志需要修改 **milvus.yaml**中的 `log.file.rootPath` 参数配置。
+
 #### 仍有问题没有得到解答？
 
 如果仍有其他问题，你可以：

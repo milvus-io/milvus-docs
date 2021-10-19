@@ -107,7 +107,11 @@ Object-relational mapping (ORM) allows users to focus more on the upper-level bu
 	</tr>
 	<tr>
 		<th>SDKs</th>
+<<<<<<< HEAD
 		<td><li>Python</li><li>Node.js</li><li>Go (in planning)</li><li>Java (in planning)</li><li>C++ (in planning)</li></td>
+=======
+		<td><li>Python</li><li>Go (in planning)</li><li>Java (in planning)</li><li>RESTful (in planning)</li><li>C++ (in planning)</li></td>
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 	</tr>
 	<tr>

@@ -4,6 +4,7 @@
 
 # Milvus Documentation
 
+<<<<<<< HEAD
 Welcome to Milvus documentation!
 
 This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database.
@@ -83,6 +84,9 @@ Reference to cite when you use Milvus in a research paper:
   year={2021}
 
 }
+=======
+This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), an open-source vector database designed by [Zilliz](https://zilliz.com).
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 
 ```
 

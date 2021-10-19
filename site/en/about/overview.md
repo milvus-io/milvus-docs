@@ -13,6 +13,7 @@ It is available in:
 - [Milvus cluster](install_cluster-docker.md)
 
 Compatibility: 
+<<<<<<< HEAD
 
 <table class="version">
 	<thead>
@@ -34,6 +35,13 @@ Compatibility:
 	</tr>
 	</tbody>
 </table>
+=======
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| ----------- | ----------- | -----------  | ----------- |
+| 2.0.0-RC2   | 2.0.0rc2   | Coming soon  | Coming soon |
+
+Milvus 2.0.0-RC2 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 
 Milvus {{var.milvus_release_version}} is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 

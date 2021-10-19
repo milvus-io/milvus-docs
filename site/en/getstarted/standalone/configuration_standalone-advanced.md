@@ -4,16 +4,13 @@ title: Milvus Standalone System Configurations
 label: Advanced Configurations
 order: 1
 group: standalone_sys
-summary: Learn about basic and advanced Milvus standalone configurations.
 ---
 
 # Milvus Standalone System Configurations
 
 Milvus standalone maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
-<div class="alert note">
-All parameters take effect only after being configured at the startup of Milvus.
-</div>
+
 
 {{tab}}
 
@@ -21,18 +18,13 @@ All parameters take effect only after being configured at the startup of Milvus.
 
 
 
-<<<<<<< HEAD:site/en/reference/sys_config/configuration_standalone-advanced.md
-If you are an administrator of Milvus, you may access the following configurations to maintain the system operation.
-=======
 If you are an administrator of Milvus, you may access the following configurations to maintain the system operation. You can set these configurations in **milvus.yaml**.
->>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb:site/zh-CN/getstarted/standalone/configuration_standalone-advanced.md
 
 ## etcd Configurations
 
-etcd is the metadata engine supporting Milvus' metadata storage and access. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
+etcd is the metadata engine supporting Milvus' metadata storage and access. 
 
-
-> You do not need to change this session if you use the default [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
 <table id="etcd">
 <thead>
@@ -69,11 +61,11 @@ etcd is the metadata engine supporting Milvus' metadata storage and access. You 
 </table>
 
 
-## MinIO/S3 Configurations
+## MinIO Configurations
 
-Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under `MinIO` section. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
+MinIO is the storage engine supporting Milvus' data persistence for insert log files and index files.  You can set these configurations in **milvus.yaml**.
 
-> You do not need to change this session if you use the default [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
 <table id="minio">
 <thead>
@@ -85,23 +77,23 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 </thead>
 <tbody>
   <tr>
-<td><code>minio.address</code></td>
-<td><details>
-       <summary>IP address of MinIO/S3</summary>
+		<td><code>minio.address</code></td>
+		<td><details>
+       <summary>IP address of MinIO</summary>
        <li>Environment variable: <code>MINIO_ADDRESS</code></li>
-       <li>Access MinIO/S3 service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generate the valid access to MinIO/S3.</li>
+       <li>Access MinIO service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generates the valid access to MinIO.</li>
        <li>MinIO preferentially acquires the valid address from the environment variable <code>MINIO_ADDRESS</code> when Milvus is booted up.</li>
-       <li>Default value applies when MinIO/S3 and Milvus are running on the same network.</li>
-       <li>Milvus 2.0 uses non-secure mode to access MinIO. Upcoming Milvus versions will support secure access to MinIO.</li>
+      <li>Default value applies when MinIO and Milvus are running on the same network.</li>
+      <li>Milvus 2.0 uses non-secure mode to access MinIO. Upcoming Milvus versions will support secure access to MinIO.</li>
       </details></td>
-<td>localhost</td>
-</tr>
-<tr>
+		<td>localhost</td>
+	</tr>
+  <tr>
 		<td><code>minio.port</code></td>
 		<td><details>
-       <summary>Port of MinIO/S3</summary>
+       <summary>Port of MinIO</summary>
        <li>Environment variable: <code>MINIO_ADDRESS</code></li>
-       <li>Access MinIO/S3 service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generate the valid access to MinIO/S3.</li>
+       <li>Access MinIO service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generates the valid access to MinIO.</li>
        <li>MinIO preferentially acquires the valid port from the environment variable <code>MINIO_ADDRESS</code> when Milvus is booted up.</li>
       </details></td>
 		<td>9000</td>
@@ -109,20 +101,20 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
   <tr>
 		<td><code>minio.AccessKeyID</code></td>
 		<td><details>
-       <summary>MinIO/S3 key ID for authorized user access</summary>
+       <summary>MinIO key ID for authorized user access</summary>
        <li>Environment variable: <code>MINIO_ACCESS_KEY</code></li>
-       <li>Access key ID that MinIO/S3 issues to authorized users. <code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together are used for identity authentication to access the MinIO/S3 service.</li>
-       <li>This configuration must be set identical to the environment variable <code>MINIO_ACCESS_KEY</code>, which is necessary for booting up MinIO/S3. The default value applies to the MinIO/S3 service that boots up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
+       <li>Access key ID that MinIO issued to authorized users. <code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together is used for identity authentication to access the MinIO service.</li>
+       <li>This configuration must be set identical to the environment variable <code>MINIO_ACCESS_KEY</code>, which is necessary for booting up MinIO. The default value applies to the MinIO service that booted up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
       </details></td>
 		<td>minioadmin</td>
 	</tr>
   <tr>
 		<td><code>minio.secretAccessKey</code></td>
 		<td><details>
-       <summary>MinIO/S3 encryption string</summary>
+       <summary>MinIO encryption string</summary>
        <li>Environment variable: <code>MINIO_SECRET_KEY</code></li>
-       <li>Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO/S3 server and users.</li>
-       <li>This configuration must be set identical to the environment variable <code>MINIO_SECRET_KEY</code>, which is necessary for booting up MinIO/S3. The default value applies to the MinIO/S3 service that boots up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
+       <li>Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO server and users.</li>
+       <li>This configuration must be set identical to the environment variable <code>MINIO_SECRET_KEY</code>, which is necessary for booting up MinIO. The default value applies to the MinIO service that booted up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
       </details></td>
 		<td>minioadmin</td>
 	</tr>
@@ -134,7 +126,7 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 
 ## Server Address Configurations
 
-This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
+This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml**.
 
 <table id="server_address">
 <thead>
@@ -147,7 +139,10 @@ This session configures the IP address and port of the monitor request from Milv
 <tbody>
   <tr>
 		<td><code>proxy.port</code></td>
-		<td>TCP port for monitoring Milvus</td>
+		<td><details>
+       <summary>TCP port for monitoring Milvus</summary>
+       <li>This parameter takes effect only after being configured at the startup of Milvus.</li>
+      </details></td>
 		<td>19530</td>
 	</tr>
 </tbody>
@@ -156,7 +151,7 @@ This session configures the IP address and port of the monitor request from Milv
 
 ## System Behavior Configurations
 
-This session configures the system behaviors of Milvus. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml), [**root_coord.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/advanced/root_coord.yaml), [**data_coord.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/advanced/data_coord.yaml), and [**data_node.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/advanced/data_node.yaml).
+This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml**, **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml**.
 
 <table id="system_behavior">
 <thead>
@@ -197,7 +192,7 @@ This session configures the system behaviors of Milvus. You can set these config
   <tr>
 		<td><code>datacoord.segment.sealProportion</code></td>
 		<td><details>
-       <summary>Maximum proportion of a segment’s actual size comparing to <code>datacoord.segment.maxSize</code></summary>
+       <summary>Maximum proportion of a segment’s actual size comparing to <code>datacoord.segment.size</code></summary>
        <li>When actual proportion is greater than the set value, the corresponding segment can be sealed.</li>
       </details></td>
 		<td>0.75</td>

@@ -5,5 +5,9 @@
 <p>
 所以当总的向量条数约等于 <code>nlist</code> 时，两者的计算量相当，性能也差不多。而随着向量条数达到 <code>nlist</code> 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的优势就越来越大。</p>
 <p>
+<<<<<<< HEAD
 可参阅 <a href="https://milvus.io/cn/blog/2019-12-03-select-index.md">如何选择索引类型</a>。
+=======
+可参阅 <a href="https://milvus.io/cn/blogs/2019-12-03-select-index.md">如何选择索引类型</a>。
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 </p>

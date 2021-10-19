@@ -686,6 +686,43 @@
       "label1": "faq",
       "label2": "",
       "order": 1
+<<<<<<< HEAD
+=======
+    },
+    {
+      "id": "glossary.md",
+      "title": "专业术语",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "tools",
+      "title": "开发工具",
+      "label1": "",
+      "label2": null,
+      "label3": null,
+      "order": 5,
+      "isMenu": true
+    },
+    {
+      "id": "milvus_insight",
+      "title": "Milvus Insight",
+      "label1": "tools",
+      "label2": "",
+      "label3": "",
+      "order": 0,
+      "outLink": "https://github.com/milvus-io/milvus-insight"
+    },
+    {
+      "id": "release_notes.md",
+      "title": "发版说明",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 6
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
     }
     
   ]

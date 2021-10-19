@@ -6,9 +6,15 @@ id: example_code.md
 
 成功启动 Milvus 服务端后，通过 Python 示例代码使用 Milvus。
 
+<<<<<<< HEAD
 1. 安装 PyMilvus 及依赖库:
 ```Python
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
+=======
+1. 安装 pymilvus_orm 及依赖库:
+```
+pip install pymilvus-orm==2.0.0rc2
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 ```
 
 <div class="alert note">
@@ -17,6 +23,7 @@ PyMilvus 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python
 
 
 2. 下载 **hello_milvus.py** 示例代码:
+<<<<<<< HEAD
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
@@ -24,6 +31,15 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python
 - 导入 pymilvus 包
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
+=======
+```
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc2/examples/hello_milvus.py
+```
+3. 浏览 **hello_milvus.py**，这个示例程序将：
+- 导入 pymilvus 包
+```
+from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 ```
 
 - 连接 Milvus 服务端
@@ -32,7 +48,11 @@ connections.connect(host='localhost', port='19530')
 ```
 
 - 创建一个 collection：
+<<<<<<< HEAD
 ```Python
+=======
+```
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 dim = 128
 default_fields = [
     FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
@@ -132,6 +152,7 @@ $ python3 hello_milvus.py
 ```
 *运行结果及查询等待时间如下：*
 
+<<<<<<< HEAD
 
 <div class='result-bock'>
 <p>Search...</p>
@@ -147,6 +168,10 @@ $ python3 hello_milvus.py
 <p>(distance: 15.538337707519531, id: 637) -19.0</p>
 <p>search latency = 0.0549s</p>
 </div>
+=======
+![Returned results](../../../assets/hello_world.png)
+
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 
 
 <br/>

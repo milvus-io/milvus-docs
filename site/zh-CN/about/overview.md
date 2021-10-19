@@ -11,6 +11,12 @@ Milvus 提供以下 2 个版本：
 - [Milvus 分布式版](install_cluster-docker.md)
 
 版本兼容: 
+<<<<<<< HEAD
+=======
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| ----------- | ----------- | -----------  | ----------- |
+| 2.0.0-RC1 | 2.0.0rc2   | 即将上线  | 即将上线 |
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 
 <table class="version">
 	<thead>

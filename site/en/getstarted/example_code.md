@@ -9,8 +9,13 @@ After the Milvus server boots successfully, test the platform using our Python s
 
 1. Install PyMilvus and its dependencies:
 
+<<<<<<< HEAD
 ```Python
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
+=======
+```
+pip install pymilvus-orm==2.0.0rc2
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 ```
 <div class="alert note">
 Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
@@ -18,15 +23,26 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 
 2. Download sample code **hello_milvus.py**:
 
+<<<<<<< HEAD
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
+=======
+```
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc2/examples/hello_milvus.py
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
 
+<<<<<<< HEAD
 - Imports the PyMilvus package:
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
+=======
+- Imports the pymilvus package:
+```
+from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 ```
 
 - Connects to the Milvus server:
@@ -35,7 +51,11 @@ connections.connect(host='localhost', port='19530')
 ```
 
 - Creates a collection:
+<<<<<<< HEAD
 ```Python
+=======
+```
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 dim = 128
 default_fields = [
     FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
@@ -130,10 +150,14 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 - Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
 
 ```
+<<<<<<< HEAD
 
 4. Run **hello_milvus.py**:
 ```Python
 $ python3 hello_milvus.py
+=======
+$ python3 hello_pymilvus.py
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 ```
 
 *The returned results and query latency show as follows:*
@@ -153,6 +177,10 @@ $ python3 hello_milvus.py
 <p>search latency = 0.0549s</p>
 </div>
 
+<<<<<<< HEAD
+=======
+![Returned results](../../../assets/hello_world.png)
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 
 <br/>
 

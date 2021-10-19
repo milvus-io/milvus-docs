@@ -102,7 +102,11 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 	</tr>
 	<tr>
 		<th>SDK</th>
+<<<<<<< HEAD
 		<td><li>Python</li><li>Node.js</li><li>Go (开发中)</li><li>Java (开发中)</li><li>C++ (开发中)</li></td>
+=======
+		<td><li>Python</li><li>Go (开发中)</li><li>Java (开发中)</li><li>RESTful (开发中)</li><li>C++ (开发中)</li></td>
+>>>>>>> 1023d49ea7cc93386f4636054019f8649395ccbb
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 	</tr>
 	<tr>
