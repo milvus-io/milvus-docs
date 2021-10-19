@@ -8,7 +8,7 @@ summary: Learn how to create a collection in Milvus.
 This page will show you how to create a collection or a partition in Milvus.
 
 <div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**<code> are specific to Node.js SDK.
 </div>
 
 ## Create a collection
