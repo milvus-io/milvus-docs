@@ -1,13 +1,6 @@
 ---
-id: example_code.md
-related_key: pymilvus
-label: Python
-order: 0
-group: example
-summary: Inizia ad usare Milvus più velocemente utilizzando questo codice di esempio in Python.
+id: example_code_it.md
 ---
-
-{{tab}}
 
 # Esegui Milvus usando Python
 
