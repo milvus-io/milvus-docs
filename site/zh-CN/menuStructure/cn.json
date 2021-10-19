@@ -704,14 +704,6 @@
       "label1": "faq",
       "label2": "milvusfaq",
       "order": 3
-    },
-    {
-      "id": "pymilvus_faq.md",
-      "title": "PyMilvus 常见问题",
-      "label1": "faq",
-      "label2": "",
-      "order": 1
-    }
-    
+    }    
   ]
 }
