@@ -311,7 +311,7 @@ await milvusClient.dataManager.search({
 In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
 </div>
 
-1. Check the returned results:
+5. Check the returned results:
 
 {{fragments/multiple_code.md}}
 
