@@ -40,7 +40,7 @@ const index_param = {
 	<tr>
 		<td><code>metric_type</code></td>
 		<td>用于评估向量相似性的计算方式</td>
-		<td>可在 <a href="metric.md">Simlarity Metrics</a> 中查看其他选项。<br/>必填项</td>
+		<td>可在 <a href="metric.md">距离计算方式</a>中查看其他选项。<br/>必填项</td>
 	</tr>
 	<tr>
 		<td><code>index_type</code></td>

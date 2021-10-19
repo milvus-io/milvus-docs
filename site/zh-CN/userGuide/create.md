@@ -70,12 +70,12 @@ const params = {
 	</tr>
 	<tr>
 		<td><code>field_name</code></td>
-		<td>collection 中的字段名称</td>
+		<td>collection 中的 field 名称</td>
 		<td>数据类型: String</td>
 	</tr>
 	<tr>
 		<td><code>Schema</code></td>
-		<td>用于建立 collection 及其中字段。详细说明请参考 <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a>。</td>
+		<td>用于建立 collection 及其中的 field。详细说明请参考 <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a>。</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
@@ -115,7 +115,7 @@ await milvusClient.collectionManager.createCollection(params);
 	<tbody>
 	<tr>
 		<td>using*</td>
-		<td>在此处标明伺服器名称，以指定要建立 collection 的 Milvus 伺服器。</td>
+		<td>在此处标明服务器名称，以指定要建立 collection 的 Milvus 服务器。</td>
 		<td>选填项</td>
 	</tr>
 	<tr>

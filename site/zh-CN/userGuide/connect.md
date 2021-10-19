@@ -35,22 +35,22 @@ const milvusClient = new MilvusClient("localhost:19530");
 	<tbody>
 	<tr>
 		<td><code>alias*</code></td>
-		<td>Milvus 伺服器的名称</td>
+		<td>Milvus 服务器的名称</td>
 		<td>数据类型: String<br/>必填项</td>
 	</tr>
 	<tr>
 		<td><code>host*</code></td>
-		<td>Milvus 伺服器的 IP</td>
+		<td>Milvus 服务器的 IP</td>
 		<td>必填项</td>
 	</tr>
 	<tr>
 		<td><code>port*</code></td>
-		<td>Milvus 伺服器的端口</td>
+		<td>Milvus 服务器的端口</td>
 		<td>必填项</td>
 	</tr>
 	<tr>
 		<td><code>address**</code></td>
-		<td>Milvus 伺服器的地址</td>
+		<td>Milvus 服务器的地址</td>
 		<td><code>"server_IP:server_port"</code><br/>必填项</td>
 	</tr>
 	</tbody>
@@ -84,7 +84,7 @@ await milvusClient.closeConnection();
 	<tbody>
 	<tr>
 		<td>alias*</td>
-		<td>Milvus 伺服器的名称</td>
+		<td>Milvus 服务器的名称</td>
 		<td>数据类型: String<br/>必填项</td>
 	</tr>
 	</tbody>

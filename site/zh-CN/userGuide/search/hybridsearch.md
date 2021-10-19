@@ -35,22 +35,22 @@ const milvusClient = new MilvusClient("localhost:19530");
 	<tbody>
 	<tr>
 		<td><code>alias*</code></td>
-		<td>Milvus 伺服器的名称</td>
+		<td>Milvus 服务器的名称</td>
 		<td>数据类型: String<br/>必填项</td>
 	</tr>
 	<tr>
 		<td><code>host*</code></td>
-		<td>Milvus 伺服器的 IP</td>
+		<td>Milvus 服务器的 IP</td>
 		<td>必填项</td>
 	</tr>
 	<tr>
 		<td><code>port*</code></td>
-		<td>Milvus 伺服器的端口</td>
+		<td>Milvus 服务器的端口</td>
 		<td>必填项</td>
 	</tr>
 	<tr>
 		<td><code>address**</code></td>
-		<td>Milvus 伺服器的地址</td>
+		<td>Milvus 服务器的地址</td>
 		<td><code>"server_IP:server_port"</code><br/>必填项</td>
 	</tr>
 	</tbody>
@@ -113,12 +113,12 @@ milvusClient.collectionManager.createCollection({
 	</tr>
 	<tr>
 		<td><code>field_name</code></td>
-		<td>collection 中的字段名称</td>
+		<td>collection 中的 field 名称</td>
 		<td>数据类型: String</td>
 	</tr>
 	<tr>
 		<td><code>Schema</code></td>
-		<td>用于建立 collection 及其中字段。详细说明请参考 <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a>。</td>
+		<td>用于建立 collection 及其中的 field。详细说明请参考 <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a>。</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
@@ -128,7 +128,7 @@ milvusClient.collectionManager.createCollection({
 	</tr>
 	<tr>
 		<td>using*</td>
-		<td>在此处标明伺服器名称，以指定要建立 collection 的 Milvus 伺服器。</td>
+		<td>在此处标明服务器名称，以指定要建立 collection 的 Milvus 服务器。</td>
 		<td>选填项</td>
 	</tr>
 	<tr>
@@ -191,7 +191,7 @@ await milvusClient.collectionManager.insert({
 	</tr>
 	<tr>
 		<td>timeout*</td>
-		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待伺服器回应或产生错误。</td>
+		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待服务器回应或产生错误。</td>
 		<td>选填项</td>
 	</tr>
 	</tbody>
@@ -285,7 +285,7 @@ await milvusClient.dataManager.search({
 	</tr>
 	<tr>
 		<td>timeout*</td>
-		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待伺服器回应或产生错误。</td>
+		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待服务器回应或产生错误。</td>
 		<td>选填项</td>
 	</tr>
 	<tr>

@@ -34,22 +34,22 @@ const milvusClient = new MilvusClient("localhost:19530");
 	<tbody>
 	<tr>
 		<td><code>alias*</code></td>
-		<td>Milvus 伺服器的名称</td>
+		<td>Milvus 服务器的名称</td>
 		<td>数据类型: String<br/>必填项</td>
 	</tr>
 	<tr>
 		<td><code>host*</code></td>
-		<td>Milvus 伺服器的 IP</td>
+		<td>Milvus 服务器的 IP</td>
 		<td>必填项</td>
 	</tr>
 	<tr>
 		<td><code>port*</code></td>
-		<td>Milvus 伺服器的端口</td>
+		<td>Milvus 服务器的端口</td>
 		<td>必填项</td>
 	</tr>
 	<tr>
 		<td><code>address**</code></td>
-		<td>Milvus 伺服器的地址</td>
+		<td>Milvus 服务器的地址</td>
 		<td><code>"server_IP:server_port"</code><br/>必填项</td>
 	</tr>
 	</tbody>
@@ -133,7 +133,7 @@ await milvusClient.collectionManager.createCollection(params);
 	</tr>
 	<tr>
 		<td>using*</td>
-		<td>在此处标明伺服器名称，以指定要建立 collection 的 Milvus 伺服器。</td>
+		<td>在此处标明服务器名称，以指定要建立 collection 的 Milvus 服务器。</td>
 		<td>选填项</td>
 	</tr>
 	<tr>
@@ -197,7 +197,7 @@ await milvusClient.dataManager.insert({{
 	</tr>
 	<tr>
 		<td>timeout*</td>
-		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待伺服器回应或产生错误。</td>
+		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待服务器回应或产生错误。</td>
 		<td>选填项</td>
 	</tr>
 	</tbody>
@@ -250,7 +250,7 @@ await milvusClient.dataManager.query({
 	</tr>
 	<tr>
 		<td>output_fields</td>
-		<td>要传回的字段名称（向量字段在目前版本不支持）</td>
+		<td>要传回的 field 名称（向量 field 在目前版本不支持）</td>
 		<td>必填项</td>
 	</tr>
 	</tbody>
