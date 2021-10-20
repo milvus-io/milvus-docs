@@ -1,47 +1,40 @@
 ---
-id: example_code.md
-related_key: pymilvus
-label: Python
-order: 0
-group: example
-summary: Get started with Milvus faster using this Python example code.
+id: example_code_it.md
 ---
 
-{{tab}}
+# Esegui Milvus usando Python
 
-# Run Milvus using Python
+Questa sezione descrive come eseguire Milvus usando Python.
 
-This topic describes how to run Milvus using Python.
-
-## 1. Install PyMilvus
+## 1. Installa PyMilvus
 
 ```Python
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 <div class="alert note">
-Python 3.6 or later is required. See <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> for more information.
+E' richiesto Python 3.6 o versioni successive. Vedi <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> per maggiori informazioni.
 </div>
 
-## 2. Download sampel code
+## 2. Scarica il codice di esempio
 
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
 
-## 3. Scan the sample
-The sample code performs the following steps.
+## 3. Scannerizza il campione
+Il codice di esempio esegue i seguenti passaggi.
 
-- Imports a PyMilvus package:
+- Importa il pacchetto PyMilvus:
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
-- Connects to a server:
+- Si connette ad un server:
 ```Python
 connections.connect(host='localhost', port='19530')
 ```
 
-- Creates a collection:
+- Crea una collezione:
 ```Python
 dim = 128
 default_fields = [
@@ -55,7 +48,7 @@ print(f"\nCreate collection...")
 collection = Collection(name="hello_milvus", schema=default_schema)
 ```
 
-- Inserts vectors in the collection:
+- Inserisce dei vettori nella collezione:
 ```Python
 import random
 nb = 3000
@@ -69,14 +62,14 @@ collection.insert(
 )
 ```
 
-- Builds indexes and loads the collection:
+- Crea degli indici e carica la collezione:
 ```Python
 default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
 collection.create_index(field_name="float_vector", index_params=default_index)
 collection.load()
 ```
 
-- Performs a vector similarity search:
+- Esegue una ricerca di somiglianza vettoriale:
 ```Python
 topK = 5
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -86,7 +79,7 @@ res = collection.search(
     "count > 100", output_fields=["count", "random_value"]
 )
 ```
-To print the search results by ID and distance, run the following command.
+Per stampare i risultati della ricerca per ID e per distanza, esegui il seguente comando.
 ```Python
 for raw_result in res:
     for result in raw_result:
@@ -94,11 +87,11 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-See [API Reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) for more information.
+Vedi [API Reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) per maggiori informazioni.
 
-- Performs a hybrid search：
+- Esegue una ricerca ibrida：
 <div class="alert note">
-    The following example performs an approximate search on entities with <code>film_id</code> ranged in [2,4,6,8].
+    Il seguente esempio esegue una ricerca approssimata nelle entità con <code>film_id</code> che spazia tra [2,4,6,8].
     </div>
 
 ```Python
@@ -138,12 +131,12 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 
 ```
 
-## 4. Run the sample
+## 4. Esegui il campione
 ```Python
 $ python3 hello_milvus.py
 ```
 
-*The returned results and query latency are shown as follows:*
+*I risultati ritornati e la latenza della query vengono mostrati come segue:*
 
 <div class='result-bock'>
 <p>Search...</p>
@@ -164,5 +157,5 @@ $ python3 hello_milvus.py
 <br/>
 
 
-*Congratulations! You have started Milvus standalone and performed your first vector similarity search.*
+*Congratulazioni! Sei riuscito ad avviare Milvus indipendentemente e hai eseguito la tua prima ricerca di somiglianza vettoriale.*
 
