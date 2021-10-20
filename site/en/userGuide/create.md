@@ -123,7 +123,8 @@ await milvusClient.collectionManager.createCollection(params);
 	<tbody>
 	<tr>
 		<td>using*</td>
-		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection</td>
+
+		<td>By specifying the server alias here, you can decide in which Milvus server you create a collection.</td>
 		<td>Optional</td>
 	</tr>
 	<tr>
@@ -217,7 +218,7 @@ await milvusClient.partitionManager.createPartition({
 </table>
 </details>
 
-Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. 
+Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`.
 
 List all partitions in a collection:
 
@@ -249,4 +250,3 @@ await milvusClient.partitionManager.hasPartition({
   partition_name: "example_partition",
 });
 ```
-
