@@ -1,13 +1,6 @@
 ---
 id: example_code_bn.md
-related_key: pymilvus
-label: Python
-order: 0
-group: example
-summary: এই পাইথন উদাহরণ কোড ব্যবহার করে দ্রুত মিলভাস ব্যবহার শুরু করুন।
 ---
-
-{{tab}}
 
 # পাইথন ব্যবহার করে মিলভাস চালান
 
