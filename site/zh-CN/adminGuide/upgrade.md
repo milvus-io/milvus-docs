@@ -2,18 +2,18 @@
 id: upgrade.md
 ---
 
-# 使用 Helm Chart 更新 Milvus
+# 使用 Helm Chart 升级 Milvus 版本
 
-你可以使用 Helm Chart 轻松地更新 Milvus 2.0。这份指南以更新 Milvus v2.0.0-rc4 至 v2.0.0-rc5-hotfix1 作为范例。
+你可以使用 Helm Chart 轻松升级 Milvus 2.0 版本。本文以升级 Milvus v2.0.0-rc4 至 v2.0.0-rc5-hotfix1 为例。
 
 <div class="alert note">
-Helm Chart 不支援由 Milvus 2.0 standalone 更新至 Milvus 2.0 cluster 或是相反的操作。
-在 v2.0.0-rc7 以前的版本不支援更新至 v2.0.0-rc7。
+我们不支持使用 Helm Chart 进行单机版 Milvus 与分布式版 Milvus 之间的升级转换。
+Milvus 2.0.0-rc7 之前的版本都不支持升级至 2.0.0-rc7 版本。
 </div>
 
-## 更新 Milvus standalone
+## 升级单机版 Milvus
 
-1. 执行下面的命令查看你的 Milvus 版本：
+1. 执行如下命令查看 Milvus 版本：
 
 ```
 helm list
@@ -40,9 +40,9 @@ kubectl get pods my-release-milvus-standalone-66f985d5cd-q5qhj -o=jsonpath='{$.s
 milvusdb/milvus:v2.0.0-rc4-20210811-bdb8396
 ```
 
-可以看到 Milvus standalone 版本是 **v2.0.0-rc4**.
+可以看到单机版 Milvus 的版本是 **v2.0.0-rc4**.
 
-4. 执行下面的命令来查看 Milvus 的新版本：
+4. 执行如下命令查看 Milvus 提供的新版本：
 
 ```
 helm search repo milvus --versions
@@ -62,9 +62,9 @@ milvus/milvus        2.1.3                2.0.0-rc.3                Milvus is an
 milvus/milvus        2.1.2                2.0.0-rc.2                Milvus is an open-source vector database built ...
 ```
 
-可以看到在版本 **v2.0.0-rc4** 后有数个新版本。
+可以看到在版本 **v2.0.0-rc4** 后有多个新版本。
 
-5. 更新至 **v2.0.0-rc5-hotfix1**:
+5. 升级至 **v2.0.0-rc5-hotfix1** 版本:
 
 ```
 helm repo update
@@ -85,7 +85,7 @@ my-release-minio-744dd9586f-drjnr               1/1     Running   0          31m
 ```
 
 <div class="alert note">
-更新 Milvus standalone 时，旧的 pods 会先被删除。因此服务可能会有一小段时间无法使用。
+升级单机版 Milvus 时，旧的 pods 会先被删除。因此服务可能会有一小段时间无法使用。
 </div>
 
 6. 查看 image 版本，可以看到它是 **v2.0.0-rc5-hotfix1**。
@@ -95,9 +95,9 @@ kubectl get pods my-release-milvus-standalone-546649bcdf-xqjd5 -o=jsonpath='{$.s
 milvusdb/milvus:v2.0.0-rc5-hotfix1-20210901-9e0b2cc
 ```
 
-## 更新 Milvus cluster
+## 升级分布式版 Milvus
 
-1. 执行下面的命令查看你的 Milvus 版本：
+1. 执行如下命令查看 Milvus 版本：
 
 ```
 helm list
@@ -107,7 +107,7 @@ my-release        default              1               2021-09-06 15:54:26.35254
 
 可以看到版本 `APP VERSION` 是 **2.0.0-rc4**.
 
-2. Check the running pods:
+2. 查看运行中的 pods：
 
 ```
 kubectl get pods
@@ -132,9 +132,9 @@ kubectl get pods my-release-milvus-proxy-84dcb766c9-l8srs -o=jsonpath='{$.spec.c
 milvusdb/milvus:v2.0.0-rc4-20210811-bdb8396
 ```
 
-可以看到 Milvus cluster 版本是 **v2.0.0-rc4**.
+可以看到分布式版 Milvus 的版本是 **v2.0.0-rc4**.
 
-4. 执行下面的命令来查看 Milvus 的新版本：
+4. 执行如下命令查看 Milvus 提供的新版本：
 
 ```
 helm search repo milvus --versions
@@ -154,9 +154,9 @@ milvus/milvus        2.1.3                2.0.0-rc.3                Milvus is an
 milvus/milvus        2.1.2                2.0.0-rc.2                Milvus is an open-source vector database built ...
 ```
 
-可以看到在版本 **2.0.0-rc4** 后有数个新版本。
+可以看到在版本 **2.0.0-rc4** 后有多个新版本。
 
-5. 更新至 **v2.0.0-rc5-hotfix1**:
+5. 升级至 **v2.0.0-rc5-hotfix1** 版本：
 
 ```
 helm repo update
