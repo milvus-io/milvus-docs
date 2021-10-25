@@ -1,5 +1,9 @@
+---
+id: cli_commands.md
+summary: Interact with Milvus using commands.
+---
 # Milvus CLI Command Reference
-
+Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. 
 ## calc
 Calculates the distance between two vector arrays.
 ### Syntax
@@ -165,7 +169,9 @@ milvus_cli > create partition -c car -p new_partition -d test_add_partition
 
 ## create index
 Creates an index for a field.
-> Currently, a collection supports a maximum of one index.
+
+<div class="alert note"> Currently, a collection supports a maximum of one index.</div>
+
 ### Syntax
 ```shell
 create index
@@ -230,7 +236,8 @@ milvus_cli > delete partition -c car -p new_partition
 ```
 ## delete index
 Deletes an index and the corresponding index files.
-> Currently, a collection supports a maximum of one index.
+<div class="alert note"> Currently, a collection supports a maximum of one index.</div>
+
 ### Syntax
 ```shell
 delete index -c (text) [-t (float)]
@@ -308,7 +315,7 @@ milvus_cli > describe partition -c test_collection_insert -p _default
 ```
 ## describe index
 Shows the detailed information of an index.
->Currently, a collection supports a maximum of one index.
+<div class="alert note">Currently, a collection supports a maximum of one index.</div>
 
 ### Syntax
 ```shell
@@ -358,7 +365,7 @@ help <command>
 |release|Releases a collection or partition.|
 |search|Performs a vector similarity search or hybrid search.|
 |show|Shows the current collection, progress of entity loading, or progress of entity indexing. |
-|version|Shows the version of the Milvus CLI.|
+|version|Shows the version of Milvus CLI.|
 
 ## import
 Imports data into a partition.
@@ -404,7 +411,8 @@ list collections [-t (float)][-l (boolean)]
 
 ## list indexes
 Lists all indexes for a collection.
-> Currently, a collection supports a maximum of one index. 
+<div class="alert note"> Currently, a collection supports a maximum of one index. </div>
+
 ### Syntax
 ```shell
 list indexes -c (text)
@@ -609,7 +617,7 @@ show loading_progress -c (text) [-p (text)]
 |--help|n/a|Displays help for using the command.|
 
 ## version
-Shows the version of the Milvus CLI.
+Shows the version of Milvus CLI.
 
 ### Syntax
 ```shell
@@ -620,7 +628,7 @@ version
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-> You can also check the version of the Milvus CLI in a shell as shown in the following example. In this case, ```milvus_cli --version``` acts as a command.
+<div class="alert note"> You can also check the version of Milvus CLI in a shell as shown in the following example. In this case, <code>milvus_cli --version</code> acts as a command.</div>
 
 ### Example
 ```shell
