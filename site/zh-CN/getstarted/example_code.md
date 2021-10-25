@@ -1,6 +1,13 @@
 ---
 id: example_code.md
+related_key: pymilvus
+label: Python
+order: 0
+group: example
+summary: 使用此 Python 示例代码更快地开始使用 Milvus。
 ---
+
+{{tab}}
 
 # 通过 Python 使用 Milvus
 
