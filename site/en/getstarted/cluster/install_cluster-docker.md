@@ -1,10 +1,10 @@
 ---
 id: install_cluster-docker.md
-title: Install Milvus Cluster
 label: Install with Docker Compose
 order: 0
 group: cluster
 summary: Installation instructions for the cluster version of Milvus.
+
 ---
 
 # Install Milvus Cluster
@@ -14,21 +14,47 @@ summary: Installation instructions for the cluster version of Milvus.
 {{tab}}
 
 
-## 1. Download an installation file
+## Download an installation file
 
-
-Run the following command to download **milvus-cluster-docker-compose.yml** and save it as **docker-compose.yml**.
+[Download **milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) directly or with the following command, and save it as **docker-compose.yml**.
 
 ```
 $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
-> You can also click [here](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) to download the file.
+
+## Configure Milvus (optional)
+
+[Download **milvus.yaml**](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) directly or with the following command, and modify the configurations to suit your needs. See [Milvus Cluster System Configurations](configuration_cluster-basic.md) for more information.
+
+```
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml
+```
+
+In **docker-compose.yml**, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. And map the local path to your **milvus.yaml** file onto the corresponding docker container paths to the configuration files **/milvus/configs/milvus.yaml** under all `volumes` sections.
+
+```yaml
+...
+proxy:
+    container_name: milvus-proxy
+    image: milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
+    command: ["milvus", "run", "proxy"]
+    volumes:       # Add a volumes section.
+      - /local/path/to/your/file:/milvus/configs/milvus.yaml   # Map the local path to the container path
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      PULSAR_ADDRESS: pulsar://pulsar:6650
+    ports:
+      - "19530:19530"
+...
+```
 
 <div class="alert note">
-Data is stored in the <b>volumes</b> folder according to the default configuration in <b>milvus-cluster-docker-compose.yml</b>. To change the folder to store data, edit <b>docker-compose.yml</b> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Data is stored in the <b>volumes</b> folder according to the default configuration in <b>docker-compose.yml</b>. To change the folder to store data, edit <b>docker-compose.yml</b> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
-## 2. Start Milvus
+## Start Milvus
+
 ```Shell
 $ docker-compose up -d
 ```
@@ -66,12 +92,17 @@ milvus-querycoord   /tini -- milvus run querycoord   Up
 milvus-querynode    /tini -- milvus run querynode    Up
 milvus-rootcoord    /tini -- milvus run rootcoord    Up
 ```
-## 3. Stop Milvus
+
+## Stop Milvus
 
 To stop Milvus cluster, run <code> $ sudo docker-compose down</code>.
 
 To delete data after stopping Milvus, run <code> $ sudo rm -rf  volumes</code>.
 
-<div class="alert note">
-See <a href="upgrade.md">Upgrade Milvus Using Helm Chart</a> for more information about upgrading Milvus.
-</div>
+## What's next
+
+Having installed Milvus, You can:
+
+- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- See [Upgrade Milvus Using Helm Chart](upgrade.md) for instructions to upgrade your Milvus server.
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
