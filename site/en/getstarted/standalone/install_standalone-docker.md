@@ -58,6 +58,8 @@ Creating milvus-standalone ... done
 
 ```
 $ sudo docker-compose ps
+```
+```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
 milvus-etcd         etcd -listen-peer-urls=htt ...   Up (healthy)   2379/tcp, 2380/tcp
