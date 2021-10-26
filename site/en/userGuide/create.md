@@ -115,7 +115,7 @@ await milvusClient.collectionManager.createCollection(params);
 <table class="params">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
