@@ -18,7 +18,7 @@ summary: Installation instructions for the standalone version of Milvus.
 [Download **milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml) directly or with the following command, and save it as **docker-compose.yml**.
 
 ```
-wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Configure Milvus (optional)
@@ -26,7 +26,7 @@ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_doc
 [Download **milvus.yaml**](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) directly or with the following command, and modify the configurations to suit your needs. See [Milvus Standalone System Configurations](configuration_standalone-basic.md) for more information.
 
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml
 ```
 
 In **docker-compose.yml**, map the local path to your **milvus.yaml** file onto the corresponding docker container path to the configuration file **/milvus/configs/milvus.yaml** under the `volumes` section.
@@ -34,7 +34,7 @@ In **docker-compose.yml**, map the local path to your **milvus.yaml** file onto 
 ```yaml
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      - /local/path/to/your/file:/milvus/configs/milvus.yaml
+      - /local/path/to/your/file:/milvus/configs/milvus.yaml     # Map the local path to the container path
 ```
 
 <div class="alert note">
