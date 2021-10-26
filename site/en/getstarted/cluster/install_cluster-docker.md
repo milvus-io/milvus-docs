@@ -78,6 +78,8 @@ Creating milvus-datanode   ... done
 
 ```
 $ sudo docker ps
+```
+```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
 milvus-datacoord    /tini -- milvus run datacoord    Up
