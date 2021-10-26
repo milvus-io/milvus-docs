@@ -3,7 +3,7 @@ id: cli_commands.md
 summary: Interact with Milvus using commands.
 ---
 # Milvus CLI Command Reference
-Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. 
+Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. <br>This topic introduces all supported commands and the corresponding options. Some examples are also included for your reference.
 ## calc
 Calculates the distance between two vector arrays.
 ### Syntax
@@ -88,7 +88,7 @@ The returned distances are arranged like this:
 [D_2_a, D_2_b],
 [D_3_a, D_3_b]]
 
-Note: if some vectors doesn't exist in collection, the returned distance is "-1.0"
+Note: if some vectors do not exist in collection, the returned distance is "-1.0"
 ======
 
 Result:
@@ -230,36 +230,41 @@ delete partition -c (text) -p (text) [-t (float)]
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |-p|--partition|The name of the partition to be deleted.|
 |--help|n/a|Displays help for using the command.|
+
 ### Example
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
+
 ## delete index
 Deletes an index and the corresponding index files.
+
 <div class="alert note"> Currently, a collection supports a maximum of one index.</div>
 
 ### Syntax
 ```shell
 delete index -c (text) [-t (float)]
 ```
+
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection|The collection name.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
+
 ### Example
 ```shell
 milvus_cli > delete index -c car
 ```
-## delete entities (not yet available)
+## delete entities (available in Milvus 2.0.0-GA)
 Deletes entities.
 
 ### Syntax
-
-```
+``` shell
 delete entities -c (text) [-p (text)] [-t (float)]
 ```
+
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
@@ -267,7 +272,9 @@ delete entities -c (text) [-p (text)] [-t (float)]
 |-p|--partition|(Optional) The name of the partition that the entities belong to.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
+
 ### Example
+
 ```shell
 milvus_cli > delete entities -c car
 
@@ -506,7 +513,8 @@ milvus_cli > search
 
 Collection name (car, test_collection): car
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file with out headers): examples/import_csv/search_vectors.csv
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file 
+out headers): examples/import_csv/search_vectors.csv
 
 The vector field used to search of collection (vector): vector
 
@@ -518,7 +526,7 @@ The max number of returned record, also known as topk: 2
 
 The boolean expression used to filter attribute []: id > 0
 
-The names of partitions to search(split by "," if multiple) ['_default'] []: _default
+The names of partitions to search (split by "," if multiple) ['_default'] []: _default
 ```
 #### Example 2
 To perform a search on an indexed collection and be prompted for the required input:
@@ -527,7 +535,7 @@ milvus_cli > search
 
 Collection name (car, test_collection): car
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file with out headers):
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers):
     [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 
     0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 
     0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 
@@ -553,7 +561,7 @@ The max number of returned record, also known as topk: 2
 
 The boolean expression used to filter attribute []: id > 0
 
-The names of partitions to search(split by "," if multiple) ['_default'] []: _default
+The names of partitions to search (split by "," if multiple) ['_default'] []: _default
 
 timeout []:
 ```
@@ -564,7 +572,7 @@ milvus_cli > search
 
 Collection name (car, car2): car
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file with out headers): examples/import_csv/search_vectors.csv
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
 
 The vector field used to search of collection (vector): vector
 
@@ -574,7 +582,7 @@ The max number of returned record, also known as topk: 2
 
 The boolean expression used to filter attribute []:
 
-The names of partitions to search(split by "," if multiple) ['_default'] []:
+The names of partitions to search (split by "," if multiple) ['_default'] []:
 
 Timeout []:
 ```
