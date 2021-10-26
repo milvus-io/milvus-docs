@@ -13,7 +13,7 @@ summary: Installation instructions for the standalone version of Milvus.
 
 {{tab}}
 
-## Download installation files
+## Download an installation file
 
 [Download **milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml) directly or with the following command, and save it as **docker-compose.yml**.
 
