@@ -28,13 +28,13 @@ See [MinIO/S3 Configurations](configuration_standalone-advanced.md#MinIOS3-Confi
 
 ### 2. Map milvus.yaml
 
-For Milvus standalone, configure the [docker-compose.yml](https://github.com/milvus-io/milvus/blob/master/deployments/docker/standalone/docker-compose.yml) file as follows to map the local path of **milvus.yaml** to the corresponding path of container.
+For Milvus standalone, configure the [docker-compose.yml](https://github.com/milvus-io/milvus/blob/master/deployments/docker/standalone/docker-compose.yml) file as follows to map the local path of **milvus.yaml** to the corresponding file path in the container.
 ```yaml
 standalone:
   volumes:
     - <your_local_path>/milvus.yaml:/milvus/configs/milvus.yaml
 ```
-For Milvus cluster, add **volumes** sections for the **rootcoord**, **proxy**, **querycoord**, **querynode**, **indexcoord**, **indexnode**, **datacoord**, and **datanode** services in the [docker-compose.yml](https://github.com/milvus-io/milvus/blob/master/deployments/docker/cluster/docker-compose.yml) file as follows. Provide the path of your local **milvus.yaml** file.
+For Milvus cluster, add **volumes** sections for the **rootcoord**, **proxy**, **querycoord**, **querynode**, **indexcoord**, **indexnode**, **datacoord**, and **datanode** services in the [docker-compose.yml](https://github.com/milvus-io/milvus/blob/master/deployments/docker/cluster/docker-compose.yml) file as follows. 
 ```yaml
 rootcoord:
   container_name: milvus-rootcoord
@@ -165,7 +165,7 @@ docker-compose up -d
 
 For Milvus clusters on K8s, you can configure S3 in the same command that starts Milvus. Alternatively, you can configure S3 using the **values.yml** file on the **/charts/milvus** path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
- The following table lists the keys for configuring S3 in the YAML file.
+ The following table lists the keys for configuring S3 in **values.yml**.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
 | externalS3.enabled    | Enables or disables S3.     | true/false |
@@ -213,6 +213,8 @@ helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set 
 ```
 ## What's next
 
-- If you are ready to deploy Milvus on AWS:
+- If you are ready to deploy Milvus on clouds:
   - [Deploy Milvus on AWS with Terraform and Ansible](clouds/aws/aws.md)
   - [Deploy Milvus on Amazon EKS with Terraform](clouds/aws/eks.md)
+  - [Deploy Milvus Cluster on GCP with Kubernetes](clouds/gcp.md)
+  - [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](clouds/azure.md)
