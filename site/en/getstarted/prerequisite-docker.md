@@ -30,3 +30,9 @@ Before you install Milvus, check your hardware and software to see if they meet 
 | Linux platforms            | <ul><li>Docker 19.03 or later</li><li>Docker Compose 1.25.1 or later</li></ul> | See [Install Docker Engine](https://docs.docker.com/engine/install/) and [Install Docker Compose](https://docs.docker.com/compose/install/) for more information. |
 | Windows with WSL 2 enabled | Docker Desktop                                               | We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/windows/install/#wsl-2-backend) for more information. |
 
+## What's next
+- If your hardware and software meet the requriements, you can:
+  - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
+  - [Install Milvus cluster with Docker Compose](install_cluster-docker.md)
+
+- See [System Configuration](configuration_standalone-basic.md) for parameters you can set while installing Milvus.
