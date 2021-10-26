@@ -65,7 +65,7 @@ const params = {
 <table class="params">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
@@ -203,7 +203,7 @@ await milvusClient.partitionManager.createPartition({
 <table class="params">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
