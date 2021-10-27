@@ -12,7 +12,7 @@ Topik ini menjelaskan bagaimana cara menjalankan Milvus menggunkan Python.
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 <div class="alert note">
-Python 3.6 atau yang lebih baru dibutuhkan. Lihat <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> untuk informasi lebih lanjut.
+Python 3.6 atau yang lebih baru dibutuhkan. Lihat <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Mengunduh Python</a> untuk informasi lebih lanjut.
 </div>
 
 ## 2. Unduh kode sampel
@@ -22,7 +22,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python
 ```
 
 ## 3. Pindai sampel
-Langkah-langkah yang dilakukan untuk membuat kode sampel.The sample code performs the following steps.
+Langkah-langkah yang dilakukan untuk membuat kode sampel.
 
 - Impor paket PyMilvus :
 ```Python
@@ -87,7 +87,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Baca [API Reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) untuk informasi lebih lanjut.
+Baca [Referensi API](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) untuk informasi lebih lanjut.
 
 - Lakukan pencarian hibrid：
 <div class="alert note">
