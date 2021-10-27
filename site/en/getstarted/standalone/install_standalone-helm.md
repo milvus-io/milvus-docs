@@ -3,7 +3,7 @@ id: install_standalone-helm.md
 label: Install on Kubernetes 
 order: 1
 group: standalone
-summary: Installation instructions for the standalone version of Milvus.
+summary: Learn how to install Milvus stanalone on Kubernetes.
 ---
 
 # Install Milvus Standalone
