@@ -1,6 +1,11 @@
 ---
 id: example_code.md
+label: Python
+order: 0
+group: example
 ---
+
+{{tab}}
 
 # 通过 Python 使用 Milvus
 
