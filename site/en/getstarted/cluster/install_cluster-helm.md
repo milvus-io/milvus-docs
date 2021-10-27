@@ -37,13 +37,13 @@ $ minikube start
 
 Helm is the package manager for Kubernetes. It can help you deploy Milvus quickly.
 
-#### 1. Add Milvus Helm repository
+1. Add Milvus Helm repository
 
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-#### 2. Update charts locally
+2. Update charts locally
 
 ```
 $ helm repo update
