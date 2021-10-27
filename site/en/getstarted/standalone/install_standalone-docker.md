@@ -3,8 +3,7 @@ id: install_standalone-docker.md
 label: Install with Docker Compose
 order: 0
 group: standalone
-summary: Installation instructions for the standalone version of Milvus.
-
+summary: Learn how to install Milvus stanalone with Docker Compose.
 ---
 
 # Install Milvus Standalone
