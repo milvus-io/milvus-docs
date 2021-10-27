@@ -1,9 +1,6 @@
 ---
 id: example_code_id.md
-
 ---
-
-{{tab}}
 
 # Menjalankan Milvus menggunkan Python
 
