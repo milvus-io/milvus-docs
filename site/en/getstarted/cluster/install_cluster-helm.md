@@ -3,7 +3,7 @@ id: install_cluster-helm.md
 label: Install on Kubernetes
 order: 1
 group: cluster
-summary: Installation instructions for the cluster version of Milvus.
+summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
 # Install Milvus Cluster
