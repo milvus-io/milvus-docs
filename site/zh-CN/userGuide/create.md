@@ -57,7 +57,7 @@ const params = {
 <table class="params">
 	<thead>
 	<tr>
-		<th>参数</td>
+		<th>参数</th>
 		<th>说明</th>
 		<th>备注</th>
 	</tr>
@@ -107,7 +107,7 @@ await milvusClient.collectionManager.createCollection(params);
 <table class="params">
 	<thead>
 	<tr>
-		<th>参数</td>
+		<th>参数</th>
 		<th>说明</th>
 		<th>备注</th>
 	</tr>
@@ -194,7 +194,7 @@ await milvusClient.partitionManager.createPartition({
 <table class="params">
 	<thead>
 	<tr>
-		<th>参数</td>
+		<th>参数</th>
 		<th>说明</th>
 		<th>备注</th>
 	</tr>

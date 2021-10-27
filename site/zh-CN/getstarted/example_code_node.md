@@ -23,9 +23,7 @@ summary: 使用此 Node.js 示例代码更快地开始使用 Milvus。
 </div>
 
 
-
 ## 2. 安装 TypeScript 和 Node Milvus SDK 及其依赖
-
 ```bash
    npm install @zilliz/milvus2-sdk-node typescript --save
 ```
