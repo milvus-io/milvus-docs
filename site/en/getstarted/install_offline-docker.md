@@ -52,7 +52,7 @@ python3 save_image.py --manifest docker-compose.yml
   The images are stored in the <b>/images</b> folder.
   </div>
 
-4. Unzip the images
+4. Load the images
 
 ```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
