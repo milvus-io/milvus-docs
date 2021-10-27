@@ -8,9 +8,9 @@ summary: Learn how to manually or automatically scale out and scale in a Milvus 
 
 ## Overview
 
-Milvus supports adjusting the number of worker nodes of each type according to your own need. This topic describes how to scale out and scale in a Milvus cluster. **We assume that you have already installed a Milvus cluster with Kubernetes before scaling. ** 
+Milvus supports adjusting the number of worker nodes of each type according to your own need. This topic describes how to scale out and scale in a Milvus cluster. **We assume that you have already installed a Milvus cluster with Kubernetes before scaling.** 
 
-Also, we recommend familiarizing yourself with the [Milvus architecture](architecture_overview.md) before you begin. 
+Also, we recommend that you get familiar with the [Milvus architecture](architecture_overview.md) before you begin. 
 
 ## What is scaling-out and scaling-in
 
@@ -20,7 +20,7 @@ Scaling out refers to increasing the number of nodes in a cluster. Unlike scalin
 
 ![Scaleup](../../../assets/scale_up.jpg)
 
-Generally, you will need to scale out the Milvus cluster you created if it is over-utilized. Below are some typical situations where you may need to scale out the Milvus cluster:
+Generally, you need to scale out the Milvus cluster you created if it is over-utilized. Following are some typical situations where you might need to scale out the Milvus cluster:
 
 - The CPU and memory utilization is high for a period of time.
 - The query throughput becomes higher.
@@ -28,7 +28,7 @@ Generally, you will need to scale out the Milvus cluster you created if it is ov
 - Massive volumes of large datasets need to be processed.
 - High availability of the Milvus service needs to be ensured.
 
-On the contrary, scaling in refers to decreasing the number of nodes in a cluster. Generally, you will need to scale in the Milvus cluster you created if it is under-utilized. Below are some typical situations where you need to scale in the Milvus cluster:
+On the contrary, scaling in refers to decreasing the number of nodes in a cluster. Generally, you need to scale in the Milvus cluster that you created if it is under-utilized. Following are some typical situations where you need to scale in the Milvus cluster:
 
 - The CPU and memory utilization is low for a period of time.
 - The query throughput becomes lower.
@@ -37,7 +37,7 @@ On the contrary, scaling in refers to decreasing the number of nodes in a cluste
 
 ## Before you begin
 
-Run `kubectl get pods` to get a list of the components and their working status in the Milvus cluster you created.
+Run `kubectl get pods` to get a list of all the components and their working status in the Milvus cluster that you created.
 
 ```
 NAME                                            READY   STATUS       RESTARTS   AGE
@@ -60,7 +60,7 @@ Milvus only supports adding the worker nodes and does not support adding the coo
 
 ## Scale out 
 
-According to the [Milvus architecture](architecture_overview.md), stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.
+According to the [Milvus architecture](architecture_overview.md), stateless worker nodes include the query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to meet your business needs and requirements. You can scale out a Milvus cluster either manually or automatically.
 
 ### Query node
 
@@ -89,7 +89,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 
 - **Autoscale**
 
-Run the following command to enable autoscaling for query node. You also need to configure the value for CPU and memory resource to trigger autoscaling.
+Run the following command to enable autoscaling for query node. You also need to configure the values for CPU and memory resource to trigger autoscaling.
 
 ```
 helm upgrade my-release milvus/milvus --set queryNode.autoscaling.enabled=true --reuse-values
@@ -125,7 +125,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          5m
 
 - **Autoscale**
 
-Run the following command to enable autoscaling for data node. You also need to configure the value for CPU and memory resource to trigger autoscaling.
+Run the following command to enable autoscaling for data node. You also need to configure the values for CPU and memory resource to trigger autoscaling.
 
 ```
 helm upgrade my-release milvus/milvus --set dataNode.autoscaling.enabled=true --reuse-values
@@ -162,7 +162,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          10m
 
 - **Autoscale**
 
-Run the following command to enable autoscaling for index node. You also need to configure the value for CPU and memory resource to trigger autoscaling.
+Run the following command to enable autoscaling for index node. You also need to configure the values for CPU and memory resource to trigger autoscaling.
 
 ```
 helm upgrade my-release milvus/milvus --set indexNode.autoscaling.enabled=true --reuse-values
@@ -201,7 +201,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 
 - **Autoscale**
 
-Run the following command to enable autoscaling for proxy. You also need to configure the value for CPU and memory resource to trigger autoscaling.
+Run the following command to enable autoscaling for proxy. You also need to configure the values for CPU and memory resource to trigger autoscaling.
 
 ```
 helm upgrade my-release milvus/milvus --set proxy.autoscaling.enabled=true --reuse-values
@@ -209,10 +209,10 @@ helm upgrade my-release milvus/milvus --set proxy.autoscaling.enabled=true --reu
 
 ## Scale in
 
-According to your business need, you may need to scale in your Milvus cluster either manually or automatically. You can refer to the previous section to learn how to enable autoscaling for each type of worker node. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set. 
+According to your business need, you might need to scale in your Milvus cluster either manually or automatically. You can refer to the previous section to learn how to enable autoscaling for each type of worker nodes. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value that you have set. 
 
 <div class="alert note">
-We do not recommend reducing the number of workers nodes dramatically. For example, if there are five data nodes in the cluster, we recommend reducing one data node at a time to ensure service availability. If the service is available after the first attempt of scaling in, you can continue to further reduce the number of the data node.
+We do not recommend that you reduce the number of workers nodes dramatically. For example, if there are five data nodes in the cluster, we recommend reducing one data node at a time to ensure service availability. If the service is available after the first attempt of scaling in, you can continue to further reduce the number of the data nodes.
 </div>
 
 ### Query node
@@ -320,7 +320,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
   - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
   - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
   - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
-  - Lear how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
+  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
 
 - If you are looking for instructions on how to allocate resources:
   - [Allocate Resources on Kubernetes](allocate.md#standalone)
