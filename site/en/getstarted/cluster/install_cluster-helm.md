@@ -12,53 +12,69 @@ summary: Installation instructions for the cluster version of Milvus.
 
 {{tab}}
 
-We recommend using minikube to install Milvus on Kubernetes. Minikube has a dependency on default storageclass when installed (see screenshot below). Installation in other methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed (see screenshot below). Installation in other methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
-![Storageclass](../../../../assets/storageclass.png)
+```
+$ kubectl get sc
+```
 
-## 1. Start a K8s cluster
+```
+NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
+```
+
+## Start a K8s cluster
+
+<div class="alert note">
+This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
+</div>
+
 ```
 $ minikube start
 ```
 
-## 2. Start Milvus
-<div class="alert note">
-Helm, the package manager for K8s, helps you to quickly start Milvus.
-</div>
+## Install Helm Chart for Milvus
 
-#### Add a chart repository:
+Helm is the package manager for Kubernetes. It can help you deploy Milvus quickly.
+
+#### 1. Add Milvus Helm repository
+
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-#### Update charts locally: 
+#### 2. Update charts locally
+
 ```
 $ helm repo update
 ```
 
-#### Install the chart:
-Choose a release name for the chart instance.
+## Configure and start Milvus
 
-<div class="alert note">
-This tutorial uses <code> my-release</code> as the release name. To use a different release name, replace <code> my-release</code> in the following command.
-</div>
+Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code> my-release</code> as the release name. To use a different release name, replace <code> my-release</code> in the command.
 
-#### Install Milvus cluster:
+By running `helm show values milvus/milvus`, you can check the parameters that can be modified directly with Chart. You can configure these parameters by adding `--values` or `--set` in the command for installation. For more information, see [Milvus Cluster System Configurations](configuration_cluster-basic.md).
+
 ```
 $ helm install my-release milvus/milvus
 ```
 
 <div class="alert note">
-The default command line installs cluster version of Milvus while installing with Helm. No further setting is needed.
-For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>.
-
-See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> for more information.
-
+	<ul>
+    <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
+    <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
+  </ul>
 </div>
 
-*After Milvus starts, the `READY` column displays `1/1` for all pods.*
+Check the status of the running pods.
+
 ```
 $ kubectl get pods
+```
+
+After Milvus starts, the `READY` column displays `1/1` for all pods.
+
+```
 NAME                                             READY  STATUS   RESTARTS  AGE
 my-release-etcd-0                                1/1    Running   0        3m23s
 my-release-etcd-1                                1/1    Running   0        3m23s
@@ -84,36 +100,64 @@ my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 ```
 
-## 3. Connect to Milvus
+## Connect to Milvus
+
 Open a new terminal and run the following command to forward the local port to the port that Milvus uses.
+
 ```
 $ kubectl port-forward service/my-release-milvus 19530
+```
+
+```
 Forwarding from 127.0.0.1:19530 -> 19530
 ```
 
-## 4. Uninstall Milvus
+## Uninstall Milvus
+
+Run the following command to uninstall Milvus.
+
 ```
 $ helm uninstall my-release
 ```
 
-## 5. Stop the K8s cluster
-Run the following command to stop the cluster and the minikube VM without deleting created resources.
+## Stop the K8s cluster
+
+Stop the cluster and the minikube VM without deleting created resources.
+
 ```
 $ minikube stop
 ```
+
+Run `minikube start` to restart the cluster.
+
+
+## Delete the K8s cluster
+
+Delete the cluster, the minikube VM, and all created resources including persistent volumes.
+
+```
+$ minikube delete
+```
+
 <div class="alert note">
-Run <code>minikube start</code> to restart the cluster:
+Run <code>kubectl logs (podname)</code> to get the <code>stderr</code> log of the pod before deleting the cluster and all resources.
 </div>
 
-## 6. Delete the K8s cluster
-Run the following command to delete the cluster, the minikube VM, and all created resources including persistent volumes.
-```
-minikube delete
-```
+## What's next
 
-<div class="alert note">
-<ul>
-<li>
-Save required logs from the <code>stderr</code> before deleting the cluster and all resources. Run <code>kubectl logs (podname)</code> to get the <code>stderr</code> of the pods.</li>
-<li>See <a href="upgrade.md">Upgrade Milvus Using Helm Chart</a> for more information about upgrading Milvus.</li></ul>
-</div>
+Having installed Milvus, You can:
+
+- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+
+- Learn the basic operations of Milvus:
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+
+- See [Upgrade Milvus Using Helm Chart](upgrade.md) for instructions to upgrade your Milvus server.
+- [Scale your Milvus cluster](scaleout.md).
+- Deploy your Milvu cluster on clouds:
+  - [Amazon EC2](aws.md)
+  - [Amazon EKS](eks.md)
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](
