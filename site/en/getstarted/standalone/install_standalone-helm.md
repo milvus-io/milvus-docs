@@ -36,13 +36,13 @@ $ minikube start
 
 Helm is the package manager for Kubernetes. It can help you deploy Milvus quickly.
 
-#### 1. Add Milvus Helm repository
+1. Add Milvus Helm repository
 
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-#### 2. Update charts locally
+2. Update charts locally
 
 ```
 $ helm repo update
@@ -125,5 +125,12 @@ Run <code>kubectl logs (podname)</code> to get the <code>stderr</code> log of th
 Having installed Milvus, You can:
 
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
-- See [Upgrade Milvus Using Helm Chart](upgrade.md) for instructions to upgrade your Milvus server.
+
+- Learn the basic operations of Milvus:
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+
+- [Upgrade Milvus Using Helm Chart](upgrade.md).
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](monitor.md).
