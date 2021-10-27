@@ -54,11 +54,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
 
-*After Milvus standalone starts, three running docker containers appear including two infrastructure services and one Milvus service.* 
 
+Check the status of the containers.
 ```
 $ sudo docker-compose ps
 ```
+
+After Milvus standalone starts, three running docker containers appear including two infrastructure services and one Milvus service. 
 ```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
