@@ -8,7 +8,7 @@ summary: Learn how to manually or automatically scale out and scale in a Milvus 
 
 ## Overview
 
-Milvus supports adjusting the number of worker nodes of each type according to your own need. This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already [installed a Milvus cluster](install_cluster-helm.md) before scaling. 
+Milvus supports adjusting the number of worker nodes of each type according to your own need. This topic describes how to scale out and scale in a Milvus cluster. **We assume that you have already installed a Milvus cluster with Kubernetes before scaling. ** 
 
 Also, we recommend familiarizing yourself with the [Milvus architecture](architecture_overview.md) before you begin. 
 
