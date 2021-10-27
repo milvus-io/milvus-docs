@@ -4,7 +4,7 @@ label: Install on Kubernetes
 order: 1
 group: offline
 related_key: offline
-summary: Learn how to install Milvus offline.
+summary: Learn how to install Milvus on Kubernetes offline.
 
 ---
 
