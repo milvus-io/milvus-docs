@@ -154,10 +154,10 @@ Having installed Milvus, You can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- See [Upgrade Milvus Using Helm Chart](upgrade.md) for instructions to upgrade your Milvus server.
+- [Upgrade Milvus Using Helm Chart](upgrade.md).
 - [Scale your Milvus cluster](scaleout.md).
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
-- [Monitor Milvus with Prometheus](
+- [Monitor Milvus with Prometheus](monitor.md).
