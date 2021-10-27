@@ -36,13 +36,13 @@ $ minikube start
 
 Helm is the package manager for Kubernetes. It can help you deploy Milvus quickly.
 
-#### Add Milvus Helm repository:
+#### 1. Add Milvus Helm repository
 
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-#### Update charts locally: 
+#### 2. Update charts locally
 
 ```
 $ helm repo update
@@ -62,11 +62,13 @@ $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.r
 See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.
 </div>
 
-*After Milvus starts, the `READY` column displays `1/1` for all pods.*
+Check the status of the running pods.
 
 ```
 $ kubectl get pods
 ```
+
+After Milvus starts, the `READY` column displays `1/1` for all pods.
 
 ```
 NAME                                               READY   STATUS      RESTARTS   AGE
