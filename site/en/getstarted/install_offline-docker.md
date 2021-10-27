@@ -4,7 +4,7 @@ label: Install with Docker Compose
 order: 0
 group: offline
 related_key: offline
-summary: Learn how to install Milvus offline.
+summary: Learn how to install Milvus with Docker Compose offline.
 
 
 ---
