@@ -78,6 +78,12 @@ To delete data after stopping Milvus, run <code> $ sudo rm -rf  volumes</code>.
 Having installed Milvus, You can:
 
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
-- See [Upgrade Milvus Using Helm Chart](upgrade.md) for instructions to upgrade your Milvus server.
-- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 
+- Learn the basic operations of Milvus:
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+
+- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](monitor.md).
