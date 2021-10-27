@@ -74,11 +74,12 @@ Creating milvus-indexnode  ... done
 Creating milvus-datanode   ... done
 ```
 
-*After Milvus cluster starts, 11 running docker containers appear including three infrastructure services and eight Milvus services.*
+Check the status of the containers.
 
 ```
 $ sudo docker ps
 ```
+After Milvus cluster starts, 11 running docker containers appear including three infrastructure services and eight Milvus services.
 ```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
