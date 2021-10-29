@@ -15,7 +15,7 @@ Visualization is a chart showing the change of resource usage across time. It ma
 
 This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of Milvus.
 
-## Before you begin
+## Prerequisites
 
 You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at `http://localhost:3000`. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
 
