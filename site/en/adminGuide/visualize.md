@@ -13,19 +13,19 @@ This topic describes how to visualize Milvus metrics using Grafana.
 
 As described in the [monitoring guide](monitor.md), metrics contain useful information such as how much memory is used by a specific Milvus component. Monitoring metrics helps you better understand Milvus performance and its running status so that you can adjust resource allocation timely. 
 
-A chart showing the change of resource usage across time is called visualization. Visualization makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.
+Visualization is a chart showing the change of resource usage across time. It makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.
 
 This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of Milvus.
 
 ## Before you begin
 
-You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the set up is successful, you can access Grafana at http://localhost:3000. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
+You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at `http://localhost:3000`. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
 
 ## Visualize metrics using Grafana
 
 ### 1. Download and import dashboard
 
-Download and import Milvus dashboard from json.
+Download and import Milvus dashboard from the JSON file.
 
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monitor/grafana/milvus-dashboard.json
@@ -33,9 +33,10 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monit
 
 ![Download_and_import](../../../../assets/import_dashboard.png)
 
-### 2. Select Milvus instance
+### 2. View metrics
 
-You can see the Milvus components panel.
+Select the Milvus instance you want to monitor. Then you can see the Milvus components panel.
+
 
 ![Select_instance](../../../../assets/grafana_select.png)
 
