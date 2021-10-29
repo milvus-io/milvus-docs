@@ -1,7 +1,7 @@
 {
   "section1": {
     "order": 0,
-    "title": "Get Started",
+    "title": "",
     "items": [{
         "title": "Install Milvus",
         "key": "stand-alone",
