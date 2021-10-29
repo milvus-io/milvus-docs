@@ -7,12 +7,13 @@ summary: Learn how to create an alert for Milvus services in Grafana.
 
 # Create an Alert for Milvus Services
 
-This topic introduces the alerting mechanism for Milvus services and explains why, when, and how to create alerts in Milvus.
+This topic introduces the alert mechanism for Milvus services and explains why, when, and how to create alerts in Milvus.
 
-## Why to alert
-By creating alerts, you can receive notifications when the value of a specific metric is over or below the threshold you have predefined. For example, you create an alert and set 80 MB as the maximum value for memory usage by Milvus components. If the actual usage exceeds the predefined number, you will receive alerts reminding you that the memory usage by Milvus component surpasses 80 MB. Upon the alert, you can then adjust the allocation of resources accordingly and timely to ensure service availability.
+By creating alerts, you can receive notifications when the value of a specific metric exceeds the threshold you have predefined. 
 
-## When to alert
+For example, you create an alert and set 80 MB as the maximum value for memory usage by Milvus components. If the actual usage exceeds the predefined number, you will receive alerts reminding you that the memory usage by Milvus component surpasses 80 MB. Upon the alert, you can then adjust the allocation of resources accordingly and timely to ensure service availability.
+
+## Scenarios for creating alerts.
 
 Below are some common scenarios where you need to create an alert for.
 
@@ -30,14 +31,14 @@ The following metrics are available for alerting configuration:
 | OS Threads   | Threads, or lightweight processes in an operating system.  |   / |
 | Process Opened Fds   | The current number of used file descriptors.  | /    |
 
-## How to alert
-After describing the reasons for creating alerts and the common occasions, this topic now instructs you on how to create an alert for the Milvus service. In this guide, we will take the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in the [Milvus forum](https://discuss.milvus.io/) or initiate a discussion on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
+## Set up alerts
+This guide takes the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in the [Milvus forum](https://discuss.milvus.io/) or initiate a discussion on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
 
-### Before you begin
+### Prerequisites
 This tutorial uses Grafana to create alerts for the Milvus services. Please ensure Grafana is installed and configured before you begin. If you have not installed Grafana, we recommend reading the [monitoring guide](monitor.md). Grafana is automatically installed in the step to enable ServiceMonitor.
 
 ### 1. Add a new query
-To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`.
+To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric: `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`
 
 ![Alert_metric](../../../../assets/alert_metric.png)
 
