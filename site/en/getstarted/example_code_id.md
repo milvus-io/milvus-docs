@@ -1,42 +1,40 @@
 ---
-id: example_code.md
-label: Python
-order: 0
-group: example
+id: example_code_id.md
 ---
 
-{{tab}}
+# Menjalankan Milvus menggunkan Python
 
-# 通过 Python 使用 Milvus
+Topik ini menjelaskan bagaimana cara menjalankan Milvus menggunkan Python.
 
-成功启动 Milvus 服务端后，通过 Python 示例代码使用 Milvus。
+## 1. Instal PyMilvus
 
-1. 安装 PyMilvus 及依赖库:
 ```Python
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
-
 <div class="alert note">
-PyMilvus 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 安装指南</a>。
+Python 3.6 atau yang lebih baru dibutuhkan. Lihat <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Mengunduh Python</a> untuk informasi lebih lanjut.
 </div>
 
+## 2. Unduh kode sampel
 
-2. 下载 **hello_milvus.py** 示例代码:
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
-3. 浏览 **hello_milvus.py**，这个示例程序将：
-- 导入 pymilvus 包
+
+## 3. Pindai sampel
+Langkah-langkah yang dilakukan untuk membuat kode sampel.
+
+- Impor paket PyMilvus :
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
-- 连接 Milvus 服务端
+- Koneksikan ke server:
 ```Python
 connections.connect(host='localhost', port='19530')
 ```
 
-- 创建一个 collection：
+- Buat koleksi:
 ```Python
 dim = 128
 default_fields = [
@@ -49,7 +47,8 @@ default_schema = CollectionSchema(fields=default_fields, description="test colle
 print(f"\nCreate collection...")
 collection = Collection(name="hello_milvus", schema=default_schema)
 ```
-- 向创建的 collection 中插入数据：
+
+- Tambahkan vector ke dalam koleksi:
 ```Python
 import random
 nb = 3000
@@ -62,14 +61,15 @@ collection.insert(
     ]
 )
 ```
-- 构建 IVF_FLAT 索引并加载 collection 至内存：
+
+- Bangun indeks dan muat koleksi:
 ```Python
 default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
 collection.create_index(field_name="float_vector", index_params=default_index)
 collection.load()
 ```
 
-- 进行向量相似度查询：
+- Lakukan pencarian persamaan vektor::
 ```Python
 topK = 5
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -79,8 +79,7 @@ res = collection.search(
     "count > 100", output_fields=["count", "random_value"]
 )
 ```
-
-根据 ID 和相似度输出搜索结果:
+Untuk mencetak hasil pencarian berdasarkan ID dan jarak, jalankan perintah berikut.
 ```Python
 for raw_result in res:
     for result in raw_result:
@@ -88,12 +87,12 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-更多详情，参考 [API Reference](/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/results.html)。
+Baca [Referensi API](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) untuk informasi lebih lanjut.
 
-- 进行混合查询：
+- Lakukan pencarian hibrid：
 <div class="alert note">
-以下示例中，仅对 <code>film_id</code> 在 [2,4, 6, 8]中的 entity 进行向量相似度查询
-</div>
+    Contoh berikut melakukan pencarian perkiraan pada entitas dengan <code>film_id</code> berkisar [2,4,6,8].
+    </div>
 
 ```Python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
@@ -129,14 +128,15 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 - Total hits: 2, hits ids: [2, 4]
 >>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 - Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+
 ```
 
-4. 运行 **hello_milvus.py**:
+## 4. Jalankan sampel
 ```Python
 $ python3 hello_milvus.py
 ```
-*运行结果及查询等待时间如下：*
 
+*Hasil yang dikembalikan dan latensi kueri ditampilkan sebagai berikut:*
 
 <div class='result-bock'>
 <p>Search...</p>
@@ -157,4 +157,5 @@ $ python3 hello_milvus.py
 <br/>
 
 
-*恭喜！你已成功启动 Milvus，并完成了在 Milvus上的第一次向量查询。*
+*Selamat! Kamu baru saja memulai Milvus mandiri dan melakukan pencarian persamaan vector pertama.*
+

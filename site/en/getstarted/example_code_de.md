@@ -1,42 +1,40 @@
 ---
-id: example_code.md
-label: Python
-order: 0
-group: example
+id: example_code_de.md
 ---
 
-{{tab}}
+# Milvus mit Python ausführen
 
-# 通过 Python 使用 Milvus
+Dieser Abschnitt beschreibt, wie man Milvus mit Python ausführt.
 
-成功启动 Milvus 服务端后，通过 Python 示例代码使用 Milvus。
+## 1. PyMilvus installieren
 
-1. 安装 PyMilvus 及依赖库:
 ```Python
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
-
 <div class="alert note">
-PyMilvus 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 安装指南</a>。
+Python 3.6 oder höher ist erforderlich. Siehe <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> für weitere Informationen.
 </div>
 
+## 2. Laden Sie den Beispielcode herunter
 
-2. 下载 **hello_milvus.py** 示例代码:
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
-3. 浏览 **hello_milvus.py**，这个示例程序将：
-- 导入 pymilvus 包
+
+## 3. Scannen Sie die Probe
+Der Beispielcode führt die folgenden Schritte aus.
+
+- Importieren Sie das PyMilvus-Paket:
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
-- 连接 Milvus 服务端
+- Stellt eine Verbindung zu einem Server her:
 ```Python
 connections.connect(host='localhost', port='19530')
 ```
 
-- 创建一个 collection：
+- Erstellen Sie eine Sammlung:
 ```Python
 dim = 128
 default_fields = [
@@ -49,7 +47,8 @@ default_schema = CollectionSchema(fields=default_fields, description="test colle
 print(f"\nCreate collection...")
 collection = Collection(name="hello_milvus", schema=default_schema)
 ```
-- 向创建的 collection 中插入数据：
+
+- Fügt Vektoren in die Sammlung ein:
 ```Python
 import random
 nb = 3000
@@ -62,14 +61,15 @@ collection.insert(
     ]
 )
 ```
-- 构建 IVF_FLAT 索引并加载 collection 至内存：
+
+- Es erstellt Indizes und lädt die Sammlung:
 ```Python
 default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
 collection.create_index(field_name="float_vector", index_params=default_index)
 collection.load()
 ```
 
-- 进行向量相似度查询：
+- Führt eine Vektorähnlichkeitssuche durch:
 ```Python
 topK = 5
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -79,8 +79,7 @@ res = collection.search(
     "count > 100", output_fields=["count", "random_value"]
 )
 ```
-
-根据 ID 和相似度输出搜索结果:
+Um die Ergebnisse der Suche nach ID und Entfernung auszudrucken, führen Sie den folgenden Befehl aus.
 ```Python
 for raw_result in res:
     for result in raw_result:
@@ -88,12 +87,12 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-更多详情，参考 [API Reference](/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/results.html)。
+Siehe [API Reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/results.html) für weitere Informationen.
 
-- 进行混合查询：
+- Führt eine hybride Suche durch：
 <div class="alert note">
-以下示例中，仅对 <code>film_id</code> 在 [2,4, 6, 8]中的 entity 进行向量相似度查询
-</div>
+      Das folgende Beispiel führt eine ungefähre Suche in Entitäten mit <code>film_id</code> gleich [2,4,6,8] durch.
+    </div>
 
 ```Python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
@@ -129,14 +128,15 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 - Total hits: 2, hits ids: [2, 4]
 >>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 - Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+
 ```
 
-4. 运行 **hello_milvus.py**:
+## 4. Führen Sie die Probe aus
 ```Python
 $ python3 hello_milvus.py
 ```
-*运行结果及查询等待时间如下：*
 
+*Die zurückgegebenen Ergebnisse und die Latenzzeit der Abfrage werden wie folgt angezeigt:*
 
 <div class='result-bock'>
 <p>Search...</p>
@@ -157,4 +157,5 @@ $ python3 hello_milvus.py
 <br/>
 
 
-*恭喜！你已成功启动 Milvus，并完成了在 Milvus上的第一次向量查询。*
+*Herzlichen Glückwunsch! Sie haben es geschafft, Milvus unabhängig zu starten und Ihre erste Vektorähnlichkeitssuche durchzuführen.*
+

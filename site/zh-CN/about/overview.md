@@ -1,180 +1,147 @@
 ---
 id: overview.md
+title: Milvus 概述
+related_key: Milvus Overview
+summary: Milvus is an open-source vector database designed specifically for AI application development, embeddings similarity search, and MLOps.
 ---
 
-# Milvus 是什么
+# 关于 Milvus
 
-Milvus 是一款开源向量数据库，赋能 AI 应用和向量相似度搜索。
+本文以问答的形式从几个维度来介绍 Milvus。通过阅读本文，你将了解 Milvus 是什么及其相关的基本原理、重要概念、核心优势、应用场景、周边工具等。此外，本文还简单介绍了 Milvus 的系统架构设计以及 Milvus 支持的索引和距离计算方式。
 
-Milvus 提供以下 2 个版本：
-- [Milvus 单机版](install_standalone-docker.md) 
-- [Milvus 分布式版](install_cluster-docker.md)
+## 什么是 Milvus 向量数据库？
 
-版本兼容: 
+Milvus 于 2019 年开源，主要用于存储、索引和管理通过深度神经网络和机器学习模型产生的海量向量数据。
 
-<table class="version">
-	<thead>
-	<tr>
-		<th>Milvus 版本</th>
-		<th>Python SDK 版本</th>
-		<th>Java SDK 版本</th>
-		<th>Go SDK 版本</th>
-		<th>Node SDK 版本</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><a href="install_standalone-docker.md">{{var.milvus_release_version}}</a></td>
-		<td><a href="example_code.md">{{var.milvus_python_sdk_version}}</a></td>
-		<td>即将上线</td>
-		<td>即将上线</td>
-		<td><a href="https://github.com/milvus-io/milvus-sdk-node">{{var.milvus_node_sdk_version}}</a></td>
-	</tr>
-	</tbody>
-</table>
+Milvus 向量数据库专为向量查询与检索设计，能够为万亿级向量数据建立索引。与传统关系型数据库不同，Milvus 主要用于自下而上地处理非结构化数据向量。非结构化数据没有统一的预定义模型，因此可以转化为向量。
 
-Milvus {{var.milvus_release_version}} 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
+随着互联网不断发展，电子邮件、论文、物联网传感数据、社交媒体照片、蛋白质分子结构等非结构化数据已经变得越来越普遍。如果想要使用计算机来处理这些数据，需要使用 embedding 技术将这些数据转化为向量。随后，Milvus 会存储这些向量，并为其建立索引。Milvus 能够根据两个向量之间的距离来分析他们的相关性。如果两个向量十分相似，这说明向量所代表的源数据也十分相似。
 
-## 系统架构
+## 重要概念
 
-Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架构设计。该重构版本的所有组件均为无状态组件，极大地增强了系统弹性和灵活性。
+如果你刚刚接触向量数据库及向量相似度检索领域，可以通过阅读以下重要概念获得初步了解。
+
+更多 Milvus 相关概念详见 [Milvus 术语表](glossary.md)。
+
+### 非结构化数据
+
+非结构化数据指的是数据结构不规则，没有统一的预定义数据模型，不方便用数据库二维逻辑表来表现的数据。非结构化数据包括图片、视频、音频、自然语言等，占所有数据总量的 80%。非结构化数据的处理可以通过各种人工智能（AI）或机器学习（ML）模型转化为向量数据进行。
+
+### 特征向量
+
+向量又称为 embedding vector，是指由embedding技术从离散变量（如xxx等各种非结构化数据）转变而来的连续向量。在数学表示上，向量是一个由浮点数或者二值型数据组成的 n 维数组。通过现代的向量转化技术，比如各种人工智能（AI）或者机器学习（ML）模型，可以将非结构化数据抽象为 n 维特征向量空间的向量。这样就可以采用最近邻算法（ANN）计算非结构化数据之间的相似度。
+
+
+### 向量相似度检索
+
+相似度检索是指将目标对象与数据库中数据进行比对，并召回最相似的结果。同理，向量相似度检索返回的是最相似的向量数据。近似最近邻搜索（ANN）算法能够计算向量之间的距离，从而提升向量相似度检索的速度。如果两条向量十分相似，这就意味着他们所代表的源数据也十分相似。
+
+## 为什么选择使用 Milvus？
+
+- 高性能：性能高超，可对海量数据集进行向量相似度检索。
+- 高可用、高可靠：Milvus 支持在云上扩展，其容灾能力能够保证服务高可用。
+- 混合查询：Milvus 支持在向量相似度检索过程中进行标量字段过滤，实现混合查询。
+- 开发者友好：支持多语言、多工具的 Milvus 生态系统。
+
+## Milvus 支持哪些索引类型及距离计算公式？
+
+创建索引是一个组织数据的过程，是向量数据库实现快速查询百万、十亿、甚至万亿级数据集所依赖的一个巨大组成部分。在查询或检索数据前，必须先指定索引类型及距离计算公式。**如未指定索引类型，Milvus 将默认执行暴搜。**
+
+### 索引类型
+
+Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest Neighbors Search，近似最近邻搜索）。
+
+- **FLAT**：适用于需要 100% 召回率且数据规模相对较小（百万级）的向量相似性搜索应用。
+- **IVF_FLAT**：基于量化的索引，适用于追求查询准确性和查询速度之间理想平衡的场景。
+- **IVF_SQ8**：基于量化的索引，适用于磁盘或内存、显存资源有限的场景。
+- **IVF_PQ**：基于量化的索引，适用于追求高查询速度、低准确性的场景。
+- **HNSW**：基于图的索引，适用于追求高查询效率的场景。
+- **ANNOY**：基于树的索引，适用于追求高召回率的场景。 
+
+更多内容详见[根据应用场景选择索引](index_selection.md)。
+
+
+### 距离计算公式
+
+Milvus 基于不同的距离计算方式比较向量间的距离。根据插入数据的形式，选择合适的距离计算方式能极大地提高数据分类和聚类性能。
+
+浮点型向量主要使用以下距离计算公式：
+
+- **欧氏距离 (L2)**：主要运用于计算机视觉领域。
+- **内积 (IP)**: 主要运用于自然语言处理（NLP）领域。
+二值型向量主要使用以下距离计算公式：
+- **汉明距离 (Hamming)**：主要运用于自然语言处理（NLP）领域。
+- **杰卡德距离 (Jaccard)**：主要运用于化学分子式检索领域。
+- **谷本距离 (Tanimoto)**：主要运用于化学分子式检索领域。
+- **超结构 (Superstructure)**：主要运用于检索化学分子式的相似超结构。
+- **子结构 (Substructure)**：主要运用于检索化学分子式的相似子结构。
+
+更多内容详见 [距离计算方式](metric.md#floating)。
+
+## Milvus 应用场景
+
+你可以使用 Milvus 搭建符合自己场景需求的向量相似度检索系统。Milvus 使用场景包括：
+
+- [图片检索系统](image_similarity_search.md)：以图搜图，从海量数据库中即时返回与上传图片最相似的图片。
+- [视频检索系统](video_similarity_search.md)：将视频关键帧转化为向量并插入 Milvus，便可检索相似视频，或进行实时视频推荐。
+- [音频检索系统](audio_similarity_search.md)：快速检索海量演讲、音乐、音效等音频数据，并返回相似音频。
+- [分子式检索系统](molecular_similarity_search.md)：超高速检索相似化学分子结构、超结构、子结构。
+- [推荐系统](recommendation_system.md)：根据用户行为及需求推荐相关信息或商品。
+- [智能问答机器人](question_answering_system.md)：交互式智能问答机器人可自动为用户答疑解惑。
+- [DNA 序列分类系统](dna_sequence_classification.md)：通过对比相似 DNA 序列，仅需几毫秒便可精确对基因进行分类。
+- [文本搜索引擎](text_search_engine.md)：帮助用户从文本数据库中通过关键词搜索所需信息。
+
+更多应用场景详见 [Milvus 系统搭建教程](https://github.com/milvus-io/bootcamp/tree/master/solutions)及 [Milvus 用户](milvus_adopters.md)。
+
+## Milvus 系统架构
+
+Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架构设计，所有组件均为无状态组件，极大地增强了系统弹性和灵活性。
 
 整个系统分为四个层面：
 
-- 接入层（Access Layer）
-- 协调服务（Coordinator Service）
-- 执行节点（Worker Node）
-- 存储服务 （Storage）
+- 接入层（Access Layer）：系统的门面，由一组无状态 proxy 组成。对外提供用户连接的 endpoint，负责验证客户端请求并减少返回结果。
+- 协调服务（Coordinator Service）：系统的大脑，负责分配任务给执行节点。协调服务共有四种角色，分别为 root coord、data coord、query coord 和 index coord。
+- 执行节点（Worker Node）：系统的四肢，负责完成协调服务下发的指令和 proxy 发起的数据操作语言（DML）命令。执行节点分为三种角色，分别为 data node、query node 和 index node。
+- 存储服务 （Storage）： 系统的骨骼，负责 Milvus 数据的持久化，分为元数据存储（meta store）、消息存储（log broker）和对象存储（object storage）三个部分。
 
-**接入层（Access Layer)：** 系统的门面，包含了一组对等的 proxy 节点。接入层是暴露给用户的统一 endpoint，负责转发请求并收集执行结果。
+更多系统原理的相关内容详见 [系统架构](architecture_overview.md)。
 
-**协调服务（Coordinator Service）：** 系统的大脑，负责分配任务给执行节点。总共有四类协调者角色，分别为 root 协调者、data 协调者、query 协调者和 index 协调者。
 
-**执行节点（Worker Node）：** 系统的四肢。执行节点只负责被动执行协调服务发起的读写请求。目前有三类执行节点，即 data 节点、query 节点和 index 节点。
+![Architecture](../../../assets/architecture_02.jpg)
 
-**存储服务（Storage）：** 系统的骨骼，是所有其他功能实现的基础。Milvus 依赖三类存储：元数据存储、消息存储（Log Broker）和对象存储。
+## 开发者工具
 
-![系统架构](../../../assets/architecture_02.jpg)
+Milvus 为 DevOps 提供丰富的 API 及工具。
 
-更多系统原理的相关内容详见 [Milvus 2.0 架构](architecture_overview.md)。
 
-## Milvus 组件
+### API 
 
-Milvus 单机版中包含 3 个组件：
-- Milvus
-- etcd
-- MinIO
+Milvus 客户端库对 Milvus API 进行了封装。你可以使用 Milvus 客户端库通过应用代码进行数据插入、删除、查询等操作。
 
-Milvus 分布式版中包含 8 个微服务组件和 3 个第三方依赖。
+- [PyMilvus](https://github.com/milvus-io/pymilvus)
+- [Node.js SDK](https://github.com/milvus-io/milvus-sdk-node)
+- [Go SDK](https://github.com/milvus-io/milvus-sdk-go)
 
-- 微服务组件：
+我们正在不断开发新的客户端库。如果你愿意为 Milvus 贡献代码，请前往相应的 [Milvus 项目](https://github.com/milvus-io) 仓库。
 
-	- Root coord
-	- Proxy
-	- Query coord
-	- Query node
-	- Index coord 
-	- Index node
-	- Data coord
-	- Data node
 
-- 第三方依赖：
+### Milvus 生态系统工具 
 
-	- etcd
-	- MinIO
-	- Pulsar
+Milvus 生态系统提供多种强大的工具，包括：
 
-## 产品亮点
+- [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
+- [Milvus Insight](https://github.com/milvus-io/milvus-insight)：图形化管理系统。
+- [MilvusDM](https://milvus.io/docs/v2.0.0/migrate_overview.md)：用于导入或导出 Milvus 数据
+- [Milvus sizing tool](https://zilliz.com/sizing-tool)：用于根据向量数据量及索引类型估算所需的原始文件大小、内存大小及稳定硬盘大小。
 
-#### 针对万亿级向量的毫秒级搜索
+## 更多资源
 
-完成万亿条向量数据搜索的平均延迟以毫秒计。
+- 3 分钟快速上手 Milvus：
+  - [Hello Milvus](example_code.md)
+- 在测试或生产环境中安装 Milvus：
+  - [安装前提](prerequisite-docker.md)
+  - [安装单机版 Milvus](install_standalone-docker.md)
+  - [安装分布式版 Milvus](install_cluster-docker.md)
+- 如果你想要深入了解 Milvus 系统架构设计：
+  - 阅读 [Milvus 系统架构](architecture_overview.md)
 
-#### 简化的非结构化数据管理
-
-- 一整套专为数据科学工作流设计的 API。
-- 无论是笔记本、本地集群还是云服务器，始终如一的跨平台用户体验。
-- 可以在任何场景下实现实时搜索与分析。
-
-#### 稳定可靠的用户体验
-
-Milvus 具有故障转移和故障恢复的机制，即使服务中断，也能确保数据和应用程序的业务连续性。
-
-#### 高度可扩展，弹性伸缩
-
-组件级别的高扩展性，支持精准扩展。
-
-#### 混合查询
-
-除了向量以外，Milvus还支持布尔值、整型、浮点等数据类型。在 Milvus 中，一个 collection 可以包含多个字段来代表数据特征或属性。Milvus 还支持在向量相似度检索过程中进行标量字段过滤。
-
-#### 基于 Lambda 架构的流批一体式数据存储
-
-Milvus 在存储数据时支持流处理和批处理两种方式，兼顾了流处理的时效性和批处理的效率。统一的对外接口使得向量相似度查询更为便捷。
-
-#### 广受社区支持和业界认可
-Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，还有活跃的开源社区。Milvus 由 LF AI & DATA 基金会背书，是该基金会的毕业项目。
-
-## 应用场景
-
-#### 生物制药/医疗
-药物分子虚拟筛选，病毒结构分析，蛋白质性质预测，药物晶型预测，智能问诊，智能病理分析，高精度图片检索。
-
-#### 电子商务
-以图搜图，以商品搜商品，个性化推荐，内容推荐，商品去重。
-
-#### 泛互联网服务
-个性化音乐推荐，房地产房源检索和推荐，智能客户服务，浏览器内容搜索，APP 商店检索，相似文本检索/新闻内容推荐，视频去重，视频检索，视频推荐，以图搜商品。
-
-#### 计算机软件/硬件
-语料/图片分析和推荐，智能产品设计。
-
-#### 广告/工业设计/制造业
-智能海报设计，广告精准投放，产品库存管理。
-
-## Milvus 概念
-
-#### 非结构化数据
-非结构化数据指的是数据结构不规则，没有统一的预定义数据模型，不方便用数据库二维逻辑表来表现的数据。非结构化数据包括图片、视频、音频、自然语言等，占所有数据总量的 80%。非结构化数据的处理可以通过各种人工智能（AI）或机器学习（ML）模型转化为向量数据进行。
-
-#### 向量
-向量又称为 vector embedding，是各种非结构化数据，如视频、照片、音频的特征抽象。在数学表示上，向量是一个由浮点数或者二值型数据组成的 n 维数组。通过现代的向量转化技术，比如各种人工智能（AI）或者机器学习（ML）模型可以将非结构化数据抽象为 n 维特征向量空间的向量。这样就可以采用最近邻算法（ANN）计算非结构化数据之间的相似度。
-
-#### 向量相似度检索（近似最近邻搜索）
-相似度检索是指将目标对象与数据库中数据进行比对，并召回最相似的结果。同理，向量相似度检索返回的是最相似的向量数据。近似最近邻搜索（ANN）算法能够 [计算向量之间的距离](metric.md)。
-
-## 开发工具
-
-#### Milvus Insight
-
-[Milvus Insight](https://github.com/milvus-io/milvus-insight) 是 Milvus 图形化管理工具，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Insight 源码未来也会作为独立项目开源。
-
-#### Milvus CLI
-
-[Milvus CLI](https://github.com/milvus-io/milvus_cli#overview) 是基于 [PyMilvus](https://github.com/milvus-io/pymilvus) 的 Milvus 命令行界面，支持连接服务器、数据操作和数据导出/导入。
-
-#### Milvus DM 数据迁移工具
-[Milvus 数据迁移工具](migrate_overview.md)现已上线。
-
-## 加入开发者社区
-
-如果你有任何建议、意见或问题，欢迎加入 Milvus 的 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 社区与我们的工程师团队交流。
-
-[![Milvus Slack Channel](../../../assets/slack.png)](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ)
-
-你也可以访问 [常见问题](https://milvus.io/cn/docs/v1.1.0/performance_faq.md) 页面查看相关问题。
-
-订阅 Milvus 邮件：
-
-- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
-- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
-- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
-
-关注我们的社交媒体：
-
-- [知乎](zhihu.com/org/zilliz-11/columns)
-- [CSDN](http://zilliz.blog.csdn.net)
-- [Bilibili](http://space.bilibili.com/478166626)
-- Zilliz 技术交流微信群
-![wechat](../../../assets/wechat_qr_code.jpeg)
-###### 如二维码失效，请加zilliz小助手微信：zilliz-tech
