@@ -12,7 +12,7 @@ Dit onderwerp beschrijft hoe je Milvus kan uitvoeren met Python.
 pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 <div class="alert note">
-Python 3.6 of later is vereist. Zie <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> voor meer informatie.
+Python 3.6 of later is vereist. Zie <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python downloaden</a> voor meer informatie.
 </div>
 
 ## 2. Download voorbeeld code
@@ -24,7 +24,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python
 ## 3. Scan het voorbeeld
 De voorbeeld code voert de volgende stappen uit.
 
-- Imports a PyMilvus package:
+- Importeer een PyMilvus package:
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
@@ -91,7 +91,7 @@ Zie [API Reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/r
 
 - Voert hybride zoekopdracht uit：
 <div class="alert note">
-    The following example performs an approximate search on entities with <code>film_id</code> ranged in [2,4,6,8].
+    Het volgende voorbeeld voert een geschatte zoekopdracht uit op entiteiten met <code>film_id</code> range binnen [2,4,6,8].
     </div>
 
 ```Python
