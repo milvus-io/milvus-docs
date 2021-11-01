@@ -6,38 +6,47 @@ summary: Learn how to manually or automatically scale out and scale in a Milvus 
 
 # Scale a Milvus Cluster
 
-## Overview
+Milvus supports horizontal scaling of its components. This means you can either increase or decrease  the number of worker nodes of each type according to your own need. 
 
-Milvus supports adjusting the number of worker nodes of each type according to your own need. This topic describes how to scale out and scale in a Milvus cluster. **We assume that you have already installed a Milvus cluster with Kubernetes before scaling.** 
+This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already [installed a Milvus cluster](install_cluster-helm.md) before scaling. Also, we recommend familiarizing yourself with the [Milvus architecture](architecture_overview.md) before you begin.  
 
-Also, we recommend that you get familiar with the [Milvus architecture](architecture_overview.md) before you begin. 
+This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace queryNode with the corresponding node type in the command line.
 
-## What is scaling-out and scaling-in
+## What is horizontal scaling?
 
+Horizontal scaling includes scaling out and scaling in.
+
+### Scale out 
 Scaling out refers to increasing the number of nodes in a cluster. Unlike scaling up, scaling out does not require you to allocate more resources to one node in the cluster. Instead, scaling out expands the cluster horizontally by adding more nodes. 
 
 ![Scaleout](../../../assets/scale_out.jpg)
 
 ![Scaleup](../../../assets/scale_up.jpg)
 
-Generally, you need to scale out the Milvus cluster you created if it is over-utilized. Following are some typical situations where you might need to scale out the Milvus cluster:
+According to the [Milvus architecture](architecture_overview.md), stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.
 
+Generally, you will need to scale out the Milvus cluster you created if it is over-utilized. Below are some typical situations where you may need to scale out the Milvus cluster:
 - The CPU and memory utilization is high for a period of time.
 - The query throughput becomes higher.
 - Higher speed for indexing is required.
 - Massive volumes of large datasets need to be processed.
 - High availability of the Milvus service needs to be ensured.
 
-On the contrary, scaling in refers to decreasing the number of nodes in a cluster. Generally, you need to scale in the Milvus cluster that you created if it is under-utilized. Following are some typical situations where you need to scale in the Milvus cluster:
 
+### Scale in
+Scaling in refers to decreasing the number of nodes in a cluster. Generally, you will need to scale in the Milvus cluster you created if it is under-utilized. Below are some typical situations where you need to scale in the Milvus cluster:
 - The CPU and memory utilization is low for a period of time.
 - The query throughput becomes lower.
 - Higher speed for indexing is not required.
 - The size of the dataset to be processed is small.
 
-## Before you begin
+<div class="alert note">
+We do not recommend reducing the number of workers nodes dramatically. For example, if there are five data nodes in the cluster, we recommend reducing one data node at a time to ensure service availability. If the service is available after the first attempt of scaling in, you can continue to further reduce the number of the data node.
+</div>
 
-Run `kubectl get pods` to get a list of all the components and their working status in the Milvus cluster that you created.
+## Prerequisites
+
+Run kubectl get pods to get a list of the components and their working status in the Milvus cluster you created.
 
 ```
 NAME                                            READY   STATUS       RESTARTS   AGE
@@ -58,13 +67,13 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          
 Milvus only supports adding the worker nodes and does not support adding the coordinator components.
 </div>
 
-## Scale out 
+## Scaling 
 
-According to the [Milvus architecture](architecture_overview.md), stateless worker nodes include the query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to meet your business needs and requirements. You can scale out a Milvus cluster either manually or automatically.
+You can scale in your Milvus cluster either manually or automatically. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.  
 
-### Query node
+### Manual scaling
 
-- **Manual scale**
+#### Scaling out
 
 Run `helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values` to manually scale out the query node.
 
@@ -87,135 +96,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-- **Autoscale**
-
-Run the following command to enable autoscaling for query node. You also need to configure the values for CPU and memory resource to trigger autoscaling.
-
-```
-helm upgrade my-release milvus/milvus --set queryNode.autoscaling.enabled=true --reuse-values
-```
-
-
-### Data node
-
-- **Manual scale**
-
-Run `helm upgrade my-release milvus/milvus --set dataNode.replicas=3 --reuse-values` to manually scale out the data node.
-
-If successful, three running pods on the data node are added as shown in the following example.
-
-```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          5m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          5m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          5m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          5s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          5s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          5m
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          5m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          5m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          5m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          5m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          2m55s
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          2m55s
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          5m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          5m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          5m
-```
-
-- **Autoscale**
-
-Run the following command to enable autoscaling for data node. You also need to configure the values for CPU and memory resource to trigger autoscaling.
-
-```
-helm upgrade my-release milvus/milvus --set dataNode.autoscaling.enabled=true --reuse-values
-```
-
-### Index node
-
-- **Manual scale**
-
-Run `helm upgrade my-release milvus/milvus --set indexNode.replicas=3 --reuse-values` to manually scale out the index node.
-
-If successful, three running pods on the index node are added as shown in the following example.
-
-```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          10m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          10m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          10m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          3m45s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          3m45s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          10m
-my-release-milvus-indexnode-b89cc5756-7vp5h     1/1     Running   0          5s
-my-release-milvus-indexnode-b89cc5756-r74kd     1/1     Running   0          5s
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          10m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          10m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          10m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          10m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          7m35s
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          7m35s
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          10m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          10m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          10m
-```
-
-- **Autoscale**
-
-Run the following command to enable autoscaling for index node. You also need to configure the values for CPU and memory resource to trigger autoscaling.
-
-```
-helm upgrade my-release milvus/milvus --set indexNode.autoscaling.enabled=true --reuse-values
-```
-
-### Proxy
-
-- **Maunal scale**
-
-Run `helm upgrade my-release milvus/milvus --set proxy.replicas=3 --reuse-values` to manually scale out the proxy.
-
-If successful, three running pods on the proxy are added as shown in the following example.
-
-```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          13m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          13m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          13m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          7m29s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          7m29s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          13m
-my-release-milvus-indexnode-b89cc5756-7vp5h     1/1     Running   0          3m49s
-my-release-milvus-indexnode-b89cc5756-r74kd     1/1     Running   0          3m49s
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          13m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          13m
-my-release-milvus-proxy-7cbcc8ffbc-67vkd        1/1     Running   0          5s
-my-release-milvus-proxy-7cbcc8ffbc-7bkj2        1/1     Running   0          5s
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          13m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          13m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          11m
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          11m
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          13m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
-```
-
-- **Autoscale**
-
-Run the following command to enable autoscaling for proxy. You also need to configure the values for CPU and memory resource to trigger autoscaling.
-
-```
-helm upgrade my-release milvus/milvus --set proxy.autoscaling.enabled=true --reuse-values
-```
-
-## Scale in
-
-According to your business need, you might need to scale in your Milvus cluster either manually or automatically. You can refer to the previous section to learn how to enable autoscaling for each type of worker nodes. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value that you have set. 
-
-<div class="alert note">
-We do not recommend that you reduce the number of workers nodes dramatically. For example, if there are five data nodes in the cluster, we recommend reducing one data node at a time to ensure service availability. If the service is available after the first attempt of scaling in, you can continue to further reduce the number of the data nodes.
-</div>
-
-### Query node
+#### Scaling in
 
 Run `helm upgrade my-release milvus/milvus --set queryNode.replicas=1 --reuse-values` to scale in the query node.
 
@@ -236,79 +117,12 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-### Data node
+### Autoscaling
 
-Run `helm upgrade my-release milvus/milvus --set dataNode.replicas=1 --reuse-values` to scale in the data node.
-
-If successful, three running pods on the data node are reduced to one as shown in the following example.
+Run the following command to enable autoscaling for query node. You also need to configure the value for CPU and memory resource to trigger autoscaling.
 
 ```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          5m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          5m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          5m
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          5m
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          5m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          5m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          5m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          5m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          2m55s
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          2m55s
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          5m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          5m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          5m
-```
-
-### Index node
-
-Run `helm upgrade my-release milvus/milvus --set indexNode.replicas=1 --reuse-values` to scale in the index node.
-
-If successful, three running pods on the index node are reduced to one as shown in the following example.
-
-```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          10m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          10m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          10m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          3m45s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          3m45s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          10m
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          10m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          10m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          10m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          10m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          7m35s
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          7m35s
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          10m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          10m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          10m
-```
-
-### Proxy
-
-Run `helm upgrade my-release milvus/milvus --set proxy.replicas=1 --reuse-values` to scale in the proxy.
-
-If successful, the three running pods on the proxy are reduced to one as shown in the following example.
-
-```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          13m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          13m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          13m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          7m29s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          7m29s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          13m
-my-release-milvus-indexnode-b89cc5756-7vp5h     1/1     Running   0          3m49s
-my-release-milvus-indexnode-b89cc5756-r74kd     1/1     Running   0          3m49s
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          13m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          13m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          13m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          13m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          11m
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          11m
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          13m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
+helm upgrade my-release milvus/milvus --set queryNode.autoscaling.enabled=true --reuse-values
 ```
 
 ## What's next
@@ -324,3 +138,4 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 
 - If you are looking for instructions on how to allocate resources:
   - [Allocate Resources on Kubernetes](allocate.md#standalone)
+
