@@ -27,7 +27,7 @@ PyMilvus is available in [Python Package Index](https://pypi.org/project/pymilvu
 $ python3 -m pip install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 
-## Verify Installation
+## Verify installation
 
 If PyMilvus is correctly installed, no exception will be raised when you run the following command.
 
@@ -39,7 +39,7 @@ $ python -c "from pymilvus import Collection"
 
 ## What's next
 
-Having installed PyMilvus, You can:
+Having installed PyMilvus, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](connect.md)

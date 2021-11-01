@@ -1,10 +1,10 @@
 ---
 id: prerequisite-helm.md
 label: Install on Kubernetes
+related_key: Kubernetes
 order: 1
 group: prerequisite
 summary: Learn the necessary preparations before installing Milvus.
-
 ---
 
 # Before You Begin
@@ -26,18 +26,18 @@ Before you install Milvus, check your hardware and software to see if they meet 
 
 It is recommended that you run the Kubernetes cluster on Linux platforms. 
 
-Kubectl is the command-line tool for Kubernetes. Use a Kubectl version that is within one minor version difference of your cluster. Using the latest version of Kubectl helps avoid unforeseen issues.
+kubectl is the command-line tool for Kubernetes. Use a kubectl version that is within one minor version difference of your cluster. Using the latest version of kubectl helps avoid unforeseen issues.
 
-If you run your Kubernetes cluster locally, Minikube is required. Minikube requires Docker as a dependency. Ensure that you install Docker before installing Milvus using Helm. See <a href="https://docs.docker.com/get-docker">Get Docker</a> for more information.
+minikube is required when running Kubernetes cluster locally. minikube requires Docker as a dependency. Ensure that you install Docker before installing Milvus using Helm. See <a href="https://docs.docker.com/get-docker">Get Docker</a> for more information.
 
 
 
 | Operating system | Software                                                     | Note                                                         |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Linux platforms  | <ul><li>Kubernetes 1.16 or later</li><li>Kubectl</li>Helm 3.0.0 or later<li>Minikube</li><li>Docker 19.03 or later</li></ul> | See [Helm Docs](https://helm.sh/docs/) for more information. |
+| Linux platforms  | <ul><li>Kubernetes 1.16 or later</li><li>Kubectl</li><li>Helm 3.0.0 or later</li><li>Minikube (for Milvus standalone)</li><li>Docker 19.03 or later (for Milvus standalone)</li></ul> | See [Helm Docs](https://helm.sh/docs/) for more information. |
 
 ## What's next
-- If your hardware and software meet the requriements, you can:
+- If your hardware and software meet the requirements, you can:
   - [Install Milvus standalone on Kubernetes](install_standalone-helm.md)
   - [Install Milvus cluster on Kubernetes](install_cluster-helm.md)
 

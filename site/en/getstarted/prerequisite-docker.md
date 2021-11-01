@@ -1,13 +1,13 @@
 ---
 id: prerequisite-docker.md
 label: Install with Docker Compose
+related_key: Docker
 order: 0
 group: prerequisite
 summary: Learn the necessary preparations before installing Milvus.
-
 ---
 
-# Before You Begin
+# Environment Checklist
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
@@ -20,7 +20,7 @@ Before you install Milvus, check your hardware and software to see if they meet 
 | CPU                 | Intel CPU Sandy Bridge or later                              | Current version of Milvus does not support AMD and Apple M1 CPUs. |
 | CPU instruction set | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> | Vector similarity search and index building within Milvus require CPU's support of single instruction, multiple data (SIMD) extension sets. Ensure that the CPU supports at least one of the SIMD extensions listed. See [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more information.                           |
 | RAM                 | 8 GB or more                                                 | The size of RAM depends on the data volume.                  |
-| Hard drive          | SATA 3.0 SSD or later                                        | The size of hard drive depends on the data volume.           |
+| Hard drive          | SATA 3.0 SSD or higher                                       | The size of hard drive depends on the data volume.           |
 
 ## Software requirements
 
@@ -31,7 +31,7 @@ Before you install Milvus, check your hardware and software to see if they meet 
 | Windows with WSL 2 enabled | Docker Desktop                                               | We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/windows/install/#wsl-2-backend) for more information. |
 
 ## What's next
-- If your hardware and software meet the requriements, you can:
+- If your hardware and software meet the requirements, you can:
   - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
   - [Install Milvus cluster with Docker Compose](install_cluster-docker.md)
 

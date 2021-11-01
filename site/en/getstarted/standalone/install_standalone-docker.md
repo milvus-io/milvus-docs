@@ -1,6 +1,7 @@
 ---
 id: install_standalone-docker.md
 label: Install with Docker Compose
+related_key: Docker
 order: 0
 group: standalone
 summary: Learn how to install Milvus stanalone with Docker Compose.
@@ -14,7 +15,7 @@ summary: Learn how to install Milvus stanalone with Docker Compose.
 
 ## Download an installation file
 
-[Download **milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml) directly or with the following command, and save it as **docker-compose.yml**.
+[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
 
 ```
 $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
@@ -22,13 +23,16 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_d
 
 ## Configure Milvus (optional)
 
-[Download **milvus.yaml**](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) directly or with the following command, and modify the configurations to suit your needs. See [Milvus Standalone System Configurations](configuration_standalone-basic.md) for more information.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml
 ```
 
-In **docker-compose.yml**, map the local path to your **milvus.yaml** file onto the corresponding docker container path to the configuration file **/milvus/configs/milvus.yaml** under the `volumes` section.
+Modify the configurations to suit your needs. See [Milvus Standalone System Configurations](configuration_standalone-basic.md) for more information.
+
+
+In `docker-compose.yml`, map the local path to your `milvus.yaml` file onto the corresponding docker container path to the configuration file `/milvus/configs/milvus.yaml` under the `volumes` section.
 
 ```yaml
     volumes:
@@ -37,7 +41,7 @@ In **docker-compose.yml**, map the local path to your **milvus.yaml** file onto 
 ```
 
 <div class="alert note">
-Data is stored in the <b>volumes</b> folder according to the default configuration in <b>docker-compose.yml</b>. To change the folder to store data, edit <b>docker-compose.yml</b> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Data is stored in the <code>volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
 ## Start Milvus
@@ -59,7 +63,7 @@ Check the status of the containers.
 $ sudo docker-compose ps
 ```
 
-After Milvus standalone starts, three running docker containers appear including two infrastructure services and one Milvus service. 
+After Milvus standalone starts, three running docker containers appear including two dependencies and one Milvus service. 
 ```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
@@ -70,13 +74,13 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 ## Stop Milvus
 
-To stop Milvus standalone, run <code> $ sudo docker-compose down</code>.
+To stop Milvus standalone, run <code>$ sudo docker-compose down</code>.
 
-To delete data after stopping Milvus, run <code> $ sudo rm -rf  volumes</code>.
+To delete data after stopping Milvus, run <code>$ sudo rm -rf  volumes</code>.
 
 ## What's next
 
-Having installed Milvus, You can:
+Having installed Milvus, you can:
 
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 
@@ -85,6 +89,5 @@ Having installed Milvus, You can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).

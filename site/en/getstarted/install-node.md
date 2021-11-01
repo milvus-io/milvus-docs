@@ -29,7 +29,7 @@ $ npm install @zilliz/milvus2-sdk-node
 
 ## What's next
 
-Having installed Milvus Node.js SDK, You can:
+Having installed Milvus Node.js SDK, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](connect.md)

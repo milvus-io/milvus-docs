@@ -5,7 +5,6 @@ order: 1
 group: offline
 related_key: offline
 summary: Learn how to install Milvus on Kubernetes offline.
-
 ---
 
 # Install Milvus Offline
@@ -18,7 +17,7 @@ Installation of Milvus might fail due to image loading errors. You can install M
 
 ## Download files and images
 
-To install Milvus offline, you need to pull and save all images in an online environment, transfer them to the target host, and load them manually.
+To install Milvus offline, you need to pull and save all images in an online environment first, and then transfer them to the target host and load them manually.
 
 1. Add and update Milvus Helm repository locally.
 
@@ -41,7 +40,7 @@ helm template my-release --set cluster.enabled=true --set etcd.replicaCount=1 --
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
 
-3. Download requirement and scrpit files.
+3. Download requirement and script files.
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt
@@ -56,7 +55,7 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-The images are stored in the <b>/images</b> folder.
+The images are stored in the <code>/images</code> folder.
 </div>
 
 5. Load the images.
@@ -67,7 +66,7 @@ cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image 
 
 ## Install Milvus offline
 
-Having transfer the images to the target host, run the following command to install Milvus offline.
+Having transferred the images to the target host, run the following command to install Milvus offline.
 
 ```
 kubectl apply -f milvus_manifest.yaml
@@ -83,7 +82,7 @@ kubectl delete -f milvus_manifest.yaml
 
 ## What's next
 
-Having installed Milvus, You can:
+Having installed Milvus, you can:
 
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 

@@ -1,6 +1,7 @@
 ---
 id: install_cluster-docker.md
 label: Install with Docker Compose
+related_key: Docker
 order: 0
 group: cluster
 summary: Learn how to install Milvus cluster with Docker Compose.
@@ -15,7 +16,7 @@ summary: Learn how to install Milvus cluster with Docker Compose.
 
 ## Download an installation file
 
-[Download **milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) directly or with the following command, and save it as **docker-compose.yml**.
+[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
 
 ```
 $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml -O docker-compose.yml
@@ -23,13 +24,17 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_d
 
 ## Configure Milvus (optional)
 
-[Download **milvus.yaml**](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) directly or with the following command, and modify the configurations to suit your needs. See [Milvus Cluster System Configurations](configuration_cluster-basic.md) for more information.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) `milvus.yaml` directly or with the following command. 
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml
 ```
 
-In **docker-compose.yml**, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. And map the local path to your **milvus.yaml** file onto the corresponding docker container paths to the configuration files **/milvus/configs/milvus.yaml** under all `volumes` sections.
+Modify the configurations to suit your needs. See [Milvus Cluster System Configurations](configuration_cluster-basic.md) for more information.
+
+In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. 
+
+Map the local path to your `milvus.yaml` file onto the corresponding docker container paths to the configuration files `/milvus/configs/milvus.yaml` under all `volumes` sections.
 
 ```yaml
 ...
@@ -49,7 +54,7 @@ proxy:
 ```
 
 <div class="alert note">
-Data is stored in the <b>volumes</b> folder according to the default configuration in <b>docker-compose.yml</b>. To change the folder to store data, edit <b>docker-compose.yml</b> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Data is stored in the <code>/volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
 ## Start Milvus
@@ -78,7 +83,7 @@ Check the status of the containers.
 ```
 $ sudo docker ps
 ```
-After Milvus cluster starts, 11 running docker containers appear including three infrastructure services and eight Milvus services.
+After Milvus cluster starts, 11 running docker containers appear including three dependencies and eight Milvus services.
 ```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
@@ -97,13 +102,13 @@ milvus-rootcoord    /tini -- milvus run rootcoord    Up
 
 ## Stop Milvus
 
-To stop Milvus cluster, run <code> $ sudo docker-compose down</code>.
+To stop Milvus cluster, run <code>$ sudo docker-compose down</code>.
 
-To delete data after stopping Milvus, run <code> $ sudo rm -rf  volumes</code>.
+To delete data after stopping Milvus, run <code>$ sudo rm -rf  volumes</code>.
 
 ## What's next
 
-Having installed Milvus, You can:
+Having installed Milvus, you can:
 
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 
@@ -112,6 +117,5 @@ Having installed Milvus, You can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).
