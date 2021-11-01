@@ -11,7 +11,7 @@ This topic describes how to visualize Milvus metrics using Grafana.
 
 As described in the [monitoring guide](monitor.md), metrics contain useful information such as how much memory is used by a specific Milvus component. Monitoring metrics helps you better understand Milvus performance and its running status so that you can adjust resource allocation timely. 
 
-Visualization is a chart showing the change of resource usage across time. It makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.
+Visualization is a chart showing the change of resource usage across time, which makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.
 
 This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of Milvus.
 
