@@ -67,7 +67,7 @@ Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，
 - [产品问题](product_faq.md)
 - [运维问题](operational_faq.md)
 - [性能调优](performance_faq.md)
-- [故障诊断](troubleshooting.md)
+- [故障诊断](troubleshoot.md)
 </div>
 
 
