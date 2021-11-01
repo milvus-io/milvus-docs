@@ -8,7 +8,7 @@ Milvus is a cloud-native, open-source vector database built to manage embedding 
 
 Milvus is widely used in scenarios such as computer vision, natural language processing, computational chemistry, personalized recommender systems, and more. It has been adopted by over 1,000 organizations worldwide including iQiyi, Kingsoft, Tokopedia, and Trend Micro. More than 2,300 developers have joined the Milvus open-source community on GitHub, Slack, mailing lists, and Wechat.
 
-Milvus was released under the open-source Apache License 2.0 in October 2019, and its source code was made available on GitHub. In June 2021, Milvus graduated from the [LF AI & Data Foundation](https://lfaidata.foundation/)'s incubator program.
+Milvus was released under the open-source Apache License 2.0 in October 2019, and its source code was made available on [GitHub](https://github.com/milvus-io/milvus). In June 2021, Milvus graduated from the [LF AI & Data Foundation](https://lfaidata.foundation/)'s incubator program.
 
 <div class="card-wrapper">
 
@@ -67,7 +67,7 @@ Milvus was released under the open-source Apache License 2.0 in October 2019, an
 - [Milvus Product FAQs](product_faq.md)
 - [Milvus Operational FAQs](operational_faq.md)
 - [Milvus Performance FAQs](performance_faq.md)
-- [Troubleshooting](troubleshooting.md)
+- [Troubleshooting](troubleshoot.md)
 </div>
 
 
