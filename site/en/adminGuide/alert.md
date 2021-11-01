@@ -35,7 +35,7 @@ The following metrics are available for alerting configuration:
 This guide takes the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in the [Milvus forum](https://discuss.milvus.io/) or initiate a discussion on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
 
 ### Prerequisites
-This tutorial uses Grafana to create alerts for the Milvus services. Please ensure Grafana is installed and configured before you begin. If you have not installed Grafana, we recommend reading the [monitoring guide](monitor.md). Grafana is automatically installed in the step to enable ServiceMonitor.
+This tutorial assumes that you have Grafana installed and configured. If not, we recommend reading the [monitoring guide](monitor.md). 
 
 ### 1. Add a new query
 To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric: `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`
