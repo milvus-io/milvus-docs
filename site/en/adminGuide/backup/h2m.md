@@ -27,7 +27,7 @@ Configuration parameters include:
 
 | Parameter                 | Description                               | Example                      |
 | ------------------------- | ----------------------------------------- | ---------------------------- |
-| `milvus_version`          |  Version of Milvus.                       | 0.10.5                       |
+| `milvus_version`          |  Version of Milvus.                       | 2.0.0                       |
 | `data_path`               |  Path to the HDF5 files. Set either `data_path` or `data_dir`.                      | - /Users/zilliz/float_1.h5 <br/> - /Users/zilliz/float_2.h5                   |
 | `data_dir`         |  Directory of the HDF5 files. Set either `data_path` or `data_dir`.                      | '/Users/zilliz/Desktop/HDF5_data'                     |
 | `dest_host`          |  Milvus server address.                      | '127.0.0.1'     |
