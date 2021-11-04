@@ -130,7 +130,7 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-a|--alias|(Optional) The alias name of the Milvus link. The default is "default".|
 |--help|n/a|Displays help for using the command.|
 
-<h2 id="connecr"> Example</h2>
+<h2 id="connect"> Example</h2>
 
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
