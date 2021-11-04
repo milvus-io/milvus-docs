@@ -10,16 +10,20 @@ This topic introduces all supported commands and the corresponding options. Some
 
 ## calc
 Calculates the distance between two vector arrays.
-### Syntax
+
+<h3 id="calc">Syntax</h3>
+
 ```shell
 calc
 ```
-### Options
+<h3 id="calc">Options</h3>
+
 |Option|Full name|Description|
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="calc">Example</h3>
+
 To calculate the distance between two vector arrays and be prompted for the required input:
 ```shell
 milvus_cli > calc
@@ -102,12 +106,12 @@ Result:
 ## clear
 Clears the screen.
 
-<h2 id="clear">Syntax</h2>
+<h3 id="clear">Syntax</h3>
 
 ```shell
 clear
 ```
-<h2 id="clear">Options</h2>
+<h3 id="clear">Options</h3>
 
 |Option|Full name|Description|
 |:---|:---|:---|
@@ -116,12 +120,12 @@ clear
 ## connect 
 Connects to Milvus.
 
-<h2 id="connect">Syntax</h2>
+<h3 id="connect">Syntax</h3>
 
 ```shell
 connect [-h (text)] [-p (int)] [-a (text)]
 ```
-<h2 id="connect">Options</h2>
+<h3 id="connect">Options</h3>
 
 |Option|Full name|Description
 |:---|:---|:---|
@@ -130,7 +134,7 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-a|--alias|(Optional) The alias name of the Milvus link. The default is "default".|
 |--help|n/a|Displays help for using the command.|
 
-<h2 id="connect"> Example</h2>
+<h3 id="connect">Example</h3>
 
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
@@ -139,12 +143,14 @@ milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 Specifies unique aliases for a collection.
 <div class="alert note">A collection can have multiple aliases. However, an alias corresponds to a maximum of one collection.</div>
 
-### Syntax
+<h3 id="create-alias">Syntax</h3>
+
 ```shell
 create alias -c (text) -a (text) [-A] [-t (float)]
 ```
 
-### Options
+<h3 id="create-alias">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -153,14 +159,15 @@ create alias -c (text) -a (text) [-A] [-t (float)]
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Examples
-#### Example 1
+<h3 id="create-alias">Examples</h3>
+
+<h4 id="create-alias">Example 1</h4>
 
 The following example creates the <code>carAlias1</code> and <code>carAlias2</code> aliases for the <code>car</code> collection.
 ```shell
 milvus_cli > create alias -c car -a carAlias1 -a carAlias2
 ```
-#### Example 2
+<h4 id="create-alias">Example 2</h4>
 
 <div class="alert note">Example 2 is based on Example 1.</div>
 
@@ -171,11 +178,14 @@ milvus_cli > create alias -c car2 -A -a carAlias -a carAlias2
 
 ## create collection
 Creates a collection.
-### Syntax
+
+<h3 id="create-collection">Syntax</h3>
+
 ```shell
 create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 ```
-### Options
+<h3 id="create-collection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The nam of the collection.|
@@ -185,19 +195,23 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 |-d|--schema-description|(Optional) The description of the collection.|
 |--help|n/a|Displays help for using the command.
 
+<h3 id="create-collection">Example</h3>
 
-### Example
 ```shell
 milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:INT64:brand -p id -a -d 'car_collection'
 ```
 
 ## create partition
 Creates a partition.
-### Syntax
+
+<h3 id="creat-partition">Syntax</h3>
+
+
 ```shell
 create partition -c (text) -p (text) [-d (text)]
 ```
-### Options
+<h3 id="creat-partition">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -205,8 +219,8 @@ create partition -c (text) -p (text) [-d (text)]
 |-d|--description|(Optional) The description of the partition.|
 |--help|n/a|Displays help for using the command.|
 
+<h3 id="creat-partition">Example</h3>
 
-### Example
 ```shell
 milvus_cli > create partition -c car -p new_partition -d test_add_partition
 ```
@@ -216,16 +230,19 @@ Creates an index for a field.
 
 <div class="alert note"> Currently, a collection supports a maximum of one index.</div>
 
-### Syntax
+<h3 id="creat-index">Syntax</h3>
+
 ```shell
 create index
 ```
-### Options
+<h3 id="creat-index">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="creat-index">Example</h3>
+
 To create an index for a field and be prompted for the required input:
 ```shell
 milvus_cli > create index
@@ -244,11 +261,14 @@ Timeout []:
 ```
 ## delete alias
 Deletes an alias for a collection.
-### Syntax
+
+<h3 id="delete-alias">Syntax</h3>
+
 ```shell
 delete alias -c (text) -a (text) [-t (float)]
 ```
-### Options
+<h3 id="delete-alias">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -259,18 +279,22 @@ delete alias -c (text) -a (text) [-t (float)]
 
 ## delete collection
 Deletes a collection.
-### Syntax
+
+<h3 id="delete-collection">Syntax</h3>
+
 ```shell
 delete collection -c (text) [-t (float)]
 ```
-### Options
+<h3 id="delete-collection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection to be deleted.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-collection">Example</h3>
+
 ```shell
 milvus_cli > delete collection -c car
 ```
