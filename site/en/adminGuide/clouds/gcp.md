@@ -10,19 +10,19 @@ summary: Learn how to deploy a Milvus cluster on GCP.
 This topic describes how to deploy a Milvus cluster on [Google Cloud Platform](https://console.cloud.google.com/) (GCP).
 
 ## Prerequisites
-- Choose a Google Cloud project
-  <br>Determine the Google Cloud project that you want to work with. If you are not sure which one to use, ask your GCP administrators to create a new one. See [Creating and managing projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects) for more information.
-  <br> The project used in this topic is named <code>milvus-testing-nonprod</code>. Replace it with your project name in commands.
-
-- Install the Cloud SDK
-  <br>After you install the [Cloud SDK](https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version), ensure that you are properly authenticated.
-- Install [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- Install [Helm](https://helm.sh/docs/intro/install/)
+Determine the Google Cloud project that you want to work with. If you are not sure which one to use, ask your GCP administrators to create a new one. See [Creating and managing projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects) for more information. The project used in this topic is named <code>milvus-testing-nonprod</code>. Replace it with your project name in commands.
 
 
+### Software requirements
+- [Cloud SDK](https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm](https://helm.sh/docs/intro/install/)
+  
 Alternatively, you can use [Cloud Shell](https://cloud.google.com/shell) which has the GCP SDK, kubectl, and Helm preinstalled.
 
-## Set up the network
+<div class="alert note">After you install the Cloud SDK, ensure that you are properly authenticated.</div>
+
+## Set up network
 
 Ensure that you create a virtual private cloud (VPC) before creating a firewall rule for Milvus.
 <br>
@@ -77,7 +77,7 @@ In this topic, we use the ```e2-standard-4``` machine type, which has 4 vCPUs an
 You can select machine types as you need. However, we recommend that you select machine types that have a minimum of 16 GB of memory to ensure stability.
 </div>
 
-```Shell
+```shell
 gcloud beta container --project "milvus-testing-nonprod" clusters create "milvus-cluster-1" --zone "us-west1-a" --no-enable-basic-auth --cluster-version "1.20.8-gke.900" --release-channel "regular" --machine-type "e2-standard-4" --image-type "COS_CONTAINERD" --disk-type "pd-standard" --disk-size "100" --max-pods-per-node "110" --num-nodes "2" --enable-stackdriver-kubernetes --enable-ip-alias --network "projects/milvus-testing-nonprod/global/networks/milvus-network" --subnetwork "projects/milvus-testing-nonprod/regions/us-west1/subnetworks/milvus-network"
 ```
 
@@ -97,12 +97,12 @@ After provisioning a cluster, you can deploy Milvus. If you switch to a differen
 gcloud container clusters get-credentials milvus-cluster-1
 ```
 
-1. Run the following command to add the Milvus chart repository.
+1. Run the following command to add the Milvus Helm chart repository.
 ```shell
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-2. Run the following command to update your Milvus chart.
+2. Run the following command to update your Milvus Helm chart.
 ```Apache
 helm repo update
 ```
@@ -114,10 +114,10 @@ This topic uses the <code>my-release</code> release name. Replace it with your r
 </div>
 
 ```shell
-helm install my-release milvus/milvus --set cluster.enabled=true --set service.type=LoadBalancer
+helm install my-release milvus/milvus --set service.type=LoadBalancer
 ```
 
-Starting pods might take several minutes. Run <code>kubectl get services</code> to view services. If successful, a list of services are shown as follows.
+Starting pods might take several minutes. Run <code>kubectl get services</code> to view services. If successful, a list of services is shown as follows.
 
 
 ![GCP](../../../../assets/gcp.png)
@@ -129,8 +129,6 @@ Starting pods might take several minutes. Run <code>kubectl get services</code> 
 </div>
 
 ## Use Google Cloud Storage
-
-### Overview
 
 MinIO GCS Gateway allows accessing GCS. Essentially, MinIO GCS Gateway translates and forwards all connections to GCS by using APIs. You can use MinIO GCS Gateway instead of a MinIO server.
 
@@ -144,9 +142,9 @@ To access GCS resources, MinIO GCS Gateway requires both GCP service account cre
 
 - `accesskey`: The MinIO access key.
 - `secretkey`: The MinIO secret key.
-- `gcs_key.json`: THe GCP service account credentials file.
+- `gcs_key.json`: The GCP service account credentials file.
 
-#### Example
+##### Example
 
 ```shell
 $ kubectl create secret generic mysecret --from-literal=accesskey=minioadmin --from-literal=secretkey=minioadmin --from-file=gcs_key.json=/home/credentials.json
@@ -159,28 +157,27 @@ If you choose <code>accesskey</code> and <code>secretkey</code> values other tha
 
 #### Metadata 
 
-#### Configurable metadata:
+#### Configuration
 
-- `minio.gcsgateway.enabled`: Set the value to ```true``` to enable MinIO GCS Gateway.
-  -  The default is ```false```. 
-- `minio.gcsgateway.projectId`: The ID of the GCP project.
-  - Empty by default.
-- `minio.existingSecret`: The name of the previously defined secret. 
-  - Empty by default.
-- `externalGcs.bucketName`: The name of the GCS bucket to use. Unlike an S3/MinIO bucket, a GCS bucket must be globally unique. 
-  - Empty by default.
+|Option|Description|Default|
+|:---|:---|:---|
+|`minio.gcsgateway.enabled`|Set the value to ```true``` to enable MinIO GCS Gateway.|`false`|
+|`minio.gcsgateway.projectId`|The ID of the GCP project.|`""`|
+|`minio.existingSecret`|The name of the previously defined secret.|`""`|
+|`externalGcs.bucketName`|The name of the GCS bucket to use. Unlike an S3/MinIO bucket, a GCS bucket must be globally unique.|`""`|
 
-#### Default metadata:
+#### Defaults
 
-- `minio.gcsgateway.replicas`: The number of replica nodes to use for the gateway. We recommend that you use one because MinIO does not support well for more than one replica. 
-  - The default is ```1```.
-- `minio.gcsgateway.gcsKeyJson`: The file path to GCS service account access credentials file. Do **not** modify the default value.
-  - The default is `/etc/credentials/gcs_key.json`.
-- Continue to use all normal MinIO metadata variables.
+|Option|Description|Default|
+|:---|:---|:---|
+|`minio.gcsgateway.replicas`|The number of replica nodes to use for the gateway. We recommend that you use one because MinIO does not support well for more than one replica.|`1`|
+|`minio.gcsgateway.gcsKeyJson`|The file path to GCS service account access credentials file. Do **not** modify the default value.|`/etc/credentials/gcs_key.json`|
 
-Example
+Continue to use all normal MinIO metadata variables.
+
+##### Example
 ```shell
-$ helm install my-release milvus/milvus --set cluster.enabled=true --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
+$ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
 ```
 
 ### What's next
