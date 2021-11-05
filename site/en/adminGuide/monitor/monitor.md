@@ -53,7 +53,7 @@ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
 The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMontior.enabled=true`.
 
 ```
-helm install my-release milvus/milvus --set cluster.enabled=true --set metrics.serviceMonitor.enabled=true
+helm install my-release milvus/milvus --set metrics.serviceMonitor.enabled=true
 ```
 
 When the installation completes, use `kubectl` to check the ServiceMonitor resource.
