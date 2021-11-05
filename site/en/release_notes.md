@@ -6,7 +6,6 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
 
-
 ## v2.0.0-RC7
 
 Release date: 2021-10-11
