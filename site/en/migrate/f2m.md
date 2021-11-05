@@ -34,9 +34,10 @@ Configuration parameters include:
 | `dest_port`          |  Milvus server port.                       | 19530                      |
 | `mode`         |  Mode of migration, including `skip`, `append`, and `overwrite`. This parameter works only when the specified collection name exists in the Milvus library. <br/> <li>`skip` refers to skipping data migration if the specified collection or partition already exists.</li> <li>`append` refers to appending data if the specified collection or partition already exists.</li> <li>`overwrite` refers to deleting existing data before insertion if the specified collection or partition already exists.</li>                    | 'append'                     |
 | `dest_collection_name`          | Name of the collection to import data to.                      | 'test'                       |
-| `dest_partition_name`         |  Name of the partition to import data to. This parameter is optional.                   | 'partition'                 |
+| `dest_partition_name` (optional)        |  Name of the partition to import data to.                   | 'partition'                 |
 | `collection_parameter`         |  Collection-specific information including vector dimension, index file size, and similarity metric.                      | "dimension: 512 <br/> index_file_size: 1024 <br/> metric_type: 'HAMMING'"                     |
 
+### Example 
 
 The following example of configuration is for your reference. 
 
@@ -70,6 +71,6 @@ $ milvusdm --yaml F2M.yaml
 - If you are interested in migrating data in other forms into Milvus,
   - Learn how to [Migrate Data from HDF5 to Milvus](h2m.md).
 - If you are looking for information about how migrate data from Milvus 1.x to Milvus 2.0,
-  - Learn [version migration](m2m.md)
+  - Learn [version migration](m2m.md).
 - If you are interested in learning more about the data migration tool,
-  - Read the overview of [MilvusDM](migrate_overview.md)
+  - Read the overview of [MilvusDM](migrate_overview.md).
