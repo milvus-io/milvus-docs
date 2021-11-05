@@ -302,11 +302,14 @@ milvus_cli > delete collection -c car
 ## delete partition
 Deletes a partition.
 
-### Syntax
+<h3 id="delete-partition">Syntax</h3>
+
+
 ```shell
 delete partition -c (text) -p (text) [-t (float)]
 ```
-### Options
+<h3 id="delete-partition">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition to be deleted belongs to.|
@@ -314,7 +317,8 @@ delete partition -c (text) -p (text) [-t (float)]
 |-p|--partition|The name of the partition to be deleted.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-partition">Example</h3>s
+
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
@@ -324,31 +328,34 @@ Deletes an index and the corresponding index files.
 
 <div class="alert note"> Currently, a collection supports a maximum of one index.</div>
 
-### Syntax
+<h3 id="delete-index">Syntax</h3>
+
 ```shell
 delete index -c (text) [-t (float)]
 ```
+<h3 id="delete-index">Options</h3>
 
-### Options
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-index">Example</h3>
+
 ```shell
 milvus_cli > delete index -c car
 ```
 ## delete entities (available in Milvus 2.0.0-GA)
 Deletes entities.
 
-### Syntax
+<h3 id="delete-entities">Syntax</h3>
+
 ``` shell
 delete entities -c (text) [-p (text)] [-t (float)]
 ```
+<h3 id="delete-entities">Options</h3>
 
-### Options
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -356,7 +363,7 @@ delete entities -c (text) [-p (text)] [-t (float)]
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-entities">Example</h3>
 
 ```shell
 milvus_cli > delete entities -c car
@@ -371,48 +378,58 @@ Do you want to continue? [y/N]: y
 ## describe collection
 Shows the detailed information of a collection.
 
-### Syntax
+<h3 id="describe-collection">Syntax</h3>
+
 ```shell
 describe collection -c (text)
 ```
-### Options
+<h3 id="describe-collection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="describe-collection">Example</h3>
+
 ```shell
 milvus_cli > describe collection -c test_collection_insert
 ```
 ## describe  partition
 Shows the detailed information of a partition.
 
-### Syntax
+<h3 id="describe-partition">Syntax</h3>
+
 ```shell
 describe partition -c (text) -p (text)
 ```
-### Options
+<h3 id="describe-partition">Options</h3>
+
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition belongs to.|
 |-p|--partition|The name of the partition.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="describe-partition">Example</h3>
+
 ```shell
 milvus_cli > describe partition -c test_collection_insert -p _default
 ```
 ## describe index
 Shows the detailed information of an index.
+
 <div class="alert note">Currently, a collection supports a maximum of one index.</div>
 
-### Syntax
+<h3 id="describe-index">Syntax</h3>
+
 ```shell
 describe index -c (text)
 ```
 
-### Options
+<h3 id="describe-index">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -421,11 +438,13 @@ describe index -c (text)
 ## exit
 Closes the command line window.
 
-### Syntax
+<h3 id="exit">Syntax</h3>
+
 ```shell
 exit
 ```
-### Options
+<h3 id="exit">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
@@ -433,11 +452,14 @@ exit
 ## help
 Displays help for using a command.
 
-### Syntax
+<h3 id="help">Syntax</h3>
+
 ```shell
 help <command>
 ```
-### Commands
+
+<h3 id="help">Commands</h3>
+
 |Command|Description
 |:---|:---|
 |calc|Calculates the distance between two vector arrays.|
@@ -460,7 +482,8 @@ help <command>
 ## import
 Imports data into a partition.
 
-### Syntax
+<h3 id="import">Syntax</h3>
+
 ```shell
 import -c (text)[-p (text)][-t (float)] <file_path>
 ```
