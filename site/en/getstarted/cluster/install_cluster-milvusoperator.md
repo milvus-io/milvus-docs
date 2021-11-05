@@ -489,8 +489,8 @@ $ kubectl delete mc my-release
 ```
 
 <div class="alert note">
-When you delete the Milvus cluster using the default configuration, dependencies like etcd, Pulsar, and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again. <br/>
-TO delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see [configuration file](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_deletion.yaml).
+<li>When you delete the Milvus cluster using the default configuration, dependencies like etcd, Pulsar, and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again. </li>
+<li>To delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see [configuration file](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_deletion.yaml).</li>
 
 </div>
 
