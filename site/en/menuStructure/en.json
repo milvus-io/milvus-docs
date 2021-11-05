@@ -221,6 +221,14 @@
       "label1": "userguide",
       "label2": "search",
       "label3": "",
+      "order": 2
+    },
+    {
+      "id": "timetravel.md",
+      "title": "Search with Time Travel",
+      "label1": "userguide",
+      "label2": "search",
+      "label3": "",
       "order": 3
     },
     {
