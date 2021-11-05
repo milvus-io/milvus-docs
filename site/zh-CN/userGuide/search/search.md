@@ -1,12 +1,42 @@
 ---
 id: search.md
+related_key: search
+summary: Conduct a vector similarity search with Milvus.
 ---
 
-# 查询向量
+# Conduct a Vector Similarity Search
 
-通过本章节文档，你将了解如何在 Milvus 中进行相似性搜索。
+This topic describes how to search entities with Milvus.
 
-1. 创建搜索参数：
+## Preparations
+
+Connect to Milvus server, create a collection, insert data, and build index for the entities.
+
+If you work with your own dataset in an existing Milvus server, you can move forward to the next step.
+
+```python
+>>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+>>> connections.connect("default", host='localhost', port='19530')
+>>> schema = CollectionSchema([
+    		FieldSchema("pk", DataType.INT64, is_primary=True),
+    		FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=8)
+		])
+>>> collection = Collection("test_retrieve", schema, using='default', shards_num=2)
+>>> import random
+>>> data = [
+    		[i for i in range(10)],
+    		[[random.random() for _ in range(2)] for _ in range(2000)],
+		]
+>>> collection.insert(data)
+>>> index_params = {
+        "metric_type":"L2",
+        "index_type":"IVF_FLAT",
+        "params":{"nlist":1024}
+    }
+>>> collection.create_index("example_field", index_params=index_param)
+```
+
+## Prepare search parameters
 
 {{fragments/multiple_code.md}}
 
@@ -17,97 +47,126 @@ id: search.md
 ```javascript
 const searchParams = {
   anns_field: "example_field",
-  topk: "4",
+  topk: "10",
   metric_type: "L2",
   params: JSON.stringify({ nprobe: 10 }),
 };
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
 <table class="params">
 	<thead>
 	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
+		<th>Parameter</th>
+		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>用于评估向量相似性的计算方式</td>
-		<td>可在 <a href="metric.md">距离计算方式</a>中查看其他选项。<br/>必填项</td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
 	</tr>
 	<tr>
 		<td><code>index_type</code></td>
-		<td>用于加速向量搜寻的索引类型</td>
-		<td>可在<a href="index_selection.md">选择索引</a>中查看其他选项。<br/>必填项</td>
+		<td>Type of index used to accelerate the vector search. See <a href="index_selection.md">Index Selection</a> for more information.</td>
 	</tr>
-	<tr>
+    <tr>
 		<td><code>params</code></td>
-		<td>查询索引的参数</td>
-		<td>可在<a href="index_selection.md">选择索引</a>中查看不同索引的更多参数详细资讯。<br/>必填项</td>
-	</tr>
-	<tr>
-		<td><code>anns_field**</code></td>
-		<td>要查询的字段名称</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td><code>topk**</code></td>
-		<td>传回多少条最接近的结果</td>
-		<td>必填项</td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
-</details>
 
-2. 在查询向量前，将集合加载到内存中：
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>index_type</code></td>
+		<td>Type of index used to accelerate the vector search. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+	<tr>
+		<td><code>topk</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+	</tbody>
+</table>
+
+## Load collection
+
+All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
 
 {{fragments/multiple_code.md}}
 
 ```python
+>>> from pymilvus import collection
+>>> collection = Collection("test_retrieve")      # Get an existing collection.
 >>> collection.load()
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
-  collection_name: COLLECTION_NAME,
+  collection_name: "test_retrieve",
 });
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
 <table class="params">
 	<thead>
 	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
+		<th>Parameter</th>
+		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code>**</td>
-		<td>要载入的 collection 名称</td>
-		<td>必填项</td>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to load.</td>
 	</tr>
 	</tbody>
 </table>
-</details>
+
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to load.</td>
+	</tr>
+	</tbody>
+</table>
 
 <div class="alert warning">
-在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，从而为执行引擎预留内存资源。
+In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
 </div>
 
-3. 创建随机向量作为 `query_records` 并调用 `search()` 进行搜索。
-   _Milvus 将返回搜索结果的 ID 和距离：_
+## Conduct a vector search
+
+Milvus returns the IDs of the most similar vectors and their distances.
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> results = collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None)
+>>> results = collection.search(data=[[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], anns_field="example_field", param=search_params, limit=10, expr=None)
 >>> results[0].ids
 [424363819726212428, 424363819726212436, ...]
 >>> results[0].distances
@@ -116,105 +175,120 @@ await milvusClient.collectionManager.loadCollection({
 
 ```javascript
 await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
-  // partition_names: [],
+  collection_name: "test_retrieve",
   expr: "",
-  vectors: [[1, 2, 3, 4, 5, 6, 7, 8]],
+  vectors: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
   search_params: searchParams,
   vector_type: 100, // Float vector -> 100
 });
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
 <table class="params">
 	<thead>
 	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>data</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+  <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>limit</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return (vector field is not support in current release).</td>
+	</tr>
+  <tr>
+		<td><code>timeout</code></td>
+		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+	</tr>
+  <tr>
+		<td><code>round_decimal</code></td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code>**</td>
-		<td>要查询的 collection 名称</td>
-		<td>必填项</td>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to search in.</td>
 	</tr>
 	<tr>
-		<td>vectors</td>
-		<td>要查询的向量。数据的数目表示查询数量 <code>nq</code>。</td>
-		<td>必填项</td>
-	</tr>
+    <td><code>search_params</code></td>
+    <td>Parameters used for search.</td>
+  </tr>
 	<tr>
-		<td><code>anns_field</code></td>
-		<td>要查询的字段名称</td>
-		<td>必填项</td>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+  </tr>
+  <tr>
+		<td><code>vector_type</code></td>
+		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
 	</tr>
-	<tr>
-		<td><code>params</code>*</td>
-		<td>查询索引的参数</td>
-		<td>可在<a href="index_selection.md">选择索引</a>中查看不同索引的更多参数详细资讯。<br/>必填项</td>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
 	</tr>
-	<tr>
-		<td><code>limit</code>*</td>
-		<td>传回多少条最接近的结果</td>
-		<td>必填项</td>
+    <tr>
+		<td><code>expr</code> (optional)</td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
-	<tr>
-		<td><code>expr</code></td>
-		<td>筛选属性用的布林表达式</td>
-		<td>在<a href="boolean.md">布林表达式规则</a>中查询其他表达式资讯。<br/>选填项</td>
-	</tr>
-	<tr>
-		<td><code>partition_names</code></td>
-		<td>要查询的 partition 名称</td>
-		<td>选填项</td>
-	</tr>
-	<tr>
-		<td><code>output_fields</code></td>
-		<td>要传回的字段名称（向量字段在目前版本不支持）</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td><code>timeout</code></td>
-		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待伺服器回应或产生错误。</td>
-		<td>选填项</td>
-	</tr>
-	<tr>
-		<td><code>vector_type</code>**</td>
-		<td>预先检查二进制或浮点数向量。二进制为 <code>100</code> 而浮点数为 <code>101</code>。</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td><code>round_decimal</code>**</td>
-		<td>小数点取至第几位</td>
-		<td>数据类型: Integer<br/>选填项</td>
+  <tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return (vector field not support in current release)</td>
 	</tr>
 	</tbody>
 </table>
-</details>
 
-如果要在指定分区或者指定列查询，则可以在调用 `search()` 时设置`partition_names` 和 `fields` 参数
+To search in a specific partition or field, specify the list of partition names and field name.
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_name])
+>>> collection.search(data=[[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], "example_field", param=search_params, limit=10, expr=None, partition_names=["example_partition"])
 ```
 
 ```javascript
 await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
-  partition_names: [partition_name],
+  collection_name: "example_collection",
+  partition_names: ["example_partition"],
   expr: "",
-  vectors: [[1, 2, 3, 4, 5, 6, 7, 8]],
+  vectors: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
   search_params: searchParams,
   vector_type: 100, // Float vector -> 100
 });
 ```
 
-4. 查询完成后，可以调用 `release_collection()` 将 Milvus 中加载的 collection 从内存中释放，以减少内存消耗。查询其他 collection：
+Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
 
 {{fragments/multiple_code.md}}
 
@@ -223,27 +297,14 @@ await milvusClient.dataManager.search({
 ```
 
 ```javascript
-await milvusClient.collectionManager.releaseCollection({
-  collection_name: COLLECTION_NAME,
-});
+await milvusClient.collectionManager.releaseCollection({  collection_name: "test_retrieve",});
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code>**</td>
-		<td>要释放的 collection 名称</td>
-		<td>必填项</td>
-	</tr>
-	</tbody>
-</table>
-</details>
+## What's next
+
+- Learn more basic operations of Milvus:
+  - [Query vectors](query.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+- Explore API references for Milvus SDKs:
+  - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)

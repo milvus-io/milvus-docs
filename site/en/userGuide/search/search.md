@@ -2,18 +2,41 @@
 id: search.md
 related_key: search
 summary: Conduct a vector similarity search with Milvus.
-
 ---
 
 # Conduct a Vector Similarity Search
 
-This topic describes how to conduct a vector similarity search.
+This topic describes how to search entities with Milvus.
 
-<div class="alert note">
-Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
-</div>
+## Preparations
 
-1. Create search parameters:
+Connect to Milvus server, create a collection, insert data, and build index for the entities.
+
+If you work with your own dataset in an existing Milvus server, you can move forward to the next step.
+
+```python
+>>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+>>> connections.connect("default", host='localhost', port='19530')
+>>> schema = CollectionSchema([
+    		FieldSchema("pk", DataType.INT64, is_primary=True),
+    		FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=8)
+		])
+>>> collection = Collection("test_retrieve", schema, using='default', shards_num=2)
+>>> import random
+>>> data = [
+    		[i for i in range(10)],
+    		[[random.random() for _ in range(2)] for _ in range(2000)],
+		]
+>>> collection.insert(data)
+>>> index_params = {
+        "metric_type":"L2",
+        "index_type":"IVF_FLAT",
+        "params":{"nlist":1024}
+    }
+>>> collection.create_index("example_field", index_params=index_param)
+```
+
+## Prepare search parameters
 
 {{fragments/multiple_code.md}}
 
@@ -24,98 +47,126 @@ Parameters marked with <code>*</code> are specific to Python SDK, and those mark
 ```javascript
 const searchParams = {
   anns_field: "example_field",
-  topk: "4",
+  topk: "10",
   metric_type: "L2",
   params: JSON.stringify({ nprobe: 10 }),
 };
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
 <table class="params">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
-		<th>Note</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors</td>
-		<td>Find more options in <a href="metric.md">Simlarity Metrics</a>.<br/>Mandatory</td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
 	</tr>
 	<tr>
 		<td><code>index_type</code></td>
-		<td>Type of index used to accelerate the vector search</td>
-		<td>Find more options in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
+		<td>Type of index used to accelerate the vector search. See <a href="index_selection.md">Index Selection</a> for more information.</td>
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index</td>
-		<td>Find more parameter details of different indexes in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
-	</tr>
-    <tr>
-		<td><code>anns_field**</code></td>
-		<td>Name of the field to search on</td>
-		<td>Mandatory</td>
-	</tr>
-	<tr>
-		<td><code>topk**</code></td>
-		<td>Number of the most similar results to return</td>
-		<td>Mandatory</td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
-</details>
 
-2. Load the collection to memory before conducting a vector similarity search:
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>index_type</code></td>
+		<td>Type of index used to accelerate the vector search. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+	<tr>
+		<td><code>topk</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+	</tbody>
+</table>
+
+## Load collection
+
+All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
 
 {{fragments/multiple_code.md}}
 
 ```python
+>>> from pymilvus import collection
+>>> collection = Collection("test_retrieve")      # Get an existing collection.
 >>> collection.load()
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
-  collection_name: COLLECTION_NAME,
+  collection_name: "test_retrieve",
 });
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
 <table class="params">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
-		<th>Note</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code>**</td>
-		<td>Name of the collection to load</td>
-		<td>Mandatory</td>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to load.</td>
 	</tr>
 	</tbody>
 </table>
-</details>
+
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to load.</td>
+	</tr>
+	</tbody>
+</table>
 
 <div class="alert warning">
-In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
 </div>
 
-3. Search with newly created random vectors:
+## Conduct a vector search
 
-_Milvus returns the IDs of the most similar vectors and their distances._
+Milvus returns the IDs of the most similar vectors and their distances.
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> results = collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None)
+>>> results = collection.search(data=[[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], anns_field="example_field", param=search_params, limit=10, expr=None)
 >>> results[0].ids
 [424363819726212428, 424363819726212436, ...]
 >>> results[0].distances
@@ -124,105 +175,120 @@ _Milvus returns the IDs of the most similar vectors and their distances._
 
 ```javascript
 await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
-  // partition_names: [],
+  collection_name: "test_retrieve",
   expr: "",
-  vectors: [[1, 2, 3, 4, 5, 6, 7, 8]],
+  vectors: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
   search_params: searchParams,
   vector_type: 100, // Float vector -> 100
 });
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
 <table class="params">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
-		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>data</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+  <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>limit</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return (vector field is not support in current release).</td>
+	</tr>
+  <tr>
+		<td><code>timeout</code></td>
+		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+	</tr>
+  <tr>
+		<td><code>round_decimal</code></td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code>**</td>
-		<td>Name of the collection to search</td>
-		<td>Mandatory</td>
-	</tr>
-    <tr>
-		<td>vectors</td>
-		<td>Vectors to search with. Length of the data represents the number of query <code>nq</code>.</td>
-		<td>Mandatory</td>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to search in.</td>
 	</tr>
 	<tr>
-		<td><code>anns_field</code></td>
-		<td>Name of the field to search on</td>
-		<td>Mandatory</td>
+    <td><code>search_params</code></td>
+    <td>Parameters used for search.</td>
+  </tr>
+	<tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+  </tr>
+  <tr>
+		<td><code>vector_type</code></td>
+		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
+	</tr>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
 	</tr>
     <tr>
-		<td><code>params</code>*</td>
-		<td>Search parameter(s) specific to the index</td>
-		<td>Find more parameter details of different indexes in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
-	</tr>
-	<tr>
-		<td><code>limit</code>*</td>
-		<td>Number of the most similar results to return</td>
-		<td>Mandatory</td>
+		<td><code>expr</code> (optional)</td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
   <tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute</td>
-		<td>Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.<br/>Optional</td>
-	</tr>
-  <tr>
-		<td><code>partition_names</code></td>
-		<td>Name of the partition to search on</td>
-		<td>Optional</td>
-	</tr>
-  <tr>
-		<td><code>output_fields</code></td>
+		<td><code>output_fields</code> (optional)</td>
 		<td>Name of the field to return (vector field not support in current release)</td>
-		<td>Optional</td>
-	</tr>
-  <tr>
-		<td><code>timeout</code></td>
-		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
-		<td>Optional</td>
-	</tr>
-  <tr>
-		<td><code>vector_type</code>**</td>
-		<td>Pre-check of binary/float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
-		<td>Mandatory</td>
-	</tr>
-  <tr>
-		<td><code>round_decimal</code>**</td>
-		<td>Number of decimal places of returned distance</td>
-		<td>Data type: Integer<br/>Optional</td>
 	</tr>
 	</tbody>
 </table>
-</details>
 
-To search in a specific partition or field, specify the name of the partition and field.
+To search in a specific partition or field, specify the list of partition names and field name.
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_name])
+>>> collection.search(data=[[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], "example_field", param=search_params, limit=10, expr=None, partition_names=["example_partition"])
 ```
 
 ```javascript
 await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
-  partition_names: [partition_name],
+  collection_name: "example_collection",
+  partition_names: ["example_partition"],
   expr: "",
-  vectors: [[1, 2, 3, 4, 5, 6, 7, 8]],
+  vectors: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
   search_params: searchParams,
   vector_type: 100, // Float vector -> 100
 });
 ```
 
-4. Release the collections loaded in Milvus to reduce memory consumption when the search is completed:
+Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
 
 {{fragments/multiple_code.md}}
 
@@ -231,26 +297,14 @@ await milvusClient.dataManager.search({
 ```
 
 ```javascript
-await milvusClient.collectionManager.releaseCollection({  collection_name: COLLECTION_NAME,});
+await milvusClient.collectionManager.releaseCollection({  collection_name: "test_retrieve",});
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</td>
-		<th>Description</th>
-		<th>Note</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code>**</td>
-		<td>Name of the collection to release</td>
-		<td>Mandatory</td>
-	</tr>
-	</tbody>
-</table>
-</details>
+## What's next
 
+- Learn more basic operations of Milvus:
+  - [Query vectors](query.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+- Explore API references for Milvus SDKs:
+  - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
