@@ -18,7 +18,7 @@ Below example is based on a two-shard collection named `example_collection` with
 
 <div class="alert note">
 <ul>
-  <li>You can create collections only after <a href="connect.md">connecting to Milvus server</a>.</li>
+  <li>You can create collections only after <a href="manage_connection.md">connecting to Milvus server</a>.</li>
   <li>The collection to create must contain a primary key field. INT64 is the only supported data type for the primary key field in current version of Milvus.</li>
   </ul>
 </div>

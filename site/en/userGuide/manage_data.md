@@ -1,43 +1,48 @@
 ---
-id: manage_index.md
-related_key: create index
-summary: Learn how to build an index for vectors in Milvus.
-
+id: manage_data.md
+related_key: insert, delete
+summary: Learn how to insert and delete data in Milvus.
 ---
 
-# Manage Indexes
+# Manage Data
 
-This topic describes how to manage indexes in Milvus. See [Vector Index](index.md) and [Index Selection](index_selection.md) for more information.
+This topic describes how to insert and delete data in Milvus.
 
-<div class="alert note">
-Current release of Milvus only supports building and dropping index on vector field. Future releases will support these operations on scalar field.
-</div>
+## Insert data
 
-## Build an index
+First, prepare the data to insert.
 
-Prepare the index parameters.
-
-<div class="alert note">
-By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>root_coord.yaml</code>.
-</div>
-
+This topic inserts randomly generated vectors as the example data. You can prepare your own data to replace the example.
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> index_params = {
-        "metric_type":"L2",
-        "index_type":"IVF_FLAT",
-        "params":{"nlist":1024}
-    }
+>>> import random
+>>> vectors = [[random.random() for _ in range(8)] for _ in range(2000)]
+>>> entities = [vectors]
 ```
 
 ```javascript
-const index_params = {
-  metric_type: "L2",
-  index_type: "IVF_FLAT",
-  params: JSON.stringify({ nlist: 1024 }),
-};
+const entities = Array.from({ length: 2000 }, () => ({
+  [FIELD_NAME]: Array.from({ length: 8 }, () => Math.random()),
+}));
+```
+
+Insert the data to the collection. With the collection schema `auto_id` enabled, Milvus automatically assigns IDs to the inserted data.
+
+{{fragments/multiple_code.md}}
+
+```python
+>>> from pymilvus import collection
+>>> collection = Collection("example_collection")      # Get an existing collection.
+>>> mr = collection.insert(entities)
+```
+
+```javascript
+const mr = await milvusClient.dataManager.insert({{
+  collection_name: "example_collection",
+  fields_data: entities,
+});
 ```
 
 <table class="params">
@@ -49,93 +54,159 @@ const index_params = {
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. Find more options in <a href="metric.md">Simlarity Metrics</a>.</td>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to get.</td>
+	</tr>
+    <tr>
+		<td><code>data</code></td>
+		<td>Data to insert into Milvus.</td>
 	</tr>
 	<tr>
-		<td><code>index_type</code></td>
-		<td>Type of index used to accelerate the vector search. Find more options in <a href="index_selection.md">Index Selection</a>.</td>
-	</tr>
-	<tr>
-		<td><code>params</code></td>
-		<td>Building parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to insert data into.</td>
 	</tr>
 	</tbody>
 </table>
 
 
-Build the index by specifying the vector field name and index parameters.
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to get.</td>
+	</tr>
+  <tr>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to insert data into.</td>
+	</tr>
+  <tr>
+		<td><code>fields_data</code></td>
+		<td>Data to insert into Milvus.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+After the data are inserted, Milvus returns `MutationResult` as an object. You can check the value of `MutationResult`, which contains the corresponding primary keys of the inserted data.
+
+{{fragments/multiple_code.md}}
+
+```python
+>>> mr.primary_keys
+```
+
+```javascript
+console.log(mr.IDs) 
+```
+
+
+
+```
+[425790736918318406, 425790736918318407, 425790736918318408, ...]
+```
+
+By specifying `partition_name`, you can decide to which partition to insert the data.
 
 {{fragments/multiple_code.md}}
 
 ```python
 >>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.create_index(field_name="example_field", index_params=index_params)
+>>> collection.insert(data=entities, partition_name="example_partition")
 ```
 
 ```javascript
-await milvusClient.indexManager.createIndex({
+await milvusClient.dataManager.insert({{
   collection_name: "example_collection",
-  field_name: "example_field",
-  extra_params: index_params,
+  partition_name: "example_partition",
+  fields_data: entities,
 });
 ```
 
-```
-Status(code=0, message='')
-```
 
 
+## Delete entities
 
-## View index details
+Milvus 2.0 supports deleting entities by primary key specified with boolean expression.
 
-{{fragments/multiple_code.md}}
-
-```python
->>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.index().params
-```
-
-```javascript
-await milvusClient.indexManager.describeIndex({
-  collection_name: "example_collection",
-});
-```
-
-```
-{'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 1024}}
-```
-
-
-
-## Drop an index
-
-Drop the index of a specified field in a specified collection.
-
-<div class="alert caution">
-The drop operation is irreversible. Dropping an index removes all corresponding index files.
+<div class="alert note">
+  Current release of Milvus only supports deleting entities by primary key.
 </div>
 
 
+<div class="alert caution">
+The delete operation is irreversible. Deleted entities cannot be retrieved again.
+</div>
 
-{{fragments/multiple_code.md}}
+
+All CRUD operations within Milvus are executed in memory. Before deleting, load the collection that contains the entities you expect to delete to memory.
 
 ```python
->>> from pymilvus import collection>>> collection = Collection("example_collection")      # Get an existing collection.>>> collection.drop_index()
+>>> from pymilvus import collection
+>>> collection = Collection("example_collection")      # Get an existing collection.
+>>> collection.load()
 ```
 
-```javascript
-await milvusClient.indexManager.dropIndex({  collection_name: "example_collection",});
+
+
+Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
+
+```python
+>>> expr = "pk in [425790736918318406,425790736918318407]"
 ```
+
+
+
+Delete the enetities with the boolean expression you created.
+
+```python
+>>> collection.delete(expr)
+```
+
+
+
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+  <tr>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+
+
+You can verify the delete operation by checking the number of entities after deleting.
+
+```python
+>>> collection.num_entities
+1998
+```
+
+
 
 ## What's next
 
 - Learn more basic operations of Milvus:
+  - [Build an index for vectors](manage_index.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)

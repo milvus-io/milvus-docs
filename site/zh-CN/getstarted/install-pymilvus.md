@@ -42,7 +42,7 @@ $ python -c "from pymilvus import Collection"
 Having installed PyMilvus, You can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](connect.md)
+  - [Connect to Milvus server](manage_connection.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
