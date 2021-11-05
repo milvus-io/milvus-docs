@@ -38,13 +38,13 @@ Configuration parameters include:
 | `dest_port`          |  Milvus server port.                       | 19530                      |
 | `mode`         |  Mode of migration, including `skip`, `append`, and `overwrite`. This parameter works only when the specified collection name exists in the Milvus library. <br/> <li>`skip` refers to skipping data migration if the specified collection or partition already exists.</li> <li>`append` refers to appending data if the specified collection or partition already exists.</li> <li>`overwrite` refers to deleting existing data before insertion if the specified collection or partition already exists.</li>                    | 'append'                     |
 | `dest_collection_name`          | Name of the collection to import data to.                      | 'test_float'                       |
-| `dest_partition_name`         |  Name of the partition to import data to. This parameter is optional.                   | 'partition_1'                 |
+| `dest_partition_name` (optional)         |  Name of the partition to import data to.                  | 'partition_1'                 |
 | `collection_parameter`         |  Collection-specific information including vector dimension, index file size, and similarity metric.                      | "dimension: 512 <br/> index_file_size: 1024 <br/> metric_type: 'HAMMING'"                     |
 
 
 The following two examples of configuration are for your reference. The first example involves setting `mysql_parameter`. If you do not use MySQL for managing vector IDs in Milvus 1.x, refer to the second example.
 
-- **Example 1**
+### Example 1
 
 ```
 M2M:
@@ -65,7 +65,7 @@ M2M:
   mode: 'skip' # 'skip/append/overwrite'
 ```
 
-- **Example 2**
+### Example 2
 
 ```
 M2M:
@@ -92,6 +92,6 @@ $ milvusdm --yaml M2M.yaml
 ## What's next
 - If you are interested in migrating data in other forms into Milvus,
   - Learn how to [Migrate Data from Faiss to Milvus](f2m.md).
-  - Learn how to [Migrate from HDF5 to Milvus](h2m.md)
+  - Learn how to [Migrate from HDF5 to Milvus](h2m.md).
 - If you are interested in learning more about the data migration tool,
-  - Read the overview of [MilvusDM](migrate_overview.md)
+  - Read the overview of [MilvusDM](migrate_overview.md).
