@@ -12,7 +12,7 @@ This topic describes how to use Prometheus to deploy monitoring services for a M
 ## Monitor metrics with Prometheus
 Metrics are indicators providing information about the running status of your system. For example, with metrics, you can understand how much memory or CPU resources are consumed by a data node in Milvus. Being aware of the performance and status of the components in your Milvus cluster makes you well-informed and hence making better decisions and adjusting resource allocation in a more timely manner.
 
-Generally, metrics are stored in a time series database (TSDB), like [Prometheus](https://prometheus.io/), and the metrics recorded with a time stamp. In the case of monitoring Milvus services, you can use Prometheus to pull data from endpoints set by exporters. Prometheus then exports metrics of each Milvus 2.0 component at `http://<component-host>:9091/metrics`. 
+Generally, metrics are stored in a time series database (TSDB), like [Prometheus](https://prometheus.io/), and the metrics are recorded with a timestamp. In the case of monitoring Milvus services, you can use Prometheus to pull data from endpoints set by exporters. Prometheus then exports metrics of each Milvus component at `http://<component-host>:9091/metrics`. 
 
 However, you might have several replicas for one component, which makes manual configuration of Prometheus too complicated. Therefore, you can use [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator), an extension to Kubernetes, for automated and effective management of Prometheus monitoring instances. Using Prometheus Operator saves you the trouble of manually adding metric targets and service providers.
 
@@ -24,11 +24,11 @@ The following image illustrates Prometheus workflow.
 
 ## Prerequisites
 
-This tutorial uses kube-prometheus to save you the trouble of installing and manually configuring each monitoring and alerting component.
+This tutorial uses [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) to save you the trouble of installing and manually configuring each monitoring and alerting component.
 
-[Kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) collects Kubernetes manifests, [Grafana](http://grafana.com/) dashboards, and [Prometheus rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with [Prometheus](https://prometheus.io/) using the Prometheus Operator.
+Kube-prometheus collects Kubernetes manifests, [Grafana](http://grafana.com/) dashboards, and [Prometheus rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) combined with documentation and scripts.
 
-Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory first.
+Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory.
 
 ```
 git clone https://github.com/prometheus-operator/kube-prometheus.git
@@ -46,7 +46,6 @@ You can access Prometheus via `http://localhost:9090`.
 
 ```
 kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
-kubectl --namespace monitoring port-forward svc/grafana 3000
 ```
 
 ### 2. Enable ServiceMonitor
@@ -61,6 +60,8 @@ When the installation completes, use `kubectl` to check the ServiceMonitor resou
 
 ```
 kubectl get servicemonitor
+```
+```
 NAME                           AGE
 my-release-milvus              54s
 ```
