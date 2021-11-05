@@ -1,142 +1,155 @@
 ---
 id: azure.md
-title: Guide to Deploying Milvus on Microsoft Azure With Kubernetes
+title: Deploying Milvus on Microsoft Azure With Kubernetes
+related_key: cluster
 summary: Learn how to deploy Milvus cluster on Azure.
 ---
 
-# Guide to Deploying Milvus on Microsoft Azure With Kubernetes
+#  Deploy Milvus on Azure With Kubernetes
 
-This guide is a set of instructions for deploying Milvus cluster on Microsoft Azure.
+This topic describes how to deploy Milvus on Azure. This topic uses the [Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal) to create a cluster and uses Azure Kubernetes Service (AKS)
+ to provision a Kubernetes cluster. Click [here](https://portal.azure.com/#create/microsoft.aks) to create AKS. (legacy)
+
+ This topic uses Azure Kubernetes Service (AKS) to provision a cluster and uses the Azure portal to create the cluster. 
 
 ## Prerequisites
 
-1. Confirm that your Azure project is set up properly and that you have access to the resources you would like to use. Contact your Azure administrator if you are unsure about your permissions. 
-2. Install Azure CLI and confirm that you are properly authenticated. 
-3. Install kubectl and helm. You can also use the Azure Cloud Shell from your browser, which offers a choice of Bash or PowerShell. 
+Ensure that your Azure project has been set up properly and you have access to the resources that you want to use. Contact your administrators if you are not sure about your access permission. 
+   
+### Software requirements
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli#install)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm](https://helm.sh/docs/intro/install/)
 
-<div class="alert note">
-Azure Cloud Shell has Azure CLI, kubectl, and helm all pre-installed. 
-</div>
+Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has the Azure CLI, kubectl, and Helm preinstalled.
 
-## Provision a Kubernetes cluster with Azure Kubernetes Service (AKS)
-This guide uses [Azure Portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal) to create a cluster and AKS to provision a Kubernetes cluster. You can access the AKS creation interface [here](https://portal.azure.com/#create/microsoft.aks).
+<div class="alert note">After you install the Azure CLI, ensure that you are properly authenticated.
 
-1. Select the appropriate options.
+## Provision a Kubernetes cluster
 
-**Basics**
+1. Log on to the [Azure portal](https://portal.azure.com).
+2. On the Azure portal menu or from the **Home** page, select **Create a resource**.
+3. Select **Containers** > **Kubernetes Service**.
+4. On the **Basics** page, configure the following options:
 
-- Project Details
-  - Subscription: Contact your organization's Azure Administrator to determine which subscription you should use.
+- **Project details**:
+  - **Subscription**: Contact your organization's Azure Administrator to determine which subscription you should use.
 
-  - Resource group: Contact your organization's Azure Administrator to determine which resource group you should use.
+    - **Resource group**: Contact your organization's Azure Administrator to determine which resource group you should use.
 
-- Cluster Details
-  - Kubernetes cluster name: A cluster name of your own choice.
+- **Cluster details**:
+  - **Kubernetes cluster name**: A cluster name of your own choice.
 
-  - Region: A region of your own choice. 
+  - **Region**: A region of your own choice. 
 
-  - Availability zones: Pick a number of [availability zones](https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters) based on your needs. For production clusters, we recommend you to use multiple availability zones. But for testing purposes, it is unnecessary to use more than one availability zone.
+  - **Availability zones**: Pick a number of [availability zones](https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters) based on your needs. For production clusters, we recommend you to use multiple availability zones. But for testing purposes, it is unnecessary to use more than one availability zone.
 
-- Primary Node Pool
+- **Primary node pool**:
 
-  - Node size: We strongly recommend choosing a node type with at least **16 GiB of RAM** available. Depending on your data scale, you can also pick a node type with more resources.
+  - **Node size**: We strongly recommend choosing a node type with at least **16 GiB of RAM** available. Depending on your data scale, you can also pick a node type with more resources.
   
     <div class="alert note">    
     You may select different machine types to better suit your work case, but we strongly recommend that worker nodes all have at least 16 GB of memory to ensure minimum stable operation.
     </div>
 
-  - Scale Method: A scaling method of your own choice.
+  - **Scale method**: A scaling method of your own choice.
 
-  - Node Count: The number of nodes of your own choice.
+  - **Node count range**: The number of nodes of your own choice.
 
-**Node Pools**
+- **Node pools**:
 
-- Enable Virtual Nodes: Whether to enable virtual nodes is of your own choice.
+  - **Enable virtual nodes**: Whether to enable virtual nodes is of your own choice.
 
-- Enable Virtual Machine Scale Sets: We recommend choosing `enabled`.
+  - **Enable virtual machine scale sets**: We recommend choosing `enabled`.
 
-**Networking**
+- **Networking**:
 
-- Network configuration: We recommend choosing `Kubenet`.
+  - **Network configuration**: We recommend that you choose `Kubenet`.
 
-- DNS name prefix: A DNS name prefix of your own choice.
+  - **DNS name prefix**: A DNS name prefix of your own choice.
 
-- Traffic Routing
+  - **Traffic Routing**:
 
-  - Load Balancer: `Standard`
+  - **Load balancer**: `Standard`
 
-  - HTTP application routing: `Not Needed`
+  - **HTTP application routing**: `Not Needed`
 
-2. After selecting the appropriate options, review and create a cluster. Allow several minutes for the cluster to spin up before proceeding to the next step. 
+
+5. After configuring the options, click **Review + create** and then **Create** when validation completes. It takes a few minutes to create the cluster. 
+
 
 ## Deploy Milvus with Helm
 
-After setting up the cluster, we can now deploy Milvus with Helm. 
+After the cluster is created, install Milvus on the cluster with Helm.
 
-#### Before you begin
 
-1. Connect your shell to the newly created Kubernetes cluster. 
-Navigate to your Kubernetes Cluster under the Azure resources panel. Get the requisite connection info by selecting the "connect button" under the "overview" tab. See screenshot below. 
+### Connect to the cluster
 
+1. Navigate to the cluster that you have created in Kubernetes services and click it.
+2. On the left-hand navigation pane, click `Overview`.
+3. On the `Overview` page that appears, click `Connect` to view the resource group and subscription.
 ![Azure](../../../../assets/azure.png)
 
-2. Use the Azure Cloud Shell or Azure CLI to set your subscription and configure your cluster credentials with the information in the "connect" tab.
+### Set a subscription and credentials
 
-```
+<div class="alert note">You can use Azure Cloud Shell to perform the following procedures.</div>
+
+1. Run the following command to set your subscription.
+
+```shell
 az account set --subscription EXAMPLE-SUBSCRIPTION-ID
 ```
-
-```
+2. Run the following command to download credentials and configure the Kubernetes CLI to use them.
+   
+```shell
 az aks get-credentials --resource-group YOUR-RESOURCE-GROUP --name YOUR-CLUSTER-NAME
 ```
 
 <div class="alert note">
-Use the same shell for helm deployment. If you change or close your shell, repeat the above two commands before proceeding to deployment.
+Use the same shell for the following procedures. If you switch to another shell, run the preceding commands again.
 </div>
 
-#### Deploy
+### Deploy Milvus
 
-1. Add the Milvus chart repository.
+1. Run the following command to add the Milvus Helm chart repository.
 
-```
+```shell
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-2. Update your Milvus chart.
+2. Run the following command to update your Milvus Helm chart.
 
-```
+```shell
 helm repo update
 ```
 
-3. Run helm to deploy Milvus. 
+3. Run the following command to install Milvus.
 
 <div class="alert note">
-In this guide, we pick the name <code>my-release</code>, but you can change the name.
+This topic uses the <code>my-release</code> as the release name. Replace it with your release name.
 </div>
 
-```
-helm install my-release milvus/milvus --set cluster.enabled=true --set service.type=LoadBalancer
+```shell
+helm install my-release milvus/milvus --set service.type=LoadBalancer
 ```
 
-Allow several minutes for the pods to start up. Run `kubectl get services` to check on the services. If the services are successfully booted, you can see a set of services listed out. 
+Starting pods might take several minutes. Run `kubectl get services` to view services. If successful, a list of services is shown as follows.
 
 ![Results](../../../../assets/azure_results.png)
 
 <div class="alert note">
-Note that the IP listed under the EXTERNAL-IP column for the load balancer is the IP for connecting to Milvus. The default Milvus port is 19530. 
+<code>20.81.111.155</code> in the the <code>EXTERNAL-IP</code> column is the IP address of the load balancer. The default Milvus port is <code>19530</code>.
 </div>
 
 ## Use Azure Blob Storage
 
-#### Overview
+Azure Blob Storage is Azure's version of AWS Simple Storage Service (S3).
 
-Azure Blob Storage is one of Microsoft Azure's cloud storage offerings, sharing many features with competitors such as AWS's S3 storage.
+MinIO Azure Gateway allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
 
-The Azure gateway node is an alternative running method for the MinIO server which behaves the same from the client's perspective, but translates and forwards all connections to Azure Blob Storage with the according Azure connection API.
+### Set variables
 
-#### How to use
-
-You need to set a number of variables before using the Azure gateway node. Most of the variables are set to appropriate default settings, but you still need to alter some variables.
+Set variables before you use MinIO Azure Gateway. Modify the default values as needed.
 
 **Metadata that you must set**
 
@@ -152,6 +165,18 @@ You need to set a number of variables before using the Azure gateway node. Most 
 
   - Default is unset.
 
+- `accesskey`: The MinIO access key.
+- `secretkey`: The MinIO secret key.
+- `gcs_key.json`: The GCP service account credentials file.
+
+
+Option|Description|Default|
+|:---|:---|:---|
+|`minio.azuregateway.enabled`|Set the value to ```true``` to enable MinIO Azure Gateway.|`false`|
+|`minio.accessKey`|The MinIO access key.|`""`|
+|`minio.secretKey`|The MinIO secret key.|`""`|
+|`externalAzure.bucketName`|The name of the Azure bucket to use. Unlike an S3/MinIO bucket, an Azure bucket must be globally unique.|`""`|
+
 **Metadata that should be left as default**
 
 - `minio.azuregateway.replicas`: Number of replica nodes to use for the Azure gateway. We highly recommend using only one replica node because MinIO does not have good support for higher numbers. 
@@ -162,7 +187,12 @@ You need to set a number of variables before using the Azure gateway node. Most 
 
 Example helm install:
 
-```
+```shell
 helm install my-release ./milvus --set cluster.enabled=true --set service.type=LoadBalancer --set minio.persistence.enabled=false --set externalAzure.bucketName=milvusbuckettwo --set minio.azuregateway.enabled=true --set minio.azuregateway.replicas=1 --set minio.accessKey=milvusstorage --set minio.secretKey=your-azure-key
 ```
+## What's next
 
+If you want to learn how to deploy Milvus on other clouds:
+- [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
+- [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
+- [Deploy a Milvus Cluster on GCP](https://milvus.io/docs/v2.0.0/gcp.md)
