@@ -488,7 +488,8 @@ Imports data into a partition.
 import -c (text)[-p (text)][-t (float)] <file_path>
 ```
 
-### Options
+<h3 id="import">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the data is inserted into.|
@@ -496,7 +497,9 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+
+<h3 id="import">Example</h3>
+
 ```shell
 milvus_cli > import -c car 'examples/import_csv/vectors.csv'
 
@@ -518,26 +521,33 @@ Milvus timestamp:           428849214449254403
 ## list collections
 Lists all collections.
 
-### Syntax
+<h3 id="list-collections">Syntax<h3>
+
 ```shell
 list collections [-t (float)][-l (boolean)]
 ```
-### Options
+<h3 id="list-collections">Options<h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |-l|--show-loaded|(Optional) Shows the loaded collections only.|
 |--help|n/a|Displays help for using the command.|
 
+
 ## list indexes
+
 Lists all indexes for a collection.
 <div class="alert note"> Currently, a collection supports a maximum of one index. </div>
 
-### Syntax
+<h3 id="list-indexes">Syntax</h3>
+
 ```shell
 list indexes -c (text)
 ```
-### Options
+
+<h3 id="list-indexes">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -545,11 +555,15 @@ list indexes -c (text)
 
 ## list partitions
 Lists all partitions of a collection.
-### Syntax
+
+<h3 id="list-partitions">Syntax</h3>
+
 ```shell
 list partitions -c (text)
 ```
-### Options
+
+<h3 id="list-partitions">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -557,11 +571,14 @@ list partitions -c (text)
 
 ## load
 Loads a collection or partition from hard drive space into RAM.
-### Syntax
+
+<h3 id="load">Syntax</h3>
+
 ```shell
 load -c (text) [-p (text)]
 ```
-### Options
+<h3 id="load">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition belongs to.|
@@ -572,17 +589,22 @@ load -c (text) [-p (text)]
 ## query
 
 Shows query results that match all the criteria that you enter.
-### Syntax
+
+<h3 id="query">Syntax</h3>
+
 ```shell
 query
 ```
-### Options
+<h3 id="query">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="query">Example</h3>
+
 To perform a query and be prompted for the required input:
+
 ```shell
 milvus_cli > query
 
@@ -596,11 +618,15 @@ A list of fields to return(split by "," if multiple) []: color, brand
 ```
 ## release
 Releases a collection or partition from RAM.
-### Syntax
+
+<h3 id="release">Syntax</h3>
+
 ```shell
 release -c (text) [-p (text)]
 ```
-### Options
+
+<h3 id="release">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition belongs to.|
@@ -609,17 +635,21 @@ release -c (text) [-p (text)]
 
 ## search
 Performs a vector similarity search or hybrid search.
-### Syntax
+
+<h3 id="search">Syntax</h3>
+
 ```shell
 search
 ```
-### Options
+<h3 id="search">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Examples
-#### Example 1
+<h3 id="search">Examples</h3>
+<h4 id="search">Example 1</h4>
+
 To perform a search on a csv file and be prompted for the required input:
 ```shell
 milvus_cli > search
@@ -647,7 +677,8 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
-#### Example 2
+<h4 id="search">Example 2</h4>
+
 To perform a search on an indexed collection and be prompted for the required input:
 ```shell
 milvus_cli > search
@@ -688,7 +719,8 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
-#### Example 3
+<h4 id="search">Example 3</h4>
+
 To perform a search on a non-indexed collection and be prompted for the required input:
 ```shell
 milvus_cli > search
@@ -715,11 +747,15 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 ```
 ## show connection
 Shows the current connection.
-### Syntax
+
+<h3 id="show-connection">Syntax</h3>
+
 ```shell
 show connection [-a]
 ```
-### Options
+
+<h3 id="show-connection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-a|--all|（Optional) Flag to show all connections.|
@@ -727,11 +763,14 @@ show connection [-a]
 
 ## show index_progress
 Shows the progress of entity indexing.
-### Syntax
+
+<h3 id="show-index-progress">Syntax</h3>
+
 ```shell
 show index_progress -c (text) [-i (text)]
 ```
-### Options
+<h3 id="show-index-progress">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the entities belong to.|
@@ -740,11 +779,14 @@ show index_progress -c (text) [-i (text)]
 
 ## show loading_progress
 Shows the progress of entity loading.
-### Syntax
+
+<h3 id="show-loading-progress">Syntax</h3>
+ 
 ```shell
 show loading_progress -c (text) [-p (text)]
 ```
-### Options
+<h3 id="show-loading-progress">Options</h3>
+ 
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the entities belong to.|
@@ -753,11 +795,14 @@ show loading_progress -c (text) [-p (text)]
 
 ## show query_segment
 Shows the segment information of a collection.
-### Syntax
+
+<h3 id="show-query-segment">Syntax</h3>
+
 ```shell
 show query_segment -c (text) [-t (float)]
 ```
-### Options
+<h3 id="show-query-segment">Options</h3>
+ 
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -767,18 +812,21 @@ show query_segment -c (text) [-t (float)]
 ## version
 Shows the version of Milvus CLI.
 
-### Syntax
+<h3 id="version">Syntax</h3>
+ 
 ```shell
 version
 ```
-### Options
+<h3 id="version">Options</h3>
+ 
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
 <div class="alert note"> You can also check the version of Milvus CLI in a shell as shown in the following example. In this case, <code>milvus_cli --version</code> acts as a command.</div>
 
-### Example
+<h3 id="version">Example</h3>
+
 ```shell
 $ milvus_cli --version
 Milvus Cli v0.1.7
