@@ -148,9 +148,9 @@ MinIO Azure Gateway allows accessing Azure. Essentially, MinIO Azure Gateway tra
 
 Set variables before you use MinIO Azure Gateway. Modify the default values as needed.
 
-Metadata
+#### Metadata
 
-**Configurations**
+#### Configurations
 
 |Option|Description|Default|
 |:---|:---|:---|
@@ -159,7 +159,7 @@ Metadata
 |`minio.secretKey`|The MinIO secret key.|`""`|
 |`externalAzure.bucketName`|The name of the Azure bucket to use. Unlike an S3/MinIO bucket, an Azure bucket must be globally unique.|`""`|
 
-**Defaults**
+#### Defaults
 
 |Option|Description|Default|
 |:---|:---|:---|
