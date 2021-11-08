@@ -1,6 +1,6 @@
 ---
 id: install_cluster-docker.md
-label: 使用 Docker Compose 安装
+label: Docker Compose
 order: 0
 group: cluster
 ---
