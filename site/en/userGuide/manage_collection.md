@@ -2,7 +2,6 @@
 id: manage_collection.md
 related_key: create collection
 summary: Learn how to manage collections in Milvus.
-
 ---
 
 # Manage Collections
@@ -60,7 +59,7 @@ const params = {
 };
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -84,7 +83,7 @@ const params = {
 </table>
 
 
-<table class="params">
+<table class="language-javascript">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -102,7 +101,7 @@ const params = {
 	</tr>
 	<tr>
 		<td><code>fields</code></td>
-    <td>Schema of the filed within collection to create. Refer to <a href="field_schema.md">Field Schema</a> for more information.</td>
+    <td>Schema of the filed and the collection to create. Refer to <a href="field_schema.md">Field Schema</a> and <a href="collection_schema.md">Collection Schema</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -120,7 +119,7 @@ Then, create a collection with the parameters you created above.
 await milvusClient.collectionManager.createCollection(params);
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -157,6 +156,8 @@ await milvusClient.collectionManager.hasCollection({
 });
 ```
 
+
+
 ## List all collections
 
 {{fragments/multiple_code.md}}
@@ -175,26 +176,67 @@ await milvusClient.collectionManager.showCollections();
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import Collection>>> collection.num_entities
+>>> from pymilvus import Collection
+>>> collection = Collection("example_collection")      # Get an existing collection.
+>>> collection.num_entities
 ```
 
 ```javascript
 await milvusClient.collectionManager.getCollectionStatistics({  collection_name: "example_collection",});
 ```
 
+
 ## Load a collection
 
 All CRUD operations within Milvus are executed in memory. Load the collection to memory before searching or deleting data.
 
+{{fragments/multiple_code.md}}
+
 ```python
->>> from pymilvus import Collection>>> collection.load()
+>>> from pymilvus import Collection
+>>> collection = Collection("example_collection")      # Get an existing collection.
+>>> collection.load()
 ```
 
+```javascript
+await milvusClient.collectionManager.loadCollection({
+  collection_name: "example_collection",
+});
+```
 
+<table class="language-python">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to load.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to load.</td>
+	</tr>
+	</tbody>
+</table>
 
 ## Drop a collection
 
-Remove a collection.
+Remove a collection and the data within.
 
 <div class="alert caution">
 The drop operation is irreversible. Dropping a collection deletes all data within it.

@@ -32,7 +32,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -55,7 +55,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</tbody>
 </table>
 
-<table class="params">
+<table class="language-javascript">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -85,7 +85,7 @@ Disconnect from a Milvus server.
 await milvusClient.closeConnection();
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>

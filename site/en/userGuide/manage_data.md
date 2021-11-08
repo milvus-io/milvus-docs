@@ -24,7 +24,7 @@ This topic inserts randomly generated vectors as the example data. You can prepa
 
 ```javascript
 const entities = Array.from({ length: 2000 }, () => ({
-  [FIELD_NAME]: Array.from({ length: 8 }, () => Math.random()),
+  ["example_field"]: Array.from({ length: 8 }, () => Math.random()),
 }));
 ```
 
@@ -45,7 +45,7 @@ const mr = await milvusClient.dataManager.insert({{
 });
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -69,7 +69,7 @@ const mr = await milvusClient.dataManager.insert({{
 </table>
 
 
-<table class="params">
+<table class="language-javascript">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -104,8 +104,6 @@ After the data are inserted, Milvus returns `MutationResult` as an object. You c
 ```javascript
 console.log(mr.IDs) 
 ```
-
-
 
 ```
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
@@ -143,8 +141,21 @@ Milvus 2.0 supports deleting entities by primary key specified with boolean expr
 The delete operation is irreversible. Deleted entities cannot be retrieved again.
 </div>
 
+Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
+
+{{fragments/multiple_code.md}}
+
+```python
+>>> expr = "pk in [425790736918318406,425790736918318407]"
+```
+
+```javascript
+const expr = "pk in [425790736918318406,425790736918318407]";
+```
 
 All CRUD operations within Milvus are executed in memory. Before deleting, load the collection that contains the entities you expect to delete to memory.
+
+{{fragments/multiple_code.md}}
 
 ```python
 >>> from pymilvus import collection
@@ -152,25 +163,30 @@ All CRUD operations within Milvus are executed in memory. Before deleting, load 
 >>> collection.load()
 ```
 
-
-
-Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
-
-```python
->>> expr = "pk in [425790736918318406,425790736918318407]"
+```javascript
+await milvusClient.collectionManager.loadCollection({
+  collection_name: "example_collection",
+});
 ```
 
 
+Delete the entities with the boolean expression you created.
 
-Delete the enetities with the boolean expression you created.
+{{fragments/multiple_code.md}}
 
 ```python
 >>> collection.delete(expr)
 ```
 
+```javascript
+await milvusClient.dataManager.deleteEntities({
+  collection_name: "example_collection",
+  expr: expr,
+});
+```
 
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -199,6 +215,12 @@ You can verify the delete operation by checking the number of entities after del
 1998
 ```
 
+```javascript
+const res = await collectionManager.getCollectionStatistics({
+  collection_name: "example_collection",
+});
+console.log(res.data.row_count);
+```
 
 
 ## What's next

@@ -19,12 +19,12 @@ If you work with your own dataset in an existing Milvus server, you can move for
 >>> connections.connect("default", host='localhost', port='19530')
 >>> schema = CollectionSchema([
     		FieldSchema("pk", DataType.INT64, is_primary=True),
-    		FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=8)
+    		FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
 >>> collection = Collection("test_retrieve", schema, using='default', shards_num=2)
 >>> import random
 >>> data = [
-    		[i for i in range(10)],
+    		[i for i in range(2000)],
     		[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
 >>> collection.insert(data)
@@ -36,76 +36,48 @@ If you work with your own dataset in an existing Milvus server, you can move for
 >>> collection.create_index("example_field", index_params=index_param)
 ```
 
-## Prepare search parameters
-
-{{fragments/multiple_code.md}}
-
-```python
->>> search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
-```
-
 ```javascript
-const searchParams = {
-  anns_field: "example_field",
-  topk: "10",
-  metric_type: "L2",
-  params: JSON.stringify({ nprobe: 10 }),
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+const milvusClient = new MilvusClient("localhost:19530");
+const params = {
+  collection_name: "test_retrieve",
+  fields: [
+    {
+      name: "example_field",
+      description: "",
+      data_type: DataType.FloatVector,
+      type_params: {
+        dim: "2",
+      },
+    },
+    {
+      name: "pk",
+      data_type: DataType.Int64,
+      is_primary_key: true,
+      description: "",
+    },
+  ],
 };
+await milvusClient.collectionManager.createCollection(params);
+const entities = Array.from({ length: 2000 }, (v,k) => ({
+  "example_field": Array.from({ length: 2 }, () => Math.random()),
+  "pk": k,
+}));
+await milvusClient.dataManager.insert({{
+  collection_name: "test_retrieve",
+  fields_data: entities,
+});
+const index_params = {
+  metric_type: "L2",
+  index_type: "IVF_FLAT",
+  params: JSON.stringify({ nlist: 1024 }),
+};
+await milvusClient.indexManager.createIndex({
+  collection_name: "test_retrieve",
+  field_name: "example_field",
+  extra_params: index_params,
+});
 ```
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>index_type</code></td>
-		<td>Type of index used to accelerate the vector search. See <a href="index_selection.md">Index Selection</a> for more information.</td>
-	</tr>
-    <tr>
-		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
-	</tr>
-	</tbody>
-</table>
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>index_type</code></td>
-		<td>Type of index used to accelerate the vector search. See <a href="index_selection.md">Index Selection</a> for more information.</td>
-	</tr>
-    <tr>
-		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
-	</tr>
-    <tr>
-		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
-	</tr>
-	<tr>
-		<td><code>topk</code></td>
-		<td>Number of the most similar results to return.</td>
-	</tr>
-	</tbody>
-</table>
 
 ## Load collection
 
@@ -125,65 +97,96 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to load.</td>
-	</tr>
-	</tbody>
-</table>
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to load.</td>
-	</tr>
-	</tbody>
-</table>
 
 <div class="alert warning">
 In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
 </div>
 
-## Conduct a vector search
-
-Milvus returns the IDs of the most similar vectors and their distances.
+## Prepare search parameters
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> results = collection.search(data=[[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], anns_field="example_field", param=search_params, limit=10, expr=None)
->>> results[0].ids
-[424363819726212428, 424363819726212436, ...]
->>> results[0].distances
-[0.0, 1.0862197875976562, 1.1029295921325684, ...]
+>>> search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 ```
 
 ```javascript
-await milvusClient.dataManager.search({
+const searchParams = {
+  anns_field: "example_field",
+  topk: "10",
+  metric_type: "L2",
+  params: JSON.stringify({ nprobe: 10 }),
+};
+```
+
+<table class="language-python">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+	<tr>
+		<td><code>topk</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+## Conduct a vector search
+
+Search vectors with Milvus.
+
+{{fragments/multiple_code.md}}
+
+```python
+>>> results = collection.search(data=[[0.1, 0.2]], anns_field="example_field", param=search_params, limit=10, expr=None)
+```
+
+```javascript
+const results = await milvusClient.dataManager.search({
   collection_name: "test_retrieve",
   expr: "",
-  vectors: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
+  vectors: [[0.1, 0.2]],
   search_params: searchParams,
   vector_type: 100, // Float vector -> 100
 });
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -230,7 +233,7 @@ await milvusClient.dataManager.search({
 	</tbody>
 </table>
 
-<table class="params">
+<table class="language-javascript">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -244,7 +247,7 @@ await milvusClient.dataManager.search({
 	</tr>
 	<tr>
     <td><code>search_params</code></td>
-    <td>Parameters used for search.</td>
+    <td>Parameters (as an object) used for search.</td>
   </tr>
 	<tr>
     <td><code>vectors</code></td>
@@ -269,12 +272,13 @@ await milvusClient.dataManager.search({
 	</tbody>
 </table>
 
+
 To search in a specific partition or field, specify the list of partition names and field name.
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> collection.search(data=[[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], "example_field", param=search_params, limit=10, expr=None, partition_names=["example_partition"])
+>>> collection.search(data=[[0.1, 0.2]], "example_field", param=search_params, limit=10, expr=None, partition_names=["example_partition"])
 ```
 
 ```javascript
@@ -282,10 +286,23 @@ await milvusClient.dataManager.search({
   collection_name: "example_collection",
   partition_names: ["example_partition"],
   expr: "",
-  vectors: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
+  vectors: [[0.1, 0.2]],
   search_params: searchParams,
   vector_type: 100, // Float vector -> 100
 });
+```
+
+Check the primary key values of the most similar vectors and their distances.
+
+{{fragments/multiple_code.md}}
+
+```python
+>>> results[0].ids
+>>> results[0].distances
+```
+
+```javascript
+console.log(results.results)
 ```
 
 Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
@@ -305,6 +322,7 @@ await milvusClient.collectionManager.releaseCollection({  collection_name: "test
 - Learn more basic operations of Milvus:
   - [Query vectors](query.md)
   - [Conduct a hybrid search](hybridsearch.md)
+  - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)

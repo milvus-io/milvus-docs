@@ -32,7 +32,7 @@ await milvusClient.partitionManager.createPartition({
 });
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -52,7 +52,7 @@ await milvusClient.partitionManager.createPartition({
 </table>
 
 
-<table class="params">
+<table class="language-javascript">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -77,6 +77,7 @@ await milvusClient.partitionManager.createPartition({
 
 ```python
 >>> from pymilvus import Collection
+>>> collection = Collection("example_collection")      # Get an existing collection.
 >>> collection.partitions
 ```
 
@@ -86,20 +87,6 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-  <tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to list partitions in.</td>
-	</tr>
-	</tbody>
-</table>
 
 
 ## Verify if a partition exist
@@ -117,45 +104,6 @@ await milvusClient.partitionManager.hasPartition({
   partition_name: "example_partition",
 });
 ```
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>partition_name</code></td>
-		<td>Name of the partition to verify.</td>
-	</tr>
-  <tr>
-		<td><code>timeout</code> (optional)</td>
-		<td>A duration of time in seconds to allow for the RPC. When timeout is set to <code>None</code>, client waits until server responds or error occurs.</td>
-	</tr>
-	</tbody>
-</table>
-
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-  <tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to verify a partition in.</td>
-	</tr>
-  <tr>
-		<td><code>partition_name</code></td>
-		<td>Name of the partition to verify.</td>
-	</tr>
-	</tbody>
-</table>
 
 
 ## Drop a partition
@@ -180,46 +128,6 @@ await milvusClient.partitionManager.dropPartition({
   partition_name: "example_partition",
 });
 ```
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</td>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
- 	<tr>
-		<td><code>partition_name</code></td>
-		<td>Name of the partition to drop.</td>
-	</tr>
-  <tr>
-		<td><code>timeout</code> (optional)</td>
-		<td>A duration of time in seconds to allow for the RPC. When timeout is set to <code>None</code>, client waits until server responds or error occurs.</td>
-	</tr>
-	</tbody>
-</table>
-
-
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
- 	<tr>
-		<td><code>partition_name</code></td>
-		<td>Name of the partition to drop.</td>
-	</tr>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to drop partition from.</td>
-	</tr>
-	</tbody>
-</table>
-
 
 ## What's next
 

@@ -2,7 +2,6 @@
 id: manage_index.md
 related_key: create index
 summary: Learn how to build an index for vectors in Milvus.
-
 ---
 
 # Manage Indexes
@@ -10,17 +9,14 @@ summary: Learn how to build an index for vectors in Milvus.
 This topic describes how to manage indexes in Milvus. See [Vector Index](index.md) and [Index Selection](index_selection.md) for more information.
 
 <div class="alert note">
-Current release of Milvus only supports building and dropping index on vector field. Future releases will support these operations on scalar field.
+<ul>
+<li>Current release of Milvus only supports building and dropping index on vector field. Future releases will support these operations on scalar field.</li>
+<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>root_coord.yaml</code>.</li>
 </div>
 
 ## Build an index
 
 Prepare the index parameters.
-
-<div class="alert note">
-By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>root_coord.yaml</code>.
-</div>
-
 
 {{fragments/multiple_code.md}}
 
@@ -74,16 +70,16 @@ Build the index by specifying the vector field name and index parameters.
 >>> collection.create_index(field_name="example_field", index_params=index_params)
 ```
 
+```python
+Status(code=0, message='')
+```
+
 ```javascript
 await milvusClient.indexManager.createIndex({
   collection_name: "example_collection",
   field_name: "example_field",
   extra_params: index_params,
 });
-```
-
-```
-Status(code=0, message='')
 ```
 
 
@@ -98,16 +94,15 @@ Status(code=0, message='')
 >>> collection.index().params
 ```
 
+```python
+{'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 1024}}
+```
+
 ```javascript
 await milvusClient.indexManager.describeIndex({
   collection_name: "example_collection",
 });
 ```
-
-```
-{'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 1024}}
-```
-
 
 
 ## Drop an index
