@@ -1,6 +1,6 @@
 ---
 id: install_cluster-helm.md
-label: 使用 Kubernetes 安装
+label: 使用 Helm 安装
 order: 1
 group: cluster
 ---
