@@ -2,15 +2,12 @@
 id: azure.md
 title: Deploying Milvus on Microsoft Azure With Kubernetes
 related_key: cluster
-summary: Learn how to deploy Milvus cluster on Azure.
+summary: Learn how to deploy a Milvus cluster on Azure.
 ---
 
 #  Deploy Milvus on Azure With Kubernetes
 
-This topic describes how to deploy Milvus on Azure. This topic uses the [Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal) to create a cluster and uses Azure Kubernetes Service (AKS)
- to provision a Kubernetes cluster. Click [here](https://portal.azure.com/#create/microsoft.aks) to create AKS. (legacy)
-
- This topic uses Azure Kubernetes Service (AKS) to provision a cluster and uses the Azure portal to create the cluster. 
+ This topic describes how to provision a cluster and create the cluster with Azure Kubernetes Service (AKS) and the Azure portal.
 
 ## Prerequisites
 
@@ -38,41 +35,41 @@ Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has
     - **Resource group**: Contact your organization's Azure Administrator to determine which resource group you should use.
 
 - **Cluster details**:
-  - **Kubernetes cluster name**: A cluster name of your own choice.
+  - **Kubernetes cluster name**: Enter a cluster name.
 
-  - **Region**: A region of your own choice. 
+  - **Region**: Select a region.
 
-  - **Availability zones**: Pick a number of [availability zones](https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters) based on your needs. For production clusters, we recommend you to use multiple availability zones. But for testing purposes, it is unnecessary to use more than one availability zone.
+  - **Availability zones**: Select [availability zones](https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters) as you need. For production clusters, we recommend that you select multiple availability zones.
 
 - **Primary node pool**:
 
-  - **Node size**: We strongly recommend choosing a node type with at least **16 GiB of RAM** available. Depending on your data scale, you can also pick a node type with more resources.
+  - **Node size**: We recommend that you choose VMs with a minimum of 16 GB of RAM.
   
     <div class="alert note">    
-    You may select different machine types to better suit your work case, but we strongly recommend that worker nodes all have at least 16 GB of memory to ensure minimum stable operation.
+    You can select virtual machine sizes as you need. However, we recommend that you select a minimum of 16 GB of memory to ensure stability.
     </div>
 
-  - **Scale method**: A scaling method of your own choice.
+  - **Scale method**: Choose a scale method.
 
-  - **Node count range**: The number of nodes of your own choice.
+  - **Node count range**: Select a range for the number of nodes.
 
 - **Node pools**:
 
-  - **Enable virtual nodes**: Whether to enable virtual nodes is of your own choice.
+  - **Enable virtual nodes**: Specifies whether to enable virtual nodes. Select the checkbox to enable virtual nodes.
 
-  - **Enable virtual machine scale sets**: We recommend choosing `enabled`.
+  - **Enable virtual machine scale sets**: We recommend that you choose `enabled`.
 
 - **Networking**:
 
   - **Network configuration**: We recommend that you choose `Kubenet`.
 
-  - **DNS name prefix**: A DNS name prefix of your own choice.
+  - **DNS name prefix**: Enter a DNS name prefix.
 
   - **Traffic Routing**:
 
-  - **Load balancer**: `Standard`
+    - **Load balancer**: `Standard`.
 
-  - **HTTP application routing**: `Not Needed`
+    - **HTTP application routing**: Not required.
 
 
 5. After configuring the options, click **Review + create** and then **Create** when validation completes. It takes a few minutes to create the cluster. 
@@ -86,7 +83,7 @@ After the cluster is created, install Milvus on the cluster with Helm.
 ### Connect to the cluster
 
 1. Navigate to the cluster that you have created in Kubernetes services and click it.
-2. On the left-hand navigation pane, click `Overview`.
+2. On the left-side navigation pane, click `Overview`.
 3. On the `Overview` page that appears, click `Connect` to view the resource group and subscription.
 ![Azure](../../../../assets/azure.png)
 
@@ -126,7 +123,7 @@ helm repo update
 3. Run the following command to install Milvus.
 
 <div class="alert note">
-This topic uses the <code>my-release</code> as the release name. Replace it with your release name.
+This topic uses <code>my-release</code> as the release name. Replace it with your release name.
 </div>
 
 ```shell
@@ -151,44 +148,30 @@ MinIO Azure Gateway allows accessing Azure. Essentially, MinIO Azure Gateway tra
 
 Set variables before you use MinIO Azure Gateway. Modify the default values as needed.
 
-**Metadata that you must set**
+Metadata
 
-- `minio.azuregateway.enabled`: Must be set to `true` to enable operation.
+**Configurations**
 
-  -  Default is false. 
-
-- `minio.accessKey`: Name of the Azure storage account to use.
-
-- `minio.secretKey`: Access key for the Azure storage account.
-
-- `externalAzure.bucketName`: Name of the Azure storage bucket to use. Unlike S3/MinIO buckets, Azure buckets must be *globally* unique. Therefore the default value is unset.
-
-  - Default is unset.
-
-- `accesskey`: The MinIO access key.
-- `secretkey`: The MinIO secret key.
-- `gcs_key.json`: The GCP service account credentials file.
-
-
-Option|Description|Default|
+|Option|Description|Default|
 |:---|:---|:---|
 |`minio.azuregateway.enabled`|Set the value to ```true``` to enable MinIO Azure Gateway.|`false`|
 |`minio.accessKey`|The MinIO access key.|`""`|
 |`minio.secretKey`|The MinIO secret key.|`""`|
 |`externalAzure.bucketName`|The name of the Azure bucket to use. Unlike an S3/MinIO bucket, an Azure bucket must be globally unique.|`""`|
 
-**Metadata that should be left as default**
+**Defaults**
 
-- `minio.azuregateway.replicas`: Number of replica nodes to use for the Azure gateway. We highly recommend using only one replica node because MinIO does not have good support for higher numbers. 
+|Option|Description|Default|
+|:---|:---|:---|
+|`minio.azuregateway.replicas`|The number of replica nodes to use for the gateway. We recommend that you use one because MinIO does not support well for more than one replica.|`1`|
 
-  - Default is 1.
+Continue to use all normal MinIO metadata variables.
 
-- You should also inherit all of the normal MinIO metadata variables.
 
-Example helm install:
+#### Example
 
 ```shell
-helm install my-release ./milvus --set cluster.enabled=true --set service.type=LoadBalancer --set minio.persistence.enabled=false --set externalAzure.bucketName=milvusbuckettwo --set minio.azuregateway.enabled=true --set minio.azuregateway.replicas=1 --set minio.accessKey=milvusstorage --set minio.secretKey=your-azure-key
+helm install my-release ./milvus --set service.type=LoadBalancer --set minio.persistence.enabled=false --set externalAzure.bucketName=milvusbuckettwo --set minio.azuregateway.enabled=true --set minio.azuregateway.replicas=1 --set minio.accessKey=milvusstorage --set minio.secretKey=your-azure-key
 ```
 ## What's next
 
