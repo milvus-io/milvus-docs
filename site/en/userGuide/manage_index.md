@@ -16,6 +16,8 @@ This topic describes how to manage indexes in Milvus. See [Vector Index](index.m
 
 ## Build an index
 
+This topic builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics.
+
 Prepare the index parameters.
 
 {{fragments/multiple_code.md}}
