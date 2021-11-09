@@ -77,6 +77,14 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="doc-home-what-is-new">
 
 ## What's new in docs
+  
+_Nov 2021_
+  
+- With the release of Milvus 2.0-RC8, we have published a new documentation introducing the new feature [Time Travel](timetravel.md).
+- Added guidance on installation a Milvus cluster on Kubernetes with [Milvus Operator](install_cluster-milvusoperator.md).
+- Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md).  Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
+- Added the [installation guide](milvusdm_install.md) for MilvusDM. Learn how to install the data migration tool and import data from [Faiss](f2m.md), [HDF5 files](h2m.md), and [Milvus 1.x](m2m.md) to Milvus 2.0.
+- Reorganized topics under User Guide based on objects, such as [collection](manage_collection.md), [partition](manage_partition.md), [indexes](manage_index.md), [data](manage_data.md), and more.
 
 _Oct 2021_
 
