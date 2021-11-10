@@ -83,7 +83,7 @@ await milvusClient.indexManager.createIndex({
 
 ## Load collection
 
-All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
+All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector search.
 
 {{fragments/multiple_code.md}}
 
