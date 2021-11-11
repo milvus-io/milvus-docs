@@ -9,11 +9,11 @@ summary: Learn how to manage partitions in Milvus.
 
 This topic describes how to manage partitions in Milvus.
 
-Search performance drops as data volume increases in a collection. To mitigate the declining search performance, you can divide the bulk of data via partitioning. By dividing the data and storing them in separate partitions, you can narrow the range of a search to a partition and thereby improve the search performance.
+Milvus allows you to divide the bulk of vector data into a small number of partitions. Search and other operations can then be limited to one partition to improve the performance.
 
 A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Partition](glossary.md#Partition) for more information.
 
-This topic is based on a partition `example_partition` in the collection `example_collection`.
+The following example is based on a partition `example_partition` in the collection `example_collection`.
 
 ## Create a partition
 

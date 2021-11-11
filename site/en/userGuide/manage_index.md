@@ -8,15 +8,17 @@ summary: Learn how to build an index for vectors in Milvus.
 
 This topic describes how to manage indexes in Milvus. See [Vector Index](index.md) and [Index Selection](index_selection.md) for more information.
 
+Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without index built on vectors, Milvus will perform a brute-force search by default.
+
 <div class="alert note">
 <ul>
-<li>Current release of Milvus only supports building and dropping index on vector field. Future releases will support these operations on scalar field.</li>
+<li>Current release of Milvus only supports building and dropping an index on vector field. Future releases will support these operations on scalar field.</li>
 <li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>root_coord.yaml</code>.</li>
 </div>
 
 ## Build an index
 
-This topic builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics.
+The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metric that suit your scenario.
 
 Prepare the index parameters.
 
@@ -48,7 +50,7 @@ const index_params = {
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. Find more options in <a href="metric.md">Simlarity Metrics</a>.</td>
+		<td>Type of metrics used to measure similarity of vectors. Find more options in <a href="metric.md">Simlarity Metrics</a>.</td>
 	</tr>
 	<tr>
 		<td><code>index_type</code></td>
@@ -109,7 +111,7 @@ await milvusClient.indexManager.describeIndex({
 
 ## Drop an index
 
-Drop the index of a specified field in a specified collection.
+Drop the index if you are sure that you do not want to use it anymore.
 
 <div class="alert caution">
 The drop operation is irreversible. Dropping an index removes all corresponding index files.

@@ -12,7 +12,7 @@ This topic describes how to insert and delete data in Milvus.
 
 First, prepare the data to insert.
 
-This topic inserts randomly generated vectors as the example data. You can prepare your own data to replace the example.
+This topic inserts randomly generated 2,000 rows of eight-dimensional vector data as the example data. Real applications will likely use much higher dimensional vectors than this. You can prepare your own data to replace the example.
 
 {{fragments/multiple_code.md}}
 
@@ -28,7 +28,9 @@ const entities = Array.from({ length: 2000 }, () => ({
 }));
 ```
 
-Insert the data to the collection. With the collection schema `auto_id` enabled, Milvus automatically assigns IDs to the inserted data.
+Insert the data to the collection. By specifying `partition_name`, you can decide to which partition to insert the data.
+
+With the collection schema `auto_id` enabled, Milvus automatically assigns an ID (primary key value) to each inserted data.
 
 {{fragments/multiple_code.md}}
 
@@ -109,49 +111,19 @@ console.log(mr.IDs)
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
 ```
 
-By specifying `partition_name`, you can decide to which partition to insert the data.
-
-{{fragments/multiple_code.md}}
-
-```python
->>> from pymilvus import collection
->>> collection.insert(data=entities, partition_name="example_partition")
-```
-
-```javascript
-await milvusClient.dataManager.insert({{
-  collection_name: "example_collection",
-  partition_name: "example_partition",
-  fields_data: entities,
-});
-```
-
 
 
 ## Delete entities
 
-Milvus 2.0 supports deleting entities by primary key specified with boolean expression.
-
-<div class="alert note">
-  Current release of Milvus only supports deleting entities by primary key.
-</div>
+Milvus supports deleting entities by primary key specified with boolean expression.
 
 
 <div class="alert caution">
-The delete operation is irreversible. Deleted entities cannot be retrieved again.
+<ul>
+<li>The delete operation is irreversible. Deleted entities cannot be retrieved again.</li>
+<li>Frequent delete operations will impact the system performance.</li>
+</ul>
 </div>
-
-Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
-
-{{fragments/multiple_code.md}}
-
-```python
->>> expr = "pk in [425790736918318406,425790736918318407]"
-```
-
-```javascript
-const expr = "pk in [425790736918318406,425790736918318407]";
-```
 
 All CRUD operations within Milvus are executed in memory. Before deleting, load the collection that contains the entities you expect to delete to memory.
 
@@ -170,7 +142,23 @@ await milvusClient.collectionManager.loadCollection({
 ```
 
 
-Delete the entities with the boolean expression you created.
+
+Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
+
+The following example filters data with primary key values of `425790736918318406` and `425790736918318407`.
+
+{{fragments/multiple_code.md}}
+
+```python
+>>> expr = "pk in [425790736918318406,425790736918318407]"
+```
+
+```javascript
+const expr = "pk in [425790736918318406,425790736918318407]";
+```
+
+
+Delete the entities with the boolean expression you created. By specifying `partition_name`, you can decide from which partition to delete the entities and thus save the resources.
 
 {{fragments/multiple_code.md}}
 

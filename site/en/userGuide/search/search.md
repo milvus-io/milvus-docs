@@ -8,23 +8,29 @@ summary: Conduct a vector similarity search with Milvus.
 
 This topic describes how to search entities with Milvus.
 
+A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field, you can perform a [hybrid search](hybridsearch.md) or even a search with [Time Travel](timetravel.md).
+
+The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined. 
+
 ## Preparations
 
-Connect to Milvus server, create a collection, insert data, and build index for the entities.
+The following example code demonstrates the steps prior to a search.
 
-If you work with your own dataset in an existing Milvus server, you can move forward to the next step.
+If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
 
 ```python
 >>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
 >>> connections.connect("default", host='localhost', port='19530')
 >>> schema = CollectionSchema([
-    		FieldSchema("pk", DataType.INT64, is_primary=True),
-    		FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
+    		FieldSchema("book_id", DataType.INT64, is_primary=True),
+			FieldSchema("word_count", DataType.INT64),
+    		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
->>> collection = Collection("test_retrieve", schema, using='default', shards_num=2)
+>>> collection = Collection("test_book_search", schema, using='default', shards_num=2)
 >>> import random
 >>> data = [
     		[i for i in range(2000)],
+			[i for i in range(10000, 12000)],
     		[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
 >>> collection.insert(data)
@@ -33,38 +39,44 @@ If you work with your own dataset in an existing Milvus server, you can move for
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
     }
->>> collection.create_index("example_field", index_params=index_param)
+>>> collection.create_index("book_intro", index_params=index_param)
 ```
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const milvusClient = new MilvusClient("localhost:19530");
 const params = {
-  collection_name: "test_retrieve",
+  collection_name: "test_book_search",
   fields: [
     {
-      name: "example_field",
+      name: "book_intro",
       description: "",
       data_type: DataType.FloatVector,
       type_params: {
         dim: "2",
       },
     },
-    {
-      name: "pk",
+	{
+      name: "book_id",
       data_type: DataType.Int64,
       is_primary_key: true,
+      description: "",
+    },
+    {
+      name: "word_count",
+      data_type: DataType.Int64,
       description: "",
     },
   ],
 };
 await milvusClient.collectionManager.createCollection(params);
 const entities = Array.from({ length: 2000 }, (v,k) => ({
-  "example_field": Array.from({ length: 2 }, () => Math.random()),
-  "pk": k,
+  "book_intro": Array.from({ length: 2 }, () => Math.random()),
+  "book_id": k,
+  "word_count": k+10000,
 }));
 await milvusClient.dataManager.insert({{
-  collection_name: "test_retrieve",
+  collection_name: "test_book_search",
   fields_data: entities,
 });
 const index_params = {
@@ -73,8 +85,8 @@ const index_params = {
   params: JSON.stringify({ nlist: 1024 }),
 };
 await milvusClient.indexManager.createIndex({
-  collection_name: "test_retrieve",
-  field_name: "example_field",
+  collection_name: "test_book_search",
+  field_name: "book_intro",
   extra_params: index_params,
 });
 ```
@@ -87,13 +99,13 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 ```python
 >>> from pymilvus import collection
->>> collection = Collection("test_retrieve")      # Get an existing collection.
+>>> collection = Collection("test_book_search")      # Get an existing collection.
 >>> collection.load()
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
-  collection_name: "test_retrieve",
+  collection_name: "test_book_search",
 });
 ```
 
@@ -104,6 +116,8 @@ In current release, volume of the data to load must be under 70% of the total me
 
 ## Prepare search parameters
 
+Prepare the parameters that suit your search scenario. The following examples defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
+
 {{fragments/multiple_code.md}}
 
 ```python
@@ -112,7 +126,7 @@ In current release, volume of the data to load must be under 70% of the total me
 
 ```javascript
 const searchParams = {
-  anns_field: "example_field",
+  anns_field: "book_intro",
   topk: "10",
   metric_type: "L2",
   params: JSON.stringify({ nprobe: 10 }),
@@ -168,17 +182,17 @@ const searchParams = {
 
 ## Conduct a vector search
 
-Search vectors with Milvus.
+Search vectors with Milvus. To search in a specific partition, specify the list of partition names. 
 
 {{fragments/multiple_code.md}}
 
 ```python
->>> results = collection.search(data=[[0.1, 0.2]], anns_field="example_field", param=search_params, limit=10, expr=None)
+>>> results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=search_params, limit=10, expr=None)
 ```
 
 ```javascript
 const results = await milvusClient.dataManager.search({
-  collection_name: "test_retrieve",
+  collection_name: "test_book_search",
   expr: "",
   vectors: [[0.1, 0.2]],
   search_params: searchParams,
@@ -272,25 +286,6 @@ const results = await milvusClient.dataManager.search({
 	</tbody>
 </table>
 
-
-To search in a specific partition or field, specify the list of partition names and field name.
-
-{{fragments/multiple_code.md}}
-
-```python
->>> collection.search(data=[[0.1, 0.2]], "example_field", param=search_params, limit=10, expr=None, partition_names=["example_partition"])
-```
-
-```javascript
-await milvusClient.dataManager.search({
-  collection_name: "example_collection",
-  partition_names: ["example_partition"],
-  expr: "",
-  vectors: [[0.1, 0.2]],
-  search_params: searchParams,
-  vector_type: 100, // Float vector -> 100
-});
-```
 
 Check the primary key values of the most similar vectors and their distances.
 

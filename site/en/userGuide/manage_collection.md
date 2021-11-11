@@ -10,7 +10,7 @@ This topic describes how to manage collections in Milvus.
 
 A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Collection](glossary.md#Collection) for more information.
 
-Below example is based on a two-shard collection named `example_collection` with an eight-dimension float vector field, and an INT64, `auto_id` enabled primary key field.
+The following example is based on a two-shard collection named `example_collection` with an eight-dimension float vector field, and an INT64, `auto_id` enabled primary key field.
 
 
 ## Create a collection
@@ -18,7 +18,7 @@ Below example is based on a two-shard collection named `example_collection` with
 <div class="alert note">
 <ul>
   <li>You can create collections only after <a href="manage_connection.md">connecting to Milvus server</a>.</li>
-  <li>The collection to create must contain a primary key field. INT64 is the only supported data type for the primary key field in current version of Milvus.</li>
+  <li>The collection to create must contain a primary key field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
   </ul>
 </div>
 
