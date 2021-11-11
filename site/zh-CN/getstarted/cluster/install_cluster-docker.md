@@ -26,7 +26,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_d
 2. 启动 Milvus 分布式版：
 
 ```Shell
-$ docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 ```Text
