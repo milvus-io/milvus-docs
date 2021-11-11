@@ -47,7 +47,7 @@ Data is stored in the <code>volumes</code> folder according to the default confi
 ## Start Milvus
 
 ```shell
-$ docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 ```text
