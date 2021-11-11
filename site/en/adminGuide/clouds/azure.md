@@ -7,7 +7,7 @@ summary: Learn how to deploy a Milvus cluster on Azure.
 
 #  Deploy Milvus on Azure with AKS
 
- This topic describes how to provision and create a cluster with Azure Kubernetes Service (AKS) and the [Azure portal](https://portal.azure.com).
+ This topic describes how to provision and create a cluster with [Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview) (AKS) and the [Azure portal](https://portal.azure.com).
 
 ## Prerequisites
 
@@ -84,7 +84,7 @@ After the cluster is created, install Milvus on the cluster with Helm.
 
 1. Navigate to the cluster that you have created in Kubernetes services and click it.
 2. On the left-side navigation pane, click `Overview`.
-3. On the `Overview` page that appears, click `Connect` to view the resource group and subscription.
+3. On the **Overview** page that appears, click **Connect** to view the resource group and subscription.
 ![Azure](../../../../assets/azure.png)
 
 ### Set a subscription and credentials
@@ -138,11 +138,11 @@ Starting pods might take several minutes. Run `kubectl get services` to view ser
 <code>20.81.111.155</code> in the the <code>EXTERNAL-IP</code> column is the IP address of the load balancer. The default Milvus port is <code>19530</code>.
 </div>
 
-## Use Azure Blob Storage
+## Using Azure Blob Storage
 
 Azure Blob Storage is Azure's version of AWS Simple Storage Service (S3).
 
-MinIO Azure Gateway allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
+[MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
 
 ### Set variables
 
@@ -165,7 +165,7 @@ The following table lists the metadata that you might want to leave as default.
 |:---|:---|:---|
 |`minio.azuregateway.replicas`|The number of replica nodes to use for the gateway. We recommend that you use one because MinIO does not support well for more than one replica.|`1`|
 
-Continue to use all normal MinIO metadata variables.
+Continue to use all predefined MinIO metadata variables.
 
 The following example installs a chart named `my-release`.
 
