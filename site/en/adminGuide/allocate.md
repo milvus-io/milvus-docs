@@ -8,7 +8,7 @@ summary: Learn how to allocate resources to Milvus on Kubernetes.
 
 This topic describes how to allocate resources to a Milvus cluster on Kubernetes.
 
-Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before deploying the cluster.
+Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before [deploying the cluster](install_cluster-helm.md).
 
 ## 1. View available resources
 
@@ -22,7 +22,7 @@ Use Helm to allocate CPU and memory resources to Milvus components.
 Using Helm to upgrade resources will cause the running pods to perform rolling update.
 </div>
 
-There are two ways to allocate resources. 
+There are two ways to allocate resources:
 
 - [Use the commands](allocate.md#Allocate-resources-with-commands)
 - [Set the parameters in the `YAML` file](allocate.md#Allocate-resources-by-setting-configuration-file )
@@ -54,7 +54,7 @@ helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.li
 
 ### Allocate resources by setting configuration file 
 
-You can also allocate CPU and memory resources by specifying the parameters `resources.requests` and `resources.limits` in the `resources.yaml` YAML file:
+You can also allocate CPU and memory resources by specifying the parameters `resources.requests` and `resources.limits` in the `resources.yaml` file.
 
 ```Yaml
 dataNode:
@@ -83,7 +83,7 @@ Run the following command to apply the new configurations to your Milvus cluster
 helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 ```
 <div class="alert note">
-If <code>resources.limits</code> is not specified, the pods will consume all the CPU and memory resources available. Therefore, please specify <code>resources.requests</code> and <code>resources.limits</code> to avoid overallocation of resources when other running tasks on the same instance require more memory consumption.
+If <code>resources.limits</code> is not specified, the pods will consume all the CPU and memory resources available. Therefore, ensure to specify <code>resources.requests</code> and <code>resources.limits</code> to avoid overallocation of resources when other running tasks on the same instance require more memory consumption.
 </div>
 
 See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for more information about managing resources.
@@ -93,7 +93,7 @@ See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration
 
 - You might also want to learn how to:
   - [Scale a Milvus cluster](scaleout.md)
-  - [Upgrade](upgrade.md) your Milvus version
+  - [Upgrade](upgrade.md) your Milvus instance
 - If you are ready to deploy your cluster on clouds:
   - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
   - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
