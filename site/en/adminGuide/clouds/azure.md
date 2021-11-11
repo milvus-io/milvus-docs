@@ -150,7 +150,7 @@ Set variables before you use MinIO Azure Gateway. Modify the default values as n
 
 #### Metadata
 
-#### Configurations
+The following table lists the metadata that you can configure.
 
 |Option|Description|Default|
 |:---|:---|:---|
@@ -159,7 +159,7 @@ Set variables before you use MinIO Azure Gateway. Modify the default values as n
 |`minio.secretKey`|The MinIO secret key.|`""`|
 |`externalAzure.bucketName`|The name of the Azure bucket to use. Unlike an S3/MinIO bucket, an Azure bucket must be globally unique.|`""`|
 
-#### Defaults
+The following table lists the metadata that you might want to leave as default.
 
 |Option|Description|Default|
 |:---|:---|:---|
@@ -167,8 +167,7 @@ Set variables before you use MinIO Azure Gateway. Modify the default values as n
 
 Continue to use all normal MinIO metadata variables.
 
-
-#### Example
+The following example installs a chart named `my-release`.
 
 ```shell
 helm install my-release ./milvus --set service.type=LoadBalancer --set minio.persistence.enabled=false --set externalAzure.bucketName=milvusbuckettwo --set minio.azuregateway.enabled=true --set minio.azuregateway.replicas=1 --set minio.accessKey=milvusstorage --set minio.secretKey=your-azure-key
