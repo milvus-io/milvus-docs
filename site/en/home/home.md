@@ -4,7 +4,7 @@ id: home.md
 
 # Welcome to Milvus Docs!
 
-Here you will learn about [what Milvus is](overview.md), and how to [install](install_standalone-docker.md), [use](connect.md), and [deploy](aws.md) Milvus to build an [application](image_similarity_search.md) according to your business need. You will also find [FAQs](performance_faq.md) and [API references](api-reference/pymilvus/v2.0.0rc7/api/collection.html) here.
+Here you will learn about [what Milvus is](overview.md), and how to [install](install_standalone-docker.md), [use](connect.md), and [deploy](aws.md) Milvus to build an [application](image_similarity_search.md) according to your business need. You will also find [FAQs](performance_faq.md) and [API references](https://milvus.io/api-reference/pymilvus/v2.0.0rc8/api/collection.html) here.
 
 You can start by browsing the recomended contents below or using the search box at the top left to search across the documentation. If you do not find the information you are looking for, feel free to ask _MilMil_![MilMil](../../../assets/icon_bird.svg) at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page.
 
@@ -21,14 +21,14 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="start_card_container">
   <a href="example_code.md">
     <img  src="../../../assets/start.svg" alt="icon" />
-    <p class="link-btn">Install Milvus <i class="fas fa-chevron-circle-right"></i></p>
+    <p class="link-btn">Quick Start <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>Learn how to quickly run Milvus with sample code."</p>
 </div>
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/bootcamps.png" alt="icon" />
+    <img  src="../../../assets/bootcamps.svg" alt="icon" />
     <p class="link-btn">Bootcamp <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>
@@ -43,33 +43,33 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="doc-home-recommend-section">
 
 <div class="recomment-item">
-  <p>Get started</p>
+  <p>Use</p>
 
 - [Create a Collection](create.md)
+- [Insert Data](insert.md)
 - [Build an Index](build.md)
-- [Drop a Collection or an Index](drop.md)
-- [Scale a Milvus Cluster](scaleout.md)
-- [Monitor and Alert](monitor.md)
+- [Vector Similarity Search](search.md)
+- [Query](query.md)
 </div>
 
 <div class="recomment-item">
-  <p>Get started</p>
+  <p>Deploy</p>
 
-- [Create a Collection](create.md)
-- [Build an Index](build.md)
-- [Drop a Collection or an Index](drop.md)
+- [Deploy on Clouds](aws.md)
 - [Scale a Milvus Cluster](scaleout.md)
-- [Monitor and Alert](monitor.md)
+- [Set up storage](deploy_s3.md)
+- [Monitor and Alert](monitor_overview.md)
+- [Upgrade](upgrade.md)
 </div>
 
 <div class="recomment-item">
-  <p>Get started</p>
+  <p>Learn</p>
 
-- [Create a Collection](create.md)
-- [Build an Index](build.md)
-- [Drop a Collection or an Index](drop.md)
-- [Scale a Milvus Cluster](scaleout.md)
-- [Monitor and Alert](monitor.md)
+- [System Configurations](configuration_standalone-basic.md)
+- [Architecture Overview](architecture_overview.md)
+- [Vector Index](index_selection.md)
+- [Similarity Metrics](metric.md)
+- [Glossary](glossary.md)
 </div>
 
 </div>

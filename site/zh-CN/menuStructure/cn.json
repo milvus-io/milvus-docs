@@ -249,20 +249,12 @@
         "isMenu": true
       },
       {
-        "id": "deploy_s3.md",
-        "title": "配置 S3 存储",
+        "id": "allocate.md",
+        "title": "配置集群资源",
         "label1": "admin_guide",
         "label2": "",
         "label3": "",
         "order": 0
-      },
-      {
-        "id": "scaleout.md",
-        "title": "扩缩容",
-        "label1": "admin_guide",
-        "label2": "",
-        "label3": "",
-        "order": 1
       },
       {
         "id": "cloud",
@@ -270,7 +262,7 @@
         "label1": "admin_guide",
         "label2": "",
         "label3": "",
-        "order": 2,
+        "order": 1,
         "isMenu": true
       },
       {
@@ -315,13 +307,45 @@
         "order": 2
       },
       {
+        "id": "deploy_s3.md",
+        "title": "配置 S3 存储",
+        "label1": "admin_guide",
+        "label2": "",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "scaleout.md",
+        "title": "扩缩容",
+        "label1": "admin_guide",
+        "label2": "",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "upgrade.md",
+        "title": "升级 Milvus 2.0",
+        "label1": "admin_guide",
+        "label2": "",
+        "label3": "",
+        "order": 4
+      },
+      {
       "id": "monitor",
       "title": "监控与报警",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3,
+      "order": 5,
       "isMenu": true
+     },
+     {
+      "id": "monitor_overview.md",
+      "title": "监控框架概述",
+      "label1": "admin_guide",
+      "label2": "monitor",
+      "label3": "",
+      "order": 0
      },
      {
       "id": "monitor.md",
@@ -329,7 +353,7 @@
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 0
+      "order": 1
      },
      {
       "id": "visualize.md",
@@ -337,7 +361,7 @@
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 1
+      "order": 2
      },
      {
       "id": "alert.md",
@@ -345,15 +369,7 @@
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 2
-      },
-      {
-        "id": "allocate.md",
-        "title": "配置集群资源",
-        "label1": "admin_guide",
-        "label2": "",
-        "label3": "",
-        "order": 4
+      "order": 3
       },
       {
         "id": "migrate",
@@ -361,7 +377,7 @@
         "label1": "admin_guide",
         "label2": "",
         "label3": "",
-        "order": 5,
+        "order": 6,
         "isMenu": true
       },
       {
@@ -387,14 +403,6 @@
         "label2": "migrate",
         "label3": "",
         "order": 2
-      },
-      {
-        "id": "upgrade.md",
-        "title": "升级 Milvus 2.0",
-        "label1": "admin_guide",
-        "label2": "",
-        "label3": "",
-        "order": 6
       },
       {
         "id": "tools",

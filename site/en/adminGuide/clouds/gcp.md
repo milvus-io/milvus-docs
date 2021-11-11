@@ -26,7 +26,7 @@ Alternatively, you can use [Cloud Shell](https://cloud.google.com/shell) which h
 
 Ensure that you create a virtual private cloud (VPC) before creating a firewall rule for Milvus.
 <br>
-If you already have a VPC that you want to use, proceed to [Create a firewall rule for Milvus ](gcp.md#Create-a-Firewall-Rule-for-Milvus).</div>
+If you already have a VPC that you want to use, proceed to [Create a firewall rule for Milvus ](gcp.md#Create-a-firewall-rule-for-Milvus).
 
 
 ### Create a VPC
@@ -129,6 +129,7 @@ Starting pods might take several minutes. Run <code>kubectl get services</code> 
 </div>
 
 ## Use Google Cloud Storage
+Google Cloud Storage (GCS) is Google Cloud's version of AWS Simple Storage Service (S3).
 
 MinIO GCS Gateway allows accessing GCS. Essentially, MinIO GCS Gateway translates and forwards all connections to GCS by using APIs. You can use MinIO GCS Gateway instead of a MinIO server.
 
@@ -144,7 +145,8 @@ To access GCS resources, MinIO GCS Gateway requires both GCP service account cre
 - `secretkey`: The MinIO secret key.
 - `gcs_key.json`: The GCP service account credentials file.
 
-##### Example
+
+The following example creates a secret named `mysecret` with `accesskey=minioadmin`, `secretkey=minioadmin`, and `gcs_key.json` using the `/home/credentials.json` path.
 
 ```shell
 $ kubectl create secret generic mysecret --from-literal=accesskey=minioadmin --from-literal=secretkey=minioadmin --from-file=gcs_key.json=/home/credentials.json
@@ -157,8 +159,8 @@ If you choose <code>accesskey</code> and <code>secretkey</code> values other tha
 
 #### Metadata 
 
-#### Configuration
 
+ The following table lists the metadata that you can configure.
 |Option|Description|Default|
 |:---|:---|:---|
 |`minio.gcsgateway.enabled`|Set the value to ```true``` to enable MinIO GCS Gateway.|`false`|
@@ -166,8 +168,7 @@ If you choose <code>accesskey</code> and <code>secretkey</code> values other tha
 |`minio.existingSecret`|The name of the previously defined secret.|`""`|
 |`externalGcs.bucketName`|The name of the GCS bucket to use. Unlike an S3/MinIO bucket, a GCS bucket must be globally unique.|`""`|
 
-#### Defaults
-
+The following table lists the metadata that you might want to leave as default.
 |Option|Description|Default|
 |:---|:---|:---|
 |`minio.gcsgateway.replicas`|The number of replica nodes to use for the gateway. We recommend that you use one because MinIO does not support well for more than one replica.|`1`|
@@ -175,14 +176,15 @@ If you choose <code>accesskey</code> and <code>secretkey</code> values other tha
 
 Continue to use all normal MinIO metadata variables.
 
-##### Example
+The following example installs a chart named `my-release`.
+
 ```shell
 $ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
 ```
 
-### What's next
+## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
 - [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
 - [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
-- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](https://milvus.io/docs/v2.0.0/azure.md)
+- [Deploy a Milvus Cluster on Azure](https://milvus.io/docs/v2.0.0/azure.md)

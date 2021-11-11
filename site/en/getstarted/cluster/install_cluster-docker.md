@@ -1,6 +1,6 @@
 ---
 id: install_cluster-docker.md
-label: Install with Docker Compose
+label: Docker Compose
 related_key: Docker
 order: 0
 group: cluster
@@ -60,7 +60,7 @@ Data is stored in the <code>/volumes</code> folder according to the default conf
 ## Start Milvus
 
 ```Shell
-$ docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 ```Text

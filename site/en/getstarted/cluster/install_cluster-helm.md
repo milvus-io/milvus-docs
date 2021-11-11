@@ -1,6 +1,6 @@
 ---
 id: install_cluster-helm.md
-label: Install on Kubernetes
+label: Helm 
 related_key: Kubernetes
 order: 1
 group: cluster

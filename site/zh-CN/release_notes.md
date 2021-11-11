@@ -4,6 +4,160 @@ id: release_notes.md
 
 # 发版说明
 
+## v2.0.0-RC8
+
+发布时间：2021-11-5
+
+### 版本兼容
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+		<th>Node SDK 版本</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC8</td>
+		<td>2.0.0rc8</td>
+		<td>即将上线</td>
+		<td>即将上线</td>
+		<td>1.0.18</td>
+	</tr>
+	</tbody>
+</table>
+
+Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Milvus 支持 Handoff 任务，Primary Key 去重，以及 Time Travel 搜索功能。随着 Timetick 机制的增强，系统的平均修复时间 （mean time to recovery, MTTR）也大幅减少。在针对该版本的千万级数据集的压力测试中，单机版与分布式版 Milvus 都运行超过 84 小时。
+
+目前，Primary Key（`pk`）去重功能无法保证插入新数据会覆盖与其 `pk` 相同的旧数据。因此，当前版本中基于相同 `pk` 的结构化匹配的返回结果为未知行为。该限制将在未来版本中修复。
+
+### 主要改进
+
+- 故障恢复速度：
+  - [#10737](https://github.com/milvus-io/milvus/pull/10737) 实现 Proxy Session Checker。
+  - [#10723](https://github.com/milvus-io/milvus/pull/10723 ) 修复寻求 `queryChannel` 错误。
+  - [#10907](https://github.com/milvus-io/milvus/pull/10907) 修复 `LatestPosition` 选项与最早补丁冲突的问题。
+  - [#10616](https://github.com/milvus-io/milvus/pull/10616) 删除 Common YAML 文件。
+  - [#10771](https://github.com/milvus-io/milvus/pull/10771) 将 channel 查找起始位置更改为所有 segment 的最早先的检查点。
+  - [#10651](https://github.com/milvus-io/milvus/pull/10651) 修复 query coord 设置查找位置错误。
+  - [#9543](https://github.com/milvus-io/milvus/pull/9543) 初始化 global sealed segment 并在`AddQueryChannel`时寻找查询通道。
+  - [#9684](https://github.com/milvus-io/milvus/pull/9684) Data coord 重启时，避免重复消耗 timetick MsgStream。
+
+- 重构 meta 快照：
+  - [#10288](https://github.com/milvus-io/milvus/pull/10288) 减少存储在 `SnapshotMeta` 中的信息。
+  - [#10703](https://github.com/milvus-io/milvus/pull/10703 ) 修复因兼容问题导致创建 meta table 失败。
+  - [#9778](https://github.com/milvus-io/milvus/pull/9778) 简化 `meta_snapshot` 接口。
+
+- [#10563](https://github.com/milvus-io/milvus/pull/10563) 修改默认平衡策略。
+
+- [#10730](https://github.com/milvus-io/milvus/pull/10730) 获取查询 segment 信息时返回 segment 状态。
+
+- [#10534](https://github.com/milvus-io/milvus/pull/10534) 支持从环境变量中读取 MinIO 配置。
+
+- [#10114](https://github.com/milvus-io/milvus/pull/10114) 设定默认 `gracefulTime` 为 `0`。
+
+- [#9860](https://github.com/milvus-io/milvus/pull/9860) 将 `liveChn` 隐藏至 `sessionutil` 并修复存活初始化顺序。
+
+- [#7115](https://github.com/milvus-io/milvus/pull/7115) 使用 etcd 监听 data node。
+
+- [#7606](https://github.com/milvus-io/milvus/pull/7606) 使 `knowhere` 独立编译。
+
+### 新增功能
+
+- Handoff:   
+
+  - [#10330](https://github.com/milvus-io/milvus/pull/10330) 添加 `handoffTask`。
+  - [#10084](https://github.com/milvus-io/milvus/pull/10084) 向 `queryChannel` 发布 `sealedSegmentChangeInfo`。
+  - [#10619](https://github.com/milvus-io/milvus/pull/10619) 修复当 query node 收到 `segmentChangeInfo` 时删除 segment。
+  - [#10045](https://github.com/milvus-io/milvus/pull/10045) 监听 query node 中的 `changeInfo`。
+  - [#10011](https://github.com/milvus-io/milvus/pull/10011) 当收到  `changeInfo` 时，更新被排除的 segment 信息。
+  - [#9606](https://github.com/milvus-io/milvus/pull/9606) 为 `AddQueryChannelRequest` 添加初始化信息。
+- Primary Key 去重：
+  - [#10834](https://github.com/milvus-io/milvus/pull/10834) 在 query node 中删除 primary key 重复的查询结果。
+  - [#10355](https://github.com/milvus-io/milvus/pull/10355) [#10967](https://github.com/milvus-io/milvus/pull/10967) 在 proxy 中删除 primary key 重复的查询结果。
+  - [#10117](https://github.com/milvus-io/milvus/pull/10117) 在 segcore reduce 中删除 primary key 重复的查询结果。
+  - [#10949](https://github.com/milvus-io/milvus/pull/10949) 仅使用 primary key 检测重复的查询结果。
+- Auto-flush:
+  - [#10659](https://github.com/milvus-io/milvus/pull/10659) 为 `flushManager` 接口添加 `injectFlush` 方法。
+  - [#10580](https://github.com/milvus-io/milvus/pull/10580) 为 `FlushManager` 添加 injection 逻辑。
+  - [#10550](https://github.com/milvus-io/milvus/pull/10550) 为同一 ID 的 segment 合并自动和手动 flush。
+  - [#10539](https://github.com/milvus-io/milvus/pull/10539) 允许已 flush 的 segment 触发 flush 流程。
+  - [#10197](https://github.com/milvus-io/milvus/pull/10197) 添加定时 flush 触发机制。
+  - [#10142](https://github.com/milvus-io/milvus/pull/10142) 在 data node 中应用 flush manager 逻辑。
+  - [#10075](https://github.com/milvus-io/milvus/pull/10075) 使用单信号 channel 提示 flush。
+  - [#9986](https://github.com/milvus-io/milvus/pull/9986) 添加 flush manager 结构。
+- [#10173](https://github.com/milvus-io/milvus/pull/10173) 添加 binlog 迭代器。
+- [#10193](https://github.com/milvus-io/milvus/pull/10193) 更改 bloom filter 使用 primary key。
+- [#9782](https://github.com/milvus-io/milvus/pull/9782) 为 data node allocator 添加 `allocIDBatch`。
+
+### 问题修复
+
+- 当内存资源不足时 collection 加载行为错误：
+  - [#10796](https://github.com/milvus-io/milvus/pull/10796) 修复获取 container 内存使用问题。
+  - [#10800](https://github.com/milvus-io/milvus/pull/10800) 在 `GetContainerMemUsed` 中使用 `TotalInactiveFile`。
+  - [#10603](https://github.com/milvus-io/milvus/pull/10603) 为 `EstimateMemorySize` 接口增加兼容。
+  - [#10363](https://github.com/milvus-io/milvus/pull/10363) 添加 `cgroups` 以获取 container 内存并检查 segment loader 中的索引内存。
+  - [#10294](https://github.com/milvus-io/milvus/pull/10294) 使用 proto 大小计算请求大小。
+  - [#9688](https://github.com/milvus-io/milvus/pull/9688) 使用 descriptor event 估算内存大小。
+  - [#9681](https://github.com/milvus-io/milvus/pull/9681) 修复 binlog 存储原始内存大小的方式问题。
+  - [#9628](https://github.com/milvus-io/milvus/pull/9628) 在 extra information 中存储 binlog 原始内存大小。
+
+- etcd 相关请求过大：
+  - [#10909](https://github.com/milvus-io/milvus/pull/10909) 修复当存储 `segmentInfo` 时 `txn` 操作过多问题。
+  - [#10812](https://github.com/milvus-io/milvus/pull/10812) 修复当加载 segment 时请求过大问题。
+  - [#10768](https://github.com/milvus-io/milvus/pull/10768) 修复当加载 collection 时请求过大问题。
+  - [#10655](https://github.com/milvus-io/milvus/pull/10655) 拆分监听操作。
+  - [#10587](https://github.com/milvus-io/milvus/pull/10587) 精简 `multiSegmentChangeInfo` 为单条信息。
+  - [#10425](https://github.com/milvus-io/milvus/pull/10425) 针对使用 `VChaninfo` 调整 `segmentinfo` binlog 。
+  - [#10340](https://github.com/milvus-io/milvus/pull/10340) 修复 etcd `multiSave` `childTask` 失败。
+  - [#10310](https://github.com/milvus-io/milvus/pull/10310) 修复分配加载 segment 请求错误。
+  - [#10125](https://github.com/milvus-io/milvus/pull/10125) 拆分大型 `loadSegmentReq` 为多个小型请求。
+
+- 系统崩溃：
+  - [#10832](https://github.com/milvus-io/milvus/pull/10832) 添加查询 `mutex` 修复崩溃问题。
+  - [#10821](https://github.com/milvus-io/milvus/pull/10821) 调整 index node 在 index coord 修改 meta 前完成任务。
+  - [#10182](https://github.com/milvus-io/milvus/pull/10182) 修复当 flush segment 时系统崩溃。
+  - [#10681](https://github.com/milvus-io/milvus/pull/10681) 修复当更新 `querychannelInfo` 时 query coord 崩溃。
+
+- RocksMQ 相关问题：
+  - [#10367](https://github.com/milvus-io/milvus/pull/10367) 优雅关闭 retention。
+  - [#9828](https://github.com/milvus-io/milvus/pull/9828) 修复 retention 时的数据竞争。
+  - [#9933](https://github.com/milvus-io/milvus/pull/9933) 修改 retention ticker time 为 10 分钟。
+  - [#9694](https://github.com/milvus-io/milvus/pull/9694) 在删除 RocksMQ metadata 前删除信息。
+  - [#11029](https://github.com/milvus-io/milvus/pull/11029) 修复 RocksMQ `SeekToLatest` 问题。
+  - [#11057](https://github.com/milvus-io/milvus/pull/11057) 修复 `SeekToLatest` 内存泄漏并删除冗余逻辑。
+  - [#11081](https://github.com/milvus-io/milvus/pull/11081) 修复 RocksMQ retention 未设定 ts。
+  - [#11083](https://github.com/milvus-io/milvus/pull/11083) 为 RocksMQ `Seek` 添加 topic。
+  - [#11076](https://github.com/milvus-io/milvus/pull/11076) 在 retention 过期清理中将 topic lock 移至最终删除之前。
+
+- [#10751](https://github.com/milvus-io/milvus/pull/10751) 当 `indexFilePathInfo` 收到空列表时 `loadIndex` 不断重试。
+
+- [#10583](https://github.com/milvus-io/milvus/pull/10583) `ParseHybridTs` 返回数据类型问题。
+
+- [#10599](https://github.com/milvus-io/milvus/pull/10599) 删除信息哈希错误。
+
+- [#10314](https://github.com/milvus-io/milvus/pull/10314) 索引构建任务因 index coord 错误被取消。
+
+- [#9701](https://github.com/milvus-io/milvus/pull/9701)  `CreateAlias/DropAlias/AlterAlias` 实现错误。
+
+- [#9573](https://github.com/milvus-io/milvus/pull/9573) Data coord 储存 binlog 超时。
+
+- [#9788](https://github.com/milvus-io/milvus/pull/9788) 监听 channel 因网络问题被取消。
+
+- [#10994](https://github.com/milvus-io/milvus/pull/10994) Index node 无法平衡负载。
+
+- [#11152](https://github.com/milvus-io/milvus/pull/11152) 当使用 Time Travel 搜索时不传过滤条件并调用 `num_entities` 搜索出错。
+
+- [#11249](https://github.com/milvus-io/milvus/pull/11249) [#11277](https://github.com/milvus-io/milvus/pull/11277) Query node 死锁。
+
+- [#11222](https://github.com/milvus-io/milvus/pull/11222) 空检索结果处理错误。
+
+
+
 ## v2.0.0-RC7
 
 发布时间：2021-10-11
@@ -23,7 +177,7 @@ id: release_notes.md
 	<tbody>
 	<tr>
 		<td>2.0.0-RC7</td>
-		<td>{{var.milvus_python_sdk_version}}</td>
+		<td>2.0.0rc7</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
 		<td>{{var.milvus_node_sdk_version}}</td>
@@ -208,7 +362,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 	<tbody>
 	<tr>
 		<td>2.0.0-RC6</td>
-		<td>{{var.milvus_python_sdk_version}}</td>
+		<td>2.0.0rc6</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
 		<td>{{var.milvus_node_sdk_version}}</td>
@@ -271,7 +425,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
 	<tbody>
 	<tr>
 		<td>2.0.0-RC5</td>
-		<td>{{var.milvus_python_sdk_version}}</td>
+		<td>2.0.0rc5</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
 		<td>{{var.milvus_node_sdk_version}}</td>
@@ -359,7 +513,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 
 | Milvus 版本 | Python SDK 版本                   | Java SDK 版本 | Go SDK 版本 |
 | --------------- | ------------------------------------- | ----------------- | --------------- |
-| 2.0.0-RC4       | {{var.milvus_python_sdk_version}} | 即将上线          | 即将上线        |
+| 2.0.0-RC4       | 2.0.0rc4 | 即将上线          | 即将上线        |
 
 Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性问题，并新增从对象存储中检索向量数据以及通过通配符匹配指定输出 field 的功能。
 
@@ -481,7 +635,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC2         | {{var.milvus_python_sdk_version}}              | 即将上线            | 即将上线          |
+| 2.0.0-RC2         | 2.0.0rc2              | 即将上线            | 即将上线          |
 
 Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳定性和性能问题，并针对节点和存储管理进行了代码重构。
 
@@ -518,7 +672,7 @@ Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1 | {{var.milvus_python_sdk_version}} | 即将上线            | 即将上线          |
+| 2.0.0-RC1 | 2.0.0rc1 | 即将上线            | 即将上线          |
 
 
 Milvus 2.0.0-RC1 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。

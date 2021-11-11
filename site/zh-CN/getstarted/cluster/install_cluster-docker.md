@@ -1,6 +1,6 @@
 ---
 id: install_cluster-docker.md
-label: 使用 Docker Compose 安装
+label: Docker Compose
 order: 0
 group: cluster
 ---
@@ -26,7 +26,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_d
 2. 启动 Milvus 分布式版：
 
 ```Shell
-$ docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 ```Text
