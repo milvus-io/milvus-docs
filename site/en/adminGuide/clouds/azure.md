@@ -5,9 +5,9 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on Azure.
 ---
 
-#  Deploy Milvus on Azure With Kubernetes
+#  Deploy Milvus on Azure with AKS
 
- This topic describes how to provision a cluster and create the cluster with Azure Kubernetes Service (AKS) and the Azure portal.
+ This topic describes how to provision and create a cluster with Azure Kubernetes Service (AKS) and the [Azure portal](https://portal.azure.com).
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has
 
 ## Provision a Kubernetes cluster
 
-1. Log on to the [Azure portal](https://portal.azure.com).
+1. Log on to the Azure portal.
 2. On the Azure portal menu or from the **Home** page, select **Create a resource**.
 3. Select **Containers** > **Kubernetes Service**.
 4. On the **Basics** page, configure the following options:
