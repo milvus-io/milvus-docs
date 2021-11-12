@@ -20,9 +20,9 @@ The following example is based on a partition `example_partition` in the collect
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> partition = collection.create_partition("example_partition")
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+partition = collection.create_partition("example_partition")
 ```
 
 ```javascript
@@ -76,9 +76,9 @@ await milvusClient.partitionManager.createPartition({
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.partitions
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.partitions
 ```
 
 ```javascript
@@ -94,8 +94,8 @@ await milvusClient.partitionManager.showPartitions({
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import Collection
->>> collection.has_partition("example_partition")
+from pymilvus import Collection
+collection.has_partition("example_partition")
 ```
 
 ```javascript
@@ -118,8 +118,8 @@ The drop operation is irreversible. Dropping a partition deletes all data within
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import Collection
->>> collection.drop_partition("example_partition")
+from pymilvus import Collection
+collection.drop_partition("example_partition")
 ```
 
 ```javascript
