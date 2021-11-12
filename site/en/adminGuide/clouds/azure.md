@@ -43,11 +43,7 @@ Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has
 
 - **Primary node pool**:
 
-  - **Node size**: We recommend that you choose VMs with a minimum of 16 GB of RAM.
-  
-    <div class="alert note">    
-    You can select virtual machine sizes as you need. However, we recommend that you select a minimum of 16 GB of memory to ensure stability.
-    </div>
+  - **Node size**: We recommend that you choose VMs with a minimum of 16 GB of RAM, but you can select virtual machine sizes as you need.
 
   - **Scale method**: Choose a scale method.
 
@@ -55,7 +51,7 @@ Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has
 
 - **Node pools**:
 
-  - **Enable virtual nodes**: Specifies whether to enable virtual nodes. Select the checkbox to enable virtual nodes.
+  - **Enable virtual nodes**: Select the checkbox to enable virtual nodes.
 
   - **Enable virtual machine scale sets**: We recommend that you choose `enabled`.
 
