@@ -39,11 +39,11 @@ If you work with your own dataset in an existing Milvus instance, you can move f
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
     }
->>> collection.create_index("book_intro", index_params=index_param)
+>>> collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
 const milvusClient = new MilvusClient("localhost:19530");
 const params = {
   collection_name: "test_book_search",
@@ -51,20 +51,20 @@ const params = {
     {
       name: "book_intro",
       description: "",
-      data_type: DataType.FloatVector,
+      data_type: 101,  // DataType.FloatVector
       type_params: {
         dim: "2",
       },
     },
 	{
       name: "book_id",
-      data_type: DataType.Int64,
+      data_type: 5,   //DataType.Int64
       is_primary_key: true,
       description: "",
     },
     {
       name: "word_count",
-      data_type: DataType.Int64,
+      data_type: 5,    //DataType.Int64
       description: "",
     },
   ],
@@ -75,7 +75,7 @@ const entities = Array.from({ length: 2000 }, (v,k) => ({
   "book_id": k,
   "word_count": k+10000,
 }));
-await milvusClient.dataManager.insert({{
+await milvusClient.dataManager.insert({
   collection_name: "test_book_search",
   fields_data: entities,
 });
@@ -98,7 +98,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import collection
+>>> from pymilvus import Collection
 >>> collection = Collection("test_book_search")      # Get an existing collection.
 >>> collection.load()
 ```
@@ -116,7 +116,7 @@ In current release, volume of the data to load must be under 70% of the total me
 
 ## Prepare search parameters
 
-Prepare the parameters that suit your search scenario. The following examples defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
+Prepare the parameters that suit your search scenario. The following example defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
 
 {{fragments/multiple_code.md}}
 
@@ -182,7 +182,7 @@ const searchParams = {
 
 ## Conduct a vector search
 
-Search vectors with Milvus. To search in a specific partition, specify the list of partition names. 
+Search vectors with Milvus. To search in a specific [partition](manage_partition.md), specify the list of partition names. 
 
 {{fragments/multiple_code.md}}
 
@@ -196,7 +196,7 @@ const results = await milvusClient.dataManager.search({
   expr: "",
   vectors: [[0.1, 0.2]],
   search_params: searchParams,
-  vector_type: 100, // Float vector -> 100
+  vector_type: 101,    // DataType.FloatVector
 });
 ```
 
@@ -234,14 +234,14 @@ const results = await milvusClient.dataManager.search({
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return (vector field is not support in current release).</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
 	</tr>
   <tr>
-		<td><code>timeout</code></td>
+		<td><code>timeout</code> (optional)</td>
 		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
 	</tr>
   <tr>
-		<td><code>round_decimal</code></td>
+		<td><code>round_decimal</code> (optional)</td>
 		<td>Number of decimal places of returned distance.</td>
 	</tr>
 	</tbody>
@@ -281,7 +281,7 @@ const results = await milvusClient.dataManager.search({
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return (vector field not support in current release)</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -309,7 +309,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
 ```
 
 ```javascript
-await milvusClient.collectionManager.releaseCollection({  collection_name: "test_retrieve",});
+await milvusClient.collectionManager.releaseCollection({  collection_name: "test_book_search",});
 ```
 
 ## What's next

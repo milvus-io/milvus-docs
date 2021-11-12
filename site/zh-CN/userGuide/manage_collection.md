@@ -19,7 +19,6 @@ The following example is based on a two-shard collection named `example_collecti
 <ul>
   <li>You can create collections only after <a href="manage_connection.md">connecting to Milvus server</a>.</li>
   <li>The collection to create must contain a primary key field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
-  <li>Optionally, you can create multiple scalar fields in addition to a primary key field and a vector field in order to support boolean filtering in a vector search or query.</li>
   </ul>
 </div>
 
@@ -44,14 +43,14 @@ const params = {
     {
       name: "example_field",
       description: "",
-      data_type: DataType.FloatVector,
+      data_type: 101,     // DataType.FloatVector
       type_params: {
         dim: "8",
       },
     },
     {
       name: "pk",
-      data_type: DataType.Int64,
+      data_type: 5,       // DataType.Int64
       autoID: true,
       is_primary_key: true,
       description: "",
@@ -103,6 +102,10 @@ const params = {
 	<tr>
 		<td><code>fields</code></td>
     <td>Schema of the filed and the collection to create. Refer to <a href="field_schema.md">Field Schema</a> and <a href="collection_schema.md">Collection Schema</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>data_type</code></td>
+    <td>Data type of the filed to create. Refer to <a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/milvus/types/Common.ts">data type reference number</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>

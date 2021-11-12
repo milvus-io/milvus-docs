@@ -8,9 +8,9 @@ summary: Conduct a Hybrid Search with Milvus.
 
 This topic describes how to conduct a hybrid search.
 
-A hybrid search is essentially a vector search with boolean filtering. By specifying [boolean expressions](boolean.md) that filters the scalar fields or the primary key field, you can limit your search with certain conditions.
+A hybrid search is essentially a vector search with boolean filtering. By specifying [boolean expressions](boolean.md) that filter the scalar fields or the primary key field, you can limit your search with certain conditions.
 
-The following example shows how to perform a hybrid search on the basis of a regular [vector search](search.md). Suppose you want to search for certain books based on their vectorized introductions, but you only want those within specific range of word count. You can then specify the boolean expression to filter the `word_count` field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.
+The following example shows how to perform a hybrid search on the basis of a regular [vector search](search.md). Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the `word_count` field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.
 
 ## Preparations
 
@@ -39,11 +39,11 @@ If you work with your own dataset in an existing Milvus instance, you can move f
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
     }
->>> collection.create_index("book_intro", index_params=index_param)
+>>> collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
 const milvusClient = new MilvusClient("localhost:19530");
 const params = {
   collection_name: "test_book_search",
@@ -51,20 +51,20 @@ const params = {
     {
       name: "book_intro",
       description: "",
-      data_type: DataType.FloatVector,
+      data_type: 101,  // DataType.FloatVector
       type_params: {
         dim: "2",
       },
     },
 	{
       name: "book_id",
-      data_type: DataType.Int64,
+      data_type: 5,   // DataType.Int64
       is_primary_key: true,
       description: "",
     },
     {
       name: "word_count",
-      data_type: DataType.Int64,
+      data_type: 5,    //DataType.Int64
       description: "",
     },
   ],
@@ -75,7 +75,7 @@ const entities = Array.from({ length: 2000 }, (v,k) => ({
   "book_id": k,
   "word_count": k+10000,
 }));
-await milvusClient.dataManager.insert({{
+await milvusClient.dataManager.insert({
   collection_name: "test_book_search",
   fields_data: entities,
 });
@@ -98,7 +98,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 {{fragments/multiple_code.md}}
 
 ```python
->>> from pymilvus import collection
+>>> from pymilvus import Collection
 >>> collection = Collection("test_book_search")      # Get an existing collection.
 >>> collection.load()
 ```
@@ -116,7 +116,7 @@ In current release, volume of the data to load must be under 70% of the total me
 
 ## Conduct a hybrid vector search
 
-By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within certain `word_count` value range.
+By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
 {{fragments/multiple_code.md}}
 
@@ -132,8 +132,8 @@ By specifying the boolean expression, you can filter the scalar field of the ent
 ```
 
 ```javascript
-await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
+const results = await milvusClient.dataManager.search({
+  collection_name: "test_book_search",
   expr: "word_count <= 11000",
   vectors: [[0.1, 0.2]],
   search_params: {
@@ -142,7 +142,7 @@ await milvusClient.dataManager.search({
     metric_type: "L2",
     params: JSON.stringify({ nprobe: 10 }),
   },
-  vector_type: 100, // float vector -> 100
+  vector_type: 101,    // DataType.FloatVector,
 });
 ```
 
@@ -180,14 +180,14 @@ await milvusClient.dataManager.search({
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return (vector field is not support in current release).</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
 	</tr>
   <tr>
-		<td><code>timeout</code></td>
+		<td><code>timeout</code> (optional)</td>
 		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
 	</tr>
   <tr>
-		<td><code>round_decimal</code></td>
+		<td><code>round_decimal</code> (optional)</td>
 		<td>Number of decimal places of returned distance.</td>
 	</tr>
 	</tbody>
@@ -227,7 +227,7 @@ await milvusClient.dataManager.search({
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return (vector field not support in current release)</td>
+		<td>Name of the field to return. Vector field not support in current release.</td>
 	</tr>
 	</tbody>
 </table>
