@@ -250,7 +250,9 @@ The drop operation is irreversible. Dropping a collection deletes all data withi
 {{fragments/multiple_code.md}}
 
 ```python
-collection.drop("example_collection")
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.drop()
 ```
 
 ```javascript
