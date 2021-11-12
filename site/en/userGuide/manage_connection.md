@@ -64,7 +64,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</thead>
 	<tbody>
     <tr>
-		<td><code>address</code></td>
+		<td>address</td>
 		<td>Address of the Milvus connection to construct.</td>
 	</tr>
 	</tbody>
