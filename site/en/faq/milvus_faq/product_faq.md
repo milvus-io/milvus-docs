@@ -51,7 +51,7 @@ Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of co
 
 #### Does Milvus support inserting and searching data simultaneously?
 
-Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data is unsearchable until it is loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
+Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data is unsearchable until it is loaded to the query node. If the segment size does not reach the index-building threshold ({{var.index_building_threshold}} by default), Milvus resorts to brute-force search and query performance may be diminished.
 
 #### Can vectors with duplicate IDs be inserted into Milvus?
 

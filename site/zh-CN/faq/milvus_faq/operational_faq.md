@@ -22,7 +22,7 @@ id: operational_faq.md
  
 #### Milvus 只能使用 Docker 部署吗？
 
-使用 Docker 能高效部署 Milvus，但并不是唯一方式。Milvus 也支持从源码编译安装，但该方法仅支持 Ubuntu 系统（内核版本 18.04 或以上）和 CentOS 系统（内核版本 7 或以上）。详见 [从源代码编译 Milvus]()。
+使用 Docker 能高效部署 Milvus，但并不是唯一方式。Milvus 也支持 [Kubernetes 部署](install_standalone-helm.md) 和 [源码编译安装](https://github.com/milvus-io/milvus#build-milvus-from-source-code)。
 
 #### 召回率主要受哪些因素影响？
 
@@ -34,7 +34,7 @@ id: operational_faq.md
 
 对于 HNSW 索引，`ef` 参数决定了导航图搜索的广度——`ef` 越大，图上扫描到的结点越多，召回率也就越高，但查询性能会相应降低。
 
-详见 [Milvus 索引类型](https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing)。
+详见 [Milvus 索引类型](index_selection.md)。
 
 #### 为什么配置文件更新后没有生效？
 
@@ -78,9 +78,9 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。因此，如果主�
 
 Milvus 可以通过 Docker 镜像的形式进行离线部署以单机版 Milvus 为例:
 
-1. 在有网的环境中拉取 MinIO、etcd 及 Milvus 的Docker 镜像；
-2. 运行 `docker save` 命令将各个镜像保存为 **.TAR** 文件；
-3. 将 **.TAR** 文件保存至本地；
+1. 在有网的环境中拉取 MinIO、etcd 及 Milvus 的 Docker 镜像；
+2. 运行 `docker save` 命令将各个镜像保存为 **TAR** 文件；
+3. 将 **TAR** 文件保存至本地；
 4. 运行 `docker load` 命令将该文件导入为镜像；
 5. 运行 `docker-compose` 命令启动 Milvus 服务。
 
@@ -92,7 +92,7 @@ Milvus 的日志默认输出在标准输出（standard output）和标准误差�
 
 #### Milvus 是否支持先建索引再插入数据？
 
-支持。但我们推荐分批次插入数据，每次插入数据量不超过 256 MB，插入完成后统一创建索引。
+支持。但我们推荐分批次插入数据，每次插入数据量不超过 {{var.max_insert_size}}，插入完成后统一创建索引。
 
 #### 仍有问题没有得到解答？
 
