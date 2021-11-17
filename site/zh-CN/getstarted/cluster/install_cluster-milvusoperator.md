@@ -7,7 +7,7 @@ group: cluster
 summary: 了解如何使用 Milvus Operator 在 Kubernetes 上安装 Milvus 集群
 ---
 
-# 安装 Milvus 分布式版
+# 安装分布式版 Milvus
 
 {{fragments/installation_guide_cluster.md}}
 
@@ -131,7 +131,8 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 ## 部署 Milvus Operator
 
-Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target K8s clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
+Milvus Operator 解决方案能够帮助你在目标 K8s 集群上部署 Milvus 服务栈，包含所有 Milvus 组件及 etcd、Pulsar、MinIO 等相关第三方组件。Milvus Operator 会在 [Kubernetes 自定义资源](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 基础上定义 Milvus 集群的自定义资源。定义资源后，你可以声明式使用 K8s API 并管理 Milvus 部署栈以确保服务可扩展和高可用。
+
 
 ### 部署前提
 
@@ -254,7 +255,7 @@ milvus-operator-controller-manager-698fc7dc8d-rlmtk   1/1     Running   0       
 
 ## 安装分布式版 Milvus 
 
-This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. If you have very limited local resources, you can install a Milvus cluster [using the minimum configuration](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_minimum.yaml).
+本文在安装分布式版 Milvus 时使用了默认配置。所有 Milvus 组件均启用了多个副本，这会消耗大量资源。本地资源有限时，你可以 [使用最低配置](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_minimum.yaml) 安装分布式版 Milvus。 
 
 ### 1. 部署 Milvus 集群
 
@@ -343,8 +344,7 @@ my-release-pulsar-zookeeper-0         0/1     Pending             0          16s
 
 ### 3. 启用 Milvus 组件
 
-Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now.  Once all denependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown as in the following output.
-
+Milvus Operator 会先创建 etcd、Pulsar、MinIO 等第三方组件，随后再创建 Milvus 组件。因此，目前你仅能看到 etcd、Pulsar 及 MinIO 的 pod。Milvus Operator 会在所有第三方组件启用后启动 Milvus 组件。Milvus 集群状态如下所示： 
 ```
 ...
 status:
