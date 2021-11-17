@@ -69,7 +69,7 @@ Entity IDs must be non-negative 64-bit integers.
 
 #### What is the maximum amount of data that can be added per insert operation?
 
-An insert operation must not exceed 1,024 MB in size. This is a limit imposed by gRPC.
+An insert operation must not exceed {{var.max_insert_size}} in size. This is a limit imposed by gRPC.
 
 #### Does collection size impact query performance when searching in a specific partition?
 

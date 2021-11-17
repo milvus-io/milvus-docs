@@ -80,7 +80,7 @@ Entity ID 必须是非负的 64 位整型。
 
 #### Milvus 中单次插入数据有上限吗？
 
-因 gRPC 限制，单次插入数据不能超过 1024 MB。
+因 gRPC 限制，单次插入数据不能超过 {{var.max_insert_size}}。
 
  
 
