@@ -24,7 +24,7 @@ Users from Mainland China can add the URL "https://registry.docker-cn.com" to th
 
 #### Is Docker the only way to install and run Milvus?
 
-Docker is an efficient way to deploy Milvus, but not the only way. You can also [install Milvus on Kubernetes](install_standalone-helm.md) or [compile it from source code](https://github.com/milvus-io/milvus#build-milvus-from-source-code).
+Docker is an efficient way to deploy Milvus, but not the only way. You can also deploy Milvus from source code. This requires Ubuntu (18.04 or higher) or CentOS (7 or higher). See [Building Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
 
 #### What are the main factors affecting recall?
 
@@ -32,11 +32,11 @@ Recall is affected mainly by index type and search parameters.
 
 For FLAT index, Milvus takes an exhaustive scan within a collection, with a 100% return.
 
-For IVF indexes, the `nprobe` parameter determines the scope of a search within the collection. Increasing `nprobe` increases the proportion of vectors searched and recall, but diminishes query performance.
+For IVF indexes, the nprobe parameter determines the scope of a search within the collection. Increasing nprobe increases the proportion of vectors searched and recall, but diminishes query performance.
 
-For HNSW index, the `ef` parameter determines the breadth of the graph search. Increasing `ef` increases the number of points searched on the graph and recall, but diminishes query performance.
+For HNSW index, the ef parameter determines the breadth of the graph search. Increasing ef increases the number of points searched on the graph and recall, but diminishes query performance.
 
-For more information, see [Vector Indexing](index_selection.md).
+For more information, see [Vector Indexing](https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing).
 
 #### Why did my changes to the configuration files not take effect?
 
@@ -82,7 +82,7 @@ Milvus is available as a Docker image and allows offline deployment. Taking Milv
 
 1. Pull the Docker images of MinIO, etcd, and Milvus when you have Internet access.
 2. Run `docker save` to save the images as TAR files.
-3. Save the **TAR** files locally.
+3. Save the **.TAR** files locally.
 4. Run `docker load` to load the file as a Docker image.
 5. Run `docker-compose` to start Milvus.
 For more information about Docker, see [Installing Milvus Standalone](install_standalone-docker.md).
@@ -94,11 +94,11 @@ The Milvus log is printed to stout (standard output) and stderr (standard error)
 
 #### Can I create index for a segment before inserting data into it?
 
-Yes, you can. But we recommend inserting data in batches, each of which should not exceed {{var.max_insert_size}}, before indexing each segment.
+Yes, you can. But we recommend inserting data in batches, each of which should not exceed 256 MB, before indexing each segment.
 
 #### Still have questions?
 
 You can:
 
-- Check out [the Milvus Project](https://github.com/milvus-io/milvus/issues) on GitHub. Feel free to ask questions, share ideas, and help others.
+- Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. Feel free to ask questions, share ideas, and help others.
 - Join our [Slack Channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to find support and engage with our open-source community.

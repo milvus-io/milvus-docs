@@ -6,4 +6,5 @@
   "gpu_milvus_docker_image_version": "",
   "max_insert_size": "256 MB",
   "index_building_threshold": "1024"
+
 }

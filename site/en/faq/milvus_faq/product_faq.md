@@ -51,7 +51,7 @@ Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of co
 
 #### Does Milvus support inserting and searching data simultaneously?
 
-Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data is unsearchable until it is loaded to the query node. If the segment size does not reach the index-building threshold ({{var.index_building_threshold}} by default), Milvus resorts to brute-force search and query performance may be diminished.
+Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data is unsearchable until it is loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
 
 #### Can vectors with duplicate IDs be inserted into Milvus?
 
@@ -61,7 +61,7 @@ Yes. Milvus does not check if vector IDs are duplicates.
 
 No. Milvus does not currently support update operations and does not check if entity IDs are duplicates. You are responsible for ensuring entity IDs are unique, and if they aren't Milvus may contain multiple entities with duplicate IDs.
 
-If this occurs, duplicate IDs may be returned from a search, causing confusion.
+If this occurs, which data copy will return when queried remains an unknown behavior. This limitation will be fixed in future releases.
 
 #### What is the maximum length of self-defined entity IDs?
 
@@ -69,7 +69,7 @@ Entity IDs must be non-negative 64-bit integers.
 
 #### What is the maximum amount of data that can be added per insert operation?
 
-An insert operation must not exceed {{var.max_insert_size}} in size. This is a limit imposed by gRPC.
+An insert operation must not exceed 1,024 MB in size. This is a limit imposed by gRPC.
 
 #### Does collection size impact query performance when searching in a specific partition?
 
