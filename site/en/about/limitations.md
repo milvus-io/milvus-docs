@@ -56,7 +56,7 @@ VARCHAR will be supported in the 2.0 stable version. More string data types will
 ## Input per remote procedure call (RPC)
 | Operation      | Limit |
 | ----------- | ----------- |
-| Insert      | 512 MB    |
+| Insert      | {{var.max_insert_size}}   |
 | Search   | 512 MB     |
 | Query   | 512 MB      |
 
