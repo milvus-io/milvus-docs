@@ -28,7 +28,7 @@ Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/m
 
 When searching in segcore, it obtains a bitmap indicating if the timestamp meets the condition. Then, the segcore combines the timestamp bitmap with the other two types of bitmaps, data deletion bitmap and attribute filtering bitmap. Finally, a bitmap containing all deletion, attribute filtering, and timestamp information is generated.
 
-The search implementation for sealed segments and growing segments are slightly different. Because all CRUD operations within Milvus are executed in memory.  For sealed segments, you need to [load collection from disk to memory](search.md#Load-collection) before searching with Time Travel. However, for growing segments, you can search or use the Time Travel feature directly.
+All CRUD operations within Milvus are executed in memory. Therefore, you need to [load collection from disk to memory](search.md#Load-collection) before searching with Time Travel.
 
 
 ### Sealed segment
