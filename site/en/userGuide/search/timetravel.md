@@ -8,7 +8,7 @@ summary: Learn how to search with Time Travel in Milvus.
 
 This topic describes how to use the Time Travel feature during vector search.
 
-Milvus maintains a timeline for all data insert and delete operations. It allows users to specify a timestamp in a search to retrieve a data view at a specified point in time, without spending tremendously on maintanence for data rollback.
+Milvus maintains a timeline for all data insert and delete operations. It allows users to specify a timestamp in a search to retrieve a data view at a specified point in time, without spending tremendously on maintenance for data rollback.
 
 ## Connect to the Milvus server
 
@@ -44,7 +44,7 @@ batch1 = collection.insert(data)
 
 ## Check the timestamp of the first data batch
 
-Check the timepstamp of the first data batch for search with Time Travel. Data inserted within the same batch share an identical timestamp.
+Check the timestamp of the first data batch for search with Time Travel. Data inserted within the same batch share an identical timestamp.
 
 ```python
 batch1.timestamp
