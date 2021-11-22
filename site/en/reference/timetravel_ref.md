@@ -12,15 +12,15 @@ Data engineers often need to roll back data to fix dirty data or bugs. Unlike tr
 
 ## Design Details
 
-When the proxy receives a data insert or delete request, it also gets a timestamp from root coord. Then, the proxy adds the timestamp as an additional field to the inserted or deleted data. All primary keys of the same insert or delete request have the same timestamp. The timestamp field is stored together with other data fields of a collection.
+When the proxy receives a data insert or delete request, it also gets a timestamp from root coord. Then, the proxy adds the timestamp as an additional field to the inserted or deleted data. Timestamp is a data field just like `pk`. Data in the same insert or delete request share the same timestamp. The timestamp field is stored together with other data fields of a collection.
 
-When you load a collection to memory, all data in the collection and the timestamps are loaded into memory.
+When you load a collection to memory, all data in the collection, including their corresponding timestamps, are loaded into memory.
 
 During a search, if the search request received by the proxy contains the parameter, `travel_timestamp`, the value of this parameter will be passed to segcore, which filters the search results by timestamp.
 
 ## Search implementation
 
-Searches with filtering in knowhere is achieved by bitmap. Bitmap can be applied in the following three aspects:
+Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is achieved by bitmap. Bitmap can be applied in the following three aspects:
 
 - Delete data
 - Timestamp
