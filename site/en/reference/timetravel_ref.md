@@ -26,7 +26,7 @@ Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/m
 - Timestamp
 - Attribute filtering
 
-When searching in segcore, it obtains a bitmap indicating if the timestamp meets the condition. Then, the segcore combines the timestamp bitmap with the other two types of bitmaps, data deletion bitmap and attribute filtering bitmap. Finally, a bitmap containing all deletion, attribute filtering, and timestamp information is generated.
+When searching in [segcore](https://github.com/milvus-io/milvus/tree/master/docs/design_docs/segcore), the execution engine which supports concurrent insertion, deletion, query, index loading, monitoring and statistics of a segment data in memory, it obtains a bitmap indicating if the timestamp meets the condition. Then, the segcore combines the timestamp bitmap with the other two types of bitmaps, data deletion bitmap and attribute filtering bitmap. Finally, a bitmap containing all deletion, attribute filtering, and timestamp information is generated.
 
 All CRUD operations within Milvus are executed in memory. Therefore, you need to [load collection from disk to memory](search.md#Load-collection) before searching with Time Travel.
 
