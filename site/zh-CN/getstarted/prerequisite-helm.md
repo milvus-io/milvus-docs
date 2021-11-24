@@ -1,6 +1,6 @@
 ---
 id: prerequisite-helm.md
-label: Install on Kubernetes
+label: 使用 Kubernetes 安装
 order: 1
 group: prerequisite
 ---
