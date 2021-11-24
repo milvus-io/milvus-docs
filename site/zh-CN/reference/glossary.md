@@ -22,7 +22,7 @@ Milvus 2.0 现已支持标量字段过滤。
 </div>
 
 ## Segment
-Milvus 在数据插入时通过合并数据自动创建的数据文件。一个 collection 可以包含多个 segment。一个 segment 可以包含多个 entity。在搜索中，Milvus 会搜索每个 segment，并返回合并后的结果。
+Milvus 在数据插入时通过合并数据自动创建的数据文件。一个 collection 可以包含多个 segment。一个 segment 可以包含多个 entity。在搜索中，Milvus 会搜索每个 segment，并返回合并后的结果。 A segment can be either growing or sealed. A growing segment keeps receiving the newly inserted data till it is sealed. A sealed segment no longer receives any new data, and will be flushed to the object storage, leaving new data to be inserted into a freshly created growing segment. A growing segment will be sealed either because the number of entities it holds reaches the pre-defined threshold, or because the span of "growing" status exceeds the specified limit.
 
 ## Sharding
 Shard 是指将数据写入操作分散到不同节点上，使 Milvus 能充分利用集群的并行计算能力进行写入。默认情况下单个 collection 包含 2 个分片（shard）。目前 Milvus 采用基于主键哈希的分片方式，未来将支持随机分片、自定义分片等更加灵活的分片方式。
