@@ -638,18 +638,25 @@
         "order": 5
       },
       {
+        "id": "delete_ref.md",
+        "title": "删除 Entity",
+        "label1": "reference",
+        "label2": "",
+        "order": 6
+      },
+      {
         "id": "timetravel_ref.md",
         "title": "Time Travel",
         "label1": "reference",
         "label2": "",
-        "order": 6
+        "order": 7
       },
       {
         "id": "glossary.md",
         "title": "Milvus 术语",
         "label1": "reference",
         "label2": "",
-        "order": 7
+        "order": 8
       },
       {
         "id": "tutorials",
