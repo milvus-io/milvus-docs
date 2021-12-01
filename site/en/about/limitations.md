@@ -32,7 +32,7 @@ The name of a resource can contain numbers, letters, dollar signs ($), and under
 
 | Resource     | Limit|
 | ----------- | ----------- |
-| Partition      | 4,096       |
+| Partition      | unlimited       |
 | Shard   | 256        |
 | Field   | 256        |
 | Index   | 65,536        |
