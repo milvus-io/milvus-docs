@@ -481,7 +481,7 @@
       "isMenu": true
     },
     {
-      "id": "insight_overview.md",
+      "id": "insight.md",
       "title": "Overview",
       "label1": "tools",
       "label2": "milvus_insight",
@@ -489,7 +489,7 @@
       "order": 0
     },
     {
-      "id": "insight_install.md",
+      "id": "insight_install-docker.md",
       "title": "Installation",
       "label1": "tools",
       "label2": "milvus_insight",
