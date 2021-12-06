@@ -33,6 +33,10 @@ const address = "localhost:19530";
 const milvusClient = new MilvusClient(address);
 ```
 
+```cli
+connect -h localhost -p 19530 -a default
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -84,6 +88,10 @@ connections.disconnect("default")
 
 ```javascript
 await milvusClient.closeConnection();
+```
+
+```cli
+connect -D default
 ```
 
 <table class="language-python">

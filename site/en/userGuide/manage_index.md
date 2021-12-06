@@ -40,6 +40,22 @@ const index_params = {
 };
 ```
 
+```cli
+create index
+
+Collection name (example_collection): example_collection
+
+The name of the field to create an index for (example_field): example_field
+
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
+
+Index metric type (L2, IP, HAMMING, TANIMOTO): L2
+
+Index params nlist: 1024
+
+Timeout []:
+```
+
 <table class="params">
 	<thead>
 	<tr>
@@ -86,6 +102,9 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
+```cli
+# See the previous step.
+```
 
 
 ## View index details
@@ -106,6 +125,10 @@ collection.index().params
 await milvusClient.indexManager.describeIndex({
   collection_name: "example_collection",
 });
+```
+
+```cli
+describe index -c example_collection
 ```
 
 
@@ -131,6 +154,10 @@ collection.drop_index()
 await milvusClient.indexManager.dropIndex({
   collection_name: "example_collection",
 });
+```
+
+```cli
+delete index -c example_collection
 ```
 
 ## What's next
