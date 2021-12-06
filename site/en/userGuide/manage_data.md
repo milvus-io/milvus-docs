@@ -103,7 +103,7 @@ const mr = await milvusClient.dataManager.insert({{
 </table>
 
 
-After the data are inserted, Milvus returns `MutationResult` as an object. You can check the value of `MutationResult`, which contains the corresponding primary keys of the inserted data. As for Milvus CLI, it automatically returns the row count of the successfully inserted data after insertion.
+After the data are inserted, Milvus returns `MutationResult` as an object. You can check the value of `MutationResult`, which contains the corresponding primary keys of the inserted data. As for Milvus CLI, it automatically returns the row count of the successfully inserted data after the data is inserted.
 
 {{fragments/multiple_code.md}}
 

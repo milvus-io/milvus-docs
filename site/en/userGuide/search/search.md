@@ -78,7 +78,7 @@ await milvusClient.collectionManager.createCollection(params);
 ```
 
 ```cli
-create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 -f word_count::INT64 -p book_id
+create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
 ```
 
 3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
@@ -204,8 +204,7 @@ search
 
 Collection name (test_book_search): test_book_search
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file 
-out headers): [[0.1, 0.2]]
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): [[0.1, 0.2]]
 
 The vector field used to search of collection (book_intro): book_intro
 

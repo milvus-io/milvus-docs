@@ -91,7 +91,7 @@ await milvusClient.closeConnection();
 ```
 
 ```cli
-connect -D default
+connect -D
 ```
 
 <table class="language-python">
