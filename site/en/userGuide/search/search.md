@@ -32,6 +32,10 @@ const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
+```cli
+connect -h localhost -p 19530 -a default
+```
+
 2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
 
 {{fragments/multiple_code.md}}
@@ -73,7 +77,11 @@ const params = {
 await milvusClient.collectionManager.createCollection(params);
 ```
 
-3. Insert data into the collection. See [Manage Data](manage_data.md) for more instruction.
+```cli
+create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
+```
+
+3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -97,6 +105,10 @@ await milvusClient.dataManager.insert({
   collection_name: "test_book_search",
   fields_data: entities,
 });
+```
+
+```cli
+import -c test_book_search 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 
 4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
@@ -125,6 +137,22 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
+```cli
+create index
+
+Collection name (test_book_search): test_book_search
+
+The name of the field to create an index for (book_intro): book_intro
+
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
+
+Index metric type (L2, IP, HAMMING, TANIMOTO): L2
+
+Index params nlist: 1024
+
+Timeout []:
+```
+
 ## Load collection
 
 All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
@@ -141,6 +169,10 @@ collection.load()
 await milvusClient.collectionManager.loadCollection({
   collection_name: "test_book_search",
 });
+```
+
+```cli
+load -c test_book_search
 ```
 
 
@@ -165,6 +197,32 @@ const searchParams = {
   metric_type: "L2",
   params: JSON.stringify({ nprobe: 10 }),
 };
+```
+
+```cli
+search
+
+Collection name (test_book_search): test_book_search
+
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): [[0.1, 0.2]]
+
+The vector field used to search of collection (book_intro): book_intro
+
+Metric type: L2
+
+Search parameter nprobe's value: 10
+
+The max number of returned record, also known as topk: 10
+
+The boolean expression used to filter attribute []: 
+
+The names of partitions to search (split by "," if multiple) ['_default'] []: 
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 
 <table class="language-python">
@@ -232,6 +290,10 @@ const results = await milvusClient.dataManager.search({
   search_params: searchParams,
   vector_type: 101,    // DataType.FloatVector
 });
+```
+
+```cli
+
 ```
 
 <table class="language-python">
@@ -334,6 +396,10 @@ results[0].distances
 console.log(results.results)
 ```
 
+```cli
+# Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
+```
+
 Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
 
 {{fragments/multiple_code.md}}
@@ -344,6 +410,10 @@ collection.release()
 
 ```javascript
 await milvusClient.collectionManager.releaseCollection({  collection_name: "test_book_search",});
+```
+
+```cli
+release -c test_book_search
 ```
 
 ## What's next

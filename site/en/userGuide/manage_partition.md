@@ -32,6 +32,11 @@ await milvusClient.partitionManager.createPartition({
 });
 ```
 
+```cli
+create partition -c example_collection -p example_partition
+```
+
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -87,6 +92,9 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
+```cli
+list partitions -c example_collection
+```
 
 
 ## Verify if a partition exist
@@ -103,6 +111,10 @@ await milvusClient.partitionManager.hasPartition({
   collection_name: "example_collection",
   partition_name: "example_partition",
 });
+```
+
+```cli
+describe partition -c example_collection -p example_partition
 ```
 
 
@@ -127,6 +139,10 @@ await milvusClient.partitionManager.dropPartition({
   collection_name: "example_collection",
   partition_name: "example_partition",
 });
+```
+
+```cli
+delete partition -c example_collection -p example_partition
 ```
 
 ## What's next
