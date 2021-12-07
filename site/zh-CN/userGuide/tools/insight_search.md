@@ -12,6 +12,7 @@ This topic describes how to search data with Insight.
 
 On the basis of the regular vector similarity search, you can perform hybrid search of search with Time Travel.
 
+
 ### Load the collection to memory
 
 All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search. See [Load a collection](insight_collection.md#Load-a-collection) for more instruction.
@@ -24,6 +25,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 2. In the **Enter vector value** field, enter a vector (or vectors) with the same dimensions of the selected field as the target vector(s) to search with.
 3. In the **Set search parameters** section, specify the specific parameter(s) to the index and other search-related parameters.
 
+
 ![Search Data](../../../../assets/insight_search2.png)
 
 ### Hybrid search with advanced filters (optional)
@@ -34,9 +36,11 @@ Click **Advanced Filter** and the **Advanced Filter** dialog box appears. You ca
 
 ### Search with Time Travel (optional)
 
+
 Milvus maintains a timeline for all data insert and delete operations. It allows users to specify a timestamp in a search to retrieve a data view at a specified point in time.
 
 1. Click **Time Travel**, and select a time point in the dialog box that appears.
+
 
 ![Search Data](../../../../assets/insight_search4.png)
 
@@ -45,3 +49,4 @@ Milvus maintains a timeline for all data insert and delete operations. It allows
 
 ![Search Data](../../../../assets/insight_search5.png)
 ![Search Data](../../../../assets/insight_search6.png)
+

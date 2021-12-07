@@ -22,9 +22,11 @@ This example builds an IVF_FLAT index with Euclidean distance as the similarity 
 
 If successful, the type of the index you created appears in the **Index Type** column for the vector field.
 
+
 ![Create Index](../../../../assets/insight_index1.png)
 
 ![Create Index](../../../../assets/insight_index2.png)
+
 
 ## Delete indexes
 
@@ -33,4 +35,6 @@ If successful, the type of the index you created appears in the **Index Type** c
 
 If successful, **CREATE INDEX** button appears in the Index Type column.
 
+
 ![Delete Index](../../../../assets/insight_index3.png)
+
