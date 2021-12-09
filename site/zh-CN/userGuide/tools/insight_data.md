@@ -6,28 +6,28 @@ summary: Milvus Insight, an intuitive GUI for Milvus service management.
 
 # 使用 Insight 管理数据
 
-这片文章将会描述如何使用 Insight 管理数据
+这片文章将会描述如何使用 Insight 管理数据。
 
 ## 导入数据
 
-这个例子将导入 20,000 数据。导入数据是追加数据，而不是覆盖数据。
+这个例子将导入 20,000 行数据。导入数据是追加数据，而不是覆盖数据。
 
-1. 在 **Collection** 页面，点击 **Import Data** 按钮。如下图所示，将会出现弹窗 **Import Data**。
+1. 在 **Collection** 页面，点击 **Import Data** 按钮。如下图所示，将会出现 **Import Data** 对话框。
 
 ![Import Data](../../../../assets/insight_data1.png)
 
-2. 在 **Collection** 下拉选择器中，选择需要的 collection 来导入数据。
-3. 在 **Partition** 下拉选择器中，选择需要的 partition 来导入数据。
+2. 在 **Collection** 下拉列表框中，选择需要的 collection 来导入数据。
+3. 在 **Partition** 下拉列表框中，选择需要的 partition 来导入数据。
 4. 点击 **Choose CSV File** 选择 CSV 文件。
 
 <div class="alert note">
- 需要保证 CSV 文件符合一下条件：
+ 需要保证 CSV 文件符合以下条件：
 <ul>
 <li>
-列名与 collection 中 schema 的字段名完全一致
+列名与 collection 中 schema 的字段名完全一致。
 </li>
 <li>
-上传的CSV文件需要小雨150MB,以及行的总数小于 100,000.
+上传的 CSV 文件需要小于 150MB，以及行的总数小于 100,000。
 </li>
 </ul>
 </div>
@@ -36,10 +36,10 @@ summary: Milvus Insight, an intuitive GUI for Milvus service management.
 
 ![Import Data](../../../../assets/insight_data2.png)
 
-6. 在新的窗口中，你可以选择在下拉选择器中选择列名。
+6. 在新的对话框中，你可以选择在下拉列表框中选择列名。
 
 <div class="alert note">
-我们推荐在CSV文件的首行设置你的列名。
+我们推荐在 CSV 文件的首行设置你的列名。
 </div>
 
 ![Import Data](../../../../assets/insight_data3.png)
