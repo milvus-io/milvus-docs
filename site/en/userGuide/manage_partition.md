@@ -76,6 +76,38 @@ create partition -c example_collection -p example_partition
 	</tbody>
 </table>
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>The partition name.</td>
+        </tr>
+        <tr>
+            <td>-d</td>
+            <td>--description</td>
+            <td>(Optional) The description of the partition.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 ## List all partitions
 
 {{fragments/multiple_code.md}}
@@ -95,7 +127,32 @@ await milvusClient.partitionManager.showPartitions({
 ```cli
 list partitions -c example_collection
 ```
-
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection that the partition belongs to.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>(Optional/Multiple) The name of the partition.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Verify if a partition exist
 
@@ -117,6 +174,32 @@ await milvusClient.partitionManager.hasPartition({
 describe partition -c example_collection -p example_partition
 ```
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection that the partition belongs to.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>The name of the partition.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Drop a partition
 
@@ -144,6 +227,38 @@ await milvusClient.partitionManager.dropPartition({
 ```cli
 delete partition -c example_collection -p example_partition
 ```
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection that the partition to be deleted belongs to.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>The name of the partition to be deleted.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## What's next
 

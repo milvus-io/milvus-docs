@@ -263,6 +263,24 @@ timeout []:
 	</tbody>
 </table>
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
+
 Check the returned results. 
 
 {{fragments/multiple_code.md}}
