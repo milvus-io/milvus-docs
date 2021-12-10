@@ -10,13 +10,13 @@ summary: Milvus Insight, an intuitive GUI for Milvus service management.
 
 ## 获取数据
 
-1. 点击需要获取数据的 Collection, 就可以跳转到相应到详情页面。
+1. 点击需要获取数据的 collection，就可以跳转到相应到详情页面。
 2. 在 **Data Query** 页面，点击 **Filter** 标签，将会出现 **Advanced Filter** 对话框。
 3. 通过表单，选择你需要的筛选条件，例如 **color > 10 && color < 20**。 点击 **Apply** 确认筛选条件。
 
 ![Query Data](../../../../assets/insight_query1.png)
 
-4. 点击 **Query**， 获取所有符合条件的数据。
+1. 点击 **Query**，获取所有符合条件的数据。
 
 ![Query Data](../../../../assets/insight_query2.png)
 
@@ -28,6 +28,6 @@ summary: Milvus Insight, an intuitive GUI for Milvus service management.
 
 ![Delete Data](../../../../assets/insight_query3.png)
 
-删除成功后，通过 query 获取已删除的数据，结果将不会包含已删除的数据。
+删除成功后，通过 **Query** 获取已删除的数据，结果将不会包含已删除的数据。
 
 ![Delete Data](../../../../assets/insight_query4.png)
