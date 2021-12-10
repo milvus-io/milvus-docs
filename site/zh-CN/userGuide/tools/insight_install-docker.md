@@ -9,13 +9,13 @@ summary: Learn how to install Milvus Insight with Docker Compose to manage your 
 
 # 安装 Insight
 
-这篇文章将描述如何安装 Insight - 一个开源的 MIlvus 管理工具
+这篇文章将描述如何安装 Insight - 一个开源的 MIlvus 管理工具。
 
 {{tab}}
 
 ## 先决条件
 
-- 已安装 Milvua [单机版](install_standalone-docker.md) 或者 [分布式版](install_cluster-docker.md)。
+- 已安装 Milvus [单机版](install_standalone-docker.md) 或者 [分布式版](install_cluster-docker.md)。
 - Docker 版本 19.03 或者更新的版本。
 
 <div class="alert note">
@@ -35,6 +35,6 @@ docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_UR
 
 ## 欢迎成为贡献者
 
-Milvus Insight 是一个开源项目。所有人都欢迎成为贡献者。在提交代码钱，可以参考[贡献导读](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)
+Milvus Insight 是一个开源项目。所有人都欢迎成为贡献者。在提交代码前，可以参考[贡献导读](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)。
 
-如果你发现一个 buga 或者想添加新功能，请创建一个[GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose),同时请确认仓库中不存在类似都 issue。
+如果你发现一个 bug 或者想添加新功能，请创建一个 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose)，同时请确认仓库中不存在类似的 issue。

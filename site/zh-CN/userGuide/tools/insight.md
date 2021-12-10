@@ -40,10 +40,10 @@ Milvus Insight 正在快速开发中，每周都会添加新功能。每当新�
 
 ![code_mode](../../../../assets/code_mode.png)
 
-了解更多 [install Milvus Insight](insight_install-docker.md).
+阅读[安装 Milvus Insight](insight_install-docker.md) 以了解更多。
 
 ## 贡献
 
-Milvus Insight 是一个开源项目。欢迎所有贡献者。在提交代码前，请阅读我们的 [贡献指南](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)
+Milvus Insight 是一个开源项目。欢迎所有贡献者。在提交代码前，请阅读我们的[贡献指南](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)。
 
-如果您发现错误或想要请求新功能， 请创建一个 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose),并确保其他人没有创建相同的问题。
+如果您发现错误或想要请求新功能， 请创建一个 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose)，并确保其他人没有创建相同的问题。
