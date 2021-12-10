@@ -79,9 +79,9 @@ create partition -c example_collection -p example_partition
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -130,9 +130,9 @@ list partitions -c example_collection
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -177,9 +177,9 @@ describe partition -c example_collection -p example_partition
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -231,9 +231,9 @@ delete partition -c example_collection -p example_partition
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
