@@ -442,7 +442,7 @@ You can specify an an alias for a collection. Duplicated alias is not allowed, h
 ```python
 from pymilvus import Collection
 collection = Collection("example_collection")      # Get an existing collection.
-Collection.create_alias("example_alias")
+collection.create_alias("example_alias")
 ```
 
 ```javascript
@@ -536,12 +536,11 @@ Drop an alias for a specified collection.
 ```python
 from pymilvus import Collection
 collection = Collection("example_collection")      # Get an existing collection.
-Collection.drop_alias("example_alias")
+collection.drop_alias("example_alias")
 ```
 
 ```javascript
 await milvusClient.collectionManager.dropAlias({
-  collection_name: "example_collection",
   alias: "example_alias",
 });
 ```
