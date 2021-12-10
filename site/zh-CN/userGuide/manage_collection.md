@@ -432,6 +432,157 @@ delete collection -c example_collection
 </table>
 
 
+## Collection Alias
+
+Milvus supports specifying unique alias for a collection.
+
+### Create a collection alias
+You can specify an an alias for a collection. Duplicated alias is not allowed, hence you cannot assign the same alias to different collections. However, you can assign multiple alias to a collection.
+
+```python
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+Collection.create_alias("example_alias")
+```
+
+```javascript
+await milvusClient.collectionManager.createAlias({
+  collection_name: "example_collection",
+  alias: "example_alias",
+});
+```
+
+```cli
+create alias -c example_collection -a example_alias
+```
+
+<table class="language-python">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>alias</code></td>
+		<td>Alias for the collection to create.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to create alias for.</td>
+	</tr>
+    <tr>
+		<td><code>alias</code></td>
+		<td>Alias for the collection to create.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The nam of the collection.</td>
+        </tr>
+        <tr>
+            <td>-a</td>
+            <td>--alias-name</td>
+            <td>The alias.</td>
+        </tr>
+        <tr>
+            <td>-A</td>
+            <td>--alter</td>
+            <td>(Optional) Flag to transfer the alias to a specified collection.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+### Drop a collection alias
+
+Drop an alias for a specified collection.
+
+```python
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+Collection.drop_alias("example_alias")
+```
+
+```javascript
+await milvusClient.collectionManager.dropAlias({
+  collection_name: "example_collection",
+  alias: "example_alias",
+});
+```
+
+```cli
+delete alias -c example_collection -a example_alias
+```
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The nam of the collection.</td>
+        </tr>
+        <tr>
+            <td>-a</td>
+            <td>--alias-name</td>
+            <td>The alias.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
+
 ## What's next
 
 - Learn more basic operations of Milvus:
