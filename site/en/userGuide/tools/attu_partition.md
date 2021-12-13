@@ -1,12 +1,12 @@
 ---
-id: insight_partition.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_partition.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Partitions with Insight
+# Manage Partitions with Attu
 
-This topic describes how to manage partitions with Insight.
+This topic describes how to manage partitions with Attu.
 
 Milvus creates a partition automatically after a collection is created, which cannot be deleted.
 

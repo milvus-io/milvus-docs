@@ -1,12 +1,12 @@
 ---
-id: insight_search.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_search.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# Search Data with Insight
+# Search Data with Attu
 
-This topic describes how to search data with Insight.
+This topic describes how to search data with Attu.
 
 ## Conduct a vector similarity search
 
@@ -15,7 +15,7 @@ On the basis of the regular vector similarity search, you can perform hybrid sea
 
 ### Load the collection to memory
 
-All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search. See [Load a collection](insight_collection.md#Load-a-collection) for more instruction.
+All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search. See [Load a collection](attu_collection.md#Load-a-collection) for more instruction.
 
 ![Search Data](../../../../assets/insight_search1.png)
 

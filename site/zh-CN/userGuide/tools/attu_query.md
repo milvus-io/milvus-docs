@@ -1,12 +1,12 @@
 ---
-id: insight_query.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_query.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# 使用 Insight 获取数据
+# 使用 Attu 获取数据
 
-这个篇文章将描述 Milvus Insight 如何获取数据。
+这个篇文章将描述 Milvus Attu 如何获取数据。
 
 ## 获取数据
 

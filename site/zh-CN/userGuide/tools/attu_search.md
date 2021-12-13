@@ -1,12 +1,12 @@
 ---
-id: insight_search.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_search.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# 使用 Insight 进行向量搜索
+# 使用 Attu 进行向量搜索
 
-这个篇文章将描述 Milvus Insight 如何进行向量搜索。
+这个篇文章将描述 Milvus Attu 如何进行向量搜索。
 
 ## 向量相似度搜索
 
@@ -14,7 +14,7 @@ summary: Milvus Insight, an intuitive GUI for Milvus service management.
 
 ### 加载 collection 到缓存中
 
-Milvus 内的所有 CRUD 操作都在内存中执行。在进行向量相似性搜索之前，需要将 collection 加载到内存中。查看[加载 collection](insight_collection.md#Load-a-collection) 了解更多。
+Milvus 内的所有 CRUD 操作都在内存中执行。在进行向量相似性搜索之前，需要将 collection 加载到内存中。查看[加载 collection](attu_collection.md#Load-a-collection) 了解更多。
 
 ![Search Data](../../../../assets/insight_search1.png)
 

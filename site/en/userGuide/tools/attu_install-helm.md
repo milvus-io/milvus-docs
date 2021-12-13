@@ -1,15 +1,15 @@
 ---
-id: insight_install-helm.md
+id: attu_install-helm.md
 label: Install with Helm Chart
 order: 1
-group: insight
-related_key: insight
-summary: Learn how to install Milvus Insight with Helm Chart to manage your Milvus service.
+group: attu
+related_key: attu
+summary: Learn how to install Milvus Attu with Helm Chart to manage your Milvus service.
 ---
 
-# Install Milvus Insight
+# Install Milvus Attu
 
-This topic describes how to install Insight, an efficient open-source management tool for Milvus.
+This topic describes how to install Attu, an efficient open-source management tool for Milvus.
 
 {{tab}}
 
@@ -18,7 +18,7 @@ This topic describes how to install Insight, an efficient open-source management
 - Helm 3.0.0 or later
 
 <div class="alert note">
-Milvus Insight only supports Milvus 2.x.
+Milvus Attu only supports Milvus 2.x.
 </div>
 
 ## Install Helm Chart for Milvus
@@ -35,11 +35,11 @@ $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 $ helm repo update
 ```
 
-## Install Insight while installing Milvus
+## Install Attu while installing Milvus
 
-Start Milvus and Insight with Helm by specifying the release name, the chart, and the parameters that indicate the installation and service mode of Insight. This topic uses `my-release` as the release name. To use a different release name, replace `my-release` in the command.
+Start Milvus and Attu with Helm by specifying the release name, the chart, and the parameters that indicate the installation and service mode of Attu. This topic uses `my-release` as the release name. To use a different release name, replace `my-release` in the command.
 
-Insight provides services in the following three modes among which you can select to suit your scenario. It is recommended to use Ingress mode. Port-forward mode is suggested to be used in test environment only.
+Attu provides services in the following three modes among which you can select to suit your scenario. It is recommended to use Ingress mode. Port-forward mode is suggested to be used in test environment only.
 
 - [Ingress mode](#Ingress-mode)
 - [LoadBalancer mode](#LoadBalancer-mode)
@@ -49,7 +49,7 @@ Insight provides services in the following three modes among which you can selec
 
 Ensure that you have integrated Ingress controller in your Kubernetes cluster.
 
-1. Install Milvus and Insight.
+1. Install Milvus and Attu.
 
 ```
 helm install my-release milvus/milvus --set insight.enabled=true
@@ -68,27 +68,27 @@ NAME                          CLASS    HOSTS                  ADDRESS           
 my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.32.2,10.100.32.3   80      22h
 ```
 
-4. Configure DNS on the device that requires the Insight service by mapping the path `milvus-insight.local` onto any of the addresses returned above in the system file `/etc/hosts`.
+4. Configure DNS on the device that requires the Attu service by mapping the path `milvus-insight.local` onto any of the addresses returned above in the system file `/etc/hosts`.
 
 ```
 10.100.32.1     milvus-insight.local
 ```
 
-5. Visit `http://milvus-insight.local` in your browser, and click **Connect** to enter the Insight service.
+5. Visit `http://milvus-insight.local` in your browser, and click **Connect** to enter the Attu service.
 
-![Insight_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/insight_install.png)
 
 ### LoadBalancer mode
 
 Ensure that you have integrated LoadBalancer in your Kubernetes cluster.
 
-1. Install Milvus and Insight.
+1. Install Milvus and Attu.
 
 ```
 helm install my-release milvus/milvus --set insight.enabled=true --set insight.service.type=LoadBalancer --set insight.ingress.enabled=false
 ```
 
-2. Check the Insight service.
+2. Check the Attu service.
 
 ```
 kubectl get svc
@@ -118,42 +118,42 @@ my-release-pulsar-zookeeper            ClusterIP      None            <none>    
 my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>        2888/TCP,3888/TCP,2181/TCP            117s
 ```
 
-4. Configure DNS on the device that requires the Insight service by mapping the path `my-release-milvus-insight` onto its external IP returned above in the system file `/etc/hosts`.
+4. Configure DNS on the device that requires the Attu service by mapping the path `my-release-milvus-insight` onto its external IP returned above in the system file `/etc/hosts`.
 
 ```
 10.98.0.16 my-release-milvus-insight
 ```
 
-5. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Insight service.
+5. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Attu service.
 
-![Insight_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/insight_install.png)
 
 ### Port-forward mode
 
-1. Install Milvus and Insight.
+1. Install Milvus and Attu.
 ```
 helm install my-release milvus/milvus --set insight.enabled=true  --set insight.ingress.enabled=false
 ```
 
-2. Forward the Insight service to local port `3000`.
+2. Forward the Attu service to local port `3000`.
 
 ```
 kubectl port-forward service/my-release-milvus-insight 3000
 ```
 
-3. Configure DNS on the device that forwards the Insight service by mapping the path `my-release-milvus-insight` onto `127.0.0.1` in the system file `/etc/hosts`.
+3. Configure DNS on the device that forwards the Attu service by mapping the path `my-release-milvus-insight` onto `127.0.0.1` in the system file `/etc/hosts`.
 
 ```
 127.0.01 my-release-milvus-insight
 ```
 
-4. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Insight service.
+4. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Attu service.
 
-![Insight_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/insight_install.png)
 
 
 ## Contribution
-Milvus Insight is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code) before making contributions.
+Milvus Attu is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/zilliztech/attu) before making contributions.
 
-If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose), and make sure that the same issue has not been created by someone else.
+If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/zilliztech/attu), and make sure that the same issue has not been created by someone else.
 

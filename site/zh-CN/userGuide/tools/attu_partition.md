@@ -1,12 +1,12 @@
 ---
-id: insight_partition.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_partition.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# 使用 Insight 管理 Partitions
+# 使用 Attu 管理 Partitions
 
-这个篇文章将描述 Milvus Insight 如何管理 partition。
+这个篇文章将描述 Milvus Attu 如何管理 partition。
 
 Milvus 会在创建 collection 成功以后，自动创建一个默认的，不可删除的 partition。
 

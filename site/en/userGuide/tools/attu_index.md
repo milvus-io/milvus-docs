@@ -1,12 +1,12 @@
 ---
-id: insight_index.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_index.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Index with Insight
+# Manage Index with Attu
 
-This topic describes how to manage an index with Insight.
+This topic describes how to manage an index with Attu.
 
 ## Create indexes
 

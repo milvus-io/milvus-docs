@@ -1,16 +1,16 @@
 ---
-id: insight_install-helm.md
+id: attu_install-helm.md
 label: Install with Helm Chart
 order: 1
-group: insight
-related_key: insight
-summary: Learn how to install Milvus Insight with Helm Chart to manage your Milvus service.
+group: attu
+related_key: attu
+summary: Learn how to install Milvus Attu with Helm Chart to manage your Milvus service.
 ---
 
-# 安装 Milvus Insight
+# 安装 Milvus Attu
 
 
-本文介绍如何安装 Insight 工具。Insight 是 Milvus 的高效开源管理工具。
+本文介绍如何安装 Attu 工具。Attu 是 Milvus 的高效开源管理工具。
 
 {{tab}}
 
@@ -19,7 +19,7 @@ summary: Learn how to install Milvus Insight with Helm Chart to manage your Milv
 - Helm 3.0.0 或更高版本
 
 <div class="alert note">
-Milvus Insight 只支持 Milvus 2.x。
+Milvus Attu 只支持 Milvus 2.x。
 </div>
 
 ## 为 Milvus 安装 Helm Chart
@@ -36,11 +36,11 @@ $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 $ helm repo update
 ```
 
-## 在安装 Milvus 时安装 Insight
+## 在安装 Milvus 时安装 Attu
 
-通过指定版本名称、图表和参数来启动 Milvus 和 Insight，这些参数表明 Insight 的安装和服务模式。本主题使用 `my-release` 作为发布名称。要使用不同的发布名称，请在命令中替换 `my-release`。
+通过指定版本名称、图表和参数来启动 Milvus 和 Attu，这些参数表明 Attu 的安装和服务模式。本主题使用 `my-release` 作为发布名称。要使用不同的发布名称，请在命令中替换 `my-release`。
 
-Insight 提供以下三种服务模式，您可以根据自己的场景选择其中一种。建议使用 Ingress 模式。端口转发模式建议仅在测试环境中使用。
+Attu 提供以下三种服务模式，您可以根据自己的场景选择其中一种。建议使用 Ingress 模式。端口转发模式建议仅在测试环境中使用。
 
 - [Ingress 模式](#Ingress-mode)
 - [LoadBalancer 模式](#LoadBalancer-mode)
@@ -51,7 +51,7 @@ Insight 提供以下三种服务模式，您可以根据自己的场景选择其
 
 确保在 Kubernetes 集群中集成了 Ingress 控制器。
 
-1. 安装 Milvus 和 Insight。
+1. 安装 Milvus 和 Attu。
 
 ```
 helm install my-release milvus/milvus --set insight.enabled=true
@@ -70,27 +70,27 @@ NAME                          CLASS    HOSTS                  ADDRESS           
 my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.32.2,10.100.32.3   80      22h
 ```
 
-4. 通过将路径 `milvus-insight.local` 映射到系统文件 `/etc/hosts` 中返回的任何地址，在需要 Insight 服务的设备上配置 DNS。
+4. 通过将路径 `milvus-insight.local` 映射到系统文件 `/etc/hosts` 中返回的任何地址，在需要 Attu 服务的设备上配置 DNS。
 
 ```
 10.100.32.1     milvus-insight.local
 ```
 
-5. 访问 `http://milvus-insight.local`，然后单击 **Connect** 进入 Insight 服务。
+5. 访问 `http://milvus-insight.local`，然后单击 **Connect** 进入 Attu 服务。
 
-![Insight_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/insight_install.png)
 
 ### LoadBalancer 模式
 
 确保在 Kubernetes 集群中集成了 LoadBalancer。
 
-1. 安装 Milvus and Insight。
+1. 安装 Milvus and Attu。
 
 ```
 helm install my-release milvus/milvus --set insight.enabled=true --set insight.service.type=LoadBalancer --set insight.ingress.enabled=false
 ```
 
-2. 检查 Insight 服务。
+2. 检查 Attu 服务。
 
 ```
 kubectl get svc
@@ -122,40 +122,40 @@ my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>    
 ```
 
    
-4. 通过将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中返回的外部 IP 上，在需要 Insight 服务的设备上配置 DNS。
+4. 通过将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中返回的外部 IP 上，在需要 Attu 服务的设备上配置 DNS。
 
 ```
 10.98.0.16 my-release-milvus-insight
 ```
 
-5. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Insight 服务。
+5. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
 
-![Insight_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/insight_install.png)
 
 ### Port-forward 模式
 
-1. 安装 Milvus 和 Insight。
+1. 安装 Milvus 和 Attu。
 ```
 helm install my-release milvus/milvus --set insight.enabled=true  --set insight.ingress.enabled=false
 ```
 
-2. 将 Insight 服务转发到本地端口 `3000`。
+2. 将 Attu 服务转发到本地端口 `3000`。
 
 ```
 kubectl port-forward service/my-release-milvus-insight 3000
 ```
 
-3. 在转发 Insight 服务的设备上配置 DNS，将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中的 `127.0.0.1`。
+3. 在转发 Attu 服务的设备上配置 DNS，将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中的 `127.0.0.1`。
 
 ```
 127.0.01 my-release-milvus-insight
 ```
 
-4. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Insight 服务。
+4. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
 
-![Insight_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/insight_install.png)
 
 ## 贡献
-Milvus Insight 是一个开源项目。欢迎所有贡献。投稿前请先阅读我们的[投稿指南](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)。
+Milvus Attu 是一个开源项目。欢迎所有贡献。投稿前请先阅读我们的[投稿指南](https://github.com/zilliztech/attu)。
 
-如果你发现一个 bug 或者想请求一个新特性，请创建一个 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose)，并确保相同的问题没有由其他人创建。
+如果你发现一个 bug 或者想请求一个新特性，请创建一个 [GitHub Issue](https://github.com/zilliztech/attu)，并确保相同的问题没有由其他人创建。

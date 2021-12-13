@@ -1,12 +1,12 @@
 ---
-id: insight_system.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_system.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# 使用 Insight 监控系统状态
+# 使用 Attu 监控系统状态
 
-此话题讨论如何使用 Insight 监控 Milvus 系统。
+此话题讨论如何使用 Attu 监控 Milvus 系统。
 
 ## 系统视图
 

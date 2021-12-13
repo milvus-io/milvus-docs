@@ -1,12 +1,12 @@
 ---
-id: insight_data.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_data.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Data with Insight
+# Manage Data with Attu
 
-This topic describes how to manage data with Insight.
+This topic describes how to manage data with Attu.
 
 ## Import data
 

@@ -1,12 +1,12 @@
 ---
-id: insight_collection.md
-related_key: insight
-summary: Milvus Insight, an intuitive GUI for Milvus service management.
+id: attu_collection.md
+related_key: attu
+summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# 使用 Insight 管理 Collections
+# 使用 Attu 管理 Collections
 
-这片文章将会描述如何使用 Insight 管理 collections。
+这片文章将会描述如何使用 Attu 管理 collections。
 
 ## 创建 collection
 
