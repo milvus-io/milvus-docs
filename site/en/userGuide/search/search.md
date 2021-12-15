@@ -36,7 +36,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 connect -h localhost -p 19530 -a default
 ```
 
-2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
+2. Create a collection. See [Create a Collection](create_collection.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -81,7 +81,7 @@ await milvusClient.collectionManager.createCollection(params);
 create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
 ```
 
-3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
+3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Insert Data](insert_data.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -111,7 +111,7 @@ await milvusClient.dataManager.insert({
 import -c test_book_search 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 
-4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
+4. Create an index for the vector field. See [Build Index](build_index.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -291,7 +291,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 ## Conduct a vector search
 
-Search vectors with Milvus. To search in a specific [partition](manage_partition.md), specify the list of partition names. 
+Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
 {{fragments/multiple_code.md}}
 
