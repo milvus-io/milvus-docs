@@ -37,6 +37,7 @@ const milvusClient = new MilvusClient(address);
 connect -h localhost -p 19530 -a default
 ```
 
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -112,6 +113,15 @@ connect -h localhost -p 19530 -a default
     </tbody>
 </table>
 
+<h3 class="language-python">Raises</h3>
+
+<ul class ="language-python">
+  <li><b>NotImplementedError</b>: If handler in connection parameters is not GRPC.</li>
+  <li><b>ParamError</b>: If pool in connection parameters is not supported.</li>
+  <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
+</ul>  
+
+
 ## Disconnect from a Milvus server
 
 Disconnect from a Milvus server.
@@ -145,6 +155,14 @@ connect -D
 	</tr>
 	</tbody>
 </table>
+
+<h3 class="language-python">Raises</h3>
+
+<ul class ="language-python">
+  <li><b>NotImplementedError</b>: If handler in connection parameters is not GRPC.</li>
+  <li><b>ParamError</b>: If pool in connection parameters is not supported.</li>
+  <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
+</ul>  
 
 ## What's next
 
