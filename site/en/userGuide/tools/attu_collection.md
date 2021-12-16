@@ -12,15 +12,15 @@ This topic describes how to manage collections with Attu.
 
 1. Click the **Collection** icon on the left-side navigation pane and then click **Create Collection**. The **Create Collection** dialog box appears as shown below.
 
-![Create Collection dialog box](../../../../assets/create_collection_dialog_box1.png)
+![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box1.png)
 
 2. Enter the required information. This example creates a collection named `test` with a primary key field, a vector field, and a scalar field. You can add scalar fields as needed.
 
-![Create Collection dialog box](../../../../assets/create_collection_dialog_box2.png)
+![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box2.png)
 
 3. Click **Create** to create a collection.
 
-![Create Collection dialog box](../../../../assets/create_collection_dialog_box3.png)
+![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box3.png)
 
 ## Delete a collection
 
@@ -33,34 +33,34 @@ This topic describes how to manage collections with Attu.
 Deleting a collection is irreversible.
 </div>
 
-![Delete Collection dialog box](../../../../assets/delete_collection.png)
+![Delete Collection dialog box](../../../../assets/attu/delete_collection.png)
 
 ## Load a collection
 
 1. Hover on the collection you want to load, the **Load** icon appears on the right end of the entry.
 
-![Load Collection](../../../../assets/load_collection1.png)
+![Load Collection](../../../../assets/attu/load_collection1.png)
 
 2. Click the **Load** icon and the **Load Collection** dialog box appears.
 3. Click **Load** in the **Load Collection** dialog box.
 
-![Load Collection](../../../../assets/load_collection2.png)
+![Load Collection](../../../../assets/attu/load_collection2.png)
 
 4. Loading a collection might take a while. If successful, Loaded For Search appears in the Status column.
 
-![Load Collection](../../../../assets/load_collection3.png)
+![Load Collection](../../../../assets/attu/load_collection3.png)
 
 ## Release a collection
 
 1. Hover on the loaded collection you want to release, the **Release** icon appears on the right end of the entry.
 
-![Release Collection](../../../../assets/release_collection1.png)
+![Release Collection](../../../../assets/attu/release_collection1.png)
 
 2. Click the **Release** icon and the **Release Collection** dialog box appears.
 3. Click **Release** in the **Release Collection** dialog box.
 4. If successful, the Status becomes **Unloaded** in the **Status** column.
 
-![Release Collection](../../../../assets/release_collection2.png)
+![Release Collection](../../../../assets/attu/release_collection2.png)
 
 ## View the schema of a collection
 
@@ -76,4 +76,4 @@ Attributes of a schema include:
 - Index Parameters (Only applies to vector fields)
 - Collection description
 
-![Collection Schema](../../../../assets/collection_schema.png)
+![Collection Schema](../../../../assets/attu/collection_schema.png)

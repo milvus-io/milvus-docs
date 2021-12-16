@@ -25,7 +25,7 @@ Attu 只支持 Milvus 2.x。
 ## 运行 Attu
 
 ```Apache
-docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_URL={your machine IP}:19530 milvusdb/milvus-insight:latest
+docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_URL={your machine IP}:19530 zilliz/attu:latest
 ```
 
 一旦你成功运行了 Attu docker, 在浏览器输入 `http://{ your machine IP }:8000`，
