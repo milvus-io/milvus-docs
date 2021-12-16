@@ -1,12 +1,12 @@
 ---
 id: attu_partition.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # 使用 Attu 管理 Partitions
 
-这个篇文章将描述 Milvus Attu 如何管理 partition。
+这个篇文章将描述 Attu 如何管理 partition。
 
 Milvus 会在创建 collection 成功以后，自动创建一个默认的，不可删除的 partition。
 
@@ -17,11 +17,11 @@ Milvus 会在创建 collection 成功以后，自动创建一个默认的，不�
 3. 在 **Create Partition** 对话框中，在 **Name** 输入框内，输入新的 partition 名称。
 4. 点击 **Create** 按钮，创建一个 partition。
 
-![Create Partition](../../../../assets/insight_partition1.png)
+![Create Partition](../../../../assets/attu/insight_partition1.png)
 
 如果创建成功，新的 partition 会出现在 **Partitions** 页面中。
 
-![Create Partition](../../../../assets/insight_partition2.png)
+![Create Partition](../../../../assets/attu/insight_partition2.png)
 
 这样就可以选择任意一个 partition 来存储数据。
 
@@ -32,4 +32,4 @@ Milvus 会在创建 collection 成功以后，自动创建一个默认的，不�
 3. 输入`delete` 确认删除操作。
 4. 点击 **Delete** 删除 partition。
 
-![Delete Partition](../../../../assets/insight_partition3.png)
+![Delete Partition](../../../../assets/attu/insight_partition3.png)

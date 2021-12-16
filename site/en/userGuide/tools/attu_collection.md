@@ -1,7 +1,7 @@
 ---
 id: attu_collection.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # Manage Collections with Attu
@@ -65,9 +65,10 @@ Deleting a collection is irreversible.
 ## View the schema of a collection
 
 1. Click the name of the collection that you want to view the schema of, and the corresponding detail page appears.
-2. Click **Schema** on the detail page, which lists the information of all fields. 
+2. Click **Schema** on the detail page, which lists the information of all fields.
 
 Attributes of a schema include:
+
 - Field Name
 - Field Type
 - Dimension (Only applies to vector fields)

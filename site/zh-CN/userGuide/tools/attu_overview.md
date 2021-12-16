@@ -1,14 +1,14 @@
 ---
 id: attu_overview.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # Attu Overview 页面
 
-这个篇文章将描述 Milvus Attu 的首页。
+这个篇文章将描述 Attu 的首页。
 
-Milvus Attu 主要有 **Overview** 页面、**Collection** 页面、**Vector Search** 页面、和 **System View** 页面，对应左侧导航栏的四个图标。
+Attu 主要有 **Overview** 页面、**Collection** 页面、**Vector Search** 页面、和 **System View** 页面，对应左侧导航栏的四个图标。
 
 **Overview** 页面主要列出了以下信息：
 
@@ -17,4 +17,4 @@ Milvus Attu 主要有 **Overview** 页面、**Collection** 页面、**Vector Sea
 3. 所有导入到 Milvus 的数据
 4. **Loaded For Search** 卡片：一个交互式快捷面板，允许你执行[向量搜索](attu_search.md)或者[释放 Collection](attu_collection.md)
 
-![Attu Overview](../../../../assets/insight_overview_page.png)
+![Attu Overview](../../../../assets/attu/insight_overview_page.png)

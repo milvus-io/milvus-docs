@@ -1,7 +1,7 @@
 ---
 id: attu_faq.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # Attu FAQ
@@ -16,4 +16,4 @@ summary: Milvus Attu, an intuitive GUI for Milvus service management.
 
 #### 我该如何在 k8s 中使用 Attu？
 
-答：请参考[使用 Helm Chart 安装 Milvus Attu](https://milvus.io/cn/docs/v2.0.0/attu_install-helm.md)。
+答：请参考[使用 Helm Chart 安装 Attu](https://milvus.io/cn/docs/v2.0.0/attu_install-helm.md)。

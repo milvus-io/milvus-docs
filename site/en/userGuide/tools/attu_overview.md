@@ -1,14 +1,14 @@
 ---
 id: attu_overview.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # Attu Overview Page
 
-This topic describes the Home page of Milvus Attu.
+This topic describes the Home page of Attu.
 
-Milvus Attu consists of **Overview** page, **Collection** page, **Vector Search** page, and **System View** page, corresponding to the four icons on the left-side navigation pane respectively.
+Attu consists of **Overview** page, **Collection** page, **Vector Search** page, and **System View** page, corresponding to the four icons on the left-side navigation pane respectively.
 
 The Overview page lists the following information:
 
@@ -17,4 +17,4 @@ The Overview page lists the following information:
 3. Data: the total number of entities.
 4. **Loaded For Search** card: an interactive shortcut panel that allows you to perform a [vector search](attu_search.md) on or [release the collection](attu_collection.md).
 
-![Attu Overview](../../../../assets/insight_overview_page.png)
+![Attu Overview](../../../../assets/attu/insight_overview_page.png)

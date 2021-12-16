@@ -1,7 +1,7 @@
 ---
 id: attu_faq.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # Attu FAQ

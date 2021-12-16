@@ -1,7 +1,7 @@
 ---
 id: attu_index.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
 # Manage Index with Attu
@@ -22,11 +22,9 @@ This example builds an IVF_FLAT index with Euclidean distance as the similarity 
 
 If successful, the type of the index you created appears in the **Index Type** column for the vector field.
 
+![Create Index](../../../../assets/attu/insight_index1.png)
 
-![Create Index](../../../../assets/insight_index1.png)
-
-![Create Index](../../../../assets/insight_index2.png)
-
+![Create Index](../../../../assets/attu/insight_index2.png)
 
 ## Delete indexes
 
@@ -35,6 +33,4 @@ If successful, the type of the index you created appears in the **Index Type** c
 
 If successful, **CREATE INDEX** button appears in the Index Type column.
 
-
-![Delete Index](../../../../assets/insight_index3.png)
-
+![Delete Index](../../../../assets/attu/insight_index3.png)

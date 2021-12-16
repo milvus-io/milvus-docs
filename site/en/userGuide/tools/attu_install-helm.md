@@ -4,27 +4,30 @@ label: Install with Helm Chart
 order: 1
 group: attu
 related_key: attu
-summary: Learn how to install Milvus Attu with Helm Chart to manage your Milvus service.
+summary: Learn how to install Attu with Helm Chart to manage your Milvus service.
 ---
 
-# Install Milvus Attu
+# Install Attu
 
 This topic describes how to install Attu, an efficient open-source management tool for Milvus.
 
 {{tab}}
 
 ## Prerequisites
+
 - Kubernetes 1.16 or later
 - Helm 3.0.0 or later
 
 <div class="alert note">
-Milvus Attu only supports Milvus 2.x.
+Attu only supports Milvus 2.x.
 </div>
 
 ## Install Helm Chart for Milvus
+
 Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
 
 1. Add Milvus Helm repository.
+
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
@@ -76,7 +79,7 @@ my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.
 
 5. Visit `http://milvus-insight.local` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png)
 
 ### LoadBalancer mode
 
@@ -126,11 +129,12 @@ my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>    
 
 5. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png)
 
 ### Port-forward mode
 
 1. Install Milvus and Attu.
+
 ```
 helm install my-release milvus/milvus --set insight.enabled=true  --set insight.ingress.enabled=false
 ```
@@ -149,11 +153,10 @@ kubectl port-forward service/my-release-milvus-insight 3000
 
 4. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/insight_install.png)
-
+![Attu_install](../../../../assets/attu/insight_install.png)
 
 ## Contribution
-Milvus Attu is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/zilliztech/attu) before making contributions.
+
+Attu is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/zilliztech/attu) before making contributions.
 
 If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/zilliztech/attu), and make sure that the same issue has not been created by someone else.
-

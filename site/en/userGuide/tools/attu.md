@@ -1,17 +1,18 @@
 ---
 id: attu.md
 related_key: attu
-summary: Milvus Attu, an intuitive GUI for Milvus service management.
+summary: Attu, an intuitive GUI for Milvus service management.
 ---
 
-# Milvus Attu
+# Attu
 
-[Milvus Attu](https://github.com/milvus-io/milvus-attu) is an efficient open-source management tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
+[Attu](https://github.com/milvus-io/milvus-attu) is an efficient open-source management tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
 
 ![Attu_overview](../../../../assets/insight_overview.png)
 
 ## Features
-Milvus Attu is under rapid development and new features are added on a weekly basis. We will release a new version every time when a new feature is ready. 
+
+Attu is under rapid development and new features are added on a weekly basis. We will release a new version every time when a new feature is ready.
 
 Below is the features we have to offer:
 
@@ -23,7 +24,7 @@ Below is the features we have to offer:
 
 ![manage_collections](../../../../assets/manage_collections.png)
 
-- Perform CRUD or bulk operations with just a few clicks. 
+- Perform CRUD or bulk operations with just a few clicks.
 
 ![attu_operations](../../../../assets/insight_operations.png)
 
@@ -39,11 +40,10 @@ Below is the features we have to offer:
 
 ![code_mode](../../../../assets/code_mode.png)
 
-Learn more about how to [install Milvus Attu](attu_install-docker.md).
-
+Learn more about how to [install Attu](attu_install-docker.md).
 
 ## Contribution
+
 Milvus Attu is an open-source project. All contributions are welcome. Pleae read our [Contribute guide](https://github.com/zilliztech/attu) before making contributions.
 
 If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/zilliztech/attu), and make sure that the same issue has not been created by someone else.
-

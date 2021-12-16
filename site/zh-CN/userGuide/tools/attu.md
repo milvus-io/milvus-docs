@@ -4,15 +4,15 @@ related_key: attu
 summary: Milvus Attu, an intuitive GUI for Milvus service management.
 ---
 
-# Milvus Attu
+# Attu
 
-[Milvus Attu](https://github.com/zilliztech/attu) 是 Milvus 的高效开源管理工具. 它具有直观的图形用户界面 (GUI)，可让您轻松与数据库进行交互。 只需点击几下，您就可以可视化集群状态、管理元数据、执行数据查询等等。
+[Attu](https://github.com/zilliztech/attu) 是 Milvus 的高效开源管理工具. 它具有直观的图形用户界面 (GUI)，可让您轻松与数据库进行交互。 只需点击几下，您就可以可视化集群状态、管理元数据、执行数据查询等等。
 
 ![Attu_overview](../../../../assets/insight_overview.png)
 
 ## 特点
 
-Milvus Attu 正在快速开发中，每周都会添加新功能。每当新功能准备就绪时，我们都会发布新版本。
+Attu 正在快速开发中，每周都会添加新功能。每当新功能准备就绪时，我们都会发布新版本。
 
 以下是我们必须提供的功能：
 

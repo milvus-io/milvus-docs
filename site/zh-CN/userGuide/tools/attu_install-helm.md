@@ -4,28 +4,30 @@ label: Install with Helm Chart
 order: 1
 group: attu
 related_key: attu
-summary: Learn how to install Milvus Attu with Helm Chart to manage your Milvus service.
+summary: Learn how to install Attu with Helm Chart to manage your Milvus service.
 ---
 
-# 安装 Milvus Attu
-
+# 安装 Attu
 
 本文介绍如何安装 Attu 工具。Attu 是 Milvus 的高效开源管理工具。
 
 {{tab}}
 
 ## 先决条件
+
 - Kubernetes 1.16 或更高版本
 - Helm 3.0.0 或更高版本
 
 <div class="alert note">
-Milvus Attu 只支持 Milvus 2.x。
+Attu 只支持 Milvus 2.x。
 </div>
 
 ## 为 Milvus 安装 Helm Chart
+
 Helm 是一个 Kubernetes 包管理器，可以帮助您快速部署 Milvus。
 
 1. 添加 Milvus Helm 存储库。
+
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
@@ -47,7 +49,6 @@ Attu 提供以下三种服务模式，您可以根据自己的场景选择其中
 - [Port-forward 模式](#Port-forward-mode)
 
 ### Ingress 模式
-
 
 确保在 Kubernetes 集群中集成了 Ingress 控制器。
 
@@ -78,7 +79,7 @@ my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.
 
 5. 访问 `http://milvus-insight.local`，然后单击 **Connect** 进入 Attu 服务。
 
-![Attu_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png)
 
 ### LoadBalancer 模式
 
@@ -96,8 +97,7 @@ helm install my-release milvus/milvus --set insight.enabled=true --set insight.s
 kubectl get svc
 ```
 
-
-3. 在返回的结果中检查服务 `my-release-milvus-insight` 的外部IP。
+3. 在返回的结果中检查服务 `my-release-milvus-insight` 的外部 IP。
 
 ```
 NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)
@@ -121,7 +121,6 @@ my-release-pulsar-zookeeper            ClusterIP      None            <none>    
 my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>        2888/TCP,3888/TCP,2181/TCP            117s
 ```
 
-   
 4. 通过将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中返回的外部 IP 上，在需要 Attu 服务的设备上配置 DNS。
 
 ```
@@ -130,11 +129,12 @@ my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>    
 
 5. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
 
-![Attu_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png)
 
 ### Port-forward 模式
 
 1. 安装 Milvus 和 Attu。
+
 ```
 helm install my-release milvus/milvus --set insight.enabled=true  --set insight.ingress.enabled=false
 ```
@@ -153,9 +153,10 @@ kubectl port-forward service/my-release-milvus-insight 3000
 
 4. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
 
-![Attu_install](../../../../assets/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png)
 
 ## 贡献
-Milvus Attu 是一个开源项目。欢迎所有贡献。投稿前请先阅读我们的[投稿指南](https://github.com/zilliztech/attu)。
+
+Attu 是一个开源项目。欢迎所有贡献。投稿前请先阅读我们的[投稿指南](https://github.com/zilliztech/attu)。
 
 如果你发现一个 bug 或者想请求一个新特性，请创建一个 [GitHub Issue](https://github.com/zilliztech/attu)，并确保相同的问题没有由其他人创建。
