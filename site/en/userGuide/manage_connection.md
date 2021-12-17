@@ -115,7 +115,7 @@ connect -h localhost -p 19530 -a default
 
 <div class="language-python">
 
-### Return Milvus
+### Return
 
 A milvus connection created by the passed parameters.
 
