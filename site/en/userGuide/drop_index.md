@@ -26,24 +26,27 @@ await milvusClient.indexManager.dropIndex({
 });
 ```
 
+```go
+err := milvusClient.DropIndex(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    "book_intro",           // fieldName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+milvusClient.dropIndex(DropIndexParam.newBuilder()
+                .withCollectionName("book")
+                .withFieldName("book_intro")
+                .build());
+```
+
 ```cli
 delete index -c book
 ```
-
-<table class="language-python">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>collection_name</code></td>
-            <td>Name of the collection to drop index from.</td>
-        </tr>
-	</tbody>
-</table>
 
 
 <table class="language-javascript">
@@ -59,6 +62,48 @@ delete index -c book
             <td>Name of the collection to drop index from.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop index on.</td>
+        </tr>
+        <tr>
+            <td><code>fieldName</code></td>
+            <td>Name of the vector field to drop index on.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop index on.</td>
+        </tr>
+        <tr>
+            <td><code>FieldName</code></td>
+            <td>Name of the vector field to drop index on.</td>
+        </tr>
+    </tbody>
 </table>
 
 <table class="language-cli">

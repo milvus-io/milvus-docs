@@ -27,6 +27,24 @@ await milvusClient.partitionManager.hasPartition({
 });
 ```
 
+```go
+hasPar, err := milvusClient.HasPartition(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    "novel",                // partitionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+milvusClient.hasPartition(HasPartitionParam.newBuilder()
+                .withCollectionName("book")
+                .withPartitionName("novel")
+                .build());
+```
+
 ```cli
 describe partition -c book -p novel
 ```
@@ -66,6 +84,29 @@ describe partition -c book -p novel
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
+        <td>Name of the partition to check.</td>
+    </tr>
+  </tbody>
+</table>
+
 <table class="language-cli">
     <thead>
         <tr>
@@ -102,6 +143,22 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
+```go
+partitions, err := milvusClient.ShowPartitions(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+milvusClient.showPartitions(ShowPartitionsParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+```
+
 ```cli
 list partitions -c book
 ```
@@ -119,6 +176,40 @@ list partitions -c book
             <td>Name of the collection to check.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
 </table>
 
 <table class="language-cli">

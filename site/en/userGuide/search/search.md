@@ -193,10 +193,21 @@ search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 ```javascript
 const searchParams = {
   anns_field: "book_intro",
-  topk: "10",
+  topk: "2",
   metric_type: "L2",
   params: JSON.stringify({ nprobe: 10 }),
 };
+```
+
+```go
+sp, _ := entity.NewIndexFlatSearchParam(  // NewIndex*SearchParam func
+  10          // searchParam
+  )
+```
+
+```java
+private static final Integer SEARCH_K = 2;                       // TopK
+private static final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
 ```
 
 ```cli
@@ -271,6 +282,69 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>NewIndex*SearchParam func</code></td>
+		<td>Function to create entity.SearchParam according to different index types.</td>
+        <td>For floating point vectors:
+            <ul>
+                <li><code>NewIndexFlatSearchParam</code> (FLAT)</li>
+                <li><code>NewIndexIvfFlatSearchParam</code> (IVF_FLAT)</li>
+                <li><code>NewIndexIvfSQ8SearchParam</code> (IVF_SQ8)</li>
+                <li><code>NewIndexIvfPQSearchParam</code> (RNSG)</li>
+                <li><code>NewIndexRNSGSearchParam</code> (HNSW)</li>
+                <li><code>NewIndexHNSWSearchParam</code> (HNSW)</li>
+                <li><code>NewIndexANNOYSearchParam</code> (ANNOY)</li>
+                <li><code>NewIndexRHNSWFlatSearchParam</code> (RHNSW_FLAT)</li>
+                <li><code>NewIndexRHNSW_PQSearchParam</code> (RHNSW_PQ)</li>
+                <li><code>NewIndexRHNSW_SQSearchParam</code> (RHNSW_SQ)</li>
+            </ul>
+            For binary vectors:
+            <ul>
+                <li><code>NewIndexBinFlatSearchParam</code> (BIN_FLAT)</li>
+                <li><code>NewIndexBinIvfFlatSearchParam</code> (BIN_IVF_FLAT)</li>
+            </ul>
+        </td>
+	</tr>
+	<tr>
+		<td><code>searchParam</code></td>
+		<td>Search parameter(s) specific to the index.</td>
+    <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    	<th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+		<td><code>TopK</code></td>
+		<td>Number of the most similar results to return.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>Params</code></td>
+		<td>Search parameter(s) specific to the index.</td>
+    <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
 <table class="language-cli">
     <thead>
         <tr>
@@ -307,6 +381,39 @@ const results = await milvusClient.dataManager.search({
   search_params: searchParams,
   vector_type: 101,    // DataType.FloatVector
 });
+```
+
+```go
+queryVector := [][]float32 {{0.1, 0.2}}   // vectors
+searchResult, err := milvusClient.Search(
+  context.Background(),     // ctx
+  "book",                   // CollectionName
+  []string{},               // partitionNames
+  "",                       // expr
+  []string{"book_id"},      // outputFields
+  queryVector,              // vectors
+  "Vector",                 // vectorField
+  entity.L2,                // metricType
+  2,                        // topK
+  sp                        // sp
+  )
+```
+
+```java
+List<String> outFields = Collections.singletonList(PK_FIELD);
+List<List<Float>> vector = [[0.1, 0.2]];
+
+SearchParam searchParam = SearchParam.newBuilder()
+        .withCollectionName("book")
+        .withMetricType(MetricType.L2)
+        .withOutFields(outFields)
+        .withTopK(SEARCH_K)
+        .withVectors(vector)
+        .withVectorFieldName(VECTOR_FIELD)
+        .withParams(SEARCH_PARAM)
+        .build();
+
+milvusClient.search(searchParam);
 ```
 
 ```cli
@@ -398,6 +505,111 @@ const results = await milvusClient.dataManager.search({
 	</tr>
 	</tbody>
 </table>
+
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+    <td><code>ctx</code></td>
+    <td>Context to control API invocation process.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>partitionNames</code></td>
+    <td>List of names of the partitions to load. All partitions will be searched if it is left empty.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>vectorField</code></td>
+		<td>Name of the field to search on.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>metricType</code></td>
+		<td>Metric type used for search.</td>
+    <td>This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+  <tr>
+		<td><code>topK</code></td>
+		<td>Number of the most similar results to return.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>sp</code></td>
+		<td>entity.SearchParam specific to the index.</td>
+    <td>N/A</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>MetricType</code></td>
+		<td>Metric type used for search.</td>
+    <td>This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+  <tr>
+		<td><code>OutFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+    <td><code>Vectors</code></td>
+    <td>Vectors to search with.</td>
+    <td>N/A</td>
+  </tr>
+<tr>
+		<td><code>VectorFieldName</code></td>
+		<td>Name of the field to search on.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>Expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
 
 
 Check the primary key values of the most similar vectors and their distances.

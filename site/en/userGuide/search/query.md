@@ -43,7 +43,7 @@ connect -h localhost -p 19530 -a default
 ```python
 schema = CollectionSchema([
     		FieldSchema("book_id", DataType.INT64, is_primary=True),
-			FieldSchema("word_count", DataType.INT64),
+			  FieldSchema("word_count", DataType.INT64),
     		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
 collection = Collection("book", schema, using='default', shards_num=2)
@@ -88,9 +88,9 @@ create collection -c book -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id 
 ```python
 import random
 data = [
-    		[i for i in range(2000)],
+    	[i for i in range(2000)],
 			[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
+    	[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
 collection.insert(data)
 ```
@@ -198,6 +198,32 @@ const results = await milvusClient.dataManager.query({
 });
 ```
 
+```go
+searchResult, err := milvusClient.Search(
+  context.Background(),     // ctx
+  "book",                   // CollectionName
+  []string{},               // partitionNames
+  "word_count <= 11000",    // expr
+  []string{"book_id"},      // outputFields
+  queryVector,              // vectors
+  "Vector",                 // vectorField
+  entity.L2,                // metricType
+  2,                        // topK
+  sp                        // sp
+  )
+```
+
+```java
+List<String> fields = Arrays.asList(PK_FIELD, SCALAR_FIELD);
+QueryParam queryParam = QueryParam.newBuilder()
+                .withCollectionName("book")
+                .withExpr("book_id in [2,4,6,8]")
+                .withOutFields(fields)
+                .build();
+R<QueryResults> response = milvusClient.query(queryParam);
+QueryResultsWrapper wrapper = new QueryResultsWrapper(response.getData());
+```
+
 ```cli
 query
 
@@ -263,6 +289,71 @@ timeout []:
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+    <td><code>ctx</code></td>
+    <td>Context to control API invocation process.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to query.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>partitionNames</code></td>
+    <td>List of names of the partitions to load. All partitions will be queried if it is left empty.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>OutFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+		<td><code>Expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
 <table class="language-cli">
     <thead>
         <tr>
@@ -292,6 +383,16 @@ sorted_res
 
 ```javascript
 console.log(results.data)
+```
+
+```go
+
+```
+
+```java
+System.out.println(PK_FIELD + ":" + wrapper.getFieldWrapper(PK_FIELD).getFieldData().toString());
+System.out.println(SCALAR_FIELD + ":" + wrapper.getFieldWrapper(SCALAR_FIELD).getFieldData().toString());
+System.out.println("Query row count: " + wrapper.getFieldWrapper(PK_FIELD).getRowCount());
 ```
 
 ```cli

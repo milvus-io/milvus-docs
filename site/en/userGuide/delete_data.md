@@ -37,6 +37,14 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
+```go
+
+```
+
+```java
+
+```
+
 ```cli
 load -c book
 ```
@@ -50,16 +58,20 @@ The following example filters data with primary key values of `0` and `1`.
 {{fragments/multiple_code.md}}
 
 ```python
-expr = "pk in [0,1]"
+expr = "book_id in [0,1]"
 ```
 
 ```javascript
-const expr = "pk in [0,1]";
+const expr = "book_id in [0,1]";
+```
+
+```java
+private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
 ```cli
 delete entities -c book
-The expression to specify entities to be deleted： pk in [0,1]
+The expression to specify entities to be deleted： book_id in [0,1]
 ```
 
 <table class="language-cli">
@@ -101,6 +113,18 @@ await milvusClient.dataManager.deleteEntities({
   collection_name: "book",
   expr: expr,
 });
+```
+
+```go
+
+```
+
+```java
+DeleteParam DelParam = DeleteParam.newBuilder()
+                .withCollectionName("book")
+                .withExpr(DELETE_EXPR)
+                .build();
+milvusClient.delete(DelParam);
 ```
 
 ```cli
@@ -150,7 +174,28 @@ Do you want to continue? [y/N]: y
 	</tbody>
 </table>
 
-
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>CollectionName</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+    <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+    <tr>
+		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+	</tbody>
+</table>
 
 You can verify the delete operation by checking the number of entities after deleting.
 
@@ -158,7 +203,7 @@ You can verify the delete operation by checking the number of entities after del
 from pymilvus import collection
 collection = Collection("book")      # Get an existing collection.
 collection.num_entities
-1998
+# 1998
 ```
 
 ```javascript
@@ -166,6 +211,14 @@ const res = await collectionManager.getCollectionStatistics({
   collection_name: "book",
 });
 console.log(res.data.row_count);
+```
+
+```go
+
+```
+
+```java
+
 ```
 
 ```cli

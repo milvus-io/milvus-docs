@@ -25,6 +25,23 @@ await milvusClient.collectionManager.hasCollection({
 });
 ```
 
+```go
+hasColl, err := milvusClient.HasCollection(
+    context.Background(),  // ctx
+    "book",                // CollectionName
+    )
+	if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+R<Boolean> response = milvusClient.hasCollection(HasCollectionParam.newBuilder()
+        .withCollectionName("book")
+        .build());
+System.out.println(response);
+```
+
 ```cli
 describe collection -c book
 ```
@@ -58,6 +75,41 @@ describe collection -c book
             <td>Name of the collection to check.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
 </table>
 
 <table class="language-cli">
@@ -105,6 +157,39 @@ await milvusClient.collectionManager.getCollectionStatistics({     // Return the
 });
 ```
 
+```go
+collDesc, err := milvusClient.DescribeCollection(               // Return the name and schema of the collection.
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+
+collStat, err := milvusClient.GetCollectionStatistics(          // Return the statistics information of the collection.
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+R<DescribeCollectionResponse> response = milvusClient.describeCollection(DescribeCollectionParam.newBuilder()  // Return the name and schema of the collection.
+        .withCollectionName("book")
+        .build());
+DescCollResponseWrapper wrapper = new DescCollResponseWrapper(response.getData());
+System.out.println(wrapper.toString());
+
+R<GetCollectionStatisticsResponse> response = milvusClient.getCollectionStatistics(  // Return the statistics information of the collection.
+        GetCollectionStatisticsParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+GetCollStatResponseWrapper wrapper = new GetCollStatResponseWrapper(response.getData());
+System.out.println("Collection row count: " + wrapper.getRowCount());
+```
+
 ```cli
 describe collection -c book
 ```
@@ -122,6 +207,40 @@ describe collection -c book
             <td>Name of the collection to check.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
 </table>
 
 <table class="language-cli">
@@ -155,9 +274,39 @@ utility.list_collections()
 await milvusClient.collectionManager.showCollections();
 ```
 
+```go
+listColl, err := milvusClient.ListCollection(
+    context.Background(),   // ctx
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+R<ShowCollectionsResponse> response = milvusClient.showCollections(ShowCollectionsParam.newBuilder()
+        .build());
+System.out.println(response);
+```
+
 ```cli
 list collections
 ```
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## What's next
 

@@ -35,6 +35,54 @@ const data = Array.from({ length: 2000 }, (v,k) => ({
 }));
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func main() {
+	nb := 2000
+	dim := 2
+	rand.Seed(time.Now().UnixNano())
+
+	vectors := make([][]float32, nb)
+
+	for i := range vectors {
+		v := make([]float32, dim)
+		for j := range v {
+			v[j] = rand.Float32()
+		}
+		vectors[i] = v
+	}
+
+
+
+}
+```
+
+```java
+List<List<Float>> vectors = generateFloatVectors(2000);
+
+Random ran = new Random();
+List<Integer> word_count = new ArrayList<>();
+for (long i = 0L; i < count; ++i) {
+	ages.add(ran.nextInt(99));
+}
+
+List<InsertParam.Field> fields = new ArrayList<>();
+fields.add(new InsertParam.Field(VECTOR_FIELD, DataType.FloatVector, vectors));
+fields.add(new InsertParam.Field(SCALAR_FIELD, DataType.Int8, ages));
+
+InsertParam insertParam = InsertParam.newBuilder()
+		.withCollectionName("book")
+		.withFields(fields)
+		.build();
+```
+
 ```cli
 # Prepare your data in a CSV file. Milvus CLI only supports importing data from local or remote files.
 ```
@@ -138,6 +186,14 @@ mr.primary_keys
 
 ```javascript
 console.log(mr.IDs) 
+```
+
+```go
+
+```
+
+```java
+milvusClient.insert(insertParam);
 ```
 
 ```cli

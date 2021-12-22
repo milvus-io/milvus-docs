@@ -50,16 +50,16 @@ The following example filters data with primary key values of `0` and `1`.
 {{fragments/multiple_code.md}}
 
 ```python
-expr = "pk in [0,1]"
+expr = "book_id in [0,1]"
 ```
 
 ```javascript
-const expr = "pk in [0,1]";
+const expr = "book_id in [0,1]";
 ```
 
 ```cli
 delete entities -c book
-The expression to specify entities to be deleted： pk in [0,1]
+The expression to specify entities to be deleted： book_id in [0,1]
 ```
 
 <table class="language-cli">
