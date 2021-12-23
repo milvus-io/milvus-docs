@@ -97,6 +97,11 @@ create partition -c book -p novel
     </tbody>
 </table>
 
+## Limits
+|Feature |Maximum limit|
+|---|---|
+|Number of partitions in a collection|4,096|
+
 ## What's next
 
 - Learn more basic operations of Milvus:
