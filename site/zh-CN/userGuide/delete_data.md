@@ -26,7 +26,7 @@ All CRUD operations within Milvus are executed in memory, hence before deletion,
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import collection
+from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 collection.load()
 ```
@@ -50,11 +50,11 @@ The following example filters data with primary key values of `0` and `1`.
 {{fragments/multiple_code.md}}
 
 ```python
-expr = "pk in [0,1]"
+expr = "book_id in [0,1]"
 ```
 
 ```javascript
-const expr = "pk in [0,1]";
+const expr = "book_id in [0,1]";
 ```
 
 ```cli
@@ -91,7 +91,7 @@ By specifying `partition_name`, you can decide from which partition to delete th
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import collection
+from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 collection.delete(expr)
 ```
@@ -155,7 +155,7 @@ Do you want to continue? [y/N]: y
 You can verify the delete operation by checking the number of entities after deleting.
 
 ```python
-from pymilvus import collection
+from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 collection.num_entities
 1998
