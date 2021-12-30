@@ -282,6 +282,12 @@ create alias -c book -A -a publication
     </tbody>
 </table>
 
+## Limits
+
+|Feature|Maximum limit|
+|---|---|
+|Length of an alias|255 characters|
+
 ## What's next
 
 - Learn more basic operations of Milvus:
