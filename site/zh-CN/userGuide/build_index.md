@@ -195,7 +195,7 @@ Build the index by specifying the vector field name and index parameters.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import collection
+from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 collection.create_index(
     field_name="book_intro", 
