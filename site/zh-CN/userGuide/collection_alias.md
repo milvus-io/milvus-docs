@@ -21,9 +21,11 @@ Specify an an alias for a collection.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.create_alias("publication")
+from pymilvus import utility
+utility.create_alias(
+collection_name = "book",
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -108,8 +110,10 @@ Drop a specified alias.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection.drop_alias("publication")
+from pymilvus import utility
+utility.drop_alias(
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -180,9 +184,11 @@ Alter an existing alias to another collection.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.alter_alias("publication")
+from pymilvus import utility
+utility.alter_alias(
+collection_name = "book",
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -257,6 +263,12 @@ create alias -c book -A -a publication
         </tr>
     </tbody>
 </table>
+
+## Limits
+
+|Feature|Maximum limit|
+|---|---|
+|Length of an alias|255 characters|
 
 ## What's next
 
