@@ -37,6 +37,7 @@ const milvusClient = new MilvusClient(address);
 connect -h localhost -p 19530 -a default
 ```
 
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -112,6 +113,24 @@ connect -h localhost -p 19530 -a default
     </tbody>
 </table>
 
+<div class="language-python">
+
+### Return
+
+A milvus connection created by the passed parameters.
+
+### Raises
+
+<ul>
+  <li><b>NotImplementedError</b>: If handler in connection parameters is not GRPC.</li>
+  <li><b>ParamError</b>: If pool in connection parameters is not supported.</li>
+  <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
+</ul>  
+
+### 
+</div>
+
+
 ## Disconnect from a Milvus server
 
 Disconnect from a Milvus server.
@@ -146,13 +165,17 @@ connect -D
 	</tbody>
 </table>
 
+## Limits
+
+The maximum number of connections is 65,536.
+
 ## What's next
 
 Having connected to a Milvus server, you can:
 
-- [Create a collection](manage_collection.md)
-- [Manage data](manage_data.md)
-- [Build a vector index](manage_index.md)
+- [Create a collection](create_collection.md)
+- [Manage data](insert_data.md)
+- [Build a vector index](build_index.md)
 - [Conduct a vector search](search.md)
 - [Conduct a hybrid search](hybridsearch.md)
 

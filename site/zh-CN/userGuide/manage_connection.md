@@ -150,9 +150,9 @@ connect -D
 
 Having connected to a Milvus server, you can:
 
-- [Create a collection](manage_collection.md)
-- [Manage data](manage_data.md)
-- [Build a vector index](manage_index.md)
+- [Create a collection](create_collection.md)
+- [Manage data](insert_data.md)
+- [Build a vector index](build_index.md)
 - [Conduct a vector search](search.md)
 - [Conduct a hybrid search](hybridsearch.md)
 

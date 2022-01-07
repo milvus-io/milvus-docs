@@ -36,7 +36,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 connect -h localhost -p 19530 -a default
 ```
 
-2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
+2. Create a collection. See [Create a Collection](create_collection.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -46,12 +46,12 @@ schema = CollectionSchema([
 			FieldSchema("word_count", DataType.INT64),
     		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
-collection = Collection("test_book_search", schema, using='default', shards_num=2)
+collection = Collection("book", schema, using='default', shards_num=2)
 ```
 
 ```javascript
 const params = {
-  collection_name: "test_book_search",
+  collection_name: "book",
   fields: [
     {
       name: "book_intro",
@@ -78,10 +78,10 @@ await milvusClient.collectionManager.createCollection(params);
 ```
 
 ```cli
-create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
+create collection -c book -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
 ```
 
-3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
+3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Insert Data](insert_data.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -96,22 +96,22 @@ collection.insert(data)
 ```
 
 ```javascript
-const entities = Array.from({ length: 2000 }, (v,k) => ({
+const data = Array.from({ length: 2000 }, (v,k) => ({
   "book_intro": Array.from({ length: 2 }, () => Math.random()),
   "book_id": k,
   "word_count": k+10000,
 }));
 await milvusClient.dataManager.insert({
-  collection_name: "test_book_search",
+  collection_name: "book",
   fields_data: entities,
 });
 ```
 
 ```cli
-import -c test_book_search 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
+import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 
-4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
+4. Create an index for the vector field. See [Build Index](build_index.md) for more instruction.
 
 {{fragments/multiple_code.md}}
 
@@ -131,7 +131,7 @@ const index_params = {
   params: JSON.stringify({ nlist: 1024 }),
 };
 await milvusClient.indexManager.createIndex({
-  collection_name: "test_book_search",
+  collection_name: "book",
   field_name: "book_intro",
   extra_params: index_params,
 });
@@ -140,7 +140,7 @@ await milvusClient.indexManager.createIndex({
 ```cli
 create index
 
-Collection name (test_book_search): test_book_search
+Collection name (book): book
 
 The name of the field to create an index for (book_intro): book_intro
 
@@ -161,18 +161,18 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 ```python
 from pymilvus import Collection
-collection = Collection("test_book_search")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 collection.load()
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
-  collection_name: "test_book_search",
+  collection_name: "book",
 });
 ```
 
 ```cli
-load -c test_book_search
+load -c book
 ```
 
 
@@ -202,7 +202,7 @@ const searchParams = {
 ```cli
 search
 
-Collection name (test_book_search): test_book_search
+Collection name (book): book
 
 The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): [[0.1, 0.2]]
 
@@ -291,7 +291,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 ## Conduct a vector search
 
-Search vectors with Milvus. To search in a specific [partition](manage_partition.md), specify the list of partition names. 
+Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
 {{fragments/multiple_code.md}}
 
@@ -301,7 +301,7 @@ results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=se
 
 ```javascript
 const results = await milvusClient.dataManager.search({
-  collection_name: "test_book_search",
+  collection_name: "book",
   expr: "",
   vectors: [[0.1, 0.2]],
   search_params: searchParams,
@@ -426,12 +426,24 @@ collection.release()
 ```
 
 ```javascript
-await milvusClient.collectionManager.releaseCollection({  collection_name: "test_book_search",});
+await milvusClient.collectionManager.releaseCollection({  collection_name: "book",});
 ```
 
 ```cli
-release -c test_book_search
+release -c book
 ```
+
+## Limits
+|Feature|Maximum limit|
+|---|---|
+|Length of a collection name|255 characters|
+|Number of partitions in a collection|4,096|
+|Number of fields in a collection|256|
+|Number of shards in a collection|256|
+|Dimensions of a vector|32,768|
+|Top K|16,384|
+|Target input vectors|16,384|
+
 
 ## What's next
 
