@@ -108,10 +108,5 @@ _Nov 2021_
 - Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md). Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
 - Added the [installation guide](milvusdm_install.md) for MilvusDM. Learn how to install the data migration tool and import data from [Faiss](f2m.md), [HDF5 files](h2m.md), and [Milvus 1.x](m2m.md) to Milvus 2.0.
 
-_Oct 2021_
-
-- With the release of Milvus 2.0-RC7, we've made a number of compatibility and performance updates. Check out the [Release Notes](release_notes.md) for details. Note that RC7 is _not compatible_ with previous versions of Milvus 2.0.0 due to changes made to storage format.
-- [Tutorials](image_similarity_search.md) are updated with direct links to Jupyter notebook, GitHub repos, and online demos. Read the latest tutorial about how to use Milvus to build a [DNA sequence classification model](dna_sequence_classification.md).
-- The list of [Milvus adoptors](milvus_adopters.md) is further extended with more use cases added to the [blog](https://milvus.io/blog). [Let us know](<https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update>) if your organization also uses Milvus and would like to be mentioned as well.
 
 </div>
