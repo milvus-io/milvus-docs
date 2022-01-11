@@ -1,6 +1,6 @@
 ---
 id: install_standalone-aptyum.md
-label: 使用 APT 或 YUM 安装
+label: Install with APT or YUM
 related_key: Install
 order: 2
 group: standalone
@@ -37,7 +37,7 @@ sudo apt install milvus
 Alternatively, you can download the Debian software package and install Milvus standalone.
 
 ```bash
-wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_deb_name}}.deb
+wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus_2.0.0-preGA_1-1_amd64.deb
 sudo apt-get update
 sudo dpkg -i {{var.milvus_deb_name}}.deb
 sudo apt-get -f install
@@ -48,7 +48,7 @@ sudo apt-get -f install
 You can install Milvus standalone with YUM.
 
 ```bash
-sudo yum install https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_rpm_name}}.rpm
+sudo yum https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-2.0.0-preGA.1.el7.x86_64.rpm
 ```
 
 
