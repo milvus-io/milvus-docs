@@ -1,6 +1,6 @@
 ---
 id: install_standalone-aptyum.md
-label: Install with APT or YUM
+label: 使用 APT 或 YUM 安装
 related_key: Install
 order: 2
 group: standalone
