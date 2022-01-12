@@ -48,7 +48,7 @@ $ sudo apt-get -f install
 You can install Milvus standalone with YUM.
 
 ```bash
-sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-2.0.0-preGA.1.el7.x86_64.rpm
+$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-2.0.0-preGA.1.el7.x86_64.rpm
 ```
 
 
@@ -57,9 +57,9 @@ sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.0.0-pr
 After installation, Milvus standalone and its dependencies, i.e. etcd and MinIO, start directly. You can check their status.
 
 ```bash
-sudo systemctl status milvus
-sudo systemctl status milvus-etcd
-sudo systemctl status milvus-minio
+$ sudo systemctl status milvus
+$ sudo systemctl status milvus-etcd
+$ sudo systemctl status milvus-minio
 ```
 
 ## Configure Milvus (optional)
@@ -67,7 +67,7 @@ sudo systemctl status milvus-minio
 To configure your Milvus service, make changes to the Milvus configuration file `milvus.yaml` under `/etc/milvus/configs/` in your local device after installation, and restart Milvus standalone.
 
 ```bash
-sudo systemctl restart milvus
+$ sudo systemctl restart milvus
 ```
 
 ## What's next
