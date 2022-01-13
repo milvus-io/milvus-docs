@@ -107,11 +107,29 @@ schema := &entity.Schema{
 ```
 
 ```java
-private static final String COLLECTION_NAME = "book";
-private static final String PK_FIELD = "book_id";
-private static final String SCALAR_FIELD = "word_count";
-private static final String VECTOR_FIELD = "book_intro";
-private static final Integer VECTOR_DIM = 2;
+FieldType fieldType1 = FieldType.newBuilder()
+        .withName("book_id")
+        .withDataType(DataType.Int64)
+        .withPrimaryKey(true)
+        .withAutoID(false)
+        .build();
+FieldType fieldType2 = FieldType.newBuilder()
+        .withName("word_count")
+        .withDataType(DataType.Int64)
+        .build();
+FieldType fieldType3 = FieldType.newBuilder()
+        .withName("book_intro")
+        .withDataType(DataType.FloatVector)
+        .withDimension(2)
+        .build();
+CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
+        .withCollectionName("book")
+        .withDescription("Test book search")
+        .withShardsNum(2)
+        .addFieldType(fieldType1)
+        .addFieldType(fieldType2)
+        .addFieldType(fieldType3)
+        .build();
 ```
 
 ```cli
@@ -322,147 +340,6 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 	</tbody>
 </table>
 
-<table class="language-cli">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>The name of the collection.</td>
-        </tr>
-        <tr>
-            <td>-f (Multiple)</td>
-            <td>The field schema in the    ```<fieldName>:<dataType>:<dimOfVector/desc>``` format.</td>
-        </tr>
-        <tr>
-            <td>-p</td>
-            <td>The name of the primary key field.</td>
-        </tr>
-        <tr>
-            <td>-a (Optional)</td>
-            <td>Flag to generate IDs automatically.</td>
-        </tr>
-        <tr>
-            <td>-d (Optional)</td>
-            <td>The description of the collection.</td>
-        </tr>
-    </tbody>
-</table>
-
-## Create a collection with the schema
-
-Then, create a collection with the schema you specified above.
-
-{{fragments/multiple_code.md}}
-
-```python
-from pymilvus import Collection
-collection = Collection(
-    name=collection_name, 
-    schema=schema, 
-    using='default', 
-    shards_num=2
-    )
-```
-
-```javascript
-await milvusClient.collectionManager.createCollection(params);
-```
-
-```go
-err := milvusClient.CreateCollection(
-    context.Background(),  // ctx
-    schema, 
-    1,  // shardNum
-    )
-	if err != nil {
-		// Handle error here.
-	}
-```
-
-```java
-FieldType fieldType1 = FieldType.newBuilder()
-        .withName(PK_FIELD)
-        .withDataType(DataType.Int64)
-        .withPrimaryKey(true)
-        .withAutoID(false)
-        .build();
-
-FieldType fieldType2 = FieldType.newBuilder()
-        .withName(SCALAR_FIELD)
-        .withDataType(DataType.Int64)
-        .build();
-
-FieldType fieldType3 = FieldType.newBuilder()
-        .withName(VECTOR_FIELD)
-        .withDataType(DataType.FloatVector)
-        .withDimension(VECTOR_DIM)
-        .build();
-
-CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
-        .withCollectionName(COLLECTION_NAME)
-        .withDescription("Test book search")
-        .withShardsNum(2)
-        .addFieldType(fieldType1)
-        .addFieldType(fieldType2)
-        .addFieldType(fieldType3)
-        .build();
-milvusClient.createCollection(createCollectionReq);
-```
-
-```cli
-# Follow the previous step.
-```
-
-<table class="language-python">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>using</code> (optional)</td>
-            <td>By specifying the server alias here, you can choose in which Milvus server you create a collection.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>shards_num</code> (optional)</td>
-            <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-go">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>shardNum</code></td>
-            <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
-        </tr>
-    </tbody>
-</table>
-
-
 <table class="language-java">
 	<thead>
         <tr>
@@ -535,6 +412,122 @@ milvusClient.createCollection(createCollectionReq);
         </tr>
 	</tbody>
 </table>
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>-f (Multiple)</td>
+            <td>The field schema in the    ```<fieldName>:<dataType>:<dimOfVector/desc>``` format.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>The name of the primary key field.</td>
+        </tr>
+        <tr>
+            <td>-a (Optional)</td>
+            <td>Flag to generate IDs automatically.</td>
+        </tr>
+        <tr>
+            <td>-d (Optional)</td>
+            <td>The description of the collection.</td>
+        </tr>
+    </tbody>
+</table>
+
+## Create a collection with the schema
+
+Then, create a collection with the schema you specified above.
+
+{{fragments/multiple_code.md}}
+
+```python
+from pymilvus import Collection
+collection = Collection(
+    name=collection_name, 
+    schema=schema, 
+    using='default', 
+    shards_num=2
+    )
+```
+
+```javascript
+await milvusClient.collectionManager.createCollection(params);
+```
+
+```go
+err := milvusClient.CreateCollection(
+    context.Background(),  // ctx
+    schema, 
+    1,  // shardNum
+    )
+	if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+milvusClient.createCollection(createCollectionReq);
+```
+
+```cli
+# Follow the previous step.
+```
+
+<table class="language-python">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>using</code> (optional)</td>
+            <td>By specifying the server alias here, you can choose in which Milvus server you create a collection.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>shards_num</code> (optional)</td>
+            <td>Number of the shards for the collection to create.</td>
+            <td>[1,256]</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>shardNum</code></td>
+            <td>Number of the shards for the collection to create.</td>
+            <td>[1,256]</td>
+        </tr>
+    </tbody>
+</table>
+
+
 
 ## Limits
 |Feature|Maximum limit|

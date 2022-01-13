@@ -39,10 +39,14 @@ hasPar, err := milvusClient.HasPartition(
 ```
 
 ```java
-milvusClient.hasPartition(HasPartitionParam.newBuilder()
+R<Boolean> respHasPartition = milvusClient.hasPartition(
+        HasPartitionParam.newBuilder()
                 .withCollectionName("book")
                 .withPartitionName("novel")
                 .build());
+if (respHasCollection.getData() == Boolean.TRUE) {
+    System.out.println("Partition exists.");
+}
 ```
 
 ```cli
@@ -154,9 +158,11 @@ partitions, err := milvusClient.ShowPartitions(
 ```
 
 ```java
-milvusClient.showPartitions(ShowPartitionsParam.newBuilder()
+R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
+        ShowPartitionsParam.newBuilder()
                 .withCollectionName("book")
                 .build());
+System.out.println(respShowPartitions);
 ```
 
 ```cli

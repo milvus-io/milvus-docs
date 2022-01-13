@@ -48,15 +48,11 @@ milvusClient, err := client.NewGrpcClient(
 ```
 
 ```java
-private static final MilvusServiceClient milvusClient;
-
-static {
-	ConnectParam connectParam = ConnectParam.newBuilder()
-			.withHost("localhost")
-			.withPort(19530)
-			.build();
-	milvusClient = new MilvusServiceClient(connectParam);
-}
+final MilvusServiceClient milvusClient = new MilvusServiceClient(
+		ConnectParam.newBuilder()
+				.withHost("localhost")
+				.withPort(19530)
+				.build());
 ```
 
 ```cli

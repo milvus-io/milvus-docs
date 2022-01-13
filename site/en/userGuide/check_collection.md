@@ -36,10 +36,13 @@ hasColl, err := milvusClient.HasCollection(
 ```
 
 ```java
-R<Boolean> response = milvusClient.hasCollection(HasCollectionParam.newBuilder()
-        .withCollectionName("book")
-        .build());
-System.out.println(response);
+R<Boolean> respHasCollection = milvusClient.hasCollection(
+        HasCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+if (respHasCollection.getData() == Boolean.TRUE) {
+    System.out.println("Collection exists.");
+}
 ```
 
 ```cli
@@ -176,18 +179,19 @@ collStat, err := milvusClient.GetCollectionStatistics(          // Return the st
 ```
 
 ```java
-R<DescribeCollectionResponse> response = milvusClient.describeCollection(DescribeCollectionParam.newBuilder()  // Return the name and schema of the collection.
-        .withCollectionName("book")
-        .build());
-DescCollResponseWrapper wrapper = new DescCollResponseWrapper(response.getData());
-System.out.println(wrapper.toString());
+R<DescribeCollectionResponse> respDescribeCollection = milvusClient.describeCollection(          // Return the name and schema of the collection.
+        DescribeCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+DescCollResponseWrapper wrapperDescribeCollection = new DescCollResponseWrapper(respDescribeCollection.getData());
+System.out.println(wrapperDescribeCollection);
 
-R<GetCollectionStatisticsResponse> response = milvusClient.getCollectionStatistics(  // Return the statistics information of the collection.
+R<GetCollectionStatisticsResponse> respCollectionStatistics = milvusClient.getCollectionStatistics(   // Return the statistics information of the collection.
         GetCollectionStatisticsParam.newBuilder()
                 .withCollectionName("book")
                 .build());
-GetCollStatResponseWrapper wrapper = new GetCollStatResponseWrapper(response.getData());
-System.out.println("Collection row count: " + wrapper.getRowCount());
+GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponseWrapper(respCollectionStatistics.getData());
+System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
 ```
 
 ```cli
@@ -351,9 +355,10 @@ listColl, err := milvusClient.ListCollection(
 ```
 
 ```java
-R<ShowCollectionsResponse> response = milvusClient.showCollections(ShowCollectionsParam.newBuilder()
-        .build());
-System.out.println(response);
+R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
+        ShowCollectionsParam.newBuilder()
+                .build());
+System.out.println(respShowCollections);
 ```
 
 ```cli

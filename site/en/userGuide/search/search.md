@@ -12,150 +12,10 @@ A vector similarity search in Milvus calculates the distance between query vecto
 
 The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined. 
 
-## Preparations
-
-The following example code demonstrates the steps prior to a search.
-
-If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
-
-1.  Connect to the Milvus server. See [Manage Connection](manage_connection.md) for more instruction.
-
-{{fragments/multiple_code.md}}
-
-```python
-from pymilvus import connections
-connections.connect("default", host='localhost', port='19530')
-```
-
-```javascript
-const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
-const milvusClient = new MilvusClient("localhost:19530");
-```
-
-```cli
-connect -h localhost -p 19530 -a default
-```
-
-2. Create a collection. See [Create a Collection](create_collection.md) for more instruction.
-
-{{fragments/multiple_code.md}}
-
-```python
-schema = CollectionSchema([
-    		FieldSchema("book_id", DataType.INT64, is_primary=True),
-			FieldSchema("word_count", DataType.INT64),
-    		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
-		])
-collection = Collection("book", schema, using='default', shards_num=2)
-```
-
-```javascript
-const params = {
-  collection_name: "book",
-  fields: [
-    {
-      name: "book_intro",
-      description: "",
-      data_type: 101,  // DataType.FloatVector
-      type_params: {
-        dim: "2",
-      },
-    },
-	{
-      name: "book_id",
-      data_type: 5,   //DataType.Int64
-      is_primary_key: true,
-      description: "",
-    },
-    {
-      name: "word_count",
-      data_type: 5,    //DataType.Int64
-      description: "",
-    },
-  ],
-};
-await milvusClient.collectionManager.createCollection(params);
-```
-
-```cli
-create collection -c book -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
-```
-
-3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Insert Data](insert_data.md) for more instruction.
-
-{{fragments/multiple_code.md}}
-
-```python
-import random
-data = [
-    		[i for i in range(2000)],
-			[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
-		]
-collection.insert(data)
-```
-
-```javascript
-const data = Array.from({ length: 2000 }, (v,k) => ({
-  "book_intro": Array.from({ length: 2 }, () => Math.random()),
-  "book_id": k,
-  "word_count": k+10000,
-}));
-await milvusClient.dataManager.insert({
-  collection_name: "book",
-  fields_data: entities,
-});
-```
-
-```cli
-import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
-```
-
-4. Create an index for the vector field. See [Build Index](build_index.md) for more instruction.
-
-{{fragments/multiple_code.md}}
-
-```python
-index_params = {
-        "metric_type":"L2",
-        "index_type":"IVF_FLAT",
-        "params":{"nlist":1024}
-    }
-collection.create_index("book_intro", index_params=index_params)
-```
-
-```javascript
-const index_params = {
-  metric_type: "L2",
-  index_type: "IVF_FLAT",
-  params: JSON.stringify({ nlist: 1024 }),
-};
-await milvusClient.indexManager.createIndex({
-  collection_name: "book",
-  field_name: "book_intro",
-  extra_params: index_params,
-});
-```
-
-```cli
-create index
-
-Collection name (book): book
-
-The name of the field to create an index for (book_intro): book_intro
-
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
-
-Index metric type (L2, IP, HAMMING, TANIMOTO): L2
-
-Index params nlist: 1024
-
-Timeout []:
-```
 
 ## Load collection
 
-All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
+All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
 
 {{fragments/multiple_code.md}}
 
@@ -169,6 +29,17 @@ collection.load()
 await milvusClient.collectionManager.loadCollection({
   collection_name: "book",
 });
+```
+
+```go
+
+```
+
+```java
+milvusClient.loadCollection(
+        LoadCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
 ```
 
 ```cli
@@ -206,8 +77,8 @@ sp, _ := entity.NewIndexFlatSearchParam(  // NewIndex*SearchParam func
 ```
 
 ```java
-private static final Integer SEARCH_K = 2;                       // TopK
-private static final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
+final Integer SEARCH_K = 2;                       // TopK
+final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
 ```
 
 ```cli
@@ -400,20 +271,20 @@ searchResult, err := milvusClient.Search(
 ```
 
 ```java
-List<String> outFields = Collections.singletonList(PK_FIELD);
-List<List<Float>> vector = [[0.1, 0.2]];
+List<String> search_output_fields = Arrays.asList("book_id");
+List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
 SearchParam searchParam = SearchParam.newBuilder()
-        .withCollectionName("book")
-        .withMetricType(MetricType.L2)
-        .withOutFields(outFields)
-        .withTopK(SEARCH_K)
-        .withVectors(vector)
-        .withVectorFieldName(VECTOR_FIELD)
-        .withParams(SEARCH_PARAM)
-        .build();
-
-milvusClient.search(searchParam);
+		.withCollectionName("book")
+		.withMetricType(MetricType.L2)
+		.withOutFields(search_output_fields)
+		.withTopK(SEARCH_K)
+		.withVectors(search_vectors)
+		.withVectorFieldName("book_intro")
+		.withExpr()
+		.withParams(SEARCH_PARAM)
+		.build();
+R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
 ```cli
@@ -639,6 +510,17 @@ collection.release()
 
 ```javascript
 await milvusClient.collectionManager.releaseCollection({  collection_name: "book",});
+```
+
+```go
+
+```
+
+```java
+milvusClient.releaseCollection(
+		ReleaseCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
 ```
 
 ```cli

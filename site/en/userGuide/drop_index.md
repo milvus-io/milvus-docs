@@ -38,7 +38,8 @@ err := milvusClient.DropIndex(
 ```
 
 ```java
-milvusClient.dropIndex(DropIndexParam.newBuilder()
+milvusClient.dropIndex(
+        DropIndexParam.newBuilder()
                 .withCollectionName("book")
                 .withFieldName("book_intro")
                 .build());

@@ -92,11 +92,11 @@ await milvusClient.dataManager.deleteEntities({
 ```
 
 ```java
-DeleteParam DelParam = DeleteParam.newBuilder()
-                .withCollectionName("book")
-                .withExpr(DELETE_EXPR)
-                .build();
-milvusClient.delete(DelParam);
+milvusClient.delete(
+		DeleteParam.newBuilder()
+				.withCollectionName("book")
+				.withExpr(DELETE_EXPR)
+				.build());
 ```
 
 ```cli

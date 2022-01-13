@@ -6,7 +6,7 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 # Load a collection
 
-All CRUD operations within Milvus are executed in memory. Load the collection to memory before searching, querying, or deleting entities.
+This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
 {{fragments/multiple_code.md}}
 
@@ -20,6 +20,36 @@ collection.load()
 await milvusClient.collectionManager.loadCollection({
   collection_name: "book",
 });
+```
+
+```go
+err := milvusClient.LoadCollection(               // Load a collection.
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    false                   // async
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```go
+err := milvusClient.LoadPartitions(               // Load partition(s).
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    []string{"_default"},   // partitionNames
+    false                   // async
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+milvusClient.loadCollection(
+        LoadCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
 ```
 
 ```cli
@@ -56,6 +86,47 @@ load -c book
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to load.</td>
+        </tr>
+        <tr>
+            <td><code>partitionNames</code></td>
+            <td>List of names of the partitions to load. All partitions will be loaded if it is left empty.</td>
+        </tr>
+        <tr>
+            <td><code>async</code></td>
+            <td>Switch to control sync/async behavior. The deadline of context is not applied in sync load.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to load.</td>
+        </tr>
+    </tbody>
+</table>
 
 <table class="language-cli">
     <thead>

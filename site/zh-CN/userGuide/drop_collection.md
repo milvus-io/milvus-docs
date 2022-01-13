@@ -25,6 +25,23 @@ collection.drop()
 await milvusClient.collectionManager.dropCollection({  collection_name: "book",});
 ```
 
+```go
+err := milvusClient.DropCollection(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+milvusClient.dropCollection(
+        DropCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+```
+
 ```cli
 delete collection -c book
 ```
@@ -42,6 +59,40 @@ delete collection -c book
             <td>Name of the collection to drop.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+    </tbody>
 </table>
 
 <table class="language-cli">

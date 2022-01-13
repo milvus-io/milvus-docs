@@ -40,7 +40,8 @@ err := milvusClient.DropPartition(
 ```
 
 ```java
-milvusClient.dropPartition(DropPartitionParam.newBuilder()
+milvusClient.dropPartition(
+        DropPartitionParam.newBuilder()
                 .withCollectionName("book")
                 .withPartitionName("novel")
                 .build());

@@ -36,51 +36,23 @@ const data = Array.from({ length: 2000 }, (v,k) => ({
 ```
 
 ```go
-package main
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
-)
-
-func main() {
-	nb := 2000
-	dim := 2
-	rand.Seed(time.Now().UnixNano())
-
-	vectors := make([][]float32, nb)
-
-	for i := range vectors {
-		v := make([]float32, dim)
-		for j := range v {
-			v[j] = rand.Float32()
-		}
-		vectors[i] = v
-	}
-
-
-
-}
 ```
 
 ```java
-List<List<Float>> vectors = generateFloatVectors(2000);
-
 Random ran = new Random();
-List<Integer> word_count = new ArrayList<>();
-for (long i = 0L; i < count; ++i) {
-	ages.add(ran.nextInt(99));
+List<Long> book_id_array = new ArrayList<>();
+List<Long> word_count_array = new ArrayList<>();
+List<List<Float>> book_intro_array = new ArrayList<>();
+for (long i = 0L; i < 2000; ++i) {
+	book_id_array.add(i);
+	word_count_array.add(i + 10000);
+	List<Float> vector = new ArrayList<>();
+	for (int k = 0; k < 2; ++k) {
+		vector.add(ran.nextFloat());
+	}
+	book_intro_array.add(vector);
 }
-
-List<InsertParam.Field> fields = new ArrayList<>();
-fields.add(new InsertParam.Field(VECTOR_FIELD, DataType.FloatVector, vectors));
-fields.add(new InsertParam.Field(SCALAR_FIELD, DataType.Int8, ages));
-
-InsertParam insertParam = InsertParam.newBuilder()
-		.withCollectionName("book")
-		.withFields(fields)
-		.build();
 ```
 
 ```cli
@@ -107,6 +79,24 @@ const mr = await milvusClient.dataManager.insert({{
   collection_name: "book",
   fields_data: data,
 });
+```
+
+```go
+
+```
+
+```java
+List<InsertParam.Field> fields = new ArrayList<>();
+fields.add(new InsertParam.Field("book_id", DataType.Int64, book_id_array));
+fields.add(new InsertParam.Field("word_count", DataType.Int64, word_count_array));
+fields.add(new InsertParam.Field("book_intro", DataType.FloatVector, book_intro_array));
+
+InsertParam insertParam = InsertParam.newBuilder()
+		.withCollectionName("book")
+		.withPartitionName("novel")
+		.withFields(fields)
+		.build();
+milvusClient.insert(insertParam);
 ```
 
 ```cli
@@ -156,6 +146,37 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 	</tbody>
 </table>
 
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>fieldName</code></td>
+		<td>Name of the field to insert data in.</td>
+	</tr>
+	<tr>
+		<td><code>DataType</code></td>
+		<td>Data type of the field to insert data in.</td>
+	</tr>
+    <tr>
+		<td><code>data</code></td>
+		<td>Data to insert into each field.</td>
+	</tr>
+		<tr>
+		<td><code>CollectionName</code></td>
+		<td>Name of the collection to insert data into.</td>
+	</tr>
+	<tr>
+		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to insert data into.</td>
+	</tr>
+	</tbody>
+</table>
+
 <table class="language-cli">
     <thead>
         <tr>
@@ -193,7 +214,7 @@ console.log(mr.IDs)
 ```
 
 ```java
-milvusClient.insert(insertParam);
+
 ```
 
 ```cli

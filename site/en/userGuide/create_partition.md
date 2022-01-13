@@ -34,7 +34,7 @@ await milvusClient.partitionManager.createPartition({
 err := milvusClient.CreatePartition(
     context.Background(),   // ctx
     "book",                 // CollectionName
-    "Partition1"            // partitionName
+    "novel"                 // partitionName
   )
     if err != nil {
 		// Handle error here.
@@ -42,10 +42,11 @@ err := milvusClient.CreatePartition(
 ```
 
 ```java
-milvusClient.createPartition(CreatePartitionParam.newBuilder()
-            .withCollectionName("book")
-            .withPartitionName("novel")
-            .build());
+milvusClient.createPartition(
+        CreatePartitionParam.newBuilder()
+                .withCollectionName("book")
+                .withPartitionName("novel")
+                .build());
 ```
 
 ```cli

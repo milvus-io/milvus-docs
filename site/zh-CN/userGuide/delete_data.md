@@ -20,6 +20,7 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 </div>
 
 
+
 ## Prepare boolean expression
 
 Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
@@ -34,6 +35,10 @@ expr = "book_id in [0,1]"
 
 ```javascript
 const expr = "book_id in [0,1]";
+```
+
+```java
+private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
 ```cli
@@ -80,6 +85,18 @@ await milvusClient.dataManager.deleteEntities({
   collection_name: "book",
   expr: expr,
 });
+```
+
+```go
+
+```
+
+```java
+milvusClient.delete(
+		DeleteParam.newBuilder()
+				.withCollectionName("book")
+				.withExpr(DELETE_EXPR)
+				.build());
 ```
 
 ```cli
@@ -129,6 +146,28 @@ Do you want to continue? [y/N]: y
 	</tbody>
 </table>
 
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>CollectionName</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+    <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+    <tr>
+		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+	</tbody>
+</table>
 
 
 ## What's next

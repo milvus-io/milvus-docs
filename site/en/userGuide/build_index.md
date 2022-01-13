@@ -53,8 +53,8 @@ idx, err := entity.NewIndexIvfFlat(  // NewIndex func
 ```
 
 ```java
-private static final IndexType INDEX_TYPE = IndexType.IVF_FLAT;    // IndexType
-private static final String INDEX_PARAM = "{\"nlist\":1024}";      // ExtraParam
+final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
+final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
 ```cli
@@ -340,7 +340,8 @@ err := milvusClient.CreateIndex(
 ```
 
 ```java
-milvusClient.createIndex(CreateIndexParam.newBuilder()
+milvusClient.createIndex(
+        CreateIndexParam.newBuilder()
                 .withCollectionName("book")
                 .withFieldName("book_intro")
                 .withIndexType(INDEX_TYPE)

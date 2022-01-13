@@ -36,9 +36,10 @@ err := milvusClient.DropCollection(
 ```
 
 ```java
-milvusClient.dropCollection(DropCollectionParam.newBuilder()
-            .withCollectionName("book")
-            .build());
+milvusClient.dropCollection(
+        DropCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
 ```
 
 ```cli

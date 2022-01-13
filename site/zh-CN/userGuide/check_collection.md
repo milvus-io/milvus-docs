@@ -25,6 +25,26 @@ await milvusClient.collectionManager.hasCollection({
 });
 ```
 
+```go
+hasColl, err := milvusClient.HasCollection(
+    context.Background(),  // ctx
+    "book",                // CollectionName
+    )
+	if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+R<Boolean> respHasCollection = milvusClient.hasCollection(
+        HasCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+if (respHasCollection.getData() == Boolean.TRUE) {
+    System.out.println("Collection exists.");
+}
+```
+
 ```cli
 describe collection -c book
 ```
@@ -58,6 +78,41 @@ describe collection -c book
             <td>Name of the collection to check.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
 </table>
 
 <table class="language-cli">
@@ -105,9 +160,91 @@ await milvusClient.collectionManager.getCollectionStatistics({     // Return the
 });
 ```
 
+```go
+collDesc, err := milvusClient.DescribeCollection(               // Return the name and schema of the collection.
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+
+collStat, err := milvusClient.GetCollectionStatistics(          // Return the statistics information of the collection.
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+R<DescribeCollectionResponse> respDescribeCollection = milvusClient.describeCollection(          // Return the name and schema of the collection.
+        DescribeCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+DescCollResponseWrapper wrapperDescribeCollection = new DescCollResponseWrapper(respDescribeCollection.getData());
+System.out.println(wrapperDescribeCollection);
+
+R<GetCollectionStatisticsResponse> respCollectionStatistics = milvusClient.getCollectionStatistics(   // Return the statistics information of the collection.
+        GetCollectionStatisticsParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponseWrapper(respCollectionStatistics.getData());
+System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
+```
+
 ```cli
 describe collection -c book
 ```
+
+<table class="language-python">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Return</th>
+            <th>Exception</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>schema</td>
+            <td>The schema of the collection.</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>The description of the collection.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>is_empty</td>
+            <td>A boolean value that indicates whether the collection is empty.</td>
+        </tr>
+        <tr>
+            <td>num_entities</td>
+            <td>The number of entities in the collection.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+        <tr>
+            <td>primary_field</td>
+            <td>The primary field of the collection.</td>
+        </tr>
+        <tr>
+            <td>partitions</td>
+            <td>A list of all partitions.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+        <tr>
+            <td>indexes</td>
+            <td>A list of all indexes.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+    </tbody>
+</table>
+
 
 <table class="language-javascript">
 	<thead>
@@ -123,6 +260,59 @@ describe collection -c book
         </tr>
 	</tbody>
 </table>
+
+
+
+<table class="language-javascript">
+	<thead>
+        <tr>
+            <th>Property</th>
+
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>status</code></td>
+            <td>{ error_code: number, reason: string }</td>
+        </tr>
+        <tr>
+            <td><code>schema</code></td>
+            <td>Information of all fields in this collection</td>
+        <tr>
+            <td><code>collectionID</code></td>
+            <td> collectionID</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
 
 <table class="language-cli">
     <thead>
@@ -155,9 +345,40 @@ utility.list_collections()
 await milvusClient.collectionManager.showCollections();
 ```
 
+```go
+listColl, err := milvusClient.ListCollection(
+    context.Background(),   // ctx
+    )
+    if err != nil {
+		// Handle error here.
+	}
+```
+
+```java
+R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
+        ShowCollectionsParam.newBuilder()
+                .build());
+System.out.println(respShowCollections);
+```
+
 ```cli
 list collections
 ```
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## What's next
 
