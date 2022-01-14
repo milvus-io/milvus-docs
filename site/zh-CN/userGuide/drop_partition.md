@@ -6,6 +6,8 @@ summary: Learn how to drop a partition in Milvus.
 
 # Drop Partitions
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to drop a partition in a specified collection.
 
 

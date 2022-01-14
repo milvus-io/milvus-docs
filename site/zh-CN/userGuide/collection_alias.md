@@ -6,6 +6,8 @@ summary: Learn how to manage collection alias in Milvus.
 
 # Collection Alias
 
+{{fragments/translation_needed.md}}
+
 Milvus supports specifying a unique alias for a collection.
 
 <div class="alert note">
@@ -21,9 +23,11 @@ Specify an an alias for a collection.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.create_alias("publication")
+from pymilvus import utility
+utility.create_alias(
+collection_name = "book",
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -139,8 +143,10 @@ Drop a specified alias.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection.drop_alias("publication")
+from pymilvus import utility
+utility.drop_alias(
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -237,9 +243,11 @@ Alter an existing alias to another collection. The following example is based on
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.alter_alias("publication")
+from pymilvus import utility
+utility.alter_alias(
+collection_name = "book",
+alias = "publication"
+)
 ```
 
 ```javascript

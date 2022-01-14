@@ -6,6 +6,8 @@ summary: Learn how to check collection information in Milvus.
 
 # Check Collection Information
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to check the information of the collection in Milvus.
 
 ## Check if a collection exists

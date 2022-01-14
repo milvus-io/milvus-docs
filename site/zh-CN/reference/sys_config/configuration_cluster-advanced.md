@@ -22,7 +22,7 @@ Milvus 集群的管理员需要通过更改以下配置项维护集群运行。
 
 etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你可以在 [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml) 中设置这些参数。
 
-> 如使用默认 [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
+> 如使用默认 [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="etcd">
 <thead>
@@ -63,7 +63,7 @@ etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你
 
 Milvus 支持 MinIO 以及 Amazon S3 作为系统的存储引擎，支撑日志文件与索引文件的持久化存储。由于 MinIO 兼容 S3，你可以将以下配置项直接修改为你的 S3 服务配置。你可以在 [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml) 中设置这些参数。
 
-> 如使用默认 [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
+> 如使用默认 [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="minio">
 <thead>
@@ -124,7 +124,7 @@ Milvus 支持 MinIO 以及 Amazon S3 作为系统的存储引擎，支撑日志�
 
 Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发布/订阅。你可以在 [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml) 中设置这些参数。
 
-> 如使用默认 [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
+> 如使用默认 [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="pulsar">
 <thead>
@@ -264,7 +264,7 @@ Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发�
        <li>当 <code>search</code> 消息时间戳早于 query node 系统时间的时候，Milvus 直接执行此查询命令。</li>
        <li>当 <code>search</code> 消息时间戳晚于 query node 系统时间的时候，Milvus 会等待 query node 系统时间推进直至两者时间差小于该参数后执行此查询命令。</li>
       </details></td>
-		<td>1000</td>
+		<td>0</td>
 	</tr>
   <tr>
 		<td><code>rootcoord.minSegmentSizeToEnableIndex</code></td>
@@ -295,11 +295,12 @@ Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发�
 		<td><code>dataNode.flush.insertBufSize</code></td>
 		<td><details>
        <summary>内存中一个 segment 缓存 insert 数据的最大行数</summary>
+       <li>单位：Byte</li>
        <li>当内存中缓存的数据超过这个值时，data node 会将所有的缓存数据打包为 1 组 binlog 文件存储在 MinIO/S3 上。</li>
        <li>设定该参数与数据量大小相关。如果设定过小，系统会频繁将少量数据存盘，如果设定过大，系统的内存需求会增高。</li>
        <li>默认值适用于大多数场景。对于 128 维浮点型向量，32000 行数据会生成约 16 MB 的 binlog 文件。</li>
       </details></td>
-		<td>32000</td>
+		<td>16777216</td>
 	</tr>
 </tbody>
 </table>

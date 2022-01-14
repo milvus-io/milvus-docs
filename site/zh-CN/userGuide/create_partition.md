@@ -6,6 +6,8 @@ summary: Learn how to create a partition in Milvus.
 
 # Create a Partitions
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to create a partition in Milvus.
 
 Milvus allows you to divide the bulk of vector data into a small number of partitions. Search and other operations can then be limited to one partition to improve the performance.

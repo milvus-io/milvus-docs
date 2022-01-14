@@ -6,7 +6,11 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 # Load a collection
 
+{{fragments/translation_needed.md}}
+
+
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
+
 
 {{fragments/multiple_code.md}}
 

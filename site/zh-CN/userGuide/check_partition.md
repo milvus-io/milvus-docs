@@ -6,6 +6,8 @@ summary: Learn how to check partition information in Milvus.
 
 # Check Partition Information
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to check the information of the partition in Milvus.
 
 ## Verify if a partition exist
