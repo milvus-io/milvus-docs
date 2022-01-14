@@ -9,6 +9,8 @@ summary: Learn how to install the Python SDK of Milvus.
 
 # Install Milvus SDK
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to install Milvus SDK for Milvus.
 
 Current version of Milvus supports SDKs in Python and Node.js.

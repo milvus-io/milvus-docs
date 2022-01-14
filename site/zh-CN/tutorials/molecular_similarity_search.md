@@ -5,6 +5,8 @@ title: 分子式检索系统
 
 # Molecular Similarity Search 
 
+{{fragments/translation_needed.md}}
+
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a molecular similarity search system.
 - [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/molecular_search.ipynb)
 - [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/quick_deploy)

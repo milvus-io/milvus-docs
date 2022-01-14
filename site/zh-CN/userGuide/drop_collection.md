@@ -6,6 +6,8 @@ summary: Learn how to drop a collection in Milvus.
 
 # Drop a collection
 
+{{fragments/translation_needed.md}}
+
 Remove a collection and the data within.
 
 <div class="alert caution">

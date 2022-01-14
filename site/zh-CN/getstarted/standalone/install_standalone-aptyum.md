@@ -9,6 +9,8 @@ summary: Learn how to install Milvus stanalone with APT or YUM.
 
 # Install Milvus Standalone
 
+{{fragments/translation_needed.md}}
+
 {{fragments/installation_guide.md}}
 
 {{tab}}

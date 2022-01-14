@@ -11,6 +11,8 @@ summary: Get started with Milvus faster using this Node.js example code.
 
 # Run Milvus using Node.js
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to run Milvus using Node.js.
 
 

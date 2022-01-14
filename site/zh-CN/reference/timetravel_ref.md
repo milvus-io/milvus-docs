@@ -6,6 +6,8 @@ summary: Learn the design and implementation details of Time Travel in Milvus.
 
 # Time Travel
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the Time Travel feature in detail, including how it is designed and how it works in Milvus. See [Search with Time Travel](timetravel.md) for more information about how to use this feature.
 
 Data engineers often need to roll back data to fix dirty data or bugs. Unlike traditional databases that use snapshots or retrain data to achieve data rollback, Milvus maintains a timeline for all data insert or delete operations. Therefore, users can specify the timestamp in a query to retrieve data at a specific point of time, which can significantly reduce maintenance costs.

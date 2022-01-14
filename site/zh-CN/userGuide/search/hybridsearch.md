@@ -6,6 +6,8 @@ summary: Conduct a Hybrid Search with Milvus.
 
 # Conduct a Hybrid Search
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to conduct a hybrid search.
 
 A hybrid search is essentially a vector search with attribute filtering. By specifying [boolean expressions](boolean.md) that filter the scalar fields or the primary key field, you can limit your search with certain conditions.

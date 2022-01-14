@@ -6,6 +6,8 @@ summary: Learn how to manage collection alias in Milvus.
 
 # Collection Alias
 
+{{fragments/translation_needed.md}}
+
 Milvus supports specifying a unique alias for a collection.
 
 <div class="alert note">
