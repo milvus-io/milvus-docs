@@ -6,6 +6,8 @@ summary: Learn how to delete data in Milvus.
 
 # Delete Entities
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to delete entities in Milvus.
 
 Milvus supports deleting entities by primary key filtered with boolean expression.

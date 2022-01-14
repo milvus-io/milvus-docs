@@ -5,6 +5,8 @@ title: Image Similarity Search
 
 # Image Similarity Search 
 
+{{fragments/translation_needed.md}}
+
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a reverse image search system.
 - [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/reverse_image_search/reverse_image_search.ipynb)
 - [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/reverse_image_search/quick_deploy)

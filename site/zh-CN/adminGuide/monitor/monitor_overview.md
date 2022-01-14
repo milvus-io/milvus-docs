@@ -7,6 +7,8 @@ summary: Learn how Prometheus and Grafana are used in Milvus for montoring and a
 
 # Milvus monitoring framework overview
 
+{{fragments/translation_needed.md}}
+
 This topic explains how Milvus uses Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.
 
 ## Prometheus in Milvus

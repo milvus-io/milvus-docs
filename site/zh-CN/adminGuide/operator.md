@@ -7,6 +7,8 @@ summary: Learn how to configure dependencies with Milvus Operator.
 
 # Configure Dependencies with Milvus Operator
 
+{{fragments/translation_needed.md}}
+
 Milvus cluster depends on components including object storage, etcd, and Pulsar. This topic introduces how to configure these dependencies when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.

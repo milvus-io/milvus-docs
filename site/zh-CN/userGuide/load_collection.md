@@ -6,6 +6,8 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 # Load a collection
 
+{{fragments/translation_needed.md}}
+
 All CRUD operations within Milvus are executed in memory. Load the collection to memory before searching, querying, or deleting entities.
 
 {{fragments/multiple_code.md}}

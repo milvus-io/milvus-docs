@@ -11,6 +11,8 @@ summary: Get started with Milvus faster using this Python example code.
 
 # Run Milvus using Python
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to run Milvus using Python.
 
 Through running the example code we provided, you will have a primary understanding of what Milvus is capable of.
