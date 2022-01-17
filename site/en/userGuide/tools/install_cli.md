@@ -5,12 +5,12 @@ summary: Learn how to install Milvus_CLI.
 
 # Install Milvus_CLI
 
-The current version of Milvus_CLI is 0.1.9. To find your installed version and see if you need to update, run `milvus_cli --version`.
+This topic describes how to install Milvus_CLI.
 
 
 ## Install from PyPI
 
-You can install Milvus_CLI from [PyPI](https://pypi.org/project/milvus-cli/), source code, or an .exe file. We recommend that you install Milvus_CLI from PyPI.
+You can install Milvus_CLI from [PyPI](https://pypi.org/project/milvus-cli/).
 
 ### Prerequisites
 
@@ -24,6 +24,7 @@ Run the following command to install Milvus_CLI.
 ```shell
 pip install milvus-cli
 ```
+
 ## Install with Docker
 
 You can instal Milvus_CLI with docker.
@@ -32,10 +33,10 @@ You can instal Milvus_CLI with docker.
 
 Docker 19.03 or later is required.
 
-### install based on Docker image
+### Install based on Docker image
 
 ```shell
-docker run -it zilliz/milvus_cli:latest
+$ docker run -it zilliz/milvus_cli:latest
 ```
 
 
