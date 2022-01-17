@@ -21,7 +21,7 @@ Both DML (data manipulation language) operations and DDL (data definition langua
 
 *Vchannels* are maintained in the underlying log broker nodes. Each channel is physically indivisible and available for any but only one node. When data ingestion rate reaches bottleneck, consider two things: Whether the log broker node is overloaded and needs to be scaled, and whether there are sufficient shards to ensure load balance for each node. 
 
-![Write log sequence]({{images.assets/write_log_sequence.jpg}} "Proxy, log broker, data node, and object storage.")
+![Write log sequence]({{images.assets/write_log_sequence.jpg}} "The process of writing log sequence.")
 
 The above diagram encapsulates four components involved in the process of writing log sequence: proxy, log broker, data node, and object storage. The process involves four tasks: validation of DML requests, publication-subscription of log sequence, conversion from streaming log to log snapshots, and persistence of log snapshots. The four tasks are decoupled from each other to make sure each task is handled by its corresponding node type. Nodes of the same type are made equal and can be scaled elastically and independently to accommodate various data loads, massive and highly fluctuating streaming data in particular.
 

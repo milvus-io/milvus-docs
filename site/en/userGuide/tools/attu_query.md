@@ -18,7 +18,7 @@ This topic describes how to query data with Attu.
 
 3. Click **Query** to retrieve all query results that match the query condition.
 
-![Query Data](../../../../assets/attu/insight_query2.png "Retrive query results.")
+![Query Data](../../../../assets/attu/insight_query2.png "Retrieve query results.")
 
 ## Query data with Time Travel
 
