@@ -11,7 +11,7 @@ summary: Milvus is an open-source vector database designed specifically for AI a
 
 ## 什么是 Milvus 向量数据库？
 
-Milvus 于 2019 年开源，主要用于存储、索引和管理通过深度神经网络和机器学习模型产生的海量向量数据。
+Milvus 于 2019 年开源，致力于存储、索引和管理由深度神经网络学习与其他机器学习模型生成的海量Embedding向量。
 
 Milvus 向量数据库专为向量查询与检索设计，能够为万亿级向量数据建立索引。与传统关系型数据库不同，Milvus 主要用于自下而上地处理非结构化数据向量。非结构化数据没有统一的预定义模型，因此可以转化为向量。
 
