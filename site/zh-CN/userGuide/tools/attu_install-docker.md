@@ -1,8 +1,8 @@
 ---
 id: attu_install-docker.md
-label: Install with Docker Compose
+label: Docker Compose 安装
 order: 0
-group: attu
+group: attu_install-docker.md
 related_key: attu
 summary: Learn how to install Attu with Docker Compose to manage your Milvus service.
 ---

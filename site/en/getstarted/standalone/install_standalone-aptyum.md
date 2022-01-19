@@ -1,9 +1,9 @@
 ---
 id: install_standalone-aptyum.md
-label: Install with APT or YUM
+label: APT or YUM
 related_key: Install
 order: 2
-group: standalone
+group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with APT or YUM.
 ---
 

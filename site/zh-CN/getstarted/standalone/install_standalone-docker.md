@@ -1,8 +1,8 @@
 ---
 id: install_standalone-docker.md
-label: 使用 Docker Compose 安装
+label: Docker Compose 安装
 order: 0
-group: standalone
+group: install_standalone-docker.md
 ---
 
 # 安装 Milvus 单机版
