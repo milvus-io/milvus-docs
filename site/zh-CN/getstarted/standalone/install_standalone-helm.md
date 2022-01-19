@@ -1,8 +1,8 @@
 ---
 id: install_standalone-helm.md
-label: 使用 Kubernetes 安装
+label: Helm 安装
 order: 1
-group: standalone
+group: install_standalone-docker.md
 ---
 # 安装 Milvus 单机版
 
