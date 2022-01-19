@@ -4,6 +4,80 @@ id: release_notes.md
 
 # 发版说明
 
+## v2.0.0-PreGA
+
+发布时间： 2021-12-31
+
+<h3 id="v2.0.0-PreGA">版本兼容</h3>
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+		<th>Node.js SDK 版本</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-PreGA</td>
+		<td>2.0.0rc9</td>
+		<td>2.0.0</td>
+		<td>即将上线</td>
+		<td>1.0.20</td>
+	</tr>
+	</tbody>
+</table>
+
+Milvus 2.0.0-PreGA 是 2.0.0-GA 的预览版。它现在支持通过 primary key 删除 entity 和数据 Compaction 来清除已删除的数据。我们还在 Milvus 中引入了 Loadbalance 机制，以便均匀地分配每个 query node 的内存使用。在这个版本中我们修复了一些关键问题，包括被删除的 collection 数据清理，Jaccard 距离计算错误，以及一些导致系统卡死和内存泄漏的 bug。 
+请注意，由于数据编码格式和 RocksMQ 数据格式的一些变化， Milvus 2.0.0-PreGA 与其他 Milvus 2.0.0 前期预览版本不兼容。
+
+
+<h3 id="v2.0.0-PreGA">新增功能</h3>
+
+- 删除 entity：Milvus 现在支持通过 primary key 删除 entity。由于 Milvus 依赖于仅追加存储，导致其只支持逻辑删除，也就是说，Milvus 为被删除的 entity 插入删除标记以覆盖实际数据，令搜索或查询不返回被标记的 entity。请注意，过度删除可能会导致搜索性能下降和存储使用量激增。参见[删除数据](delete_data.md)获取更多信息。
+
+- Compaction 机制：通过 Compaction 机制，清理 binlog 中删除或过期的 entity，节省存储空间。该机制为 data coord 触发，data node 执行的后台任务。
+
+- 自动 Loadbalance [#9481](https://github.com/milvus-io/milvus/issues/9481)：Loadbalance 机制将 segment 均匀地分布在 query node 上，以平衡集群的内存使用。它可以自动触发，也可以由用户触发。
+
+- Handoff [#9481](https://github.com/milvus-io/milvus/issues/9481)：Handoff 机制是指当一个 growing segment 转化为 sealed segment 时，query node 等待至该 segment 被 index node 构建索引后，将该 segment 加载到内存中进行搜索或查询。
+
+<h3 id="v2.0.0-PreGA">主要改进</h3>
+
+- [#12199](https://github.com/milvus-io/milvus/pull/12199) 在 segment 之间并行执行，以提高搜索性能。
+- [#11373](https://github.com/milvus-io/milvus/pull/11373) 允许在 RocksMQ 内部循环中批量消费消息，以提高系统效率。
+- [#11665](https://github.com/milvus-io/milvus/pull/11665) 延迟 Handoff 的执行，直到索引创建完成。
+
+<h3 id="v2.0.0-PreGA">问题修复</h3>
+
+- 删除 collection 时，etcd、Pulsar 和 MinIO 上的数据没有被清除：
+  - [#12191](https://github.com/milvus-io/milvus/pull/12191) 清除 etcd 上被删除 segment 的元数据。
+  - [#11554](https://github.com/milvus-io/milvus/pull/11554) 为 data coord 增加 garbage collector。
+  - [#11552](https://github.com/milvus-io/milvus/pull/11552) 在 data node 中完成删除 collection 的过程。
+  - [#12227](https://github.com/milvus-io/milvus/pull/12227) 删除 collection 时删除所有索引。
+  - [#11436](https://github.com/milvus-io/milvus/pull/11436) 修改 `retentionSizeInMB` 默认值为8192 (8GB)。
+  
+- [#11901](https://github.com/milvus-io/milvus/pull/11901) 不同度量类型的属性导致的距离计算错误。
+- [#12511](https://github.com/milvus-io/milvus/pull/12511) 不同度量类型的属性导致的相似相关性错误。
+- [#12225](https://github.com/milvus-io/milvus/pull/12225) 重复搜索时 RocksMQ 会卡死。
+- [#12255](https://github.com/milvus-io/milvus/pull/12255) RocksMQ 服务器在 Milvus 单机版退出时不会关闭。
+- [#12281](https://github.com/milvus-io/milvus/pull/12281) 删除别名时的错误。
+- [#11769](https://github.com/milvus-io/milvus/pull/11769) 错误更新 `serviceableTime`。
+- [#11325](https://github.com/milvus-io/milvus/pull/11325) 合并搜索结果时崩溃。
+- [#11248](https://github.com/milvus-io/milvus/pull/11248) 参数 `guarantee_timestamp` 不起作用。
+
+<h3 id="v2.0.0-PreGA">其他增强</h3>
+
+- [#12351](https://github.com/milvus-io/milvus/pull/12351) 更改代理默认的 RPC 传输限制。
+- [#12055](https://github.com/milvus-io/milvus/pull/12055) 减少从 MinIO 加载时的内存成本。
+- [#12248](https://github.com/milvus-io/milvus/pull/12248) 支持更多的部署指标。
+- [#11247](https://github.com/milvus-io/milvus/pull/11247) 为集群增加 `getNodeInfoByID` 和 `getSegmentInfoByNode` 函数。
+
+- [#11181](https://github.com/milvus-io/milvus/pull/11181) 重构 query coord 上的 segment 分配策略。
+
 ## v2.0.0-RC8
 
 发布时间：2021-11-5

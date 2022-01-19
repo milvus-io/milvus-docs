@@ -24,7 +24,7 @@ If you are an administrator of a Milvus cluster, you may access the following co
 
 etcd is the metadata engine supporting Milvus' metadata storage and access. 
 
-> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) for third-party services.
 
 <table id="etcd">
 <thead>
@@ -65,7 +65,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 
 Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under `MinIO` section. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
-> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) for third-party services.
 
 <table id="minio">
 <thead>
@@ -126,7 +126,7 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 
 Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
-> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) for third-party services.
 
 <table id="pulsar">
 <thead>
@@ -264,7 +264,7 @@ This session configures the system behaviors of Milvus. You can set these config
        <li>Milvus executes this query command directly when the search message timestamp is earlier the query node system time.</li>
        <li>When the <code>search</code> message timestamp is later than the query node system time, the search message waits for the query node system time to advance until the time difference between them is less than the value set in <code>queryNode.gracefulTime</code>, and then Milvus executes the query demand.</li>
       </details></td>
-		<td>1000</td>
+		<td>0</td>
 	</tr>
   <tr>
 		<td><code>rootcoord.minSegmentSizeToEnableIndex</code></td>
@@ -295,11 +295,12 @@ This session configures the system behaviors of Milvus. You can set these config
 		<td><code>dataNode.flush.insertBufSize</code></td>
 		<td><details>
        <summary>Maximum row count of a segment buffered in memory</summary>
+	<li>Unit: Byte.</li>
        <li>Data node packs all buffered data into a binlog file and stores the file in MinIO/S3 when the row count of the data in memory exceeds this value.</li>
        <li>Setting this parameter is associated with the data size. If it is set too small, the system stores data in small size too frequently. If it is set too large, the system's demand for memory will increase.</li>
        <li>The default value applies to most scenarios. For a 128-dimensions floating-point vector, 32000 rows of data generate a binlog file of approximately 16 MB.</li>
       </details></td>
-		<td>32000</td>
+		<td>16777216</td>
 	</tr>
 </tbody>
 </table>

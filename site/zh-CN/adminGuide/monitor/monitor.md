@@ -7,6 +7,8 @@ summary: Learn how to deploy monitoring services for a Milvus cluster using Prom
 
 # Deploying Monitoring Services on Kubernetes
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to use Prometheus to deploy monitoring services for a Milvus cluster on Kubernetes.
 
 ## Monitor metrics with Prometheus

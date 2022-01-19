@@ -6,6 +6,8 @@ summary: Learn how to create a collection in Milvus.
 
 # Create a Collection
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to create a collection in Milvus.
 
 A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Collection](glossary.md#Collection) for more information.

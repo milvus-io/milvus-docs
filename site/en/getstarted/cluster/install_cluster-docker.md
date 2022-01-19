@@ -16,18 +16,18 @@ summary: Learn how to install Milvus cluster with Docker Compose.
 
 ## Download an installation file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
+[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.cpu_milvus_docker_image_version}}/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Configure Milvus (optional)
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml) `milvus.yaml` directly or with the following command. 
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_tag}}/configs/milvus.yaml) `milvus.yaml` directly or with the following command. 
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.cpu_milvus_docker_image_version}}/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_tag}}/configs/milvus.yaml
 ```
 
 Modify the configurations to suit your needs. See [Milvus Cluster System Configurations](configuration_cluster-basic.md) for more information.

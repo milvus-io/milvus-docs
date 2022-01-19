@@ -7,6 +7,8 @@ summary: Learn how to create an alert for Milvus services in Grafana.
 
 # Create an Alert for Milvus Services
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the alert mechanism for Milvus services and explains why, when, and how to create alerts in Milvus.
 
 By creating alerts, you can receive notifications when the value of a specific metric exceeds the threshold you have predefined. 

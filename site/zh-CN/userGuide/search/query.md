@@ -6,6 +6,8 @@ summary: Learn how to query vectors in Milvus.
 
 # Conduct a Vector Query
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to conduct a vector query.
 
 Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on [boolean expression](boolean.md). Milvus supports many data types in the scalar fields and a variety of boolean expressions. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters.

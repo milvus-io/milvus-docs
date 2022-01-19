@@ -6,6 +6,8 @@ summary: Learn how to connect to a Milvus server.
 
 # Manage Milvus Connections
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to connect to and disconnect from a Milvus server.
 
 <div class="alert note">

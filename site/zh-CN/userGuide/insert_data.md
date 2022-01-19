@@ -6,6 +6,8 @@ summary: Learn how to insert data in Milvus.
 
 # Insert Data
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to insert data in Milvus via client.
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.

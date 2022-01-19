@@ -4,6 +4,9 @@ title: 智能问答机器人
 ---
 
 # Question Answering System 
+
+{{fragments/translation_needed.md}}
+
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a question answering (QA) system.
 - [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system/question_answering.ipynb)
 - [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system/quick_deploy)

@@ -6,6 +6,8 @@ summary: Learn how to drop an index in Milvus.
 
 # Drop an Index
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to drop an index in Milvus. 
 
 <div class="alert caution">
