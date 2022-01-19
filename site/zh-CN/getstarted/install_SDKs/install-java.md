@@ -3,11 +3,14 @@ id: install-java.md
 label: Install Java SDK
 related_key: SDK
 order: 3
-group: sdk
+group: install-pymilvus.md
 summary: Learn how to install the Java SDK of Milvus.
 ---
 
 # Install Milvus SDK
+
+{{fragments/translation_needed.md}}
+
 
 This topic describes how to install Milvus SDK for Milvus.
 

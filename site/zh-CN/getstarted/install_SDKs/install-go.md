@@ -3,11 +3,14 @@ id: install-go.md
 label: Install GO SDK
 related_key: SDK
 order: 2
-group: sdk
+group: install-pymilvus.md
 summary: Learn how to install the GO SDK of Milvus.
 ---
 
 # Install Milvus SDK
+
+{{fragments/translation_needed.md}}
+
 
 This topic describes how to install Milvus SDK for Milvus.
 
