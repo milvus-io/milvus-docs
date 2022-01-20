@@ -4,22 +4,22 @@ related_key: connect Milvus
 summary: Learn how to connect to a Milvus server.
 ---
 
-# Manage Milvus Connections
+# 管理Milvus连接
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to connect to and disconnect from a Milvus server.
+当前主题介绍怎么连接、断开连接Milvus服务器。
 
 <div class="alert note">
-  Ensure to connect to Milvus server before any operations.
+  在其他操作前确保连接到Milvus服务器。
 </div>
 
-Below example connects to a Milvus server with host as `localhost` and port as `19530` and disconnects from it.
+下面的例子使用 `localhost` 作为主机名，端口号`19530`连接或断开连接到Milvus服务器。
 
 
-## Connect to a Milvus server
+## 连接到Milvus服务器
 
-Construct a Milvus connection. Ensure to connect to Milvus server before any operations.
+构建一个Milvus连接。在其他操作前确保已连接Milvus服务。
 
 {{fragments/multiple_code.md}}
 
@@ -49,15 +49,15 @@ connect -h localhost -p 19530 -a default
 	<tbody>
 	<tr>
 		<td><code>alias</code></td>
-		<td>Alias of the Milvus connection to construct.</td>
+		<td>创建的Milvus连接的别名。</td>
 	</tr>
 	<tr>
 		<td><code>host</code></td>
-		<td>IP address of the Milvus server.</td>
+		<td>Milvus服务IP地址。</td>
 	</tr>
 	<tr>
 		<td><code>port</code></td>
-		<td>Port of the Milvus server.</td>
+		<td>Milvus服务端口号。</td>
 	</tr>
 	</tbody>
 </table>
@@ -114,9 +114,9 @@ connect -h localhost -p 19530 -a default
     </tbody>
 </table>
 
-## Disconnect from a Milvus server
+## 断开MIlvus连接
 
-Disconnect from a Milvus server.
+从MIlvus服务器断开。
 
 {{fragments/multiple_code.md}}
 
