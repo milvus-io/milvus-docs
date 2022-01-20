@@ -4,28 +4,28 @@ related_key: create collection
 summary: Learn how to create a collection in Milvus.
 ---
 
-# Create a Collection
+# 创建集合
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to create a collection in Milvus.
+当前主题介绍如何在Milvus中创建一个集合。
 
-A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Collection](glossary.md#Collection) for more information.
+一个集合由一或多个分区构成。 当创建一个新的集合时，Milvus创建一个默认的分区 `_default`。更多信息参见[Glossary - Collection](glossary.md#Collection)。
 
-The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
+下面的例子创建一个两分片[shard](glossary.md#Sharding)的集合，名为`book`, 有一个主键字段名为`book_id`，一个 `INT64`标量字段名为`word_count`, 和一个二维浮点向量字段名为`book_intro`。 真实应用场景往往会使用比这个例子更高维的向量。
 
 
-## Prepare Schema
+## 准备架构
 
 <div class="alert note">
     <ul>
-        <li><a href="manage_connection.md">Connecting to Milvus server</a> before any operation.</li>
-        <li>The collection to create must contain a primary key field and a vector field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
+        <li><a href="manage_connection.md">Connecting to Milvus server</a> 在其他操作前确保已连接到Milvus</li>
+        <li>创建集合必须包含主键字段与向量字段，INT64是目前Milvus版本主键字段唯一支持的数据类型。</li>
     </ul>
 </div>
 
 
-First, prepare necessary parameters, including field schema, collection schema, and collection name.
+首先，准备必要参数，包括字段架构，集合架构和集合名。
 
 {{fragments/multiple_code.md}}
 
@@ -247,9 +247,9 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
     </tbody>
 </table>
 
-## Create a collection with the schema
+## 通过架构创建集合
 
-Then, create a collection with the schema you specified above.
+再者，根据上面定制的架构创建集合。
 
 {{fragments/multiple_code.md}}
 
