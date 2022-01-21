@@ -4,14 +4,14 @@ related_key: drop collection
 summary: Learn how to drop a collection in Milvus.
 ---
 
-# Drop a collection
+# 删除集合
 
 {{fragments/translation_needed.md}}
 
-Remove a collection and the data within.
+删除一个集合，连同数据一起。
 
 <div class="alert caution">
-Dropping a collection irreversibly deletes all data within it.
+删除集合将不可逆的删除集合中的所有数据。
 </div>
 
 
