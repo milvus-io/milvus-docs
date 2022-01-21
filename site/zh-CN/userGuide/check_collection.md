@@ -4,15 +4,15 @@ related_key: collection
 summary: Learn how to check collection information in Milvus.
 ---
 
-# Check Collection Information
+# 查看集合信息
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to check the information of the collection in Milvus.
+当前主题介绍怎么在Milvus查看集合信息。
 
-## Check if a collection exists
+## 查看集合是否存在
 
-Verify if a collection exists in Milvus.
+验证Milvus中是否存在集合。
 
 {{fragments/multiple_code.md}}
 
@@ -77,9 +77,9 @@ describe collection -c book
     </tbody>
 </table>
 
-## Check collection details
+## 查看集合明细
 
-Check the details of a collection.
+查看集合的明细。
 
 {{fragments/multiple_code.md}}
 
@@ -142,9 +142,9 @@ describe collection -c book
 </table>
 
 
-## List all collections
+## 列出所有集合
 
-List all collections in this Milvus Instance.
+列出Milvus实例中所有集合。
 
 {{fragments/multiple_code.md}}
 
