@@ -4,21 +4,22 @@ related_key: collection alias
 summary: Learn how to manage collection alias in Milvus.
 ---
 
-# Collection Alias
+# 集合别名
 
 {{fragments/translation_needed.md}}
 
-Milvus supports specifying a unique alias for a collection.
+Milvus支持为集合指定唯一别名。
 
 <div class="alert note">
-A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
+集合别名是全局唯一，因此您不能给两个不同集合安排相同别名。但您可给一个集合安排几个别名。
 </div>
 
-The following example is based on the alias `publication`.
+下面的例子基于别名`publication`。
 
-## Create a collection alias
 
-Specify an an alias for a collection.
+## 创建集合别名
+
+为集合指定别名。
 
 {{fragments/multiple_code.md}}
 
@@ -51,11 +52,11 @@ create alias -c book -a publication
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to create alias on.</td>
+            <td>要创建别名的集合名称。</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to create.</td>
+            <td>集合别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -105,9 +106,9 @@ create alias -c book -a publication
 
 
 
-## Drop a collection alias
+## 删除集合别名
 
-Drop a specified alias.
+删除一个指定的别名。
 
 {{fragments/multiple_code.md}}
 
@@ -179,9 +180,9 @@ delete alias -c book -a publication
 </table>
 
 
-## Alter a collection alias
+## 修改集合别名
 
-Alter an existing alias to another collection.
+修改一个存在的别名到另一个。
 
 {{fragments/multiple_code.md}}
 
