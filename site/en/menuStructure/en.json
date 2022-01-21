@@ -742,31 +742,6 @@
       "order": 3
     },
     {
-      "id": "systemconfigurations",
-      "title": "System Configurations",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "isMenu": true
-    },
-    {
-      "id": "configuration_standalone-basic.md",
-      "title": "Milvus Stanalone",
-      "label1": "reference",
-      "label2": "systemconfigurations",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "configuration_cluster-basic.md",
-      "title": "Milvus Cluster",
-      "label1": "reference",
-      "label2": "systemconfigurations",
-      "label3": "",
-      "order": 1
-    },
-    {
       "id": "metric.md",
       "title": "Similarity Metrics",
       "label1": "reference",
