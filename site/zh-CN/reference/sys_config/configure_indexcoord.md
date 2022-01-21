@@ -6,6 +6,8 @@ summary: Learn how to configure index coordinator of Milvus.
 
 # Index Coordinator-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the index coordinator-related configurations of Milvus.
 
 Index coordinator (index coord) manages topology of the index nodes, and maintains index metadata.

@@ -6,6 +6,8 @@ summary: Learn how to configure common parameters of Milvus.
 
 # Common Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the common configurations of Milvus.
 
 Under this section, you can configure the default names of partition and index, and the Time Travel (data retention) span of Milvus.

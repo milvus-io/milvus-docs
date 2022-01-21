@@ -142,7 +142,7 @@ Configure and start Milvus by adding `--values` or `--set` in the command for in
 
 ```
 # For instance, start a Milvus cluster with compaction disabled
-helm install my-release milvus/milvus --set dataCoord.enableCompaction=false
+$ helm install my-release milvus/milvus --set dataCoord.enableCompaction=false
 ```
 
 ## What's next

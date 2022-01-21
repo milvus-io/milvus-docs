@@ -6,6 +6,8 @@ summary: Learn how to configure query coordinator of Milvus.
 
 # Query Coordinator-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the query coordinator-related configurations of Milvus.
 
 Query coordinator (query coord) manages topology and load-balancing of the query nodes, and handoff operation from growing segments to sealed segments.

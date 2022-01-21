@@ -6,6 +6,8 @@ summary: Learn how to configure MinIO for Milvus.
 
 # MinIO-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the MinIO-related configurations of Milvus.
 
 Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under MinIO section.

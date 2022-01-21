@@ -8,6 +8,8 @@ summary: Learn how to configure your Milvus.
 
 # Configure Milvus
 
+{{fragments/translation_needed.md}}
+
 This topic describes how to configure your Milvus.
 
 {{tab}}

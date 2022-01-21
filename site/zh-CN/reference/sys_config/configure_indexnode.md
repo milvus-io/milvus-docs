@@ -6,6 +6,8 @@ summary: Learn how to configure index node of Milvus.
 
 # Index Node-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the index node-related configurations of Milvus.
 
 Index node builds indexes.

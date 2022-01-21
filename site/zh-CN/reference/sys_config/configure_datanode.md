@@ -6,6 +6,8 @@ summary: Learn how to configure data node of Milvus.
 
 # Data Node-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the data node-related configurations of Milvus.
 
 Data node retrieves incremental log data by subscribing to the log broker, processes mutation requests, and packs log data into log snapshots and stores them in the object storage.

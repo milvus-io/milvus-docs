@@ -6,6 +6,8 @@ summary: Learn how to configure proxy of Milvus.
 
 # Proxy-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the proxy-related configurations of Milvus.
 
 Proxy is the access layer of the system and endpoint to users. It validates client requests and reduces the returned results.

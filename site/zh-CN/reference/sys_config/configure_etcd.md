@@ -6,6 +6,8 @@ summary: Learn how to configure etcd for Milvus.
 
 # etcd-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the etcd-related configurations of Milvus.
 
 etcd is the metadata engine supporting Milvus' metadata storage and access. 

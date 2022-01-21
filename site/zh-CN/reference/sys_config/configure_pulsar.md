@@ -6,6 +6,8 @@ summary: Learn how to configure Pulsar for Milvus cluster.
 
 # Pulsar-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the Pulsar-related configurations of Milvus.
 
 Pulsar is the underlying engine supporting Milvus cluster's reliable storage and publication/subscription of message streams. 

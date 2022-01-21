@@ -6,6 +6,8 @@ summary: Learn how to configure log of Milvus.
 
 # Log-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the log-related configurations of Milvus.
 
 Using Milvus generates a collection of logs. By default, Milvus uses logs to record information at debug or even higher level for standard output (stdout) and standard error (stderr).

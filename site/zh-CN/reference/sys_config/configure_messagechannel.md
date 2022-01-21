@@ -6,6 +6,8 @@ summary: Learn how to configure message channels of Milvus.
 
 # Message Channel-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the message channel-related configurations of Milvus.
 
 Under this section, you can configure the message channel name prefixes and component subscription name prefixes.

@@ -6,6 +6,8 @@ summary: Learn how to configure common parameters of Milvus.
 
 # Common Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the knowhere-related configurations of Milvus.
 
 Knowhere is the search engine of Milvus.

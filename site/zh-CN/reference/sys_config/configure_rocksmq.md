@@ -6,6 +6,8 @@ summary: Learn how to configure RocksMQ for Milvus standalone.
 
 # RocksMQ-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the RocksMQ-related configurations of Milvus.
 
 RocksMQ is the underlying engine supporting Milvus standalone's reliable storage and publication/subscription of message streams. It is implemented on the basis of RocksDB.

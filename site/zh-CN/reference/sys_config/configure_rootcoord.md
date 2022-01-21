@@ -6,6 +6,8 @@ summary: Learn how to configure root coordinator of Milvus.
 
 # Root Coordinator-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the root coordinator-related configurations of Milvus.
 
 Root coordinator (root coord) handles data definition language (DDL) and data control language (DCL) requests, manages TSO (timestamp Oracle), and publishes time tick messages.

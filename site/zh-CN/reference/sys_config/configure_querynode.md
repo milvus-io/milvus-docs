@@ -6,6 +6,8 @@ summary: Learn how to configure query node of Milvus.
 
 # Query Node-related Configurations
 
+{{fragments/translation_needed.md}}
+
 This topic introduces the query node-related configurations of Milvus.
 
 Query node performs hybrid search of vector and scalar data on both incremental and historical data.
