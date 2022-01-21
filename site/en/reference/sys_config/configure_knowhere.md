@@ -1,5 +1,5 @@
 ---
-id: configure_common.md
+id: configure_knowhere.md
 related_key: configure
 summary: Learn how to configure common parameters of Milvus.
 ---
