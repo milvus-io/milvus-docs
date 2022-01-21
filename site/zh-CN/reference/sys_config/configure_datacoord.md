@@ -10,7 +10,7 @@ summary: Learn how to configure data coordinator of Milvus.
 
 This topic introduces the data coordinator-related configurations of Milvus.
 
-Data coordinator (data coord) manages topology of the data nodes, maintains metadata, and triggers flush, compact, and other background data operations.
+Data coordinator (data coord) manages the topology of data nodes, maintains metadata, and triggers flush, compact, and other background data operations.
 
 Under this section, you can configure data coord address, segment settings, compaction, garbage collection, etc.
 

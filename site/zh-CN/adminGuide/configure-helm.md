@@ -87,7 +87,7 @@ Sorted by:
 <table id="purpose">
 <thead>
   <tr>
-    <th class="width20">Purposes</th>
+    <th class="width20">Purpose</th>
     <th class="width80">Parameters</th>
   </tr>
 </thead>
