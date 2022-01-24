@@ -38,12 +38,12 @@ const milvusClient = new MilvusClient(address);
 ```
 
 ```go
-milvusClient, err := client.NewGrpcClient(
-	context.Background(),  // ctx
-	"localhost:19530"      // addr
+	milvusClient, err := client.NewGrpcClient(
+		context.Background(), // ctx
+		"localhost:19530",    // addr
 	)
 	if err != nil {
-		// Handle error here.
+		log.Fatal("failed to connect to Milvus:", err.Error())
 	}
 ```
 
@@ -167,7 +167,7 @@ connect -h localhost -p 19530 -a default
 
 ### Return
 
-A milvus connection created by the passed parameters.
+A Milvus connection created by the passed parameters.
 
 ### Raises
 
@@ -177,7 +177,6 @@ A milvus connection created by the passed parameters.
   <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
 </ul>  
 
-### 
 </div>
 
 
@@ -197,10 +196,7 @@ await milvusClient.closeConnection();
 ```
 
 ```go
-err := client.Close()
-	if err != nil {
-		// Handle error here.
-	}
+milvusClient.Close()
 ```
 
 ```java

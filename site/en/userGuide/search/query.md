@@ -32,7 +32,14 @@ await milvusClient.collectionManager.loadCollection({
 ```
 
 ```go
-
+err := milvusClient.LoadCollection(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    false                   // async
+    )
+if err != nil {
+    log.Fatal("failed to load collection:", err.Error())
+}
 ```
 
 ```java
@@ -69,18 +76,7 @@ const results = await milvusClient.dataManager.query({
 ```
 
 ```go
-searchResult, err := milvusClient.Search(
-  context.Background(),                    // ctx
-  "book",                                  // CollectionName
-  []string{},                              // partitionNames
-  "word_count <= 11000",                   // expr
-  []string{"book_id", "book_intro"},       // outputFields
-  queryVector,                             // vectors
-  "Vector",                                // vectorField
-  entity.L2,                               // metricType
-  2,                                       // topK
-  sp                                       // sp
-  )
+// This function is under active development on the GO client.
 ```
 
 ```java
@@ -255,7 +251,7 @@ console.log(results.data)
 ```
 
 ```go
-
+// This function is under active development on the GO client.
 ```
 
 ```java

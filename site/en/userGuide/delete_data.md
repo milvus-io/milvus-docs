@@ -14,7 +14,7 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 <div class="alert caution">
     <ul>
         <li>This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.</li>
-	<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
+		<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
         <li>Frequent deletion operations will impact the system performance.</li>
     </ul>
 </div>
@@ -88,7 +88,7 @@ await milvusClient.dataManager.deleteEntities({
 ```
 
 ```go
-
+// This function is under active development on the GO client.
 ```
 
 ```java

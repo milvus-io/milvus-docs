@@ -27,14 +27,14 @@ await milvusClient.indexManager.dropIndex({
 ```
 
 ```go
-err := milvusClient.DropIndex(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    "book_intro",           // fieldName
-    )
-    if err != nil {
-		// Handle error here.
-	}
+err = milvusClient.DropIndex(
+    context.Background(),     // ctx
+    "book",                   // CollectionName
+    "book_intro",             // fieldName
+)
+if err != nil {
+    log.Fatal("fail to drop index:", err.Error())
+}
 ```
 
 ```java

@@ -25,27 +25,15 @@ await milvusClient.collectionManager.releaseCollection({
 ```
 
 ```go
-err := milvusClient.ReleaseCollection(               // Release a collection.
+err := milvusClient.ReleaseCollection(
     context.Background(),                            // ctx
     "book",                                          // CollectionName
-    false                                            // async
     )
-    if err != nil {
-		// Handle error here.
-	}
+if err != nil {
+    log.Fatal("failed to release collection:", err.Error())
+}
 ```
 
-```go
-err := milvusClient.ReleasePartitions(               // Release partition(s).
-    context.Background(),                            // ctx
-    "book",                                          // CollectionName
-    []string{"_default"},                            // partitionNames
-    false                                            // async
-    )
-    if err != nil {
-		// Handle error here.
-	}
-```
 
 ```java
 milvusClient.releaseCollection(
@@ -103,10 +91,6 @@ release -c book
         <tr>
             <td><code>CollectionName</code></td>
             <td>Name of the collection to release.</td>
-        </tr>
-        <tr>
-            <td><code>partitionNames</code></td>
-            <td>List of names of the partitions to release.</td>
         </tr>
     </tbody>
 </table>

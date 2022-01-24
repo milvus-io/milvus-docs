@@ -11,7 +11,6 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
-
 {{fragments/multiple_code.md}}
 
 ```python
@@ -27,26 +26,14 @@ await milvusClient.collectionManager.loadCollection({
 ```
 
 ```go
-err := milvusClient.LoadCollection(               // Load a collection.
+err := milvusClient.LoadCollection(
     context.Background(),   // ctx
     "book",                 // CollectionName
     false                   // async
     )
-    if err != nil {
-		// Handle error here.
-	}
-```
-
-```go
-err := milvusClient.LoadPartitions(               // Load partition(s).
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    []string{"_default"},   // partitionNames
-    false                   // async
-    )
-    if err != nil {
-		// Handle error here.
-	}
+if err != nil {
+    log.Fatal("failed to load collection:", err.Error())
+}
 ```
 
 ```java
@@ -105,10 +92,6 @@ load -c book
         <tr>
             <td><code>CollectionName</code></td>
             <td>Name of the collection to load.</td>
-        </tr>
-        <tr>
-            <td><code>partitionNames</code></td>
-            <td>List of names of the partitions to load. All partitions will be loaded if it is left empty.</td>
         </tr>
         <tr>
             <td><code>async</code></td>

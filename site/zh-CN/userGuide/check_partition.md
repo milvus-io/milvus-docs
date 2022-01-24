@@ -35,9 +35,10 @@ hasPar, err := milvusClient.HasPartition(
     "book",                 // CollectionName
     "novel",                // partitionName
     )
-    if err != nil {
-		// Handle error here.
-	}
+if err != nil {
+    log.Fatal("failed to check the partition:", err.Error())
+}
+log.Println(hasPar)
 ```
 
 ```java
@@ -154,9 +155,10 @@ partitions, err := milvusClient.ShowPartitions(
     context.Background(),   // ctx
     "book",                 // CollectionName
     )
-    if err != nil {
-		// Handle error here.
-	}
+if err != nil {
+    log.Fatal("failed to list partitions:", err.Error())
+}
+log.Println(listPar)
 ```
 
 ```java

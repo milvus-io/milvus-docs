@@ -32,7 +32,14 @@ await milvusClient.collectionManager.loadCollection({
 ```
 
 ```go
-
+err := milvusClient.LoadCollection(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    false                   // async
+    )
+if err != nil {
+    log.Fatal("failed to load collection:", err.Error())
+}
 ```
 
 ```java
@@ -71,9 +78,9 @@ const searchParams = {
 ```
 
 ```go
-sp, _ := entity.NewIndexFlatSearchParam(  // NewIndex*SearchParam func
-  10          // searchParam
-  )
+sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
+	10,                                  // searchParam
+)
 ```
 
 ```java
@@ -255,19 +262,21 @@ const results = await milvusClient.dataManager.search({
 ```
 
 ```go
-queryVector := [][]float32 {{0.1, 0.2}}   // vectors
 searchResult, err := milvusClient.Search(
-  context.Background(),     // ctx
-  "book",                   // CollectionName
-  []string{},               // partitionNames
-  "",                       // expr
-  []string{"book_id"},      // outputFields
-  queryVector,              // vectors
-  "Vector",                 // vectorField
-  entity.L2,                // metricType
-  2,                        // topK
-  sp                        // sp
-  )
+	context.Background(),                    // ctx
+	"book",                                  // CollectionName
+	[]string{},                              // partitionNames
+	"",                                      // expr
+	[]string{"book_id"},                     // outputFields
+	[]entity.Vector{entity.FloatVector([]float32{0.1, 0.2})}, // vectors
+	"book_intro",                            // vectorField
+	entity.L2,                               // metricType
+	2,                                       // topK
+	sp,                                      // sp
+)
+if err != nil {
+	log.Fatal("fail to search collection:", err.Error())
+}
 ```
 
 ```java
@@ -513,7 +522,11 @@ await milvusClient.collectionManager.releaseCollection({  collection_name: "book
 ```
 
 ```go
-
+fmt.Printf("%#v\n", searchResult)
+for _, sr := range searchResult {
+	fmt.Println(sr.IDs)
+	fmt.Println(sr.Scores)
+}
 ```
 
 ```java

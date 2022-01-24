@@ -43,13 +43,13 @@ const index_params = {
 ```
 
 ```go
-idx, err := entity.NewIndexIvfFlat(  // NewIndex func
-    entity.L2,     // metricType
-    1024           // ConstructParams
-    )
-    if err != nil {
-		// Handle error here.
-	}
+idx, err := entity.NewIndexIvfFlat(   // NewIndex func
+    entity.L2,                        // metricType
+    1024,                             // ConstructParams
+)
+if err != nil {
+    log.Fatal("fail to create ivf flat index parameter:", err.Error())
+}
 ```
 
 ```java
@@ -220,7 +220,7 @@ Timeout []:
         </td>
 	</tr>
     <tr>
-		<td><code>metric_type</code></td>
+		<td><code>metricType</code></td>
 		<td>Type of metrics used to measure similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
@@ -327,16 +327,16 @@ await milvusClient.indexManager.createIndex({
 ```
 
 ```go
-err := milvusClient.CreateIndex(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    "book_intro",           // fieldName
-    idx,                    // entity.Index
-    false                   // async
-    )
-    if err != nil {
-		// Handle error here.
-	}
+err = milvusClient.CreateIndex(
+    context.Background(),        // ctx
+    "book",                      // CollectionName
+    "book_intro",                // fieldName
+    idx,                         // entity.Index
+    false,                       // async
+)
+if err != nil {
+    log.Fatal("fail to create index:", err.Error())
+}
 ```
 
 ```java

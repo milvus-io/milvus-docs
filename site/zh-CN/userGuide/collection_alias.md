@@ -8,7 +8,7 @@ summary: Learn how to manage collection alias in Milvus.
 
 {{fragments/translation_needed.md}}
 
-Milvus supports specifying a unique alias for a collection.
+This topic describes how to manage collection alias. Milvus supports specifying a unique alias for a collection.
 
 <div class="alert note">
 A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
@@ -38,7 +38,7 @@ await milvusClient.collectionManager.createAlias({
 ```
 
 ```go
-// This function is under active development on the client.
+// This function is under active development on the GO client.
 ```
 
 ```java
@@ -156,7 +156,7 @@ await milvusClient.collectionManager.dropAlias({
 ```
 
 ```go
-// This function is under active development on the client.
+// This function is under active development on the GO client.
 ```
 
 ```java
@@ -258,7 +258,7 @@ await milvusClient.collectionManager.alterAlias({
 ```
 
 ```go
-// This function is under active development on the client.
+// This function is under active development on the GO client.
 ```
 
 ```java

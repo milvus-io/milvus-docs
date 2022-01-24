@@ -36,9 +36,9 @@ err := milvusClient.DropPartition(
     "book",                 // CollectionName
     "novel",                // partitionName
     )
-    if err != nil {
-		// Handle error here.
-	}
+if err != nil {
+    log.Fatal("fail to drop partition:", err.Error())
+}
 ```
 
 ```java

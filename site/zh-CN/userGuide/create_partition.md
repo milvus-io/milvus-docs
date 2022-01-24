@@ -37,10 +37,10 @@ err := milvusClient.CreatePartition(
     context.Background(),   // ctx
     "book",                 // CollectionName
     "novel"                 // partitionName
-  )
-    if err != nil {
-		// Handle error here.
-	}
+)
+if err != nil {
+    log.Fatal("failed to create partition:", err.Error())
+}
 ```
 
 ```java

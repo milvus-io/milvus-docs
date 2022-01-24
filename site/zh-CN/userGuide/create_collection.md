@@ -81,31 +81,34 @@ const params = {
 ```
 
 ```go
+var (
+		collectionName = "book"
+	)
 schema := &entity.Schema{
-		CollectionName: "book",
-		Description:    "Test book search",
-		Fields: []*entity.Field{
-			{
-				Name:       "book_id",
-				DataType:   entity.FieldTypeInt64,
-				PrimaryKey: true,
-				AutoID:     false,
-			},
-			{
-				Name:       "word_count",
-				DataType:   entity.FieldTypeInt64,
-				PrimaryKey: false,
-				AutoID:     false,
-			},
-			{
-				Name:     "book_intro",
-				DataType: entity.FieldTypeFloatVector,
-				TypeParams: map[string]string{
-					"dim": "2",
-				},
-			},
-		},
-	}
+    CollectionName: collectionName,
+    Description:    "Test book search",
+    Fields: []*entity.Field{
+        {
+            Name:       "book_id",
+            DataType:   entity.FieldTypeInt64,
+            PrimaryKey: true,
+            AutoID:     false,
+        },
+        {
+            Name:       "word_count",
+            DataType:   entity.FieldTypeInt64,
+            PrimaryKey: false,
+            AutoID:     false,
+        },
+        {
+            Name:     "book_intro",
+            DataType: entity.FieldTypeFloatVector,
+            TypeParams: map[string]string{
+                "dim": "2",
+            },
+        },
+    },
+}
 ```
 
 ```java
@@ -231,7 +234,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to create.</td>
             <td>N/A</td>
         </tr>
@@ -467,14 +470,14 @@ await milvusClient.collectionManager.createCollection(params);
 ```
 
 ```go
-err := milvusClient.CreateCollection(
-    context.Background(),  // ctx
-    schema, 
-    1,  // shardNum
-    )
-	if err != nil {
-		// Handle error here.
-	}
+err = milvusClient.CreateCollection(
+    context.Background(), // ctx
+    schema,
+    2, // shardNum
+)
+if err != nil {
+    log.Fatal("failed to create collection:", err.Error())
+}
 ```
 
 ```java

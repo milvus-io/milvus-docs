@@ -34,7 +34,14 @@ await milvusClient.collectionManager.loadCollection({
 ```
 
 ```go
-
+err := milvusClient.LoadCollection(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    false                   // async
+    )
+if err != nil {
+    log.Fatal("failed to load collection:", err.Error())
+}
 ```
 
 ```java
@@ -86,22 +93,24 @@ const results = await milvusClient.dataManager.search({
 ```
 
 ```go
-sp, _ := entity.NewIndexFlatSearchParam(  // NewIndex*SearchParam func
-  10          // searchParam
-  )
-queryVector := [][]float32 {{0.1, 0.2}}   // vectors
+sp, _ := entity.NewIndexFlatSearchParam(   // NewIndex*SearchParam func
+  10,                                      // searchParam
+)
 searchResult, err := milvusClient.Search(
-  context.Background(),     // ctx
-  "book",                   // CollectionName
-  []string{},               // partitionNames
-  "word_count <= 11000",    // expr
-  []string{"book_id"},      // outputFields
-  queryVector,              // vectors
-  "book_intro",             // vectorField
-  entity.L2,                // metricType
-  2,                        // topK
-  sp                        // sp
-  )
+  context.Background(),                    // ctx
+  "book",                                  // CollectionName
+  []string{},                              // partitionNames
+  "word_count <= 11000",                   // expr
+  []string{"book_id"},                     // outputFields
+  []entity.Vector{entity.FloatVector([]float32{0.1, 0.2})}, // vectors
+  "book_intro",                            // vectorField
+  entity.L2,                               // metricType
+  2,                                       // topK
+  sp,                                      // sp
+)
+if err != nil {
+  log.Fatal("fail to search collection:", err.Error())
+}
 ```
 
 ```java
@@ -411,7 +420,11 @@ console.log(results.results)
 ```
 
 ```go
-
+fmt.Printf("%#v\n", searchResult)
+for _, sr := range searchResult {
+  fmt.Println(sr.IDs)
+  fmt.Println(sr.Scores)
+}
 ```
 
 ```java

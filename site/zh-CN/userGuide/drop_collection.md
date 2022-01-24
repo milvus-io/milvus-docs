@@ -8,7 +8,7 @@ summary: Learn how to drop a collection in Milvus.
 
 {{fragments/translation_needed.md}}
 
-Remove a collection and the data within.
+This topic describes how to drop a collection and the data within.
 
 <div class="alert caution">
 Dropping a collection irreversibly deletes all data within it.
@@ -28,13 +28,13 @@ await milvusClient.collectionManager.dropCollection({  collection_name: "book",}
 ```
 
 ```go
-err := milvusClient.DropCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    )
-    if err != nil {
-		// Handle error here.
-	}
+err = milvusClient.DropCollection(
+		context.Background(), // ctx
+		"book",               // CollectionName
+)
+if err != nil {
+	log.Fatal("fail to drop collection:", err.Error())
+}
 ```
 
 ```java

@@ -38,7 +38,21 @@ const data = Array.from({ length: 2000 }, (v,k) => ({
 ```
 
 ```go
-
+bookIDs := make([]int64, 0, 2000)
+wordCounts := make([]int64, 0, 2000)
+bookIntros := make([][]float32, 0, 2000)
+for i := 0; i < 2000; i++ {
+	bookIDs = append(bookIDs, int64(i))
+	wordCounts = append(wordCounts, int64(i+10000))
+	v := make([]float32, 0, 2)
+	for j := 0; j < 2; j++ {
+		v = append(v, rand.Float32())
+	}
+	bookIntros = append(bookIntros, v)
+}
+idColumn := entity.NewColumnInt64("book_id", bookIDs)
+wordColumn := entity.NewColumnInt64("word_count", wordCounts)
+introColumn := entity.NewColumnFloatVector("book_intro", 2, bookIntros)
 ```
 
 ```java
@@ -84,7 +98,17 @@ const mr = await milvusClient.dataManager.insert({{
 ```
 
 ```go
-
+_, err = milvusClient.Insert(
+	context.Background(), // ctx
+	"book",               // CollectionName
+	"",                   // partitionName
+	idColumn,             // columnarData
+	wordColumn,           // columnarData
+	introColumn,          // columnarData
+)
+if err != nil {
+	log.Fatal("failed to insert data:", err.Error())
+}
 ```
 
 ```java
@@ -148,6 +172,33 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to insert data in.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
+        <td>Name of the partition to insert data in. Data will be inserted in the default partition if left blank.</td>
+    </tr>
+	<tr>
+        <td><code>columnarData</code></td>
+        <td>Data to insert into each field.</td>
+    </tr>
+  </tbody>
+</table>
+
 <table class="language-java">
 	<thead>
 	<tr>
@@ -198,46 +249,6 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
     </tbody>
 </table>
 
-
-After the data are inserted, Milvus returns the `MutationResult` as an object. You can check the value of the `MutationResult`, which contains the corresponding primary keys of the inserted data. As for Milvus CLI, it automatically returns the row count of the successfully inserted data after the data is inserted.
-
-{{fragments/multiple_code.md}}
-
-```python
-mr.primary_keys
-```
-
-```javascript
-console.log(mr.IDs) 
-```
-
-```go
-
-```
-
-```java
-
-```
-
-```cli
-Reading file from remote URL.
-
-Reading csv file...  [####################################]  100%
-
-Column names are ['pk', 'example_field']
-
-Processed 2001 lines.
-
-Inserting ...
-
-Insert successfully.
-
---------------------------  ------------------
-Total insert entities:                    2000
-Total collection entities:                2000
-Milvus timestamp:           425790736918318406
---------------------------  ------------------
-```
 
 ## Limits
 

@@ -27,12 +27,13 @@ await milvusClient.collectionManager.hasCollection({
 
 ```go
 hasColl, err := milvusClient.HasCollection(
-    context.Background(),  // ctx
-    "book",                // CollectionName
-    )
-	if err != nil {
-		// Handle error here.
-	}
+    context.Background(), // ctx
+    collectionName,       // CollectionName
+)
+if err != nil {
+    log.Fatal("failed to check whether collection exists:", err.Error())
+}
+log.Println(hasColl)
 ```
 
 ```java
@@ -164,18 +165,19 @@ await milvusClient.collectionManager.getCollectionStatistics({     // Return the
 collDesc, err := milvusClient.DescribeCollection(               // Return the name and schema of the collection.
     context.Background(),   // ctx
     "book",                 // CollectionName
-    )
-    if err != nil {
-		// Handle error here.
-	}
+)
+if err != nil {
+    log.Fatal("failed to check collection schema:", err.Error())
+}
+log.Printf("%v\n", collDesc)
 
 collStat, err := milvusClient.GetCollectionStatistics(          // Return the statistics information of the collection.
     context.Background(),   // ctx
     "book",                 // CollectionName
-    )
-    if err != nil {
-		// Handle error here.
-	}
+)
+if err != nil {
+log.Fatal("failed to check collection statistics:", err.Error())
+}
 ```
 
 ```java
@@ -349,9 +351,10 @@ await milvusClient.collectionManager.showCollections();
 listColl, err := milvusClient.ListCollection(
     context.Background(),   // ctx
     )
-    if err != nil {
-		// Handle error here.
-	}
+if err != nil {
+		log.Fatal("failed to list all collections:", err.Error())
+    }
+log.Println(listColl)
 ```
 
 ```java
