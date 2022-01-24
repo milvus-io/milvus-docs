@@ -18,9 +18,8 @@ Dropping a collection irreversibly deletes all data within it.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.drop()
+from pymilvus import utility
+utility.drop_collection("book")
 ```
 
 ```javascript
@@ -47,6 +46,21 @@ milvusClient.dropCollection(
 ```cli
 delete collection -c book
 ```
+
+<table class="language-python">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+	</tbody>
+</table>
 
 <table class="language-javascript">
 	<thead>
