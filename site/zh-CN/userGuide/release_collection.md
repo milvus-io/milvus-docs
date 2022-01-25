@@ -1,67 +1,78 @@
 ---
-id: drop_index.md
-related_key: drop index
-summary: Learn how to drop an index in Milvus.
+id: release_collection.md
+related_key: release collection
+summary: Learn how to release a collection from memory in Milvus.
 ---
 
-# Drop an Index
+# Release a collection
 
-This topic describes how to drop an index in Milvus. 
+{{fragments/translation_needed.md}}
 
-<div class="alert caution">
-Dropping an index irreversibly removes all corresponding index files.
-</div>
+This topic describes how to release a collection from memory after a search or a query to reduce memory usage.
 
 {{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.drop_index()
+collection.release()
 ```
 
 ```javascript
-await milvusClient.indexManager.dropIndex({
+await milvusClient.collectionManager.releaseCollection({
   collection_name: "book",
 });
 ```
 
 ```go
-err = milvusClient.DropIndex(
-    context.Background(),     // ctx
-    "book",                   // CollectionName
-    "book_intro",             // fieldName
-)
+err := milvusClient.ReleaseCollection(
+    context.Background(),                            // ctx
+    "book",                                          // CollectionName
+    )
 if err != nil {
-    log.Fatal("fail to drop index:", err.Error())
+    log.Fatal("failed to release collection:", err.Error())
 }
 ```
 
+
 ```java
-milvusClient.dropIndex(
-        DropIndexParam.newBuilder()
+milvusClient.releaseCollection(
+        ReleaseCollectionParam.newBuilder()
                 .withCollectionName("book")
-                .withFieldName("book_intro")
                 .build());
 ```
 
 ```cli
-delete index -c book
+release -c book
 ```
 
+<table class="language-python">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>partition_name</code> (optional)</td>
+		<td>Name of the partition to release.</td>
+	</tr>
+	</tbody>
+</table>
 
 <table class="language-javascript">
 	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-        </tr>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
 	</thead>
 	<tbody>
-        <tr>
-            <td><code>collection_name</code></td>
-            <td>Name of the collection to drop index from.</td>
-        </tr>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to release.</td>
+	</tr>
 	</tbody>
 </table>
 
@@ -79,11 +90,7 @@ delete index -c book
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop index on.</td>
-        </tr>
-        <tr>
-            <td><code>fieldName</code></td>
-            <td>Name of the vector field to drop index on.</td>
+            <td>Name of the collection to release.</td>
         </tr>
     </tbody>
 </table>
@@ -98,11 +105,7 @@ delete index -c book
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop index on.</td>
-        </tr>
-        <tr>
-            <td><code>FieldName</code></td>
-            <td>Name of the vector field to drop index on.</td>
+            <td>Name of the collection to release.</td>
         </tr>
     </tbody>
 </table>
@@ -117,7 +120,11 @@ delete index -c book
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to drop index from.</td>
+            <td>Name of the collection to release.</td>
+        </tr>
+        <tr>
+            <td>-p (Optional/Multiple)</td>
+            <td>The name of the partition to release.</td>
         </tr>
     </tbody>
 </table>
@@ -126,9 +133,11 @@ delete index -c book
 ## What's next
 
 - Learn more basic operations of Milvus:
+  - [Insert data into Milvus](insert_data.md)
+  - [Create a partition](create_partition.md)
+  - [Build an index for vectors](build_index.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)

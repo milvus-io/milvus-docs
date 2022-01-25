@@ -8,7 +8,7 @@ summary: Learn how to manage collection alias in Milvus.
 
 {{fragments/translation_needed.md}}
 
-Milvus supports specifying a unique alias for a collection.
+This topic describes how to manage collection alias. Milvus supports specifying a unique alias for a collection.
 
 <div class="alert note">
 A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
@@ -35,6 +35,18 @@ await milvusClient.collectionManager.createAlias({
   collection_name: "book",
   alias: "publication",
 });
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+milvusClient.createAlias(
+    CreateAliasParam.newBuilder()
+    .withCollectionName("book")
+    .withAlias("publication")
+    .build());
 ```
 
 ```cli
@@ -75,6 +87,25 @@ create alias -c book -a publication
         </tr>
         <tr>
             <td><code>alias</code></td>
+            <td>Collection alias to create.</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to create alias on.</td>
+        </tr>
+        <tr>
+            <td><code>Alias</code></td>
             <td>Collection alias to create.</td>
         </tr>
 	</tbody>
@@ -124,6 +155,17 @@ await milvusClient.collectionManager.dropAlias({
 });
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+milvusClient.dropAlias(
+    DropAliasParam.newBuilder()
+    .withAlias("publication")
+    .build());
+```
+
 ```cli
 delete alias -c book -a publication
 ```
@@ -159,6 +201,21 @@ delete alias -c book -a publication
 	</tbody>
 </table>
 
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>Alias</code></td>
+            <td>Collection alias to drop.</td>
+        </tr>
+	</tbody>
+</table>
+
 <table class="language-cli">
     <thead>
         <tr>
@@ -181,7 +238,7 @@ delete alias -c book -a publication
 
 ## Alter a collection alias
 
-Alter an existing alias to another collection.
+Alter an existing alias to another collection. The following example is based on the situation that the alias `publication` was originally created for another collection.
 
 {{fragments/multiple_code.md}}
 
@@ -198,6 +255,18 @@ await milvusClient.collectionManager.alterAlias({
   collection_name: "book",
   alias: "publication",
 });
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+milvusClient.alterAlias(
+    AlterAliasParam.newBuilder()
+    .withCollectionName("book")
+    .withAlias("publication")
+    .build());
 ```
 
 ```cli
@@ -238,6 +307,25 @@ create alias -c book -A -a publication
         </tr>
         <tr>
             <td><code>alias</code></td>
+            <td>Collection alias to alter.</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to alter alias to.</td>
+        </tr>
+        <tr>
+            <td><code>Alias</code></td>
             <td>Collection alias to alter.</td>
         </tr>
 	</tbody>
