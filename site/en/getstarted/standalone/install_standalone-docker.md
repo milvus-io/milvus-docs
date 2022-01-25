@@ -21,28 +21,6 @@ summary: Learn how to install Milvus stanalone with Docker Compose.
 $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
-## Configure Milvus (optional)
-
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_tag}}/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
-
-```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_tag}}/configs/milvus.yaml
-```
-
-Modify the configurations to suit your needs. See [Milvus Standalone System Configurations](configuration_standalone-basic.md) for more information.
-
-
-In `docker-compose.yml`, map the local path to your `milvus.yaml` file onto the corresponding docker container path to the configuration file `/milvus/configs/milvus.yaml` under the `volumes` section.
-
-```yaml
-    volumes:
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      - /local/path/to/your/file:/milvus/configs/milvus.yaml     # Map the local path to the container path
-```
-
-<div class="alert note">
-Data is stored in the <code>volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
-</div>
 
 ## Start Milvus
 

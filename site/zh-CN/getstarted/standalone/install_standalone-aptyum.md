@@ -29,7 +29,7 @@ Currently, Milvus supports installation via Launchpad PPA only on Ubuntu 18.04.
 
 ```bash
 $ sudo apt install software-properties-common
-$ sudo add-apt-repository ppa:milvusdb/milvus-standalone
+$ sudo add-apt-repository ppa:milvusdb/milvus
 $ sudo apt update
 $ sudo apt install milvus
 ```
@@ -50,7 +50,7 @@ $ sudo apt-get -f install
 You can install Milvus standalone with YUM.
 
 ```bash
-$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-2.0.0-preGA.1.el7.x86_64.rpm
+$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_rpm_name}}.rpm
 ```
 
 
