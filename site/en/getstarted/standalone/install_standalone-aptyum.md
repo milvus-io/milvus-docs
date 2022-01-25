@@ -37,7 +37,7 @@ $ sudo apt install milvus
 Alternatively, you can download the Debian software package and install Milvus standalone.
 
 ```bash
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus_2.0.0-preGA_1-1_amd64.deb
+$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_deb_name}}.deb
 $ sudo apt-get update
 $ sudo dpkg -i {{var.milvus_deb_name}}.deb
 $ sudo apt-get -f install
