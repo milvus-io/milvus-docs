@@ -46,7 +46,7 @@ if (respHasCollection.getData() == Boolean.TRUE) {
 }
 ```
 
-```cli
+```shell
 describe collection -c book
 ```
 
@@ -196,7 +196,7 @@ GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponse
 System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
 ```
 
-```cli
+```shell
 describe collection -c book
 ```
 
@@ -364,7 +364,7 @@ R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
 System.out.println(respShowCollections);
 ```
 
-```cli
+```shell
 list collections
 ```
 

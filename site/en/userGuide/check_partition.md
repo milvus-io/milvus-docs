@@ -50,7 +50,7 @@ if (respHasCollection.getData() == Boolean.TRUE) {
 }
 ```
 
-```cli
+```shell
 describe partition -c book -p novel
 ```
 
@@ -167,7 +167,7 @@ R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
 System.out.println(respShowPartitions);
 ```
 
-```cli
+```shell
 list partitions -c book
 ```
 

@@ -40,7 +40,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 

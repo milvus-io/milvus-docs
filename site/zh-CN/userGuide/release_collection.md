@@ -42,7 +42,7 @@ milvusClient.releaseCollection(
                 .build());
 ```
 
-```cli
+```shell
 release -c book
 ```
 

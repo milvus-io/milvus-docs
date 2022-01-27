@@ -49,7 +49,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 
@@ -88,7 +88,7 @@ final Integer SEARCH_K = 2;                       // TopK
 final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
 ```
 
-```cli
+```shell
 search
 
 Collection name (book): book
@@ -296,7 +296,7 @@ SearchParam searchParam = SearchParam.newBuilder()
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
-```cli
+```shell
 
 ```
 
@@ -505,7 +505,7 @@ results[0].distances
 console.log(results.results)
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 
@@ -536,7 +536,7 @@ milvusClient.releaseCollection(
                 .build());
 ```
 
-```cli
+```shell
 release -c book
 ```
 

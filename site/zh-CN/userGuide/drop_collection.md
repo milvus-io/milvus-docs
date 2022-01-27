@@ -43,7 +43,7 @@ milvusClient.dropCollection(
                 .build());
 ```
 
-```cli
+```shell
 delete collection -c book
 ```
 
