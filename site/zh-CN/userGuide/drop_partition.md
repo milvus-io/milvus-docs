@@ -49,7 +49,7 @@ milvusClient.dropPartition(
                 .build());
 ```
 
-```cli
+```shell
 delete partition -c book -p novel
 ```
 

@@ -51,7 +51,7 @@ milvusClient.createPartition(
                 .build());
 ```
 
-```cli
+```shell
 create partition -c book -p novel
 ```
 

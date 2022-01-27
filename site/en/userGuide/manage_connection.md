@@ -55,7 +55,7 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 				.build());
 ```
 
-```cli
+```shell
 connect -h localhost -p 19530 -a default
 ```
 
@@ -203,7 +203,7 @@ milvusClient.Close()
 milvusClient.close()
 ```
 
-```cli
+```shell
 connect -D
 ```
 

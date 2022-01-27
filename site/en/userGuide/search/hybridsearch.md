@@ -49,7 +49,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 
@@ -130,7 +130,7 @@ SearchParam searchParam = SearchParam.newBuilder()
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
-```cli
+```shell
 search
 
 Collection name (book): book
@@ -431,7 +431,7 @@ System.out.println(wrapperSearch.getIDScore(0));
 System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 ## What's next

@@ -69,7 +69,7 @@ for (long i = 0L; i < 2000; ++i) {
 }
 ```
 
-```cli
+```shell
 # Prepare your data in a CSV file. Milvus CLI only supports importing data from local or remote files.
 ```
 
@@ -123,7 +123,7 @@ InsertParam insertParam = InsertParam.newBuilder()
 milvusClient.insert(insertParam);
 ```
 
-```cli
+```shell
 import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 

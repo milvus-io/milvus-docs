@@ -49,7 +49,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 
@@ -89,7 +89,7 @@ QueryParam queryParam = QueryParam.newBuilder()
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
 
-```cli
+```shell
 query
 
 collection_name: book
@@ -260,7 +260,7 @@ System.out.println(wrapperQuery.getFieldWrapper("book_id").getFieldData());
 System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
 

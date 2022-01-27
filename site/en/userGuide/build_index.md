@@ -57,7 +57,7 @@ final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
 final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
-```cli
+```shell
 create index
 
 Collection name (book): book
@@ -351,7 +351,7 @@ milvusClient.createIndex(
                 .build());
 ```
 
-```cli
+```shell
 # Follow the previous step.
 ```
 

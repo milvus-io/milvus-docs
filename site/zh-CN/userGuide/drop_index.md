@@ -47,7 +47,7 @@ milvusClient.dropIndex(
                 .build());
 ```
 
-```cli
+```shell
 delete index -c book
 ```
 

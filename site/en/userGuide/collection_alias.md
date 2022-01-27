@@ -47,7 +47,7 @@ milvusClient.createAlias(
     .build());
 ```
 
-```cli
+```shell
 create alias -c book -a publication
 ```
 
@@ -164,7 +164,7 @@ milvusClient.dropAlias(
     .build());
 ```
 
-```cli
+```shell
 delete alias -c book -a publication
 ```
 
@@ -267,7 +267,7 @@ milvusClient.alterAlias(
     .build());
 ```
 
-```cli
+```shell
 create alias -c book -A -a publication
 ```
 

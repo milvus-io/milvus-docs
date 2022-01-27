@@ -67,7 +67,7 @@ await milvusClient.collectionManager.createCollection(params);
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 connect -h localhost -p 19530 -a default
 create collection -c test_time_travel -f pk:INT64:primary_field -f example_field:FLOAT_VECTOR:2 -p pk
 ```
@@ -106,7 +106,7 @@ const batch1 = milvusClient.dataManager.insert({
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 import -c test_time_travel https://raw.githubusercontent.com/zilliztech/milvus_cli/main/examples/user_guide/search_with_timetravel_1.csv
 Reading file from remote URL.
 Reading csv rows...  [####################################]  100%
@@ -144,7 +144,7 @@ batch1.timestamp
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the timestamp as shown in the previous step.
 ```
 
@@ -197,7 +197,7 @@ const batch2 = await milvusClient.dataManager.insert({
 ```
 
 
-```cli
+```shell
 import -c test_time_travel https://raw.githubusercontent.com/zilliztech/milvus_cli/main/examples/user_guide/search_with_timetravel_2.csv
 Reading file from remote URL.
 Reading csv rows...  [####################################]  100%
@@ -263,7 +263,7 @@ console.log(res1.results)
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 search
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -296,7 +296,7 @@ As shown below, the target data itself and other data inserted later are not ret
 ```
 
 
-```cli
+```shell
 Search results:
 
 No.1:
@@ -374,7 +374,7 @@ console.log(res2.results)
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 search 
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -443,7 +443,7 @@ const pre_del_timestamp = datetimeToHybrids(datetime)
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 calc mkts_from_unixtime -e 1641809375
 430390476800000000
 ```
@@ -471,7 +471,7 @@ await milvusClient.dataManager.deleteEntities({
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 delete entities -c test_time_travel
 The expression to specify entities to be deleted, such as "film_id in [ 0, 1 ]": pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 You are trying to delete the entities of collection. This action cannot be undone!
@@ -520,7 +520,7 @@ console.log(res3.results)
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 search 
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -602,7 +602,7 @@ console.log(res4.results)
 // Java User Guide will be ready soon.
 ```
 
-```cli
+```shell
 search 
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]

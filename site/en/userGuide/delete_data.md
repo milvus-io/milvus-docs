@@ -41,7 +41,7 @@ const expr = "book_id in [0,1]";
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
-```cli
+```shell
 delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
 ```
@@ -97,7 +97,7 @@ milvusClient.delete(
 				.build());
 ```
 
-```cli
+```shell
 You are trying to delete the entities of collection. This action cannot be undone!
 Do you want to continue? [y/N]: y
 ```
