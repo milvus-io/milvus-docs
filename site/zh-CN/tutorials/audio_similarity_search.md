@@ -21,9 +21,7 @@ title: 音频相似度检索
 
 </br>
 
-In this tutorial, you will learn how to build an audio similarity search system that can return similar sound clips. The uploaded audio clips are converted into vectors using PANNs. These vectors are stored in Milvus which automatically generates a unique ID for each vector. Then users can conduct a vector similarity search in Milvus and query the audio clip data path corresponding to th unique vector ID returned by Milvus.
-
-在本教程中，你将学会如何构建一个音频检索系统，用来返回相似的声音片段。使用 PANN 将上传的音频片段转换为向量数据。这些向量存储在 Milvus 中，Milvus会自动为每个向量生成一个唯一的 ID。然后用户就可以在 Milvus 中进行向量相似度搜索，Milvus会返回一个唯一的向量ID，这个ID对应的音频片段数据的地址就是用户检索结果。
+在本教程中，你将学会如何构建一个音频检索系统，用来返回相似的声音片段。使用 PANN 将上传的音频片段转换为向量数据。这些向量存储在 Milvus 中，Milvus会自动为每个向量自动生成一个唯一的 ID。然后用户就可以在 Milvus 中进行向量相似度搜索，Milvus会返回一个唯一的向量ID，这个ID对应的音频片段数据的地址就是用户检索结果。
 
 <br/>
 
