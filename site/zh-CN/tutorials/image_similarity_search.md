@@ -1,6 +1,6 @@
 ---
 id: image_similarity_search.md
-title: 图片相似性检索
+title: 图像相似性检索
 ---
 
 # 图像相似性检索 
