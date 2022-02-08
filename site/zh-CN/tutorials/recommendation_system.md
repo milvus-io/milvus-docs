@@ -7,8 +7,6 @@ title: 推荐系统
 
 {{fragments/translation_needed.md}}
 
-This tutorial demonstrates how to use Milvus, the open-source vector database, to build a recommendation system.
-
 本教程将介绍如何使用开源向量数据库 Milvus 搭建推荐系统。
 
 - [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system/recommender_system.ipynb)
