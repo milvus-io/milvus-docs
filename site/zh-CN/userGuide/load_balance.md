@@ -92,7 +92,7 @@ show query_segment -c book
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -191,7 +191,7 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
 	<thead>
 	<tr>
 		<th>Option</th>
