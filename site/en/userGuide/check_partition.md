@@ -112,7 +112,7 @@ describe partition -c book -p novel
   </tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -220,7 +220,7 @@ list partitions -c book
   </tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
