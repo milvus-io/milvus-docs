@@ -9,20 +9,20 @@ summary: Get started with Milvus faster using this Python example code.
 
 {{tab}}
 
-# 使用Python运行Milvus
+# 使用 Python 运行Milvus
 
 {{fragments/translation_needed.md}}
 
-该篇文章介绍了如何使用Python运行Milvus.
+该篇文章介绍了如何使用 Python 运行 Milvus.
 
-通过运行我们提供的示例代码，您将初步了解Milvus的功能。
+通过运行我们提供的示例代码，您将初步了解 Milvus 的功能。
 
 
 
 ## 准备工作
 
 - [Milvus 2.0.0](install_standalone-docker.md)
-- Python 3 (3.71 or later)
+- Python 3 (3.71 或者更高版本)
 - [PyMilvus 2.0.0](install-pymilvus.md)
 
 ## 下载示例代码
@@ -36,9 +36,9 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python
 
 ## 代码详解
 
-示例代码执行以下步骤
+示例代码将执行以下步骤：
 
-- 导入PyMilvus包:
+- 导入PyMilvus 包:
 ```Python
 from pymilvus import (
     connections,
@@ -55,7 +55,7 @@ from pymilvus import (
 connections.connect("default", host="localhost", port="19530")
 ```
 
-- 创建一个collection:
+- 创建一个 Collection:
 ```Python
 fields = [
     FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
@@ -66,7 +66,7 @@ schema = CollectionSchema(fields, "hello_milvus is the simplest demo to introduc
 hello_milvus = Collection("hello_milvus", schema)
 ```
 
-- 在创建好的collection中插入向量:
+- 在创建好的 Collection 中插入向量:
 ```Python
 import random
 entities = [
@@ -77,7 +77,7 @@ entities = [
 insert_result = hello_milvus.insert(entities)
 ```
 
-- Builds indexes on the entities:
+- 在数据上构建索引：
 ```Python
 index = {
     "index_type": "IVF_FLAT",
@@ -87,7 +87,7 @@ index = {
 hello_milvus.create_index("embeddings", index)
 ```
 
-- 将collection加载到内存并执行相似搜索:
+- 将 Collection 加载到内存并执行相似搜索：
 ```Python
 hello_milvus.load()
 vectors_to_search = entities[-1][-2:]
@@ -99,26 +99,26 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 ```
 
 
-- 执行向量查询:
+- 执行结构化查询：
 
 ```Python
 result = hello_milvus.query(expr="random > -14", output_fields=["random", "embeddings"])
 ```
 
-- 执行混合查询:
+- 执行混合查询：
 
 ```Python
 result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, expr="random > -12", output_fields=["random"])
 ```
 
-- 通过关键字删除实体：
+- 根据 pk 删除数据：
 
 ```Python
 expr = f"pk in [{ids[0]}, {ids[1]}]"
 hello_milvus.delete(expr)
 ```
 
-- 删除collection:
+- 删除 Collection：
 
 ```Python
 utility.drop_collection("hello_milvus")
@@ -126,13 +126,13 @@ utility.drop_collection("hello_milvus")
 
 ## 运行示例代码
 
-执行以下命令运行.
+执行以下命令，运行示例代码：
 
 ```Python
 $ python3 hello_milvus.py
 ```
 
-*运行结果如下所示:*
+*运行结果如下所示：*
 
 ```
 === start connecting to Milvus     ===
@@ -189,3 +189,4 @@ query after delete by expr=`pk in [0, 1]` -> result: []
 
 === Drop collection `hello_milvus` ===
 ```
+恭喜！您已经启动了 Milvus 单机版，并执行了第一次结构化查询。
