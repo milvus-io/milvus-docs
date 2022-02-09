@@ -9,34 +9,36 @@ summary: Get started with Milvus faster using this Python example code.
 
 {{tab}}
 
-# Run Milvus using Python
+# 使用Python运行Milvus
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to run Milvus using Python.
+该篇文章介绍了如何使用Python运行Milvus.
 
-Through running the example code we provided, you will have a primary understanding of what Milvus is capable of.
+通过运行我们提供的示例代码，您将初步了解Milvus的功能。
 
-## Preparations
+
+
+## 准备工作
 
 - [Milvus 2.0.0](install_standalone-docker.md)
 - Python 3 (3.71 or later)
 - [PyMilvus 2.0.0](install-pymilvus.md)
 
-## Download example code
+## 下载示例代码
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+使用下面的命令[下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` 
 
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
 
 
-## Scan the example code
+## 代码详解
 
-The example code performs the following steps.
+示例代码执行以下步骤
 
-- Imports a PyMilvus package:
+- 导入PyMilvus包:
 ```Python
 from pymilvus import (
     connections,
@@ -48,12 +50,12 @@ from pymilvus import (
 )
 ```
 
-- Connects to a server:
+- 连接服务:
 ```Python
 connections.connect("default", host="localhost", port="19530")
 ```
 
-- Creates a collection:
+- 创建一个collection:
 ```Python
 fields = [
     FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
@@ -64,7 +66,7 @@ schema = CollectionSchema(fields, "hello_milvus is the simplest demo to introduc
 hello_milvus = Collection("hello_milvus", schema)
 ```
 
-- Inserts vectors in the collection:
+- 在创建好的collection中插入向量:
 ```Python
 import random
 entities = [
@@ -85,7 +87,7 @@ index = {
 hello_milvus.create_index("embeddings", index)
 ```
 
-- Loads the collection to memory and performs a vector similarity search:
+- 将collection加载到内存并执行相似搜索:
 ```Python
 hello_milvus.load()
 vectors_to_search = entities[-1][-2:]
@@ -97,40 +99,40 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 ```
 
 
-- Performs a vector query:
+- 执行向量查询:
 
 ```Python
 result = hello_milvus.query(expr="random > -14", output_fields=["random", "embeddings"])
 ```
 
-- Performs a hybrid search:
+- 执行混合查询:
 
 ```Python
 result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, expr="random > -12", output_fields=["random"])
 ```
 
-- Deletes entities by their primary keys:
+- 通过关键字删除实体：
 
 ```Python
 expr = f"pk in [{ids[0]}, {ids[1]}]"
 hello_milvus.delete(expr)
 ```
 
-- Drops the collection:
+- 删除collection:
 
 ```Python
 utility.drop_collection("hello_milvus")
 ```
 
-## Run the example code
+## 运行示例代码
 
-Execute the following command to run the example code.
+执行以下命令运行.
 
 ```Python
 $ python3 hello_milvus.py
 ```
 
-*The returned results and query latency are shown as follows:*
+*运行结果如下所示:*
 
 ```
 === start connecting to Milvus     ===
@@ -187,10 +189,3 @@ query after delete by expr=`pk in [0, 1]` -> result: []
 
 === Drop collection `hello_milvus` ===
 ```
-
-
-<br/>
-
-
-*Congratulations! You have started Milvus standalone and performed your first vector similarity search.*
-
