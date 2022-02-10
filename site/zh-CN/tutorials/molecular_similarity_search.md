@@ -5,8 +5,6 @@ title: 分子式检索系统
 
 # 分子式检索系统
 
-{{fragments/translation_needed.md}}
-
 本教程将介绍如何使用开源向量数据库 Milvus 搭建分子式检索系统。
 
 - [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/molecular_search.ipynb)
@@ -22,7 +20,7 @@ title: 分子式检索系统
 
 <br/>
 
-通过本教程，你将学习到如何搭建分子式检索系统，该系统可以检索特定分子的子结构，上层结构，和相似结构。RDKit 是一个开源化学信息学软件，可以将分子结构转换为向量。 然后，向量存储在 Milvus 中，Milvus 可以对向量进行相似度搜索。 Milvus 还会自动为每个向量生成一个唯一的 ID。 向量 ID 和分子结构的映射存储在 MySQL 中。
+通过本教程，你将学习到如何搭建分子式检索系统，该系统可以检索特定分子的子结构，超结构，和相似结构。RDKit 是一个开源化学信息学软件，可以将分子结构转换为向量。 然后，向量存储在 Milvus 中，Milvus 可以对向量进行相似度搜索。 Milvus 还会自动为每个向量生成一个唯一的 ID。 向量 ID 和分子结构的映射存储在 MySQL 中。
 
 <br/>
 

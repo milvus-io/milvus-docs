@@ -5,9 +5,7 @@ summary: 使用 Milvus 构建文本搜索引擎。
 
 # 文本搜索引擎
 
-{{fragments/translation_needed.md}}
-
-本教程将介绍如何使用开源向量数据库 Milvus 搭建一个文件搜索引擎。
+本教程将介绍如何使用开源向量数据库 Milvus 搭建一个文本搜索引擎。
 
 - [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/text_search_engine/text_search_engine.ipynb)
 - [快速部署](https://github.com/milvus-io/bootcamp/blob/master/solutions/text_search_engine/quick_deploy)
@@ -21,7 +19,7 @@ Milvus 在自然语言处理（NLP）领域的一个主要应用是文本搜索�
 
 <br/>
 
-通过本教程，你将学习到如何构建一个文本搜索引擎。本教程使用 BERT 将文本转换为固定长度的向量。Milvus 作为向量数据库，用于存储和向量相似性搜索。然后使用 MySQL 将 Milvus 生成的向量 ID 映射到文本数据中。
+通过本教程，你将学习到如何构建一个文本搜索引擎。本教程使用 BERT 将文本转换为固定长度的向量。Milvus 作为向量数据库，用于存储和向量相似性搜索。使用 MySQL 存储 Milvus 向量 ID 与文本数据间的映射关系。
 
 <br/>
 

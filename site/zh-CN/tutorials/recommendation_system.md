@@ -5,8 +5,6 @@ title: 推荐系统
 
 # 推荐系统
 
-{{fragments/translation_needed.md}}
-
 本教程将介绍如何使用开源向量数据库 Milvus 搭建推荐系统。
 
 - [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system/recommender_system.ipynb)
@@ -18,7 +16,7 @@ title: 推荐系统
 
 </br>
 
-推荐系统是信息过滤系统的一个子集，可用于个性化电影、音乐、产品、feed 流推荐等各种场景。与搜索引擎不同，推荐系统不需要用户准确地描述他们的需求，而是通过分析用户行为来发现用户的需求和兴趣。
+推荐系统是一种信息过滤系统，可用于推荐个性化电影、音乐、产品、订阅消息等各种应用场景。与搜索引擎不同，推荐系统不需要用户准确地描述他们的需求，可以通过分析用户行为来发现用户的需求和兴趣。
 
 </br>
 
