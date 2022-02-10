@@ -292,7 +292,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
 ```shell
-
+# Follow the previous step.
 ```
 
 <table class="language-python">
