@@ -27,7 +27,7 @@ summary: Get started with Milvus faster using this Python example code.
 
 ## 下载示例代码
 
-使用下面的命令[下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` 
+使用下面的命令 [下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` 
 
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
@@ -38,7 +38,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python
 
 示例代码将执行以下步骤：
 
-- 导入PyMilvus 包:
+- 导入 PyMilvus 包:
 ```Python
 from pymilvus import (
     connections,
@@ -189,4 +189,5 @@ query after delete by expr=`pk in [0, 1]` -> result: []
 
 === Drop collection `hello_milvus` ===
 ```
+
 恭喜！您已经启动了 Milvus 单机版，并执行了第一次结构化查询。
