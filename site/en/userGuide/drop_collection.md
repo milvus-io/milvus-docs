@@ -6,7 +6,7 @@ summary: Learn how to drop a collection in Milvus.
 
 # Drop a collection
 
-Remove a collection and the data within.
+This topic describes how to drop a collection and the data within.
 
 <div class="alert caution">
 Dropping a collection irreversibly deletes all data within it.
@@ -24,7 +24,24 @@ utility.drop_collection("book")
 await milvusClient.collectionManager.dropCollection({  collection_name: "book",});
 ```
 
-```cli
+```go
+err = milvusClient.DropCollection(
+		context.Background(), // ctx
+		"book",               // CollectionName
+)
+if err != nil {
+	log.Fatal("fail to drop collection:", err.Error())
+}
+```
+
+```java
+milvusClient.dropCollection(
+        DropCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+```
+
+```shell
 delete collection -c book
 ```
 
@@ -58,7 +75,41 @@ delete collection -c book
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>

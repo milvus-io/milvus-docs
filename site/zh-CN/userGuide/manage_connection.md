@@ -26,7 +26,11 @@ summary: Learn how to connect to a Milvus server.
 ```python
 # Run `python3` in your terminal to operate in the Python interactive mode.
 from pymilvus import connections
-connections.connect(alias="default", host='localhost', port='19530')
+connections.connect(
+	alias="default", 
+	host='localhost', 
+	port='19530'
+	)
 ```
 
 ```javascript
@@ -35,9 +39,28 @@ const address = "localhost:19530";
 const milvusClient = new MilvusClient(address);
 ```
 
-```cli
+```go
+	milvusClient, err := client.NewGrpcClient(
+		context.Background(), // ctx
+		"localhost:19530",    // addr
+	)
+	if err != nil {
+		log.Fatal("failed to connect to Milvus:", err.Error())
+	}
+```
+
+```java
+final MilvusServiceClient milvusClient = new MilvusServiceClient(
+		ConnectParam.newBuilder()
+				.withHost("localhost")
+				.withPort(19530)
+				.build());
+```
+
+```shell
 connect -h localhost -p 19530 -a default
 ```
+
 
 <table class="language-python">
 	<thead>
@@ -64,20 +87,58 @@ connect -h localhost -p 19530 -a default
 
 <table class="language-javascript">
 	<thead>
+		<tr>
+		<th>参数</th>
+		<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+    	<tr>
+	    	<td><code>address</code></td>
+			<td>Milvus 链接地址。</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+		<tr>
+		<th>参数</th>
+		<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+    	<tr>
+	    	<td><code>ctx</code></td>
+			<td>控制调用 API 的 context。</td>
+		</tr>
+		<tr>
+	    	<td><code>addr</code></td>
+			<td>Milvus 链接地址。</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
 	<tr>
 		<th>参数</th>
 		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
-    	<tr>
-	    	<td><code>address</code></td>
-		<td>Milvus 服务地址。</td>
+	<tr>
+		<td><code>Host</code></td>
+		<td>Milvus IP 地址。</td>
+	</tr>
+	<tr>
+		<td><code>Port</code></td>
+		<td>Milvus 端口。</td>
 	</tr>
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>选项</th>
@@ -114,6 +175,8 @@ connect -h localhost -p 19530 -a default
     </tbody>
 </table>
 
+
+
 ## 断开 MIlvus 连接
 
 从 MIlvus 服务器断开。
@@ -129,7 +192,15 @@ connections.disconnect("default")
 await milvusClient.closeConnection();
 ```
 
-```cli
+```go
+milvusClient.Close()
+```
+
+```java
+milvusClient.close()
+```
+
+```shell
 connect -D
 ```
 
@@ -147,6 +218,10 @@ connect -D
 	</tr>
 	</tbody>
 </table>
+
+## Limits
+
+The maximum number of connections is 65,536.
 
 ## What's next
 

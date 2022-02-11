@@ -13,7 +13,7 @@ summary: Learn how to install the Node.js SDK of Milvus.
 
 This topic describes how to install Milvus SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python and Node.js.
+Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
 {{tab}}
 
@@ -31,12 +31,12 @@ $ npm install @zilliz/milvus2-sdk-node
 
 ## What's next
 
-Having installed Milvus Node.js SDK, You can:
+Having installed Milvus Node.js SDK, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v1.0.18/tutorial.html)
+- Explore [Milvus Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
