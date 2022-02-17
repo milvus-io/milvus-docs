@@ -4,14 +4,14 @@ related_key: drop index
 summary: Learn how to drop an index in Milvus.
 ---
 
-# Drop an Index
+# 删除索引
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to drop an index in Milvus. 
+当前主题介绍如何在 Milvus 中删除索引。
 
 <div class="alert caution">
-Dropping an index irreversibly removes all corresponding index files.
+删除索引会不可逆转地删除所有相应的索引文件。
 </div>
 
 {{fragments/multiple_code.md}}
@@ -55,14 +55,14 @@ delete index -c book
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>说明</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to drop index from.</td>
+            <td>需要删除索引的 collection 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -70,22 +70,22 @@ delete index -c book
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>说明</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制 API 调用过程的 Context 。</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop index on.</td>
+            <td>需要删除索引的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>fieldName</code></td>
-            <td>Name of the vector field to drop index on.</td>
+            <td>需要删除索引的 vector field 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -93,18 +93,18 @@ delete index -c book
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop index on.</td>
+            <td>需要删除索引的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>FieldName</code></td>
-            <td>Name of the vector field to drop index on.</td>
+            <td>需要删除索引的 vector field 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -112,26 +112,26 @@ delete index -c book
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to drop index from.</td>
+            <td>需要删除索引的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
-- Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
+- 了解更多 Milvus 的基本操作:
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+  - [使用 Time Travel 搜索](timetravel.md)
+- 探索 Milvus SDK 的 API 参考:
+  - [PyMilvus API 参考](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
+  - [Node.js API 参考](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
