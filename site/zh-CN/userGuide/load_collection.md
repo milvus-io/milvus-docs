@@ -4,7 +4,7 @@ related_key: load collection
 summary: Learn how to load a collection into memory for CRUD operations in Milvus.
 ---
 
-# Load a collection
+# Load a Collection
 
 {{fragments/translation_needed.md}}
 
