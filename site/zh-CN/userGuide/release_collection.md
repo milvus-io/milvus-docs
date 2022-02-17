@@ -4,7 +4,7 @@ related_key: release collection
 summary: Learn how to release a collection from memory in Milvus.
 ---
 
-# Release a collection
+# Release a Collection
 
 {{fragments/translation_needed.md}}
 
