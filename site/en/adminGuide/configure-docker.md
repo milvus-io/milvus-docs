@@ -27,7 +27,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_
 
 ## Modify the configuration file
 
-Configure your Milvus instance ro suit your application scenarios by adjusting corresponding parameters in `milvus.yaml`.
+Configure your Milvus instance to suit your application scenarios by adjusting corresponding parameters in `milvus.yaml`.
 
 Check the following links for more information about each parameter.
 
