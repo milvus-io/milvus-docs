@@ -203,9 +203,8 @@ describe collection -c book
 <table class="language-python">
     <thead>
         <tr>
-            <th>Property</th>
-            <th>Return</th>
-            <th>Exception</th>
+            <th>Parameter</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -228,21 +227,10 @@ describe collection -c book
         <tr>
             <td>num_entities</td>
             <td>The number of entities in the collection.</td>
-            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
         </tr>
         <tr>
             <td>primary_field</td>
             <td>The primary field of the collection.</td>
-        </tr>
-        <tr>
-            <td>partitions</td>
-            <td>A list of all partitions.</td>
-            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
-        </tr>
-        <tr>
-            <td>indexes</td>
-            <td>A list of all indexes.</td>
-            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
         </tr>
     </tbody>
 </table>
@@ -263,35 +251,13 @@ describe collection -c book
 	</tbody>
 </table>
 
-
-
-<table class="language-javascript">
-	<thead>
-        <tr>
-            <th>Property</th>
-
-            <th>Description</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>status</code></td>
-            <td>{ error_code: number, reason: string }</td>
-        </tr>
-        <tr>
-            <td><code>schema</code></td>
-            <td>Information of all fields in this collection</td>
-        <tr>
-            <td><code>collectionID</code></td>
-            <td> collectionID</td>
-        </tr>
-	</tbody>
-</table>
-
 <table class="language-go">
 	<thead>
         <tr>
             <th>Parameter</th>
+	    <th>Description</th>
+	</tr>
+	<tr>
             <td><code>ctx</code></td>
             <td>Context to control API invocation process.</td>
         </tr>
@@ -303,18 +269,19 @@ describe collection -c book
 </table>
 
 <table class="language-java">
-	<thead>
+    <thead>
         <tr>
             <th>Parameter</th>
             <th>Description</th>
         </tr>
-	</thead>
+    </thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
             <td>Name of the collection to check.</td>
         </tr>
     </tbody>
+</table>
 
 <table class="language-shell">
     <thead>
