@@ -17,7 +17,7 @@ Python 3.6 o más reciente es requerido. Lee <a href="https://wiki.python.org/mo
 
 ## 2. Descarga el código muestra
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
 
