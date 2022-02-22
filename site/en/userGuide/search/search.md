@@ -240,10 +240,19 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
+Milvus supports setting consistency level specifically for a search or query. The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+
 {{fragments/multiple_code.md}}
 
 ```python
-results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=search_params, limit=10, expr=None)
+results = collection.search(
+	data=[[0.1, 0.2]], 
+	anns_field="book_intro", 
+	param=search_params, 
+	limit=10, 
+	expr=None,
+	consistency_level="strong"
+)
 ```
 
 ```javascript
@@ -338,6 +347,10 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>round_decimal</code> (optional)</td>
 		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	<tr>
+		<td><code>consistency_level</code> (optional)</td>
+		<td>Consistency level of the search.</td>
 	</tr>
 	</tbody>
 </table>
