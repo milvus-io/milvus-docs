@@ -12,7 +12,7 @@ summary: Conduct a vector similarity search with Milvus.
 
 Milvus 中的向量相似度搜索计算查询向量与 collection 中具有指定相似度度量的向量之间的距离，并返回最相似的结果。通过指定过滤标量 field 或者主键 field 的 [布尔表达式](boolean.md) ，你可以执行 [混合搜索](hybridsearch.md)，甚至使用 [Time Travel](timetravel.md)来进行搜索。
 
-下面的例子展示了如何对一个 2000 行的 book ID (primary key) 、 word count (scalar field) 和 book introduction (vector field) 的数据集进行向量相似度搜索，模拟你基于向量化的介绍搜索某些书籍的情况。 Milvus 会根据你定义的查询向量和搜索参数返回最相似的结果。
+下面的例子展示了如何对一个拥有 2000 行数据的数据集进行向量相似度搜索，模拟你基于书籍介绍的特征向量搜索某些书籍的情况。该数据集包含 book ID (primary key) 、 word count (标量 field) 和 book introduction (向量 field)。 Milvus 会根据你定义的查询向量和搜索参数返回最相似的结果。
 
 
 ## 加载 collection
@@ -59,7 +59,7 @@ load -c book
 
 ## 准备搜索参数
 
-准备适合你的搜索场景的参数。下面的示例定义了搜索将使用 Euclidean 距离计算，并从 IVF_FLAT 索引构建的十个最近的聚类中检索向量。
+准备适合你的搜索场景的参数。下面的示例定义了搜索将使用欧式距离计算，并从 IVF_FLAT 索引构建的十个最近的聚类中检索向量。
 
 {{fragments/multiple_code.md}}
 
@@ -123,11 +123,11 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>用于衡量向量相似性的指标。详细信息请参考 <a href="metric.md">相似度指标</a>。 </td>
+		<td>用于衡量向量相似性的指标。详细信息请参考 <a href="metric.md">距离计算方式</a>。 </td>
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>特定于索引的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -150,11 +150,11 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>用于衡量向量相似性的指标。详细信息请参考 <a href="metric.md">相似度指标</a>。</td>
+		<td>用于衡量向量相似性的指标。详细信息请参考 <a href="metric.md">距离计算方式</a>。</td>
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>特定于索引的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -171,7 +171,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	<tr>
 		<td><code>NewIndex*SearchParam func</code></td>
 		<td>根据不同的索引类型创建 entity.SearchParam 的函数。</td>
-        <td>对于浮点型向量：
+        <td>浮点型向量：
             <ul>
                 <li><code>NewIndexFlatSearchParam</code> (FLAT)</li>
                 <li><code>NewIndexIvfFlatSearchParam</code> (IVF_FLAT)</li>
@@ -184,7 +184,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
                 <li><code>NewIndexRHNSW_PQSearchParam</code> (RHNSW_PQ)</li>
                 <li><code>NewIndexRHNSW_SQSearchParam</code> (RHNSW_SQ)</li>
             </ul>
-            对于二进制型向量：
+            二进制型向量：
             <ul>
                 <li><code>NewIndexBinFlatSearchParam</code> (BIN_FLAT)</li>
                 <li><code>NewIndexBinIvfFlatSearchParam</code> (BIN_IVF_FLAT)</li>
@@ -193,7 +193,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
 	<tr>
 		<td><code>searchParam</code></td>
-		<td>特定于索引的搜索参数。</td>
+		<td>该索引特有的搜索参数。</td>
     <td>详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
@@ -215,7 +215,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
   <tr>
 		<td><code>Params</code></td>
-		<td>特定于索引的搜索参数。</td>
+		<td>该索引特有的搜索参数。</td>
     <td>详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
@@ -317,7 +317,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
   <tr>
 		<td><code>params</code></td>
-		<td>特定于索引的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
@@ -412,7 +412,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>expr</code></td>
 		<td>Boolean expression used to filter attribute.</td>
-    <td>有关详细信息，有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code></td>
@@ -431,7 +431,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
   <tr>
 		<td><code>metricType</code></td>
-		<td>用于搜索的指标类型</td>
+		<td>用于搜索的指标类型。</td>
     <td>此参数必须设置为与用于索引构建的指标类型相同。</td>
 	</tr>
   <tr>
@@ -441,7 +441,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
   <tr>
 		<td><code>sp</code></td>
-		<td>特定于索引的 entity.SearchParam 。</td>
+		<td>该索引特有的搜索参数 entity.SearchParam 。</td>
     <td>N/A</td>
 	</tr>
 	</tbody>
@@ -463,7 +463,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   </tr>
   <tr>
 		<td><code>MetricType</code></td>
-		<td>用于搜索的指标类型</td>
+		<td>距离计算方式</td>
     <td>此参数必须设置为与用于索引构建的指标类型相同。</td>
 	</tr>
   <tr>
@@ -484,14 +484,14 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>Expr</code></td>
 		<td>用于过滤属性的布尔表达式。</td>
-    <td>有关详细信息，有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
 	</tbody>
 </table>
 
 
 
-校验最相似向量的主键值及其距离值。
+查看最相似向量的 primary key 及其距离值。
 
 {{fragments/multiple_code.md}}
 
@@ -560,8 +560,8 @@ release -c book
 |---|---|
 |collection 的名称长度|255 characters|
 |collection 中的 partition 数量|4,096|
-|collection 中的 fields 数量|256|
-|collection 中的分片数|256|
+|collection 中的 field 数量|256|
+|collection 中的 shard 数|256|
 |向量维度|32,768|
 |Top K|16,384|
 |目标输入向量数|16,384|
