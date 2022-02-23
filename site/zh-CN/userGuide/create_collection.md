@@ -14,6 +14,8 @@ A collection consists of one or more partitions. While creating a new collection
 
 The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
+Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). In this example, the consistency level of the collection is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. By default, a collection created without specifying the consistency level is set with bounded consistency level, under which Milvus reads a less updated data view (usually several seconds earlier) when a search or query request comes. Besides collection creation, you can also set the consistency level specifically for [search](search.md) or [query](query.md)  (only on PyMilvus currently). For other consistency level supported by Milvus, see [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md). 
+
 
 ## Prepare Schema
 
@@ -451,7 +453,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 
 ## Create a collection with the schema
 
-Then, create a collection with the schema you specified above.
+Then, create a collection with strong consistency level and the schema you specified above.
 
 {{fragments/multiple_code.md}}
 
@@ -461,7 +463,8 @@ collection = Collection(
     name=collection_name, 
     schema=schema, 
     using='default', 
-    shards_num=2
+    shards_num=2,
+    consistency_level="strong"
     )
 ```
 
@@ -506,6 +509,19 @@ milvusClient.createCollection(createCollectionReq);
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
             <td>[1,256]</td>
+        </tr>
+        <tr>
+            <td><code>consistency_level</code> (optional)</td>
+            <td>Consistency level of the collection to create.</td>
+            <td>
+                <ul>
+                    <li><code>Strong</code></li>
+                    <li><code>Bounded</code></li>
+                    <li><code>Session</code></li>
+                    <li><code>Eventually</code></li>
+                    <li><code>Customized</code></li>
+                </ul>
+            </td>
         </tr>
     </tbody>
 </table>

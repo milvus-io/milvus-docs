@@ -56,8 +56,8 @@ load -c book
 ```
 
 
-
 ## 准备搜索参数
+
 
 准备适合你的搜索场景的参数。下面的示例定义了搜索将使用欧式距离计算，并从 IVF_FLAT 索引构建的十个最近的聚类中检索向量。
 
@@ -244,10 +244,19 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 使用 Milvus 搜索向量。要在特定的[partition](glossary.md#Partition)中搜索，请指定 partition 名称列表。 
 
+Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+
 {{fragments/multiple_code.md}}
 
 ```python
-results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=search_params, limit=10, expr=None)
+results = collection.search(
+	data=[[0.1, 0.2]], 
+	anns_field="book_intro", 
+	param=search_params, 
+	limit=10, 
+	expr=None,
+	consistency_level="strong"
+)
 ```
 
 ```javascript
@@ -342,6 +351,10 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>round_decimal</code> (optional)</td>
 		<td>返回距离的小数位数。</td>
+	</tr>
+	<tr>
+		<td><code>consistency_level</code> (optional)</td>
+		<td>Consistency level of the search.</td>
 	</tr>
 	</tbody>
 </table>

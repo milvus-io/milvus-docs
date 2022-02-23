@@ -18,7 +18,7 @@ pip3 install pymilvus=={{var.milvus_python_sdk_version}}
 
 ## 2. নমুনা কোড ডাউনলোড করুন
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
 

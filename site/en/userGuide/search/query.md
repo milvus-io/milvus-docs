@@ -33,20 +33,21 @@ await milvusClient.collectionManager.loadCollection({
 
 ```go
 err := milvusClient.LoadCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    false                   // async
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  false                   // async
+)
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+  log.Fatal("failed to load collection:", err.Error())
 }
 ```
 
 ```java
 milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  LoadCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 ```
 
 ```shell
@@ -57,10 +58,16 @@ load -c book
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
+Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+
 {{fragments/multiple_code.md}}
 
 ```python
-res = collection.query(expr = "book_id in [2,4,6,8]", output_fields = ["book_id", "book_intro"])
+res = collection.query(
+  expr = "book_id in [2,4,6,8]", 
+  output_fields = ["book_id", "book_intro"],
+  consistency_level="strong"
+)
 ```
 
 ```javascript
@@ -87,10 +94,10 @@ if err != nil {
 ```java
 List<String> query_output_fields = Arrays.asList("book_id", "word_count");
 QueryParam queryParam = QueryParam.newBuilder()
-        .withCollectionName("book")
-        .withExpr("book_id in [2,4,6,8]")
-        .withOutFields(query_output_fields)
-        .build();
+  .withCollectionName("book")
+  .withExpr("book_id in [2,4,6,8]")
+  .withOutFields(query_output_fields)
+  .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
 
@@ -127,6 +134,10 @@ timeout []:
 	<tr>
 		<td><code>partition_names</code> (optional)</td>
 		<td>List of names of the partitions to query on.</td>
+	</tr>
+	<tr>
+		<td><code>consistency_level</code> (optional)</td>
+		<td>Consistency level of the query.</td>
 	</tr>
 	</tbody>
 </table>
