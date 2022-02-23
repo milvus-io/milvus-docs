@@ -50,7 +50,7 @@ $ sudo apt-get -f install
 You can install Milvus standalone with YUM.
 
 ```bash
-$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_rpm_name}}.rpm
+Coming soon.
 ```
 
 
