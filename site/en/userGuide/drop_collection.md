@@ -26,8 +26,8 @@ await milvusClient.collectionManager.dropCollection({  collection_name: "book",}
 
 ```go
 err = milvusClient.DropCollection(
-		context.Background(), // ctx
-		"book",               // CollectionName
+  context.Background(), // ctx
+  "book",               // CollectionName
 )
 if err != nil {
 	log.Fatal("fail to drop collection:", err.Error())
@@ -36,9 +36,10 @@ if err != nil {
 
 ```java
 milvusClient.dropCollection(
-        DropCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  DropCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 ```
 
 ```shell
