@@ -41,9 +41,10 @@ const compactionID = res.compactionID;
 
 ```java
 R<ManualCompactionResponse> response = milvusClient.manualCompaction(
-    ManualCompactionParam.newBuilder()
-        .withCollectionName("book")
-        .build());
+  ManualCompactionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 long compactionID = response.getData().getCompactionID();
 ```
 
@@ -118,8 +119,9 @@ const state = await milvusClient.collectionManager.getCompactionState({
 
 ```java
 milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
-        .withCompactionID(compactionID)
-        .build());
+  .withCompactionID(compactionID)
+  .build()
+);
 ```
 
 ```shell
