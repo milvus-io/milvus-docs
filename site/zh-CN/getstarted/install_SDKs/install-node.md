@@ -11,19 +11,19 @@ summary: Learn how to install the Node.js SDK of Milvus.
 
 
 
-本主题介绍如何为 Milvus 安装 Milvus SDK 。
+本主题介绍如何为 Milvus 安装 Milvus SDK。
 
-当前版本的 Milvus 支持 Python 、 Node.js 、 GO 和 Java 的 SDK 。
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 {{tab}}
 
-## 要求
+## 安装前提
 
-要求 Node.js （12.0.0 或更高版本）。
+要求 Node.js（12.0.0 或更高版本）。
 
 ## 安装 Milvus Node.js SDK
 
-运行以下命令安装 Milvus Node.js SDK 。
+运行以下命令安装 Milvus Node.js SDK。
 
 ```
 $ npm install @zilliz/milvus2-sdk-node
