@@ -4,19 +4,19 @@ related_key: Load balance
 summary: Learn how to balance query load in Milvus.
 ---
 
-# Balance Query Load
+# 负载均衡
 
-{{fragments/translation_needed.md}}
 
-This topic describes how to balance query load in Milvus.
 
-Milvus supports automatic load balance by default. You can [configure](configure-docker.md) your Milvus to enable or disable [automatic load balance](configure_querycoord.md#queryCoordautoBalance). By specifying [`queryCoord.balanceIntervalSeconds`](configure_querycoord.md#queryCoordbalanceIntervalSeconds), [`queryCoord.overloadedMemoryThresholdPercentage`](configure_querycoord.md#queryCoordoverloadedMemoryThresholdPercentage), and [`queryCoord.memoryUsageMaxDifferencePercentage`](configure_querycoord.md#queryCoordmemoryUsageMaxDifferencePercentage), you can change the thresholds that trigger the automatic load balance.
+本主题介绍如何平衡 Milvus 中的查询负载。
 
-If automatic load balance is disabled, you can still balance the load manually.
+Milvus 默认支持自动负载均衡。你可以[配置](configure-docker.md)  Milvus 以启用或禁用[自动负载均衡](configure_querycoord.md#queryCoordautoBalance)。通过指定 [`queryCoord.balanceIntervalSeconds`](configure_querycoord.md#queryCoordbalanceIntervalSeconds), [`queryCoord.overloadedMemoryThresholdPercentage`](configure_querycoord.md#queryCoordoverloadedMemoryThresholdPercentage) 和 [`queryCoord.memoryUsageMaxDifferencePercentage`](configure_querycoord.md#queryCoordmemoryUsageMaxDifferencePercentage)，你可以更改触发自动负载均衡的阈值。
 
-## Check segment information
+如果禁用自动负载均衡，你仍然可以手动平衡负载。
 
-Get the `segmentID` of the sealed segment that you expect to transfer and the `nodeID` of the query node that you expect to transfer the segment to.
+## 查看 segment 信息
+
+获取输入 collection 的封装段的 `segmentID` 和查询节点的 `nodeID` 。
 
 {{fragments/multiple_code.md}}
 
@@ -50,14 +50,14 @@ show query_segment -c book
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to check the segment information.</td>
+		<td>用于查看 segment 信息的 collection 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -65,14 +65,14 @@ show query_segment -c book
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collectionName</code></td>
-		<td>Name of the collection to check the segment information.</td>
+		<td>用于查看 segment 信息的 collection 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -80,14 +80,14 @@ show query_segment -c book
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>CollectionName</code></td>
-		<td>Name of the collection to check the segment information.</td>
+		<td>用于查看 segment 信息的 collection 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -95,21 +95,21 @@ show query_segment -c book
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to check the segment information.</td>
+            <td>用于查看 segment 信息的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
 
-## Transfer segment
+## 迁移 segment
 
-Transfer the sealed segment(s) with the `segmentID` and the `nodeID` of the current query node and new query node(s).
+使用当前查询节点和新查询节点的 `segmentID` 和 `nodeID` 迁移封装 segment 。
 
 {{fragments/multiple_code.md}}
 
@@ -148,22 +148,22 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>src_node_id</code></td>
-		<td>ID of the query node you want to transfer segment(s) from.</td>
+		<td>源 segment 查询节点的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>dst_node_ids</code> (Optional)</td>
-		<td>ID(s) of the query node(s) you want to transfer segment(s) to. Milvus transfers segment(s) to other query nodes automatically if this parameter is left blank.</td>
+		<td>目标 segment 查询节点的 ID 。如果该参数为空，Milvus 会自动将 segment(s) 转移到其他查询节点。</td>
 	</tr>
 	<tr>
 		<td><code>sealed_segment_ids</code> (Optional)</td>
-		<td>ID(s) of the segment(s) you want to transfer. Milvus transfers all sealed segment(s) in the source query node to other query nodes automatically if this parameter is left blank.</td>
+		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源查询节点中的所有封装 segment 传输到其他查询节点。</td>
 	</tr>
 	</tbody>
 </table>
@@ -171,22 +171,22 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>src_nodeID</code></td>
-		<td>ID of the query node you want to transfer segment(s) from.</td>
+		<td>源 segment 查询节点的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>dst_nodeIDs</code> (Optional)</td>
-		<td>ID(s) of the query node(s) you want to transfer segment(s) to. Milvus transfers segment(s) to other query nodes automatically if this parameter is left blank.</td>
+		<td>目标 segment 查询节点的 ID 。如果该参数为空，Milvus 会自动将 segment(s) 转移到其他查询节点。</td>
 	</tr>
 	<tr>
 		<td><code>sealed_segmentIDs</code> (Optional)</td>
-		<td>ID(s) of the segment(s) you want to transfer. Milvus transfers all sealed segment(s) in the source query node to other query nodes automatically if this parameter is left blank.</td>
+		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源查询节点中的所有封装 segment 传输到其他查询节点。</td>
 	</tr>
 	</tbody>
 </table>
@@ -194,22 +194,22 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>SourceNodeID</code></td>
-		<td>ID of the query node you want to transfer segment(s) from.</td>
+		<td>源 segment 查询节点的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>DestinationNodeID</code> (Optional)</td>
-		<td>ID(s) of the query node(s) you want to transfer segment(s) to. Milvus transfers segment(s) to other query nodes automatically if this parameter is left blank.</td>
+		<td>目标 segment 查询节点的 ID 。如果该参数为空，Milvus 会自动将 segment(s) 转移到其他查询节点。</td>
 	</tr>
 	<tr>
 		<td><code>SegmentID</code> (Optional)</td>
-		<td>ID(s) of the segment(s) you want to transfer. Milvus transfers all sealed segment(s) in the source query node to other query nodes automatically if this parameter is left blank.</td>
+		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源查询节点中的所有封装 segment 传输到其他查询节点。</td>
 	</tr>
 	</tbody>
 </table>
@@ -217,35 +217,35 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 <table class="language-shell">
 	<thead>
 	<tr>
-		<th>Option</th>
-		<th>Description</th>
+		<th>选项</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>-s</code></td>
-		<td>ID of the query node you want to transfer segment(s) from.</td>
+		<td>源 segment 查询节点的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>-d</code> (Multiple)</td>
-		<td>ID(s) of the query node(s) you want to transfer segment(s) to.</td>
+		<td>目标 segment 查询节点的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>-ss</code> (Multiple)</td>
-		<td>ID(s) of the segment(s) you want to transfer.</td>
+		<td>要转移的 segment ID 。</td>
 	</tr>
 	</tbody>
 </table>
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
+- 了解更多 Milvus 的基本操作：
+  - [插入数据](insert_data.md)
+  - [创建 partition](create_partition.md)
+  - [创建向量索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考：
+  - [PyMilvus API 参考](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
+  - [Node.js API 参考](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
