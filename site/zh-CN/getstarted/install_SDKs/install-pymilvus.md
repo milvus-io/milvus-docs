@@ -7,36 +7,36 @@ group: install-pymilvus.md
 summary: Learn how to install the Python SDK of Milvus.
 ---
 
-# Install Milvus SDK
+# 安装 Milvus SDK
 
-{{fragments/translation_needed.md}}
 
-This topic describes how to install Milvus SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+本主题介绍如何为 Milvus 安装 Milvus SDK。
+
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 {{tab}}
 
-## Requirement
+## 安装前提
 
-Python 3 (3.71 or later) is required.
+要求 Python 3（3.71 或更高版本）。
 
 
-## Install PyMilvus via pip
+## 通过 pip 安装 PyMilvus
 
-PyMilvus is available in [Python Package Index](https://pypi.org/project/pymilvus/).
+PyMilvus 在 [Python Package Index](https://pypi.org/project/pymilvus/) 中提供。
 
 <div class="alert note">
-It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="release_notes.md">Release Notes</a>.
+建议安装与你安装的 Milvus 服务器版本相匹配的 PyMilvus 版本。有关详细信息，请参阅<a href="release_notes.md">发版说明</a>。
 </div>
 
 ```
 $ python3 -m pip install pymilvus=={{var.milvus_python_sdk_version}}
 ```
 
-## Verify installation
+## 验证安装
 
-If PyMilvus is correctly installed, no exception will be raised when you run the following command.
+如果 PyMilvus 安装正确，运行以下命令不会引发异常。
 
 ```
 $ python3 -c "from pymilvus import Collection"
@@ -44,13 +44,13 @@ $ python3 -c "from pymilvus import Collection"
 
 
 
-## What's next
+## 更多内容
 
-Having installed PyMilvus, you can:
+安装 PyMilvus 后，你可以：
 
-- Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+- 了解更多 Milvus 的基本操作：
+  - [连接 Milvus 服务器](manage_connection.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
+- 探索 [PyMilvus API 参考](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
