@@ -11,13 +11,13 @@ summary: Learn how to install the Python SDK of Milvus.
 
 
 
-本主题介绍如何为 Milvus 安装 Milvus SDK 。
+本主题介绍如何为 Milvus 安装 Milvus SDK。
 
-当前版本的 Milvus 支持 Python 、 Node.js 、 GO 和 Java 的 SDK 。
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 {{tab}}
 
-## 要求
+## 安装前提
 
 要求 Python 3（3.71 或更高版本）。
 
