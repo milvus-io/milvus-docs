@@ -7,36 +7,36 @@ group: install-pymilvus.md
 summary: Learn how to install the Node.js SDK of Milvus.
 ---
 
-# Install Milvus SDK
+# 安装 Milvus SDK
 
-{{fragments/translation_needed.md}}
 
-This topic describes how to install Milvus SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+本主题介绍如何为 Milvus 安装 Milvus SDK。
+
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 {{tab}}
 
-## Requirement
+## 安装前提
 
-Node.js (12.0.0 or later) is required.
+要求 Node.js（12.0.0 或更高版本）。
 
-## Install Milvus Node.js SDK
+## 安装 Milvus Node.js SDK
 
-Run the following command to install Milvus Node.js SDK.
+运行以下命令安装 Milvus Node.js SDK。
 
 ```
 $ npm install @zilliz/milvus2-sdk-node
 ```
 
-## What's next
+## 更多内容
 
-Having installed Milvus Node.js SDK, you can:
+安装 Milvus Node.js SDK 后，你可以：
 
-- Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+- 了解更多 Milvus 的基本操作：
+  - [连接 Milvus 服务器](manage_connection.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
+- 探索 [Milvus Node.js API 参考](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
