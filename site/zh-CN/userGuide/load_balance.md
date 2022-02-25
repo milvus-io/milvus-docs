@@ -16,7 +16,7 @@ Milvus 默认支持自动负载均衡。你可以[配置](configure-docker.md)  
 
 ## 查看 segment 信息
 
-获取输入 collection 的封装段的 `segmentID` 和查询节点的 `nodeID` 。
+获取输入 collection 的 sealed segment 的 `segmentID` 和 query node 的 `nodeID` 。
 
 {{fragments/multiple_code.md}}
 
@@ -109,7 +109,7 @@ show query_segment -c book
 
 ## 迁移 segment
 
-使用当前查询节点和新查询节点的 `segmentID` 和 `nodeID` 迁移封装 segment 。
+使用当前 query node 和新 query node 的 `segmentID` 和 `nodeID` 迁移 sealed segment 。
 
 {{fragments/multiple_code.md}}
 
@@ -155,15 +155,15 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 	<tbody>
 	<tr>
 		<td><code>src_node_id</code></td>
-		<td>源 segment 查询节点的 ID 。</td>
+		<td>源 segment query node 的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>dst_node_ids</code> (Optional)</td>
-		<td>目标 segment 查询节点的 ID 。如果该参数为空，Milvus 会自动将 segment(s) 转移到其他查询节点。</td>
+		<td>目标 segment query node 的 ID 。如果该参数为空，Milvus 会自动将 segment 转移到其他 query node 。</td>
 	</tr>
 	<tr>
 		<td><code>sealed_segment_ids</code> (Optional)</td>
-		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源查询节点中的所有封装 segment 传输到其他查询节点。</td>
+		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源 query node 中的所有 sealed segment 传输到其他 query node 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -178,15 +178,15 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 	<tbody>
 	<tr>
 		<td><code>src_nodeID</code></td>
-		<td>源 segment 查询节点的 ID 。</td>
+		<td>源 segment query node 的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>dst_nodeIDs</code> (Optional)</td>
-		<td>目标 segment 查询节点的 ID 。如果该参数为空，Milvus 会自动将 segment(s) 转移到其他查询节点。</td>
+		<td>目标 segment query node 的 ID 。如果该参数为空，Milvus 会自动将 segment 转移到其他 query node 。</td>
 	</tr>
 	<tr>
 		<td><code>sealed_segmentIDs</code> (Optional)</td>
-		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源查询节点中的所有封装 segment 传输到其他查询节点。</td>
+		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源 query node 中的所有 sealed segment 传输到其他 query node 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -201,15 +201,15 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 	<tbody>
 	<tr>
 		<td><code>SourceNodeID</code></td>
-		<td>源 segment 查询节点的 ID 。</td>
+		<td>源 segment query node 的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>DestinationNodeID</code> (Optional)</td>
-		<td>目标 segment 查询节点的 ID 。如果该参数为空，Milvus 会自动将 segment(s) 转移到其他查询节点。</td>
+		<td>目标 segment query node 的 ID 。如果该参数为空，Milvus 会自动将 segment 转移到其他 query node 。</td>
 	</tr>
 	<tr>
 		<td><code>SegmentID</code> (Optional)</td>
-		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源查询节点中的所有封装 segment 传输到其他查询节点。</td>
+		<td>要转移的 segment ID 。如果该参数为空，Milvus 会自动将源 query node 中的所有 sealed segment 传输到其他 query node 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -224,11 +224,11 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 	<tbody>
 	<tr>
 		<td><code>-s</code></td>
-		<td>源 segment 查询节点的 ID 。</td>
+		<td>源 segment query node 的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>-d</code> (Multiple)</td>
-		<td>目标 segment 查询节点的 ID 。</td>
+		<td>目标 segment query node 的 ID 。</td>
 	</tr>
 	<tr>
 		<td><code>-ss</code> (Multiple)</td>
