@@ -12,20 +12,20 @@ summary: Learn how to install the Java SDK of Milvus.
 
 
 
-本主题介绍如何为 Milvus 安装 Milvus SDK 。
+本主题介绍如何为 Milvus 安装 Milvus SDK。
 
-当前版本的 Milvus 支持 Python 、 Node.js 、 GO 和 Java 的 SDK 。
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 {{tab}}
 
-## 要求
+## 安装前提
 
 - Java （8 或更高版本）
 - Apache Maven 或者 Gradle/Grails
 
 ## 安装 Milvus Java SDK
 
-运行以下命令安装 Milvus Java SDK 。
+运行以下命令安装 Milvus Java SDK。
 
 - Apache Maven
 
