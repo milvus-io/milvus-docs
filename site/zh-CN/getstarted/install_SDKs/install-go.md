@@ -12,15 +12,15 @@ summary: Learn how to install the GO SDK of Milvus.
 
 
 
-本主题介绍如何为 Milvus 安装 Milvus SDK 。
+本主题介绍如何为 Milvus 安装 Milvus SDK。
 
-当前版本的 Milvus 支持 Python 、 Node.js 、 GO 和 Java 的 SDK 。
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 {{tab}}
 
-## 要求
+## 安装前提
 
-要求 GO （1.15 或更高版本）。
+要求 GO（1.15 或更高版本）。
 
 ## 安装 Milvus GO SDK
 
