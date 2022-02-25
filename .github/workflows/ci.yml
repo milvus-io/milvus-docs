@@ -3,7 +3,7 @@ name: dev
 on:
   push:
     branches:
-      - v2.0.0
+      - v2.0.x
   release:
     types: [released]
 
@@ -19,7 +19,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
         with:
-          ref: v2.0.0
+          ref: v2.0.x
 
       - name: Extract branch name
         shell: bash
