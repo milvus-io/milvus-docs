@@ -11,7 +11,7 @@ summary: Get started with Milvus faster using this Python example code.
 
 # 使用 Python 运行Milvus
 
-{{fragments/translation_needed.md}}
+
 
 该篇文章介绍了如何使用 Python 运行 Milvus.
 
