@@ -4,14 +4,14 @@ related_key: drop collection
 summary: Learn how to drop a collection in Milvus.
 ---
 
-# Drop a collection
+# 删除 collection
 
-{{fragments/translation_needed.md}}
 
-This topic describes how to drop a collection and the data within.
+
+当前主题介绍如何删除 collection 和 collection 中的数据。
 
 <div class="alert caution">
-Dropping a collection irreversibly deletes all data within it.
+删除 collection 会不可逆地删除 collection 中的所有数据。
 </div>
 
 
@@ -50,14 +50,14 @@ delete collection -c book
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to drop.</td>
+            <td>要删除的 collection 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -65,14 +65,14 @@ delete collection -c book
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to drop.</td>
+            <td>要删除的 collection 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -80,18 +80,18 @@ delete collection -c book
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制调用 API 的 Context。</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop.</td>
+            <td>要删除的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -99,14 +99,14 @@ delete collection -c book
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop.</td>
+            <td>要删除的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -114,28 +114,28 @@ delete collection -c book
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to drop.</td>
+            <td>要删除的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 了解更多 Milvus 的基本操作：
+  - [插入数据](insert_data.md)
+  - [创建 partition](create_partition.md)
+  - [创建索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
