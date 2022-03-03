@@ -33,7 +33,7 @@ id: four_layers.md
 
 ### Index coordinator (index coord）
 
-负责管理 index node 的拓扑结构，构建索引构和维护索引元信息。
+负责管理 index node 的拓扑结构，构建索引和维护索引元信息。
 
 ## 执行节点
 
@@ -57,7 +57,7 @@ Index node 负责执行索引构建任务。Index node不需要常驻于内存�
 
 ### 元数据存储
 
-负责存储元信息的快照，比如 collection schema 信息、节点状态信息、消息消费的 checkpoint 等。元信息存储需要极高的可用性、强一致和事务支持，因此 etcd 是这个场景下的不二选择。除此之外，etcd 还承担了服务注册和健康检查的职责。
+负责存储元信息的快照，比如 collection schema 信息、节点状态信息、消息使用的 checkpoint 等。元信息存储需要极高的可用性、强一致和事务支持，因此 etcd 是这个场景下的不二选择。除此之外，etcd 还承担了服务注册和健康检查的职责。
 
 ### 对象存储
 
