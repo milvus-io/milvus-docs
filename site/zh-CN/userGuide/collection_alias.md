@@ -4,21 +4,21 @@ related_key: collection alias
 summary: Learn how to manage collection alias in Milvus.
 ---
 
-# Collection Alias
+# Collection 别名
 
-{{fragments/translation_needed.md}}
 
-This topic describes how to manage collection alias. Milvus supports specifying a unique alias for a collection.
+
+当前主题介绍如何管理 collection 别名。 Milvus 支持为 collection 指定唯一别名。
 
 <div class="alert note">
-A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
+Collection 别名是全局唯一的，因此你不能将相同的别名分配给不同的 collection。但是，你可以为一个 collection 分配多个别名。
 </div>
 
-The following example is based on the alias `publication`.
+以下示例基于别名 `publication`。
 
-## Create a collection alias
+## 创建 collection 别名
 
-Specify an an alias for a collection.
+为 collection 指定别名。
 
 {{fragments/multiple_code.md}}
 
@@ -56,18 +56,18 @@ create alias -c book -a publication
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to create alias on.</td>
+            <td>要创建别名的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to create.</td>
+            <td>要创建的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -76,18 +76,18 @@ create alias -c book -a publication
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to create alias on.</td>
+            <td>要创建别名的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to create.</td>
+            <td>要创建的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -95,18 +95,18 @@ create alias -c book -a publication
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to create alias on.</td>
+            <td>要创建别名的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>Alias</code></td>
-            <td>Collection alias to create.</td>
+            <td>要创建的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -114,31 +114,31 @@ create alias -c book -a publication
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to create alias on.</td>
+            <td>要创建别名的 collection 名称。</td>
         </tr>
         <tr>
             <td>-a</td>
-            <td>Collection alias to create.</td>
+            <td>要创建的 collection 别名。</td>
         </tr>
         <tr>
             <td>-A (Optional)</td>
-            <td>Flag to transfer the alias to a specified collection.</td>
+            <td>将别名转移到指定 collection 的标志。</td>
         </tr>
     </tbody>
 </table>
 
 
 
-## Drop a collection alias
+## 删除 collection 别名
 
-Drop a specified alias.
+删除指定的别名。
 
 {{fragments/multiple_code.md}}
 
@@ -173,14 +173,14 @@ delete alias -c book -a publication
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to drop.</td>
+            <td>要删除的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -189,14 +189,14 @@ delete alias -c book -a publication
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to drop.</td>
+            <td>要删除的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -204,14 +204,14 @@ delete alias -c book -a publication
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>Alias</code></td>
-            <td>Collection alias to drop.</td>
+            <td>要删除的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -219,26 +219,26 @@ delete alias -c book -a publication
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to drop alias on.</td>
+            <td>要删除别名的 collection 名称。</td>
         </tr>
         <tr>
             <td>-a</td>
-            <td>Collection alias to drop.</td>
+            <td>要删除的 collection 别名。</td>
         </tr>
     </tbody>
 </table>
 
 
-## Alter a collection alias
+## 更改 collection 别名
 
-Alter an existing alias to another collection. The following example is based on the situation that the alias `publication` was originally created for another collection.
+将现有的别名变更到另一个 collection 上。以下示例基于别名 `publication` 最初是为另一个 collection 创建的情况。
 
 {{fragments/multiple_code.md}}
 
@@ -276,18 +276,18 @@ create alias -c book -A -a publication
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>要更改别名的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>要更改的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -296,18 +296,18 @@ create alias -c book -A -a publication
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>要更改别名的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>要更改的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -315,18 +315,18 @@ create alias -c book -A -a publication
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>要更改别名的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>Alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>要更改的 collection 别名。</td>
         </tr>
 	</tbody>
 </table>
@@ -334,41 +334,41 @@ create alias -c book -A -a publication
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>要更改别名的 collection 名称。</td>
         </tr>
         <tr>
             <td>-a</td>
-            <td>Collection alias to alter.</td>
+            <td>要更改的 collection 别名。</td>
         </tr>
         <tr>
             <td>-A</td>
-            <td>Flag to transfer the alias to a specified collection.</td>
+            <td>将别名转移到指定 collection 的标志。</td>
         </tr>
     </tbody>
 </table>
 
-## Limits
+## 使用限制
 
-|Feature|Maximum limit|
+|类型|最大长度（字符）|
 |---|---|
-|Length of an alias|255 characters|
+|别名长度|255|
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 了解更多 Milvus 的基本操作：
+  - [插入数据](insert_data.md)
+  - [创建 partition](create_partition.md)
+  - [创建索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
