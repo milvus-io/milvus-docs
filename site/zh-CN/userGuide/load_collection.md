@@ -4,15 +4,15 @@ related_key: load collection
 summary: Learn how to load a collection into memory for CRUD operations in Milvus.
 ---
 
-# Load a Collection
-
-{{fragments/translation_needed.md}}
+# 加载 Collection
 
 
-This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
+
+
+当前主题介绍如何在搜索或查询之前将 collection 加载到内存中。 Milvus 中所有的搜索和查询操作都在内存中执行。
 
 <div class="alert warning">
-In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+在当前版本中，要加载的数据量必须低于所有 query node 总内存资源的 90%，以便为执行引擎预留内存资源。
 </div>
 
 {{fragments/multiple_code.md}}
@@ -54,14 +54,14 @@ load -c book
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to load.</td>
+		<td>要加载的 partition 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -69,14 +69,14 @@ load -c book
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to load.</td>
+		<td>要加载的 collection 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -84,22 +84,22 @@ load -c book
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制调用 API 的 Context。</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
+            <td>要加载的 collection 名称。</td>
         </tr>
         <tr>
             <td><code>async</code></td>
-            <td>Switch to control sync/async behavior. The deadline of context is not applied in sync load.</td>
+            <td>Switch to control sync/async behavior. The deadline of context is not applied in sync load.切换以控制 sync/async 行为。Sync 加载中未应用 context 的截止日期。</td>
         </tr>
     </tbody>
 </table>
@@ -107,14 +107,14 @@ load -c book
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
+            <td>要加载的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -122,32 +122,32 @@ load -c book
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to load.</td>
+            <td>要加载的 collection 名称。</td>
         </tr>
         <tr>
             <td>-p (Optional/Multiple)</td>
-            <td>The name of the partition to load.</td>
+            <td>要加载的 partition 名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 了解更多 Milvus 的基本操作：
+  - [插入数据](insert_data.md)
+  - [创建 partition](create_partition.md)
+  - [创建索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
