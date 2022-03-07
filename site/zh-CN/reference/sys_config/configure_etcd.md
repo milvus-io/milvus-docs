@@ -27,7 +27,7 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
   <tbody>
     <tr>
       <td>
-        <li>你可以将此参数更改为你自己的 etcd 集群的端点。</li>
+        <li>用以访问 etcd 服务的端点。你可以将此参数更改为你自己的 etcd 集群的端点。</li>
         <li>环境变量： <code>ETCD_ENDPOINTS</code></li>
         <li>当 Milvus 启动时，etcd 优先从环境变量 <code>ETCD_ENDPOINTS</code> 获取有效地址。</li>
       </td>
@@ -52,7 +52,7 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
         <li>Milvus 在 etcd 中存储数据的键的根前缀。</li>
         <li>注意：使用 Milvus 一段时间后更改此参数会影响对旧数据的访问。</li>
         <li>建议在首次启动 Milvus 之前更改此参数。</li>
-        <li>如果 etcd 服务已经存在，则为 Milvus 设置一个易于识别的根密钥前缀。</li>
+        <li>如果 etcd 服务已经存在，则为 Milvus 设置一个易于识别的前缀。</li>
       </td>
       <td>by-dev</td>
     </tr>
@@ -71,7 +71,7 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
   <tbody>
     <tr>
       <td>
-        <li>Milvus 在 etcd 中存储元数据相关信息的键的子前缀。</li>
+        <li>Milvus 在 etcd 中存储元数据相关信息的键的次前缀。</li>
         <li>注意：使用 Milvus 一段时间后更改此参数会影响对旧数据的访问。</li>
         <li>建议在首次启动 Milvus 之前更改此参数。</li>
       </td>
@@ -93,9 +93,9 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
   <tbody>
     <tr>
       <td>
-        <li>Milvus 在 etcd 中存储时间戳的键的子前缀。</li>
+        <li>Milvus 在 etcd 中存储时间戳的键的次前缀。</li>
         <li>注意：使用 Milvus 一段时间后更改此参数会影响对旧数据的访问。</li>
-        <li>如果没有具体原因，建议不要更改此参数。</li>
+        <li>如无特殊原因，建议不要更改此参数。</li>
       </td>
       <td>kv</td>
     </tr>
