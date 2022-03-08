@@ -14,9 +14,9 @@ group: prerequisite-docker.md
 
 ## 硬件要求
 
-| 硬件           | 前提                                                  |建议配置| 注意                                                         |
+| 硬件           | 要求                                                  |建议配置| 说明                                                         |
 | ------------------- | ------------------------------------------------------------ |--------------| ------------------------------------------------------------ |
-| CPU                 | Intel CPU Sandy Bridge 或以上                              |<ul><li>单机版：8 core 或更多</li><li>分布式版：16 core 或更多</li></ul>| 当前版本的 Milvus 不支持 AMD 和 Apple M1 CPU。 |
+| CPU                 | Intel CPU Sandy Bridge 或以上                              |<ul><li>单机版：8 核或更多</li><li>分布式版：16 核或更多</li></ul>| 当前版本的 Milvus 不支持 AMD 和 Apple M1 CPU。 |
 | CPU 指令集 | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |<ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |  Milvus 中的向量相似度搜索和索引构建需要 CPU 支持单指令多数据 (SIMD) 扩展集。 请确保 CPU 至少支持一个列出的 SIMD 扩展集。 有关更多信息，请参阅 [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX)。                           |
 | RAM                 | <ul><li>单机版： 16G</li><li>分布式版： 64G</li></ul>       |<ul><li>单机版： 32G</li><li>分布式版： 128G</li></ul>        | RAM 的大小取决于数据量。                  |
 | 硬盘          | SATA 3.0 SSD 或以上                                       |SATA 3.0 SSD 或以上 | 硬盘的大小取决于数据量。           |
@@ -32,7 +32,7 @@ kubectl 是 Kubernetes 的命令行工具。使用与集群一个次要版本差
 
 
 
-| 操作系统 | 软件                                                     | 注意                                                         |
+| 操作系统 | 软件                                                     | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Linux 发行版  | <ul><li>Kubernetes 1.16 或以上</li><li>kubectl</li><li>Helm 3.0.0 或以上</li><li>minikube (Milvus 单机版)</li><li>Docker 19.03 或以上 (Milvus 单机版)</li></ul> | 有关更多信息，请参阅 [Helm Docs](https://helm.sh/docs/)。|
 
