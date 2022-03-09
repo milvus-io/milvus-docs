@@ -4,20 +4,20 @@ related_key: filter
 summary: Conduct a Hybrid Search with Milvus.
 ---
 
-# Conduct a Hybrid Search
-
-{{fragments/translation_needed.md}}
-
-This topic describes how to conduct a hybrid search.
-
-A hybrid search is essentially a vector search with attribute filtering. By specifying [boolean expressions](boolean.md) that filter the scalar fields or the primary key field, you can limit your search with certain conditions.
-
-The following example shows how to perform a hybrid search on the basis of a regular [vector search](search.md). Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the `word_count` field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.
+# 混合搜索
 
 
-## Load collection
 
-All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector search.
+当前主题介绍如何进行混合搜索。
+
+混合搜索本质上是带有属性过滤的向量搜索。通过指定过滤标量 field 或者主键 field 的 [布尔表达式](boolean.md)，你可以使用特定条件限制搜索。
+
+下面的例子展示了如何在正则 [向量搜索](search.md) 的基础上进行混合搜索。假设你想基于书籍介绍的特征向量搜索某些书籍，然而你只需要特定 word count 范围内的书籍。你可以指定布尔表达式来过滤过滤搜索参数中的 `word_count` field。Milvus 只会在匹配表达式的 entity 中搜索相似的向量。
+
+
+## 加载 collection
+
+Milvus 中的所有搜索和查询操作都在内存中执行。在进行向量相似性搜索之前将 collection 加载到内存中。
 
 {{fragments/multiple_code.md}}
 
@@ -56,9 +56,9 @@ load -c book
 ```
 
 
-## Conduct a hybrid vector search
+## 混合向量搜索
 
-By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
+通过指定布尔表达式，你可以在向量搜索过程中过滤 entity 的标量 field。以下示例将搜索范围限制为指定 `word_count` 值范围内的向量。
 
 {{fragments/multiple_code.md}}
 
@@ -157,46 +157,46 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
     <tr>
 		<td><code>data</code></td>
-		<td>Vectors to search with.</td>
+		<td>用于搜索的向量</td>
 	</tr>
 	<tr>
 		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 field 名称。</td>
 	</tr>
   <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
 	</tr>
   <tr>
 		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partition to search in.</td>
+		<td>要搜索的 partition 名称列表。</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>返回的 field 名称。当前版本不支持 Vector filed 。</td>
 	</tr>
   <tr>
 		<td><code>timeout</code> (optional)</td>
-		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+		<td>允许 RPC 的持续时间（以秒为单位）。当设置为 None 时，客户端等待服务器响应或者发生错误。</td>
 	</tr>
   <tr>
 		<td><code>round_decimal</code> (optional)</td>
-		<td>Number of decimal places of returned distance.</td>
+		<td>返回距离的小数位数。</td>
 	</tr>
 	</tbody>
 </table>
@@ -204,38 +204,38 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to search in.</td>
+		<td>要搜索的 collection 名称。</td>
 	</tr>
 	<tr>
     <td><code>search_params</code></td>
-    <td>Parameters (as an object) used for search.</td>
+    <td>用于搜索的参数（作为对象）。</td>
   </tr>
 	<tr>
     <td><code>vectors</code></td>
-    <td>Vectors to search with.</td>
+    <td>用于搜索的向量。</td>
   </tr>
   <tr>
 		<td><code>vector_type</code></td>
-		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
+		<td>二进制型或浮点型向量的预检查。二进制型向量为<code>100</code> ，浮点型向量为<code>101</code>。</td>
 	</tr>
   <tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partition to search in.</td>
+		<td>要搜索的 partition 名称列表。</td>
 	</tr>
     <tr>
 		<td><code>expr</code> (optional)</td>
-		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field not support in current release.</td>
+		<td>返回的 field 名称。当前版本不支持 Vector field 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -243,16 +243,16 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-go">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>NewIndex*SearchParam func</code></td>
-		<td>Function to create entity.SearchParam according to different index types.</td>
-        <td>For floating point vectors:
+		<td>根据不同的索引类型创建 entity.SearchParam 的函数。</td>
+        <td>浮点型向量：
             <ul>
                 <li><code>NewIndexFlatSearchParam</code> (FLAT)</li>
                 <li><code>NewIndexIvfFlatSearchParam</code> (IVF_FLAT)</li>
@@ -265,7 +265,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
                 <li><code>NewIndexRHNSW_PQSearchParam</code> (RHNSW_PQ)</li>
                 <li><code>NewIndexRHNSW_SQSearchParam</code> (RHNSW_SQ)</li>
             </ul>
-            For binary vectors:
+            二进制型向量：
             <ul>
                 <li><code>NewIndexBinFlatSearchParam</code> (BIN_FLAT)</li>
                 <li><code>NewIndexBinIvfFlatSearchParam</code> (BIN_IVF_FLAT)</li>
@@ -274,57 +274,57 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
 	<tr>
 		<td><code>searchParam</code></td>
-		<td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。</td>
+    <td>详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
   <tr>
     <td><code>ctx</code></td>
-    <td>Context to control API invocation process.</td>
+    <td>控制调用 API 的 Context。</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td><code>CollectionName</code></td>
-    <td>Name of the collection to load.</td>
+    <td>要加载的 collection 名称。</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td><code>partitionNames</code></td>
-    <td>List of names of the partitions to load. All partitions will be searched if it is left empty.</td>
+    <td>要加载的 partition 名称列表。如果将其置空，将搜索所有的 partition 。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>要返回的 field 名称。</td>
+    <td>当前版本不支持 Vector field 。</td>
 	</tr>
   <tr>
     <td><code>vectors</code></td>
-    <td>Vectors to search with.</td>
+    <td>用于搜索的向量。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>vectorField</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 filed 名称。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>metricType</code></td>
-		<td>Metric type used for search.</td>
-    <td>This parameter must be set identical to the metric type used for index building.</td>
+		<td>用于搜索的指标类型。</td>
+    <td>此参数必须设置为与用于索引构建的指标类型相同。</td>
 	</tr>
   <tr>
 		<td><code>topK</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>sp</code></td>
-		<td>entity.SearchParam specific to the index.</td>
+		<td>该索引特有的搜索参数 entity.SearchParam 。</td>
     <td>N/A</td>
 	</tr>
 	</tbody>
@@ -333,51 +333,51 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
     <td><code>CollectionName</code></td>
-    <td>Name of the collection to load.</td>
+    <td>要加载的 collection 名称。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>MetricType</code></td>
-		<td>Metric type used for search.</td>
-    <td>This parameter must be set identical to the metric type used for index building.</td>
+		<td>距离计算方式。</td>
+    <td>此参数必须设置为与用于索引构建的指标类型相同。</td>
 	</tr>
   <tr>
 		<td><code>OutFields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>要返回的 field 名称。</td>
+    <td>当前版本不支持 Vector field 。</td>
 	</tr>
   <tr>
 		<td><code>TopK</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
     <td>N/A</td>
 	</tr>
   <tr>
     <td><code>Vectors</code></td>
-    <td>Vectors to search with.</td>
+    <td>用于搜索的向量。</td>
     <td>N/A</td>
   </tr>
 <tr>
 		<td><code>VectorFieldName</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 field 名称。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>Expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>Params</code></td>
-		<td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。</td>
+    <td>详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -385,21 +385,21 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Full name</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>全称</th>
+            <th>说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>--help</td>
             <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>显示使用命令的帮助。</td>
         </tr>
     </tbody>
 </table>
 
-Check the returned results.
+检查返回的结果。
 
 {{fragments/multiple_code.md}}
 
@@ -432,10 +432,10 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
+- 了解更多关于 Milvus 的基本操作：
   - [Search with Time Travel](timetravel.md)
-- Explore API references for Milvus SDKs:
+- 探索 Milvus SDKs 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
