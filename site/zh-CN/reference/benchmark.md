@@ -117,8 +117,8 @@ This test aims to observe the correlation between NB and RT of data inserting.
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -126,7 +126,8 @@ dataNode:
         memory: 32Gi
         cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 
@@ -155,8 +156,8 @@ This test aims to observe the correlation between index building time and the nu
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -170,7 +171,8 @@ indexNode:
             memory: 32Gi
             cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
@@ -226,8 +228,8 @@ This test observes the RT of search with different search parameters (nq & topk)
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -247,7 +249,8 @@ queryNode:
             memory: 32Gi
             cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
@@ -315,8 +318,8 @@ This test observes the VPS of search with different search parameters (nq & topk
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -336,7 +339,8 @@ queryNode:
             memory: 32Gi
             cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
@@ -404,8 +408,8 @@ This test observes the correlation between QPS and RT of concurrent searches on 
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -425,20 +429,22 @@ queryNode:
             memory: 32Gi
             cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
     <summary><b>Server configurations (standalone)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 standalone:
     resources:
         limits:
             memory: 64Gi
             cpu: 16.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
@@ -487,8 +493,8 @@ This test observes the QPS and RT with different number of query nodes under the
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -508,7 +514,8 @@ queryNode:
             memory: 32Gi
             cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
@@ -557,8 +564,8 @@ This test observes the Recall and RT of search with different index types under 
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
-    <pre>
-        <code>
+
+```yaml
 dataNode:
     replicas: 1
     resources:
@@ -578,7 +585,8 @@ queryNode:
             memory: 32Gi
             cpu: 8.0
         </code>
-    </pre>
+```
+
 </details>
 
 <details>
