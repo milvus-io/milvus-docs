@@ -12,12 +12,12 @@ summary: Conduct a Hybrid Search with Milvus.
 
 混合搜索本质上是带有属性过滤的向量搜索。通过指定过滤标量 field 或者主键 field 的 [布尔表达式](boolean.md)，你可以使用特定条件限制搜索。
 
-下面的例子展示了如何在正则 [向量搜索](search.md) 的基础上进行混合搜索。假设你想基于书籍介绍的特征向量搜索某些书籍，然而你只需要特定 word count 范围内的书籍。你可以指定布尔表达式来过滤过滤搜索参数中的 `word_count` field。Milvus 只会在匹配表达式的 entity 中搜索相似的向量。
+下面的例子展示了如何在 [向量搜索](search.md) 的基础上进行混合搜索。假设你想基于书籍介绍的特征向量搜索某些书籍，然而你只需要特定 word count 范围内的书籍。你可以指定布尔表达式来过滤过滤搜索参数中的 `word_count` field。Milvus 只会在匹配表达式的 entity 中搜索相似的向量。
 
 
 ## 加载 collection
 
-Milvus 中的所有搜索和查询操作都在内存中执行。在进行向量相似性搜索之前将 collection 加载到内存中。
+Milvus 中的所有搜索和结构化匹配操作都在内存中执行。在进行向量相似性搜索之前将 collection 加载到内存中。
 
 {{fragments/multiple_code.md}}
 
@@ -164,7 +164,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	<tbody>
     <tr>
 		<td><code>data</code></td>
-		<td>用于搜索的向量</td>
+		<td>用于搜索的向量。</td>
 	</tr>
 	<tr>
 		<td><code>anns_field</code></td>
@@ -215,7 +215,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
 	<tr>
     <td><code>search_params</code></td>
-    <td>用于搜索的参数（作为对象）。</td>
+    <td>用于搜索的参数（对象）。</td>
   </tr>
 	<tr>
     <td><code>vectors</code></td>
