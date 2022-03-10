@@ -439,7 +439,7 @@ indexNode:
 
 </template>
 
-<template id="config"></template>
+<template id="config">
 
 {
   "width": 1000,
@@ -508,7 +508,9 @@ indexNode:
     "label": "(item) => `${item.index_time}`",
     "labelFontSize": 10
   }
-}
+}    
+    
+</template>
 
 </div>
 
