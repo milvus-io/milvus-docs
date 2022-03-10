@@ -134,13 +134,10 @@ dataNode:
 <div class="zchart-container" id="NB_RT">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "NB": 10,
@@ -223,11 +220,9 @@ dataNode:
     "RT": 30620
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -303,7 +298,6 @@ dataNode:
     "sameYScale": true
   }
 }
-
 </template>
 
 </div>
@@ -377,13 +371,10 @@ indexNode:
 <div class="zchart-container" id="indexnodes_indextime">
 
 <template id="chart-type">
-
 "barchart"
-
 </template>
 
 <template id="data">
-
 [
   {
     "index_time": 16066.927,
@@ -436,11 +427,9 @@ indexNode:
     "index_type": "ivf_flat"
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -508,8 +497,7 @@ indexNode:
     "label": "(item) => `${item.index_time}`",
     "labelFontSize": 10
   }
-}    
-    
+}
 </template>
 
 </div>
@@ -607,13 +595,10 @@ queryNode:
 <div class="zchart-container" id="nq_RT_1m">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 0.0131,
@@ -832,11 +817,9 @@ queryNode:
     "vps": 1321.54515
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -925,7 +908,6 @@ queryNode:
     "legendLabel": "(topk) =>`topk=${topk}`"
   }
 }
-
 </template>
 
 </div>
@@ -935,13 +917,10 @@ queryNode:
 <div class="zchart-container" id="nq_RT_50m_4qn">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 0.0273,
@@ -1160,11 +1139,9 @@ queryNode:
     "vps": 249.6804
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -1253,7 +1230,6 @@ queryNode:
     "legendLabel": "(topk) =>`topk=${topk}`"
   }
 }
-
 </template>
 
 </div>
@@ -1263,13 +1239,10 @@ queryNode:
 <div class="zchart-container" id="nq_RT_50m_8qn">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 0.0225,
@@ -1488,11 +1461,9 @@ queryNode:
     "vps": 455.502
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -1581,7 +1552,6 @@ queryNode:
     "legendLabel": "(topk) =>`topk=${topk}`"
   }
 }
-
 </template>
 
 </div>
@@ -1676,13 +1646,10 @@ queryNode:
 <div class="zchart-container" id="nq_RT_1m_vps">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 0.0131,
@@ -1901,11 +1868,9 @@ queryNode:
     "vps": 1321.54515
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -1991,7 +1956,6 @@ queryNode:
     "legendLabel": "(topk) =>`topk=${topk}`"
   }
 }
-
 </template>
 
 </div>
@@ -2001,13 +1965,10 @@ queryNode:
 <div class="zchart-container" id="nq_RT_50m_4qn_vps">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 0.0273,
@@ -2226,11 +2187,9 @@ queryNode:
     "vps": 249.6804
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -2316,7 +2275,6 @@ queryNode:
     "legendLabel": "(topk) =>`topk=${topk}`"
   }
 }
-
 </template>
 
 </div>
@@ -2326,13 +2284,10 @@ queryNode:
 <div class="zchart-container" id="nq_RT_50m_8qn_vps">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 0.0225,
@@ -2551,11 +2506,9 @@ queryNode:
     "vps": 455.502
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -2641,7 +2594,6 @@ queryNode:
     "legendLabel": "(topk) =>`topk=${topk}`"
   }
 }
-
 </template>
 
 </div>
@@ -2736,13 +2688,10 @@ standalone:
 <div class="zchart-container" id="RT_QPS_1m">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "RT": 10,
@@ -2895,11 +2844,9 @@ standalone:
     "deploy_mode": "standalone"
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -2980,7 +2927,6 @@ standalone:
     "legendLabel": "deploy_mode => deploy_mode"
   }
 }
-
 </template>
 
 </div>
@@ -3059,13 +3005,10 @@ queryNode:
 <div class="zchart-container" id="queryNodes_QPS_50m">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "queryNodes": 2,
@@ -3118,10 +3061,88 @@ queryNode:
     "name": "RT"
   }
 ]
-
 </template>
 
-<template id="config"></template>
+<template id="config">
+{
+  "width": 1000,
+  "height": 400,
+  "border": "1px solid #999",
+  "padding": [
+    60,
+    140,
+    50,
+    90
+  ],
+  "tooltip": {
+    "hasTooltip": true,
+    "content": [
+      "queryNodes"
+    ],
+    "fontSize": 16,
+    "fontWeight": 500,
+    "fontColor": "#666"
+  },
+  "title": {
+    "text": "queryNodes & QPS / RT",
+    "fontSize": 24,
+    "fontWeight": 600,
+    "fontColor": "#222"
+  },
+  "circle": {
+    "r": 3,
+    "strokeColor": "#fff",
+    "strokeWidth": 1,
+    "isCircleColorMapping": true,
+    "circleColor": "name",
+    "withLabels": true,
+    "label": "(item) => `${item.name}=${item.value}`",
+    "labelFontSize": 10,
+    "withLinks": true,
+    "isLinkColorMapping": true,
+    "linkType": "curve",
+    "linkWidth": 2,
+    "linkColor": "name"
+  },
+  "x": {
+    "key": "queryNodes",
+    "scaleType": "linear",
+    "tickType": "bottom",
+    "tickFontSize": 14,
+    "tickColor": "#666",
+    "label": "queryNodes",
+    "labelFontSize": 16,
+    "labelWeight": 600,
+    "labelColor": "#444",
+    "inset": 8,
+    "zoom": true
+  },
+  "y": {
+    "key": "value",
+    "scaleType": "linear",
+    "tickType": "left",
+    "tickFontSize": 14,
+    "tickColor": "#666",
+    "label": "",
+    "labelFontSize": 16,
+    "labelWeight": 600,
+    "labelColor": "#444",
+    "inset": 6,
+    "zoom": true,
+    "fromZero": true
+  },
+  "groupBy": {
+    "isGroupBy": true,
+    "key": "name",
+    "sameXScale": true,
+    "sameYScale": true,
+    "legendHeight": 30,
+    "legendIconWidth": 40,
+    "legendFontSize": 10,
+    "legendLabel": "(name, i) => `${name}${i==1 ? `(TP99) / ms`:''}`"
+  }
+}
+</template>
 
 </div>
 
@@ -3214,13 +3235,10 @@ queryNode:
 <div class="zchart-container" id="Recall_RT_sift_hnsw">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "Recall": 0.855,
@@ -3259,11 +3277,9 @@ queryNode:
     "sift_hnsw": 1
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -3345,7 +3361,6 @@ queryNode:
     "sameYScale": true
   }
 }
-
 </template>
 
 </div>
@@ -3355,13 +3370,10 @@ queryNode:
 <div class="zchart-container" id="Recall_RT_sift_ivf_flat">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "Recall": 0.376,
@@ -3424,11 +3436,9 @@ queryNode:
     "ivf_flat": 1
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -3510,7 +3520,6 @@ queryNode:
     "sameYScale": true
   }
 }
-
 </template>
 
 </div>
@@ -3520,13 +3529,10 @@ queryNode:
 <div class="zchart-container" id="Recall_RT_sift_ivf_sq8">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "Recall": 0.375,
@@ -3589,11 +3595,9 @@ queryNode:
     "ivf_sq8": 1
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -3675,7 +3679,6 @@ queryNode:
     "sameYScale": true
   }
 }
-
 </template>
 
 </div>
@@ -3685,13 +3688,10 @@ queryNode:
 <div class="zchart-container" id="Recall_RT_glove_ivf_flat">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "Recall": 0.379,
@@ -3754,11 +3754,9 @@ queryNode:
     "glove_ivf_flat": 1
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -3840,7 +3838,6 @@ queryNode:
     "sameYScale": true
   }
 }
-
 </template>
 
 </div>
@@ -3864,13 +3861,10 @@ This test observes the Recall and RT of search with different index types on the
 <div class="zchart-container" id="Recall_RT_sift">
 
 <template id="chart-type">
-
 "scatter_plot"
-
 </template>
 
 <template id="data">
-
 [
   {
     "Recall": 0.855,
@@ -4055,11 +4049,9 @@ This test observes the Recall and RT of search with different index types on the
     "valueType": "nprobe"
   }
 ]
-
 </template>
 
 <template id="config">
-
 {
   "width": 1000,
   "height": 400,
@@ -4148,7 +4140,6 @@ This test observes the Recall and RT of search with different index types on the
     "legendLabel": "index_type => index_type"
   }
 }
-
 </template>
 
 </div>
