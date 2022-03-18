@@ -10,7 +10,7 @@ summary: Learn how to query vectors in Milvus.
 
 当前主题介绍如何进行向量结构化匹配。
 
-与向量相似性搜索不同，向量结构化匹配通过基于[布尔表达式](boolean.md) 的标量过滤来检索向量。 Milvus 支持标量 field 中的多种数据类型和多种布尔表达式。布尔表达式过滤标量 field 或者主键 field，并检索与过滤器匹配的所有结果。
+与向量相似性搜索不同，向量结构化匹配通过基于[布尔表达式](boolean.md) 的标量过滤来检索向量。 Milvus 支持标量 field 中的多种数据类型和多种布尔表达式。布尔表达式过滤标量 field 或者 primary key field，并检索与过滤器匹配的所有结果。
 
 下面的例子展示了如何对一个拥有 2000 行数据的数据集进行向量结构化匹配，模拟你基于书籍 ID 结构化匹配某些书籍的情况。该数据集包含 book ID (primary key)、word count (scalar field) 和 book introduction (vector field)。
 
@@ -59,7 +59,7 @@ load -c book
 
 下面的示例过滤具有特定 `book_id` 的向量，并返回结果的 `book_id` field 和 `book_intro` field。
 
-Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。在本例中，搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。Milvus 在搜索或结构化匹配期间不指定一致性级别，而是采用 collection 的原始一致性级别。
+Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。在本例中，搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。如果在搜索或结构化匹配期间不指定一致性级别，Milvus 将采用创建 collection 的原始一致性级别。
 
 {{fragments/multiple_code.md}}
 
