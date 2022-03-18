@@ -152,7 +152,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 	<tbody>
         <tr>
             <td><code>FieldSchema</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="field_schema.md">Field Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -203,7 +203,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         </tr>
         <tr>
             <td><code>CollectionSchema</code></td>
-        <td>Schema of the collection to create. Refer to <a href="collection_schema.md">Collection Schema</a> for more information.</td>
+        <td>Schema of the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
         <td>N/A</td>
         </tr>
         <tr>
@@ -245,7 +245,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         </tr>
         <tr>
             <td><code>Fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="field_schema.md">Field Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="chema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -315,7 +315,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>fields</code></td>
             <td>Schema of the filed and the collection to create.</td>
-            <td>Refer to <a href="field_schema.md">Field Schema</a> and <a href="collection_schema.md">Collection Schema</a> for more information.</td>
+            <td>Refer to <a href="schema.md">Schema</a> for more information.</td>
         </tr>
         <tr>
             <td><code>data_type</code></td>
