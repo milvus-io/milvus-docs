@@ -4,23 +4,23 @@ related_key: Time Travel
 summary: Learn how to search with Time Travel in Milvus.
 ---
 
-# Search with Time Travel
+# 使用 Time Travel 搜索
 
-{{fragments/translation_needed.md}}
 
-This topic describes how to use the Time Travel feature during vector search.
 
-Milvus maintains a timeline for all data insert and delete operations. It allows users to specify a timestamp in a search to retrieve a data view at a specified point in time, without spending tremendously on maintenance for data rollback.
+当前主题介绍如何在向量搜索过程中使用 Time Travel。
+
+Milvus 为所有数据插入和删除操作维护一条时间线。它允许用户在搜索中指定时间戳，以便在指定的时间点检索数据视图，而无需花费大量时间维护数据回滚。
 
 <div class="alert note">
-By default, Milvus allows Time Travel span of 432,000 seconds (120h0m0s). You can configure this parameter in <code>common.retentionDuration</code>.
+默认情况下，Milvus 允许 Time Travel 的跨度为 432,000 秒（120h0m0s）。你可以在 <code>common.retentionDuration</code> 中配置此参数。
 </div>
 
-## Preparations
+## 准备工作
 
-The following example code demonstrates the steps prior to inserting data.
+以下的示例代码演示了插入数据之前的步骤。
 
-If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
+如果你在现有 Milvus 实例中使用自己的数据集，则可以继续下一步。
 
 {{fragments/multiple_code.md}}
 
@@ -72,9 +72,9 @@ connect -h localhost -p 19530 -a default
 create collection -c test_time_travel -f pk:INT64:primary_field -f example_field:FLOAT_VECTOR:2 -p pk
 ```
 
-## Insert the first batch of data
+## 插入第一批数据
 
-Insert random data to simulate the original data (Milvus CLI example uses a pre-built, remote CSV file containing similar data).
+插入随机数据以模拟原始数据（Milvus CLI 示例使用包含类似数据的预构建远程 CSV 文件）。
 
 {{fragments/multiple_code.md}}
 
@@ -122,9 +122,9 @@ Milvus timestamp:           430390410783752199
 --------------------------  ------------------
 ```
 
-## Check the timestamp of the first data batch
+## 查看第一个数据批次的时间戳
 
-Check the timestamp of the first data batch for search with Time Travel. Data inserted within the same batch share an identical timestamp.
+查看第一个数据批次的时间戳以使用 Time Travel 进行搜索。在同一批次中插入的数据共享相同的时间戳。
 
 ```python
 batch1.timestamp
@@ -149,14 +149,14 @@ batch1.timestamp
 ```
 
 <div class="alert note">
-  Milvus adopts a combination of physical clock and logic counter as a hybrid timestamp. The 64-bit timestamp consists of a 46-bit physical part (high-order bits) and an 18-bit logic part (low-order bits). The physical part is the number of milliseconds that have elapsed since January 1, 1970 (midnight UTC/GMT).
+Milvus 采用物理时钟和逻辑计数器的组合作为混合时间戳。 64 位时间戳由 46 位物理部分（高位）和 18 位逻辑部分（低位）组成。物理部分是自 1970 年 1 月 1 日（UTC/GMT 午夜）以来经过的毫秒数。
 </div>
 
 
 
-## Insert the second batch of data
+## 插入第二批数据
 
-Insert the second batch of data to simulate the dirty data, among which a piece of data with primary key value `19` and vector value `[1.0,1.0]` is appended as the target data to search with in the following step (Milvus CLI example uses a pre-built, remote CSV file containing similar data).
+插入第二批数据以模拟脏数据，其中追加一条 primary key 值为 `19`，向量值为 `[1.0,1.0]` 的数据作为后续步骤搜索的目标数据（Milvus CLI 示例使用包含类似数据的预构建远程 CSV 文件）。
 
 {{fragments/multiple_code.md}}
 
@@ -213,9 +213,9 @@ Milvus timestamp:           430390435713122310
 --------------------------  ------------------
 ```
 
-## Search with a specified timestamp
+## 使用指定的时间戳搜索
 
-Load the collection and search the target data with the timestamp of the first data batch. With the timestamp specified, Milvus only retrieves the data view at the point of time the timestamp indicates.
+加载 collection 并使用第一个数据批次的时间戳搜索目标数据。指定时间戳后，Milvus 只会在时间戳指示的时间点检索数据视图。
 
 {{fragments/multiple_code.md}}
 
@@ -277,7 +277,7 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]: 430390410783752199
 ```
 
-As shown below, the target data itself and other data inserted later are not returned as results.
+如下所示，目标数据本身和后面插入的其他数据都不会作为结果返回。
 
 ```python
 [8, 7, 4, 2, 5, 6, 9, 3, 0, 1]
@@ -325,7 +325,7 @@ No.1:
 +---------+------+------------+-----------+
 ```
 
-If you do not specify the timestamp or specify it with the timestamp of the second data batch, Milvus will return the results from both batches.
+如果不指定时间戳或指定第二批数据的时间戳，Milvus 将返回两个批次的结果。
 
 {{fragments/multiple_code.md}}
 
@@ -414,13 +414,13 @@ No.1:
 +---------+------+------------+------------+
 ```
 
-## Generate a timestamp for search
+## Generate a timestamp for search为搜索生成时间戳
 
-In the case that the previous timestamp is not recorded, Milvus allows you to generate a timestamp using an existing timestamp, Unix Epoch time, or date time.
+在没有记录之前的时间戳的情况下，Milvus 允许你使用现有的时间戳、Unix Epoch 时间或日期时间生成时间戳。
 
-The following example simulates an unwanted deletion operation and shows how to generate a timestamp prior to the deletion and search with it.
+下面的示例模拟了不需要的删除操作，并展示如何在删除之前生成时间戳并使用它进行搜索。
 
-Generate a timestamp based on the date time or Unix Epoch time prior to the deletion.
+根据删除前的日期时间或 Unix  Epoch 时间生成时间戳。
 
 ```python
 import datetime
@@ -448,7 +448,7 @@ calc mkts_from_unixtime -e 1641809375
 430390476800000000
 ```
 
-Delete part of the data to simulate an accidental deletion operation.
+删除部分数据以模拟意外删除操作。
 
 ```python
 expr = "pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]"
@@ -480,7 +480,7 @@ Do you want to continue? [y/N]: y
 (insert count: 0, delete count: 10, upsert count: 0, timestamp: 430390494161534983)
 ```
 
-As shown below, the deleted entities are not returned in the results if you search without specifying the timestamp.
+如下所示，如果不指定时间戳进行搜索，结果中不会返回被删除的 entity。
 
 ```python
 search_param = {
@@ -560,7 +560,7 @@ No.1:
 +---------+------+------------+----------+
 ```
 
-Search with the prior-to-deletion timestamp. Milvus retrieves entities from the data before the deletion.
+使用删除之前的时间戳进行搜索。 Milvus 在删除之前从数据中检索 entity。
 
 ```python
 search_param = {
@@ -642,11 +642,11 @@ No.1:
 +---------+------+------------+------------+
 ```
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
+- 了解更多关于 Milvus 的基本操作：
   - [Query vectors](query.md)
   - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
