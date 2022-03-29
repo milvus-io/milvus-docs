@@ -3,6 +3,8 @@ id: boolean.md
 ---
 # 布尔表达式语法规则
 
+{{fragments/translation_needed.md}}
+
 表达式计算结果将输出布尔值——真（TRUE）或假（False）。在搜索向量时，Milvus 通过表达式进行标量过滤。查看 [Python SDK API](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/api/collection.html) 参考以了解表达式使用说明。
 
 [扩展巴科斯范式（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)语法规则中定义了布尔表达式的语法规则。布尔表达式的语法规则如下所示：
@@ -154,3 +156,54 @@ CmpOp = ">" | ">=" | "<" | "<=" | "=="| "!=";
 你可以在表达式中使用括号。运算时先计算最内层括号内的表达式。
 
 
+## Usage
+
+Samples of all available boolean expression usage in Milvus are listed as follows (`int64` represents the scalar field that contains data of INT64 type, and `float` represents the scalar field that contains data of floating-point type):
+
+1. CmpOp
+
+```
+"int64 > 0"
+```
+
+```
+"0 < int64 < 400"
+```
+
+```
+"500 <= int64 < 1000"
+```
+
+2. BinaryLogicalOp and parentheses
+
+```
+"(int64 > 0 && int64 < 400) or (int64 > 500 && int64 < 1000)"
+```
+
+3. TermExpr and UnaryLogicOp
+
+<div class="alert note">
+Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression <code>in</code>.
+</div>
+
+```
+"int64 not in [1, 2, 3]"
+```
+
+4. TermExpr, BinaryLogicalOp, and CmpOp (on different fields)
+
+```
+"int64 in [1, 2, 3] and float != 2"
+```
+
+5. BinaryLogicalOp and CmpOp
+
+```
+"int64 == 0 || int64 == 1 || int64 == 2"
+```
+
+6. CmpOp and UnaryArithOp or BinaryArithOp
+
+```
+"200+300 < int64 <= 500+500"
+```
