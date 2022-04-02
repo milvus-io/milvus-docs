@@ -36,7 +36,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_
 排序：
 
 <div class="filter">
-<a href="#component">组件或依赖项</a> <a href="#purpose">配置目的</a> 
+<a href="#component">组件或依赖</a> <a href="#purpose">配置目的</a> 
 
 </div>
 
@@ -45,7 +45,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_
 <table id="component">
 <thead>
   <tr>
-    <th>依赖项</th>
+    <th>依赖</th>
     <th>组件</th>
   </tr>
 </thead>
@@ -108,7 +108,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_
     </td>
   </tr>
   <tr>
-    <td>数据和元</td>
+    <td>数据和元数据</td>
     <td>
         <ul>
             <li><a href="configure_common.md#common.retentionDuration"><code>common.retentionDuration</code></a></li>
@@ -120,7 +120,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v{{var.milvus_release_
     </td>
   </tr>
   <tr>
-    <td>管理</td>
+    <td>集群管理</td>
     <td>
         <ul>
             <li><a href="configure_log.md#log.level"><code>log.level</code></a></li>
