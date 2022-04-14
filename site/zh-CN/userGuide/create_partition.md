@@ -4,17 +4,17 @@ related_key: Partition
 summary: Learn how to create a partition in Milvus.
 ---
 
-# Create a Partitions
+# 创建Partition
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to create a partition in Milvus.
+本章描述如何在Milvus中创建分区(Partition)。
 
-Milvus allows you to divide the bulk of vector data into a small number of partitions. Search and other operations can then be limited to one partition to improve the performance.
+Milvus允许将大量的矢量数据划分成一定数量的分区，可以将搜索和其他操作限制在特定的分区上来提高性能。
 
-A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Partition](glossary.md#Partition) for more information.
+一个集合(Collection)由一个或多个分区构成。创建新集合时, Milvus会创建一个名为`_default`的默认分区。 分区的详细介绍参见 [术语表 - Partition](glossary.md#Partition) 。
 
-The following example builds a partition `novel` in the collection `book`.
+下面的示例代码会在`book`集合中创建`novel`分区。
 
 
 {{fragments/multiple_code.md}}
@@ -59,18 +59,18 @@ create partition -c book -p novel
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>partition_name</code></td>
-		<td>Name of the partition to create.</td>
+		<td>待创建的分区名称。</td>
 	</tr>
   <tr>
-		<td><code>description</code> (optional)</td>
-		<td>Description of the partition to create.</td>
+		<td><code>description</code> (可选)</td>
+		<td>待创建的分区描述。</td>
 	</tr>
 	</tbody>
 </table>
@@ -79,18 +79,18 @@ create partition -c book -p novel
 <table class="language-javascript">
 	<thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
       <td><code>collection_name</code></td>
-      <td>Name of the collection to create a partition in.</td>
+      <td>待创建分区的集合名。</td>
     </tr>
     <tr>
       <td><code>partition_name</code></td>
-      <td>Name of the partition to create.</td>
+      <td>待创建的分区名称。</td>
     </tr>
 	</tbody>
 </table>
@@ -98,8 +98,8 @@ create partition -c book -p novel
 <table class="language-go">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
@@ -109,11 +109,11 @@ create partition -c book -p novel
     </tr>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to create a partition in.</td>
+        <td>待创建分区的集合名。</td>
     </tr>
     <tr>
         <td><code>partitionName</code></td>
-        <td>Name of the partition to create.</td>
+        <td>待创建的分区名称。</td>
     </tr>
   </tbody>
 </table>
@@ -121,18 +121,18 @@ create partition -c book -p novel
 <table class="language-java">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to create a partition in.</td>
+        <td>待创建分区的集合名。</td>
     </tr>
     <tr>
         <td><code>PartitionName</code></td>
-        <td>Name of the partition to create.</td>
+        <td>待创建的分区名称。</td>
     </tr>
   </tbody>
 </table>
@@ -140,30 +140,30 @@ create partition -c book -p novel
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>The name of the collection.</td>
+            <td>集合名称</td>
         </tr>
         <tr>
             <td>-p</td>
-            <td>The partition name.</td>
+            <td>分区名称</td>
         </tr>
         <tr>
-            <td>-d (Optional)</td>
-            <td>The description of the partition.</td>
+            <td>-d (可选)</td>
+            <td>分区描述</td>
         </tr>
     </tbody>
 </table>
 
-## Limits
-|Feature |Maximum limit|
+## 限制
+|设置项 |最大数量限制|
 |---|---|
-|Number of partitions in a collection|4,096|
+|单个集合中的分区数量|4,096|
 
 ## What's next
 
