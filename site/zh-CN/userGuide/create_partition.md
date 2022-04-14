@@ -4,17 +4,17 @@ related_key: Partition
 summary: Learn how to create a partition in Milvus.
 ---
 
-# Create a Partitions
+# 创建 Partition
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to create a partition in Milvus.
+本章描述如何在 Milvus 中创建 Partition。
 
-Milvus allows you to divide the bulk of vector data into a small number of partitions. Search and other operations can then be limited to one partition to improve the performance.
+Milvus 允许将大量的向量数据划分成一定数量的 Partition ，可以将搜索和其他操作限制在特定的 Partition 上来提高性能。
 
-A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Partition](glossary.md#Partition) for more information.
+一个 Collection 由一个或多个 Partition 构成。创建新 Collection 时, Milvus 会创建一个名为`_default`的默认 Partition 。 Partition 的详细介绍参见 [术语表 - Partition](glossary.md#Partition) 。
 
-The following example builds a partition `novel` in the collection `book`.
+下面的示例代码会在 Collection `book`中创建 Partition `novel`。
 
 
 {{fragments/multiple_code.md}}
@@ -59,18 +59,18 @@ create partition -c book -p novel
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>partition_name</code></td>
-		<td>Name of the partition to create.</td>
+		<td>待创建的 Partition 名称。</td>
 	</tr>
   <tr>
-		<td><code>description</code> (optional)</td>
-		<td>Description of the partition to create.</td>
+		<td><code>description</code> (可选)</td>
+		<td>待创建的 Partition 描述。</td>
 	</tr>
 	</tbody>
 </table>
@@ -79,18 +79,18 @@ create partition -c book -p novel
 <table class="language-javascript">
 	<thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
       <td><code>collection_name</code></td>
-      <td>Name of the collection to create a partition in.</td>
+      <td>待创建 Partition 的 Collection 名称。</td>
     </tr>
     <tr>
       <td><code>partition_name</code></td>
-      <td>Name of the partition to create.</td>
+      <td>待创建的 Partition 名称。</td>
     </tr>
 	</tbody>
 </table>
@@ -98,8 +98,8 @@ create partition -c book -p novel
 <table class="language-go">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
@@ -109,11 +109,11 @@ create partition -c book -p novel
     </tr>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to create a partition in.</td>
+        <td>待创建 Partition 的 Collection 名称。</td>
     </tr>
     <tr>
         <td><code>partitionName</code></td>
-        <td>Name of the partition to create.</td>
+        <td>待创建的 Partition 名称。</td>
     </tr>
   </tbody>
 </table>
@@ -121,18 +121,18 @@ create partition -c book -p novel
 <table class="language-java">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to create a partition in.</td>
+        <td>待创建 Partition 的 Collection 名称。</td>
     </tr>
     <tr>
         <td><code>PartitionName</code></td>
-        <td>Name of the partition to create.</td>
+        <td>待创建的 Partition 名称。</td>
     </tr>
   </tbody>
 </table>
@@ -140,39 +140,39 @@ create partition -c book -p novel
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>The name of the collection.</td>
+            <td>Collection 名称</td>
         </tr>
         <tr>
             <td>-p</td>
-            <td>The partition name.</td>
+            <td>Partition 名称</td>
         </tr>
         <tr>
-            <td>-d (Optional)</td>
-            <td>The description of the partition.</td>
+            <td>-d (可选)</td>
+            <td>Partition 描述</td>
         </tr>
     </tbody>
 </table>
 
-## Limits
-|Feature |Maximum limit|
+## 限制
+|设置项 |最大数量限制|
 |---|---|
-|Number of partitions in a collection|4,096|
+|单个 Collection 中的 Partition 数量|4,096|
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 学习 Milvus 更多基础操作：
+  - [在 Milvus 中插入数据](insert_data.md)
+  - [创建向量索引](build_index.md)
+  - [向量检索](search.md)
+  - [混合检索](hybridsearch.md)
+- 探索 Milvus SDKs 中的 API：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
