@@ -1,6 +1,6 @@
 ---
 id: install_cluster-ansible.md
-label: Ansible Controller
+label: Ansible
 related_key: Docker
 order: 4
 group: install_cluster-docker.md
@@ -18,7 +18,7 @@ summary: Learn how to install Milvus cluster with Ansible Controller.
 
 - Hardware: Three virtual machines each with four cores of CPU and 8 GB of RAM or more
 - Operating system: Ubuntu 20.04 LTS
-- Software: Ansible Controller
+- Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
 ## Download Ansible Milvus node deployment Playbook
 
