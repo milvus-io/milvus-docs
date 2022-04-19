@@ -9,6 +9,9 @@ summary: Learn how to install Milvus cluster with Ansible Controller.
 
 # Install Milvus Cluster
 
+
+{{fragments/translation_needed.md}}
+
 {{fragments/installation_guide_cluster.md}}
 
 {{tab}}
@@ -22,31 +25,29 @@ summary: Learn how to install Milvus cluster with Ansible Controller.
 
 ## Download Ansible Milvus node deployment Playbook
 
-Download the `ansible-milvus-node-deployment` Playbook.
+Clone Milvus repository from GitHub to download the Ansible Milvus node deployment Playbook.
 
 ```
-$ git clone https://github.com/john-h-luo/ansible-milvus-node-deployment.git
+$ git clone https://github.com/milvus-io/milvus.git
 ```
 
 ## Configure installation files
 
-Enter the local path to the playbook and configure the installation files.
+Enter the local path to the Playbook and configure the installation files.
 
 ```shell
-$ cd your/local/path/to/ansible-milvus-node-deployment
+$ cd ./milvus/deployments/docker/cluster-distributed-deployment
 ```
 
 ### Configure `inventory.ini`
 
-Configure Ansible `inventory.ini` to divide hosts in groups in accordance with their roles in the Milvus system.
+Configure `inventory.ini` to divide hosts in groups in accordance with their roles in the Milvus system.
 
 Add host names, and define `docker` group and `vars`.
 
-
-
 ```
-[dockernodes] # Define group name in square brackets
-dockernode01 # Replace the default value with hostnames
+[dockernodes]
+dockernode01
 dockernode02
 dockernode03
 
@@ -54,28 +55,55 @@ dockernode03
 ansible-controller
 
 [coords]
+; Take note the IP of this host VM, and replace 10.170.0.17 with it.
 dockernode01
 
 [nodes]
 dockernode02
 
 [dependencies]
+; dependencies node will host etcd, minio, pulsar, these 3 roles are the foundation of Milvus. 
+; Take note the IP of this host VM, and replace 10.170.0.19 with it.
 dockernode03
 
-[docker:children] # Define `docker` group
+[docker:children]
 dockernodes
 coords
 nodes
 dependencies
 
-[docker:vars] # Define `vars`
-ansible_python_interpreter=/usr/bin/python3
-StrictHostKeyChecking=no
+[docker:vars]
+ansible_python_interpreter= /usr/bin/python3
+StrictHostKeyChecking= no
+
+; Setup variables to controll what type of network to use when creating containers.
+dependencies_network= host
+nodes_network= host
+
+; Setup varibale to controll what version of Milvus image to use.
+image= milvusdb/milvus-dev:master-20220412-4781db8a
+
+; Setup static IP addresses of the docker hosts as variable for container environment variable config.
+; Before running the playbook, below 4 IP addresses need to be replaced with the IP of your host VM
+; on which the etcd, minio, pulsar, coordinators will be hosted.
+etcd_ip= 10.170.0.19
+minio_ip= 10.170.0.19
+pulsar_ip= 10.170.0.19
+coords_ip= 10.170.0.17
+
+; Setup container environment which later will be used in container creation.
+ETCD_ENDPOINTS= {{etcd_ip}}:2379 
+MINIO_ADDRESS= {{minio_ip}}:9000
+PULSAR_ADDRESS= pulsar://{{pulsar_ip}}:6650
+QUERY_COORD_ADDRESS= {{coords_ip}}:19531
+DATA_COORD_ADDRESS= {{coords_ip}}:13333
+ROOT_COORD_ADDRESS= {{coords_ip}}:53100
+INDEX_COORD_ADDRESS= {{coords_ip}}:31000
 ```
 
 ### Configure `ansible.cfg`
 
-`ansible.cfg` controls the action of the playbook, for example, SSH key, etc.
+`ansible.cfg` controls the action of the Playbook, for example, SSH key, etc.
 
 ```
 [defaults]
@@ -88,9 +116,10 @@ private_key_file=~/.my_ssh_keys/gpc_sshkey # Specify the SSH key that Ansible us
 
 `deploy-docker.yml` defines the tasks during the installation of Docker. See the code comments in the file for details.
 
-```
-- name: setup pre-requisites # Installation prerequisites
-  hosts: all 
+```yaml
+---
+- name: setup pre-requisites # Install prerequisite
+  hosts: all
   become: yes
   become_user: root
   roles:
@@ -114,6 +143,30 @@ $ ansible all -m ping
 ```
 
 Add `-i` in the command to specify the path to the inventory file if you did not specify it in `ansible.cfg`, otherwise Ansible uses `/etc/ansible/hosts`.
+
+The terminal returns as follow:
+
+```
+dockernode01 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+ansible-controller | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+dockernode03 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+dockernode02 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
 
 ## Check the Playbook Syntax
 
