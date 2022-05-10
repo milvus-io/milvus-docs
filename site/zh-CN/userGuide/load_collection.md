@@ -7,12 +7,17 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 # 加载 Collection
 
 
-
+{{fragments/translation_needed.md}}
 
 当前主题介绍如何在搜索或查询之前将 collection 加载到内存中。 Milvus 中所有的搜索和查询操作都在内存中执行。
 
+Milvus 2.1 allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
+
 <div class="alert warning">
-在当前版本中，要加载的数据量必须低于所有 query node 总内存资源的 90%，以便为执行引擎预留内存资源。
+<ul>
+<li>在当前版本中，要加载的数据量必须低于所有 query node 总内存资源的 90%，以便为执行引擎预留内存资源。</li>
+<li>In current release, all on-line query nodes will be divided into multiple replica groups according to the replica number specified by user. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
+</ul>
 </div>
 
 {{fragments/multiple_code.md}}
@@ -20,7 +25,7 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.load()
+collection.load(replica_number=2)
 ```
 
 ```javascript
@@ -62,6 +67,10 @@ load -c book
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
 		<td>要加载的 partition 名称。</td>
+	</tr>
+    <tr>
+		<td><code>replica_number</code> (optional)</td>
+		<td>Number of the replica to load.</td>
 	</tr>
 	</tbody>
 </table>
@@ -138,6 +147,25 @@ load -c book
     </tbody>
 </table>
 
+
+## Get replica information
+
+You can check the information of the loaded replicas.
+
+```python
+from pymilvus import Collection
+collection = Collection("book")      # Get an existing collection.
+collection.load(replica_number=2)    # Load collection as 2 replicas
+result = collection.get_replicas()
+print(result)
+```
+
+## Constraints
+
+- Error will be returned at the attempt to load partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and (if needed) then loading some other partition(s).
+- "Load successfully" will be returned at the attempt to load the collection that is already loaded.
+- Error will be returned at the attempt to load the collection when the child partition(s) is/are already loaded. Future releases will support loading the collection when some of its partitions are already loaded.
+- Loading different partitions in a same collection via separate RPCs is not allowed.
 
 ## 更多内容
 

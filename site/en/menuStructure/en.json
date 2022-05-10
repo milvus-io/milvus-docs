@@ -283,12 +283,20 @@
       "order": 0
     },
     {
+      "id": "import_data.md",
+      "title": "Import Data",
+      "label1": "userguide",
+      "label2": "manage_data",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "delete_data.md",
       "title": "Delete Entities",
       "label1": "userguide",
       "label2": "manage_data",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "compact_data.md",
@@ -296,7 +304,7 @@
       "label1": "userguide",
       "label2": "manage_data",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "manage_index",

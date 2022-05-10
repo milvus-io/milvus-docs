@@ -12,6 +12,8 @@ summary: Learn how to insert data in Milvus.
 
 你还可以使用 [MilvusDM](migrate_overview.md) 将数据迁移到 Milvus，这是一款专门用于使用 Milvus 导入和导出数据而设计的开源工具。
 
+Milvus 2.1 supports VARCHAR data type on scalar field. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.
+
 以下示例插入 2000 行随机生成的数据作为示例数据（Milvus CLI 示例使用包含类似数据的预构建远程 CSV 文件）。实际应用程序可能会使用比示例更高维度的向量。你可以准备自己的数据来替换示例。
 
 ## 准备数据
@@ -23,9 +25,10 @@ summary: Learn how to insert data in Milvus.
 ```python
 import random
 data = [
-    		[i for i in range(2000)],
+    	[i for i in range(2000)],
+		[str(i) for i in range(2000)],
 		[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
+    	[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
 ```
 
