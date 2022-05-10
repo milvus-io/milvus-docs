@@ -571,6 +571,14 @@
         "order": 2
       },
       {
+        "id": "authenticate.md",
+        "title": "用户认证",
+        "label1": "admin_guide",
+        "label2": "",
+        "label3": "",
+        "order": 9
+      },
+      {
         "id": "tools",
         "title": "开发工具",
         "label1": "",
