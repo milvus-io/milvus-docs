@@ -464,12 +464,20 @@
       "order": 3
     },
     {
+      "id": "tls.md",
+      "title": "Enable TLS proxy",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "operator.md",
       "title": "Configure Dependencies",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "scaleout.md",
@@ -477,7 +485,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "upgrade.md",
@@ -485,7 +493,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "monitor",
@@ -493,7 +501,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
@@ -534,7 +542,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 9,
       "isMenu": true
     },
     {
