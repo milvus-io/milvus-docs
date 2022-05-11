@@ -14,11 +14,8 @@ This topic describes how to enable TLS proxy in Milvus.
 
 ### Prerequisites
 
-Make sure OpenSSL is installed. If you have not installed it, run the following command first.
+Make sure OpenSSL is installed. If you have not installed it, [build and install](https://github.com/openssl/openssl/blob/master/INSTALL.md) OpenSSL first.
 
-```
-sudo apt install openssl
-```
 
 Run the following command to check your OpenSSL version:
 
