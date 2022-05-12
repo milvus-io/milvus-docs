@@ -7,7 +7,7 @@ summary: Learn how to configure stream storage with Milvus Operator.
 
 # Configure Stream Storage with Milvus Operator
 
-Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure stream storage dependencies when you install Milvus with Milvus Operator.
+Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Pulsar is the default stream storage system. This topic introduces how to configure stream storage dependencies when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -164,3 +164,79 @@ Assuming that the configuration file is named `milvuscluster.yaml`, run the foll
 ```Shell
 kubectl apply -f milvuscluster.yaml
 ```
+
+## Configure Kafka
+
+Pulsar is the default stream storage system. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
+
+`kafka` supports `external` and `inCluster`.
+
+### External Kafka
+
+`external` indicates using an external Kafka service. 
+
+Fields used to configure an external Kafka service include:
+
+- `external`: A `true` value indicates that Milvus uses an external Kafka service.
+- `brokerList`: The list of brokers to send the messages to.
+
+#### Example
+
+The following example configures an external Kafka service.
+
+```
+apiVersion: milvus.io/v1alpha1
+kind: MilvusCluster
+metadata:
+  name: my-release
+  labels:
+    app: milvus
+spec: 
+  dependencies:
+    msgStreamType: "kafka"
+    kafka:
+      external: true
+      brokerList: 
+        - "kafkaBrokerAddr1:9092"
+        - "kafkaBrokerAddr2:9092"
+        # ...
+  components: {}
+  config: {}
+```
+
+### Internal Kafka
+
+`inCluster` indicates when a Milvus cluster starts, a Kafka service starts automatically in the cluster.
+
+#### Example
+
+The following example configures an internal Kafka service.
+
+```
+apiVersion: milvus.io/v1alpha1
+kind: MilvusCluster
+metadata:
+  name: my-release
+  labels:
+    app: milvus
+spec: 
+  dependencies:
+    msgStreamType: "kafka"
+    kafka:
+      inCluster: 
+        values: {} # values can be found in https://artifacthub.io/packages/helm/bitnami/kafka
+  components: {}
+  config: {}
+```
+
+Find the complete configuration items to configure an internal Pulsar service [here](https://artifacthub.io/packages/helm/bitnami/kafka). Add configuration items as needed under `kafka.inCluster.values`.
+
+Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
+
+```
+kubectl apply -f milvuscluster.yaml
+```
+
+
+
+
