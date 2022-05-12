@@ -5,7 +5,7 @@ related_key: S3, storage
 summary: Learn how to set up S3 storage for Milvus.
 ---
 
-# Set Up Storage
+# Object Storage
 
 Milvus uses MinIO for object storage by default, but it also supports using [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) as persistent object storage for log and index files. This topic describes how to set up S3 for Milvus. If you can accpect using MinIO for object storage, you can skip this article. 
 
