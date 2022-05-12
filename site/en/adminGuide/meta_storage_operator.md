@@ -7,9 +7,24 @@ summary: Learn how to configure meta storage with Milvus Operator.
 
 # Configure Meta Storage with Milvus Operator
 
-etcd stores metadata of components in a Milvu## Configure etcd
+etcd stores metadata of components in a Milvus. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator.
 
-etcd stores metadata of components in a Milvus cluster. Add required fields under `spec.dependencies.etcd` to configure etcd.
+This topic assumes that you have deployed Milvus Operator.
+
+<div class="alert note">See <a href="https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+
+You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
+
+```YAML
+kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
+```
+
+You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
+
+
+## Configure etcd
+
+Add required fields under `spec.dependencies.etcd` to configure etcd.
 
 `etcd` supports `external` and `inCluster`.
 
