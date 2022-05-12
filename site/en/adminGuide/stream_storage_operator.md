@@ -1,0 +1,166 @@
+---
+id: stream_storage_operator.md
+title: Configure Stream Storage with Milvus Operator
+related_key: minio, s3, storage, etcd, pulsar
+summary: Learn how to configure stream storage with Milvus Operator.
+---
+
+# Configure Stream Storage with Milvus Operator
+
+Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure stream storage dependencies when you install Milvus with Milvus Operator.
+
+This topic assumes that you have deployed Milvus Operator.
+
+See Deploy Milvus Operator for more information.
+You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
+
+kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
+
+You only need to edit the code template in milvuscluster_default.yaml to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
+
+## Configure Pulsar
+
+Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Add required fields under `spec.dependencies.pulsar` to configure Pulsar.
+`pulsar` supports `external` and `inCluster`.
+
+### External Pulsar
+
+`external` indicates using an external Pulsar service. 
+Fields used to configure an external Pulsar service include:
+
+- `external`:  A `true` value indicates that Milvus uses an external Pulsar service.
+- `endpoints`: The endpoints of Pulsar.
+
+####  Example
+
+The following example configures an external Pulsar service.
+
+```YAML
+apiVersion: milvus.io/v1alpha1
+
+kind: MilvusCluster
+
+metadata:
+
+  name: my-release
+
+  labels:
+
+    app: milvus
+
+spec:
+
+  dependencies: # Optional
+
+    pulsar: # Optional
+
+      # Whether (=true) to use an existed external pulsar as specified in the field endpoints or 
+
+      # (=false) create a new pulsar inside the same kubernetes cluster for milvus.
+
+      external: true # Optional default=false
+
+      # The external pulsar endpoints if external=true
+
+      endpoints:
+
+      - 192.168.1.1:6650
+
+  components: {}
+
+  config: {}           
+```
+
+### Internal Pulsar
+
+`inCluster` indicates when a Milvus cluster starts, a Pulsar service starts automatically in the cluster.
+
+#### Example 
+
+The following example configures an internal Pulsar service.
+
+```YAML
+apiVersion: milvus.io/v1alpha1
+
+kind: MilvusCluster
+
+metadata:
+
+  name: my-release
+
+  labels:
+
+    app: milvus
+
+spec:
+
+  dependencies:
+
+    pulsar:
+
+      inCluster:
+
+        values:
+
+          components:
+
+            autorecovery: false
+
+          zookeeper:
+
+            replicaCount: 1
+
+          bookkeeper:
+
+            replicaCount: 1
+
+            resoureces:
+
+              limit:
+
+                cpu: '4'
+
+              memory: 8Gi
+
+            requests:
+
+              cpu: 200m
+
+              memory: 512Mi
+
+          broker:
+
+            replicaCount: 1
+
+            configData:
+
+              ## Enable `autoSkipNonRecoverableData` since bookkeeper is running
+
+              ## without persistence
+
+              autoSkipNonRecoverableData: "true"
+
+              managedLedgerDefaultEnsembleSize: "1"
+
+              managedLedgerDefaultWriteQuorum: "1"
+
+              managedLedgerDefaultAckQuorum: "1"
+
+          proxy:
+
+            replicaCount: 1
+
+  components: {}
+
+  config: {}            
+```
+
+<div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
+
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
+
+Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
+
+```Shell
+kubectl apply -f milvuscluster.yaml
+```
