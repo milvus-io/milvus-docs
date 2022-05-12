@@ -7,7 +7,7 @@ order: 0
 summary: Learn how to configure your Milvus.
 ---
 
-# Configure Milvus
+# Configure Milvus with Docker Compose or Helm
 
 This topic describes how to configure your Milvus.
 
