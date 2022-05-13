@@ -18,10 +18,7 @@ Milvus supports setting consistency level while creating a collection (only on P
 ## Prepare Schema
 
 <div class="alert note">
-    <ul>
-        <li><a href="manage_connection.md">Connecting to Milvus server</a> before any operation.</li>
-        <li>The collection to create must contain a primary key field and a vector field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
-    </ul>
+The collection to create must contain a primary key field and a vector field. INT64 and String are supported data type on primary key field.
 </div>
 
 
