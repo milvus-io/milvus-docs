@@ -36,7 +36,7 @@ Enter the local path to the Playbook and configure the installation files.
 $ cd ./milvus/deployments/docker/cluster-distributed-deployment
 ```
 
-### Configure `inventory.ini`
+#### `inventory.ini`
 
 Configure `inventory.ini` to divide hosts in groups in accordance with their roles in the Milvus system.
 
@@ -98,7 +98,7 @@ ROOT_COORD_ADDRESS= {{coords_ip}}:53100
 INDEX_COORD_ADDRESS= {{coords_ip}}:31000
 ```
 
-### Configure `ansible.cfg`
+#### `ansible.cfg`
 
 `ansible.cfg` controls the action of the Playbook, for example, SSH key, etc.
 
@@ -109,7 +109,7 @@ inventory = inventory.ini # Specify the Inventory file
 private_key_file=~/.my_ssh_keys/gpc_sshkey # Specify the SSH key that Ansible uses to access Docker host
 ```
 
-### Configure `deploy-docker.yml`
+#### `deploy-docker.yml`
 
 `deploy-docker.yml` defines the tasks during the installation of Docker. See the code comments in the file for details.
 
@@ -240,7 +240,7 @@ Check the running status of the containers.
 $ docker ps
 ```
 
-## Check the Syntax of `deploy-milvus.yml`
+## Check the Syntax
 
 Check the Syntax of `deploy-milvus.yml`.
 
@@ -329,8 +329,10 @@ Having installed Milvus, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
+  - [Create a collection](create_collection.md)
+  - [Create a partition](create_partition.md)
+  - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
 
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).
