@@ -451,9 +451,6 @@ common:
     tlsEnabled: true
  ```
  
- ## What's next
- 
-- Learn how the client [connects to the Milvus server with TLS](use tls to connect to milvus).
-- Learn how to [manage user authentication in Milvus](authenticate.md).
+
 
  
