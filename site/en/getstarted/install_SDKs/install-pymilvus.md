@@ -53,4 +53,4 @@ Having installed PyMilvus, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
+- Explore [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/About.html)

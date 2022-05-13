@@ -433,8 +433,6 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```
 ## What's next
 
-- Learn more basic operations of Milvus:
-  - [Search with Time Travel](timetravel.md)
-- Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
+- Try [Search with Time Travel](timetravel.md)
+
+{{fragments/api_reference.md}}
