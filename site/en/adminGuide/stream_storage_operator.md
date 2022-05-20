@@ -7,7 +7,7 @@ summary: Learn how to configure stream storage with Milvus Operator.
 
 # Configure Stream Storage with Milvus Operator
 
-Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Pulsar is the default stream storage system. This topic introduces how to configure stream storage dependencies when you install Milvus with Milvus Operator.
+Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure stream storage dependencies when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -19,11 +19,49 @@ You need to specify a configuration file for using Milvus Operator to start a Mi
 kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
 ```
 
-You only need to edit the code template in milvuscluster_default.yaml to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
+You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
+
+## Before you begin
+The table below shows whether RocksMQ, Pulsar, and Kafka are supported in Milvus standalone and cluster mode. 
+
+|                 | RocksMQ | Pulsar | Kafka |
+|:---------------:|:-------:|:------:|:-----:|
+| Standalone mode |    ✔️    |    ✔️   |   ✔️   |
+|   Cluster mode  |    ✖️    |    ✔️   |   ✔️   |
+
+There are also other limitations for specifying the message stream system:
+- Only one message stream system for one Milvus instance is supported. However we still have backward compatibility with multiple systems set for one instance. The priority is as follows:
+  -  standalone mode:  RocksMQ(default) > Pulsar > Kafka
+  - cluster mode: Pulsar(default) > Kafka
+- The message stream system cannot be changed while the system is running. 
+-  Only Kafka 2.x or 3.x verison is supported.
+
+## Configure RocksMQ
+RocksMQ is the default stream storage system in Milvus standalone. 
+
+<div class="alert note">
+Currently, you can only configure RocksMQ as the stream storage system for Milvus standalone with Milvus Operator. 
+</div>
+
+#### Example 
+
+The following example configures a RocksMQ service. You can 
+
+```YAML
+apiVersion: milvus.io/v1alpha1
+kind: Milvus
+metadata:
+  name: milvus
+spec:
+  dependencies: {}
+  config: {}
+```
+
 
 ## Configure Pulsar
 
-Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Add required fields under `spec.dependencies.pulsar` to configure Pulsar.
+Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Configuring Pulsar as the stream storage system is supported in both Milvus standalone and Milvus cluster. However, with Milvus Operator, you can only configure Pulsar as the stream storage system for Milvus cluster. Add required fields under `spec.dependencies.pulsar` to configure Pulsar.
+
 `pulsar` supports `external` and `inCluster`.
 
 ### External Pulsar
@@ -170,7 +208,7 @@ kubectl apply -f milvuscluster.yaml
 
 ## Configure Kafka
 
-Pulsar is the default stream storage system. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
+Pulsar is the default stream storage system in a Milvus cluster. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
 
 `kafka` supports `external` and `inCluster`.
 
@@ -232,7 +270,7 @@ spec:
   config: {}
 ```
 
-Find the complete configuration items to configure an internal Pulsar service [here](https://artifacthub.io/packages/helm/bitnami/kafka). Add configuration items as needed under `kafka.inCluster.values`.
+Find the complete configuration items to configure an internal Kafka service [here](https://artifacthub.io/packages/helm/bitnami/kafka). Add configuration items as needed under `kafka.inCluster.values`.
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
