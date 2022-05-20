@@ -1,13 +1,15 @@
 ---
-id: stream_storage_operator.md
-title: Configure Stream Storage with Milvus Operator
+id: message_storage_operator.md
+title: Configure Message Storage with Milvus Operator
 related_key: minio, s3, storage, etcd, pulsar
-summary: Learn how to configure stream storage with Milvus Operator.
+summary: Learn how to configure 
+
+storage with Milvus Operator.
 ---
 
-# Configure Stream Storage with Milvus Operator
+# Configure Message Storage with Milvus Operator
 
-Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure stream storage dependencies when you install Milvus with Milvus Operator.
+Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -29,18 +31,18 @@ The table below shows whether RocksMQ, Pulsar, and Kafka are supported in Milvus
 | Standalone mode |    ✔️    |    ✔️   |   ✔️   |
 |   Cluster mode  |    ✖️    |    ✔️   |   ✔️   |
 
-There are also other limitations for specifying the message stream system:
-- Only one message stream system for one Milvus instance is supported. However we still have backward compatibility with multiple systems set for one instance. The priority is as follows:
+There are also other limitations for specifying the message storage:
+- Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
   -  standalone mode:  RocksMQ(default) > Pulsar > Kafka
   - cluster mode: Pulsar(default) > Kafka
-- The message stream system cannot be changed while the system is running. 
+- The message storage cannot be changed while the Milvus system is running. 
 -  Only Kafka 2.x or 3.x verison is supported.
 
 ## Configure RocksMQ
-RocksMQ is the default stream storage system in Milvus standalone. 
+RocksMQ is the default message storage in Milvus standalone. 
 
 <div class="alert note">
-Currently, you can only configure RocksMQ as the stream storage system for Milvus standalone with Milvus Operator. 
+Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator. 
 </div>
 
 #### Example 
@@ -60,7 +62,7 @@ spec:
 
 ## Configure Pulsar
 
-Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Configuring Pulsar as the stream storage system is supported in both Milvus standalone and Milvus cluster. However, with Milvus Operator, you can only configure Pulsar as the stream storage system for Milvus cluster. Add required fields under `spec.dependencies.pulsar` to configure Pulsar.
+Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Configuring Pulsar for message storage is supported in both Milvus standalone and Milvus cluster. However, with Milvus Operator, you can only configure Pulsar as message storage for Milvus cluster. Add required fields under `spec.dependencies.pulsar` to configure Pulsar.
 
 `pulsar` supports `external` and `inCluster`.
 
@@ -208,7 +210,7 @@ kubectl apply -f milvuscluster.yaml
 
 ## Configure Kafka
 
-Pulsar is the default stream storage system in a Milvus cluster. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
+Pulsar is the default message storage in a Milvus cluster. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
 
 `kafka` supports `external` and `inCluster`.
 
