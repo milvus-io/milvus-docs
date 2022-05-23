@@ -6,7 +6,7 @@ summary: Learn how to enable TLS proxy in Milvus.
 
 # Encryption in Transit
 
-TLS (Transport Layer Security) is a type of mutual authentication in which two parties in a connection verify each other using the TLS protocol. Milvus proxy uses the TLS mutual authentication.
+TLS (Transport Layer Security) is a type of mutual authentication using the TLS protocol. Milvus proxy uses the TLS mutual authentication and supports both client-to-server and server-to-server TLS.
 
 This topic describes how to enable TLS proxy in Milvus.
 
