@@ -2,9 +2,7 @@
 id: message_storage_operator.md
 title: Configure Message Storage with Milvus Operator
 related_key: minio, s3, storage, etcd, pulsar
-summary: Learn how to configure 
-
-storage with Milvus Operator.
+summary: Learn how to configure message storage with Milvus Operator.
 ---
 
 # Configure Message Storage with Milvus Operator
@@ -33,8 +31,8 @@ The table below shows whether RocksMQ, Pulsar, and Kafka are supported in Milvus
 
 There are also other limitations for specifying the message storage:
 - Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
-  -  standalone mode:  RocksMQ(default) > Pulsar > Kafka
-  - cluster mode: Pulsar(default) > Kafka
+  - standalone mode:  RocksMQ (default) > Pulsar > Kafka
+  - cluster mode: Pulsar (default) > Kafka
 - The message storage cannot be changed while the Milvus system is running. 
 -  Only Kafka 2.x or 3.x verison is supported.
 
