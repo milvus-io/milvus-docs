@@ -452,5 +452,15 @@ common:
  ```
  
 
+## Connect to the Milvus server
+
+Add the tls-related parameters when you connect to the Milvus server.
+
+```
+connections.connect(host=_HOST, port=_PORT, secure=True, client_pem_path="cert/client.pem",
+                        client_key_path="cert/client.key",
+                        ca_pem_path="cert/ca.pem", server_name="localhost")
+```
+
 
  
