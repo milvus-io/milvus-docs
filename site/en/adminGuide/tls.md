@@ -6,7 +6,7 @@ summary: Learn how to enable TLS proxy in Milvus.
 
 # Encryption in Transit
 
-TLS (Transport Layer Security) is a type of mutual authentication using the TLS protocol. Milvus proxy uses the TLS mutual authentication and supports both client-to-server and server-to-server TLS.
+TLS (Transport Layer Security) is a type of mutual authentication using the TLS protocol. Milvus proxy uses the TLS mutual authentication.
 
 This topic describes how to enable TLS proxy in Milvus.
 
@@ -392,6 +392,8 @@ ess_cert_id_chain	= no	# Must the ESS cert id chain be included?
 
 </details>
 
+The `openssl.cnf` file is a default OpenSSL configuration file. See [manual page](https://www.openssl.org/docs/manmaster/man5/config.html) for more information. The `gen.sh` file generates relevant certificate files. You can modify the `gen.sh` file for different purposes such as changing the validity period of the certificate file, the length of the certificate key or the certificate file names.
+
 <details><summary><code>gen.sh</code></summary>
 
 ```shell
@@ -423,9 +425,11 @@ openssl x509 -req -days 3650 -in client.csr -out client.pem -CA ca.pem -CAkey ca
 ```
 </details>
 
-### Create certificate
+The variables in the `gen.sh` file are crucial to the process of creating a certificate signing request file. The first five variables are the basic signing information, including country, state, location, organization, organization unit. Caution is needed when configuring `CommonName` as it will be verified during client-server communication.
 
-Run the `gen.sh` file to create the certificate.
+### Run `gen.sh` to generate certificate
+
+Run the `gen.sh` file to create certificate.
 
 ```
 chmod +x gen.sh
@@ -434,11 +438,58 @@ chmod +x gen.sh
 
 The following nine files will be created: `ca.key`, `ca.pem`, `ca.srl`, `server.key`, `server.pem`, `server.csr`, `client.key`, `client.pem`, `client.csr`.
 
-## Modify configurations
+### Get the detail of certificate files
 
-Set `tlsEnabled` to `true` and configure the file path in `config/milvus.yaml`.
+The implementation of SSL or TSL mutual authentication involves a client, a server, and a certificate authority (CA). A CA is used to ensure that the certificate between a client and a server is legal.
 
-The `server.pem`, `server.key`, and `ca.pem` files for the server and the `client.pem`, `client.key`, and `ca.pem` files for the client need to be configured.
+You can run `man openssl` or see [the openssl manual page](https://www.openssl.org/docs/) for more information about using the OpenSSL command.
+
+1. Generate an RSA private key for the ca.
+
+```
+openssl genpkey -algorithm RSA -out ca.key
+```
+
+2. Request CA certificate generation. 
+
+You need to provide the basic information about the CA in this step. Choose the `x509` option to skip the request and directly generate a self-signing certificate.
+
+```
+openssl req -new -x509 -key ca.key -out ca.pem -days 3650 -subj "/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$Organizational/CN=$CommonName"
+```
+
+You will get a `ca.pem` file , a CA certificate that can be used to generate client-server certificates after this step.
+
+3. Generate a server private key. 
+
+```
+openssl genpkey -algorithm RSA -out server.key
+```
+
+You will get a `server.key` file after this step.
+
+4. Generate a certificate signing request file.
+
+You need to provide the required information about the server to generate a certificate signing request file.
+
+```
+openssl req -new -nodes -key server.key -out server.csr -days 3650 -subj "/C=$Country/O=$Organization/OU=$Organizational/CN=$CommonName" -config ./openssl.cnf -extensions v3_req
+```
+
+You will get a `server.csr` file after this step.
+
+5. Sign the certificate.
+
+Open the `server.csr`, the `ca.key` and the `ca.pem` files to sign the certificate. The `CAcreateserial` command option is used to create a CA serial number file if it does not exist. You will get an `aca.srl` file after choosing this command option.
+
+```
+openssl x509 -req -days 3650 -in server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
+```
+
+
+## Modify Milvus server configurations
+
+Set `tlsEnabled` to `true` and configure the file paths of `server.pem`, `server.key`, and `ca.pem` for the server in `config/milvus.yaml`.
 
 ```
 tls:
@@ -452,15 +503,26 @@ common:
  ```
  
 
-## Connect to the Milvus server
+## Connect to the Milvus server with TLS
 
-Add the tls-related parameters when you connect to the Milvus server.
+Configure the file paths of `client.pem`, `client.key`, and `ca.pem` for the client when using the Milvus SDK.
+
+The following is an example.
 
 ```
+from pymilvus import connections
+
+_HOST = '127.0.0.1'
+_PORT = '19530'
+
+print(f"\nCreate connection...")
 connections.connect(host=_HOST, port=_PORT, secure=True, client_pem_path="cert/client.pem",
                         client_key_path="cert/client.key",
                         ca_pem_path="cert/ca.pem", server_name="localhost")
+print(f"\nList connections:")
+print(connections.list_connections())
 ```
 
+See [example_tls.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls.py) for more information.
 
  
