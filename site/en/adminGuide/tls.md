@@ -438,11 +438,13 @@ chmod +x gen.sh
 
 The following nine files will be created: `ca.key`, `ca.pem`, `ca.srl`, `server.key`, `server.pem`, `server.csr`, `client.key`, `client.pem`, `client.csr`.
 
-### Get the detail of certificate files
+### Modify the detail of certificate files (optional)
+
+After generating the certificate, you can modify the detail of the certificate files according to your own need.
 
 The implementation of SSL or TSL mutual authentication involves a client, a server, and a certificate authority (CA). A CA is used to ensure that the certificate between a client and a server is legal.
 
-You can run `man openssl` or see [the openssl manual page](https://www.openssl.org/docs/) for more information about using the OpenSSL command.
+Run `man openssl` or see [the openssl manual page](https://www.openssl.org/docs/) for more information about using the OpenSSL command.
 
 1. Generate an RSA private key for the ca.
 
