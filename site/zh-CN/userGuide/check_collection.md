@@ -43,7 +43,7 @@ R<Boolean> respHasCollection = milvusClient.hasCollection(
         HasCollectionParam.newBuilder()
                 .withCollectionName("book")
                 .build());
-if (respHasCollection.getData() == Boolean.TRUE) {
+if (respHasPartition.getData() == Boolean.TRUE) {
     System.out.println("Collection exists.");
 }
 ```
