@@ -10,6 +10,8 @@ This topic describes how to insert data in Milvus via client.
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
 
+Milvus 2.1 supports VARCHAR data type on scalar field. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.
+
 The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.
 
 ## Prepare data
@@ -22,6 +24,7 @@ First, prepare the data to insert.  Data type of the data to insert must match t
 import random
 data = [
   [i for i in range(2000)],
+  [str(i) for i in range(2000)],
   [i for i in range(10000, 12000)],
   [[random.random() for _ in range(2)] for _ in range(2000)],
 ]
