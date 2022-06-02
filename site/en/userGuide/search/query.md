@@ -289,6 +289,5 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
-- Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
+
+{{fragments/api_reference.md}}
