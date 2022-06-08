@@ -28,7 +28,7 @@ Learn more about [Milvus glossary](glossary.md).
 
 ### Unstructured data
 
-Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a pre-defined model or manner of organization. This data type accounts for 80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
+Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a pre-defined model or manner of organization. This data type accounts for around 80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
 
 ### Embedding vectors
 
@@ -58,7 +58,7 @@ Most of the vector index types supported by Milvus use approximate nearest neigh
 - **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seek a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
 - **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. 
 - **HNSW**: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency.
-- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seeks a high recall rate.
+- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seek a high recall rate.
 
 See [Vector Index](index.md) for more details.
 
