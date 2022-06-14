@@ -12,7 +12,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 
 <details><summary><h2>Proxy</h2></summary>
 
-  | Panel    | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+  | Panel    | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Search Vector Count Rate  | The average number of vectors queried per minute by each proxy within the past two minutes.  | ```  sum(increase(milvus_proxy_search_vectors_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (pod, node_id)  ```  | `milvus_proxy_search_vectors_count`    | The accumulated number of vectors queried.  |
 | Insert Vector Count Rate  | The average number of vectors inserted per minute by each proxy within the past two minutes.  | ```  sum(increase(milvus_proxy_insert_vectors_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (pod, node_id)  ```  | `milvus_proxy_insert_vectors_count`    | The accumulated number of vectors inserted.  |
