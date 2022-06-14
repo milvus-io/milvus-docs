@@ -41,7 +41,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 <details><summary><h2> Root coordinator</h2></summary>
   
   
-| Panel  | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+| Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Proxy Node Num  | The number of proxies created.  | ```  sum(milvus_rootcoord_proxy_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_rootcoord_proxy_num`  | The number of proxies.     |
 | Sync Time  | The average, maximum, and minimum number of epoch time synced by each root coord in each physical channel (PChannel).    | ```  avg(milvus_rootcoord_sync_epoch_time{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  max(milvus_rootcoord_sync_epoch_time{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  min(milvus_rootcoord_sync_epoch_time{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_rootcoord_sync_epoch_time`  | Each physical channel's epoch time (Unix time, the milliseconds passed ever since January 1, 1970).    |
@@ -61,7 +61,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 
 <details><summary><h2>Query coordinator</h2></summary>
   
-  | Panel  | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+  | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Collection Loaded Num  | The number of collections that are currently loaded into memory.    | ```  sum(milvus_querycoord_collection_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_querycoord_collection_num`  |  The number of collections that are currently loaded by Milvus.    |
 | Entity Loaded Num  | The number of entities that are currently loaded into memory.    | ```  sum(milvus_querycoord_entitiy_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_querycoord_entitiy_num`  |  The number of entities that are currently loaded by Milvus.    |
@@ -79,7 +79,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 
 <details><summary><h2>Query node</h2></summary>
   
-  | Panel  | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+  | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Collection Loaded Num  | The number of collections loaded into memory by each query node.    | ```  sum(milvus_querynode_collection_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (pod, node_id)  ```  | `milvus_querynode_collection_num`  | The number of collection loaded by each query node.    |
 | Partition Loaded Num  | The number of partitions loaded into memory by each query node.    | ```  sum(milvus_querynode_partition_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (pod, node_id)  ```  | `milvus_querynode_partition_num`  | The number of partitions loaded by each query node.    |
@@ -108,7 +108,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 
 <details><summary><h2>Data coordinator</h2></summary>
   
-  | Panel  | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+  | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Data Node Num  | The number of data nodes managed by data coord.  | ```  sum(milvus_datacoord_datanode_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_datacoord_datanode_num`  | The number of data nodes managed by data coord.  |
 | Segment Num  | The number of all types of segments recorded in metadata by data coord.    | ```  sum(milvus_datacoord_segment_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (segment_state)  ```  | `milvus_datacoord_segment_num`  | The number of all types of segments recorded in metadata by data coord.    <br/>    Types of segment include: dropped, flushed, flushing, growing, and sealed.    |
@@ -120,7 +120,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 
 <details><summary><h2>Data node</h2></summary>
   
-  | Panel    | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+  | Panel    | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Flowgraph Num  | The number of flowgraph objects that correspond to each data node.  | ```  sum(milvus_datanode_flowgraph_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (pod, node_id)  ```  | `milvus_datanode_flowgraph_num`  | The number of flowgraph objects.     <br/>    Each shard in a collection corresponds to a flowgraph object.  |
 | Msg Rows Consum Rate  | The number of rows of streaming messages consumed per minute by each data node within the past two minutes.  | ```  sum(increase(milvus_datanode_msg_rows_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (msg_type, pod, node_id)  ```  | `milvus_datanode_msg_rows_count`  | The number of rows of streaming messages consumed.     <br/>    Currently, streaming messages counted by data node only include insertion and deletion messages.   |
@@ -141,7 +141,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 <details><summary><h2>Index coordinator</h2></summary>
   
   
-| Panel  | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+| Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Index Request Rate  | The average number of index building requests received per minute by index coord within the past two minutes.  | ```  sum(increase(milvus_indexcoord_indexreq_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (status)  ```  | `milvus_indexcoord_indexreq_count`  | The number of index building requests received by index coord.  |
 | Index Task Count  | The count of all indexing tasks recorded by index coord in index metadata.  | ```  sum(milvus_indexcoord_indextask_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (index_task_status)  ```  | `milvus_indexcoord_indextask_count`  | The count of all indexing tasks recorded by index coord in index metadata.  |
@@ -151,7 +151,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 
 <details><summary><h2>Index node</h2></summary>
   
-  | Panel  | Panel description  | PromQL (Prometheus query lanage)  | The Milvus metrics used  | Milvus metrics description  |
+  | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Index Task Rate  | The average number of index building tasks received by each index node within the past two minutes.  | ```  sum(increase(milvus_indexnode_index_task_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (status, pod, node_id)  ```  | `milvus_indexnode_index_task_count`  | The number of index building tasks received.  |
 | Load Field Latency  | The 99th percentile of the time used by each index node to load segment field data each time within the past two minutes.  | ```  histogram_quantile(0.99, sum by (le, pod, node_id) (rate(milvus_indexnode_load_field_latency_bucket{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])))  ```  | `milvus_indexnode_load_field_latency`  | The time used by index node to load segment field data.   |
