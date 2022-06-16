@@ -611,12 +611,20 @@
       "order": 2
     },
     {
+      "id": "metrics_dashboard.md",
+      "title": "Milvus Metrics Dashboard",
+      "label1": "admin_guide",
+      "label2": "monitor",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "alert.md",
       "title": "Create an Alert",
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "migrate",
