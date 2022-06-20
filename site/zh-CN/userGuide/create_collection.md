@@ -38,6 +38,11 @@ book_id = FieldSchema(
     dtype=DataType.INT64, 
     is_primary=True, 
     )
+book_name = FieldSchema(
+  name="book_name", 
+  dtype=DataType.VARCHAR, 
+  max_length_per_row=200,
+)
 word_count = FieldSchema(
     name="word_count", 
     dtype=DataType.INT64,  
@@ -168,6 +173,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
             <td>For primary key field:
                 <ul>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
+                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
                 </ul>
                 For scalar field:
                 <ul>
@@ -192,6 +198,11 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
             <td><code>auto_id</code> (Mandatory for primary key field)</td>
             <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
             <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>max_length_per_row</code> (Mandatory for VARCHAR field)</td>
+            <td>Maximum length of strings allowed to be inserted.</td>
+            <td>[1, 65535]</td>
         </tr>
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>

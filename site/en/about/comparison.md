@@ -46,7 +46,7 @@ We recommend that you try out Milvus 2.0. Here is why:
 	</tr>
 	<tr>
 		<th>Data types supported</th>
-		<td><li>Vectors</li><li>Fixed-length scalars</li><li>String and text (in planning)</li></td>
+		<td><li>Vectors</li><li>Fixed-length scalars</li><li>String and text</li></td>
 		<td>Vectors</td>
 	</tr>
 	<tr>

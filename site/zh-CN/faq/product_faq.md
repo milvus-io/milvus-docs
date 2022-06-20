@@ -165,7 +165,7 @@ Milvus 最多支持 32768 维向量。
 
 #### Milvus 支持何种 ID （即 primary key）field 数据类型？
 
-在当前版本中，Milvus 仅支持 INT64 数据型。未来的 2.0 正式版将会同时支持 INT64 和 string 数据型。
+在当前版本中，Milvus 支持 INT64 和 string 数据型。
 
 #### Milvus 支持扩缩容吗？
 

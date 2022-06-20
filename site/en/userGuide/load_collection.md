@@ -8,8 +8,13 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
+Milvus 2.1 allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
+
 <div class="alert warning">
-In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+<ul>
+<li>In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.</li>
+<li>In current release, all on-line query nodes will be divided into multiple replica groups according to the replica number specified by user. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
+</ul>
 </div>
 
 {{fragments/multiple_code.md}}
@@ -17,7 +22,7 @@ In current release, volume of the data to load must be under 90% of the total me
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.load()
+collection.load(replica_number=2)
 ```
 
 ```javascript
@@ -60,6 +65,10 @@ load -c book
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
 		<td>Name of the partition to load.</td>
+	</tr>
+    <tr>
+		<td><code>replica_number</code> (optional)</td>
+		<td>Number of the replica to load.</td>
 	</tr>
 	</tbody>
 </table>
@@ -135,6 +144,19 @@ load -c book
         </tr>
     </tbody>
 </table>
+
+
+## Get replica information
+
+You can check the information of the loaded replicas.
+
+```python
+from pymilvus import Collection
+collection = Collection("book")      # Get an existing collection.
+collection.load(replica_number=2)    # Load collection as 2 replicas
+result = collection.get_replicas()
+print(result)
+```
 
 ## Constraints
 

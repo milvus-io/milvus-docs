@@ -45,7 +45,7 @@ summary: 了解新版 Milvus 的设计理念及新增功能。
 	</tr>
 	<tr>
 		<th>数据类型支持</th>
-		<td><li>向量数据</li><li>标量数据</li><li>字符串与文本 (开发中)</li></td>
+		<td><li>向量数据</li><li>标量数据</li><li>字符串与文本</li></td>
 		<td>向量数据</td>
 	</tr>
 	<tr>

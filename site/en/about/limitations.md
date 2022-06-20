@@ -41,11 +41,8 @@ The name of a resource can contain numbers, letters, dollar signs ($), and under
 ## Length of a string 
 | Data type      | Limit  |
 | ----------- | ----------- |
-| VARCHAR      | 65,535 characters       |
+| VARCHAR      | 65,535       |
 
-<div class="alert note">
-VARCHAR and more string data types will be supported in future releases of Milvus.
-</div>
 
 
 ## Dimensions of a vector

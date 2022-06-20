@@ -135,7 +135,7 @@ Current Milvus release does not support Apple M1 CPU.
 
 #### What data types does Milvus support on the primary key field?
 
-In current release, Milvus only support INT64 on primary key field. Both INT64 and string will be supported in the formal release of Milvus 2.0.0.
+In current release, Milvus support both INT64 and string.
 
 #### Is Milvus scalable?
 
