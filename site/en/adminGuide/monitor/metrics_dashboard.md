@@ -6,9 +6,13 @@ summary: This topic introduces the monitoring metrics displayed in the Milvus Da
 
 # Milvus Metrics Dashboard
 
-This topic introduces the monitoring metrics displayed in the Milvus Dashboard.
+Milvus outputs a list of detailed time-series metrics (link to Metrics in Milvus) during runtime. You can use [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) to visualize the metrics. This topic introduces the monitoring metrics displayed in the Grafana Milvus Dashboard.
+
 
 The time unit in this topic is millisecond. And "99th percentile" in this topic refers to the fact that 99 percent of the time statistics are controlled within certain value.
+
+We recommend reading [Milvus monitoring framework overview](monitor_overview.md) to understand Prometheus metrics first.
+
 
 <details><summary><h2>Proxy</h2></summary>
 
