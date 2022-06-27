@@ -179,7 +179,7 @@ Continue to use all normal MinIO metadata variables.
 The following example installs a chart named `my-release`.
 
 ```shell
-$ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
+$ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example --set minio.mode=standalone
 ```
 
 ## What's next
