@@ -335,7 +335,7 @@ If you need to scale out Milvus nodes, you can follow the steps below to add new
 
 1. Prepare host resources as requested in the prerequisites.
 2. Ensure connectivity to the network and host names can be resolved.
-3. Add the new host to the corresponding section in the inventory.ini file. More specifically, add the host name of the new node in the node section as shown in the example below. 
+3. Add the new host to the corresponding section in the `inventory.ini` file. More specifically, add the host name of the new node in the node section as shown in the example below. 
 
 ```
 [nodes] #Add host names of Milvus nodes.
