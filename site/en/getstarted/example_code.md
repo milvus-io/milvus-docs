@@ -17,9 +17,9 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-- [Milvus 2.0.0](install_standalone-docker.md)
+- [Milvus 2.1.0](install_standalone-docker.md)
 - Python 3 (3.71 or later)
-- [PyMilvus 2.0.0](install-pymilvus.md)
+- [PyMilvus 2.1.0](install-pymilvus.md)
 
 
 ## Download example code
@@ -52,24 +52,28 @@ from pymilvus import (
 connections.connect("default", host="localhost", port="19530")
 ```
 
-- Creates a collection:
+- Creates a collection with 3 fields:
 ```Python
 fields = [
-    FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
+    FieldSchema(name="pk", dtype=DataType.VARCHAR, is_primary=True, auto_id=False, max_length=100),
     FieldSchema(name="random", dtype=DataType.DOUBLE),
-    FieldSchema(name="embeddings", dtype=DataType.FLOAT_VECTOR, dim=8)
+    FieldSchema(name="embeddings", dtype=DataType.FLOAT_VECTOR, dim=dim)
 ]
+
 schema = CollectionSchema(fields, "hello_milvus is the simplest demo to introduce the APIs")
-hello_milvus = Collection("hello_milvus", schema)
+
+print(fmt.format("Create collection `hello_milvus`"))
+hello_milvus = Collection("hello_milvus", schema, consistency_level="Strong")
 ```
 
 - Inserts vectors in the collection:
 ```Python
 import random
 entities = [
-    [i for i in range(3000)],  # field pk
-    [float(random.randrange(-20, -10)) for _ in range(3000)],  # field random
-    [[random.random() for _ in range(8)] for _ in range(3000)],  # field embeddings
+    # provide the pk field because `auto_id` is set to False
+    [str(i) for i in range(num_entities)],
+    rng.random(num_entities).tolist(),  # field random, only supports list
+    rng.random((num_entities, dim)),    # field embeddings, supports numpy.ndarray and list
 ]
 insert_result = hello_milvus.insert(entities)
 ```
@@ -99,13 +103,13 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 - Performs a vector query:
 
 ```Python
-result = hello_milvus.query(expr="random > -14", output_fields=["random", "embeddings"])
+result = hello_milvus.query(expr="random > 0.5", output_fields=["random", "embeddings"])
 ```
 
 - Performs a hybrid search:
 
 ```Python
-result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, expr="random > -12", output_fields=["random"])
+result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, expr="random > 0.5", output_fields=["random"])
 ```
 
 - Deletes entities by their primary keys:
@@ -159,13 +163,13 @@ hit: (distance: 0.10560893267393112, id: 2430), random field: -18.0
 hit: (distance: 0.13938161730766296, id: 377), random field: -14.0
 search latency = 0.2796s
 
-=== Start querying with `random > -14` ===
+=== Start querying with `random > 0.5` ===
 
 query result:
 -{'pk': 9, 'random': -13.0, 'embeddings': [0.298433, 0.931987, 0.949756, 0.598713, 0.290125, 0.094323, 0.064444, 0.306993]}
 search latency = 0.2970s
 
-=== Start hybrid searching with `random > -12` ===
+=== Start hybrid searching with `random > 0.5` ===
 
 hit: (distance: 0.0, id: 2998), random field: -11.0
 hit: (distance: 0.15773043036460876, id: 472), random field: -11.0
