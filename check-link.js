@@ -121,6 +121,10 @@ const checkInnerLink = (paths, validMds) => {
       : [];
     innerLinks.forEach((link) => {
       let ignoreAnchorLink = link.split("#")[0];
+      // ignore api reference
+      if (link.includes("/api-reference/")) {
+        return;
+      }
       if (!validMds.includes(ignoreAnchorLink)) {
         errors.push(`Check Link ${link} in ${v}`);
         // throw new Error(`Check Link ${link} in ${v}`);
@@ -137,3 +141,4 @@ if (errors.length) {
   errors.forEach((v) => console.log(v));
   throw new Error("Fail");
 }
+00
