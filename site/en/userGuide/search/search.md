@@ -241,7 +241,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
-Milvus supports setting consistency level specifically for a search (only on PyMilvus currently). The example in this topic sets the consistency level as "Strong". To set other consistency level, see [Tune Consistency](tune_consistency.md).
+Milvus supports setting consistency level specifically for a search (only on PyMilvus currently). The example in this topic sets the consistency level as `Strong`. To set other consistency level, see [Tune Consistency](tune_consistency.md).
 
 {{fragments/multiple_code.md}}
 
