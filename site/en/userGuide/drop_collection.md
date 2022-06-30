@@ -46,6 +46,21 @@ milvusClient.dropCollection(
 delete collection -c book
 ```
 
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/collection' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+output:
+```json
+{}
+```
+
 <table class="language-python">
 	<thead>
         <tr>
