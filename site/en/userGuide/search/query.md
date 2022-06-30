@@ -58,7 +58,7 @@ load -c book
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
-Milvus supports setting consistency level specifically for a query (only on PyMilvus currently). The example in this topic sets the consistency level as "Strong". To set other consistency level, see [Tune Consistency](tune_consistency.md).
+Milvus supports setting consistency level specifically for a query (only on PyMilvus currently). The example in this topic sets the consistency level as `Strong`. To set other consistency level, see [Tune Consistency](tune_consistency.md).
 
 {{fragments/multiple_code.md}}
 
