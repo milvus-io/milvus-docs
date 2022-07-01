@@ -587,9 +587,7 @@ output:
                 21: "VarChar",
                 100: "BinaryVector",
                 101: "FloatVector",
-            </td> 
-            <td>   
-                For primary key field:
+                <br>For primary key field:
                 <ul>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
                     <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
