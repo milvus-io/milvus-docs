@@ -2,7 +2,9 @@ const fs = require("fs");
 const path = require("path");
 
 const EN_MENU_PATH = path.join(__dirname, "site/en/menuStructure/en.json");
+const CN_MENU_PATH = path.join(__dirname, "site/zh-CN/menuStructure/cn.json");
 const EN_MDS_PATH = path.join(__dirname, "site/en/");
+const CN_MDS_PATH = path.join(__dirname, "site/zh-CN/");
 
 const errors = [];
 const getMenuJson = (path) => {
@@ -10,7 +12,9 @@ const getMenuJson = (path) => {
   return JSON.parse(doc.toString());
 };
 
+const CN_MENU_CONTENT = getMenuJson(CN_MENU_PATH);
 const EN_MENU_CONTENT = getMenuJson(EN_MENU_PATH);
+const cnIds = CN_MENU_CONTENT.menuList.map((v) => v.id);
 const enIds = EN_MENU_CONTENT.menuList.map((v) => v.id);
 
 // check if id is duplicate in menustructor
@@ -34,6 +38,7 @@ const checkSameId = (ids, prefix = "") => {
   return "";
 };
 
+checkSameId(cnIds, "CN");
 checkSameId(enIds, "EN");
 
 const metaRegx = /(\S+)\s*?:\s*([\s\S]*?)(?=$|\n)/g;
@@ -79,9 +84,11 @@ const generateValidIds = (dirPath, validMds = [], validPaths = []) => {
 
 const { validMds: enValidMds, validPaths: enValidPaths } =
   generateValidIds(EN_MDS_PATH);
-
+const { validMds: cnValidMds, validPaths: cnValidPaths } =
+  generateValidIds(CN_MDS_PATH);
 
 const enMenuMdIds = enIds.filter((v) => v.includes(".md"));
+const cnMenuMdIds = cnIds.filter((v) => v.includes(".md"));
 
 const checkIsIdValid = (arr, validArr) => {
   arr.forEach((v) => {
@@ -98,6 +105,7 @@ const checkIsIdValid = (arr, validArr) => {
 
 // check menu id valid
 checkIsIdValid(enMenuMdIds, enValidMds);
+checkIsIdValid(cnMenuMdIds, cnValidMds);
 
 const linkRegx = /[^(\]\()]+(?=\))/g;
 const checkInnerLink = (paths, validMds) => {
@@ -127,9 +135,9 @@ const checkInnerLink = (paths, validMds) => {
 
 // check markdown file inner link
 checkInnerLink(enValidPaths, enValidMds);
+checkInnerLink(cnValidPaths, cnValidMds);
 
 if (errors.length) {
   errors.forEach((v) => console.log(v));
   throw new Error("Fail");
 }
-
