@@ -575,18 +575,19 @@ output:
             <td><code>data_type</code></td>
             <td>Data type of the field to create.</td>
             <td>
-                Enums:
-                1: "Bool",
-                2: "Int8",
-                3: "Int16",
-                4: "Int32",
-                5: "Int64",
-                10: "Float",
-                11: "Double",
-                20: "String",
-                21: "VarChar",
-                100: "BinaryVector",
-                101: "FloatVector",
+                <br>Enums:
+                <br>1: "Bool",
+                <br>2: "Int8",
+                <br>3: "Int16",
+                <br>4: "Int32",
+                <br>5: "Int64",
+                <br>10: "Float",
+                <br>11: "Double",
+                <br>20: "String",
+                <br>21: "VarChar",
+                <br>100: "BinaryVector",
+                <br>101: "FloatVector",
+                <br>
                 <br>For primary key field:
                 <ul>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
