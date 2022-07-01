@@ -139,7 +139,7 @@ curl -X 'POST' \
     "dsl_type": 1
   }'
 ```
-output
+output:
 ```json
 {"status":{},"results":{"num_queries":1,"top_k":2,"fields_data":[{"type":5,"field_name":"book_id","Field":{"Scalars":{"Data":{"LongData":{"data":[1,2]}}}},"field_id":100}],"scores":[1.45,4.25],"ids":{"IdField":{"IntId":{"data":[1,2]}}},"topks":[2]},"collection_name":"book"}
 ```
