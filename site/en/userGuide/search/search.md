@@ -279,7 +279,7 @@ output
 	</thead>
 	<tbody>
     <tr>
-		<td><code>output_fields</code></td>
+		<td><code>output_fields</code>(optional)</td>
 		<td>Name of the field to return. Vector field is not supported in current release.</td>
 	</tr>
 	<tr>
