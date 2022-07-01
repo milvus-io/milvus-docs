@@ -575,7 +575,7 @@ output:
             <td><code>data_type</code></td>
             <td>Data type of the field to create.</td>
             <td>
-                <br>Enums:
+                Enums:
                 <br>1: "Bool",
                 <br>2: "Int8",
                 <br>3: "Int16",
