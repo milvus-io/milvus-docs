@@ -52,6 +52,17 @@ milvusClient.dropPartition(
 delete partition -c book -p novel
 ```
 
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/partition' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "partition_name": "novel"
+  }'
+```
+
 <table class="language-python">
 	<thead>
         <tr>
@@ -146,6 +157,25 @@ delete partition -c book -p novel
             <td>Name of the partition to drop.</td>
         </tr>
     </tbody>
+</table>
+
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to drop partition from.</td>
+        </tr>
+        <tr>
+            <td><code>partition_name</code></td>
+            <td>Name of the partition to drop.</td>
+        </tr>
+	</tbody>
 </table>
 
 ## What's next
