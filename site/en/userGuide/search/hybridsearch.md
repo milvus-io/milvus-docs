@@ -54,6 +54,9 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+```curl
+# See the following step.
+```
 
 ## Conduct a hybrid vector search
 
