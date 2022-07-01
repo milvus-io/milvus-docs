@@ -655,6 +655,10 @@ milvusClient.createCollection(createCollectionReq);
 # Follow the previous step.
 ```
 
+```curl
+# Follow the previous step.
+```
+
 <table class="language-python">
 	<thead>
         <tr>

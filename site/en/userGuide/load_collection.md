@@ -54,6 +54,20 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+``` curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+output:
+```json
+{}
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -145,6 +159,20 @@ load -c book
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to load.</td>
+	</tr>
+	</tbody>
+</table>
 
 ## Get replica information
 
