@@ -291,7 +291,7 @@ output
 		<td>Number of the most similar results to return.</td>
 	</tr>
 	<tr>
-		<td><code>param</code></td>
+		<td><code>params</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	<tr>
@@ -645,6 +645,16 @@ milvusClient.releaseCollection(
 
 ```shell
 release -c book
+```
+
+``` curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
 ```
 
 ## Limits
