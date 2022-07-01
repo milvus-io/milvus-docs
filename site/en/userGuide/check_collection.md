@@ -151,6 +151,21 @@ output:
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+	</tbody>
+</table>
+
 ## Check collection details
 
 Check the details of a collection.
@@ -378,6 +393,20 @@ output:
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## List all collections
 

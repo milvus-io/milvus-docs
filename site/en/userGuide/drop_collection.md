@@ -140,6 +140,20 @@ output:
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## What's next
 
