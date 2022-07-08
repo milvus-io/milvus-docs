@@ -11,6 +11,8 @@ summary: Learn the necessary preparations before installing Milvus.
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
+- {{tab}}
+
 ## Hardware requirements
 
 | Component           | Requirement                                                  |Recommendation| Note                                                         |
@@ -32,23 +34,24 @@ minikube is required when running Kubernetes cluster locally. minikube requires 
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Linux platforms  | <ul><li>Kubernetes 1.16 or later</li><li>kubectl</li><li>Helm 3.0.0 or later</li><li>minikube (for Milvus standalone)</li><li>Docker 19.03 or later (for Milvus standalone)</li></ul> | See [Helm Docs](https://helm.sh/docs/) for more information. |
 
-| Software | Version                       |
-| -------- | ----------------------------- |
-| etcd     | 3.5.0                         |
+| Software | Version                       | Note |
+| -------- | ----------------------------- | ---- |
+| etcd     | 3.5.0                         |  See [additional disk requirements](###-additional-disk-requirements). |
 | MinIO    |  RELEASE.2020-11-06T23-17-07Z |
 | Pulsar   | 2.8.2                         |
 
 ### Additional disk requirements
-Disks are critical to the performance of etcd, which will be compromised on slower disks. There will also be frequent cluster elections that will eventually fail the entire service.
 
-Use the `fio` command to test the storage system that will be used by etcd:
+Disk performance is critical to etcd. It is highly recommended that you use local NVMe SSDs. Slower disk reponse may cause frequent cluster elections that will eventually degrade the etcd service.
+
+To test if your disk is qualified, use [fio](https://github.com/axboe/fio).
 
 ```bash
 mkdir test-data
- fio --rw=write --ioengine=sync --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
+fio --rw=write --ioengine=sync --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 ```
 
-Ideally, your disks should reach over 500 for IOPS and below 10ms for 99th fsync. Local NVMe SSDs are highly recommended.
+Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd [Docs](https://etcd.io/docs/v3.5/op-guide/hardware/#disks) for more detailed requirements.
 
 ## What's next
 
