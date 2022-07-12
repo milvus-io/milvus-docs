@@ -52,9 +52,8 @@ curl -X 'DELETE' \
   -d '{
     "collection_name": "book"
   }'
-```
-output:
-```json
+
+# Output:
 {}
 ```
 

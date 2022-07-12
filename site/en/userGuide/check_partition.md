@@ -64,9 +64,8 @@ curl -X 'GET' \
     "collection_name": "book",
     "partition_name": "novel"
   }'
-```
-output:
-```json
+
+# Output:
 {"status":{},"value":true}
 ```
 
@@ -214,9 +213,8 @@ curl -X 'GET' \
   -d '{
     "collection_name": "book"
   }'
-```
-output:
-```json
+
+# Output:
 {
   "status": {},
   "partition_names": [
