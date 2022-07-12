@@ -297,9 +297,8 @@ curl -X 'POST' \
     ],
     "num_rows": 10
   }'
-```
-output:
-```json
+
+# Output:
 {"status":{},"IDs":{"IdField":{"IntId":{"data":[11,12,13,14,15,16,17,18,19,20]}}},"succ_index":[0,1,2,3,4,5,6,7,8,9],"insert_cnt":10,"timestamp":434284782724317186}
 ```
 
@@ -445,8 +444,7 @@ No.1:
 ```
 
 ```curl
-Output:
-```json
+# Output:
 {"status":{},"results":{"num_queries":1,"top_k":10,"fields_data":[{"type":5,"field_name":"pk","Field":{"Scalars":{"Data":{"LongData":{"data":[10,9,8,7,6,5,4,3,2,1]}}}},"field_id":100}],"scores":[81,82,85,90,97,106,117,130,145,162],"ids":{"IdField":{"IntId":{"data":[10,9,8,7,6,5,4,3,2,1]}}},"topks":[10]},"collection_name":"test_time_travel"}
 ```
 
@@ -558,7 +556,6 @@ curl -X 'POST' \
   }'
 
 # Output:
-```json
 {"status":{},"results":{"num_queries":1,"top_k":10,"fields_data":[{"type":5,"field_name":"pk","Field":{"Scalars":{"Data":{"LongData":{"data":[11,12,13,14,15,16,17,18,19,20]}}}},"field_id":100}],"scores":[1,2,5,10,17,26,37,50,65,82],"ids":{"IdField":{"IntId":{"data":[11,12,13,14,15,16,17,18,19,20]}}},"topks":[10]},"collection_name":"test_time_travel"}
 ```
 
@@ -643,7 +640,6 @@ curl -X 'DELETE' \
   }'
 
 # Output:
-```json
 {"status":{},"IDs":{"IdField":{"IntId":{"data":[0,2,4,6,8,10,12,14,16,18]}}},"delete_cnt":10,"timestamp":434284904547614721}
 ```
 
@@ -727,6 +723,28 @@ No.1:
 +---------+------+------------+----------+
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/search' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "test_time_travel",
+    "output_fields": ["pk"],
+    "search_params": [
+      {"key": "anns_field", "value": "example_field"},
+      {"key": "topk", "value": "10"},
+      {"key": "params", "value": "{\"nprobe\": 10}"},
+      {"key": "metric_type", "value": "L2"}
+    ],
+    "vectors": [ [11,11] ],
+    "dsl_type": 1
+  }'
+
+# Output:
+{"status":{},"results":{"num_queries":1,"top_k":10,"fields_data":[{"type":5,"field_name":"pk","Field":{"Scalars":{"Data":{"LongData":{"data":[11,13,15,17,19,20,9,7,5,3]}}}},"field_id":100}],"scores":[1,5,17,37,65,82,104,116,136,164],"ids":{"IdField":{"IntId":{"data":[11,13,15,17,19,20,9,7,5,3]}}},"topks":[10]},"collection_name":"test_time_travel"}
+```
+
 Search with the prior-to-deletion timestamp. Milvus retrieves entities from the data before the deletion.
 
 ```python
@@ -807,6 +825,29 @@ No.1:
 +---------+------+------------+------------+
 |       9 |   11 | 0.531529   | 0.531529   |
 +---------+------+------------+------------+
+```
+
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/search' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "test_time_travel",
+    "output_fields": ["pk"],
+    "search_params": [
+      {"key": "anns_field", "value": "example_field"},
+      {"key": "topk", "value": "10"},
+      {"key": "params", "value": "{\"nprobe\": 10}"},
+      {"key": "metric_type", "value": "L2"}
+    ],
+    "travel_timestamp": 434284782724317186,
+    "vectors": [ [10,10] ],
+    "dsl_type": 1
+  }'
+
+# Output:
+{"status":{},"results":{"num_queries":1,"top_k":10,"fields_data":[{"type":5,"field_name":"pk","Field":{"Scalars":{"Data":{"LongData":{"data":[11,12,13,14,15,16,17,18,10,9]}}}},"field_id":100}],"scores":[5,8,13,20,29,40,53,68,81,82],"ids":{"IdField":{"IntId":{"data":[11,12,13,14,15,16,17,18,10,9]}}},"topks":[10]},"collection_name":"test_time_travel"}
 ```
 
 ## What's next
