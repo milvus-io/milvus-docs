@@ -207,9 +207,7 @@ batch1.timestamp
 
 ```curl
 # Output:
-```json
 {"status":{},"IDs":{"IdField":{"IntId":{"data":[1,2,3,4,5,6,7,8,9,10]}}},"succ_index":[0,1,2,3,4,5,6,7,8,9],"insert_cnt":10,"timestamp":434284775520862209}
-```
 ```
 
 <div class="alert note">
