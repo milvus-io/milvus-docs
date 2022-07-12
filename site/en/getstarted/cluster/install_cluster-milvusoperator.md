@@ -15,17 +15,21 @@ summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 
 ## Start a K8s cluster
 
-<div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
-</div>
-
 ```
 $ minikube start
 ```
 
+<div class="alert note">
+This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
+</div>
+
+
+
 ## Deploy Milvus Operator
 
-Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target K8s clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
+Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
+
+Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
 ### Prerequisites
 
@@ -39,12 +43,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 
 ### Install Milvus Operator
 
-There're 2 ways to install Milvus Operator in the Kubernetes: 
+There are two ways to install Milvus Operator in the Kubernetes: 
 
-- 1. install by `helm` command with our helm chart
-- 2. install by `kubectl` command directly with raw manifests
-
-Run the following command to install Milvus Operator.
+- with helm chart
+- with `kubectl` command directly with raw manifests
 
 #### 1. Install by helm command
 
@@ -52,7 +54,7 @@ Run the following command to install Milvus Operator.
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.5.0/milvus-operator-0.5.0.tgz
+  https://github.com/milvus-io/milvus-operator/releases/download/v{{var.milvus_operator_version}}/milvus-operator-{{var.milvus_operator_version}}.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -75,7 +77,7 @@ CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/t
 #### 2. Install by kubectl command
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.5.0/deploy/manifests/deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -364,7 +366,7 @@ Run the following command to uninstall the Milvus Operator.
 ### Uninstall the Milvus Operator by kubectl command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.5.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
 ```
 
 
