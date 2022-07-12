@@ -9,9 +9,7 @@ Milvus is an open-source vector database specializing in scalable similarity sea
 - [What is Milvus](overview.md)
 
 An overview of Milvus, including what it is, how it works and why use Milvus.
-- [Release comparison](comparison.md)
 
-Features of the latest release of Milvus.
 - [Milvus Adopters](milvus_adopters.md)
 
 List of companies that have adopted Milvus.
