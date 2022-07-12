@@ -50,6 +50,22 @@ vectors_right = {"float_vectors": external_vectors}
 // CLI User Guide will be ready soon.
 ```
 
+```curl
+vectors_left='{
+  "dim": 2,
+  "ids": {
+    "id_array": [1,2],
+    "collection_name": "book",
+    "partition_names": ["_default"],
+    "field_name": "book_intro"
+  }
+}'
+vectors_right='{
+  "dim": 2,
+  "vectors": [1,2,3,4,5,6,7,8]
+}'
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -113,6 +129,12 @@ params = {
 
 ```shell
 // CLI User Guide will be ready soon.
+```
+
+```curl
+params='[
+  {"key": "metric", "value": "IP"}
+]'
 ```
 
 <table class="language-python">
@@ -196,6 +218,16 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+``` curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
 ## Calculate vector distance
 
 Calculate the distance between vectors based on the vectors and parameters provided.
@@ -225,6 +257,22 @@ print(results)
 ```shell
 // CLI User Guide will be ready soon.
 ```
+
+``` curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/distance' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d "{
+    \"op_left\": $vectors_left,
+    \"op_right\": $vectors_right,
+    \"params\": $params
+  }"
+
+# Output:
+{"status":{},"Array":{"FloatDist":{"data":[3,7,11,15,4,10,16,22]}}}
+```
+
 
 ## What's next
 
