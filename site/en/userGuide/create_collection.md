@@ -184,10 +184,8 @@ curl -X 'POST' \
       "name": "book"
     }
   }'
-```
 
-output:
-```json
+# Output:
 {}
 ```
 

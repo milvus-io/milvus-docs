@@ -62,9 +62,8 @@ curl -X 'POST' \
   -d '{
     "collection_name": "book"
   }'
-```
-output:
-```json
+
+# Output:
 {}
 ```
 

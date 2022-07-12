@@ -60,9 +60,8 @@ curl -X 'POST' \
   -d '{
     "collectionID": 434262071120432449
   }'
-```
-output:
-```json
+
+# Output:
 {"status":{},"compactionID":434262132129005569}
 ```
 
@@ -150,9 +149,8 @@ curl -X 'GET' \
   -d '{
     "compactionID": 434262132129005569
   }'
-```
-output:
-```json
+
+# Output:
 {"status":{},"state":2}
 ```
 

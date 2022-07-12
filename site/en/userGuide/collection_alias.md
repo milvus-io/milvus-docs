@@ -61,9 +61,8 @@ curl -X 'POST' \
     "collection_name": "book",
     "alias":"publication"
   }'
-```
-output:
-```json
+
+# Output:
 {}
 ```
 
@@ -208,9 +207,8 @@ curl -X 'DELETE' \
   -d '{
     "alias":"publication"
   }'
-```
-output:
-```json
+
+# Output:
 {}
 ```
 
@@ -341,9 +339,8 @@ curl -X 'PATCH' \
     "collection_name": "book",
     "alias":"publication"
   }'
-```
-output:
-```json
+
+# Output:
 {}
 ```
 

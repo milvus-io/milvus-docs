@@ -118,9 +118,8 @@ curl -X 'DELETE' \
     "collection_name": "book",
     "expr": "book_id in [0,1]"
   }'
-```
-output:
-```json
+
+# Output
 {"status":{},"IDs":{"IdField":{"IntId":{"data":[0,1]}}},"delete_cnt":2,"timestamp":434262178115092482}
 ```
 
