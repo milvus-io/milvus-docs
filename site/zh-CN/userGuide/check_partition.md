@@ -1,18 +1,18 @@
 ---
 id: check_partition.md
 related_key: Partition
-summary: Learn how to check partition information in Milvus.
+summary: 学习如何在 Milvus 中查看分区信息。
 ---
 
-# Check Partition Information
+# 查看 Partition 信息
 
 {{fragments/translation_needed.md}}
 
-This topic describes how to check the information of the partition in Milvus.
+本章介绍如何在 Milvus 中查看分区信息。
 
-## Verify if a partition exist
+## 查看 Partition 是否存在
 
-Verify if a partition exists in the specified collection.
+校验 给定的 Collection 中是否存在 Partition。
 
 {{fragments/multiple_code.md}}
 
@@ -59,14 +59,14 @@ describe partition -c book -p novel
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>partition_name</code></td>
-            <td>Name of the partition to check.</td>
+            <td>待查看的 Partition 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -75,18 +75,18 @@ describe partition -c book -p novel
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to check.</td>
+            <td>待查看的 Collection 名称。</td>
         </tr>
         <tr>
             <td><code>partition_name</code></td>
-            <td>Name of the partition to check.</td>
+            <td>待查看的 Partition 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -94,22 +94,22 @@ describe partition -c book -p novel
 <table class="language-go">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
         <td><code>ctx</code></td>
-        <td>Context to control API invocation process.</td>
+        <td>控制 API 调用过程的上下文。</td>
     </tr>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to check.</td>
+        <td>待查看 Collection 的名称。</td>
     </tr>
     <tr>
         <td><code>partitionName</code></td>
-        <td>Name of the partition to check.</td>
+        <td>待查看 Partition 的名称。</td>
     </tr>
   </tbody>
 </table>
@@ -117,24 +117,24 @@ describe partition -c book -p novel
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to check.</td>
+            <td>待查看 Collection 的名称。</td>
         </tr>
         <tr>
             <td>-p</td>
-            <td>Name of the partition to check.</td>
+            <td>待查看 Partition 的名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## List all partitions
+## 获取 partitions 列表
 
 {{fragments/multiple_code.md}}
 
@@ -176,14 +176,14 @@ list partitions -c book
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to check.</td>
+            <td>待查看 Collection 的名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -191,18 +191,18 @@ list partitions -c book
 <table class="language-go">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
         <td><code>ctx</code></td>
-        <td>Context to control API invocation process.</td>
+        <td>控制 API 调用过程的上下文。</td>
     </tr>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to check.</td>
+        <td>待查看 Collection 的名称。</td>
     </tr>
   </tbody>
 </table>
@@ -210,14 +210,14 @@ list partitions -c book
 <table class="language-java">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>描述</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to check.</td>
+        <td>待查看 Collection 的名称。</td>
     </tr>
   </tbody>
 </table>
@@ -225,27 +225,27 @@ list partitions -c book
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to check.</td>
+            <td>待查看 Collection 的名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 学习 Milvus 更多基础操作：
+  - [在 Milvus 中插入数据](insert_data.md)
+  - [创建向量索引](build_index.md)
+  - [向量检索](search.md)
+  - [混合检索](hybridsearch.md)
+- 探索 Milvus SDKs 中的 API：
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
 
