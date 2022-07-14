@@ -177,7 +177,24 @@ curl -X 'POST' \
   }'
 
 # Output:
-{"status":{},"results":{"num_queries":1,"top_k":2,"fields_data":[{"type":5,"field_name":"book_id","Field":{"Scalars":{"Data":{"LongData":{"data":[11,12]}}}},"field_id":100}],"scores":[119.44999,142.24998],"ids":{"IdField":{"IntId":{"data":[11,12]}}},"topks":[2]},"collection_name":"book"}
+{
+  "status":{},
+  "results":{
+    "num_queries":1,
+    "top_k":2,
+    "fields_data":[
+      {
+        "type":5,
+        "field_name":"book_id",
+        "Field":{"Scalars":{"Data":{"LongData":{"data":[11,12]}}}},
+        "field_id":100
+      }
+    ],
+    "scores":[119.44999,142.24998],
+    "ids":{"IdField":{"IntId":{"data":[11,12]}}},"topks":[2]
+  },
+  "collection_name":"book"
+}
 ```
 
 <table class="language-python">

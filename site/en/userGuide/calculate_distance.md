@@ -62,7 +62,7 @@ vectors_left='{
 }'
 vectors_right='{
   "dim": 2,
-  "vectors": [1,2,3,4,5,6,7,8]
+  "vectors": [1,2,3,4,5,6,7,8] # The numbers will be automatically split into four vectors. 
 }'
 ```
 
