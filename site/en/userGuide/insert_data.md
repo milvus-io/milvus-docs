@@ -237,11 +237,11 @@ curl -X 'POST' \
     </tr>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to insert data in.</td>
+        <td>Name of the collection to insert data into.</td>
     </tr>
     <tr>
         <td><code>partitionName</code></td>
-        <td>Name of the partition to insert data in. Data will be inserted in the default partition if left blank.</td>
+        <td>Name of the partition to insert data into. Data will be inserted in the default partition if left blank.</td>
     </tr>
 	<tr>
         <td><code>columnarData</code></td>
@@ -260,11 +260,11 @@ curl -X 'POST' \
 	<tbody>
 	<tr>
 		<td><code>fieldName</code></td>
-		<td>Name of the field to insert data in.</td>
+		<td>Name of the field to insert data into.</td>
 	</tr>
 	<tr>
 		<td><code>DataType</code></td>
-		<td>Data type of the field to insert data in.</td>
+		<td>Data type of the field to insert data into.</td>
 	</tr>
     <tr>
 		<td><code>data</code></td>
@@ -321,12 +321,12 @@ curl -X 'POST' \
         </tr>
         <tr>
             <td><code>field_name</code></td>
-            <td>Name of the field to insert data in.</td>
+            <td>Name of the field to insert data into.</td>
             <td>N/A</td>
         </tr>		
         <tr>
             <td><code>type</code></td>
-            <td>Data type of the field to insert data in.</td>
+            <td>Data type of the field to insert data into.</td>
             <td>
                 Enums:
                 <br>1: "Bool",
