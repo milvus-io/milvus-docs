@@ -137,7 +137,7 @@ vectors_right='{
       </tr>
       <tr>
         <td><code>vectors</code></td>
-        <td>Temporarily only floating point vectors are supported.</td>
+        <td>Temporarily only floating-point vectors are supported.</td>
         <td>N/A</td>
       </tr>
 	</tbody>
@@ -195,7 +195,7 @@ params='[
         <tr>
             <td><code>metric</code></td>
             <td>Metric types used for calculation.</td>
-            <td>For floating point vectors:
+            <td>For floating-point vectors:
                 <ul>
                     <li><code>L2</code> (Euclidean distance)</li>
                     <li><code>IP</code> (Inner product)</li>
@@ -230,7 +230,7 @@ params='[
         <tr>
             <td><code>metric</code></td>
             <td>Metric types used for calculation.</td>
-            <td>For floating point vectors:
+            <td>For floating-point vectors:
                 <ul>
                     <li><code>L2</code> (Euclidean distance)</li>
                     <li><code>IP</code> (Inner product)</li>
