@@ -61,7 +61,7 @@ connect -h localhost -p 19530 -a default
 ```
 
 ```curl
-You can use any http client implementation to connect to Milvus server's HTTP port.
+# You can use any HTTP client implementation to connect to Milvus server's HTTP port.
 ```
 
 <table class="language-python">
@@ -209,6 +209,10 @@ milvusClient.close()
 
 ```shell
 connect -D
+```
+
+```curl
+# Close your HTTP client connection.
 ```
 
 <table class="language-python">
