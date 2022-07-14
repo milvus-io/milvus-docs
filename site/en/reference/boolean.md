@@ -165,7 +165,7 @@ Parentheses can be nested within expressions. Innermost parenthetical expression
 
 ## Usage
 
-Samples of all available boolean expression usage in Milvus are listed as follows (`int64` represents the scalar field that contains data of INT64 type,  `float` represents the scalar field that contains data of floating-point type, and `VARCHAR` represents the scalar field that contains data of VARCHAR  type):
+Samples of all available boolean expression usage in Milvus are listed as follows (`int64` represents the scalar field that contains data of INT64 type,  `float` represents the scalar field that contains data of floating-point type, and `VARCHAR` represents the scalar field that contains data of VARCHAR  type). Note that all operations on string data must only involve string operands.
 
 1. CmpOp
 
@@ -182,7 +182,7 @@ Samples of all available boolean expression usage in Milvus are listed as follow
 ```
 
 ```
-"str1" < VARCHAR < "str3"
+VARCHAR > "str1"
 ```
 
 
