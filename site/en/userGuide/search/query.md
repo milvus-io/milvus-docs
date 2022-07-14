@@ -132,7 +132,23 @@ curl -X 'POST' \
   }'
 
 # Output:
-{"status":{},"fields_data":[{"type":5,"field_name":"book_id","Field":{"Scalars":{"Data":{"LongData":{"data":[6,8,2,4]}}}},"field_id":100},{"type":101,"field_name":"book_intro","Field":{"Vectors":{"dim":2,"Data":{"FloatVector":{"data":[6,1,8,1,2,1,4,1]}}}},"field_id":102}]}
+{
+  "status":{},
+  "fields_data":[
+    {
+      "type":5,
+      "field_name":"book_id",
+      "Field":{"Scalars":{"Data":{"LongData":{"data":[6,8,2,4]}}}},
+      "field_id":100
+    },
+    {
+      "type":101,
+      "field_name":"book_intro",
+      "Field":{"Vectors":{"dim":2,"Data":{"FloatVector":{"data":[6,1,8,1,2,1,4,1]}}}},
+      "field_id":102
+    }
+  ]
+}
 ```
 
 <table class="language-python">

@@ -120,7 +120,12 @@ curl -X 'DELETE' \
   }'
 
 # Output
-{"status":{},"IDs":{"IdField":{"IntId":{"data":[0,1]}}},"delete_cnt":2,"timestamp":434262178115092482}
+{
+  "status":{},
+  "IDs":{"IdField":{"IntId":{"data":[0,1]}}},
+  "delete_cnt":2,
+  "timestamp":434262178115092482
+}
 ```
 
 <table class="language-python">
