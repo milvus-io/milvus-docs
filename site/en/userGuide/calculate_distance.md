@@ -62,7 +62,7 @@ vectors_left='{
 }'
 vectors_right='{
   "dim": 2,
-  "vectors": [1,2,3,4,5,6,7,8] # The numbers will be automatically split into four vectors. 
+  "vectors": [1,2,3,4,5,6,7,8] # The numbers in the list will be automatically split into four vectors. 
 }'
 ```
 
@@ -101,6 +101,47 @@ vectors_right='{
 	</tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        <th>Option</th>
+      </tr>
+	</thead>
+	<tbody>
+      <tr>
+        <td><code>dim</code></td>
+        <td>Dimension of the vector.</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>id_array</code></td>
+        <td>List of the primary keys of entities in the collection.</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>collection_name</code></td>
+        <td>Name of the collection that holds the entities.</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>partition_names</code></td>
+        <td>Names of the partitions that hold the entities.</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>field_name</code></td>
+        <td>Name of the vector field in the collection.</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>vectors</code></td>
+        <td>Temporarily only floating point vectors are supported.</td>
+        <td>N/A</td>
+      </tr>
+	</tbody>
+</table>
 
 ## Prepare calculation parameters
 
@@ -173,6 +214,28 @@ params='[
             <td><code>"dim"</code></td>
             <td>Dimension of the vector.</td>
             <td>N/A</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>metric</code></td>
+            <td>Metric types used for calculation.</td>
+            <td>For floating point vectors:
+                <ul>
+                    <li><code>L2</code> (Euclidean distance)</li>
+                    <li><code>IP</code> (Inner product)</li>
+                </ul>
+            </td>
         </tr>
 	</tbody>
 </table>
