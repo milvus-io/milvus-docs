@@ -11,7 +11,7 @@ summary: Learn the necessary preparations before installing Milvus.
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
-- {{tab}}
+{{tab}}
 
 ## Hardware requirements
 
