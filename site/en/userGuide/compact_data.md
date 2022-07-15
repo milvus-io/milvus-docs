@@ -52,19 +52,6 @@ long compactionID = response.getData().getCompactionID();
 compact -c book
 ```
 
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/compaction' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collectionID": 434262071120432449
-  }'
-
-# Output:
-{"status":{},"compactionID":434262132129005569}
-```
-
 <table class="language-javascript">
 	<thead>
 	<tr>
@@ -139,19 +126,6 @@ milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
 
 ```shell
 show compaction_state -c book
-```
-
-```curl
-curl -X 'GET' \
-  'http://localhost:9091/api/v1/compaction/state' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "compactionID": 434262132129005569
-  }'
-
-# Output:
-{"status":{},"state":2}
 ```
 
 ## What's next

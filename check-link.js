@@ -114,7 +114,7 @@ const checkInnerLink = (paths, validMds) => {
     innerLinks.forEach((link) => {
       let ignoreAnchorLink = link.split("#")[0];
       // ignore api reference
-      if (link.includes("/api-reference/") || link==='.md') {
+      if (link.includes("/api-reference/")) {
         return;
       }
       if (!validMds.includes(ignoreAnchorLink)) {

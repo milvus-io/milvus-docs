@@ -4,5 +4,4 @@
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
 </div>

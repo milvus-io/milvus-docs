@@ -63,11 +63,9 @@ const collectionName = "hello_milvus";
             fields: [
                 {
                     name: "count",
-                    data_type: DataType.VarChar,
+                    data_type: DataType.Int64,
                     is_primary_key: true,
-                    type_params: {
-                      max_length: '100',
-                    },
+                    description: "",
                 }, 
                 {
                     name: "random_value",

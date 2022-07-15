@@ -50,22 +50,6 @@ vectors_right = {"float_vectors": external_vectors}
 // CLI User Guide will be ready soon.
 ```
 
-```curl
-vectors_left='{
-  "dim": 2,
-  "ids": {
-    "id_array": [1,2],
-    "collection_name": "book",
-    "partition_names": ["_default"],
-    "field_name": "book_intro"
-  }
-}'
-vectors_right='{
-  "dim": 2,
-  "vectors": [1,2,3,4,5,6,7,8] # The numbers in the list will be automatically split into four vectors. 
-}'
-```
-
 <table class="language-python">
 	<thead>
 	<tr>
@@ -79,69 +63,28 @@ vectors_right='{
 		<td>Vectors on the left and right side of the operator. Dict type that can be represented as <code>{"ids": [primary_key_1, primary_key_2, ... primary_key_n], "collection": "collection_name", "partition": "partition_name", "field": "vector_field_name"}</code>, <code>{"float_vectors": [[1.0, 2.0], [3.0, 4.0], ... [9.0, 10.0]]}</code>, or <code>{"bin_vectors": [b'', b'N', ... b'Ê']}</code>.</td>
 	</tr>
     <tr>
-		<td><code>ids</code></td>
+		<td><code>"ids"</code></td>
 		<td>List of primary key of entities that in the collection.</td>
 	</tr>
     <tr>
-		<td><code>collection</code></td>
+		<td><code>"collection"</code></td>
 		<td>Name of the collection that holds the entities.</td>
 	</tr>
     <tr>
-		<td><code>partition</code></td>
+		<td><code>"partition"</code></td>
 		<td>Name of the partition that holds the entities.</td>
 	</tr>
     <tr>
-		<td><code>field</code></td>
+		<td><code>"field"</code></td>
 		<td>Name of the vector field in the collection.</td>
 	</tr>
     <tr>
-		<td><code>float_vectors</code> or <code>bin_vectors</code></td>
+		<td><code>"float_vectors"</code> or <code>"bin_vectors"</code></td>
 		<td>Type of the vectors.</td>
 	</tr>
 	</tbody>
 </table>
 
-<table class="language-curl">
-	<thead>
-      <tr>
-        <th>Parameter</th>
-        <th>Description</th>
-        <th>Option</th>
-      </tr>
-	</thead>
-	<tbody>
-      <tr>
-        <td><code>dim</code></td>
-        <td>Dimension of the vector.</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td><code>id_array</code></td>
-        <td>List of the primary keys of entities in the collection.</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td><code>collection_name</code></td>
-        <td>Name of the collection that holds the entities.</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td><code>partition_names</code></td>
-        <td>Names of the partitions that hold the entities.</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td><code>field_name</code></td>
-        <td>Name of the vector field in the collection.</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td><code>vectors</code></td>
-        <td>Temporarily only floating-point vectors are supported.</td>
-        <td>N/A</td>
-      </tr>
-	</tbody>
-</table>
 
 ## Prepare calculation parameters
 
@@ -172,12 +115,6 @@ params = {
 // CLI User Guide will be ready soon.
 ```
 
-```curl
-params='[
-  {"key": "metric", "value": "IP"}
-]'
-```
-
 <table class="language-python">
 	<thead>
         <tr>
@@ -193,9 +130,9 @@ params='[
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>metric</code></td>
+            <td><code>"metric"</code></td>
             <td>Metric types used for calculation.</td>
-            <td>For floating-point vectors:
+            <td>For floating point vectors:
                 <ul>
                     <li><code>L2</code> (Euclidean distance)</li>
                     <li><code>IP</code> (Inner product)</li>
@@ -211,31 +148,9 @@ params='[
             </td>
         </tr>
         <tr>
-            <td><code>dim</code></td>
+            <td><code>"dim"</code></td>
             <td>Dimension of the vector.</td>
             <td>N/A</td>
-        </tr>
-	</tbody>
-</table>
-
-<table class="language-curl">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>metric</code></td>
-            <td>Metric types used for calculation.</td>
-            <td>For floating-point vectors:
-                <ul>
-                    <li><code>L2</code> (Euclidean distance)</li>
-                    <li><code>IP</code> (Inner product)</li>
-                </ul>
-            </td>
         </tr>
 	</tbody>
 </table>
@@ -281,16 +196,6 @@ milvusClient.loadCollection(
 load -c book
 ```
 
-``` curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book"
-  }'
-```
-
 ## Calculate vector distance
 
 Calculate the distance between vectors based on the vectors and parameters provided.
@@ -320,22 +225,6 @@ print(results)
 ```shell
 // CLI User Guide will be ready soon.
 ```
-
-``` curl
-curl -X 'GET' \
-  'http://localhost:9091/api/v1/distance' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d "{
-    \"op_left\": $vectors_left,
-    \"op_right\": $vectors_right,
-    \"params\": $params
-  }"
-
-# Output:
-{"status":{},"Array":{"FloatDist":{"data":[3,7,11,15,4,10,16,22]}}}
-```
-
 
 ## What's next
 

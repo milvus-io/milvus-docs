@@ -62,18 +62,6 @@ milvusClient.loadPartitions(
 load -c book -p novel
 ```
 
-``` curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/partitions/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "partition_names": ["novel"],
-    "replica_number": 1
-  }'
-```
-
 <table class="language-python">
 	<thead>
 	<tr>
@@ -177,28 +165,6 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to load partitions from.</td>
-	</tr>
-    <tr>
-		<td><code>partition_names</code></td>
-		<td>List of names of the partitions to load.</td>
-	</tr>
-    <tr>
-		<td><code>replica_number</code> (optional)</td>
-		<td>Number of the replica to load.</td>
-	</tr>
-	</tbody>
-</table>
 
 ## Get replica information
 

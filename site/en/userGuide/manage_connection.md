@@ -60,9 +60,6 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 connect -h localhost -p 19530 -a default
 ```
 
-```curl
-# You can use any HTTP client implementation to connect to Milvus server's HTTP port.
-```
 
 <table class="language-python">
 	<thead>
@@ -209,10 +206,6 @@ milvusClient.close()
 
 ```shell
 connect -D
-```
-
-```curl
-# Close your HTTP client connection.
 ```
 
 <table class="language-python">

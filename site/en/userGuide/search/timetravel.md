@@ -70,38 +70,6 @@ connect -h localhost -p 19530 -a default
 create collection -c test_time_travel -f pk:INT64:primary_field -f example_field:FLOAT_VECTOR:2 -p pk
 ```
 
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "consistency_level": 1,
-    "schema": {
-      "name": "test_time_travel",
-      "autoID": false,
-      "fields": [
-        {
-          "name": "pk",
-          "is_primary_key": true,
-          "data_type": 5
-        },
-        {
-          "name": "example_field",
-          "data_type": 101,
-          "type_params": [
-            {
-              "key": "dim",
-              "value": "2"
-            }
-          ]
-        }
-      ]
-    }
-  }'
-```
-
 ## Insert the first batch of data
 
 Insert random data to simulate the original data (Milvus CLI example uses a pre-built, remote CSV file containing similar data).
@@ -152,33 +120,6 @@ Milvus timestamp:           430390410783752199
 --------------------------  ------------------
 ```
 
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/entities' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "collection_name": "test_time_travel",
-  "fields_data": [
-    {
-      "field_name": "pk",
-      "type": 5,
-      "field": [
-        0,1,2,3,4,5,6,7,8,9
-      ]
-    },
-    {
-      "field_name": "example_field",
-      "type": 101,
-      "field": [
-        [1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1]
-      ]
-    }
-  ],
-  "num_rows": 10
-}'
-```
-
 ## Check the timestamp of the first data batch
 
 Check the timestamp of the first data batch for search with Time Travel. Data inserted within the same batch share an identical timestamp.
@@ -205,19 +146,11 @@ batch1.timestamp
 # Milvus CLI automatically returns the timestamp as shown in the previous step.
 ```
 
-```curl
-# Output:
-{
-  "status":{},
-  "IDs":{"IdField":{"IntId":{"data":[1,2,3,4,5,6,7,8,9,10]}}},
-  "succ_index":[0,1,2,3,4,5,6,7,8,9],
-  "insert_cnt":10,
-  "timestamp":434575831766925313
-```
-
 <div class="alert note">
   Milvus adopts a combination of physical clock and logic counter as a hybrid timestamp. The 64-bit timestamp consists of a 46-bit physical part (high-order bits) and an 18-bit logic part (low-order bits). The physical part is the number of milliseconds that have elapsed since January 1, 1970 (midnight UTC/GMT).
 </div>
+
+
 
 ## Insert the second batch of data
 
@@ -261,6 +194,7 @@ const batch2 = await milvusClient.dataManager.insert({
 // Java User Guide will be ready soon.
 ```
 
+
 ```shell
 import -c test_time_travel https://raw.githubusercontent.com/zilliztech/milvus_cli/main/examples/user_guide/search_with_timetravel_2.csv
 Reading file from remote URL.
@@ -275,42 +209,6 @@ Total insert entities:                      10
 Total collection entities:                  20
 Milvus timestamp:           430390435713122310
 --------------------------  ------------------
-```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/entities' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "fields_data": [
-      {
-        "field_name": "pk",
-        "type": 5,
-        "field": [
-          10,11,12,13,14,15,16,17,18,19
-        ]
-      },
-      {
-        "field_name": "example_field",
-        "type": 101,
-        "field": [
-          [11,12],[12,12],[13,12],[14,12],[15,12],[16,12],[17,12],[18,12],[19,12],[1,1]
-        ]
-      }
-    ],
-    "num_rows": 10
-  }'
-
-# Output:
-{
-  "status":{},
-  "IDs":{"IdField":{"IntId":{"data":[10,11,12,13,14,15,16,17,18,19]}}},
-  "succ_index":[0,1,2,3,4,5,6,7,8,9],
-  "insert_cnt":10,
-  "timestamp":434575834238943233
-}
 ```
 
 ## Search with a specified timestamp
@@ -377,36 +275,6 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]: 430390410783752199
 ```
 
-```curl
-# Load the collection:
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel"
-  }'
-
-# Conduct a vector search:
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "output_fields": ["pk"],
-    "search_params": [
-      {"key": "anns_field", "value": "example_field"},
-      {"key": "topk", "value": "10"},
-      {"key": "params", "value": "{\"nprobe\": 10}"},
-      {"key": "metric_type", "value": "L2"}
-    ],
-    "travel_timestamp": 434575831766925313,
-    "vectors": [ [10,10] ],
-    "dsl_type": 1
-  }'
-```
-
 As shown below, the target data itself and other data inserted later are not returned as results.
 
 ```python
@@ -424,6 +292,7 @@ As shown below, the target data itself and other data inserted later are not ret
 ```java
 // Java User Guide will be ready soon.
 ```
+
 
 ```shell
 Search results:
@@ -452,29 +321,6 @@ No.1:
 +---------+------+------------+-----------+
 |       9 |    7 |  1.19445   | 1.19445   |
 +---------+------+------------+-----------+
-```
-
-```curl
-# Output:
-{
-  "status":{},
-  "results":{
-    "num_queries":1,
-    "top_k":10,
-    "fields_data":[
-      {
-        "type":5,
-        "field_name":"pk",
-        "Field":{"Scalars":{"Data":{"LongData":{"data":[9,8,7,6,5,4,3,2,1,0]}}}},
-        "field_id":100
-      }
-    ],
-    "scores":[81,82,85,90,97,106,117,130,145,162],
-    "ids":{"IdField":{"IntId":{"data":[9,8,7,6,5,4,3,2,1,0]}}},
-    "topks":[10]
-  },
-  "collection_name":"test_time_travel"
-}
 ```
 
 If you do not specify the timestamp or specify it with the timestamp of the second data batch, Milvus will return the results from both batches.
@@ -566,46 +412,6 @@ No.1:
 +---------+------+------------+------------+
 ```
 
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "output_fields": ["pk"],
-    "search_params": [
-      {"key": "anns_field", "value": "example_field"},
-      {"key": "topk", "value": "10"},
-      {"key": "params", "value": "{\"nprobe\": 10}"},
-      {"key": "metric_type", "value": "L2"}
-    ],
-    "vectors": [ [11,11] ],
-    "dsl_type": 1
-  }'
-
-# Output:
-{
-  "status":{},
-  "results":{
-    "num_queries":1,
-    "top_k":10,
-    "fields_data":[
-      {
-        "type":5,
-        "field_name":"pk",
-        "Field":{"Scalars":{"Data":{"LongData":{"data":[10,11,12,13,14,15,16,17,18,9]}}}},
-        "field_id":100
-      }
-    ],
-    "scores":[1,2,5,10,17,26,37,50,65,101],
-    "ids":{"IdField":{"IntId":{"data":[10,11,12,13,14,15,16,17,18,9]}}},
-    "topks":[10]
-  },
-  "collection_name":"test_time_travel"
-}
-```
-
 ## Generate a timestamp for search
 
 In the case that the previous timestamp is not recorded, Milvus allows you to generate a timestamp using an existing timestamp, Unix Epoch time, or date time.
@@ -640,10 +446,6 @@ calc mkts_from_unixtime -e 1641809375
 430390476800000000
 ```
 
-```curl
-# This function is not supported. It is suggested to use Milvus_CLI.
-```
-
 Delete part of the data to simulate an accidental deletion operation.
 
 ```python
@@ -674,25 +476,6 @@ You are trying to delete the entities of collection. This action cannot be undon
 
 Do you want to continue? [y/N]: y
 (insert count: 0, delete count: 10, upsert count: 0, timestamp: 430390494161534983)
-```
-
-```curl
-curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/entities' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "expr": "pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]"
-  }'
-
-# Output:
-{
-  "status":{},
-  "IDs":{"IdField":{"IntId":{"data":[0,2,4,6,8,10,12,14,16,18]}}},
-  "delete_cnt":10,
-  "timestamp": 434575874068316161
-}
 ```
 
 As shown below, the deleted entities are not returned in the results if you search without specifying the timestamp.
@@ -775,46 +558,6 @@ No.1:
 +---------+------+------------+----------+
 ```
 
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "output_fields": ["pk"],
-    "search_params": [
-      {"key": "anns_field", "value": "example_field"},
-      {"key": "topk", "value": "10"},
-      {"key": "params", "value": "{\"nprobe\": 10}"},
-      {"key": "metric_type", "value": "L2"}
-    ],
-    "vectors": [ [11,11] ],
-    "dsl_type": 1
-  }'
-
-# Output:
-{
-  "status":{},
-  "results":{
-    "num_queries":1,
-    "top_k":10,
-    "fields_data":[
-      {
-        "type":5,
-        "field_name":"pk",
-        "Field":{"Scalars":{"Data":{"LongData":{"data":[11,13,15,17,9,7,5,3,1,19]}}}},
-        "field_id":100
-      }
-    ],
-    "scores":[2,10,26,50,101,109,125,149,181,200],
-    "ids":{"IdField":{"IntId":{"data":[11,13,15,17,9,7,5,3,1,19]}}},
-    "topks":[10]
-  },
-  "collection_name":"test_time_travel"
-}
-```
-
 Search with the prior-to-deletion timestamp. Milvus retrieves entities from the data before the deletion.
 
 ```python
@@ -895,46 +638,6 @@ No.1:
 +---------+------+------------+------------+
 |       9 |   11 | 0.531529   | 0.531529   |
 +---------+------+------------+------------+
-```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "test_time_travel",
-    "output_fields": ["pk"],
-    "search_params": [
-      {"key": "anns_field", "value": "example_field"},
-      {"key": "topk", "value": "10"},
-      {"key": "params", "value": "{\"nprobe\": 10}"},
-      {"key": "metric_type", "value": "L2"}
-    ],
-    "travel_timestamp": 434284782724317186,
-    "vectors": [ [10,10] ],
-    "dsl_type": 1
-  }'
-
-# Output:
-{
-  "status":{},
-  "results":{
-    "num_queries":1,
-    "top_k":10,
-    "fields_data":[
-      {
-        "type":5,
-        "field_name":"pk",
-        "Field":{"Scalars":{"Data":{"LongData":{"data":[11,12,13,14,15,16,17,18,10,9]}}}},
-        "field_id":100}
-    ],
-    "scores":[5,8,13,20,29,40,53,68,81,82],
-    "ids":{"IdField":{"IntId":{"data":[11,12,13,14,15,16,17,18,10,9]}}},
-    "topks":[10]
-  },
-  "collection_name":"test_time_travel"
-}
 ```
 
 ## What's next

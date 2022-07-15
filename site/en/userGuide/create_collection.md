@@ -10,7 +10,7 @@ This topic describes how to create a collection in Milvus.
 
 A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Collection](glossary.md#Collection) for more information.
 
-The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional, floating-point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
+The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
 Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). The example in this topic sets the consistency level of the collection as `Strong`. To set other consistency level, see [Tune Consistency](tune_consistency.md).
 
@@ -141,52 +141,6 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
 
 ```shell
 create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLOAT_VECTOR:2 -p book_id
-```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "consistency_level": 1,
-    "schema": {
-      "autoID": false,
-      "description": "Test book search",
-      "fields": [
-        {
-          "name": "book_id",
-          "description": "book id",
-          "is_primary_key": true,
-          "autoID": false,
-          "data_type": 5
-        },
-        {
-          "name": "word_count",
-          "description": "count of words",
-          "is_primary_key": false,
-          "data_type": 5
-        },
-        {
-          "name": "book_intro",
-          "description": "embedded vector of book introduction",
-          "data_type": 101,
-          "is_primary_key": false,
-          "type_params": [
-            {
-              "key": "dim",
-              "value": "2"
-            }
-          ]
-        }
-      ],
-      "name": "book"
-    }
-  }'
-
-# Output:
-{}
 ```
 
 <table class="language-python">
@@ -503,116 +457,6 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
-    <thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>collection_name</code></td>
-            <td>Name of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>consistency_level</code></td>
-            <td>Consistency level of the collection to create.</td>
-            <td><ul>
-                    <li>0 for <code>Strong</code></li>
-                    <li>1 for <code>Session</code> (default)</li>
-                    <li>2 for <code>Bounded</code></li>
-                    <li>3 for <code>Eventually</code></li>
-              <li>4 for <code>Customized</code> (Users pass their own <code>gurantee_timestamp</code>)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>name</code> (schema)</td>
-            <td>Must be the same as <code>collection_name</code>, this duplicated field is kept for historical reasons.</td>
-            <td>Same as <code>collection_name</code></td>
-        </tr>
-        <tr>
-            <td><code>autoID</code> (schema)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>description</code> (schema)</td>
-            <td>Description of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>name</code>(field)</td>
-            <td>Name of the field to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>description</code> (field)</td>
-            <td>Description of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>is_primary_key</code>(Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>autoID</code> (field)(Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>data_type</code></td>
-            <td>Data type of the field to create.</td>
-            <td>
-                Enums:
-                <br>1: "Bool",
-                <br>2: "Int8",
-                <br>3: "Int16",
-                <br>4: "Int32",
-                <br>5: "Int64",
-                <br>10: "Float",
-                <br>11: "Double",
-                <br>20: "String",
-                <br>21: "VarChar",
-                <br>100: "BinaryVector",
-                <br>101: "FloatVector",
-                <br>
-                <br>For primary key field:
-                <ul>
-                    <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
-                </ul>
-                For scalar field:
-                <ul>
-                    <li><code>DataType.BOOL</code> (Boolean)</li>
-                    <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.FLOAT</code> (numpy.float32)</li>
-                    <li><code>DataType.DOUBLE</code> (numpy.double)</li>
-                </ul>
-                For vector field:
-                <ul>
-                    <li><code>BINARY_VECTOR</code> (Binary vector)</li>
-                    <li><code>FLOAT_VECTOR</code> (Float vector)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32,768]</td>
-        </tr>
-    </tbody>
-</table>
-
 ## Create a collection with the schema
 
 Then, create a collection with `Strong` consistency level and the schema you specified above.
@@ -650,10 +494,6 @@ milvusClient.createCollection(createCollectionReq);
 ```
 
 ```shell
-# Follow the previous step.
-```
-
-```curl
 # Follow the previous step.
 ```
 
