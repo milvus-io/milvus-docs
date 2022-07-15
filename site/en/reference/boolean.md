@@ -47,6 +47,8 @@ CompareExpr = IDENTIFIER CmpOp IDENTIFIER
 CmpOpRestricted = "<" | "<=";
 
 CmpOp = ">" | ">=" | "<" | "<=" | "=="| "!=";
+
+MatchOp = "like" | "LIKE";
 ```
 
 The following table lists the description of each symbol mentioned in the above Boolean expression rules.
@@ -80,6 +82,7 @@ The following table lists the description of each symbol mentioned in the above 
 | SingleExpr   |  SingleExpr, namely single expression, can be either a TermExpr or a CompareExpr.      |
 | LogicalExpr      | A LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or a UnaryLogicalOp on a single LogicalExpr, or a LogicalExpr grouped within parentheses, or a SingleExpr. The LogicalExpr is defined recursively.    |
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
+| MatchOp   | A MatchOp, namely a match operator, compares a string to a regular expression. |
 
 ## Operators
 
@@ -137,8 +140,9 @@ The following table lists the precedence and associativity of operators. Operato
 | 5          | + -       | BinaryArithOp | Left-to-right |
 | 6          | < <= > >= | CmpOp         | Left-to-right |
 | 7          | == !=     | CmpOp         | Left-to-right |
-| 8          | && and    | BinaryLogicOp | Left-to-right |
-| 9          | \|\| or     | BinaryLogicOp | Left-to-right |
+| 8          | like LIKE | MatchOp       | Left-to-right |
+| 9          | && and    | BinaryLogicOp | Left-to-right |
+| 10         | \|\| or   | BinaryLogicOp | Left-to-right |
 
 
 Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used. 
@@ -161,7 +165,7 @@ Parentheses can be nested within expressions. Innermost parenthetical expression
 
 ## Usage
 
-Samples of all available boolean expression usage in Milvus are listed as follows (`int64` represents the scalar field that contains data of INT64 type, and `float` represents the scalar field that contains data of floating-point type):
+Samples of all available boolean expression usage in Milvus are listed as follows (`int64` represents the scalar field that contains data of INT64 type,  `float` represents the scalar field that contains data of floating-point type, and `VARCHAR` represents the scalar field that contains data of VARCHAR  type). Note that all operations on string data must only involve string operands.
 
 1. CmpOp
 
@@ -176,6 +180,11 @@ Samples of all available boolean expression usage in Milvus are listed as follow
 ```
 "500 <= int64 < 1000"
 ```
+
+```
+VARCHAR > "str1"
+```
+
 
 2. BinaryLogicalOp and parentheses
 
@@ -193,6 +202,11 @@ Milvus only supports deleting entities with clearly specified primary keys, whic
 "int64 not in [1, 2, 3]"
 ```
 
+```
+VARCHAR not in ["str1", "str2"]
+```
+
+
 4. TermExpr, BinaryLogicalOp, and CmpOp (on different fields)
 
 ```
@@ -209,4 +223,10 @@ Milvus only supports deleting entities with clearly specified primary keys, whic
 
 ```
 "200+300 < int64 <= 500+500"
+```
+
+7. MatchOp (prefix matching)
+
+```
+VARCHAR like "prefix%"
 ```

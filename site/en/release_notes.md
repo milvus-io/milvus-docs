@@ -28,7 +28,7 @@ Release date: 2022-06-29
 		<td>2.1.0</td>
 		<td>2.1.0</td>
 		<td>2.1.0</td>
-		<td>2.1.0</td>
+		<td>2.1.2</td>
 	</tr>
 	</tbody>
 </table>

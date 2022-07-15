@@ -52,6 +52,20 @@ milvusClient.createAlias(
 create alias -c book -a publication
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/alias' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "alias":"publication"
+  }'
+
+# Output:
+{}
+```
+
 <table class="language-python">
 	<thead>
         <tr>
@@ -133,7 +147,24 @@ create alias -c book -a publication
     </tbody>
 </table>
 
-
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to create alias on.</td>
+        </tr>
+        <tr>
+            <td><code>alias</code></td>
+            <td>Collection alias to create.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## Drop a collection alias
 
@@ -166,6 +197,19 @@ milvusClient.dropAlias(
 
 ```shell
 delete alias -c book -a publication
+```
+
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/alias' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "alias":"publication"
+  }'
+
+# Output:
+{}
 ```
 
 <table class="language-python">
@@ -233,6 +277,20 @@ delete alias -c book -a publication
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>alias</code></td>
+            <td>Collection alias to drop.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## Alter a collection alias
 
@@ -270,6 +328,20 @@ milvusClient.alterAlias(
 
 ```shell
 create alias -c book -A -a publication
+```
+
+```curl
+curl -X 'PATCH' \
+  'http://localhost:9091/api/v1/alias' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "alias":"publication"
+  }'
+
+# Output:
+{}
 ```
 
 <table class="language-python">
@@ -351,6 +423,25 @@ create alias -c book -A -a publication
             <td>Flag to transfer the alias to a specified collection.</td>
         </tr>
     </tbody>
+</table>
+
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to alter alias to.</td>
+        </tr>
+        <tr>
+            <td><code>alias</code></td>
+            <td>Collection alias to alter.</td>
+        </tr>
+	</tbody>
 </table>
 
 ## Limits
