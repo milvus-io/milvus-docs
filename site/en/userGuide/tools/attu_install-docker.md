@@ -21,7 +21,7 @@ This topic describes how to install Attu, an efficient open-source management to
 - Milvus 2.1.0 or later
 
 <div class="alert note">
-If useing Milvus 2.0.x , you can check [v2.0.x attu doc](https://milvus.io/docs/v2.0.x/attu_install-docker.md).
+If useing Milvus 2.0.x , you can check <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x attu doc</a>.
 </div>
 
 ## Start an Attu instance
