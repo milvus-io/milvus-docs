@@ -42,7 +42,7 @@ $ helm repo update
 
 Start Milvus and Attu with Helm by specifying the release name, the chart, and the parameters that indicate the installation of Attu. This topic uses `my-release` as the release name. To use a different release name, replace `my-release` in the command.
 
-Attu provides four service modes: ClusterIp, Ingress, LoadBalancer, and Port-forward. The default service mode of Attu is ClusterIp.You can choose the Attu service mode that suits your application by configuring the parameters `attu.service.type` and `attu.ingress.enable`. Port-forward mode is suggested to be used in test environment only.
+Kubernetes provides four service modes: ClusterIp, Ingress, LoadBalancer, and NodePort. The default service mode of Attu is ClusterIp. You can choose the  service mode that suits your application by configuring the parameters `attu.service.type` and `attu.ingress.enable`. 
 
 
 1. Install Milvus and Attu
