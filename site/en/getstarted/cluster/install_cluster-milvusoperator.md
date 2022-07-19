@@ -13,8 +13,19 @@ summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 
 {{tab}}
 
+Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
+
+Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
+
 ## Prerequisites
-- [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
+- [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation.
+- Ensure that you can access the K8s cluster via `kubectl` or `helm`. 
+- Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on default StorageClass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+
+```
+NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
+``` 
 
 ## Start a K8s cluster
 
@@ -26,29 +37,14 @@ $ minikube start
 This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
 </div>
 
-## Deploy Milvus Operator
-
-Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
-
-Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
-
-### Prerequisites
-- Ensure that you can access the K8s cluster via `kubectl` or `helm`. 
-- Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on default StorageClass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
-
-```
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
-```
-
-### Install Milvus Operator
+## Install Milvus Operator
 
 There are two ways to install Milvus Operator in the Kubernetes: 
 
 - with helm chart
 - with `kubectl` command directly with raw manifests
 
-#### 1. Install by helm command
+### 1. Install by helm command
 
 ```
 helm install milvus-operator \
@@ -74,7 +70,7 @@ More samples can be found in https://github.com/milvus-io/milvus-operator/tree/m
 CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
 ```
 
-#### 2. Install by kubectl command
+### 2. Install by kubectl command
 
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
@@ -103,7 +99,7 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutati
 validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
-### Check milvus-operator status
+## Check milvus-operator status
 
 Run `$ kubectl get -n milvus-operator deploy/milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator deploy running as shown in the following output.
 
