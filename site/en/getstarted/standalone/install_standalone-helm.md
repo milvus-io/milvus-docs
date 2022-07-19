@@ -13,7 +13,7 @@ summary: Learn how to install Milvus stanalone on Kubernetes.
 
 {{tab}}
 
-We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 $ kubectl get sc
