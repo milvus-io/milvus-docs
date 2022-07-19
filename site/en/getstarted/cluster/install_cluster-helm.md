@@ -13,6 +13,9 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 
 {{tab}}
 
+## Prerequisites
+[Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
+
 We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
