@@ -23,8 +23,6 @@ $ minikube start
 This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
 </div>
 
-
-
 ## Deploy Milvus Operator
 
 Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
@@ -32,7 +30,7 @@ Milvus Operator allows you to deploy and manage a full Milvus service stack to a
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
 ### Prerequisites
-
+- [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
 - Ensure that you can access the K8s cluster via `kubectl` or `helm`. 
 - Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on Default storageclass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
