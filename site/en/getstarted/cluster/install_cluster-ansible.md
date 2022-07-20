@@ -21,6 +21,7 @@ Ansible can only be used in test environments. It is not recommended that you de
 
 ## Prerequisites
 
+- Ensure that your CPU and RAM meet the requirements in [Environment Checklist](prerequisite-docker.md). 
 - Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller
 - Operating system: Ubuntu 20.04 LTS
 - Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
