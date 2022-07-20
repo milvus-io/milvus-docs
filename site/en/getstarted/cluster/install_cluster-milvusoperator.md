@@ -25,7 +25,7 @@ Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes 
 ```
 $ kubectl get sc
 ```
-Output:
+
 ```
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
