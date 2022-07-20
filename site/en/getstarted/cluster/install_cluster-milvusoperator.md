@@ -74,7 +74,7 @@ More samples can be found in https://github.com/milvus-io/milvus-operator/tree/m
 CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
 ```
 
-### 2. Install by kubectl command
+### 2. Install by `kubectl` command
 
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
@@ -361,7 +361,7 @@ Run the following command to uninstall the Milvus Operator.
 $ helm -n milvus-operator uninstall milvus-operator
 ```
 
-### Uninstall the Milvus Operator by kubectl command
+### Uninstall the Milvus Operator by `kubectl` command
 
 ```
 $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
