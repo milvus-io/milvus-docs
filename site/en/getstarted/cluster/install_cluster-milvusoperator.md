@@ -351,17 +351,17 @@ $ kubectl delete milvus my-release
 
 </div>
 
-## Uninstall the Milvus Operator
+## Uninstall Milvus Operator
 
-Run the following command to uninstall the Milvus Operator.
+Run the following command to uninstall Milvus Operator.
 
-### Uninstall the Milvus Operator by helm command
+### Uninstall Milvus Operator by helm command
 
 ```
 $ helm -n milvus-operator uninstall milvus-operator
 ```
 
-### Uninstall the Milvus Operator by `kubectl` command
+### Uninstall Milvus Operator by `kubectl` command
 
 ```
 $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
