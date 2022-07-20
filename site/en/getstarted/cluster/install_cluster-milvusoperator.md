@@ -103,9 +103,9 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutati
 validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
-## Check milvus-operator status
+## Check Milvus Operator status
 
-Run `$ kubectl get -n milvus-operator deploy/milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator deploy running as shown in the following output.
+Run `$ kubectl get -n milvus-operator deploy/milvus-operator` to check if Milvus Operator is running. You can see the following output if Milvus Operator is running.
 
 ```
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
