@@ -233,7 +233,7 @@ status:
   status: Unhealthy
 ```
 
-Check the status of the Milvus Pods again.
+Check the status of the Milvus pods again.
 
 ```
 $ kubectl get pods
