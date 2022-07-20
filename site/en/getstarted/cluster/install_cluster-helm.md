@@ -30,7 +30,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 ## Start a K8s cluster
 
 <div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
+This topic uses a local Kubernetes cluster based on minikube. minikube can only be used in test environments. You can deploy a Milvus cluster on your own Kubernetes cluster.
 </div>
 
 ```

@@ -34,7 +34,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 ## Start a K8s cluster
 
 <div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
+This topic uses a local Kubernetes cluster based on minikube. minikube can only be used in test environments. You can deploy a Milvus cluster on your own Kubernetes cluster.
 </div>
 
 ```
@@ -370,9 +370,7 @@ $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/
 
 ## Delete the K8s cluster
 
-When you no longer need the K8s cluster in the testing environment, you can delete it.
-
-If you use minikube to install the K8s cluster, run `$ minikube delete`.
+When you no longer need the K8s cluster in the test environment, you can delete it, run `$ minikube delete` to delete it.
 
 
 ## What's next
