@@ -80,12 +80,19 @@ To improve stability, especially during streaming data insertion, we fixed a few
 <h3 id="v2.1.0-RC1">Other improvements</h3>
 
 - Security 
+
 Starting from Milvus 2.1.0-RC1, we support username, password, and TLS connection. We also enabled safe connections to our dependencies such as S3, Kafka and etcd.
+
 - ANTLR parser
+
 Milvus now adopts Go ANTLR as the plan parser to make adding new grammar such as arithmetic operations on numerical fields more flexible. The adoption of ANTLR also prepares for Milvus query language support in future releases.
+
 - Observability
+
 We refined monitoring metrics by adding important metrics including search QPS and latency to the new dashboard. Please notify us if any metrics critical to your production environment are not listed.
+
 - Deployment
+
 For users who don't have a K8s environment but still want to deploy a cluster, Milvus now supports Ansible deployment. See [Install Milvus Cluster](https://milvus.io/docs/install_cluster-ansible.md) for more information.
 
 <h3 id="v2.1.0-RC1">Known issues</h3>
