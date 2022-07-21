@@ -39,14 +39,23 @@ Milvus 2.1.0-RC1 is the preview version of Milvus 2.1. It not only introduces ma
 <h3 id="v2.1.0-RC1">Features</h3>
 
 - Support for VARCHAR data type
+
 Milvus now supports variable-length string as a scalar data type. Like previous scalar types, VARCHAR can be specified as an output field or be used for attribute filtering. A MARISA-trie-based inverted index is also supported to accelerate prefix query and exact match.
+
 - Memory Replicas
+
 Memory replicas enable you to load data on multiple query nodes. Like read replicas in traditional databases, memory replicas can help increase throughput if you have a relatively small dataset but want to scale read throughput with more hardware resources. We will support hedged read in future releases to increase availability when applying memory replicas.
+
 Message storage in search path can be removed thanks to the implementation of memory replicas, and search latency is significantly decreased.
+
 - Embedded Milvus
+
 Embedded Milvus enables you to pip install Milvus in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor. 
+
 - Kafka Support (Beta)
+
 Apache Kafka is the most widely used open-source distributed message store. In Milvus 2.1, you can simply use Kafka for message storage by modifying configurations. 
+
 - RESTful API (Beta)
 Milvus 2.1 now provides RESTful API for applications written in PHP or Ruby. GIN, one of the most popular Golang web frameworks, is adopted as the web server.
 
