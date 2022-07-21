@@ -61,7 +61,7 @@ Milvus 2.1 now provides RESTful API for applications written in PHP or Ruby. GIN
 
 <h3 id="v2.1.0-RC1">Performance</h3>
 
-The Milvus core team conducted a full performance benchmarking and profiling, and fixed a few bottlenecks on load/search paths. Under some test cases, Milvus search performance is boosted 3x?(waiting to be specified) thanks to the search combination logic.
+The Milvus core team conducted a full performance benchmarking and profiling, and fixed a few bottlenecks on load/search paths. Under some test cases, Milvus search performance is boosted about 3.2 times thanks to the search combination logic.
 - [#16014](https://github.com/milvus-io/milvus/pull/16014) Enables ZSTD compression for pulsar.
 - [#16514](https://github.com/milvus-io/milvus/pull/16514) [#17273](https://github.com/milvus-io/milvus/pull/17273) Improves load performance.
 - [#17005](https://github.com/milvus-io/milvus/pull/17005) Loads binlog for different fields in parallel. 
