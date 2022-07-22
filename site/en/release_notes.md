@@ -42,9 +42,9 @@ Milvus 2.1.0 not only introduces many new features including support for VARCHAR
 
 Milvus now supports variable-length string as a scalar data type. Like previous scalar types, VARCHAR can be specified as an output field or be used for attribute filtering. A MARISA-trie-based inverted index is also supported to accelerate prefix query and exact match.
 
-- Memory Replicas
+- In-memory Replicas
 
-Memory replicas enable you to load data on multiple query nodes. Like read replicas in traditional databases, memory replicas can help increase throughput if you have a relatively small dataset but want to scale read throughput with more hardware resources. We will support hedged read in future releases to increase availability when applying memory replicas.
+In-memory replicas enable you to load data on multiple query nodes. Like read replicas in traditional databases, in-memory replicas can help increase throughput if you have a relatively small dataset but want to scale read throughput with more hardware resources. We will support hedged read in future releases to increase availability when applying in-memory replicas.
 
 - Embedded Milvus
 
