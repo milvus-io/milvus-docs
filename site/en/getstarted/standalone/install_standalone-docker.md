@@ -13,35 +13,44 @@ summary: Learn how to install Milvus stanalone with Docker Compose.
 
 {{tab}}
 
-## Download an installation file
+## Prerequisites
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
+Check [the requirements](prerequisite-docker.md) for hardware and software prior to your installation.
+
+## Download the `YAML` file
+
+[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
 $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
-
 ## Start Milvus
+
+In the same directory as the `docker-compose.yml` file, start up Milvus by running:
 
 ```shell
 $ sudo docker-compose up -d
 ```
 
+<div class="alert note">
+If your system has Docker Compose V2 installed instead of V1, use `docker compose` instead of `docker-compose`. Check if this is the case with `$ docker compose version`. Read [here](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command) for more information.
+</div>
+
 ```text
-Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
 
+Now check if the containers are up and running.
 
-Check the status of the containers.
 ```
 $ sudo docker-compose ps
 ```
 
-After Milvus standalone starts, three running docker containers appear including two dependencies and one Milvus service. 
+After Milvus standalone starts, there will be three docker containers running, including the Milvus standalone service and its two dependencies.
+
 ```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
