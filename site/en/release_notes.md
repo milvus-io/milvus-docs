@@ -8,7 +8,7 @@ Find out what’s new in Milvus! This page summarizes information about new feat
 
 ## v2.1.0-RC1
 
-Release date: 2022-06-29
+Release date: 2022-07-22
 
 <h3 id="v2.1.0-RC1">Compatibility</h3>
 
