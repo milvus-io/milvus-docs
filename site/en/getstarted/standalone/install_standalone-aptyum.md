@@ -13,16 +13,20 @@ summary: Learn how to install Milvus stanalone with APT or YUM.
 
 {{tab}}
 
+## Prerequisites
+
+Ensure that your CPU, RAM, and disk meets the requirements in [Environment Checklist](prerequisite-docker.md) prior to your installation.
+
 ## Install Milvus with APT on Ubuntu
 
-You can install Milvus standalone with either Launchpad PPA or directly with the Debian software package.
+On Ubuntu, you can install Milvus standalone either via Launchpad PPA or directly with a `.deb` package.
 
-### Install via Launchpad PPA on Ubuntu
+### Install via Launchpad PPA
 
-Milvus standalone is now available on Launchpad PPA.
+You can install Milvus standalone via Launchpad PPA (Personal Package Archive). PPA allows you to install packages outside Ubuntu's official repository with APT.
 
 <div class="alert note">
-Currently, Milvus supports installation via Launchpad PPA only on Ubuntu 18.04.
+Currently, the PPA package of Milvus only supports Ubuntu 18.04.
 </div>
 
 ```bash
@@ -32,9 +36,9 @@ $ sudo apt update
 $ sudo apt install milvus
 ```
 
-### Install with Debian software package
+### Install with a `.deb` package
 
-Alternatively, you can download the Debian software package and install Milvus standalone.
+You can also download the `.deb` package that Milvus provides and install Milvus standalone.
 
 ```bash
 $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_deb_name}}.deb
@@ -45,22 +49,35 @@ $ sudo apt-get -f install
 
 ## Install Milvus with YUM on CentOS
 
-You can install Milvus standalone with YUM.
+On CentOS, you can install Milvus standalone with YUM.
 
 ```bash
 $ sudo yum install https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/{{var.milvus_rpm_name}}.rpm
 ```
 
-
 ## Check the status of Milvus and its dependencies
 
-After installation, Milvus standalone and its dependencies, i.e. etcd and MinIO, start directly. You can check their status.
+After installation, Milvus standalone and its dependencies (etcd and MinIO) start automatically. You can check their status by:
 
 ```bash
 $ sudo systemctl status milvus
 $ sudo systemctl status milvus-etcd
 $ sudo systemctl status milvus-minio
 ```
+
+## Uninstall Milvus
+
+Run the following command to uninstall Milvus.
+
+```bash
+$ sudo apt-get remove milvus
+```
+
+Additionally, remove Milvus from your system's repository list if you installed via PPA.
+
+```bash
+$ sudo add-apt-repository --remove ppa:milvusdb/milvus
+````
 
 ## What's next
 
