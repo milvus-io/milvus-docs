@@ -19,8 +19,8 @@ Attu is under rapid development and new features are added on a weekly basis. We
 Below is the features we have to offer:
 
 - Support username, password, and TLS connection
-  ![Attu_Login](../../../../assets/attu/insight_install.png "Connect to the Attu service.")
-  ![Attu_Login_user_pwd](../../../../assets/attu/insight_install_user_pwd.png "Connect to the Attu service with user")
+  ![Attu_Login](../../../../assets/attu/insight_install.png "Connect to the Milvus service.")
+  ![Attu_Login_user_pwd](../../../../assets/attu/insight_install_user_pwd.png "Connect to the Milvus service with username and password.")
 - View milvus cluster statistics in a glance.
 
 ![view_cluster_statistics](../../../../assets/attu/view_cluster_statistics.png "View cluster statistics.")

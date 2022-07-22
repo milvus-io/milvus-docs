@@ -17,7 +17,7 @@ Click the **System View** icon on the left-side navigation pane to visit the Sys
 The System View dashboard consists of the following tiles:
 
 - **Topology**: Shows the structure of your Milvus instance. Click Milvus node or a coordinator node and the corresponding information appears in the Info tile on the right.
-- **Info**: Shows the system, and configuration information of the selected node.
+- **Info**: Shows the system and configuration information of the selected node.
 
 ## Node list view
 

@@ -21,7 +21,7 @@ This topic describes how to install Attu, an efficient open-source management to
 - Milvus 2.1.0 or later
 
 <div class="alert note">
-If useing Milvus 2.0.x , you can check <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x attu doc</a>.
+See <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x Attu doc</a> if you are using Milvus 2.0.x.
 </div>
 
 ## Start an Attu instance
@@ -33,8 +33,8 @@ docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:lates
 Once you start the docker, visit `http://{ your machine IP }:8000` in your browser, and click **Connect** to enter the Attu service.
 And we alsow support TLS connection, username and password.
 
-![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Attu service.")
-![Attu_Login_user_pwd](../../../../assets/attu/insight_install_user_pwd.png "Connect to the Attu service with user")
+![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Milvus service.")
+![Attu_Login_user_pwd](../../../../assets/attu/insight_install_user_pwd.png "Connect to the Milvus service with username and password.")
 
 ## Contribution
 
