@@ -42,7 +42,7 @@ Milvus 2.1.0 not only introduces many new features including support for VARCHAR
 
 Milvus now supports variable-length string as a scalar data type. Like previous scalar types, VARCHAR can be specified as an output field or be used for attribute filtering. A MARISA-trie-based inverted index is also supported to accelerate prefix query and exact match.
 
-- In-memory Replicas
+- In-memory replicas
 
 In-memory replicas enable you to load data on multiple query nodes. Like read replicas in traditional databases, in-memory replicas can help increase throughput if you have a relatively small dataset but want to scale read throughput with more hardware resources. We will support hedged read in future releases to increase availability when applying in-memory replicas.
 
@@ -51,7 +51,7 @@ In-memory replicas enable you to load data on multiple query nodes. Like read re
 Embedded Milvus enables you to [pip install Milvus](install_embedded_milvus.md
 ) in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor. 
 
-- Kafka Support (Beta)
+- Kafka support (Beta)
 
 Apache Kafka is the most widely used open-source distributed message store. In Milvus 2.1, you can simply use Kafka for message storage by modifying configurations. 
 
@@ -82,7 +82,7 @@ To improve stability, especially during streaming data insertion, we fixed a few
 
 - Security 
 
-Starting from Milvus 2.1.0, we support username, password, and TLS connection. We also enabled safe connections to our dependencies such as S3, Kafka and etcd.
+Starting from Milvus 2.1.0, we support username, password, and TLS connection. We also enable safe connections to our dependencies such as S3, Kafka and etcd.
 
 - ANTLR parser
 
@@ -90,7 +90,7 @@ Milvus now adopts Go ANTLR as the plan parser to make adding new grammar such as
 
 - Observability
 
-We refined monitoring metrics by adding important metrics including search QPS and latency to the new dashboard. Please notify us if any metrics critical to your production environment are not listed.
+We refined monitoring metrics by adding important [metrics](metrics_dashboard.md) including search QPS and latency to the new dashboard. Please notify us if any metrics critical to your production environment are not listed.
 
 - Deployment
 
