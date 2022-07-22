@@ -26,7 +26,7 @@ Release date: 2022-07-22
 	<tr>
 		<td>2.1.0</td>
 		<td>2.1.0</td>
-		<td>2.1.0</td>
+		<td>2.1.0-beta4</td>
 		<td>2.1.0</td>
 		<td>2.1.2</td>
 	</tr>
