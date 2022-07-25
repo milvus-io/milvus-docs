@@ -1,17 +1,17 @@
 ---
 id: install_cluster-milvusoperator.md
-label: Milvus Operator
+label: Install Milvus Cluster with Milvus Operator
 related_key: Kubernetes
 order: 2
 group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 ---
 
-# Install Milvus Cluster
-
-{{fragments/installation_guide_cluster.md}}
-
 {{tab}}
+
+# Install Milvus Cluster with Milvus Operator
+
+This topic introduces how to deploy a Milvus cluster with Milvus Operator on Kubernetes.
 
 Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
 

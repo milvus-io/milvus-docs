@@ -1,17 +1,15 @@
 ---
 id: install_cluster-docker.md
-label: Docker Compose
+label: Install Milvus Cluster with Docker Compose
 related_key: Docker
 order: 0
 group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster with Docker Compose.
 ---
 
-# Install Milvus Cluster
-
-{{fragments/installation_guide_cluster.md}}
-
 {{tab}}
+
+# Install Milvus Cluster with Docker Compose
 
 <div class="alert note">
 Docker Compose cannot deploy Milvus distributed clusters across machines, and can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.

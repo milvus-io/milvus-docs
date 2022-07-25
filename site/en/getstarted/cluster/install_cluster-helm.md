@@ -1,17 +1,17 @@
 ---
 id: install_cluster-helm.md
-label: Helm 
+label: Install Milvus Cluster with Helm
 related_key: Kubernetes
 order: 1
 group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-# Install Milvus Cluster
-
-{{fragments/installation_guide_cluster.md}}
-
 {{tab}}
+
+# Install Milvus Cluster with Helm
+
+This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes.
 
 ## Prerequisites
 [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
