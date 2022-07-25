@@ -1,6 +1,6 @@
 ---
 id: install_cluster-docker.md
-label: Install Milvus Cluster with Docker Compose
+label: Docker Compose
 related_key: Docker
 order: 0
 group: install_cluster-docker.md

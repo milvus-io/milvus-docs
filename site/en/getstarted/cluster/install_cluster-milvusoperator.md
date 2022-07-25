@@ -1,6 +1,6 @@
 ---
 id: install_cluster-milvusoperator.md
-label: Install Milvus Cluster with Milvus Operator
+label: Milvus Operator
 related_key: Kubernetes
 order: 2
 group: install_cluster-docker.md

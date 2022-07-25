@@ -1,6 +1,6 @@
 ---
 id: install_cluster-ansible.md
-label: Install Milvus Cluster with Ansible
+label: Ansible
 related_key: Docker
 order: 4
 group: install_cluster-docker.md
