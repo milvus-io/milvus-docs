@@ -16,20 +16,20 @@ This topic describes how to install Milvus standalone using Kubernetes.
 
 Check [the requirements](prerequisite-helm.md)  for hardware and software prior to your installation.
 
-We recommend installing Milvus on Kubernetes (K8s) with minikube, which is a tool that allows you to run Kubernetes locally.
-
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
-
-```bash
-$ kubectl get sc
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
-```
+We recommend installing Milvus on Kubernetes (K8s) with minikube, a tool that allows you to run Kubernetes locally.
 
 ## Start a K8s cluster
 
 ```bash
 $ minikube start
+```
+
+minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+
+```bash
+$ kubectl get sc
+NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
 ## Install Helm Chart for Milvus

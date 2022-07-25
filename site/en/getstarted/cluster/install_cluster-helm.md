@@ -21,14 +21,14 @@ We recommend installing Milvus on Kubernetes with minikube, a tool that allows y
 ## Start a K8s cluster
 
 <div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. minikube can only be used in test environments. You can deploy a Milvus cluster on your own Kubernetes cluster.
+minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
 </div>
 
 ```
 $ minikube start
 ```
 
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 $ kubectl get sc
