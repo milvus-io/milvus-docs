@@ -11,18 +11,18 @@ summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 
 # Install Milvus Cluster with Milvus Operator
 
-Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target K8s clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. This topic introduces how to deploy a Milvus cluster with Milvus Operator on Kubernetes.
+Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target Kubernetes (K8s) clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. This topic introduces how to deploy a Milvus cluster with Milvus Operator on K8s.
 
 ## Prerequisites
 - [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation.
 
-## Create a Kubernetes Cluster
+## Create a K8s Cluster
 
 If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [deploy Milvus Operator](install_cluster-milvusoperator.md#Deploy-Milvus-Operator). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to install a Milvus cluster with Milvus Operator. 
 
 ### Create a K8s cluster with minikube
 
-[minikube](https://minikube.sigs.k8s.io/docs/) is a tool that allows you to run Kubernetes locally.
+[minikube](https://minikube.sigs.k8s.io/docs/) is a tool that allows you to run K8s locally.
 
 <div class="alert note">
 minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
@@ -46,7 +46,7 @@ Run `$ kubectl cluster-info` to check the status of the K8s cluster you just cre
 
 ## Deploy Milvus Operator
 
-Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
+Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use K8s APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
 
 ### Prerequisites
 
@@ -131,7 +131,7 @@ cert-manager-webhook-7c9588c76-tqncn      1/1     Running   0          70s
 
 ### 2. Install Milvus Operator
 
-There are two ways to install Milvus Operator on Kubernetes: 
+There are two ways to install Milvus Operator on K8s: 
 
 - with helm chart
 - with `kubectl` command directly with raw manifests
