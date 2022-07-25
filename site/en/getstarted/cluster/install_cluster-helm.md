@@ -11,12 +11,12 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 
 # Install Milvus Cluster with Helm
 
-This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes.
+This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes (K8s).
 
 ## Prerequisites
 [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
 
-We recommend installing Milvus on Kubernetes with minikube, a tool that allows you to run K8s locally.
+We recommend installing Milvus on K8s with minikube, a tool that allows you to run K8s locally.
 
 ## Start a K8s cluster
 
@@ -41,7 +41,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 
 ## Install Helm Chart for Milvus
 
-Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+Helm is a K8s package manager that can help you deploy Milvus quickly.
 
 1. Add Milvus Helm repository.
 
