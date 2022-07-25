@@ -1,6 +1,4 @@
-This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes. 
-
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
+This topic describes how to install Milvus cluster using Docker Compose, Kubernetes or Ansible Controller. On Kubernetes, you can choose either Helm or Milvus Operator to deploy a Milvus cluster.
 
 If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
 
