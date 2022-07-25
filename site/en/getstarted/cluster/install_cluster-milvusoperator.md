@@ -51,7 +51,7 @@ Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes 
 ### Prerequisites
 
 - Ensure that you can access the K8s cluster via `kubectl` or `helm`. 
-- Ensure the StorageClass dependency is installed as Milvus clusters depend on default StorageClass for data persistence. minikube has a dependency on default StorageClass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+- Ensure the StorageClass dependency is installed as Milvus clusters depend on default StorageClass for data persistence. minikube has a dependency on default StorageClass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
@@ -120,7 +120,7 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook
 cert-manager version 1.13 or later is required.
 </div>
 
-Run `$ kubectl get pods -n cert-manager` to check if cert-manager is running. If so, you can see all the pods are running, as shown in the following output.
+Run `$ kubectl get pods -n cert-manager` to check if cert-manager is running. You can see the following output if all the pods are running.
 
 ```
 NAME                                      READY   STATUS    RESTARTS   AGE
@@ -191,7 +191,7 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutati
 validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
-Run `$ kubectl get pods -n milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator pod running as shown in the following output.
+Run `$ kubectl get pods -n milvus-operator` to check if Milvus Operator is running. You can see the following output if Milvus Operator is running.
 
 ```
 NAME                                                  READY   STATUS    RESTARTS   AGE
@@ -437,6 +437,21 @@ $ kubectl delete mc my-release
 
 </div>
 
+## Uninstall Milvus Operator
+
+Run the following command to uninstall Milvus Operator.
+
+### Uninstall Milvus Operator by helm command
+
+```
+$ helm -n milvus-operator uninstall milvus-operator
+```
+
+### Uninstall Milvus Operator by `kubectl` command
+
+```
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
+```
 
 ## Delete the K8s cluster
 
