@@ -455,7 +455,7 @@ $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/
 
 ## Delete the K8s cluster
 
-When you no longer need the K8s cluster in the test environment, you can delete it, run `$ minikube delete` to delete it.
+When you no longer need the K8s cluster in the test environment, you can run `$ minikube delete` to delete it.
 
 
 ## What's next
