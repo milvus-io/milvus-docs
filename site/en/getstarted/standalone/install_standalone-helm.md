@@ -10,13 +10,13 @@ summary: Learn how to install Milvus stanalone on Kubernetes.
 
 # Install Milvus Standalone with Kubernetes
 
-This topic describes how to install Milvus standalone using Kubernetes.
+This topic describes how to install Milvus standalone using Kubernetes (K8s).
 
 ## Prerequisites
 
-Check [the requirements](prerequisite-helm.md)  for hardware and software prior to your installation.
+Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
 
-We recommend installing Milvus on Kubernetes (K8s) with minikube, a tool that allows you to run Kubernetes locally.
+We recommend installing Milvus on K8s with minikube, a tool that allows you to run K8s locally.
 
 ## Start a K8s cluster
 
@@ -34,7 +34,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 
 ## Install Helm Chart for Milvus
 
-Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+Helm is a K8s package manager that can help you deploy Milvus quickly.
 
 1. Add Milvus to Helm's repository.
 
