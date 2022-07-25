@@ -1,22 +1,25 @@
 ---
 id: install_cluster-ansible.md
-label: Ansible
+label: Install Milvus Cluster with Ansible
 related_key: Docker
 order: 4
 group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster with Ansible Controller.
 ---
 
-# Install Milvus Cluster
-
-{{fragments/installation_guide_cluster.md}}
-
 {{tab}}
 
-This topic introduces how to deploy a Milvus cluster. We provide the Docker Host for creating an Ansible playbook and the Container for running the Milvus cluster. The script in this topic is only for running on Ubuntu 20.04 LTS systems. Modify the script commands and parameters if you want to run the Milvus cluster on other versions of operating systems.
+# Install Milvus Cluster with Ansible
+
+This topic introduces how to deploy a Milvus cluster with Ansible. We provide the Docker Host for creating an Ansible playbook and the Container for running the Milvus cluster. The script in this topic is only for running on Ubuntu 20.04 LTS systems. Modify the script commands and parameters if you want to run the Milvus cluster on other versions of operating systems.
+
+<div class="alert note">
+Ansible can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
+</div>
 
 ## Prerequisites
 
+- Ensure that your CPU and RAM meet the requirements in [Environment Checklist](prerequisite-docker.md). 
 - Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller
 - Operating system: Ubuntu 20.04 LTS
 - Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
