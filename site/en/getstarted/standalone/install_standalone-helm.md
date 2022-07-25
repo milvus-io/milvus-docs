@@ -8,7 +8,7 @@ summary: Learn how to install Milvus stanalone on Kubernetes.
 
 {{tab}}
 
-# Install Milvus Standalone
+# Install Milvus Standalone with Kubernetes
 
 This topic describes how to install Milvus standalone using Kubernetes.
 
