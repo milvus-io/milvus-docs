@@ -9,7 +9,7 @@ summary: Learn how to install Milvus stanalone with APT or YUM.
 
 {{tab}}
 
-# Install Milvus Standalone
+# Install Milvus Standalone with APT/YUM
 
 This topic describes how to install Milvus standalone using package manager APT or YUM on Linux systems.
 
