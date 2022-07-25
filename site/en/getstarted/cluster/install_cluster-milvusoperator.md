@@ -30,7 +30,7 @@ minikube can only be used in test environments. It is not recommended that you d
 
 #### 1. Install minikube
 
-See [Prerequisites](prerequisite-helm.md#Software-requirements) for more information.
+See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more information.
 
 #### 2. Start a K8s cluster using minikube
 
