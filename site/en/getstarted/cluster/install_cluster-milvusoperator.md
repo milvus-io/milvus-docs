@@ -439,7 +439,7 @@ $ kubectl delete mc my-release
 
 ## Uninstall Milvus Operator
 
-Run the following command to uninstall Milvus Operator.
+There are also two ways to uninstall Milvus Operator on K8s:
 
 ### Uninstall Milvus Operator by Helm command
 
@@ -456,7 +456,6 @@ $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/
 ## Delete the K8s cluster
 
 When you no longer need the K8s cluster in the test environment, you can run `$ minikube delete` to delete it.
-
 
 ## What's next
 
