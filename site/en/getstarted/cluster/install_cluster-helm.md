@@ -1,6 +1,6 @@
 ---
 id: install_cluster-helm.md
-label: Install Milvus Cluster with Helm
+label: Helm
 related_key: Kubernetes
 order: 1
 group: install_cluster-docker.md
