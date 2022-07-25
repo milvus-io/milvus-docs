@@ -136,7 +136,7 @@ There are two ways to install Milvus Operator on Kubernetes:
 - with helm chart
 - with `kubectl` command directly with raw manifests
 
-#### Install by helm command
+#### Install by Helm command
 
 ```
 helm install milvus-operator \
@@ -441,7 +441,7 @@ $ kubectl delete mc my-release
 
 Run the following command to uninstall Milvus Operator.
 
-### Uninstall Milvus Operator by helm command
+### Uninstall Milvus Operator by Helm command
 
 ```
 $ helm -n milvus-operator uninstall milvus-operator
