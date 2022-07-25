@@ -7,11 +7,11 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Docker Compose.
 ---
 
+{{tab}}
+
 # Install Milvus Standalone
 
-{{fragments/installation_guide.md}}
-
-{{tab}}
+This topic describes how to install Milvus standalone using Docker Compose.
 
 ## Prerequisites
 
