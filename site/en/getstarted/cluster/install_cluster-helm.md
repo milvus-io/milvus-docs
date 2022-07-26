@@ -16,17 +16,11 @@ This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes (K8
 ## Prerequisites
 [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
 
-We recommend installing Milvus on K8s with minikube, a tool that allows you to run K8s locally.
+## Create a K8s Cluster
 
-## Start a K8s cluster
+If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [Install Helm Chart for Milvus](install_cluster-helm.md#Install-Helm-Chart-for-Milvus). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm. 
 
-<div class="alert note">
-minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
-</div>
-
-```
-$ minikube start
-```
+{{fragments/create_a_k8s_cluster_using_minikube.md}}
 
 minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
