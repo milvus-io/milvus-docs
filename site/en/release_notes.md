@@ -48,8 +48,7 @@ In-memory replicas enable you to load data on multiple query nodes. Like read re
 
 - Embedded Milvus
 
-Embedded Milvus enables you to [pip install Milvus](install_embedded_milvus.md
-) in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor. 
+Embedded Milvus enables you to [pip install Milvus](install_embedded_milvus.md) in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor. 
 
 - Kafka support (Beta)
 
