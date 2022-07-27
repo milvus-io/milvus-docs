@@ -19,7 +19,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
         with:
-          ref: v2.0.x
+          ref: v2.1.x
 
       - name: Extract branch name
         shell: bash
