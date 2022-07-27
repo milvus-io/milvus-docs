@@ -52,11 +52,11 @@ Embedded Milvus enables you to [pip install Milvus](install_embedded_milvus.md) 
 
 - Kafka support (Beta)
 
-Apache Kafka is the most widely used open-source distributed message store. In Milvus 2.1, you can simply use Kafka for message storage by modifying configurations. 
+Apache Kafka is the most widely used open-source distributed message store. In Milvus 2.1.0, you can simply use Kafka for message storage by modifying configurations. 
 
 - RESTful API (Beta)
 
-Milvus 2.1 now provides RESTful API for applications written in PHP or Ruby. GIN, one of the most popular Golang web frameworks, is adopted as the web server.
+Milvus 2.1.0 now provides RESTful API for applications written in PHP or Ruby. GIN, one of the most popular Golang web frameworks, is adopted as the web server.
 
 <h3 id="v2.1.0">Performance</h3>
 
