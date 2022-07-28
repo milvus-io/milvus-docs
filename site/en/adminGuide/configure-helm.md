@@ -7,7 +7,7 @@ order: 1
 summary: Learn how to configure your Milvus.
 ---
 
-# Configure Milvus
+# Configure Milvus with Docker Compose or Helm
 
 This topic describes how to configure Milvus components and its third-party dependencies with Docker Compose or Helm.
 
