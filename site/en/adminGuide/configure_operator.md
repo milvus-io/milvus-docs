@@ -11,7 +11,7 @@ In production environment, you need to allocate resources to the Milvus cluster 
 
 This topic introduces how to configure a Milvus cluster when you install it with Milvus Operator.
 
-This topic assumes that you have deployed Milvus Operator. See [Deploy Milvus Operator](https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md) for more information.
+This topic assumes that you have deployed Milvus Operator. See [Deploy Milvus Operator](install_cluster-milvusoperator.md) for more information.
 
 Configuring a Milvus cluster with Milvus Operator includes:
 - Global resource configurations
@@ -65,7 +65,7 @@ metadata:
     app: milvus
 spec:
   components:
-    image: milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
+    image: milvusdb/milvus:v{{var.milvus_image}}
     nodeSelector: {}
     tolerations: {}
     env: {}
@@ -116,7 +116,7 @@ metadata:
     app: milvus
 spec:
   components:
-    image: milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
+    image: milvusdb/milvus:v{{var.milvus_image}}
     resources:
       limits:
         cpu: '4'
