@@ -45,7 +45,8 @@ touch openssl.cnf gen.sh
 # This is mostly being used for generation of certificate requests.
 #
 
-# This definition stops the following lines choking if HOME isn't defined.
+# This definition stops the following lines choking if HOME isn't
+# defined.
 HOME			= .
 RANDFILE		= $ENV::HOME/.rnd
 
@@ -53,9 +54,12 @@ RANDFILE		= $ENV::HOME/.rnd
 #oid_file		= $ENV::HOME/.oid
 oid_section		= new_oids
 
-# To use this configuration file with the "-extfile" option of the "openssl x509" utility, name here the section containing the X.509v3 extensions to use:
+# To use this configuration file with the "-extfile" option of the
+# "openssl x509" utility, name here the section containing the
+# X.509v3 extensions to use:
 # extensions		= 
-# (Alternatively, use a configuration file that has only X.509v3 extensions in its main [= default] section.)
+# (Alternatively, use a configuration file that has only
+# X.509v3 extensions in its main [= default] section.)
 
 [ new_oids ]
 
@@ -77,7 +81,7 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir			= ./demoCA		# Where everything is kept
+dir		= ./demoCA		# Where everything is kept
 certs		= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl		# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
@@ -114,7 +118,8 @@ default_md	= default		# use public key default MD
 preserve	= no			# keep passed DN ordering
 
 # A few difference way of specifying how similar the request should look
-# For type CA, the listed attributes must be the same, and the optional and supplied fields are just that :-)
+# For type CA, the listed attributes must be the same, and the optional
+# and supplied fields are just that :-)
 policy		= policy_match
 
 # For the CA policy
@@ -127,7 +132,8 @@ commonName		= supplied
 emailAddress		= optional
 
 # For the 'anything' policy
-# At this point in time, you must list all acceptable 'object' types.
+# At this point in time, you must list all acceptable 'object'
+# types.
 [ policy_anything ]
 countryName		= optional
 stateOrProvinceName	= optional
@@ -142,7 +148,7 @@ emailAddress		= optional
 default_bits		= 2048
 default_keyfile 	= privkey.pem
 distinguished_name	= req_distinguished_name
-attributes			= req_attributes
+attributes		= req_attributes
 x509_extensions	= v3_ca	# The extentions to add to the self signed cert
 
 # Passwords for private keys if not present they will be prompted for
