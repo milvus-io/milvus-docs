@@ -6,7 +6,7 @@ summary: Learn how to enable TLS proxy in Milvus.
 
 # Encryption in Transit
 
-TLS (Transport Layer Security) is a type of mutual authentication using the TLS protocol. Milvus proxy uses the TLS mutual authentication.
+TLS (Transport Layer Security) is an encryption protocol to ensure communication security. Milvus proxy uses TLS one-way and two-way authentication.
 
 This topic describes how to enable TLS proxy in Milvus.
 
@@ -16,6 +16,15 @@ This topic describes how to enable TLS proxy in Milvus.
 
 Make sure OpenSSL is installed. If you have not installed it, [build and install](https://github.com/openssl/openssl/blob/master/INSTALL.md) OpenSSL first.
 
+```shell
+openssl version
+```
+
+If OpenSSL is not installed. It can be installed with the following command in Ubuntu.
+
+```shell
+sudo apt install openssl
+```
 
 ### Create files
 
@@ -36,8 +45,7 @@ touch openssl.cnf gen.sh
 # This is mostly being used for generation of certificate requests.
 #
 
-# This definition stops the following lines choking if HOME isn't
-# defined.
+# This definition stops the following lines choking if HOME isn't defined.
 HOME			= .
 RANDFILE		= $ENV::HOME/.rnd
 
@@ -45,12 +53,9 @@ RANDFILE		= $ENV::HOME/.rnd
 #oid_file		= $ENV::HOME/.oid
 oid_section		= new_oids
 
-# To use this configuration file with the "-extfile" option of the
-# "openssl x509" utility, name here the section containing the
-# X.509v3 extensions to use:
+# To use this configuration file with the "-extfile" option of the "openssl x509" utility, name here the section containing the X.509v3 extensions to use:
 # extensions		= 
-# (Alternatively, use a configuration file that has only
-# X.509v3 extensions in its main [= default] section.)
+# (Alternatively, use a configuration file that has only X.509v3 extensions in its main [= default] section.)
 
 [ new_oids ]
 
@@ -72,7 +77,7 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir		= ./demoCA		# Where everything is kept
+dir			= ./demoCA		# Where everything is kept
 certs		= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl		# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
@@ -109,8 +114,7 @@ default_md	= default		# use public key default MD
 preserve	= no			# keep passed DN ordering
 
 # A few difference way of specifying how similar the request should look
-# For type CA, the listed attributes must be the same, and the optional
-# and supplied fields are just that :-)
+# For type CA, the listed attributes must be the same, and the optional and supplied fields are just that :-)
 policy		= policy_match
 
 # For the CA policy
@@ -123,8 +127,7 @@ commonName		= supplied
 emailAddress		= optional
 
 # For the 'anything' policy
-# At this point in time, you must list all acceptable 'object'
-# types.
+# At this point in time, you must list all acceptable 'object' types.
 [ policy_anything ]
 countryName		= optional
 stateOrProvinceName	= optional
@@ -139,7 +142,7 @@ emailAddress		= optional
 default_bits		= 2048
 default_keyfile 	= privkey.pem
 distinguished_name	= req_distinguished_name
-attributes		= req_attributes
+attributes			= req_attributes
 x509_extensions	= v3_ca	# The extentions to add to the self signed cert
 
 # Passwords for private keys if not present they will be prompted for
@@ -501,15 +504,22 @@ tls:
 
 common:
   security:
-    tlsEnabled: true
+    tlsMode: 2
  ```
- 
+
+### One-way authentication
+
+Server need server.pem and server.key. Client-side need server.pem.
+
+### Two-way authentication
+
+Server-side need server.pem, server.key and ca.pem. Client-side need client.pem, client.key, ca.pem.
 
 ## Connect to the Milvus server with TLS
 
 Configure the file paths of `client.pem`, `client.key`, and `ca.pem` for the client when using the Milvus SDK.
 
-The following is an example.
+The following example uses the Milvus Python SDK.
 
 ```
 from pymilvus import connections
@@ -525,6 +535,6 @@ print(f"\nList connections:")
 print(connections.list_connections())
 ```
 
-See [example_tls.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls.py) for more information.
+See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py) for more information.
 
  
