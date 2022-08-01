@@ -157,9 +157,9 @@ connect [-h (text)] [-p (int)] [-a (text)] [-s (text)] [-u (text)] [-pwd (text)]
 | -h     | --host       | (Optional) The host name. The default is "127.0.0.1".                                                       |
 | -p     | --port       | (Optional) The port number. The default is "19530".                                                         |
 | -a     | --alias      | (Optional) The alias name of the Milvus link. The default is "default".                                     |
-| -s     | --secure     | (Optional) The secure connection or not. The default is False                                               |
-| -pwd   | --password   | (Optional) The password of user in Milvus. The default is None                                              |
-| -u     | --username   | (Optional) The username of user in Milvus. The default is None                                              |
+| -s     | --secure     | (Optional) Whether to enable secure connection or not. The default is "False".                                               |
+| -pwd   | --password   | (Optional) The user password in Milvus. The default is "None".                                              |
+| -u     | --username   | (Optional) The username in Milvus. The default is "None".                                              |
 | -D     | --disconnect | (Optional) Flag to disconnect from the Milvus server specified by an alias. The default alias is "default". |
 | --help | n/a          | Displays help for using the command.                                                                        |
 
@@ -183,8 +183,8 @@ create user -u (text) -p (text)
 
 | Option | Full name  | Description                                         |
 | :----- | :--------- | :-------------------------------------------------- |
-| -p     | --password | The password of user in milvus. The default is None |
-| -u     | --username | The username of user in milvus. The default is None |
+| -p     | --password | The user password in milvus. The default is "None". |
+| -u     | --username | The username in milvus. The default is "None". |
 | --help | n/a        | Displays help for using the command.                |
 
 ### Examples
@@ -343,7 +343,7 @@ delete alias -p (text)
 
 | Option | Full name  | Description                          |
 | :----- | :--------- | :----------------------------------- |
-| -u     | --usernmae | The username of user.                |
+| -u     | --usernmae | The username.                |
 | --help | n/a        | Displays help for using the command. |
 
 ### Example
