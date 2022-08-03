@@ -59,7 +59,8 @@ curl -X 'GET' \
   -d '{
     "collection_name": "book"
   }'
-
+```
+```curl
 # Output:
 {
   "status":{},
@@ -244,7 +245,8 @@ curl -X 'GET' \
   -d '{
     "collection_name": "book"
   }'
-
+```
+```curl
 # Output:
 {
   "status": {},
@@ -443,7 +445,8 @@ curl -X 'GET' \
   'http://localhost:9091/api/v1/collections' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json'
-
+```
+```curl
 # Output:
 {
   "status": {},

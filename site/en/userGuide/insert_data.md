@@ -165,6 +165,8 @@ curl -X 'POST' \
   ],
   "num_rows": 100
 }'
+```
+```curl
 # Output:
 {
   "status":{},

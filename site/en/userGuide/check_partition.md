@@ -6,7 +6,7 @@ summary: Learn how to check partition information in Milvus.
 
 # Check Partition Information
 
-This topic describes how to check the information of the partition in Milvus.
+This topic describes how to check the information of partitions in Milvus.
 
 ## Verify if a partition exist
 
@@ -64,7 +64,8 @@ curl -X 'GET' \
     "collection_name": "book",
     "partition_name": "novel"
   }'
-
+```
+```curl
 # Output:
 {"status":{},"value":true}
 ```
@@ -213,7 +214,8 @@ curl -X 'GET' \
   -d '{
     "collection_name": "book"
   }'
-
+```
+```curl
 # Output:
 {
   "status": {},
