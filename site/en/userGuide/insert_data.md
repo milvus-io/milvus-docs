@@ -166,8 +166,11 @@ curl -X 'POST' \
   "num_rows": 100
 }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "IDs":{
@@ -181,6 +184,8 @@ curl -X 'POST' \
   "timestamp":434262073374408706
 }
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
