@@ -220,7 +220,7 @@ Output:
 		<td>Name of the field to search on.</td>
 	</tr>
   <tr>
-		<td><code>params</code></td>
+		<td><code>param</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	<tr>
