@@ -65,10 +65,16 @@ curl -X 'GET' \
     "partition_name": "novel"
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {"status":{},"value":true}
 ```
+
+</div>
+
 
 <table class="language-python">
 	<thead>
@@ -215,8 +221,11 @@ curl -X 'GET' \
     "collection_name": "book"
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {
   "status": {},
   "partition_names": [
@@ -237,6 +246,8 @@ curl -X 'GET' \
   ]
 }
 ```
+
+</div>
 
 <table class="language-javascript">
 	<thead>
