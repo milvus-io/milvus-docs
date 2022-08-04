@@ -172,8 +172,8 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-vali
 Run `$ kubectl get pods -n milvus-operator` to check if Milvus Operator is running. You can see the following output if Milvus Operator is running.
 
 ```
-NAME                                                  READY   STATUS    RESTARTS   AGE
-milvus-operator-controller-manager-698fc7dc8d-rlmtk   1/1     Running   0          46s
+NAME                               READY   STATUS    RESTARTS   AGE
+milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 ```
 
 ## Install a Milvus cluster
@@ -199,7 +199,7 @@ milvuscluster.milvus.io/my-release created
 Run the following command to check the status of the Milvus cluster you just deployed.
 
 ```
-$ kubectl get mc my-release -o yaml
+$ kubectl get milvus my-release -o yaml
 ```
 
 You can confirm the current status of Milvus cluster from the `status` field in the output. When the Milvus cluster is still under creation, the `status` shows `Unhealthy`.
