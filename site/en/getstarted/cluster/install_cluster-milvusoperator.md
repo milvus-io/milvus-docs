@@ -399,14 +399,14 @@ my-release-pulsar-zookeeper-1                   1/1     Running     0          1
 my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
-When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md)
+When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md).
 
 ## Uninstall the Milvus cluster
 
 Run the following command to uninstall the Milvus cluster.
 
 ```
-$ kubectl delete mc my-release
+$ kubectl delete milvus my-release
 ```
 
 <div class="alert note">
