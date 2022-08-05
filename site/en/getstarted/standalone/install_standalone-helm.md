@@ -38,8 +38,11 @@ Run `$ kubectl cluster-info` to check the status of the K8s cluster you just cre
 
 minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
-```bash
+```
 $ kubectl get sc
+```
+
+```
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
