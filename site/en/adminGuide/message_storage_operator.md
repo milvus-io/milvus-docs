@@ -11,7 +11,7 @@ Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, output
 
 This topic assumes that you have deployed Milvus Operator.
 
-<div class="alert note">See <a href="https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+<div class="alert note">See <a href="https://milvus.io/docs/v{{var.milvus_release_tag}}/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
@@ -198,7 +198,7 @@ spec:
 
 <div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
@@ -278,6 +278,11 @@ Assuming that the configuration file is named `milvuscluster.yaml`, run the foll
 kubectl apply -f milvuscluster.yaml
 ```
 
+## What's next
+
+Learn how to configure other Milvus dependencies with Milvus Operator:
+- [Configure Object Storage with Milvus Operator](object_storage_operator.md)
+- [Configure Meta Storage with Milvus Operator](meta_storage_operator.md)
 
 
 

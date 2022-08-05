@@ -48,6 +48,10 @@ delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
 ```
 
+```curl
+"expr" = "book_id in [0,1]"
+```
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -104,6 +108,31 @@ milvusClient.delete(
 You are trying to delete the entities of collection. This action cannot be undone!
 Do you want to continue? [y/N]: y
 ```
+
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/entities' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "expr": "book_id in [0,1]"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status":{},
+  "IDs":{"IdField":{"IntId":{"data":[0,1]}}},
+  "delete_cnt":2,
+  "timestamp":434262178115092482
+}
+```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -170,6 +199,24 @@ Do you want to continue? [y/N]: y
 	</tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+	<tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+	</tbody>
+</table>
 
 ## What's next
 

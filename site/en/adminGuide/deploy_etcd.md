@@ -1,27 +1,25 @@
 ---
 id: deploy_etcd.md
-title: Configure Meta Storage with Docker Compose/Helm
+title: Configure Meta Storage with Docker Compose or Helm
 related_key: S3, storage
-summary: Learn how to set up meta storage for Milvus using Docker Compose/Helm.
+summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm.
 ---
 
-# Configure Meta Storage with Docker Compose/Helm
+# Configure Meta Storage with Docker Compose or Helm
 
-etcd stores metadata of components in a Milvus. 
+Milvus uses etcd for storing metadata. This topic introduces how to configure etcd with Docker Compose or Helm.
 
-This topic introduces how to configure etcd with Docker Compose or Helm.
-
-## Configure with Docker Compose
+## Configure etcd with Docker Compose
 
 ### 1. Configure etcd
 
-To set up etcd with Docker Compose, provide your values for the `etcd` section in the `milvus.yaml` file on the milvus/configs path.
+To configure etcd with Docker Compose, provide your values for the `etcd` section in the `milvus.yaml` file on the milvus/configs path.
 
 ```
 etcd:
   endpoints:
     - localhost:2379
-  rootPath: by-dev # The root path where data is stored in etcd
+  rootPath: by-dev # The root path where data are stored in etcd
   metaSubPath: meta # metaRootPath = rootPath + '/' + metaSubPath
   kvSubPath: kv # kvRootPath = rootPath + '/' + kvSubPath
   log:
@@ -52,9 +50,9 @@ Run the following command to start Milvus that uses the etcd configurations.
 docker-compose up
 ```
 
-<div class="alert note">Configurations only take effect after Milvus starts. See <a herf=https://milvus.io/docs/v2.0.0/install_cluster-docker.md#2-Start-Milvus>Start Milvus</a> for more information.</div>
+<div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/v{{var.milvus_release_tag}}/install_cluster-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 
-## Set up on K8s
+## Configure etcd on K8s
 
 For Milvus clusters on K8s, you can configure etcd in the same command that starts Milvus. Alternatively, you can configure etcd using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
@@ -74,7 +72,6 @@ For Milvus clusters on K8s, you can configure etcd in the same command that star
 externalEtcd:
   enabled: true
   ## the endpoints of the external etcd
-  ##
   endpoints:
     - localhost:2379
 ```
@@ -91,3 +88,10 @@ To install Milvus and configure etcd, run the following command using your value
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externaletcd.enabled=true 
 ```
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Docker Compose or Helm:
+
+- [Configure Object Storage with Docker Compose or Helm](deploy_s3.md)
+- [Configure Message Storage with Docker Compose or Helm](deploy_pulsar.md)

@@ -7,11 +7,11 @@ summary: Learn how to configure object storage with Milvus Operator.
 
 # Configure Object Storage with Milvus Operator
 
-A Milvus cluster uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. This topic introduces how to configure object storage dependencies when you install Milvus with Milvus Operator.
+Milvus uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. This topic introduces how to configure object storage dependencies when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.
 
-<div class="alert note">See <a href="https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+<div class="alert note">See <a href="https://milvus.io/docs/v{{var.milvus_release_tag}}/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
@@ -34,7 +34,7 @@ A Milvus cluster uses MinIO or S3 as object storage to persist large-scale files
 Fields used to configure an external object storage service include:
 
 - `external`: A `true` value indicates that Milvus uses an external storage service.
-- `type`: Specifies whether Milvus uses S3 or MinIO as object storage.
+- `type`: Specifies Milvus uses whether S3 or MinIO as object storage.
 - `secretRef`: The secret reference that the object storage service uses.
 - `endpoint`: The endpoint of the object storage service.
 
@@ -150,7 +150,7 @@ spec:
 
 <div class="alert note">In this example, <code>inCluster.deletionPolicy</code> defines a deleletion policy for data. <code>inCluster.values.resources</code> defines the compute resources that MinIO uses. <code>inCluster.values.statefulset.replicaCount</code> defines the number of replicas of MinIO on each drive.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
@@ -159,3 +159,9 @@ kubectl apply -f milvuscluster.yaml
 ```
 
 <div class="alert note">If <code>my-release</code> is an existing Milvus cluster, <code>milvuscluster.yaml</code> overwrites its configuration. Otherwise, a new Milvus cluster is created.</div>
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Milvus Operator:
+- [Configure Meta Storage with Milvus Operator](meta_storage_operator.md)
+- [Configure Message Storage with Milvus Operator](message_storage_operator.md)

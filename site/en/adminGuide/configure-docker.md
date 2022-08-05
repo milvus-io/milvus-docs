@@ -9,10 +9,10 @@ summary: Learn how to configure your Milvus.
 
 # Configure Milvus with Docker Compose or Helm
 
-This topic describes how to configure your Milvus.
+This topic describes how to configure Milvus components and its third-party dependencies with Docker Compose or Helm.
 
 <div class="alert note">
-In current release, all parameters take effect only after being configured at the startup of Milvus.
+In current release, all parameters take effect only after Milvus restarts.
 </div>
 
 {{tab}}
@@ -94,14 +94,14 @@ Sorted by:
     <td>Performance tuning</td>
     <td>
         <ul>
-            <li><a href="configure_querynode.md#queryNode.gracefulTime"><code>queryNode.gracefulTime</code></a></li>
-            <li><a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-            <li><a href="configure_datacoord.md#dataCoord.segment.maxSize"><code>dataCoord.segment.maxSize</code></a></li>
-            <li><a href="configure_datacoord.md#dataCoord.segment.sealProportion"><code>dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="configure_datanode.md#dataNode.flush.insertBufSize"><code>dataNode.flush.insertBufSize</code></a></li>
-            <li><a href="configure_querycoord.md#queryCoord.autoHandoff"><code>queryCoord.autoHandoff</code></a></li>
-            <li><a href="configure_querycoord.md#queryCoord.autoBalance"><code>queryCoord.autoBalance</code></a></li>
-            <li><a href="configure_localstorage.md#localStorage.enabled"><code>localStorage.enabled</code></a></li>
+            <li><a href="configure_querynode.md#queryNodegracefulTime"><code>queryNode.gracefulTime</code></a></li>
+            <li><a href="configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a></li>
+            <li><a href="configure_datacoord.md#dataCoordsegmentmaxSize"><code>dataCoord.segment.maxSize</code></a></li>
+            <li><a href="configure_datacoord.md#dataCoordsegmentsealProportion"><code>dataCoord.segment.sealProportion</code></a></li>
+            <li><a href="configure_datanode.md#dataNodeflushinsertBufSize"><code>dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="configure_querycoord.md#queryCoordautoHandoff"><code>queryCoord.autoHandoff</code></a></li>
+            <li><a href="configure_querycoord.md#queryCoordautoBalance"><code>queryCoord.autoBalance</code></a></li>
+            <li><a href="configure_localstorage.md#localStorageenabled"><code>localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -109,11 +109,11 @@ Sorted by:
     <td>Data and meta</td>
     <td>
         <ul>
-            <li><a href="configure_common.md#common.retentionDuration"><code>common.retentionDuration</code></a></li>
-            <li><a href="configure_rocksmq.md#rocksmq.retentionTimeInMinutes"><code>rocksmq.retentionTimeInMinutes</code></a></li>
-            <li><a href="configure_datacoord.md#dataCoord.enableCompaction"><code>dataCoord.enableCompaction</code></a></li>
-            <li><a href="configure_datacoord.md#dataCoord.enableGarbageCollection"><code>dataCoord.enableGarbageCollection</code></a></li>
-            <li><a href="configure_datacoord.md#dataCoord.gc.dropTolerance"><code>dataCoord.gc.dropTolerance</code></a></li>
+            <li><a href="configure_common.md#commonretentionDuration"><code>common.retentionDuration</code></a></li>
+            <li><a href="configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code>rocksmq.retentionTimeInMinutes</code></a></li>
+            <li><a href="configure_datacoord.md#dataCoordenableCompaction"><code>dataCoord.enableCompaction</code></a></li>
+            <li><a href="configure_datacoord.md#dataCoordenableGarbageCollection"><code>dataCoord.enableGarbageCollection</code></a></li>
+            <li><a href="configure_datacoord.md#dataCoordgcdropTolerance"><code>dataCoord.gc.dropTolerance</code></a></li>
         </ul>
     </td>
   </tr>
@@ -121,11 +121,11 @@ Sorted by:
     <td>Administration</td>
     <td>
         <ul>
-            <li><a href="configure_log.md#log.level"><code>log.level</code></a></li>
-            <li><a href="configure_log.md#log.file.rootPath"><code>log.file.rootPath</code></a></li>
-            <li><a href="configure_log.md#log.file.maxAge"><code>log.file.maxAge</code></a></li>
-            <li><a href="configure_minio.md#minio.accessKeyID"><code>minio.accessKeyID</code></a></li>
-            <li><a href="configure_minio.md#minio.secretAccessKey"><code>minio.secretAccessKey</code></a></li>
+            <li><a href="configure_log.md#loglevel"><code>log.level</code></a></li>
+            <li><a href="configure_log.md#logfilerootPath"><code>log.file.rootPath</code></a></li>
+            <li><a href="configure_log.md#logfilemaxAge"><code>log.file.maxAge</code></a></li>
+            <li><a href="configure_minio.md#minioaccessKeyID"><code>minio.accessKeyID</code></a></li>
+            <li><a href="configure_minio.md#miniosecretAccessKey"><code>minio.secretAccessKey</code></a></li>
         </ul>
     </td>
   </tr>
@@ -160,7 +160,7 @@ Map the local path to your `milvus.yaml` file onto the corresponding docker cont
 ...
 proxy:
     container_name: milvus-proxy
-    image: milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
+    image: milvusdb/milvus:v{{var.milvus_image}}
     command: ["milvus", "run", "proxy"]
     volumes:       # Add a volumes section.
       - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
@@ -174,7 +174,7 @@ proxy:
 ```
 
 <div class="alert note">
-Data is stored in the <code>/volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Data are stored in the <code>/volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
 ## Start Milvus
@@ -187,7 +187,9 @@ $ sudo docker-compose up -d
 
 ## What's next
 
-- If you want to learn how to monitor the Milvus services and create alerts:
-  - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
-  - Learn [Visualize Milvus Metrics in Grafana](visualize.md).
+- Learn how to manage the following Milvus dependencies with Docker Compose or Helm:
+  - [Configure Object Storage with Docker Compose or Helm](deploy_s3.md)
+  - [Configure Meta Storage with Docker Compose or Helm](deploy_etcd.md)
+  - [Configure Message Storage with Docker Compose or Helm](deploy_pulsar.md)
+
 

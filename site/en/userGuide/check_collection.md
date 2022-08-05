@@ -51,6 +51,28 @@ if (respHasCollection.getData() == Boolean.TRUE) {
 describe collection -c book
 ```
 
+```curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/collection/existence' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status":{},
+  "value":true
+}
+```
+
+</div>
+
 <table class="language-python">
 	<thead>
         <tr>
@@ -132,6 +154,21 @@ describe collection -c book
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+	</tbody>
+</table>
+
 ## Check collection details
 
 Check the details of a collection.
@@ -204,6 +241,65 @@ System.out.println("Collection row count: " + wrapperCollectionStatistics.getRow
 ```shell
 describe collection -c book
 ```
+
+```curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/collection' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status": {},
+  "schema": {
+    "name": "book",
+    "description": "Test book search",
+    "fields": [
+      {
+        "fieldID": 100,
+        "name": "book_id",
+        "is_primary_key": true,
+        "description": "book id",
+        "data_type": 5
+      },
+      {
+        "fieldID": 101,
+        "name": "book_intro",
+        "description": "embedded vector of book introduction",
+        "data_type": 101,
+        "type_params": [
+          {
+            "key": "dim",
+            "value": "2"
+          }
+        ]
+      }
+    ]
+  },
+  "collectionID": 434240188610972993,
+  "virtual_channel_names": [
+    "by-dev-rootcoord-dml_0_434240188610972993v0",
+    "by-dev-rootcoord-dml_1_434240188610972993v1"
+  ],
+  "physical_channel_names": [
+    "by-dev-rootcoord-dml_0",
+    "by-dev-rootcoord-dml_1"
+  ],
+  "created_timestamp": 434240188610772994,
+  "created_utc_timestamp": 1656494860118,
+  "shards_num": 2,
+  "consistency_level": 1
+}
+```
+
+</div>
 
 <table class="language-python">
     <thead>
@@ -303,6 +399,20 @@ describe collection -c book
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## List all collections
 
@@ -339,6 +449,36 @@ System.out.println(respShowCollections);
 ```shell
 list collections
 ```
+
+```curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/collections' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status": {},
+  "collection_names": [
+    "book"
+  ],
+  "collection_ids": [
+    434240188610972993
+  ],
+  "created_timestamps": [
+    434240188610772994
+  ],
+  "created_utc_timestamps": [
+    1656494860118
+  ]
+}
+```
+
+</div>
 
 <table class="language-go">
 	<thead>

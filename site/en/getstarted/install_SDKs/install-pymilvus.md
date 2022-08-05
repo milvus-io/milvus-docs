@@ -15,10 +15,11 @@ Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
 {{tab}}
 
-## Requirement
+## Requirements
 
-Python 3.6 or later is required.
-
+- Python 3.6 or later is required.
+- Google protobuf is installed. You can install it with the command `pip3 install protobuf==3.20.0`.
+- grpcio-tools is installed. You can install it with the command `pip3 install grpcio-tools`.
 
 ## Install PyMilvus via pip
 
