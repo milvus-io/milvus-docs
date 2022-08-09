@@ -89,7 +89,7 @@ id: home.md
 
 _Jul 2022_
 
-- Added Milvus 2.1.0 [release note](release_notes.md#).
+- Added Milvus 2.1.0 [release note](release_notes.md).
 - Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
 - Added guidance on how to [configure object storage with Docker Compose or Helm](deploy_s3.md)
 - Added guidance on how to [configure meta storage with Docker Compose or Helm](deploy_etcd.md)
