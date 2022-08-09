@@ -91,9 +91,9 @@ _Jul 2022_
 
 - Added Milvus 2.1.0 [release note](release_notes.md).
 - Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
-- Added guidance on how to [configure object storage with Docker Compose or Helm](deploy_s3.md)
-- Added guidance on how to [configure meta storage with Docker Compose or Helm](deploy_etcd.md)
-- Added guidance on how to [configure message storage with Docker Compose or Helm](deploy_pulsar.md)
+- Added guidance on how to [configure object storage with Docker Compose or Helm](deploy_s3.md).
+- Added guidance on how to [configure meta storage with Docker Compose or Helm](deploy_etcd.md).
+- Added guidance on how to [configure message storage with Docker Compose or Helm](deploy_pulsar.md).
 - Added guidance on how to [configure RocksMQ and Kafka for message storage with Milvus Operator](message_storage_operator.md).
 - Added [Milvus Metrics Dashboard](metrics_dashboard.md).
 - Added guidance on how to [authenticate user access](authenticate.md).
