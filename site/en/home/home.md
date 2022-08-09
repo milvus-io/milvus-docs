@@ -90,12 +90,9 @@ id: home.md
 _Jul 2022_
 
 - Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
-- Added guidance on how to [configure object storage with Docker Compose or Helm](deploy_s3.md).
-- Added guidance on how to [configure meta storage with Docker Compose or Helm](deploy_etcd.md).
-- Added guidance on how to [configure message storage with Docker Compose or Helm](deploy_pulsar.md).
-- Added guidance on how to [configure RocksMQ and Kafka for message storage with Milvus Operator](message_storage_operator.md).
-- Added [Milvus Metrics Dashboard](metrics_dashboard.md).
-- Added guidance on how to [authenticate user access](authenticate.md).
-- Added guidance on how to [enable TLS (Transport Layer Security) proxy](tls.md) in Milvus.
+- Added guidance on how to configure [object storage](deploy_s3.md), [meta storage](deploy_etcd.md) and [message storage](deploy_pulsar.md) with Docker Compose or Helm.
+- Added guidance on how to [configure RocksMQ, Pulsar and Kafka for message storage with Milvus Operator](message_storage_operator.md).
+- Added a full list of important monitoring metrics in the [Milvus Metrics Dashboard](metrics_dashboard.md).
+- Added security guidance including [user access authentication](authenticate.md) and [encryption in transit](tls.md) .
 
 </div>
