@@ -87,15 +87,16 @@ id: home.md
 
 ## What's new in docs
 
-_Apr 2022_
+_Jul 2022_
 
-- Added Milvus cluster installation guidance with [Ansible](install_cluster-ansible.md).
-- Remade API Reference of [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.0.2/About.md) and [Milvus GO SDK](https://milvus.io/api-reference/go/v2.0.0/About.md).
-
-_Mar 2022_
-
-- Added guidance on [distance calculation](calculate_distance.md).
-- Added documentation on how to [load](load_partition.md) and [release](release_partition.md) a partition.
-- Added Milvus [benchmark](benchmark.md) report.
+- Added Milvus 2.1.0 [release note](release_notes.md#).
+- Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
+- Added guidance on how to [configure object storage with Docker Compose or Helm](deploy_s3.md)
+- Added guidance on how to [configure meta storage with Docker Compose or Helm](deploy_etcd.md)
+- Added guidance on how to [configure message storage with Docker Compose or Helm](deploy_pulsar.md)
+- Added guidance on how to [configure RocksMQ and Kafka for message storage with Milvus Operator](message_storage_operator.md).
+- Added [Milvus Metrics Dashboard](metrics_dashboard.md).
+- Added guidance on how to [authenticate user access](authenticate.md).
+- Added guidance on how to [enable TLS (Transport Layer Security) proxy](tls.md) in Milvus.
 
 </div>
