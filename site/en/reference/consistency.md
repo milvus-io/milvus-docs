@@ -9,7 +9,7 @@ This topic introduces the four levels of consistency in Milvus and their best-su
 
 Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. 
 
-Milvus supports four consistency levels:  strong, bounded staleness, session, and eventual*.* The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when [creating a collection](https://milvus.io/docs/v2.1.x/create_collection.md) or conducting a [vector similarity search](https://milvus.io/docs/v2.1.x/search.md) or [query](https://milvus.io/docs/v2.1.x/query.md) to make it best suit your application.
+Milvus supports four consistency levels:  strong, bounded staleness, session, and eventual. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when [creating a collection](create_collection.md) or conducting a [vector similarity search](search.md) or [query](query.md) to make it best suit your application.
 
 ## Consistency levels
 
@@ -21,7 +21,7 @@ The following explains the differences of the four consistency levels supported 
 
 Strong is the highest and the most strict level of consistency. It ensures that users can read the latest version of data. 
 
-![Strong consistency](../../../assets/Consistency-Strong.png "An illustration of strong consistency.")]
+![Strong consistency](../../../assets/Consistency-Strong.png "An illustration of strong consistency.")
 
 According to the PACELC theorem, if the consistency level is set to strong, the latency will increase. Therefore, we recommend choosing strong consistency during functional testings to ensure the accuracy of the test results. Strong consistency is also best suited for applications that have strict demand for data consistency at the cost of search speed. An example can be an online financial system dealing with order payments and billing.
 
@@ -29,7 +29,7 @@ According to the PACELC theorem, if the consistency level is set to strong, the 
 
 Bounded staleness, as its name suggests, allows data inconsistency during a certain period of time. However, generally, the data are always globally consistent out of that period of time.
 
-![Bounded staleness consistency](../../../assets/Consistency-Bounded.png "An illustration of bounded staleness consistency.")]
+![Bounded staleness consistency](../../../assets/Consistency-Bounded.png "An illustration of bounded staleness consistency.")
 
 Bounded staleness is suitable for scenarios that need to control search latency and can accept sporadic data invisibility. For instance, in recommender systems like video recommendation engines, data invisibility sometimes has small impact on the overall recall rate, but can significantly boost the performance of the recommender system. 
 
@@ -37,7 +37,7 @@ Bounded staleness is suitable for scenarios that need to control search latency 
 
 Session ensures that all data writes can be immediately perceived in reads during the same session. In other words, when you write data via one client, the newly inserted data instantaneously become searchable. 
 
-![Session consistency](../../../assets/Consistency-Session.png "An illustration of session consistency.")]
+![Session consistency](../../../assets/Consistency-Session.png "An illustration of session consistency.")
 
 We recommend choosing session as the consistency level for those scenarios where the demand for data consistency in the same session is high. An example can be deleting the data of a book entry from the library system, and after confirmation of the deletion and refreshing the page (a different session), the book should no longer be visible in the search results.
 
@@ -45,7 +45,7 @@ We recommend choosing session as the consistency level for those scenarios where
 
 There is no guaranteed order of reads and writes, and replicas eventually converge to the same state given that no further write operations are done. Under eventual consistency, replicas start working on read requests with the latest updated values. Eventual consistency is the weakest level among the four. 
 
-![Eventual consistency](../../../assets/Consistency-Eventual.png "An illustration of eventual consistency.")]
+![Eventual consistency](../../../assets/Consistency-Eventual.png "An illustration of eventual consistency.")
 
 However, according to the PACELC theorem, search latency can be tremendously shortened upon sacrificing consistency. Therefore, eventual consistency is best suited for scenarios that do not have a high demand for data consistency but require blazing-fast search performance. An example can be retrieving reviews and ratings of Amazon products with eventual consistency. 
 
