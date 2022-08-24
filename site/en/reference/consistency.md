@@ -21,7 +21,7 @@ The following explains the differences of the four consistency levels supported 
 
 Strong is the highest and the most strict level of consistency. It ensures that users can read the latest version of data. 
 
-![Strong consistency](../../../assets/Consistency-Strong.png "An illustration of strong consistency.")
+![Strong consistency](../../../assets/Consistency_Strong.png "An illustration of strong consistency.")
 
 According to the PACELC theorem, if the consistency level is set to strong, the latency will increase. Therefore, we recommend choosing strong consistency during functional testings to ensure the accuracy of the test results. Strong consistency is also best suited for applications that have strict demand for data consistency at the cost of search speed. An example can be an online financial system dealing with order payments and billing.
 
@@ -29,7 +29,7 @@ According to the PACELC theorem, if the consistency level is set to strong, the 
 
 Bounded staleness, as its name suggests, allows data inconsistency during a certain period of time. However, generally, the data are always globally consistent out of that period of time.
 
-![Bounded staleness consistency](../../../assets/Consistency-Bounded.png "An illustration of bounded staleness consistency.")
+![Bounded staleness consistency](../../../assets/Consistency_Bounded.png "An illustration of bounded staleness consistency.")
 
 Bounded staleness is suitable for scenarios that need to control search latency and can accept sporadic data invisibility. For instance, in recommender systems like video recommendation engines, data invisibility sometimes has small impact on the overall recall rate, but can significantly boost the performance of the recommender system. 
 
