@@ -15,6 +15,6 @@ A Milvus collection is similar to a table in traditional databases and is used t
 
 - [Manage Collection Alias](collection_alias.md): Milvus supports specifying a unique alias for a collection.
 
-- [Load Collection](load_collection.md): Load the collection to memory before a search or a query. Milvus 2.1 now supports loading a collection as multiple replicas.
+- [Load a Collection](load_collection.md): Load the collection to memory before a search or a query. Milvus 2.1 now supports loading a collection as multiple replicas.
 
-- [Release Collection](release_collection.md): Release a collection from memory after a search or a query to reduce memory usage.
+- [Release a Collection](release_collection.md): Release a collection from memory after a search or a query to reduce memory usage.
