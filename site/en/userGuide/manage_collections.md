@@ -3,7 +3,7 @@ Id: manage_collections.md
 title: Manage Collections
 ---
 
-# Manage collections
+# Manage Collections
 
 A Milvus collection is similar to a table in traditional databases and is used to store and manage data. Learn about the collection-level operations.
 
