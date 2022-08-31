@@ -3,7 +3,7 @@ id: user_guide.md
 title: User Guide
 ---
 
-# User guide
+# User Guide
 
 Follow the step-by-step instructions to learn about the basic database features that Milvus has to offer. 
 
