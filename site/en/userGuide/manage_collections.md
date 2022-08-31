@@ -11,9 +11,9 @@ A Milvus collection is similar to a table in traditional databases and is used t
 
 - [Check Collection Information](check_collection.md): Check the basic information of a collection in Milvus including its name, number of entities, and more.
 
-- [Drop a Collection](drop_collection.md): Caution is needed as the delete operation irreversibly the collection and all data within it.
+- [Drop a Collection](drop_collection.md): Caution is needed as the delete operation irreversibly drops the collection and all data within it.
 
-- [Manage Collection Alias}(collection_alias.md): Milvus supports specifying a unique alias for a collection.
+- [Manage Collection Alias](collection_alias.md): Milvus supports specifying a unique alias for a collection.
 
 - [Load Collection](load_collection.md): Load the collection to memory before a search or a query. Milvus 2.1 now supports loading a collection as multiple replicas.
 
