@@ -3,7 +3,7 @@ id: get_started.md
 title: Get Started
 ---
 
-# Get started
+# Get Started
 
 New to Milvus? No sweat! Follow the topics below for instant onboarding with Milvus. 
 
