@@ -1,5 +1,5 @@
 ---
-Id: manage_collections.md
+id: manage_collections.md
 title: Manage Collections
 ---
 
