@@ -7,7 +7,7 @@ title: References
 
 Unfamiliar with the features of Milvus? Not sure about the meaning of some terms? You are in the right place to find a detailed explanation of the architecture, features, terms, and many other things you may want to know about Milvus.
 
-- [Architecture](architecture.md): An anatomy of the architecture, components, data processing workflow of Miluvs.
+- [Architecture](architecture.md): An anatomy of the architecture, components, data processing workflow of Milvus.
 
 - [Benchmark](benchmark.md): A benchmark test report covering the performances of data insertion, index building, and vector similarity search in Milvus. 
 
