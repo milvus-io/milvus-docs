@@ -7,7 +7,7 @@ title: References
 
 Unfamiliar with the features of Milvus? Not sure what is the meaning of some terms? You are in the right place to find a detailed explanation of the architecture, features, terms, and many other things you may want to know about Milvus.
 
-- [Architecture](architecture.md): An anatomy of the architecture, components, data processing workflow of Miluvs.
+- [Architecture](architecture.md): An anatomy of the architecture, components, data processing workflow of Milvus.
 - [Benchmarks](benchmark.md): A benchmark test report covering the performances of data insertion, index building, and vector similarity search in Milvus. 
 - [Boolean Expression Rules](boolean.md): The boolean expression rules and operators for scalar filtering in Milvus.
 - [Glossary](glossary.md): The most frequently used terminologies in Milvus.
