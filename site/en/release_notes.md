@@ -77,7 +77,7 @@ Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0. It fixed query node cra
 
 - [#18410](https://github.com/milvus-io/milvus/pull/18410) Limits the concurrency level for single load request.
 
-<h3 id="v2.1.1">Featuress</h3>
+<h3 id="v2.1.1">Features</h3>
 
 - [18570](https://github.com/milvus-io/milvus/pull/18570) Supports the dynamic change of log level through HTTP.
 
