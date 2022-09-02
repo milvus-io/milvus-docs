@@ -68,10 +68,8 @@ See [How GuaranteeTs Works](https://github.com/milvus-io/milvus/blob/f3f46d3bb2d
 
 ## What's next
 
-After learning the consistency levels in Milvus, you might also want to:
-
-- Learn about [the Time Travel feature of Milvus](tiemtravel_ref.md).
-
-- Learn about [Milvus' vector execution engine Knowhere](knowhere.md).
-
+- Learn how to tune consistency level when:
+  - [creating a collection](create_collection.md)
+  - [conducting a vector similarity search](search.md)
+  - [conducting a vector query](query.md)
 
