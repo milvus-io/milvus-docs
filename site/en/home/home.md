@@ -89,11 +89,9 @@ id: home.md
 
 _Sep 2022_
 
-- Reorganized [Java API reference](https://milvus.io/api-reference/java/v2.1.0/About.md).
-- Added reference doc for [consistency levels](consistency.md) in Milvus.
-- Added reference doc for [in-memory replica](replica.md).
-- Added reference doc for [bitset](bitset.md).
-- Updated reference doc for [vector index](index.md) and added indexes on binary embeddings.
+- Official release of 2.1.0 [Java API reference](https://milvus.io/api-reference/java/v2.1.0/About.md).
+- Added reference docs for [consistency levels in Milvus](consistency.md),[in-memory replica](replica.md), [bitset](bitset.md), and [Knowhere](knowhere.md), the vector execution engine in Milvus.
+- Added indexes on binary embeddings to [vector index](index.md)reference doc.
 - Updated reference doc explaining the mechanism behind [Time Travel](timetravel_ref.md).
 
   
