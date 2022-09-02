@@ -333,6 +333,6 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
 </details>
 
 
-## What's Next
+## What's next
 
 - Learn more about the [Similarity Metrics](metric.md) supported in Milvus.
