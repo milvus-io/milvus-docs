@@ -23,7 +23,7 @@ Milvus 2.1.2 is a minor bug-fix version of Milvus 2.1.0. It fixed issues when ga
 
 - [18690](https://github.com/milvus-io/milvus/pull/18690) Fixes DataType::bool cast to double.
 
-- [18884](https://github.com/milvus-io/milvus/pull/18884) Fixes garbage collection failure when the storage root path starts with "/".
+- [18884](https://github.com/milvus-io/milvus/pull/18884), [18808](https://github.com/milvus-io/milvus/pull/18808) Fixes garbage collection failure when the storage root path starts with "/".
 
 - [18790](https://github.com/milvus-io/milvus/pull/18790) Fixes watchDmChannel being out-of-date after compaction issue.
 
