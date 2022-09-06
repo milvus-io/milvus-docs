@@ -7,7 +7,12 @@ summary: Learn how to tune consistency level in Milvus.
 
 # Tune consistency
 
-Milvus supports setting consistency level while creating a collection, conducting a vector query, and conducting a vector search (only on PyMilvus currently). Milvus supports four levels of consistency: `Strong`, `Eventual`, `Bounded`, and `Session`. By default, a collection created without specifying the consistency level is set with `Bounded` consistency level. This topic describes how to tune consistency.
+Milvus supports setting consistency level while creating a collection, conducting a vector query, and conducting a vector search (only on PyMilvus currently).
+
+Milvus supports four levels of consistency: `Strong`, `Eventual`, `Bounded`, and `Session`.
+See [Consistency](consistency.md) for an explanation of each consistency level.
+
+By default, a collection created without specifying the consistency level is set with `Bounded` consistency level. This topic describes how to tune consistency.
 
 ## Configure parameter
 By default, the consistency level is set as `Bounded`, under which Milvus reads a less updated data view (usually several seconds earlier) when a search or query request comes. You can set the consistency level by configuring the parameter `consistency_level` while creating a collection and conducting a search or query. See [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md) for the mechanism behind.
