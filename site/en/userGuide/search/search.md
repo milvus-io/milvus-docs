@@ -601,6 +601,11 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
+  <tr>
+		<td><code>ConsistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+	</tr>
 	</tbody>
 </table>
 
