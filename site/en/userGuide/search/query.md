@@ -99,6 +99,7 @@ if err != nil {
 List<String> query_output_fields = Arrays.asList("book_id", "word_count");
 QueryParam queryParam = QueryParam.newBuilder()
   .withCollectionName("book")
+  .withConsistencyLevel(ConsistencyLevelEnum.STRONG)
   .withExpr("book_id in [2,4,6,8]")
   .withOutFields(query_output_fields)
   .build();
