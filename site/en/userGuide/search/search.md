@@ -391,6 +391,7 @@ List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
 SearchParam searchParam = SearchParam.newBuilder()
 		.withCollectionName("book")
+		.withConsistencyLevel(ConsistencyLevelEnum.STRONG)
 		.withMetricType(MetricType.L2)
 		.withOutFields(search_output_fields)
 		.withTopK(SEARCH_K)
@@ -599,6 +600,11 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 		<td><code>Expr</code></td>
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>ConsistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
 	</tr>
 	</tbody>
 </table>
