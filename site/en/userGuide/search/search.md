@@ -391,6 +391,7 @@ List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
 SearchParam searchParam = SearchParam.newBuilder()
 		.withCollectionName("book")
+		.withConsistencyLevel(ConsistencyLevelEnum.STRONG)
 		.withMetricType(MetricType.L2)
 		.withOutFields(search_output_fields)
 		.withTopK(SEARCH_K)
