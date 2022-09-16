@@ -13,7 +13,7 @@ Release date: 16 September 2022
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.1.2          | 2.1.2              | 2.1.0            | 2.1.1          | 2.1.2               |
 
-Milvus 2.1.2 is a minor bug-fix version of Milvus 2.1.0. It fixed issues when garbage collector parses binlog path i, a few other issues causing search hang, and performance regression when the user authentication feature is enabled.
+Milvus 2.1.2 is a minor bug-fix version of Milvus 2.1.0. It fixed issues when garbage collector parses binlog path issues, a few other issues causing search hang, and performance regression when the user authentication feature is enabled.
 
 ### Bug Fixes
 
