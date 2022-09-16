@@ -69,7 +69,7 @@ The following table lists the description of each symbol mentioned in the above 
 | SingleExpr   |  SingleExpr, namely single expression, can be either a TermExpr or a CompareExpr.      |
 | LogicalExpr      | A LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or a UnaryLogicalOp on a single LogicalExpr, or a LogicalExpr grouped within parentheses, or a SingleExpr. The LogicalExpr is defined recursively.    |
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
-| MatchOp   | A MatchOp, namely a match operator, compares a string to a regular expression. |
+| MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix constant. |
 
 ## Operators
 
@@ -217,3 +217,12 @@ VARCHAR not in ["str1", "str2"]
 ```
 VARCHAR like "prefix%"
 ```
+
+## What's next
+
+Now that you know how bitsets work in Milvus, you might also want to:
+
+- Learn how to conduct a  [Hybrid Search](hybridsearch.md).
+- Learn how to  [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results.
+
+

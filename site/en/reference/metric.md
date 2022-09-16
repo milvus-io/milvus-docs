@@ -174,3 +174,8 @@ Where
 <summary><font color="#4fc4f9">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
 {{fragments/faq_euclidean_ip_different_results.md}}
 </details>
+
+
+## What's next
+
+- Learn more about the supported [index types](index.md) in Milvus.

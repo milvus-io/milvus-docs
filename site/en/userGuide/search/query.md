@@ -62,7 +62,7 @@ load -c book
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
-Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventual`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
+Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
 {{fragments/multiple_code.md}}
 
@@ -99,6 +99,7 @@ if err != nil {
 List<String> query_output_fields = Arrays.asList("book_id", "word_count");
 QueryParam queryParam = QueryParam.newBuilder()
   .withCollectionName("book")
+  .withConsistencyLevel(ConsistencyLevelEnum.STRONG)
   .withExpr("book_id in [2,4,6,8]")
   .withOutFields(query_output_fields)
   .build();
@@ -272,6 +273,11 @@ Output:
 		<td><code>Expr</code></td>
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>ConsistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
 	</tr>
 	</tbody>
 </table>
