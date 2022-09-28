@@ -6,6 +6,13 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.1.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.1.3
+Release date: 28 September 2022
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.1.3          | 2.1.3              | 2.1.0            | 2.1.1          | 2.1.2               |
+
 ## v2.1.2
 Release date: 16 September 2022
 
