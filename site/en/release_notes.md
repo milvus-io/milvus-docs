@@ -17,7 +17,7 @@ Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.2. The highlight of this ve
 
 ### Bug Fixes
 
-- [19326](https://github.com/milvus-io/milvus/pull/19326), [19309](https://github.com/milvus-io/milvus/pull/19309) Fixes load collection fail with marisa string inde.
+- [19326](https://github.com/milvus-io/milvus/pull/19326), [19309](https://github.com/milvus-io/milvus/pull/19309) Fixes failure to load collection with MARISA string index.
 
 - [19353](https://github.com/milvus-io/milvus/pull/19353) Fixes garbage collection on the wrong path.
 
