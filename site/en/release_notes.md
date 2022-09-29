@@ -13,7 +13,7 @@ Release date: 28 September 2022
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.1.3          | 2.1.3              | 2.1.0            | 2.1.2          | 2.1.3               |
 
-Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.2. The highlight of this version is that we have remarkably reduced memory usage for scalar data. It also fixed a few issues on data loading, querycoord deadlock when restarting, garbage collection on the wrong path and search crash.
+Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.0. The highlight of this version is that we have remarkably reduced memory usage for scalar data. It also fixed a few issues on data loading, querycoord deadlock when restarting, garbage collection on the wrong path and search crash.
 
 ### Bug Fixes
 
