@@ -11,7 +11,7 @@ Release date: 28 September 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.1.3          | 2.1.3              | 2.1.0            | 2.1.1          | 2.1.2               |
+| 2.1.3          | 2.1.3              | 2.1.0            | 2.1.2          | 2.1.3               |
 
 ## v2.1.2
 Release date: 16 September 2022
