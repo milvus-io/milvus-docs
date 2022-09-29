@@ -35,7 +35,7 @@ Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.0. The highlight of this ve
 
 - [19436](https://github.com/milvus-io/milvus/pull/19436) Ignores cases when comparing metric type in Segcore.
 
-- [19197](https://github.com/milvus-io/milvus/pull/19197), [195245](https://github.com/milvus-io/milvus/pull/19245), [19421](https://github.com/milvus-io/milvus/pull/19421) Optimizes large memory usage of InsertRecord.
+- [19197](https://github.com/milvus-io/milvus/pull/19197), [19245](https://github.com/milvus-io/milvus/pull/19245), [19421](https://github.com/milvus-io/milvus/pull/19421) Optimizes large memory usage of InsertRecord.
 
 ## v2.1.2
 Release date: 16 September 2022
