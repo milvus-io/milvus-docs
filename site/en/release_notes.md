@@ -13,7 +13,7 @@ Release date: 28 September 2022
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.1.3          | 2.1.3              | 2.1.0            | 2.1.2          | 2.1.3               |
 
-Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.0. The highlight of this version is that we have remarkably reduced memory usage for scalar data. It also fixed a few issues on data loading, queryCoord deadlock when restarting, garbage collection on the wrong path and search crash.
+Milvus 2.1.3 is a minor bug fix version of Milvus 2.1.0. The highlight of this version is that we have remarkably reduced memory usage for scalar data. It also fixed a few issues with data loading, query coord deadlock when restarting, garbage collection on the wrong path and search crash.
 
 ### Bug Fixes
 
@@ -21,13 +21,13 @@ Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.0. The highlight of this ve
 
 - [19353](https://github.com/milvus-io/milvus/pull/19353) Fixes garbage collection on the wrong path.
 
-- [19402](https://github.com/milvus-io/milvus/pull/19402) Fixes queryCoord init deadlock when restarting.
+- [19402](https://github.com/milvus-io/milvus/pull/19402) Fixes query coord init deadlock when restarting.
 
 - [19312](https://github.com/milvus-io/milvus/pull/19312) Adds SyncSegments to sync meta between DN and DC.
 
-- [19486](https://github.com/milvus-io/milvus/pull/19486) Fixes DML stream leakage in Proxy.
+- [19486](https://github.com/milvus-io/milvus/pull/19486) Fixes DML stream leakage in proxy.
 
-- [19148](https://github.com/milvus-io/milvus/pull/19148), [19487](https://github.com/milvus-io/milvus/pull/19487), [19465](https://github.com/milvus-io/milvus/pull/19465) Fixes Cgo failing to lock OS thread.
+- [19148](https://github.com/milvus-io/milvus/pull/19148), [19487](https://github.com/milvus-io/milvus/pull/19487), [19465](https://github.com/milvus-io/milvus/pull/19465) Fixes the failure of CGO to lock OS thread.
 
 - [19524](https://github.com/milvus-io/milvus/pull/19524) Fixes offset in search being equal to insert barrier.
 
