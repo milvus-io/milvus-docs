@@ -13,6 +13,30 @@ Release date: 28 September 2022
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.1.3          | 2.1.3              | 2.1.0            | 2.1.2          | 2.1.3               |
 
+Milvus 2.1.3 is a minor bugfix version of Milvus 2.1.2. The highlight of this version is that we have remarkably reduced memory usage for scalar data. It also fixed a few issues on data loading, querycoord deadlock when restarting, garbage collection on the wrong path and search crash.
+
+### Bug Fixes
+
+- [19326](https://github.com/milvus-io/milvus/pull/19326), [19309](https://github.com/milvus-io/milvus/pull/19309) Fixes load collection fail with marisa string inde.
+
+- [19353](https://github.com/milvus-io/milvus/pull/19353) Fixes garbage collection on the wrong path.
+
+- [19402](https://github.com/milvus-io/milvus/pull/19402) Fixes queryCoord init deadlock when restarting.
+
+- [19312](https://github.com/milvus-io/milvus/pull/19312) Adds SyncSegments to sync meta between DN and DC.
+
+- [19486](https://github.com/milvus-io/milvus/pull/19486) Fixes DML stream leakage in Proxy.
+
+- [19148](https://github.com/milvus-io/milvus/pull/19148), [19487](https://github.com/milvus-io/milvus/pull/19487), [19465](https://github.com/milvus-io/milvus/pull/19465) Fixes Cgo lock os thread failed.
+
+- [19524](https://github.com/milvus-io/milvus/pull/19524) Fixes offset in search should not equal to insert barrier.
+
+### Improvements
+
+- [19436](https://github.com/milvus-io/milvus/pull/19436) Ignores cases when comparing metric type in Segcore.
+
+- [19197](https://github.com/milvus-io/milvus/pull/19197), [195245](https://github.com/milvus-io/milvus/pull/19245), [19421](https://github.com/milvus-io/milvus/pull/19421) Optimizes large memory usage of InsertRecord.
+
 ## v2.1.2
 Release date: 16 September 2022
 
@@ -68,7 +92,7 @@ Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0. It fixed query node cra
 
 - [#18383](https://github.com/milvus-io/milvus/pull/18383), [#18432](https://github.com/milvus-io/milvus/pull/18432) Fixed garbage collector parse segment ID panics with bad input.
 
-- [#18418](https://github.com/milvus-io/milvus/pull/18418) Fixed metatable related error when etcd compaction error happens.
+- [#18418](https://github.com/milvus-io/milvus/pull/18418) Fixes metatable related error when etcd compaction error happens.
 
 - [#18568](https://github.com/milvus-io/milvus/pull/18568) Closes Node/Segment detector when closing ShardCluster.
 
