@@ -197,7 +197,7 @@ milvusClient.dropAlias(
 ```
 
 ```shell
-delete alias -c book -a publication
+delete alias -a publication
 ```
 
 ```curl
@@ -268,10 +268,6 @@ curl -X 'DELETE' \
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to drop alias on.</td>
-        </tr>
         <tr>
             <td>-a</td>
             <td>Collection alias to drop.</td>
