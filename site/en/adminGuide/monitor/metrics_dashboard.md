@@ -9,7 +9,7 @@ summary: This topic introduces the monitoring metrics displayed in the Milvus Da
 Milvus outputs a list of detailed time-series metrics during runtime. You can use [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) to visualize the metrics. This topic introduces the monitoring metrics displayed in the Grafana Milvus Dashboard.
 
 
-The time unit in this topic is milliseconds. And "99th percentile" in this topic refers to the fact that 99 percent of the time statistics are controlled within certain value.
+The time unit in this topic is milliseconds. And "99th percentile" in this topic refers to the fact that 99 percent of the time statistics are controlled within a certain value.
 
 We recommend reading [Milvus monitoring framework overview](monitor_overview.md) to understand Prometheus metrics first.
 
@@ -61,7 +61,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
 | DML Channel Num  | The total number of DML channels.    | ```  sum(milvus_rootcoord_dml_channel_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_rootcoord_dml_channel_num`  | The total number of DML channels existing in Milvus currently.     |
 | Msgstream Num  | The total number of msgstreams.    | ```  sum(milvus_rootcoord_msgstream_obj_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_rootcoord_msgstream_obj_num`  | The total number of msgstreams in Milvus currently.     |
 | Credential Num  | The total number of credentials.    | ```  sum(milvus_rootcoord_credential_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_rootcoord_credential_num`  | The total number of credentials in Milvus currently.     |
-| Time Tick | The sum of the maximum time tick delay of the flow graphs on all DataNodes and QueryNodes. | ```sum(milvus_rootcoord_time_tick_delay{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)``` | `milvus_rootcoord_time_tick_delay` | The maximum time tick delay of the flow graphs on all DataNodes and QueryNodes. |
+| Time Tick Delay | The sum of the maximum time tick delay of the flow graphs on all DataNodes and QueryNodes. | ```sum(milvus_rootcoord_time_tick_delay{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)``` | `milvus_rootcoord_time_tick_delay` | The maximum time tick delay of the flow graphs on each DataNode and QueryNode. |
   
 </details>
 
