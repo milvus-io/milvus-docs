@@ -29,7 +29,7 @@ This report shows the major test results of Milvus 2.1, covering the performance
             </tr>
             <tr>
                 <td>ef</td>
-                <td>A search parameter specific to <a href="https://milvus.io/docs/v{{var.milvus_release_tag}}/index.md">HNSW index</a></td>
+                <td>A search parameter specific to <a href="https://milvus.io/docs/v2.1.x/index.md">HNSW index</a></td>
             </tr>
             <tr>
                 <td>RT</td>
