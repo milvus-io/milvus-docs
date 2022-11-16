@@ -51,5 +51,5 @@ Having installed Milvus Java SDK, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [Milvus Java API reference](/api-reference/java/v{{var.milvus_java_sdk_version}}/index.html)
+- Explore [Milvus Java API reference](/api-reference/java/v{{var.milvus_java_sdk_version}}/About.md)
 
