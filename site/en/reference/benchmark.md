@@ -64,7 +64,7 @@ All tests are performed under the following environments.
 
 ### Deployment scheme
 
-- Milvus instance (standalone or cluster) in each test is deployed via [Helm](https://milvus.io/docs/v{{var.milvus_release_tag}}/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
+- Milvus instance (standalone or cluster) in each test is deployed via [Helm](https://milvus.io/docs/v2.1.x/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
 - Configurations of the tested Milvus instances merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus cluster.
 - Unspecified configurations are [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml).
 - Milvus dependencies (MinIO, Pulsar, and etcd) store data on the local SSD in each node.
