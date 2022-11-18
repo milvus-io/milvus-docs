@@ -76,6 +76,7 @@ Sorted by:
             <li><a href="configure_messagechannel.md">Message channel</a></li>
             <li><a href="configure_common.md">Common</a></li>
             <li><a href="configure_knowhere.md">Knowhere</a></li>
+            <li><a href="configure_quota_limits.md">Quota and Limits</a></li>
         </ul>
     </td>
   </tr>

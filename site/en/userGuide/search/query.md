@@ -68,7 +68,9 @@ Milvus supports setting consistency level specifically for a query. The example 
 
 ```python
 res = collection.query(
-  expr = "book_id in [2,4,6,8]", 
+  expr = "book_id in [2,4,6,8]",
+  offset = 0,
+  limit = 10, 
   output_fields = ["book_id", "book_intro"],
   consistency_level="Strong"
 )
@@ -169,6 +171,14 @@ Output:
 	<tr>
 		<td><code>expr</code></td>
 		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>Number of results to skip in the returned set.</td>
+	</tr>
+	<tr>
+		<td><code>limit</code></td>
+		<td>Number of the most similar results to return.</td>
 	</tr>
 	<tr>
 		<td><code>output_fields</code> (optional)</td>

@@ -350,7 +350,8 @@ Milvus supports setting consistency level specifically for a search. The example
 results = collection.search(
 	data=[[0.1, 0.2]], 
 	anns_field="book_intro", 
-	param=search_params, 
+	param=search_params,
+	offset=0, 
 	limit=10, 
 	expr=None,
 	consistency_level="Strong"
@@ -426,9 +427,13 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 		<td><code>anns_field</code></td>
 		<td>Name of the field to search on.</td>
 	</tr>
-  <tr>
+    <tr>
 		<td><code>param</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>Number of results to skip in the returned set.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>

@@ -69,6 +69,7 @@ search_param = {
   "data": [[0.1, 0.2]],
   "anns_field": "book_intro",
   "param": {"metric_type": "L2", "params": {"nprobe": 10}},
+  "offset": 0,
   "limit": 2,
   "expr": "word_count <= 11000",
 }
@@ -222,6 +223,10 @@ Output:
   <tr>
 		<td><code>params</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>Number of results to skip in the returned set.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
