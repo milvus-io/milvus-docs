@@ -73,7 +73,7 @@ task_id = utility.do_bulk_insert(
 
 ### Check task state
 
-Since the `utility.do_bulk_insert()` method is asynchronous, you need to check if bulk insertion of entities in a file is completed.
+Since the `utility.do_bulk_insert()` method is asynchronous, you need to check if a file import task is completed.
 
 ```
 task = utility.get_bulk_insert_state(task_id=task_id)
@@ -89,7 +89,7 @@ if task.state == BulkInsertState.ImportFailed:
     print("Failed reason:", task.failed_reason)
 ```
 
-The following table lists the state of a bulk insertion task.
+The following table lists the state of a file import task.
 
 | State              |   Code   |   Description                                                |
 | ------------------ | -------- | ------------------------------------------------------------ |
@@ -115,12 +115,15 @@ for task in tasks:
 | limit (optional)           | Specify this parameter to limit the number of returned tasks. |
 
 
+See [System Configurations](configure_rootcoord.md) for more information about import task configurations.
+
 ## Limits
 
 | Feature                       | Maximum limit |
 | ----------------------------- | ------------- |
 | Max size of task pending list | 32            |
 | Max size of a data file       | 1GB           |
+
 
 ## What's next
 
