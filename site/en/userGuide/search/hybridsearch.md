@@ -226,7 +226,7 @@ Output:
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set.</td>
+		<td>Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
@@ -238,7 +238,7 @@ Output:
 	</tr>
   <tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partition to search in.</td>
+		<td>List of names of the partition to search in.  The sum of this value and `offset` should be less than 65535.</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
