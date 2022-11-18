@@ -66,7 +66,7 @@ utility.list_roles(include_user_info, using="default")
 
 ## 3. Grant a privilege to a role
 
-The following example grants the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
+The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
 
 ```
 utility.grant_privilege("roleA", "Collection", "*", "Search")
