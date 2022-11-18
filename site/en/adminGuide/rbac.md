@@ -1,0 +1,135 @@
+---
+id: rbac.md
+related_key: enable RBAC
+summary: Learn how to manage users, roles, and privileges.
+---
+
+# Enable RBAC
+
+By enabling RBAC, you can control access to specific Milvus resources (Eg. a collection or a partition) or permissions based on user role and privileges. Currently, this feature is only available in Python and Java.
+
+This topic describes how to enable RBAC and manage users, roles, and privileges.
+
+## 1. Create a user
+
+```
+utility.create_user(user, password, using="default")
+```
+
+After creating a user, you can:
+
+- Update a user password. You need to provide both the original and the new password. 
+
+```
+utility.update_password(user, old_password, new_password, using="default")
+```
+
+- List all users.
+
+```
+utility.list_usernames(using="default")
+```
+
+- Check the role of a particular user.
+
+```
+utility.list_user(username, include_role_info, using="default")
+```
+
+- Check the roles of all users.
+
+```
+utility.list_users(include_role_info, using="default")
+```
+
+## 2. Create a role
+
+The following example creates a role named `roleA`.
+
+```
+utility.create("roleA"):
+```
+
+After creating a role, you can:
+
+- Check if a role exists.
+
+```
+utility.is_exist("roleA")
+```
+
+- List all roles.
+
+```
+utility.list_roles(include_user_info, using="default")
+```
+
+## 3. Grant a privilege to a role
+
+The following example grants the permission of searching all collections to the role named `roleA`.
+
+```
+utility.grant_privilege("roleA", "Collection", "*", "Search")
+```
+
+After granting a privilege to a role, you can:
+
+- List all privileges granted to a role
+
+```
+utility.list_grant(self, object, object_name)
+```
+
+## 4. Bind a role to a user
+
+Bind the role to a user so that this user can inherit all the privileges of the role.
+
+```
+utility.add_user("roleA", username)
+```
+
+After binding a role to a user, you can:
+
+- List all users bind to a role
+
+```
+utility.get_users("roleA")
+```
+
+## 5. Deny access or privileges
+
+<div class="alert caution">
+
+Exercise caution when performing the following operations because these operations are irreversible.
+
+</div>
+
+- Remove a privilege from a role.
+
+```
+utility.revoke("roleA", "Collection", "*", "Search")
+```
+
+- Remove a user from a role
+
+```
+remove_user(self, username)
+```
+
+- Delete a role
+
+```
+utility.drop("roleA"):
+```
+
+- Delete a user
+
+```
+utility.delete_user(user: str, using="default")
+```
+
+## What's next
+
+- Learn how to manage [user authentication](authenticate.md).
+
+- Learn how to enable [TLS proxy](tls.md) in Milvus.
