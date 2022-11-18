@@ -145,7 +145,7 @@ curl -X 'POST' \
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="./disk_index">Disk Index</a>.</td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
     </tr>
 	</tbody>
 </table>
