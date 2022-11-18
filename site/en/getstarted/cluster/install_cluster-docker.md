@@ -2,8 +2,8 @@
 id: install_cluster-docker.md
 label: Docker Compose
 related_key: Docker
-order: 0
-group: install_cluster-docker.md
+order: 2
+group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster with Docker Compose.
 ---
 

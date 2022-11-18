@@ -65,6 +65,27 @@ $ sudo systemctl status milvus-etcd
 $ sudo systemctl status milvus-minio
 ```
 
+## Start / Stop Milvus service
+
+You can start or stop Milvus service by following commands after installing Milvus with apt or yum.
+
+```Shell
+# start Milvus service
+$ sudo systemctl start milvus
+# stop Milvus service
+$ sudo systemctl stop milvus
+# restart Milvus service
+$ sudo systemctl restart milvus
+```
+
+## View Milvus log
+
+Use `journalctl` to view Milvus logs.
+
+```Shell
+$ journalctl -u milvus
+```
+
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.

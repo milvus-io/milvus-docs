@@ -2,8 +2,8 @@
 id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
-order: 2
-group: install_cluster-docker.md
+order: 0
+group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 ---
 

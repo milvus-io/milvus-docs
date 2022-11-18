@@ -8,21 +8,21 @@ summary: Learn how to build an index for vectors in Milvus.
 
 This topic describes how to build an index in Milvus. 
 
-Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without index built on vectors, Milvus will perform a brute-force search by default.
+Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search by default.
 
-See [Vector Index](index.md) for more information about mechanism and varieties of vector indexes.
+See [Vector Index](index.md) for more information about the mechanism and varieties of vector indexes.
 
 <div class="alert note">
 <ul>
-<li>Milvus 2.1 supports index on scalar field.</li>
+<li>Milvus 2.1 supports index on scalar fields.</li>
 <li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.</li>
 </div>
 
-The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.
+The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metric. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.
 
 ## Prepare index parameter
 
-Prepare the index parameters (If you expect to build index for scalar field, no index-building parameter is required, and default index type is dictionary tree).
+Prepare the index parameters (If you expect to build indexes for scalar fields, no index-building parameter is required, and the default index type is a dictionary tree).
 
 {{fragments/multiple_code.md}}
 
@@ -100,7 +100,7 @@ curl -X 'POST' \
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -130,6 +130,7 @@ curl -X 'POST' \
                 <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
                 <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
                 <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -141,8 +142,11 @@ curl -X 'POST' \
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+    <tr>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
+    </tr>
 	</tbody>
 </table>
 
@@ -157,7 +161,7 @@ curl -X 'POST' \
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -187,6 +191,7 @@ curl -X 'POST' \
                 <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
                 <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
                 <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -198,8 +203,11 @@ curl -X 'POST' \
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+    <tr>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
+    </tr>
 	</tbody>
 </table>
 
@@ -214,7 +222,7 @@ curl -X 'POST' \
 	<tbody>
 	<tr>
 		<td><code>NewIndex func</code></td>
-		<td>Function to create entity.Index according to different index types.</td>
+		<td>Function to create entity. Index according to different index types.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>NewIndexFlat</code> (FLAT)</li>
@@ -237,7 +245,7 @@ curl -X 'POST' \
 	</tr>
     <tr>
 		<td><code>metricType</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -256,7 +264,7 @@ curl -X 'POST' \
 	<tr>
 		<td><code>ConstructParams</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -295,7 +303,7 @@ curl -X 'POST' \
 	<tr>
 		<td><code>ExtraParam</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -326,15 +334,15 @@ curl -X 'POST' \
 	<tbody>
     <tr>
         <td><code>collection_name</code></td>
-        <td>Name of the collection to build index on.</td>
+        <td>Name of the collection to build the index on.</td>
     </tr>
     <tr>
         <td><code>field_name</code></td>
-        <td>Name of the vector field to build index on.</td>
+        <td>Name of the vector field to build the index on.</td>
     </tr>	
     <tr>
 		<td><code>metric_type</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -375,7 +383,7 @@ curl -X 'POST' \
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
