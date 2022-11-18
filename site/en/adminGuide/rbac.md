@@ -63,7 +63,7 @@ role.is_exist("roleA")
 - List all roles.
 
 ```
-role.list_roles(include_user_info, using="default")
+utility.list_roles(include_user_info, using="default")
 ```
 
 ## 3. Grant a privilege to a role
@@ -71,7 +71,7 @@ role.list_roles(include_user_info, using="default")
 The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
 
 ```
-role.grant_privilege("Collection", "*", "Search")
+role.grant("Collection", "*", "Search")
 ```
 
 After granting a privilege to a role, you can:
@@ -94,7 +94,7 @@ role.list_grants()
 Bind the role to a user so that this user can inherit all the privileges of the role.
 
 ```
-utility.add_user("roleA", username)
+role.add_user("roleA", username)
 ```
 
 After binding a role to a user, you can:
@@ -102,7 +102,7 @@ After binding a role to a user, you can:
 - List all users bind to a role
 
 ```
-utility.get_users("roleA")
+role.get_users("roleA")
 ```
 
 ## 5. Deny access or privileges
