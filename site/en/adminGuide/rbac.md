@@ -125,7 +125,7 @@ utility.drop("roleA"):
 - Delete a user
 
 ```
-utility.delete_user(user: str, using="default")
+utility.delete_user(user, using="default")
 ```
 
 ## What's next
