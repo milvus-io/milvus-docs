@@ -1010,7 +1010,7 @@
       "order": 0
     },
     {
-      "id": "disk-index.md",
+      "id": "disk_index.md",
       "title": "On-disk Index",
       "label1": "reference",
       "label2": "vector_index",
