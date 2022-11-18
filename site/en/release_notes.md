@@ -22,14 +22,14 @@ Since metadata storage is refined and API usage is normalize, Milvus 2.2 is not 
 - Support for bulk insertion of entities from files
 Milvus now offers a new set of bulk insertion APIs to make data insertion more efficient. You can now upload entities in a Json file directly to Milvus. See [Insert Entities from Files](bulk_load.md) for details.
 
-- Query Result Pagination 
+- Query result pagination 
 To avoid massive search and query results returned in a single RPC, Milvus now supports configuring offset and filtering results with keywords in searches and queries. See [Search](search.md) and [Query](query.md) for details.
 
 
 - Role-based access control (RBAC)
 Like other traditional databases, Milvus now supports RBAC so that you can manages users, roles and privileges. See [Enable RBAC](rbac.md) for details.
 
-- Quota limitation
+- Quotas and limits
 Quota is a new mechanism that protects the system from OOM and crash under a burst of traffic. By imposing quota limitations, you can limit ingestion rate, search rate, etc. See [Quota and Limitation Configurations](configure_quota_limits.md) for details.
 
 
@@ -37,7 +37,7 @@ Quota is a new mechanism that protects the system from OOM and crash under a bur
 In prior releases, we only support configuring TTL at a cluster level. Milvus 2.2.0 now supports configuring collection TTL when you create or modify a collection. After setting TTL for a collection, the entities in this collection automatically expires after the specified period of time. See [Create a collection](create_collection.md) or [Modify a collection](modify_collection.md) for details.
 
 
-- Support for Disk-based approximate nearest neighbor search (ANNS) indexes (Beta)
+- Support for disk-based approximate nearest neighbor search (ANNS) indexes (Beta)
 Traditionally, you need to load the entire index into memory before search. Now with DiskANN, an SSD-resident and Vamana graph-based ANNS algorithm, you can directly search on large-scale datasets and save up to 10 times the memory.
 
 
