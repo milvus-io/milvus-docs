@@ -30,11 +30,11 @@ To avoid massive search and query results returned in a single RPC, Milvus now s
 Like other traditional databases, Milvus now supports RBAC so that you can manages users, roles and privileges. See [Enable RBAC](rbac.md) for details.
 
 - Quota limitation
-Quota is a new mechanism that protects the system from OOM and crash under a burst of traffic. By imposing quota limitations, you can limit ingestion rate, search rate, etc. 
+Quota is a new mechanism that protects the system from OOM and crash under a burst of traffic. By imposing quota limitations, you can limit ingestion rate, search rate, etc. See [Quota and Limitation Configurations](configure_quota_limits.md) for details.
 
 
 - Time to live (TTL) at a collection level
-In prior releases, we only support configuring TTL at a cluster level. Milvus 2.2 now supports configuring collection TTL when you create or modify a collection. After setting TTL for a collection, the entities in this collection automatically expires after the specified period of time. See [Create a collection](create_collection.md) or [Modify a collection](modify_collection.md) for details.
+In prior releases, we only support configuring TTL at a cluster level. Milvus 2.2.0 now supports configuring collection TTL when you create or modify a collection. After setting TTL for a collection, the entities in this collection automatically expires after the specified period of time. See [Create a collection](create_collection.md) or [Modify a collection](modify_collection.md) for details.
 
 
 - Support for Disk-based approximate nearest neighbor search (ANNS) indexes (Beta)
@@ -42,7 +42,7 @@ Traditionally, you need to load the entire index into memory before search. Now 
 
 
 - Data backup (Beta)
-Thanks to the contribution from [Zilliz](https://zilliz.com/), Milvus 2.2 now provides [a tool](https://github.com/zilliztech/milvus-backup) to back up and restore data. The tool can be used either in a command line or an API server for data security.
+Thanks to the contribution from [Zilliz](https://zilliz.com/), Milvus 2.2.0 now provides [a tool](https://github.com/zilliztech/milvus-backup) to back up and restore data. The tool can be used either in a command line or an API server for data security.
  
 
 <h3 id="v2.2.0">Bug fixes and stability</h3>
@@ -69,12 +69,11 @@ Thanks to the contribution from [Zilliz](https://zilliz.com/), Milvus 2.2 now pr
 - Index and load
   - A collection can only be loaded with an index created on it.
   - Indexes cannot be created after a collection is loaded.
-  - A collection must be released before loading.
+  - A loaded collection must be released before dropping the index created on this collection.
   
 - Flush
   - Flush API, which forces a seal on a growing segment and syncs the segment to object storage, is now exposed to users. Calling `flush()` frequently may affect search performance as too many small segments are created. 
-  - `Collection.num_entities()` triggers auto-flush.
-  - Index building does not trigger auto-flush now.
+  - No auto-flush is triggered by any SDK APIs such as `num_entities()`, `create_index()`, etc.
   
 - Time Travel
 In Milvus 2.2,  Time Travel is disabled by default to save disk usage. To enable Time Travel, configure the parameter `common.retentionDuration` manually.
