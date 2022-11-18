@@ -45,15 +45,15 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | Alias              | CreateAlias/DropAlias/AlterAlias                  |
 | Collection  | Import             | BulkInsert/Import                                 |
 | Collection  | LoadBalance        | LoadBalance                                       |
-| *(Global)   | *(All)             | All API operation permissions in this table       |
-| *(Global)   | CreateCollection   | CreateCollection                                  |
-| *(Global)   | DropCollection     | DropCollection                                    |
-| *(Global)   | DescribeCollection | DescribeCollection                                |
-| *(Global)   | ShowCollections    | ShowCollections                                   |
-| *(Global)   | CreateOwnership    | CreateUser CreateRole                             |
-| *(Global)   | DropOwnership      | DeleteCredential DropRole                         |
-| *(Global)   | SelectOwnership    | SelectRole/SelectGrant                            |
-| *(Global)   | ManageOwnership    | OperateUserRole OperatePrivilege                  |
+| Global      | *(All)             | All API operation permissions in this table       |
+| Global      | CreateCollection   | CreateCollection                                  |
+| Global      | DropCollection     | DropCollection                                    |
+| Global      | DescribeCollection | DescribeCollection                                |
+| Global      | ShowCollections    | ShowCollections                                   |
+| Global      | CreateOwnership    | CreateUser CreateRole                             |
+| Global      | DropOwnership      | DeleteCredential DropRole                         |
+| Global      | SelectOwnership    | SelectRole/SelectGrant                            |
+| Global      | ManageOwnership    | OperateUserRole OperatePrivilege                  |
 | User        | UpdateUser         | UpdateCredential                                  |
 | User        | SelectUser         | SelectUser                                        |
 
