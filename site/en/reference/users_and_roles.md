@@ -8,8 +8,6 @@ summary: Learn about the definition of users, roles, objects, and privileges in 
 
 This topic explains the definition of users, roles, objects, and privileges in role-based access control (RBAC).
 
-The RBAC feature in Milvus involves the following four things.
-
 - **Object:** An object to grant or deny access to. The object can be a collection, a partition, etc. 
 
 - **User:** A user identity with a username and a corresponding password.
@@ -62,7 +60,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 
 <div class="alert note">
 <li>Object and privilege names are case-sensitive.</li>
-<li>To grant all privileges to a global object, use "\*\" for privilege name.</li>
+<li>To grant all privileges to a global object, use "*" for privilege name.</li>
 </div>
 
 ## What's next
