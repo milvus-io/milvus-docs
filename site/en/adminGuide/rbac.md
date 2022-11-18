@@ -8,7 +8,7 @@ summary: Learn how to manage users, roles, and privileges.
 
 By enabling RBAC, you can control access to specific Milvus resources (Eg. a collection or a partition) or permissions based on user role and privileges. Currently, this feature is only available in Python and Java.
 
-This topic describes how to enable RBAC and manage users, roles, and privileges.
+This topic describes how to enable RBAC and manage [users and roles](users_and_roles.md).
 
 ## 1. Create a user
 
@@ -66,7 +66,7 @@ utility.list_roles(include_user_info, using="default")
 
 ## 3. Grant a privilege to a role
 
-The following example grants the permission of searching all collections to the role named `roleA`.
+The following example grants the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
 
 ```
 utility.grant_privilege("roleA", "Collection", "*", "Search")
