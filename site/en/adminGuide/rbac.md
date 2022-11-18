@@ -122,13 +122,13 @@ role.revoke("Collection","*","Search")
 - Remove a user from a role
 
 ```
-remove_user(self, username)
+role.remove_user(username)
 ```
 
 - Delete a role
 
 ```
-utility.drop("roleA"):
+role.drop("roleA"):
 ```
 
 - Delete a user
