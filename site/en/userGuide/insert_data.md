@@ -4,7 +4,7 @@ related_key: insert
 summary: Learn how to insert data in Milvus.
 ---
 
-# Insert Data
+# Insert Entities
 
 This topic describes how to insert data in Milvus via client.
 
