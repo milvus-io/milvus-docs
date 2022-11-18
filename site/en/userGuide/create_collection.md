@@ -670,7 +670,7 @@ milvusClient.createCollection(createCollectionReq);
 	<tr>
             <td><code>properties: collection.ttl.seconds</code> (optional)</td>
             <td>Collection time to live (TTL) is the expiration time of a collection. Data in an expired collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds.</td>
-            <td>The value should be greater than 0.</td>
+            <td>The value should be 0 or greater. 0 means TTL is disabled.</td>
         </tr>
     </tbody>
 </table>
