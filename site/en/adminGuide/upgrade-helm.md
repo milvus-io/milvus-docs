@@ -9,13 +9,14 @@ summary: Learn how to upgrade Milvus v2.1 to v2.2 with Helm.
 {{tab}}
 
 # Upgrade Milvus with Helm
-A major change in Milvus 2.2 is the meta structure of segment indexes. This topic describes how to use Helm to migrate the meta and upgrade Milvus from v2.1.x to v2.2.0.
+A major change in Milvus 2.2 is the meta structure of segment indexes. This topic describes how to use Helm to migrate the meta and upgrade Milvus from v2.1.x to v2.2.0. We provide you with a script so that you can safely migrate your meta data.
+
 
 <div class="alert note">
 This script only applies to Milvus installed on a K8s cluster. Rollback to the previous version with the <code>rollback</code> operation first if an error occurs during an upgrade.
 </div>
 
-## Parameters
+The following table lists the operations you can do for meta migration.
 
 | Parameters   | Description                                                      | Default value                    | Required                |
 | ------------ | ---------------------------------------------------------------- | ---------------------------- | ----------------------- |
@@ -31,10 +32,11 @@ This script only applies to Milvus installed on a K8s cluster. Rollback to the p
 
 ## Migrate meta
 
-1. Stop the Milvus components. Any live session in the Milvus etcd can cause the migration to fail.
-2. Create a backup for Milvus meta.
-3. Migrate the Milvus meta.
-4. Start Milvus components with a new image.
+1. Download the migration script.
+2. Stop the Milvus components. Any live session in the Milvus etcd can cause the migration to fail.
+3. Create a backup for Milvus meta.
+4. Migrate the Milvus meta.
+5. Start Milvus components with a new image.
 
 ## Upgrade Milvus from v2.1.x to v2.2.0
 
