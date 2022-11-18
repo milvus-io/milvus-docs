@@ -47,7 +47,9 @@ utility.list_users(include_role_info, using="default")
 The following example creates a role named `roleA`.
 
 ```
-utility.create("roleA"):
+role_name = "roleA"
+role = Role(role_name, using=_CONNECTION)
+role.create()
 ```
 
 After creating a role, you can:
@@ -55,13 +57,13 @@ After creating a role, you can:
 - Check if a role exists.
 
 ```
-utility.is_exist("roleA")
+role.is_exist("roleA")
 ```
 
 - List all roles.
 
 ```
-utility.list_roles(include_user_info, using="default")
+role.list_roles(include_user_info, using="default")
 ```
 
 ## 3. Grant a privilege to a role
@@ -69,16 +71,23 @@ utility.list_roles(include_user_info, using="default")
 The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
 
 ```
-utility.grant_privilege("roleA", "Collection", "*", "Search")
+role.grant_privilege("Collection", "*", "Search")
 ```
 
 After granting a privilege to a role, you can:
 
-- List all privileges granted to a role
+- List certain privileges to an object granted to a role.
 
 ```
-utility.list_grant(self, object, object_name)
+role.list_grant("Collection","CollectionA")
 ```
+
+- List all privileges granted to a role.
+
+```
+role.list_grants()
+```
+
 
 ## 4. Bind a role to a user
 
@@ -107,7 +116,7 @@ Exercise caution when performing the following operations because these operatio
 - Remove a privilege from a role.
 
 ```
-utility.revoke("roleA", "Collection", "*", "Search")
+role.revoke("Collection","*","Search")
 ```
 
 - Remove a user from a role
