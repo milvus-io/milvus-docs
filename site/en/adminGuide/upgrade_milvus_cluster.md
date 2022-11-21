@@ -4,7 +4,9 @@ related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster.
 ---
 
-# Upgrade Milvus Cluster
+{{tab}}
+
+# Upgrade Milvus Cluster with Helm chart
 
 ### Step 1. Check the Milvus version
 
