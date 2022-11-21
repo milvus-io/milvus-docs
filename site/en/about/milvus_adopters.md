@@ -10,7 +10,7 @@ Trusted by over 1,000 organizations worldwide, Milvus is used in almost all indu
 | Company                                                 | Industry          | User story                                             |
 | ------------------------------------------------------------ | ---------------------- | ------------------------------------------------------------ |
 | [ambeRoad](https://amberoad.de/?lang=en) |  Software| |
-| [Beike](https://investors.ke.com/about-us/default.aspx)                                                | Real estate           | [Making With Milvus: AI-Infused Proptech for Personalized Real Estate Search](https://milvus.io/blog/Making-With-Milvus-AI-Infused-Proptech-for-Personalized-Real-Estate-Search.md)                                              |                                             |
+| [Beike](https://investors.ke.com/)                                                | Real estate           | [Making With Milvus: AI-Infused Proptech for Personalized Real Estate Search](https://milvus.io/blog/Making-With-Milvus-AI-Infused-Proptech-for-Personalized-Real-Estate-Search.md)                                              |                                             |
 |[Deepset.ai](https://deepset.ai/)                                                    | Software         | [Semantic Search with Milvus, Knowledge Graph QA, Web Crawlers and more!](https://medium.com/deepset-ai/semantic-search-with-milvus-knowledge-graph-qa-web-crawlers-and-more-837451eae9fa)                                             |
 | [DXY.cn](https://en.wikipedia.org/wiki/DXY.cn)                                                  | Medical           |
 | [eBay](https://en.wikipedia.org/wiki/EBay) | Online retail| |
