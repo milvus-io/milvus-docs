@@ -9,7 +9,7 @@ summary: Learn how to upgrade Milvus cluster.
 
 {{tab}}
 
-# Upgrade Milvus Cluster with Helm chart
+# Upgrade Milvus Cluster with Helm Chart
 
 ### Step 1. Check the Milvus version
 
