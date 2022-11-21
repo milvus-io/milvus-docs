@@ -1,6 +1,6 @@
 ---
 id: upgrade_milvus_cluster-helm.md
-label: helm
+label: Helm
 order: 0
 group: upgrade_milvus_cluster-helm.md
 related_key: upgrade Milvus Cluster
