@@ -1,10 +1,16 @@
 ---
-id: upgrade_milvus_standalone.md
-related_key: upgrade Milvus Standalone
+id: upgrade_milvus_standalone-helm.md
+label: Helm
+order: 0
+group: upgrade_milvus_standalone-helm.md
+related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus standalone.
 ---
 
-# Upgrade Milvus Standalone
+{{tab}}
+
+
+# Upgrade Milvus Standalone with Helm Chart
 
 ### Step 1. Check the Milvus version
 
