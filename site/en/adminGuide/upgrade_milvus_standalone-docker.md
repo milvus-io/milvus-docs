@@ -2,7 +2,7 @@
 id: upgrade_milvus_standalone-docker.md
 label: Docker Compose
 order: 1
-group: upgrade_milvus_standalone-docker.md
+group: upgrade_milvus_standalone-helm.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone.
 ---
