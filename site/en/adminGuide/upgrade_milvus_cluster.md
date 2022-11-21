@@ -8,7 +8,7 @@ summary: Learn how to upgrade Milvus cluster.
 
 ### Step 1. Check the Milvus version
 
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.2. 
+Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.1.4. 
 
 ```
 NAME             	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION    
