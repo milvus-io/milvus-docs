@@ -1,18 +1,24 @@
 ---
-id: upgrade_milvus_cluster.md
+id: upgrade_milvus_standalone-helm.md
+label: Helm
+order: 0
+group: upgrade_milvus_standalone-helm.md
 related_key: upgrade Milvus Cluster
-summary: Learn how to upgrade Milvus cluster.
+summary: Learn how to upgrade Milvus standalone.
 ---
 
-# Upgrade Milvus Cluster
+{{tab}}
+
+
+# Upgrade Milvus Standalone with Helm Chart
 
 ### Step 1. Check the Milvus version
 
 Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.1.4. 
 
 ```
-NAME             	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION    
-new-release      	default  	1       	2022-11-21 15:41:25.51539 +0800 CST    	deployed	milvus-3.2.18	2.1.4 
+NAME             	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION     
+new-release      	default  	1       	2022-11-21 15:41:25.51539 +0800 CST    	deployed	milvus-3.2.18	2.1.4
 ```
 
 ### Step 2. Check the running pods
@@ -20,50 +26,28 @@ new-release      	default  	1       	2022-11-21 15:41:25.51539 +0800 CST    	dep
 Run `$ kubectl get pods` to check the running pods. You can see the following output.
 
 ```
-NAME                                             READY   STATUS      RESTARTS   AGE
-new-release-etcd-0                               1/1     Running     0          21m
-new-release-etcd-1                               1/1     Running     0          21m
-new-release-etcd-2                               1/1     Running     0          21m
-new-release-milvus-datacoord-664c58798d-fl75s    1/1     Running     0          21m
-new-release-milvus-datanode-5f75686c55-xfg2r     1/1     Running     0          21m
-new-release-milvus-indexcoord-5f98b97589-2l48r   1/1     Running     0          21m
-new-release-milvus-indexnode-857b4ddf98-vmd75    1/1     Running     0          21m
-new-release-milvus-proxy-6c548f787f-scspp        1/1     Running     0          21m
-new-release-milvus-querycoord-c454f44cd-dwmwq    1/1     Running     0          21m
-new-release-milvus-querynode-76bb4946d-lbrz6     1/1     Running     0          21m
-new-release-milvus-rootcoord-7764c5b686-62msm    1/1     Running     0          21m
-new-release-minio-0                              1/1     Running     0          21m
-new-release-minio-1                              1/1     Running     0          21m
-new-release-minio-2                              1/1     Running     0          21m
-new-release-minio-3                              1/1     Running     0          21m
-new-release-pulsar-bookie-0                      1/1     Running     0          21m
-new-release-pulsar-bookie-1                      1/1     Running     0          21m
-new-release-pulsar-bookie-2                      1/1     Running     0          21m
-new-release-pulsar-bookie-init-tjxpj             0/1     Completed   0          21m
-new-release-pulsar-broker-0                      1/1     Running     0          21m
-new-release-pulsar-proxy-0                       1/1     Running     0          21m
-new-release-pulsar-pulsar-init-c8vvc             0/1     Completed   0          21m
-new-release-pulsar-recovery-0                    1/1     Running     0          21m
-new-release-pulsar-zookeeper-0                   1/1     Running     0          21m
-new-release-pulsar-zookeeper-1                   1/1     Running     0          20m
-new-release-pulsar-zookeeper-2                   1/1     Running     0          20m
+NAME                                            READY   STATUS    RESTARTS   AGE
+new-release-etcd-0                               1/1     Running   0          84s
+new-release-milvus-standalone-75c599fffc-6rwlj   1/1     Running   0          84s
+new-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 ```
 
 ### Step 3. Check the image tag
 
-Check the image tag for the pod `new-release-milvus-proxy-6c548f787f-scspp`. You can see the release of your Milvus cluster is v2.1.4.
+Check the image tag for the pod `new-release-milvus-standalone-75c599fffc-6rwlj`. You can see the release of your Milvus standalone is v2.1.4.
 
 ```
-$ kubectl get pods new-release-milvus-proxy-6c548f787f-scspp -o=jsonpath='{$.spec.containers[0].image}'
+$ kubectl get pods new-release-milvus-standalone-75c599fffc-6rwlj -o=jsonpath='{$.spec.containers[0].image}'
 ```
 
 ```
 milvusdb/milvus:v2.1.4
 ```
 
-### Step 4. Check new Milvus cluster versions
 
-Run the following commands to check new Milvus versions. You can see there are several new versions after 2.0.2. 
+### Step 4. Check new Milvus standalone versions
+
+Run the following commands to check new Milvus versions. You can see there are several new versions after v2.0.2. 
 
 ```
 $ helm repo update
@@ -71,7 +55,7 @@ $ helm search repo milvus --versions
 ```
 
 ```
-NAME         	CHART VERSION	APP VERSION       	DESCRIPTION                                       
+NAME         	CHART VERSION	APP VERSION       	DESCRIPTION  
 milvus/milvus	3.3.0        	2.2.0             	Milvus is an open-source vector database built ...
 milvus/milvus	3.2.18       	2.1.4             	Milvus is an open-source vector database built ...
 milvus/milvus	3.2.17       	2.1.4             	Milvus is an open-source vector database built ...
