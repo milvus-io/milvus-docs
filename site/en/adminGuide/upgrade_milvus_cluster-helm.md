@@ -2,7 +2,7 @@
 id: upgrade_milvus_cluster-helm.md
 label: helm
 order: 0
-group: install_standalone-docker.md
+group: upgrade_milvus_cluster-helm.md
 related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster.
 ---
