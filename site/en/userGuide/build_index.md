@@ -198,9 +198,6 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
-    <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
-    </tr>
 	</tbody>
 </table>
 
@@ -360,9 +357,6 @@ curl -X 'POST' \
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
             </ul>
             For binary vectors:
             <ul>
