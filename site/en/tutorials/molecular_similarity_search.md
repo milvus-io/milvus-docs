@@ -13,7 +13,7 @@ This tutorial demonstrates how to use Milvus, the open-source vector database, t
 The third-party software used include:
 - RDKit
 - MySQL
-- Towhee
+- [Towhee](https://towhee.io/)
 
 <br/>
 
