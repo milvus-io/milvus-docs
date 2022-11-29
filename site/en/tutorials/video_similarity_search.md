@@ -13,7 +13,7 @@ The ML models and third-party software used include:
 - OpenCV
 - ResNet-50
 - MySQL
-- Towhee
+- [Towhee](https://towhee.io/)
 
 <br/>
 
