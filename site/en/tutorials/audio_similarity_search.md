@@ -12,6 +12,7 @@ This tutorial demonstrates how to use Milvus, the open-source vector database to
 The ML model and third-party software used include:
 - PANNs (Large-Scale Pretrained Audio Neural Networks)
 - MySQL
+- Towhee
 
 </br>
 
