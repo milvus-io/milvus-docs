@@ -13,6 +13,7 @@ The ML models and third-party software used include:
 - YOLOv3
 - ResNet-50
 - MySQL
+- Towhee
 
 </br>
 
