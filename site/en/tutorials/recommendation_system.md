@@ -12,7 +12,7 @@ This tutorial demonstrates how to use Milvus, the open-source vector database, t
 The ML model and third-party software used include:
 - PaddlePaddle
 - Redis or MySQL
-- Towhee
+- [Towhee](https://towhee.io/)
 
 </br>
 
