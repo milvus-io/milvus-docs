@@ -2,8 +2,6 @@
 id: prerequisite-docker.md
 label: Install with Docker Compose
 related_key: Docker
-order: 0
-group: prerequisite-docker.md
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
 ---
 
