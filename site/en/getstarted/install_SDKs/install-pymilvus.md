@@ -2,18 +2,14 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-order: 0
-group: install-pymilvus.md
 summary: Learn how to install the Python SDK of Milvus.
 ---
 
-# Install Milvus SDK
+# Install Milvus Python SDK
 
-This topic describes how to install Milvus SDK for Milvus.
+This topic describes how to install Milvus python SDK pymilvus for Milvus.
 
 Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
-
-{{tab}}
 
 ## Requirements
 
