@@ -4,7 +4,7 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: Learn how to upgrade Milvus cluster.
+summary: Learn how to upgrade Milvus cluster with Docker Compose.
 ---
 
 {{tab}}
