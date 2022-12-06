@@ -4,7 +4,7 @@ label: Helm
 order: 0
 group: upgrade_milvus_standalone-helm.md
 related_key: upgrade Milvus Cluster
-summary: Learn how to upgrade Milvus standalone.
+summary: Learn how to upgrade Milvus standalone with Helm Chart.
 ---
 
 {{tab}}
