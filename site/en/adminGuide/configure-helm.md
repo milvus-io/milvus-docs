@@ -2,8 +2,6 @@
 id: configure-helm.md
 label: Helm
 related_key: configure
-group: configure-docker.md
-order: 1
 summary: Learn how to configure your Milvus.
 ---
 

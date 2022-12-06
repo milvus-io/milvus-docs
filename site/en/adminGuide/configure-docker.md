@@ -2,8 +2,6 @@
 id: configure-docker.md
 label: Docker Compose
 related_key: configure
-group: configure-docker.md
-order: 0
 summary: Learn how to configure your Milvus.
 ---
 
