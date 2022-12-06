@@ -34,7 +34,7 @@ Run the following command to start Milvus that uses the Pulsar configurations.
 docker-compose up
 ```
 
-<div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/v2.1.x/install_cluster-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
+<div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/v2.2.x/install_cluster-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 
 
 ## Configure Pulsar on K8s
@@ -89,7 +89,15 @@ For Milvus clusters on K8s, you can configure Kafka in the same command that sta
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
 | <code>externalkafka.enabled</code>    | Enables or disables Kafka.     | <code>true</code>/<code>false</code> |
-| <code>externalpulsar.brokerlist</code>       | The brokerlist to access Pulsar.    |                                      |
+| <code>externalkafka.brokerlist</code>       | The brokerlist to access Kafka.    |                                      |
+
+The following table lists the mandatory configurations for external Kafka. Set them in Kafka configurations.
+| Key             | Description                         | Value                                   |
+| --------------------- | ------------------------------------ | ------------------------------------ |
+| `max.request.size`    | The maximum size of a request in bytes. | `5242880` |
+| `message.max.bytes`   | The largest record batch size allowed by Kafka | `10485760` |
+| `auto.create.topics.enable` | Enable auto creation of topic on the server | `true` |
+| `num.partitions`      | The default number of log partitions per topic | `1` |
 
 #### Using the YAML file
 

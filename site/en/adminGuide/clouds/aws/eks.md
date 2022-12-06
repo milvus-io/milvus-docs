@@ -51,7 +51,7 @@ addons:
   version: v1.13.0-eksbuild.1 # optional
 
 ```
-3. Run the following command to create an EKS cluster. The example in this topic uses `my-cluster` as the cluster name. You can replace it with your own value. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
+Run the following command to create an EKS cluster. The example in this topic uses `my-eks-cluster` as the cluster name, and 'us-west-2' as the default region. You can replace them with your own values. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
 
 ```
 eksctl create cluster -f milvus_cluster.yaml
@@ -94,7 +94,7 @@ helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true 
 
 Currently, a Milvus cluster can only be scaled manually. Run the following command to modify the numbers of node instances with different types.
 
-<div class ="alert note">See <a href="https://milvus.io/docs/v2.1.x/four_layers.md#StorageComputing-Disaggregation">Storage/Computing Disaggregation</a> for more information about the data node, index node, query node, and proxy.</div>
+<div class ="alert note">See <a href="https://milvus.io/docs/v2.0.x/four_layers.md#StorageComputing-Disaggregation">Storage/Computing Disaggregation</a> for more information about the data node, index node, query node, and proxy.</div>
 
 ```shell
 helm upgrade --install --set cluster.enabled=true --set dataNode.replicas=1 --set indexNode.replicas=1 --set queryNode.replicas=1 --set proxy.replicas=1 --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus

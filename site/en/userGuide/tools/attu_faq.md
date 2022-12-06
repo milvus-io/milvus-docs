@@ -1,7 +1,7 @@
 ---
 id: attu_faq.md
 related_key: attu
-summary: Find the most commonly asked questions about Attu.
+summary: Find the most commonly asked questions about Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Attu FAQ

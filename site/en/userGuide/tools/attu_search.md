@@ -1,7 +1,7 @@
 ---
 id: attu_search.md
 related_key: attu
-summary: Learn how to conduct a vector similarity search with Attu, an intuitive GUI tool for Milvus.
+summary: Learn how to conduct a vector similarity search using Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Search Data with Attu
