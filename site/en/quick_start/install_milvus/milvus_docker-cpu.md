@@ -3,7 +3,7 @@ id: milvus_docker-cpu.md
 label: CPU-only Milvus
 order: 0
 group: distribution
-Summary: Learn how to install and start CPU-only Milvus using Docker.
+summary: Learn how to install and start CPU-only Milvus using Docker.
 ---
 
 # Install and Start Milvus
