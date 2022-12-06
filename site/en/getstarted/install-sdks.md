@@ -1,5 +1,5 @@
 ---
-id: install_sdks.md
+id: install-sdks.md
 title: Install SDKs
 ---
 
