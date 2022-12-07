@@ -7,11 +7,11 @@ related_key: attu
 summary: Learn how to install Attu with Helm Chart to manage your Milvus service.
 ---
 
-# Install Attu
-
-This topic describes how to install Attu, an efficient open-source management tool for Milvus.
-
 {{tab}}
+
+# Install Attu with Helm Charts
+
+This topic describes how to install Attu with Helm charts, an efficient open-source management tool for Milvus.
 
 ## Prerequisites
 

@@ -7,11 +7,11 @@ related_key: attu
 summary: Learn how to install Attu with package to manage your Milvus service.
 ---
 
-# Install Attu
-
-This topic describes how to install Attu, an efficient open-source management tool for Milvus.
-
 {{tab}}
+
+# Install Attu with Pre-built Packages
+
+This topic describes how to install Attu with pre-built packages, an efficient open-source management tool for Milvus.
 
 ## Download and run installation package
 
