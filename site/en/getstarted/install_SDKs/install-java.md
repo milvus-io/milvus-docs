@@ -2,18 +2,14 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-order: 3
-group: install-pymilvus.md
 summary: Learn how to install the Java SDK of Milvus.
 ---
 
-# Install Milvus SDK
+# Install Milvus Java SDK
 
-This topic describes how to install Milvus SDK for Milvus.
+This topic describes how to install Milvus Java SDK for Milvus.
 
 Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
-
-{{tab}}
 
 ## Requirement
 
