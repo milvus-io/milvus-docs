@@ -2,18 +2,14 @@
 id: install-go.md
 label: Install GO SDK
 related_key: SDK
-order: 2
-group: install-pymilvus.md
 summary: Learn how to install the GO SDK of Milvus.
 ---
 
-# Install Milvus SDK
+# Install Milvus Go SDK
 
-This topic describes how to install Milvus SDK for Milvus.
+This topic describes how to install Milvus Go SDK for Milvus.
 
 Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
-
-{{tab}}
 
 ## Requirement
 
