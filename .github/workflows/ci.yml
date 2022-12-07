@@ -1,6 +1,9 @@
 name: dev
 
 on:
+  push:
+    branches:
+      - v1.1.1
   release:
     types: [released]
 
@@ -15,6 +18,8 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
+        with:
+          ref: v1.1.1
 
       - name: Extract branch name
         shell: bash
