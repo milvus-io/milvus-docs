@@ -5,8 +5,6 @@ related_key: SDK
 summary: Learn how to install the GO SDK of Milvus.
 ---
 
-{{tab}}
-
 # Install Milvus Go SDK
 
 This topic describes how to install Milvus Go SDK for Milvus.

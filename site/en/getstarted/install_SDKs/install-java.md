@@ -5,8 +5,6 @@ related_key: SDK
 summary: Learn how to install the Java SDK of Milvus.
 ---
 
-{{tab}}
-
 # Install Milvus Java SDK
 
 This topic describes how to install Milvus Java SDK for Milvus.
