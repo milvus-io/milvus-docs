@@ -5,8 +5,6 @@ related_key: SDK
 summary: Learn how to install the Node.js SDK of Milvus.
 ---
 
-{{tab}}
-
 # Install Milvu Nodejs SDK
 
 This topic describes how to install Milvus Node.js SDK for Milvus.
