@@ -6,9 +6,9 @@ group: distribution
 summary: Learn how to install and start CPU-only Milvus using Docker.
 ---
 
-# Install and Start Milvus
-
 {{tab}} 
+
+# Install and Start CPU-only Milvus
 
 ## Prerequisites
 

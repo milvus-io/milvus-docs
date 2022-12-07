@@ -6,9 +6,9 @@ group: distribution
 summary: Learn how to install and start GPU-enabled Milvus
 ---
 
-# Install and Start Milvus
-
 {{tab}}
+
+# Install and Start GPU-enabled Milvus
 
 ## Prerequisites
 
