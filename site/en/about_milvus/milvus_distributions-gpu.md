@@ -6,13 +6,13 @@ group: distribution
 summary: Learn about the indexes supported for GPU-enabled Milvus.
 ---
 
-# Milvus Distributions
+{{tab}} 
+
+# GPU-enabled Milvus
 
 ## Overview
 
 {{fragments/distributions.md}}
-
-{{tab}} 
 
 ## Indexes for GPU-enabled Milvus
 
