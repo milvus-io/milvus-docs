@@ -13,8 +13,6 @@ This topic describes how to configure Milvus components and its third-party depe
 In current release, all parameters take effect only after Milvus restarts.
 </div>
 
-{{tab}}
-
 ## Configure Milvus via configuration file
 
 You can configure Milvus with a configuration file `values.yaml`.
