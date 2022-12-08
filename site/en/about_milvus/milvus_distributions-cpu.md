@@ -6,16 +6,14 @@ group: distribution
 summary: Learn about the indexes supported for CPU-only Milvus.
 ---
 
-# Milvus Distributions
+{{tab}} 
 
-
+# CPU-only Milvus
 
 ## Overview
 
 
 {{fragments/distributions.md}}
-
-{{tab}} 
 
 ## Indexes for CPU-only Milvus
 
