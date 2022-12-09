@@ -616,8 +616,7 @@ collection = Collection(
     name=collection_name, 
     schema=schema, 
     using='default', 
-    shards_num=2,
-    properties={"collection.ttl.seconds": 15}
+    shards_num=2
     )
 ```
 
