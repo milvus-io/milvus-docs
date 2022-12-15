@@ -1,7 +1,7 @@
 ---
 id: install_standalone-operator.md
 label: Helm
-order: 2
+order: 1
 group: install_standalone-helm.md
 summary: Learn how to install Milvus stanalone with Milvus Operator.
 ---
