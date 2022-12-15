@@ -40,7 +40,7 @@ Optimizes the scheduler, and increases merge tasks probability. ([#20931](https:
 - Fixed an issue that an error code is returned when a query expression does not match any results. ([#21066](https://github.com/milvus-io/milvus/pull/21066))
 - Fixed search failures on disk index when `search_list` equals to `limit`. ([#21114](https://github.com/milvus-io/milvus/pull/21114))
 - Filled collection schema after DataCoord restarts.  ([#21164](https://github.com/milvus-io/milvus/pull/21164))
-- Fixed an issue that the compaction handler may double release and hangs. ([#21019](https://github.com/milvus-io/milvus/pull/21019))
+- Fixed an issue that the compaction handler may double release and hang. ([#21019](https://github.com/milvus-io/milvus/pull/21019))
 - [restapi] Fixed precision loss for Int64 fields upon insert requests. ([#20827](https://github.com/milvus-io/milvus/pull/20827))
 - Increased `MaxWatchDuration` and make it configurable to prevent shards with large data loads from timing out. ([#21010](https://github.com/milvus-io/milvus/pull/21010))
 - Fixed the issue that the compaction target segment `rowNum` is always 0. ([#20941](https://github.com/milvus-io/milvus/pull/20941))
