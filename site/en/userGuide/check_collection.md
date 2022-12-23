@@ -187,7 +187,6 @@ collection.num_entities          	# Return the number of entities in the collect
 collection.primary_field         	# Return the schema.FieldSchema of the primary key field.
 collection.partitions            	# Return the list[Partition] object.
 collection.indexes               	# Return the list[Index] object.
-collection.collection.ttl.seconds	# Return the expiration time of data in the collection.
 ```
 
 ```javascript
@@ -333,10 +332,6 @@ Output:
         <tr>
             <td>primary_field</td>
             <td>The primary field of the collection.</td>
-        </tr>
-	<tr>
-            <td>collection.ttl.seconds</td>
-            <td>The the expiration time of data in a collection.</td>
         </tr>
     </tbody>
 </table>
