@@ -336,7 +336,7 @@ Output:
         </tr>
 	<tr>
             <td>properties</td>
-		<td>Currently, only the property of <code>collection.ttl.seconds</code> is shown. This means the expiration time of data in a collection.</td>
+		<td>Currently, only the property of <code>collection.ttl.seconds</code> is shown. Collection time to live (TTL) is the expiration time of data in a collection.</td>
         </tr>
     </tbody>
 </table>
