@@ -7,7 +7,7 @@ group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-docker.md" class='active '>Docker Compose</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
+{{tab}}
 
 # Install Milvus Cluster with Docker Compose
 
@@ -23,10 +23,10 @@ Check [the requirements](prerequisite-docker.md) for hardware and software prior
 
 ## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.0/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.0/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 

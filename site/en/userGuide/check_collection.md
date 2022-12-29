@@ -12,15 +12,7 @@ This topic describes how to check the information of the collection in Milvus.
 
 Verify if a collection exists in Milvus.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import utility
@@ -181,15 +173,7 @@ Output:
 
 Check the details of a collection.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
@@ -203,6 +187,7 @@ collection.num_entities          # Return the number of entities in the collecti
 collection.primary_field         # Return the schema.FieldSchema of the primary key field.
 collection.partitions            # Return the list[Partition] object.
 collection.indexes               # Return the list[Index] object.
+collection.properties		# Return the expiration time of data in the collection.
 ```
 
 ```javascript
@@ -349,6 +334,10 @@ Output:
             <td>primary_field</td>
             <td>The primary field of the collection.</td>
         </tr>
+	<tr>
+            <td>properties</td>
+		<td>Currently, only the property of <code>collection.ttl.seconds</code> is shown. Collection time to live (TTL) is the expiration time of data in a collection.</td>
+        </tr>
     </tbody>
 </table>
 
@@ -434,15 +423,7 @@ Output:
 
 List all collections in this Milvus Instance.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import utility

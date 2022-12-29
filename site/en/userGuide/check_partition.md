@@ -12,15 +12,7 @@ This topic describes how to check the information of partitions in Milvus.
 
 Verify if a partition exists in the specified collection.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
@@ -182,15 +174,7 @@ Output:
 
 ## List all partitions
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection

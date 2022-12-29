@@ -9,8 +9,8 @@
 ##### see as below:
 
 
-##### Title is : 
-##### Content is : 
+##### Title is : {{var.title}}
+##### Content is : {{var.content}}
 
 ##### I can use variables in Superior menu:
-#### the auth name is : 
+#### the auth name is : {{var.auth.name}}

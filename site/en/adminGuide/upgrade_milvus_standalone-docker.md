@@ -4,10 +4,10 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-helm.md
 related_key: upgrade Milvus Standalone
-summary: Learn how to upgrade Milvus standalone.
+summary: Learn how to upgrade Milvus standalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
+{{tab}}
 
 # Upgrade Milvus Standalone with Docker Compose
 
@@ -48,7 +48,7 @@ etcd:
 ```
 # Suppose your docker-compose run with the default milvus network,
 # and you put migration.yaml in the same directory with docker-compose.yaml.
-docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml harbor.milvus.io/milvus/meta-migration:20221020-02a8a0732 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
+docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 ```
 
 4. Start Milvus components again with the new Milvus image.

@@ -20,15 +20,7 @@ Prepare the vectors used for calculation.
 Vectors to be calculated must agree in vector type and dimension.
 </div>
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 vectors_left = {
@@ -155,15 +147,7 @@ vectors_right='{
 
 Specify the parameters used for the calculation.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 params = {
@@ -260,15 +244,7 @@ params='[
 
 If you calculate with the vectors in a collection in Milvus, you must load the collection to memory first.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection

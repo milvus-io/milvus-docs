@@ -7,7 +7,7 @@ group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
+{{tab}}
 
 # Install Milvus Cluster with Milvus Operator
 
@@ -20,30 +20,7 @@ Milvus Operator is a solution that helps you deploy and manage a full Milvus ser
 
 If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [deploy Milvus Operator](install_cluster-milvusoperator.md#Deploy-Milvus-Operator). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Milvus Operator. 
 
-### Create a K8s cluster using minikube
-
-We recommend installing Milvus on K8s with [minikube](https://minikube.sigs.k8s.io/docs/), a tool that allows you to run K8s locally.
-
-<div class="alert note">
-minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
-</div>
-
-#### 1. Install minikube
-
-See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more information.
-
-#### 2. Start a K8s cluster using minikube
-
-After installing minikube, run the following command to start a K8s cluster.
-
-```
-$ minikube start
-```
-
-#### 3. Check the K8s cluster status
-
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
-
+{{fragments/create_a_k8s_cluster_using_minikube.md}}
 
 ## Deploy Milvus Operator
 
@@ -147,7 +124,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.0/milvus-operator-0.7.0.tgz
+  https://github.com/milvus-io/milvus-operator/releases/download/v{{var.milvus_operator_version}}/milvus-operator-{{var.milvus_operator_version}}.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -208,7 +185,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. 
 
 <div class="alert note">
-If you have very limited local resources, you can install a Milvus cluster [using the minimum configuration](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml).
+If you have very limited local resources, you can install a Milvus cluster <a href="[url](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml)">using the minimum configuration</a>).
 </div>
 
 ### 1. Deploy a Milvus cluster
@@ -459,7 +436,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster

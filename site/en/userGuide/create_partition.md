@@ -15,15 +15,7 @@ A collection consists of one or more partitions. While creating a new collection
 The following example builds a partition `novel` in the collection `book`.
 
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection

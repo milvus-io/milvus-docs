@@ -4,10 +4,10 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: Learn how to upgrade Milvus cluster.
+summary: Learn how to upgrade Milvus cluster with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="upgrade_milvus_cluster-docker.md" class='active '>Docker Compose</a><a href="upgrade_milvus_cluster-helm.md" class=''>Helm</a></div>
+{{tab}}
 
 # Upgrade Milvus Cluster with Docker Compose
 
@@ -48,7 +48,7 @@ etcd:
 ```
 # Suppose your docker-compose run with the default milvus network,
 # and you put migration.yaml in the same directory with docker-compose.yaml.
-docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml harbor.milvus.io/milvus/meta-migration:20221020-02a8a0732 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
+docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 ```
 
 4. Start Milvus components again with the new Milvus image.

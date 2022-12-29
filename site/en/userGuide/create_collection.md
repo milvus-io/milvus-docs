@@ -22,15 +22,7 @@ The collection to create must contain a primary key field and a vector field. IN
 
 First, prepare necessary parameters, including field schema, collection schema, and collection name.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType
@@ -478,7 +470,7 @@ Output:
         <tr>
             <td><code>ShardsNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,64]</td>
         </tr>
 	</tbody>
 </table>
@@ -497,7 +489,7 @@ Output:
         </tr>
         <tr>
             <td>-f (Multiple)</td>
-            <td>The field schema in the `<fieldName>:<dataType>:<dimOfVector/desc>` format.</td>
+            <td>The field schema in the <code>&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> format.</td>
         </tr>
         <tr>
             <td>-p</td>
@@ -616,15 +608,7 @@ Output:
 
 Then, create a collection with the schema you specified above.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
@@ -632,8 +616,7 @@ collection = Collection(
     name=collection_name, 
     schema=schema, 
     using='default', 
-    shards_num=2,
-    properties={"collection.ttl.seconds": 15}
+    shards_num=2
     )
 ```
 
@@ -720,7 +703,7 @@ milvusClient.createCollection(createCollectionReq);
 |---|---|
 |Length of a collection name|255 characters|
 |Number of partitions in a collection|4,096|
-|Number of fields in a collection|256|
+|Number of fields in a collection|64|
 |Number of shards in a collection|256|
 
 

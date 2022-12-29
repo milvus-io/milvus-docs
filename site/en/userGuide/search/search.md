@@ -17,15 +17,7 @@ The following example shows how to perform a vector similarity search on a 2000-
 
 All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
@@ -76,15 +68,7 @@ curl -X 'POST' \
 
 Prepare the parameters that suit your search scenario. The following example defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}, "offset": 5}
@@ -107,7 +91,7 @@ sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
 
 ```java
 final Integer SEARCH_K = 2;                       // TopK
-final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
+final String SEARCH_PARAM = "{\"nprobe\":10, \”offset\”:5}";    // Params
 ```
 
 ```shell
@@ -360,15 +344,7 @@ Search vectors with Milvus. To search in a specific [partition](glossary.md#Part
 
 Milvus supports setting consistency level specifically for a search. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 results = collection.search(
@@ -456,11 +432,11 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set.  The sum of this value and `limit` should be less than 65535.</td>
+		<td>Number of results to skip in the returned set.  The sum of this value and `limit` should be less than 16384.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.  The sum of this value and `offset` should be less than 65535.</td>
+		<td>Number of the most similar results to return.  The sum of this value and `offset` should be less than 16384.</td>
 	</tr>
   <tr>
 		<td><code>expr</code></td>
@@ -641,15 +617,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 
 Check the primary key values of the most similar vectors and their distances.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 results[0].ids
@@ -680,15 +648,7 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 
 Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 collection.release()
@@ -748,11 +708,4 @@ curl -X 'DELETE' \
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 
-- Explore API references for Milvus SDKs:
-
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.0/About.md)
-  - [Node.js API reference](/api-reference/node/v2.2.0/About.md)
-  - [Go API reference](/api-reference/go/v2.1.2/About.md)
-  - [Java API reference](/api-reference/java/v2.2.1/About.md)
-
-
+{{fragments/api_reference.md}}

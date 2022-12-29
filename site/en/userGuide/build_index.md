@@ -24,15 +24,7 @@ The following example builds a 1024-cluster IVF_FLAT index with Euclidean distan
 
 Prepare the index parameters (If you expect to build indexes for scalar fields, no index-building parameter is required, and the default index type is a dictionary tree).
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 index_params = {
@@ -150,7 +142,7 @@ curl -X 'POST' \
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
     </tr>
 	</tbody>
 </table>
@@ -227,9 +219,9 @@ curl -X 'POST' \
                 <li><code>NewIndexIvfFlat</code> (IVF_FLAT)</li>
                 <li><code>NewIndexIvfSQ8</code> (IVF_SQ8)</li>
                 <li><code>NewIndexIvfPQ</code> (IVF_PQ)</li>
-                <li><code>NewIndexRNSG</code> (RNSG)</li>
                 <li><code>NewIndexHNSW</code> (HNSW)</li>
                 <li><code>NewIndexANNOY</code> (ANNOY)</li>
+		<li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -259,8 +251,11 @@ curl -X 'POST' \
 	<tr>
 		<td><code>ConstructParams</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">In-memory Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+	    <tr>
+		<td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+	    </tr>
 	</tbody>
 </table>
 
@@ -296,10 +291,10 @@ curl -X 'POST' \
 	<tr>
 		<td><code>ExtraParam</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">In-memory Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
     </tr>
 	</tbody>
 </table>
@@ -385,15 +380,7 @@ curl -X 'POST' \
 
 Build the index by specifying the vector field name and index parameters.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection

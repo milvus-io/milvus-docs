@@ -7,7 +7,7 @@ group: example_code.md
 summary: Get started with Milvus faster using this Python example code.
 ---
 
-<div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a><a href="example_code_node.md" class=''>Node.js</a></div>
+{{tab}}
 
 # Run Milvus using Python
 
@@ -17,17 +17,17 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-- [Milvus 2.2.0](install_standalone-docker.md)
+- [Milvus {{var.milvus_release_version}}](install_standalone-docker.md)
 - Python 3 (3.71 or later)
-- [PyMilvus 2.2.0](install-pymilvus.md)
+- [PyMilvus {{var.milvus_python_sdk_version}}](install-pymilvus.md)
 
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.0/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.0/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
 ```
 
 
@@ -72,6 +72,8 @@ entities = [
     [[random.random() for _ in range(8)] for _ in range(3000)],  # field embeddings
 ]
 insert_result = hello_milvus.insert(entities)
+# After final entity is inserted, it is best to call flush to have no growing segments left in memory
+hello_milvus.flush()  
 ```
 
 - Builds indexes on the entities:

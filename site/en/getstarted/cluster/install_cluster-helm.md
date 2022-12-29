@@ -7,7 +7,7 @@ group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
+{{tab}}
 
 # Install Milvus Cluster with Helm
 
@@ -21,30 +21,7 @@ Check [the requirements](prerequisite-helm.md) for hardware and software prior t
 
 If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [Install Helm Chart for Milvus](install_cluster-helm.md#Install-Helm-Chart-for-Milvus). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm. 
 
-### Create a K8s cluster using minikube
-
-We recommend installing Milvus on K8s with [minikube](https://minikube.sigs.k8s.io/docs/), a tool that allows you to run K8s locally.
-
-<div class="alert note">
-minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
-</div>
-
-#### 1. Install minikube
-
-See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more information.
-
-#### 2. Start a K8s cluster using minikube
-
-After installing minikube, run the following command to start a K8s cluster.
-
-```
-$ minikube start
-```
-
-#### 3. Check the K8s cluster status
-
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
-
+{{fragments/create_a_k8s_cluster_using_minikube.md}}
 
 minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
@@ -85,6 +62,8 @@ $ helm install my-release milvus/milvus
   <ul>
     <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
     <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
+    <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kuberenetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is not longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kuberenetes v1.25 and later, you can instead run the following command to install Milvus:<br>
+    <code>helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
   </ul>
 </div>
@@ -128,7 +107,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 Verify which local port the Milvus server is listening on. Replace the pod name with your own.
 
 ```bash
-$ kubectl get pod my-release-milvus-standalone-54c4f88cb9-f84pf --template
+$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 ='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
 19530
 ```

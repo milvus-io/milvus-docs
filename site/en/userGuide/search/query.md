@@ -17,15 +17,7 @@ The following example shows how to perform a vector query on a 2000-row dataset 
 
 All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
@@ -72,15 +64,7 @@ The following example filters the vectors with certain `book_id` values, and ret
 
 Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 res = collection.query(
@@ -120,6 +104,8 @@ QueryParam queryParam = QueryParam.newBuilder()
   .withConsistencyLevel(ConsistencyLevelEnum.STRONG)
   .withExpr("book_id in [2,4,6,8]")
   .withOutFields(query_output_fields)
+  .withOffset(0L)
+  .withLimit(10L)
   .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
@@ -350,15 +336,7 @@ Output:
 
 Check the returned results. 
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 sorted_res = sorted(res, key=lambda k: k['book_id'])
@@ -397,11 +375,4 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 
-- Explore API references for Milvus SDKs:
-
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.0/About.md)
-  - [Node.js API reference](/api-reference/node/v2.2.0/About.md)
-  - [Go API reference](/api-reference/go/v2.1.2/About.md)
-  - [Java API reference](/api-reference/java/v2.2.1/About.md)
-
-
+{{fragments/api_reference.md}}

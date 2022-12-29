@@ -17,15 +17,7 @@ The following example shows how to perform a hybrid search on the basis of a reg
 
 All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector search.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Collection
@@ -70,15 +62,7 @@ load -c book
 
 By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 search_param = {
@@ -130,7 +114,7 @@ if err != nil {
 
 ```java
 final Integer SEARCH_K = 2;
-final String SEARCH_PARAM = "{\"nprobe\":10}";
+final String SEARCH_PARAM = "{\"nprobe\":10, \”offset\”:5}";
 List<String> search_output_fields = Arrays.asList("book_id");
 List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
@@ -521,15 +505,7 @@ Output:
 
 Check the returned results.
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 assert len(res) == 1
@@ -569,11 +545,4 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 
 - Try [Search with Time Travel](timetravel.md)
 
-- Explore API references for Milvus SDKs:
-
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.0/About.md)
-  - [Node.js API reference](/api-reference/node/v2.2.0/About.md)
-  - [Go API reference](/api-reference/go/v2.1.2/About.md)
-  - [Java API reference](/api-reference/java/v2.2.1/About.md)
-
-
+{{fragments/api_reference.md}}

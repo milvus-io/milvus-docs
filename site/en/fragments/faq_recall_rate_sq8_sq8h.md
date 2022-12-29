@@ -1,0 +1,1 @@
+No, they have the same recall rate for the same dataset.

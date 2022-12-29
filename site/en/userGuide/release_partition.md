@@ -9,15 +9,7 @@ summary: Learn how to release a partition into memory for search or query in Mil
 This topic describes how to release a partition from memory after a search or a query to reduce memory usage.
 
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#go">GO</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
-</div>
-
+{{fragments/multiple_code.md}}
 
 ```python
 from pymilvus import Partition
