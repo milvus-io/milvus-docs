@@ -154,7 +154,7 @@ status:
     status: Provisioning
 ```
 
-Once **certificateStatus** turns to **Ready**, you are ready to set up the load balancer.
+Once **certificateStatus** turns to **Active**, you are ready to set up the load balancer.
 
 ### Create an Ingress to generate a Layer-7 Load Balancer
 
