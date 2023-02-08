@@ -28,7 +28,7 @@ python -m pip install --upgrade pymilvus
 
 </div>
 
-1. Create a resource group
+1. Create a resource group.
 
     To create a resource group, run the following after you connect to a Milvus instance. The following snippet assumes that `default` is the alias of your Milvus connection.
 
@@ -47,7 +47,7 @@ python -m pip install --upgrade pymilvus
     # Succeeded in creating resource group rg.
     ```
 
-2. List resource groups
+2. List resource groups.
 
     Once you create a resource group, you can see it in the resource group list.
 
@@ -60,7 +60,7 @@ python -m pip install --upgrade pymilvus
     # Resource group list: ['__default_resource_group', 'rg']
     ```
 
-3. Describe a resource group
+3. Describe a resource group.
 
     You can have Milvus describe a resource group in concern as follows:
 
@@ -77,7 +77,7 @@ python -m pip install --upgrade pymilvus
     #        <num_incoming_node:{}>.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg
     ```
 
-4. Transfer nodes between resource groups
+4. Transfer nodes between resource groups.
 
     You may notice that the described resource group does not have any query node yet. Move some nodes from the default resource group to the one you create as follows:
 
@@ -95,7 +95,7 @@ python -m pip install --upgrade pymilvus
     # Succeeded in moving 2 node(s) from __default_resource_group to rg.
     ```
 
-5. Load collections and partitions to a resource group
+5. Load collections and partitions to a resource group.
 
     Once there are query nodes in a resource group, you can load collections to this resource group. The following snippet assumes that a collection named `demo` already exists.
 
@@ -128,7 +128,7 @@ python -m pip install --upgrade pymilvus
 
     To have Milus load each replica of a collection in a separate resource group, ensure that the number of resource groups equals the number of replicas.
 
-6. Transfer replicas between resource groups
+6. Transfer replicas between resource groups.
 
     Milvus uses [replicas](replica) to achieve load-balancing among [segments](glossary#Segment) distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:
 
@@ -147,7 +147,7 @@ python -m pip install --upgrade pymilvus
     # Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.
     ```
 
-7. Drop a resource group
+7. Drop a resource group.
 
     You can drop a resource group at any time only if there are no query nodes in the resource group. In this guide, resource group `rg` now has one query node. You need to move it to another resource group before you drop this resource group.
 
@@ -163,3 +163,10 @@ python -m pip install --upgrade pymilvus
     except Exception:
         print(f"Something went wrong while dropping {source}.")
     ```
+
+## What's next
+
+To deploy a multi-tenant Milvus instance, read the following:
+
+- [Enable RBAC](rbac)
+- [Users and roles](users_and_roles)
