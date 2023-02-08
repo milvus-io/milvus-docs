@@ -130,7 +130,7 @@ python -m pip install --upgrade pymilvus
 
 6. Transfer replicas between resource groups.
 
-    Milvus uses [replicas](replica) to achieve load-balancing among [segments](glossary#Segment) distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:
+    Milvus uses [replicas](replica.md) to achieve load-balancing among [segments](glossary.md#Segment) distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:
 
     ```Python
     source = '__default_resource_group'
@@ -168,5 +168,5 @@ python -m pip install --upgrade pymilvus
 
 To deploy a multi-tenant Milvus instance, read the following:
 
-- [Enable RBAC](rbac)
-- [Users and roles](users_and_roles)
+- [Enable RBAC](rbac.md)
+- [Users and roles](users_and_roles.md)
