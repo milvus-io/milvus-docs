@@ -67,82 +67,82 @@ In 2.2.3, the maximum number of fields in a collection is reduced from 256 to 64
 
 - Memory usage reduced
 
-  - Issues identified and fixed so that loading failures do not return insufficient memory (#21592)
-  - Arrow usage removed from FieldData (#21523)
-  - Memory usage reduced in indexing scalar fields (#21970) (#21978)
+  - Issues identified and fixed so that loading failures do not return insufficient memory ([21592](https://github.com/milvus-io/milvus/pull/21592))
+  - Arrow usage removed from FieldData ([21523](https://github.com/milvus-io/milvus/pull/21523))
+  - Memory usage reduced in indexing scalar fields ([21970](https://github.com/milvus-io/milvus/pull/21970)) ([21978](https://github.com/milvus-io/milvus/pull/21978))
 
 - Monitoring metrics optimized
 
-  - Issues related to unregistered metrics identified and fixed  (#22098)
-  - A new segment metric that counts the number of binlog files added (#22085)
-  - Many new metrics added (#21975)
-  - Minor fix on segment metric (#21977)
+  - Issues related to unregistered metrics identified and fixed  ([22098](https://github.com/milvus-io/milvus/pull/22098))
+  - A new segment metric that counts the number of binlog files added ([22085](https://github.com/milvus-io/milvus/pull/22085))
+  - Many new metrics added ([21975](https://github.com/milvus-io/milvus/pull/21975))
+  - Minor fix on segment metric ([21977](https://github.com/milvus-io/milvus/pull/21977))
 
 - Meta storage performance improved
 
-  - Improved ListSegments performance for Datacoord catalog. (#21600)
-  - Improved LoadWithPrefix performance for SuffixSnapshot. (#21601)
-  - Removed redundant LoadPrefix requests for Catalog ListCollections. (#21551) (#21594)
-  - Added A WalkWithPrefix API for MetaKv interface. (#21585)
-  - Added GC for snapshot KV based on time-travel. (#21417) (#21763)
+  - Improved ListSegments performance for Datacoord catalog. ([21600](https://github.com/milvus-io/milvus/pull/21600))
+  - Improved LoadWithPrefix performance for SuffixSnapshot. ([21601](https://github.com/milvus-io/milvus/pull/21601))
+  - Removed redundant LoadPrefix requests for Catalog ListCollections. ([21551](https://github.com/milvus-io/milvus/pull/21551)) ([21594](https://github.com/milvus-io/milvus/pull/21594))
+  - Added A WalkWithPrefix API for MetaKv interface. ([21585](https://github.com/milvus-io/milvus/pull/21585))
+  - Added GC for snapshot KV based on time-travel. ([21417](https://github.com/milvus-io/milvus/pull/21417)) ([21763](https://github.com/milvus-io/milvus/pull/21763))
 
 - Performance improved
 
-  - Upgraded Knowhere to 1.3.7. (#21735)
-  - Upgraded Knowhere to 1.3.8. (#22024)
-  - Skipped search GRPC call for standalone. (#21630)
-  - Optimized some low-efficient code. (#20529) (#21683)
-  - Fixed fill the string field twice when string index exists. (#21852) (#21865)
-  - Used all() API for bitset check. (#20462) (#21682)
+  - Upgraded Knowhere to 1.3.7. ([21735](https://github.com/milvus-io/milvus/pull/21735))
+  - Upgraded Knowhere to 1.3.8. ([22024](https://github.com/milvus-io/milvus/pull/22024))
+  - Skipped search GRPC call for standalone. ([21630](https://github.com/milvus-io/milvus/pull/21630))
+  - Optimized some low-efficient code. ([20529](https://github.com/milvus-io/milvus/pull/20529)) ([21683](https://github.com/milvus-io/milvus/pull/21683))
+  - Fixed fill the string field twice when string index exists. ([21852](https://github.com/milvus-io/milvus/pull/21852)) ([21865](https://github.com/milvus-io/milvus/pull/21865))
+  - Used all() API for bitset check. ([20462](https://github.com/milvus-io/milvus/pull/20462)) ([21682](https://github.com/milvus-io/milvus/pull/21682))
 
 - Others
 
-  - Implemented the GetLoadState API. (#21533)
-  - Added a task to unsubscribe dmchannel. (#21513) (#21794)
-  - Explicitly list the triggering reasons when Milvus denies reading/writing. (#21553)
-  - Verified and adjusted the number of rows in a segment before saving and passing SegmentInfo. (#21200)
-  - Added a segment seal policy by the number of binlog files. (#21941)
-  - Upgraded etcd to 3.5.5. (#22007）
+  - Implemented the GetLoadState API. ([21533](https://github.com/milvus-io/milvus/pull/21533))
+  - Added a task to unsubscribe dmchannel. ([21513](https://github.com/milvus-io/milvus/pull/21513)) ([21794](https://github.com/milvus-io/milvus/pull/21794))
+  - Explicitly list the triggering reasons when Milvus denies reading/writing. ([21553](https://github.com/milvus-io/milvus/pull/21553))
+  - Verified and adjusted the number of rows in a segment before saving and passing SegmentInfo. ([21200](https://github.com/milvus-io/milvus/pull/21200))
+  - Added a segment seal policy by the number of binlog files. ([21941](https://github.com/milvus-io/milvus/pull/21941))
+  - Upgraded etcd to 3.5.5. ([22007](https://github.com/milvus-io/milvus/pull/22007)）
 
 ### Bug Fixes
 
 - QueryCoord segment replacement fixed
   
-  - Fixed the mismatch of sealed segments IDs after enabling load-balancing in 2.2. (#21322)
-  - Fixed the sync logic of the leader observer. (#20478) (#21315)
-  - Fixed the issues that observers may update the current target to an unfinished next target. (#21107) (#21280)
-  - Fixed the load timeout after the next target updates. (#21759) (#21770)
-  - Fixed the issue that the current target may be updated to an invalid target. (#21742) (#21762)
-  - Fixed the issue that a failed node may update the current target to an unavailable target. (#21743)
+  - Fixed the mismatch of sealed segments IDs after enabling load-balancing in 2.2. ([21322](https://github.com/milvus-io/milvus/pull/21322))
+  - Fixed the sync logic of the leader observer. ([20478](https://github.com/milvus-io/milvus/pull/20478)) ([21315](https://github.com/milvus-io/milvus/pull/21315))
+  - Fixed the issues that observers may update the current target to an unfinished next target. ([21107](https://github.com/milvus-io/milvus/pull/21107)) ([21280](https://github.com/milvus-io/milvus/pull/21280))
+  - Fixed the load timeout after the next target updates. ([21759](https://github.com/milvus-io/milvus/pull/21759)) ([21770](https://github.com/milvus-io/milvus/pull/21770))
+  - Fixed the issue that the current target may be updated to an invalid target. ([21742](https://github.com/milvus-io/milvus/pull/21742)) ([21762](https://github.com/milvus-io/milvus/pull/21762))
+  - Fixed the issue that a failed node may update the current target to an unavailable target. ([21743](https://github.com/milvus-io/milvus/pull/21743))
 
 - Improperly invalidated proxy cache fixed
 
-  - Fixed the issue that the proxy does not update the shard leaders cache for some types of error (#21185) (#21303)
-  - Fixed the issue that Milvus invalidates the proxy cache first when the shard leader list contains error (#21451) (#21464)
+  - Fixed the issue that the proxy does not update the shard leaders cache for some types of error ([21185](https://github.com/milvus-io/milvus/pull/21185)) ([21303](https://github.com/milvus-io/milvus/pull/21303))
+  - Fixed the issue that Milvus invalidates the proxy cache first when the shard leader list contains error ([21451](https://github.com/milvus-io/milvus/pull/21451)) ([21464](https://github.com/milvus-io/milvus/pull/21464))
 
 - CheckPoint and GC Related issues fixed
 
-  - Fixed the issue that the checkpoint will not update after data delete and compact (#21495)
-  - Fixed issues related to channel checkpoint and GC (#22027)
-  - Added restraints on segment GC of DML position before channel copy (#21773)
-  - Removed collection meta after GC is complete (#21595) (#21671)
+  - Fixed the issue that the checkpoint will not update after data delete and compact ([21495](https://github.com/milvus-io/milvus/pull/21495))
+  - Fixed issues related to channel checkpoint and GC ([22027](https://github.com/milvus-io/milvus/pull/22027))
+  - Added restraints on segment GC of DML position before channel copy ([21773](https://github.com/milvus-io/milvus/pull/21773))
+  - Removed collection meta after GC is complete ([21595](https://github.com/milvus-io/milvus/pull/21595)) ([21671](https://github.com/milvus-io/milvus/pull/21671))
 
 - Issues related to not being able to use embedded etcd with Milvus fixed
 
-  - Added setup config files for embedded etcd (#22076)
+  - Added setup config files for embedded etcd ([22076](https://github.com/milvus-io/milvus/pull/22076))
 
 - Others
 
-  - Fixed the offset panic in queries (#21292) (#21751)
-  - Fixed the issue that small candidate compaction should only happen with more than one segment (#21250)
-  - Fixed the issue of memory usage calculation (#21798)
-  - Fixed the issue that a timestamp allocation failure blocks compaction queue forever (#22039) (#22046)
-  - Fixed the issue that QueryNode may panic when stopped (#21406) (#21419)
-  - Modified lastSyncTime in advance to prevent multiple flush binlogs (#22048)
-  - Fixed the issue that a collection does not exist when users try to recover it (#21471) (#21628)
-  - Use tt msg stream for consume delete msg (#21478)
-  - Prevent users from deleting entities by any non-primary-key field (#21459) (#21472)
-  - Fixed potential nil access on segments (#22104)
+  - Fixed the offset panic in queries ([21292](https://github.com/milvus-io/milvus/pull/21292)) ([21751](https://github.com/milvus-io/milvus/pull/21751))
+  - Fixed the issue that small candidate compaction should only happen with more than one segment ([21250](https://github.com/milvus-io/milvus/pull/21250))
+  - Fixed the issue of memory usage calculation ([21798](https://github.com/milvus-io/milvus/pull/21798))
+  - Fixed the issue that a timestamp allocation failure blocks compaction queue forever ([22039](https://github.com/milvus-io/milvus/pull/22039)) ([22046](https://github.com/milvus-io/milvus/pull/22046))
+  - Fixed the issue that QueryNode may panic when stopped ([21406](https://github.com/milvus-io/milvus/pull/21406)) ([21419](https://github.com/milvus-io/milvus/pull/21419))
+  - Modified lastSyncTime in advance to prevent multiple flush binlogs ([22048](https://github.com/milvus-io/milvus/pull/22048))
+  - Fixed the issue that a collection does not exist when users try to recover it ([21471](https://github.com/milvus-io/milvus/pull/21471)) ([21628](https://github.com/milvus-io/milvus/pull/21628))
+  - Use tt msg stream for consume delete msg ([21478](https://github.com/milvus-io/milvus/pull/21478))
+  - Prevent users from deleting entities by any non-primary-key field ([21459](https://github.com/milvus-io/milvus/pull/21459)) ([21472](https://github.com/milvus-io/milvus/pull/21472))
+  - Fixed potential nil access on segments ([22104](https://github.com/milvus-io/milvus/pull/22104))
 
 ## 2.2.2
 Release date: 22 December, 2022
