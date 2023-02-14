@@ -13,9 +13,9 @@ summary: Learn how to upgrade Milvus cluster with Milvus Operator.
 
 This topic describes how to ugrade your Milvus cluster with Milvus Operator and uses the example of upgrading Milvus 2.1.4 to Milvus 2.2.0.
 
-## 1. Upgrade you Milvus Operator to v0.7.0
+## 1. Upgrade your Milvus Operator
 
-Run the following command to upgrade the version of your Milvus Operator to v0.7.0.
+Run the following command to upgrade the version of your Milvus Operator to v{{var.milvus_operator_version}}.
 
 ```
 helm repo add milvus-operator https://milvus-io.github.io/milvus-operator/

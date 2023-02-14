@@ -1,7 +1,7 @@
 ---
 id: upgrade_milvus_cluster-helm.md
 label: Helm
-order: 2
+order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Helm Chart.
