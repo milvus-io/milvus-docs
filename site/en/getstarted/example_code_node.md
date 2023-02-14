@@ -6,7 +6,7 @@ group: example_code.md
 summary: Get started with Milvus faster using this Node.js example code.
 ---
 
-{{tab}} 
+{{tab}}
 
 # Run Milvus using Node.js
 
