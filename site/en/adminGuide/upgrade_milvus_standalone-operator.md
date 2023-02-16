@@ -114,14 +114,12 @@ spec:
     queryCoord:
       replicas: 2
       activeStandby:
-        enable: true    
+        enable: true  
+    dataCoord:
+      replicas: 2
+      activeStandby:
+        enable: true   
 ```
-
-<div class="alert note">
-
-Currently, dataCoords cannot work in active-standby mode.
-
-</div>
 
 Save the configuration in a YAML file (for example, `milvuscoordha.yml`) and apply it to your Milvus instance.
 
