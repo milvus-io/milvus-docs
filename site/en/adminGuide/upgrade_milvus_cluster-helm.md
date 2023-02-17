@@ -182,7 +182,7 @@ Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-stan
 
 Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
 
-Based on the rolling update capabilities provided by Kubernetes, the above script enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those that depend on them during the upgrade, significantly reducing potential service downtime.
+Based on the rolling update capabilities provided by Kubernetes, the above script enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.
 
 The script applies only to the upgrade of Milvus installed with Helm. The following table lists the command flags available in the scripts.
 
