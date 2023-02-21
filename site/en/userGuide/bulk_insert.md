@@ -33,9 +33,9 @@ The following is an example of a row-based JSON file.
 <div class="alert note">
 
 - Do not add any field that does not exist in the target collection, and do not miss any field that the schema of the target collection defines.
-- Use the correct types of values in each field. For example, use integers in integer fields, floats in float values, strings in varchar fields, and float arrays in vector fields.
+- Use the correct types of values in each field. For example, use integers in integer fields, floats in float fields, strings in varchar fields, and float arrays in vector fields.
 - For an auto-generated primary key, do not include it in the JSON file.
-- For binary vectors, use uint8 arrays. Each uint8 value represents 8 dimensions, and the value must be between [0, 255]. For example, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1] is a 16-dimensional binary vector and should be written as [128, 7] in a JSON file.
+- For binary vectors, use uint8 arrays. Each uint8 value represents 8 dimensions, and the value must be between 0 and 255. For example, `[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]` is a 16-dimensional binary vector and should be written as `[128, 7]` in the JSON file.
 
 </div>
 
@@ -57,7 +57,7 @@ numpy.save('book_intro.npy', arr)
 
 <div class="alert note">
 
-- Use the field name of each column to name the NumPy file. Do not add files named after a non-existing field. There should be one NumPy file for each field.
+- Use the field name of each column to name the NumPy file. Do not add files named after a field that does not exist in the target collection. There should be one NumPy file for each field.
 - Use the correct value type when creating NumPy arrays. For details, refer to [these examples](#Create-NumPy-files).
 
 </div>
@@ -66,22 +66,21 @@ numpy.save('book_intro.npy', arr)
 
 ### 1. Upload data files
 
-You can use either MinIO or local hard disk for storage in Milvus.
+You can use either MinIO or the local hard disk for storage in Milvus.
 
 <div class="alert note">
-Using local hard disk for storage is only available in Milvus Standalone.
+Using the local hard disk for storage is only available in Milvus Standalone.
 </div>
 
 - To use MinIO for storage, upload data files to the bucket defined by `minio.bucketName` in the `milvus.yml` configuration file .
-
-- For local storage, copy the data files into a directory of local disk.
+- For local storage, copy the data files into a directory of the local disk.
 
 
 ### 2. Insert entities
 
-To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md) method. As to the Java SDK, you can use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md) method.
+To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md) method. As to the Java SDK, use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md) method.
 
-In this method, you need to set the name of the target collection (**collection_name**) and the list of files [prepared in the previous step](#Prepare-the-data-file) (**files**). Optionally, you can specify the name of a specific partition (**partition_name**) in the target collection so that Milvus imports the data from the files listed only into this partition.
+In this method, you need to set the name of the target collection as **collection_name** and the list of files [prepared in the previous step](#Prepare-the-data-file) as **files**. Optionally, you can specify the name of a specific partition as **partition_name** in the target collection so that Milvus imports the data from the files listed only into this partition.
 
 - For a row-based JSON file, parameter **files** should be a one-member list containing the path to the JSON file.
 
@@ -115,7 +114,7 @@ In this method, you need to set the name of the target collection (**collection_
   task_id = wrapper.getTaskID();
   ```
 
-- For a set of column-based NumPy file, parameter **files** should be a multi-member list containing the paths to the NumPy files.
+- For a set of column-based NumPy files, parameter **files** should be a multi-member list containing the paths to the NumPy files.
 
   <div class="multipleCode">
     <a href="#python">Python </a>
@@ -156,7 +155,7 @@ In this method, you need to set the name of the target collection (**collection_
   When setting the file paths, note that
 
   - If you upload the data file to a MinIO instance, a valid file path should be relative to the root bucket defined in **"milvus.yml"**, such as **"data/book_id.npy"**.
-  - If you upload the data file to a local hard drive, a valid file path should be an absolute path such as **"/tmp/data/book_id.npy"**.
+  - If you upload the data file to the local hard drive, a valid file path should be an absolute path such as **"/tmp/data/book_id.npy"**.
   
   If you have a lot of files to process, consider [creating multiple data-import tasks and have them run in parallel](#Import-multiple-NumPy-files-in-parallel).
 
@@ -168,7 +167,7 @@ In this method, you need to set the name of the target collection (**collection_
 
 ### Check task state
 
-Since the bulk-insert API is asynchronous, you need to check whether a data-import task is complete. Milvus provides a **BulkInsertState** object to hold the details of a data-import task and you can use the get-bulk-insert-state API to retrieve this object using the programming language of your choice. 
+Since the bulk-insert API is asynchronous, you might need to check whether a data-import task is complete. Milvus provides a **BulkInsertState** object to hold the details of a data-import task and you can use the get-bulk-insert-state API to retrieve this object using the programming language of your choice. 
 
 In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/get_bulk_insert_state().md). For Java SDK, use [`getBulkInsertState()`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/getBulkInsertState().md).
 
@@ -270,10 +269,10 @@ See [System Configurations](configure_rootcoord.md) for more information about i
 
 ## Limits
 
-| Feature                       | Maximum limit |
-| ----------------------------- | ------------- |
-| Max size of task pending list | 32            |
-| Max size of a data file       | 1GB           |
+| Feature                        | Maximum limit |
+| ------------------------------ | ------------- |
+| Max. size of task pending list | 65536         |
+| Max. size of a data file       | 16 GB         |
 
 
 ## Reference
@@ -442,7 +441,7 @@ task_2 = utility.do_bulk_insert(
 
 ### Check data searchability
 
-After a data-import task is complete, Milvus persists the imported data into segments and sends these segments to the index nodes to be indexed. During the index-building process, these segments are not ready for searches. Once such a process is complete, you need to call the load API again to load these segments into the query nodes. These segments will then be ready for searches.
+After a data-import task is complete, Milvus persists the imported data into segments and sends these segments to the index nodes for index-building. During the index-building process, these segments are unavailable for searches. Once such a process is complete, you need to call the load API again to load these segments into the query nodes. These segments will then be ready for searches.
 
 1. Check the index-building progress
 
