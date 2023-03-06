@@ -33,7 +33,7 @@ book_id = FieldSchema(
 )
 book_name = FieldSchema(
   name="book_name", 
-  dtype=DataType.VARCHAR, 
+  dtype=DataType.STRING, 
   max_length=200,
 )
 word_count = FieldSchema(
@@ -217,7 +217,7 @@ Output:
             <td>For primary key field:
                 <ul>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
+                    <li><code>DataType.STRING</code> (STRING)</li>
                 </ul>
                 For scalar field:
                 <ul>
@@ -244,7 +244,7 @@ Output:
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>max_length</code> (Mandatory for VARCHAR field)</td>
+            <td><code>max_length</code> (Mandatory for STRING field)</td>
             <td>Maximum length of strings allowed to be inserted.</td>
             <td>[1, 65,535]</td>
         </tr>
@@ -580,7 +580,7 @@ Output:
                 <br>For primary key field:
                 <ul>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
+                    <li><code>DataType.STRING</code> (STRING)</li>
                 </ul>
                 For scalar field:
                 <ul>
