@@ -6,12 +6,87 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.4
+Release date: 7 March, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.3          | 2.2.3              | 2.2.3            | 2.2.1          | Coming soon         |
+
+Milvus 2.2.4 is a minor update to Milvus 2.2.0. It introduces new features, such as namespace-based resource grouping, collection-level physical isolation, and collection renaming. 
+
+In addition to these features, Milvus 2.2.4 also addresses several issues related to rolling upgrades, failure recovery, and load balancing. These bug fixes contribute to a more stable and reliable system. 
+
+We have also made several enhancements to make your Milvus cluster faster and consume less memory with reduced convergence time for failure recovery.
+
+### New Features
+
+- Resource grouping
+
+  Milvus has implemented resource grouping for QueryNodes. A resource group is a collection of QueryNodes. Milvus supports grouping QueryNodes in the cluster into different resource groups, where access to physical resources in different resource groups is completely isolated. See [Manage Resource Group](resource_group.md) for more information.
+
+- Collection renaming
+
+  The Collection-renaming API provides a way for users to change the name of a collection. Currently, PyMilvus supports this API, and SDKs for other programming languages are on the way. See [Rename a Collection](rename_collection.md) for details.
+
+- Google Cloud Storage support
+
+  Milvus now supports Google Cloud Storage as the object storage.
+
+- New option to the search and query APIs
+
+  If you are more concerned with performance rather than data freshness, enabling this option will skip search on all growing segments and offer better search performance under the scenario search with insertion. See [search(/api-reference/pymilvus/v2.2.3/Collection/search().md)]() and [query()]() for details.
+
+### Bugfix
+
+- Fix segment not found if forward delete to empty segment [#22528](https://github.com/milvus-io/milvus/pull/22528)[#22551](https://github.com/milvus-io/milvus/pull/22551)
+- Fix 2.2.2 possible broken channel checkpoint [#22205](https://github.com/milvus-io/milvus/pull/22205) [#22227](https://github.com/milvus-io/milvus/pull/22227)
+- Fix entity number mismatch with the inserted entities [#22306](https://github.com/milvus-io/milvus/pull/22306)
+- Fix DiskANN can't recover after QueryNode reboots [#22488](https://github.com/milvus-io/milvus/pull/22488) [#22514](https://github.com/milvus-io/milvus/pull/22514)
+- Prevent search/release on same segment [#22414](https://github.com/milvus-io/milvus/pull/22414)
+- Fix file with prefix '.' in filesystem will crash while bulkloading [#22215](https://github.com/milvus-io/milvus/pull/22215)
+- Add tickle for datacoord watch event [#21193](https://github.com/milvus-io/milvus/pull/21193) [#22209](https://github.com/milvus-io/milvus/pull/22209)
+- Fix deadlock when releasing segments and removing nodes concurrently [#22584](https://github.com/milvus-io/milvus/pull/22584)
+- Support channel balancer on datacoord [#22324](https://github.com/milvus-io/milvus/pull/22324) [#22377](https://github.com/milvus-io/milvus/pull/22377)
+- Fix balance generate reduce task [#22236](https://github.com/milvus-io/milvus/pull/22236) [#22326](https://github.com/milvus-io/milvus/pull/22326)
+- Fix balance caused QueryCoord panic [#22486](https://github.com/milvus-io/milvus/pull/22486)
+- Script for rolling update Milvus's component which installed by helm [#22124](https://github.com/milvus-io/milvus/pull/22124)
+- Add NotFoundTSafer and NoReplicaAvailable to retryable error code [#22505](https://github.com/milvus-io/milvus/pull/22505)
+- Fix gRPC error not retry [#22529](https://github.com/milvus-io/milvus/pull/22529)
+- Update component state to healthy after start [#22084](https://github.com/milvus-io/milvus/pull/22084)
+- Gracefully stop session [#22386](https://github.com/milvus-io/milvus/pull/22386)
+- Add the retry op for all server [#22274](https://github.com/milvus-io/milvus/pull/22274)
+
+### Enhancement
+
+- **Performance**
+
+  - Avoid counting all bits to improve query performance [#21909](https://github.com/milvus-io/milvus/pull/21909) [#22285](https://github.com/milvus-io/milvus/pull/22285)
+  - Fix double copy varchar field while loading [#22114](https://github.com/milvus-io/milvus/pull/22114) [#22291](https://github.com/milvus-io/milvus/pull/22291)
+  - Update datacoord compaction panic after datanode update plan to ensure consistency [#22143](https://github.com/milvus-io/milvus/pull/22143) [#22329](https://github.com/milvus-io/milvus/pull/22329)
+  - Avoid allocating a zero-bytes vector each search time [#22219](https://github.com/milvus-io/milvus/pull/22219) [#22357](https://github.com/milvus-io/milvus/pull/22357)
+  - Upgrade Knowhere to 1.3.9 accelerate IVF/BF [#22368](https://github.com/milvus-io/milvus/pull/22368)
+  - Improve search task merge policy [#22006](https://github.com/milvus-io/milvus/pull/22006) [#22287](https://github.com/milvus-io/milvus/pull/22287)
+  - Refine Read method of MinioChunkManager to reduce IO[#22257](https://github.com/milvus-io/milvus/pull/22257)
+
+- **Memory Usage**
+
+  - Save index files by 16m to save memory usage while indexing [#22369](https://github.com/milvus-io/milvus/pull/22369)
+  - Add memory usage too large sync policy [#22241](https://github.com/milvus-io/milvus/pull/22241)
+
+- **Others**
+
+  - Remove constraint that compaction happens only on indexed segment [#22145](https://github.com/milvus-io/milvus/pull/22145)
+  - Change RocksMQ page size to 256M to reduce rocksmq disk usage [#22433](https://github.com/milvus-io/milvus/pull/22433)
+  - Change the etcd session timeout to 20s to improve recovery speed[#22400](https://github.com/milvus-io/milvus/pull/22400)
+  - Add the RBAC for the GetLoadingProgress and GetLoadState api [#22313](https://github.com/milvus-io/milvus/pull/22313)
+
 ## 2.2.3
 Release date: 10 Feburary, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.3          | 2.2.2              | 2.2.3            | Coming soon    | Coming soon        |
+| 2.2.3          | 2.2.2              | 2.2.3            | 2.2.0          | 2.2.3               |
 
 Milvus 2.2.3 introduces the rolling upgrade capability to Milvus clusters and brings high availability settings to RootCoords. The former greatly reduces the impacts brought by the upgrade and restart of the Milvus cluster in production to the minimum, while the latter enables coordinators to work in active-standby mode and ensures a short failure recovery time of no more than 30 seconds. 
 
