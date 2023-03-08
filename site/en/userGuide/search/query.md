@@ -132,7 +132,6 @@ curl -X 'POST' \
   -d '{
     "collection_name": "book",
     "output_fields": ["book_id", "book_intro"],
-    "vectors": [ [0.1,0.2] ],
     "expr": "book_id in [2,4,6,8]"
   }'
 ```
