@@ -60,7 +60,7 @@ We have also made several enhancements to make your Milvus cluster faster and co
 - Fixed disordered minimum timestamp in proxy's pchan statistics [#22756](https://github.com/milvus-io/milvus/pull/22756)
 - Fixed an issue to ensure segment ID recovery upon failures to send time-tick [#22771](https://github.com/milvus-io/milvus/pull/22771)
 - Added segment info retrieval without the binlog path [#22741](https://github.com/milvus-io/milvus/pull/22741)
-- * Use distribution.Peek for GetDataDistribution in case of blocked by release [#22752](https://github.com/milvus-io/milvus/pull/22752)
+- Added distribution.Peek for GetDataDistribution in case of blocked by release [#22752](https://github.com/milvus-io/milvus/pull/22752)
 - Fixed the segment not found error [#22739](https://github.com/milvus-io/milvus/pull/22739)
 - Reset delta position to vchannel in packSegmentLoadReq [#22721](https://github.com/milvus-io/milvus/pull/22721) 
 - Added vector float data verification for bulkinsert and insert [#22729](https://github.com/milvus-io/milvus/pull/22729)
