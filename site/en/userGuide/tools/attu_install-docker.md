@@ -23,6 +23,14 @@ Attu is an efficient open-source management tool for Milvus. This topic describe
 See <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x Attu doc</a> if you are using Milvus 2.0.x.
 </div>
 
+## Milvus to Attu Version Mapping
+
+| Milvus Version | Recommended Attu Image Version | 
+| -------------- | ------------------------------ |
+| v2.0.x         | v2.0.5                         |
+| v2.1.x         | v2.1.5                         |
+| v2.2.x         | {{var.attu_release}}           |
+
 ## Start an Attu instance
 
 ```Apache
