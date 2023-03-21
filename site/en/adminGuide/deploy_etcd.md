@@ -81,7 +81,7 @@ externalEtcd:
   enabled: true
   ## the endpoints of the external etcd
   endpoints:
-    - <etcd_IP>:2379
+    - <your_etcd_IP>:2379
 ```
 
 3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the etcd configurations.
@@ -94,7 +94,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 To install Milvus and configure etcd, run the following command using your values.
 
 ```shell
-helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set etcd.enabled=false --set externaletcd.enabled=true --set externalEtcd.endpoints={<etcd_IP>:2379}
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set etcd.enabled=false --set externaletcd.enabled=true --set externalEtcd.endpoints={<your_etcd_IP>:2379}
 ```
 
 ## What's next
