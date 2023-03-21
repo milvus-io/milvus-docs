@@ -65,8 +65,8 @@ pulsar:
 ```yaml
 externalPulsar:
   enabled: true
-  host: <pulsar_IP>
-  port: <pulsar_port>
+  host: <your_pulsar_IP>
+  port: <your_pulsar_port>
 ```
 
 3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the Pulsar configurations.
@@ -79,7 +79,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 To install Milvus and configure Pulsar, run the following command using your values.
 
 ```shell
-helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set externalPulsar.enabled=true --set externalPulsar.host=<pulsar_IP> --set externalPulsar.port=<pulsar_port>
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set externalPulsar.enabled=true --set externalPulsar.host=<your_pulsar_IP> --set externalPulsar.port=<your_pulsar_port>
 ```
 
 ### Configure Kafka on K8s
@@ -120,7 +120,7 @@ kafka:
 ```yaml
 externalKafka:
   enabled: true
-  brokerList: <kafka_IP>:<kafka_port>
+  brokerList: <your_kafka_IP>:<your_kafka_port>
 ```
 
 3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the Kafka configurations.
@@ -139,7 +139,7 @@ helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set 
 To install Milvus and configure external Kafka, run the following command using your values.
 
 ```shell
-helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set externalKafka.enabled=true --set externalKafka.brokerlist=<kafka_IP>:<kafka_port>
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set externalKafka.enabled=true --set externalKafka.brokerlist=<your_kafka_IP>:<your_kafka_port>
 ```
 
 ## What's next
