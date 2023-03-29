@@ -16,13 +16,9 @@ Release date: 29 March, 2023
 
 ### Security
 
-Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE-
+Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z。
 
 ### New Features
-
-- **Flush-all API**
-
-  The flush-all API seals all the collection and synchronizes data to the object storage. This interface applies if you need to back up and migrate data of the entire cluster.
 
 - **First/Random replica selection policy**
 
