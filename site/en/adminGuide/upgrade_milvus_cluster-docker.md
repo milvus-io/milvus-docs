@@ -21,7 +21,7 @@ docker-compose down
 docker-compose up -d
 ```
 
-However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from Milvus v2.1.x to v{{var.milvus_operator_version}}.
+However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from Milvus v2.1.x to v{{var.milvus_release_version}}.
 
 ## Migrate the metadata
 
