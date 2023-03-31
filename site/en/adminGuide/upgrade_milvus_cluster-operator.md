@@ -25,69 +25,9 @@ helm -n milvus-operator upgrade milvus-operator milvus-operator/milvus-operator
 
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:
 
-- To upgrade Milvus from v2.1.x to {{var.milvus_release_version}}, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
 - To upgrade Milvus from v2.2.3 or later releases to {{var.milvus_release_version}}, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
-- To upgrade Milvus from a minor release before v2.2.3 to {{var.milvus_release_version}}, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image-version).
-
-## Migrate the metadata
-
-Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus {{var.milvus_release_version}}.
-
-### 1. Create a `.yaml` file for metadata migration
-
-Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v{{var.milvus_release_version}}`. This means that your Milvus cluster will be upgraded from v2.1.4 to v{{var.milvus_release_version}}.
-
-```
-apiVersion: milvus.io/v1beta1
-kind: MilvusUpgrade
-metadata:
-  name: my-release-upgrade
-spec:
-  milvus:
-    namespace: default
-    name: my-release
-  sourceVersion: "v2.1.4"
-  targetVersion: "v{{var.milvus_release_version}}"
-  # below are some omit default values:
-  # targetImage: "milvusdb/milvus:v{{var.milvus_release_tag}}"
-  # toolImage: "milvusdb/meta-migration:v2.2.0"
-  # operation: upgrade
-  # rollbackIfFailed: true
-  # backupPVC: ""
-  # maxRetry: 3
-```
-
-
-
-### 2. Apply the new configuration
-
-Run the following command to apply the new configuration.
-
-```
-$ kubectl apply -f https://github.com/milvus-io/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
-```
-
-
-
-### 3. Check the status of metadata migration
-
-Run the following command to check the status of your metadata migration.
-
-```
-kubectl describe milvus release-name
-```
-
-The status of `ready` in the output means that the metadata migration is successful.
-
-Or, you can also run `kubectl get pod` to check all the pods. If all the pods are `ready`, the metadata migration is successful.
-
-
-
-### 4. Delete `my-release-upgrade`
-
-When the upgrade is successful, delete `my-release-upgrade` in the YAML file.
-
-
+- To upgrade Milvus from a minor release before v2.2.3 to {{var.milvus_release_version}}, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
+- To upgrade Milvus from v2.1.x to {{var.milvus_release_version}}, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
 
 ## Conduct a rolling upgrade
 
@@ -146,7 +86,7 @@ kubectl apply -f milvusupgrade.yml
 ```
 
 
-## Upgrade Milvus by changing its image version
+## Upgrade Milvus by changing its image
 
 In normal cases, you can simply update your Milvus to the latest by changing its image. However, note that there will be a certain downtime when upgrading Milvus in this way.
 
@@ -170,3 +110,61 @@ Then run the following to perform the upgrade:
 ```shell
 kubectl apply -f milvusupgrade.yaml
 ```
+
+## Migrate the metadata
+
+Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus {{var.milvus_release_version}}.
+
+### 1. Create a `.yaml` file for metadata migration
+
+Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v{{var.milvus_release_version}}`. This means that your Milvus cluster will be upgraded from v2.1.4 to v{{var.milvus_release_version}}.
+
+```
+apiVersion: milvus.io/v1beta1
+kind: MilvusUpgrade
+metadata:
+  name: my-release-upgrade
+spec:
+  milvus:
+    namespace: default
+    name: my-release
+  sourceVersion: "v2.1.4"
+  targetVersion: "v{{var.milvus_release_version}}"
+  # below are some omit default values:
+  # targetImage: "milvusdb/milvus:v{{var.milvus_release_tag}}"
+  # toolImage: "milvusdb/meta-migration:v2.2.0"
+  # operation: upgrade
+  # rollbackIfFailed: true
+  # backupPVC: ""
+  # maxRetry: 3
+```
+
+
+
+### 2. Apply the new configuration
+
+Run the following command to apply the new configuration.
+
+```
+$ kubectl apply -f https://github.com/milvus-io/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
+```
+
+
+
+### 3. Check the status of metadata migration
+
+Run the following command to check the status of your metadata migration.
+
+```
+kubectl describe milvus release-name
+```
+
+The status of `ready` in the output means that the metadata migration is successful.
+
+Or, you can also run `kubectl get pod` to check all the pods. If all the pods are `ready`, the metadata migration is successful.
+
+
+
+### 4. Delete `my-release-upgrade`
+
+When the upgrade is successful, delete `my-release-upgrade` in the YAML file.

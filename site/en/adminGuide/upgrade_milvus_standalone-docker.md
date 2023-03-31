@@ -2,7 +2,7 @@
 id: upgrade_milvus_standalone-docker.md
 label: Docker Compose
 order: 1
-group: upgrade_milvus_standalone-helm.md
+group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Docker Compose.
 ---
@@ -11,63 +11,75 @@ summary: Learn how to upgrade Milvus standalone with Docker Compose.
 
 # Upgrade Milvus Standalone with Docker Compose
 
-A major change in Milvus 2.2 is the metadata structure of segment indexes. This topic describes how to use Docker Compose upgrade Milvus from v2.1.x to v2.2.x.
+This topic describes how to upgrade your Milvus using Docker Compose. 
 
-In normal cases, you can upgrade Milvus as follows and a certain downtime is introduced:
+In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v{{var.milvus_release_version}}.
 
-```shell
-// Run the following only after you update the milvus image tag in the docker-compose.yaml
-docker-compose down
-docker-compose up -d
-```
+## Upgrade Milvus by changing its image
 
-However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from Milvus v2.1.x to v{{var.milvus_release_version}}.
+In normal cases, you can upgrade Milvus as follows:
+
+1. Change the Milvus image tag in `docker-compose.yaml`.
+
+    ```yaml
+    ...
+    standalone:
+      container_name: milvus-standalone
+      image: milvusdb/milvus:v{{var.milvus_release_version}}
+    ```
+
+2. Run the following commands to perform the upgrade.
+
+    ```shell
+    docker-compose down
+    docker-compose up -d
+    ```
 
 ## Migrate the metadata
 
 1. Stop all Milvus components.
 
-```
-docker stop <milvus-component-docker-container-name>
-```
+    ```
+    docker stop <milvus-component-docker-container-name>
+    ```
 
 2. Prepare the configuration file `migration.yaml` for meta migration.
 
-```yaml
-# migration.yaml
-cmd:
-  # Option: run/backup/rollback
-  type: run
-  runWithBackup: true
-config:
-  sourceVersion: 2.1.4   # Specify your milvus version
-  targetVersion: {{var.milvus_release_version}}
-  backupFilePath: /tmp/migration.bak
-metastore:
-  type: etcd
-etcd:
-  endpoints:
-    - milvus-etcd:2379  # Use the etcd container name
-  rootPath: by-dev # The root path where data is stored in etcd
-  metaSubPath: meta
-  kvSubPath: kv
-```
+    ```yaml
+    # migration.yaml
+    cmd:
+      # Option: run/backup/rollback
+      type: run
+      runWithBackup: true
+    config:
+      sourceVersion: 2.1.4   # Specify your milvus version
+      targetVersion: {{var.milvus_release_version}}
+      backupFilePath: /tmp/migration.bak
+    metastore:
+      type: etcd
+    etcd:
+      endpoints:
+        - milvus-etcd:2379  # Use the etcd container name
+      rootPath: by-dev # The root path where data is stored in etcd
+      metaSubPath: meta
+      kvSubPath: kv
+    ```
 
 3. Run the migration container.
 
-```
-# Suppose your docker-compose run with the default milvus network,
-# and you put migration.yaml in the same directory with docker-compose.yaml.
-docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
-```
+    ```
+    # Suppose your docker-compose run with the default milvus network,
+    # and you put migration.yaml in the same directory with docker-compose.yaml.
+    docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
+    ```
 
 4. Start Milvus components again with the new Milvus image.
 
-```shell
-// Run the following only after update the milvus image tag in the docker-compose.yaml
-docker-compose down
-docker-compose up -d
-```
+    ```shell
+    // Run the following only after update the milvus image tag in the docker-compose.yaml
+    docker-compose down
+    docker-compose up -d
+    ```
 
 ## What's next
 - You might also want to learn how to:
