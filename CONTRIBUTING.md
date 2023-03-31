@@ -64,7 +64,7 @@ Example:
 
 Markdown pages start with the following front-matter with `id` as the mandatory field:
 
-```
+```yaml
 ---
 
 id: page_id.md
@@ -134,9 +134,9 @@ In the JSON file for a version's sidebar, there are six possible fields:
 
 This example shows some of the "Get Started" section of the sidenav:
 
-```json
+```js
 {
-     "menuList": [
+   "menuList": [
      ...,
      {
       "id": "getstarted",
@@ -196,7 +196,7 @@ This example shows some of the "Get Started" section of the sidenav:
       "label3": "",
       "order": 2
     },
-     ...
-     ]
+    ...
+   ]
 }
 ```
