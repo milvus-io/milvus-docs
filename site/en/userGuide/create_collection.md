@@ -394,7 +394,7 @@ Output:
             <td><code>true</code> or <code>false</code></td>
         </tr>
         <tr>
-            <td><code>auto_id</code></td>
+            <td><code>autoID</code></td>
             <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
             <td><code>true</code> or <code>false</code></td>
         </tr>
