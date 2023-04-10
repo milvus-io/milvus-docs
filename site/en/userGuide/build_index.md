@@ -382,16 +382,16 @@ Build the index by specifying the vector field name and index parameters.
 {{fragments/multiple_code.md}}
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
+from pymilvus import Collection, utility
+# Get an existing collection.
+collection = Collection("book")      
 collection.create_index(
   field_name="book_intro", 
   index_params=index_params
 )
-```
 
-```python
-Status(code=0, message='')
+utility.index_building_progress("book")
+# Output: {'total_rows': 0, 'indexed_rows': 0}
 ```
 
 ```javascript
@@ -403,7 +403,7 @@ await milvusClient.indexManager.createIndex({
 ```
 
 ```go
-err = milvusClient.CreateIndex(
+err := milvusClient.CreateIndex(
   context.Background(),        // ctx
   "book",                      // CollectionName
   "book_intro",                // fieldName
