@@ -18,7 +18,7 @@ Release date: 13 April, 2023
 
 Please refrain from using version 2.2.5 due to several critical issues that require immediate attention. Version 2.2.6 addresses these issues. One of the critical issues is the inability to recycle dirty binlog data. We highly recommend using version 2.2.6 version instead of version 2.2.5 to avoid any potential complications.
 
-If you hit the issue where data on object storage cannot be recycled, upgrade your Milvus to v2.2.6 and run [the script](#) to fix these issues.
+If you hit the issue where data on object storage cannot be recycled, upgrade your Milvus to v2.2.6 to fix these issues.
 
 ### Bugfix
 
