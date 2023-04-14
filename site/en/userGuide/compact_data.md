@@ -29,7 +29,7 @@ collection.compact()
 ```
 
 ```javascript
-const res = await milvusClient.collectionManager.compact({
+const res = await milvusClient.compact({
   collection_name: "book",
 });
 const compactionID = res.compactionID;
@@ -127,7 +127,7 @@ collection.get_compaction_state()
 ```
 
 ```javascript
-const state = await milvusClient.collectionManager.getCompactionState({
+const state = await milvusClient.getCompactionState({
     compactionID
 });
 ```

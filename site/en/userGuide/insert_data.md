@@ -95,7 +95,7 @@ mr = collection.insert(data)
 ```
 
 ```javascript
-const mr = await milvusClient.dataManager.insert({
+const mr = await milvusClient.insert({
   collection_name: "book",
   fields_data: data,
 });

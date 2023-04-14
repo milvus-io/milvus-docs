@@ -22,7 +22,7 @@ collection.drop_partition("novel")
 ```
 
 ```javascript
-await milvusClient.partitionManager.dropPartition({
+await milvusClient.dropPartition({
   collection_name: "book",
   partition_name: "novel",
 });

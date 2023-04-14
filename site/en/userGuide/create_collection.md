@@ -635,7 +635,7 @@ collection = Collection(
 ```
 
 ```javascript
-await milvusClient.collectionManager.createCollection(params);
+await milvusClient.createCollection(params);
 ```
 
 ```go

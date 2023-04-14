@@ -85,7 +85,7 @@ collection.delete(expr)
 ```
 
 ```javascript
-await milvusClient.dataManager.deleteEntities({
+await milvusClient.deleteEntities({
   collection_name: "book",
   expr: expr,
 });

@@ -24,7 +24,7 @@ collection.create_partition("novel")
 ```
 
 ```javascript
-await milvusClient.partitionManager.createPartition({
+await milvusClient.createPartition({
   collection_name: "book",
   partition_name: "novel",
 });

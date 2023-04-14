@@ -29,7 +29,7 @@ utility.create_alias(
 ```
 
 ```javascript
-await milvusClient.collectionManager.createAlias({
+await milvusClient.createAlias({
   collection_name: "book",
   alias: "publication",
 });
@@ -179,7 +179,7 @@ utility.drop_alias(alias = "publication")
 ```
 
 ```javascript
-await milvusClient.collectionManager.dropAlias({
+await milvusClient.dropAlias({
   alias: "publication",
 });
 ```
@@ -305,7 +305,7 @@ utility.alter_alias(
 ```
 
 ```javascript
-await milvusClient.collectionManager.alterAlias({
+await milvusClient.alterAlias({
   collection_name: "book",
   alias: "publication",
 });

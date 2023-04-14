@@ -26,7 +26,7 @@ collection.load()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.loadCollection({
   collection_name: "book",
 });
 ```
@@ -77,7 +77,7 @@ res = collection.search(**search_param)
 ```
 
 ```javascript
-const results = await milvusClient.dataManager.search({
+const results = await milvusClient.search({
   collection_name: "book",
   expr: "word_count <= 11000",
   vectors: [[0.1, 0.2]],

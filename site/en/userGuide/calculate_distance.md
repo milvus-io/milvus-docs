@@ -253,7 +253,7 @@ collection.load()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.loadCollection({
   collection_name: "book",
 });
 ```
