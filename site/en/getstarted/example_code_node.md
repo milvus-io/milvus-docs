@@ -202,7 +202,7 @@ tsc MilvusHello.ts
 
 ## 6. Run the example
 ```bash
-node MilvusHello.ts
+node MilvusHello.js
 ```
 
 
