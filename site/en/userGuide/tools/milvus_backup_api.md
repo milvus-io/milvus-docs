@@ -1,8 +1,8 @@
 ---
-id: milvus_backup-api.md
+id: milvus_backup_api.md
 lablel: RESTful API
 order: 1
-group: milvus_backup-cli.md
+group: milvus_backup_cli.md
 related_key: Milvus Backup
 summary: Learn how to use Milvus Backup through API
 ---

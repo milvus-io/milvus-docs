@@ -1,8 +1,8 @@
 ---
-id: milvus_backup-cli.md
+id: milvus_backup_cli.md
 lablel: CLI
 order: 0
-group: milvus_backup-cli.md
+group: milvus_backup_cli.md
 related_key: Milvus Backup
 summary: Learn how to use Milvus Backup through CLI
 ---
