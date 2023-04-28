@@ -1,13 +1,7 @@
 ---
 id: install_offline-docker.md
-label: Docker Compose
-order: 1
-group: install_offline-helm.md
-related_key: offline
 summary: Learn how to install Milvus with Docker Compose offline.
 ---
-
-{{tab}}
 
 # Install Milvus Offline with Docker Compose
 
