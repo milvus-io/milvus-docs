@@ -18,31 +18,31 @@ In this update, we have focused on resolving various issues reported by our user
 
 ### Bugfix
 
-- Fixed a panic caused by not removing metadata of a dropped segment from the DataNode. [#23492](https://github.com/milvus-io/milvus/pull/23492)
-- Fixed a bug that caused forever blocking due to the release of a non-loaded partition. [#23612](https://github.com/milvus-io/milvus/pull/23612)
-- To prevent the query service from becoming unavailable, automatic balancing at the channel level has been disabled as a workaround. [#23632](https://github.com/milvus-io/milvus/pull/23632) [#23724](https://github.com/milvus-io/milvus/pull/23724)
-- Cancel failed tasks in the scheduling queue promptly to prevent an increase in QueryCoord scheduling latency. [#23649](https://github.com/milvus-io/milvus/pull/23649)
-- Fixed compatibility bug and recalculate segment rows to prevent service queries from being unavailable. [#23696](https://github.com/milvus-io/milvus/pull/23696)
-- Fixed a bug in the superuser password validation logic. [#23729](https://github.com/milvus-io/milvus/pull/23729)
-- Fixed the issue of shard detector rewatch failure, which was caused by returning a closed channel. [#23734](https://github.com/milvus-io/milvus/pull/23734)
-- Fixed a loading failure caused by unhandled interrupts in the AWS SDK. [#23736](https://github.com/milvus-io/milvus/pull/23736)
-- Fixed the "HasCollection" check in DataCoord. [#23709](https://github.com/milvus-io/milvus/pull/23709)
-- Fixed the bug that assigned all available nodes to a single replica incorrectly. [#23626](https://github.com/milvus-io/milvus/pull/23626)
+- Fixed a panic caused by not removing metadata of a dropped segment from the DataNode. ([#23492](https://github.com/milvus-io/milvus/pull/23492))
+- Fixed a bug that caused forever blocking due to the release of a non-loaded partition. ([#23612](https://github.com/milvus-io/milvus/pull/23612))
+- To prevent the query service from becoming unavailable, automatic balancing at the channel level has been disabled as a workaround. ([#23632](https://github.com/milvus-io/milvus/pull/23632)) ([#23724](https://github.com/milvus-io/milvus/pull/23724))
+- Cancel failed tasks in the scheduling queue promptly to prevent an increase in QueryCoord scheduling latency. ([#23649](https://github.com/milvus-io/milvus/pull/23649))
+- Fixed compatibility bug and recalculate segment rows to prevent service queries from being unavailable. ([#23696](https://github.com/milvus-io/milvus/pull/23696))
+- Fixed a bug in the superuser password validation logic. ([#23729](https://github.com/milvus-io/milvus/pull/23729))
+- Fixed the issue of shard detector rewatch failure, which was caused by returning a closed channel. ([#23734](https://github.com/milvus-io/milvus/pull/23734))
+- Fixed a loading failure caused by unhandled interrupts in the AWS SDK. ([#23736](https://github.com/milvus-io/milvus/pull/23736))
+- Fixed the "HasCollection" check in DataCoord. ([#23709](https://github.com/milvus-io/milvus/pull/23709))
+- Fixed the bug that assigned all available nodes to a single replica incorrectly. ([#23626](https://github.com/milvus-io/milvus/pull/23626))
 
 ### Enhancement
 
-- Optimized the display of RootCoord histogram metrics. [#23567](https://github.com/milvus-io/milvus/pull/23567)
-- Reduced peak memory consumption during collection loading. [#23138](https://github.com/milvus-io/milvus/pull/23138)
-- Removed unnecessary handoff event-related metadata. [#23565](https://github.com/milvus-io/milvus/pull/23565)
-- Added a plugin logic to QueryNode to support the dynamic loading of shared library files. [#23599](https://github.com/milvus-io/milvus/pull/23599)
-- Supports load balancing with replica granularity. [#23629](https://github.com/milvus-io/milvus/pull/23629)
-- Released a load-balancing strategy based on scores. [#23805](https://github.com/milvus-io/milvus/pull/23805)
-- Added a coroutine pool to limit the concurrency of cgo calls triggered by "delete". [#23680](https://github.com/milvus-io/milvus/pull/23680)
-- Improved the compaction algorithm to make the distribution of segment sizes tend towards the ideal value. [#23692](https://github.com/milvus-io/milvus/pull/23692)
-- Changed the default shard number to 1. [#23593](https://github.com/milvus-io/milvus/pull/23593)
-- Improved search grouping algorithm to enhance throughput. [#23721](https://github.com/milvus-io/milvus/pull/23721)
-- Code refactoring: Separated the read, build, and load DiskANN parameters. [#23722](https://github.com/milvus-io/milvus/pull/23722)
-- Updated etcd and Minio versions. [#23765](https://github.com/milvus-io/milvus/pull/23765)
+- Optimized the display of RootCoord histogram metrics. ([#23567](https://github.com/milvus-io/milvus/pull/23567))
+- Reduced peak memory consumption during collection loading. ([#23138](https://github.com/milvus-io/milvus/pull/23138))
+- Removed unnecessary handoff event-related metadata. ([#23565](https://github.com/milvus-io/milvus/pull/23565))
+- Added a plugin logic to QueryNode to support the dynamic loading of shared library files. ([#23599](https://github.com/milvus-io/milvus/pull/23599))
+- Supports load balancing with replica granularity. ([#23629](https://github.com/milvus-io/milvus/pull/23629))
+- Released a load-balancing strategy based on scores. ([#23805](https://github.com/milvus-io/milvus/pull/23805))
+- Added a coroutine pool to limit the concurrency of cgo calls triggered by "delete". ([#23680](https://github.com/milvus-io/milvus/pull/23680))
+- Improved the compaction algorithm to make the distribution of segment sizes tend towards the ideal value. ([#23692](https://github.com/milvus-io/milvus/pull/23692))
+- Changed the default shard number to 1. ([#23593](https://github.com/milvus-io/milvus/pull/23593))
+- Improved search grouping algorithm to enhance throughput. ([#23721](https://github.com/milvus-io/milvus/pull/23721))
+- Code refactoring: Separated the read, build, and load DiskANN parameters. ([#23722](https://github.com/milvus-io/milvus/pull/23722))
+- Updated etcd and Minio versions. ([#23765](https://github.com/milvus-io/milvus/pull/23765))
 
 ## v2.2.6
 
