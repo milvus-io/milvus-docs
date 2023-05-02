@@ -361,7 +361,7 @@ results = collection.search(
 	param=search_params,
 	limit=10, 
 	expr=None,
-	output_fields=['title'] # set the names of the fields you want to retrieve from the search result.
+	output_fields=['book_id'], # set the names of the fields you want to retrieve from the search result.
 	consistency_level="Strong"
 )
 
@@ -374,7 +374,7 @@ results[0].distances
 # get the value of an output field specified in the search request.
 # vector fields are not supported yet.
 hit = results[0][0]
-hit.entity.get('title')
+hit.entity.get('book_id')
 ```
 
 ```javascript
