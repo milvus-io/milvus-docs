@@ -1,9 +1,5 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-label: Docker Compose
-order: 2
-group: upgrade_milvus_cluster-operator.md
-related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Docker Compose.
 ---
 
