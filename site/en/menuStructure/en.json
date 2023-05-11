@@ -210,7 +210,7 @@
     },
     {
       "id": "using_milvusclient.md",
-      "title": "Use the MilvusClient",
+      "title": "Use MilvusClient",
       "label1": "userguide",
       "label2": "milvusclient",
       "label3": "",
