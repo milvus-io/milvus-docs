@@ -24,10 +24,10 @@ Through running the example code we provided, you will have a primary understand
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://github.com/milvus-io/pymilvus/blob/master/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
+$ wget https://github.com/milvus-io/pymilvus/blob/master/examples/hello_milvus.py
 ```
 
 
