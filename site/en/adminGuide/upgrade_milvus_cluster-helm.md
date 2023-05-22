@@ -49,7 +49,7 @@ You can choose the upgrade path for your Milvus as follows:
 - [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v{{var.milvus_release_version}}.
 - [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v{{var.milvus_release_version}}.
 
-<div class="display: none;">
+<div style="display: none;">
     
 ## Conduct a rolling upgrade
 
