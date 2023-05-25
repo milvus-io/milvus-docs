@@ -361,7 +361,7 @@ results = collection.search(
 	param=search_params,
 	limit=10, 
 	expr=None,
-	output_fields=['title'] # set the names of the fields you want to retrieve from the search result.
+	output_fields=['title'], # set the names of the fields you want to retrieve from the search result.
 	consistency_level="Strong"
 )
 
