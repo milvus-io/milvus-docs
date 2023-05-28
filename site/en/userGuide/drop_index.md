@@ -46,6 +46,12 @@ milvusClient.dropIndex(
 );
 ```
 
+```c#
+await milvusClient.DropIndexAsync(
+    collectionName: "book", 
+    fieldName: "book_intro");
+```
+
 ```shell
 delete index -c book
 ```
@@ -113,6 +119,25 @@ curl -X 'DELETE' \
         </tr>
         <tr>
             <td><code>FieldName</code></td>
+            <td>Name of the vector field to drop index on.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to drop index on.</td>
+        </tr>
+        <tr>
+            <td><code>fieldName</code></td>
             <td>Name of the vector field to drop index on.</td>
         </tr>
     </tbody>

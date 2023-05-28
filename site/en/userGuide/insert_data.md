@@ -72,6 +72,24 @@ for (long i = 0L; i < 2000; ++i) {
 }
 ```
 
+```c#
+Random ran = new Random();
+List<long> bookIds = new();
+List<long> wordCounts = new();
+List<List<float>> bookIntros = new();
+for (long i = 0L; i < 2000; ++i)
+{
+  bookIds.Add(i);
+  wordCounts.Add(i + 10000);
+  List<float> vector = new();
+  for (int k = 0; k < 2; ++k)
+  {
+    vector.Add(ran.Next());
+  }
+  bookIntros.Add(vector);
+}
+```
+
 ```shell
 # Prepare your data in a CSV file. Milvus CLI only supports importing data from local or remote files.
 ```
@@ -127,6 +145,18 @@ InsertParam insertParam = InsertParam.newBuilder()
   .withFields(fields)
   .build();
 milvusClient.insert(insertParam);
+```
+
+```c#
+MilvusMutationResult result = await milvusClient.InsertAsync(
+  collectionName: "book",
+  new Field[]
+  {
+    Field.Create("book_id",bookIds),
+    Field.Create("word_count",wordCounts),
+    Field.CreateFloatVector("book_intro",bookIntros),
+  },
+  "novel");
 ```
 
 ```shell
@@ -283,6 +313,33 @@ Output:
 	</tr>
 	<tr>
 		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to insert data into.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>fieldName</code></td>
+		<td>Name of the field to insert data into.</td>
+	</tr>
+  <tr>
+		<td><code>fields</code></td>
+		<td>Data to insert into each field.</td>
+	</tr>
+		<tr>
+		<td><code>collectionName</code></td>
+		<td>Name of the collection to insert data into.</td>
+	</tr>
+	<tr>
+		<td><code>partitionName</code> (optional)</td>
 		<td>Name of the partition to insert data into.</td>
 	</tr>
 	</tbody>

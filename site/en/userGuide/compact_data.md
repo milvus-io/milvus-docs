@@ -48,6 +48,11 @@ R<ManualCompactionResponse> response = milvusClient.manualCompaction(
 long compactionID = response.getData().getCompactionID();
 ```
 
+```c#
+DetailedMilvusCollection collectionInfo = await client.DescribeCollectionAsync("book");
+long compactionId = await client.ManualCompactionAsync(collectionInfo.CollectionId);
+```
+
 ```shell
 compact -c book
 ```
@@ -101,6 +106,21 @@ Output:
     </tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to compact data.</td>
+        </tr>
+    </tbody>
+</table>
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -141,6 +161,10 @@ milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
   .withCompactionID(compactionID)
   .build()
 );
+```
+
+```c#
+MilvusCompactionState state = await client.GetCompactionStateAsync(compactionId);
 ```
 
 ```shell

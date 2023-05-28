@@ -43,6 +43,10 @@ const expr = "book_id in [0,1]";
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
+```c#
+string expr = "book_id in [0,1]";
+```
+
 ```shell
 delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
@@ -102,6 +106,12 @@ milvusClient.delete(
     .withExpr(DELETE_EXPR)
     .build()
 );
+```
+
+```c#
+await milvusClient.DeleteAsync(
+	collectionName: "book", 
+	expr: expr);
 ```
 
 ```shell
@@ -194,6 +204,29 @@ Output:
 	</tr>
     <tr>
 		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collectionName</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+    <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+    <tr>
+		<td><code>partitionName</code> (optional)</td>
 		<td>Name of the partition to delete entities from.</td>
 	</tr>
 	</tbody>
