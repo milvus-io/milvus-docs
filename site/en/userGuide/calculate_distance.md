@@ -46,6 +46,20 @@ vectors_right = {"float_vectors": external_vectors}
 // Java User Guide will be ready soon.
 ```
 
+```c#
+var vectorsLeft = MilvusVectors.CreateIds(
+  collectionName: "book",, 
+  fieldName: "book_intro",
+  ids: new long[] {1,2});
+
+var vectorsRight = MilvusVectors.CreateFloatVectors(
+  new List<List<float>> {
+    new List<float> { 1,2},
+    new List<float> { 3,4},
+    new List<float> { 5,6},
+    new List<float> { 7,8},});
+```
+
 ```shell
 // CLI User Guide will be ready soon.
 ```
@@ -96,6 +110,41 @@ vectors_right='{
 	</tr>
     <tr>
 		<td><code>float_vectors</code> or <code>bin_vectors</code></td>
+		<td>Type of the vectors.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>leftVectors</code> and <code>rightVectors</code></td>
+		<td>Vectors on the left and right side of the operator. Dict type that can be represented as <code>{"ids": [primary_key_1, primary_key_2, ... primary_key_n], "collection": "collection_name", "partition": "partition_name", "field": "vectorFieldName"}</code>, <code>{"floatVectors": [[1.0, 2.0], [3.0, 4.0], ... [9.0, 10.0]]}</code>, or <code>{"binaryVectors": [b'', b'N', ... b'Ê']}</code>.</td>
+	</tr>
+    <tr>
+		<td><code>ids</code></td>
+		<td>List of primary key of entities that in the collection.</td>
+	</tr>
+    <tr>
+		<td><code>collectionName</code></td>
+		<td>Name of the collection that holds the entities.</td>
+	</tr>
+    <tr>
+		<td><code>partitionName</code></td>
+		<td>Name of the partition that holds the entities.</td>
+	</tr>
+    <tr>
+		<td><code>fieldName</code></td>
+		<td>Name of the vector field in the collection.</td>
+	</tr>
+    <tr>
+		<td><code>floatVectors</code> or <code>bin_vectors</code></td>
 		<td>Type of the vectors.</td>
 	</tr>
 	</tbody>
@@ -168,6 +217,10 @@ params = {
 // Java User Guide will be ready soon.
 ```
 
+```c#
+var metricType = MilvusMetricType.IP;
+```
+
 ```shell
 // CLI User Guide will be ready soon.
 ```
@@ -192,6 +245,41 @@ params='[
             <td>Calculation parameters.</td>
             <td>N/A</td>
         </tr>
+        <tr>
+            <td><code>metric</code></td>
+            <td>Metric types used for calculation.</td>
+            <td>For floating-point vectors:
+                <ul>
+                    <li><code>L2</code> (Euclidean distance)</li>
+                    <li><code>IP</code> (Inner product)</li>
+                </ul>
+                For binary vectors:
+                <ul>
+                    <li><code>JACCARD</code> (Jaccard distance)</li>
+                    <li><code>TANIMOTO</code> (Tanimoto distance)</li>
+                    <li><code>HAMMING</code> (Hamming distance)</li>
+                    <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                    <li><code>SUBSTRUCTURE</code> (Substructure)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>dim</code></td>
+            <td>Dimension of the vector.</td>
+            <td>N/A</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
         <tr>
             <td><code>metric</code></td>
             <td>Metric types used for calculation.</td>
@@ -277,6 +365,10 @@ milvusClient.loadCollection(
 );
 ```
 
+```c#
+await milvusClient.LoadCollectionAsync(collectionName:"book");
+```
+
 ```shell
 load -c book
 ```
@@ -315,6 +407,13 @@ print(results)
 
 ```java
 // Java User Guide will be ready soon.
+```
+
+```c#
+var result = await milvusClient.CalDistanceAsync(
+  vectorsLeft, 
+  vectorsRight, 
+  metricType);
 ```
 
 ```shell
