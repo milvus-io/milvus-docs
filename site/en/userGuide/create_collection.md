@@ -140,6 +140,14 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .build();
 ```
 
+```c#
+FieldType[] fieldTypes = new FieldType[]{
+    FieldType.Create<long>("book_id", isPrimaryKey:true),
+    FieldType.Create<long>("word_count"),
+    FieldType.CreateFloatVector("book_intro",dim: 2)
+};
+```
+
 ```shell
 create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_count -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
@@ -496,6 +504,80 @@ Output:
 	</tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>Name</code></td>
+            <td>Name of the field to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>DataType</code></td>
+            <td>Data type of the field to create.</td>
+            <td>For primary key field:
+                <ul>
+                    <li><code>FieldType.Create<long>()</code></li>
+                    <li><code>FieldType.CreateVarChar()</code> (VARCHAR)</li>
+                </ul>
+                For scalar field:
+                <ul>
+                    <li><code>FieldType.Create<bool>()</code> (bool)</li>
+                    <li><code>FieldType.Create<int8>()</code> (Int8)</li>
+                    <li><code>FieldType.Create<int16>()</code> (Int16)</li>
+                    <li><code>FieldType.Create<int>()</code> (int)</li>
+                    <li><code>FieldType.Create<long>()</code> (long)</li>
+                    <li><code>FieldType.Create<float>()</code> (float)</li>
+                    <li><code>FieldType.Create<double>()</code> (double)</li>
+                    <li><code>FieldType.CreateVarChar()</code> (string)</li>
+                </ul>
+                For vector field:
+                <ul>
+                    <li><code>FieldType.Create(name,MilvusDataType.BinaryVector)</code> (Binary vector)</li>
+                    <li><code>entity.CreateFloatVector()</code> (Float vector)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
+            <td>Switch to control if the field is primary key field.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>AutoID</code></td>
+            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>Dimension</code> (Mandatory for vector field)</td>
+            <td>Dimension of the vector.</td>
+            <td>[1, 32768]</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>Description</code> (Optional)</td>
+            <td>Description of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>ShardsNum</code></td>
+            <td>Number of the shards for the collection to create.</td>
+            <td>[1,64]</td>
+        </tr>
+	</tbody>
+</table>
+
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -658,6 +740,13 @@ if err != nil {
 
 ```java
 milvusClient.createCollection(createCollectionReq);
+```
+
+```c#
+await milvusClient.CreateCollectionAsync("book", fieldTypes);
+```
+
+```shell
 ```
 
 ```shell

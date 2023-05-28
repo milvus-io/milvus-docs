@@ -66,6 +66,16 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 );
 ```
 
+```c#
+using IO.Milvus.Client.gRPC;
+
+IMilvusClient milvusClient = new MilvusGrpcClient(
+	"http://localhost",
+	"19530",
+	"username",
+	"password");
+```
+
 ```shell
 connect -h localhost -p 19530 -a default
 ```
@@ -171,6 +181,25 @@ curl localhost:9091/api/v1/health
 	</tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>Endpoint</code></td>
+		<td>Url of the Milvus server.</td>
+	</tr>
+	<tr>
+		<td><code>Port</code></td>
+		<td>Port of the Milvus server.</td>
+	</tr>
+	</tbody>
+</table>
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -234,6 +263,10 @@ milvusClient.Close()
 
 ```java
 milvusClient.close()
+```
+
+```c#
+milvusClient.Close();
 ```
 
 ```shell

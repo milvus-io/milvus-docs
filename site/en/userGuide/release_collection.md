@@ -40,6 +40,10 @@ milvusClient.releaseCollection(
 );
 ```
 
+```c#
+await client.ReleaseCollectionAsync("book");
+```
+
 ```shell
 release -c book
 ```
@@ -122,6 +126,21 @@ Output:
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
+            <td>Name of the collection to release.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to release.</td>
         </tr>
     </tbody>

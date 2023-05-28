@@ -42,6 +42,10 @@ milvusClient.dropCollection(
 );
 ```
 
+```c#
+await milvusClient.DropCollectionAsync("book");
+```
+
 ```shell
 delete collection -c book
 ```
@@ -124,6 +128,21 @@ Output:
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to drop.</td>
         </tr>
     </tbody>

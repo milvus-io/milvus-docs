@@ -103,6 +103,13 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 System.out.println(response.getProgress());
 ```
 
+```c#
+await milvusClient.LoadCollectionAsync("book");
+
+// You can check the loading progress
+var progress = await milvusClient.GetLoadingProgressAsync(collectionName);
+```
+
 ```shell
 load -c book
 ```
@@ -184,6 +191,21 @@ Output:
 </table>
 
 <table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to load.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
 	<thead>
         <tr>
             <th>Parameter</th>
