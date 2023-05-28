@@ -50,6 +50,10 @@ milvusClient.loadCollection(
 );
 ```
 
+```c#
+await milvusClient.LoadCollectionAsync(collectionName:"book");
+```
+
 ```shell
 load -c book
 ```
@@ -108,6 +112,17 @@ QueryParam queryParam = QueryParam.newBuilder()
   .withLimit(10L)
   .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
+```
+
+```c#
+string expr = "book_id in [2,4,6,8]";
+
+var queryResult = await milvusClient.QueryAsync(
+	collectionName: "book",
+	expr,
+    new[] { "book_id", "word_count" }
+	offset: 0L,
+	limit: 10L);
 ```
 
 ```shell
@@ -293,6 +308,38 @@ Output:
 	</tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>collectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>outFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>consistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+	</tr>
+	</tbody>
+</table>
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -357,6 +404,10 @@ for _, qr := range queryResult {
 QueryResultsWrapper wrapperQuery = new QueryResultsWrapper(respQuery.getData());
 System.out.println(wrapperQuery.getFieldWrapper("book_id").getFieldData());
 System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
+```
+
+```c#
+Console.WriteLine(queryResult.FieldsData);
 ```
 
 ```shell

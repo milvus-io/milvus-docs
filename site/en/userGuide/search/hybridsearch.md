@@ -50,6 +50,12 @@ milvusClient.loadCollection(
 );
 ```
 
+```c#
+await milvusClient.LoadCollectionAsync(
+  collectionName: "book"
+);
+```
+
 ```shell
 load -c book
 ```
@@ -129,6 +135,24 @@ SearchParam searchParam = SearchParam.newBuilder()
   .withParams(SEARCH_PARAM)
   .build();
 R<SearchResults> respSearch = milvusClient.search(searchParam);
+```
+
+```c#
+List<string> searchOutputFields = new() { "book_id" };
+List<List<float>> searchVectors = new() { new() { 0.1f, 0.2f } };
+
+var searchResult = await milvusClient.SearchAsync(
+  MilvusSearchParameters.Create(
+    collectionName,
+    "book_intro",
+    searchOutputFields)
+    .WithVectors(searchVectors)
+    .WithConsistencyLevel(MilvusConsistencyLevel.Strong)
+    .WithMetricType(MilvusMetricType.IP)
+    .WithTopK(topK: 2)
+    .WithParameter("nprobe", "10")
+    .WithParameter("offset", "5")
+    .WithExpr("word_count <= 11000"));
 ```
 
 ```shell
@@ -430,6 +454,58 @@ Output:
 	</tr>
   <tr>
 		<td><code>Params</code></td>
+		<td>Search parameter(s) specific to the index.</td>
+    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>metricType</code></td>
+		<td>Metric type used for search.</td>
+    <td>This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+  <tr>
+		<td><code>outFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+		<td><code>TopK</code></td>
+		<td>Number of the most similar results to return.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+    <td>N/A</td>
+  </tr>
+<tr>
+		<td><code>vectorFieldName</code></td>
+		<td>Name of the field to search on.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>params</code></td>
 		<td>Search parameter(s) specific to the index.</td>
     <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>

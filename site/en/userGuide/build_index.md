@@ -56,6 +56,11 @@ final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
 final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
+```c#
+var indexType = MilvusIndexType.IVF_FLAT;
+var indexParams = new Dictionary<string,string>{{ "nlist","1024"} };
+```
+
 ```shell
 create index
 
@@ -298,6 +303,46 @@ curl -X 'POST' \
 	</tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+        <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>indexType</code></td>
+		<td>Type of index used to accelerate the vector search.</td>
+        <td>For floating point vectors:
+            <ul>
+                <li><code>FLAT</code> (FLAT)</li>
+                <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
+                <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
+                <li><code>IVF_PQ</code> (IVF_PQ)</li>
+                <li><code>HNSW</code> (HNSW)</li>
+                <li><code>ANNOY</code> (ANNOY)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
+            </ul>
+            For binary vectors:
+            <ul>
+                <li><code>BIN_FLAT</code> (BIN_FLAT)</li>
+                <li><code>BIN_IVF_FLAT</code> (BIN_IVF_FLAT)</li>
+            </ul>
+        </td>
+	</tr>
+	<tr>
+		<td><code>extraParams</code></td>
+		<td>Building parameter(s) specific to the index.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
+	</tr>
+    <tr>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+    </tr>
+	</tbody>
+</table>
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -426,6 +471,16 @@ milvusClient.createIndex(
     .withSyncMode(Boolean.FALSE)
     .build()
 );
+```
+
+```c#
+await milvusClient.CreateIndexAsync(
+    collectionName: "book",
+    fieldName: "book_intro",
+    indexName: "default",
+    milvusIndexType: MilvusIndexType.IVF_FLAT,
+    milvusMetricType: MilvusMetricType.L2,
+    extraParams: indexParams);
 ```
 
 ```shell

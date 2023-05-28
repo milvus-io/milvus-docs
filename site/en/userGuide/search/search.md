@@ -50,6 +50,10 @@ milvusClient.loadCollection(
 );
 ```
 
+```c#
+await milvusClient.LoadCollectionAsync(collectionName:"book");
+```
+
 ```shell
 load -c book
 ```
@@ -92,6 +96,10 @@ sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
 ```java
 final Integer SEARCH_K = 2;                       // TopK
 final String SEARCH_PARAM = "{\"nprobe\":10, \”offset\”:5}";    // Params
+```
+
+```c#
+int topK = 2;
 ```
 
 ```shell
@@ -282,6 +290,27 @@ Output:
 	</tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    	<th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+		<td><code>topK</code></td>
+		<td>Number of the most similar results to return.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index.</td>
+    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
 
 <table class="language-shell">
     <thead>
@@ -420,6 +449,23 @@ SearchParam searchParam = SearchParam.newBuilder()
 		.withParams(SEARCH_PARAM)
 		.build();
 R<SearchResults> respSearch = milvusClient.search(searchParam);
+```
+
+```c#
+List<string> searchOutputFields = new() { "book_id" };
+List<List<float>> searchVectors = new() { new() { 0.1f, 0.2f } };
+
+var searchResult = await milvusClient.SearchAsync(
+    MilvusSearchParameters.Create(
+		collectionName: "book", 
+		vectorFieldName: "book_intro", 
+		outFields: searchOutputFields)
+        .WithVectors(searchVectors)
+        .WithConsistencyLevel(MilvusConsistencyLevel.Strong)
+        .WithMetricType(MilvusMetricType.IP)
+        .WithTopK(topK)
+        .WithParameter("nprobe", "10")
+        .WithParameter("offset", "5"));
 ```
 
 ```shell
@@ -633,7 +679,52 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tbody>
 </table>
 
-
+<table class="language-c#">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>collectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>metricType</code></td>
+		<td>Metric type used for search.</td>
+    <td>This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+  <tr>
+		<td><code>outFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+    <td>N/A</td>
+  </tr>
+<tr>
+		<td><code>vectorFieldName</code></td>
+		<td>Name of the field to search on.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>consistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+	</tr>
+	</tbody>
+</table>
 
 Check the primary key values of the most similar vectors and their distances.
 
@@ -660,6 +751,10 @@ for _, sr := range searchResult {
 SearchResultsWrapper wrapperSearch = new SearchResultsWrapper(respSearch.getData().getResults());
 System.out.println(wrapperSearch.getIDScore(0));
 System.out.println(wrapperSearch.getFieldData("book_id", 0));
+```
+
+```c#
+Console.WriteLine(searchResult.Results);
 ```
 
 ```shell
@@ -693,6 +788,10 @@ milvusClient.releaseCollection(
 		ReleaseCollectionParam.newBuilder()
                 .withCollectionName("book")
                 .build());
+```
+
+```c#
+await milvusClient.ReleaseCollectionAsync("book");
 ```
 
 ```shell
