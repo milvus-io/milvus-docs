@@ -94,10 +94,11 @@ position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length
   - FLOAT: numpy.float32
   - DOUBLE: numpy.double
   - VARCHAR: VARCHAR
-  - JSON: JSON
 - Vector field supports:
   - BINARY_VECTOR: Binary vector
   - FLOAT_VECTOR: Float vector
+
+JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](dynamic_schema.md#JSON-a-new-data-type)
 
 ## Collection schema
 
