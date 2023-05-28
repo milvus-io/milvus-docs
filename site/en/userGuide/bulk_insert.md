@@ -16,11 +16,11 @@ Organize the data to be inserted into a Milvus collection in a row-based JSON fi
 
 You can name the file whatever makes sense, but the root key must be **rows**. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.
 
-The following is an example of a row-based JSON file.
+The following is an example of a row-based JSON file. You can include fields not defined in the collection schema as dynamic fields. For details, refer to [Dynamic Schema](dynamic_schema.md).
 
 <div class="none-filter">
 
-```
+```python
 {
   "rows":[
     {"book_id": 101, "word_count": 13, "book_intro": [1.1, 1.2]},
@@ -28,6 +28,18 @@ The following is an example of a row-based JSON file.
     {"book_id": 103, "word_count": 7, "book_intro": [3.1, 3.2]},
     {"book_id": 104, "word_count": 12, "book_intro": [4.1, 4.2]},
     {"book_id": 105, "word_count": 34, "book_intro": [5.1, 5.2]}
+  ]
+}
+
+# To include dynamic fields, do as follows:
+
+{
+  "rows":[
+    {"book_id": 101, "word_count": 13, "book_intro": [1.1, 1.2], "dynamic_field": "I'm dynamic"},
+    {"book_id": 102, "word_count": 25, "book_intro": [2.1, 2.2], "dynamic_field": "I'm dynamic"},
+    {"book_id": 103, "word_count": 7, "book_intro": [3.1, 3.2], "dynamic_field": "I'm dynamic"},
+    {"book_id": 104, "word_count": 12, "book_intro": [4.1, 4.2], "dynamic_field": "I'm dynamic"},
+    {"book_id": 105, "word_count": 34, "book_intro": [5.1, 5.2], "dynamic_field": "I'm dynamic"}
   ]
 }
 ```
@@ -61,6 +73,12 @@ numpy.save('book_intro.npy', arr)
 ```
 
 </div>
+
+You can also add dynamic fields using NumPy files. For details, refer to [Dynamic Schema](dynamic_schema.md).
+
+```
+numpy.save('$meta.py', numpy.array([ json.dumps({x: 2}), json.dumps({y: 8, z: 2}) ]))
+```
 
 <div class="alert note">
 
