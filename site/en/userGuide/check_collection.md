@@ -47,6 +47,13 @@ if (respHasCollection.getData() == Boolean.TRUE) {
 }
 ```
 
+```c#
+bool hasCollection = await milvusClient.HasCollectionAsync("book");
+
+if(hasCollection)
+    Console.WriteLine("Collection exists.");
+```
+
 ```shell
 describe collection -c book
 ```
@@ -134,6 +141,21 @@ Output:
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to check.</td>
         </tr>
     </tbody>

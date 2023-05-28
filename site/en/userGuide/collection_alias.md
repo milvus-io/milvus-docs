@@ -48,6 +48,13 @@ milvusClient.createAlias(
 );
 ```
 
+```c#
+await milvusClient.CreateAliasAsync(
+    collectionName: "book",
+    alias: "publication");
+
+```
+
 ```shell
 create alias -c book -a publication
 ```
@@ -120,6 +127,25 @@ curl -X 'POST' \
         </tr>
         <tr>
             <td><code>Alias</code></td>
+            <td>Collection alias to create.</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to create alias on.</td>
+        </tr>
+        <tr>
+            <td><code>alias</code></td>
             <td>Collection alias to create.</td>
         </tr>
 	</tbody>
