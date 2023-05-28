@@ -49,6 +49,12 @@ milvusClient.dropPartition(
 );
 ```
 
+```c#
+await milvusClient.DropPartitionsAsync(
+    collectionName: "book", 
+    partitionName: "novel");
+```
+
 ```shell
 delete partition -c book -p novel
 ```
@@ -136,6 +142,25 @@ curl -X 'DELETE' \
     </tr>
     <tr>
         <td><code>PartitionName</code></td>
+        <td>Name of the partition to drop.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>collectionName</code></td>
+        <td>Name of the collection to drop a partition in.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
         <td>Name of the partition to drop.</td>
     </tr>
   </tbody>

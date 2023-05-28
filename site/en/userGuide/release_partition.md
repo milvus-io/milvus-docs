@@ -46,6 +46,12 @@ milvusClient.releasePartitions(
 );
 ```
 
+```c#
+await milvusClient.ReleasePartitionAsync(
+    collectionName: "book",
+    partitionNames: new[] { "novel" });
+```
+
 ```shell
 release -c book -p novel
 ```
@@ -133,6 +139,25 @@ curl -X 'DELETE' \
         </tr>
         <tr>
             <td><code>PartitionNames</code></td>
+            <td>List of names of the partitions to release.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to release partition.</td>
+        </tr>
+        <tr>
+            <td><code>partitionNames</code></td>
             <td>List of names of the partitions to release.</td>
         </tr>
     </tbody>

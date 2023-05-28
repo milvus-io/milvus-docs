@@ -51,6 +51,16 @@ if (respHasPartition.getData() == Boolean.TRUE) {
 }
 ```
 
+```c#
+bool hasPartition = await milvusClient.HasPartitionAsync(
+  collectionName: "book", 
+  partitionName: "novel");
+
+if (hasPartition) {
+  Console.WriteLine("Partition exists.");
+}
+```
+
 ```shell
 describe partition -c book -p novel
 ```
@@ -134,6 +144,25 @@ Output:
   </tbody>
 </table>
 
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+        <tr>
+            <td><code>partitionName</code></td>
+            <td>Name of the partition to check.</td>
+        </tr>
+	</tbody>
+</table>
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -206,6 +235,12 @@ R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
           .build()
 );
 System.out.println(respShowPartitions);
+```
+
+```c#
+var partitions = await milvusClient.ShowPartitionsAsync(
+  collectionName: "book");
+partitions.ToList().ForEach(p => Console.WriteLine(p));
 ```
 
 ```shell
@@ -293,6 +328,21 @@ Output:
 	<tbody>
     <tr>
         <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>collectionName</code></td>
         <td>Name of the collection to check.</td>
     </tr>
   </tbody>

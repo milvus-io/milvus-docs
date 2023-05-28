@@ -50,6 +50,10 @@ milvusClient.createPartition(
 );
 ```
 
+```c#
+await milvusClient.CreatePartitionAsync("book", "novel");
+```
+
 ```shell
 create partition -c book -p novel
 ```
@@ -141,6 +145,25 @@ curl -X 'POST' \
     </tr>
     <tr>
         <td><code>PartitionName</code></td>
+        <td>Name of the partition to create.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>collectionName</code></td>
+        <td>Name of the collection to create a partition in.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
         <td>Name of the partition to create.</td>
     </tr>
   </tbody>

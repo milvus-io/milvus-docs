@@ -58,6 +58,12 @@ milvusClient.loadPartitions(
 );
 ```
 
+```c#
+await milvusClient.LoadPartitionsAsync(
+    collectionName: "book", 
+    partitionNames: new[] { "novel" });
+```
+
 ```shell
 load -c book -p novel
 ```
@@ -153,6 +159,25 @@ curl -X 'POST' \
         </tr>
         <tr>
             <td><code>PartitionNames</code></td>
+            <td>List of names of the partitions to load.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-c#">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to load partitions from.</td>
+        </tr>
+        <tr>
+            <td><code>partitionNames</code></td>
             <td>List of names of the partitions to load.</td>
         </tr>
     </tbody>
