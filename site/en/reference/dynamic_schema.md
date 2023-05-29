@@ -72,7 +72,7 @@ Defining a JSON field does not require you to enable dynamic schema. JSON fields
 
 To access a specific key within a JSON field, you can either directly use the key name or place the key name within square brackets and put the square brackets next to the JSON field name. For example, to access the `claps` key in the `$meta` JSON field, use either `$meta["claps"]` or `claps`.
 
-When working with JSON fields in Milvus, you can enclose a string value with either double quotation marks ("") or single quotation marks (''). It's important to note that Milvus doesn't perform any semantic escape or conversion for string values in the JSON field and stores them as is. For instance, `'a"b'` and `"a'b"` will be saved as is, while `'a'b'`, `'a\\'b'`, `"a\\"b"`, and `"a"b"` will be treated as invalid values.
+When working with JSON fields in Milvus, you can enclose a string value with either double quotation marks ("") or single quotation marks (''). It's important to note that Milvus doesn't perform any semantic escape or conversion for string values in the JSON field and stores them as is. For instance, `'a"b'`, `"a'b"`, `'a\\'b'`, and `"a\\"b"` will be saved as is, while `'a'b'` and `"a"b"` will be treated as invalid values.
 
 To build filter expressions using a JSON field, utilize the keys within the field. If a key's value is an integer or a float, you can compare it with another integer or float key or an INT32/64 or FLOAT32/64 field. If a key's value is a string, you can compare it only with another string key or a VARCHAR field.
 
