@@ -55,6 +55,7 @@ To contribute to the Milvus SDK documentation, visit the language-specific repos
 - [GO](https://github.com/milvus-io/milvus-sdk-go)
 - [Java](https://github.com/milvus-io/milvus-sdk-java)
 - [Node.js](https://github.com/milvus-io/milvus-sdk-node)
+- [c#](https://github.com/milvus-io/milvus-sdk-csharp)
 
 ### Contribute to community content
 
