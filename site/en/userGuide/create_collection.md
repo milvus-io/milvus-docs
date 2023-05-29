@@ -495,6 +495,11 @@ Output:
             <td>Number of the shards for the collection to create.</td>
             <td>[1,64]</td>
         </tr>
+        <tr>
+            <td><code>PartitionsNum</code></td>
+            <td>Number of the logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
+        </tr>
 	</tbody>
 </table>
 
@@ -688,6 +693,11 @@ milvusClient.createCollection(createCollectionReq);
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
             <td>[1,256]</td>
+        </tr>
+        <tr>
+            <td><code>num_partitions</code> (optional)</td>
+            <td>Number of logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
         </tr>
 	    <tr>
             <td><code>*kwargs: collection.ttl.seconds</code> (optional)</td>
