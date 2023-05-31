@@ -194,13 +194,13 @@ const generateInsertData = function generateInsertData(
 
 ## 5. Compile the file
 ```bash
-npx tsc MilvusHello.ts
+npx tsc HelloMilvus.ts
 ```
 
 
 ## 6. Run the example
 ```bash
-node MilvusHello.js
+node HelloMilvus.js
 ```
 
 
