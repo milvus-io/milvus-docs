@@ -81,7 +81,7 @@ numpy.save('book_props.npy', arr)
 
 </div>
 
-You can also add dynamic fields using NumPy files. For details, refer to [Dynamic Schema](dynamic_schema.md).
+You can also add dynamic fields using NumPy files as follows. For details on dynamic fields, refer to [Dynamic Schema](dynamic_schema.md).
 
 ```
 numpy.save('$meta.py', numpy.array([ json.dumps({x: 2}), json.dumps({y: 8, z: 2}) ]))

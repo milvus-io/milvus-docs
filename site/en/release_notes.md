@@ -8,13 +8,13 @@ Find out what’s new in Milvus! This page summarizes information about new feat
 
 ## 2.2.9
 
-Release date: 1 June, 2023
+Release date: 2 June, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.2.9          | 2.2.9              | 2.2.5            | 2.2.3          | 2.2.11               |
 
-Milvus 2.2.9 has added JSON support, allowing for more flexible schemas within collections through dynamic schemas. The search efficiency has been improved through partition keys, which enable data separation for multiple users within a single collection. Additionally, database support has been integrated into Role-Based Access Control (RBAC), further fortifying multi-tenancy management and security. Support has also been extended to Alibaba Cloud OSS, and connection management has been refined, resulting in an improved user experience.
+Milvus 2.2.9 has added JSON support, allowing for more flexible schemas within collections through dynamic schemas. The search efficiency has been improved through partition keys, which enable data separation for different data categories, such as multiple users, in a single collection. Additionally, database support has been integrated into Role-Based Access Control (RBAC), further fortifying multi-tenancy management and security. Support has also been extended to Alibaba Cloud OSS, and connection management has been refined, resulting in an improved user experience.
 
 As always, this release includes bug fixes, enhancements, and performance improvements. Notably, disk usage has been significantly reduced, and performance has been improved, particularly for filtered searches. 
 
@@ -102,6 +102,7 @@ We hope you enjoy the latest release!
 - Lowered the task merge cap to mitigate an insufficient memory error ([#24233](https://github.com/milvus-io/milvus/pull/24233))
 - Removed constraint that prevents creating an index after load ([#24415](https://github.com/milvus-io/milvus/pull/24415))
 - Removed index check to trigger compaction ([#23657](https://github.com/milvus-io/milvus/pull/23657)) ([#23688](https://github.com/milvus-io/milvus/pull/23688))
+- Optimized the search performance with a high filtering ratio ([#23948](https://github.com/milvus-io/milvus/pull/23948))
 
 ### Performance improvements
 

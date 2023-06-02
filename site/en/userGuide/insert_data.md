@@ -28,10 +28,11 @@ data = [
   [i for i in range(2000)],
   [str(i) for i in range(2000)],
   [i for i in range(10000, 12000)],
-  [[random.random() for _ in range(2)] for _ in range(2000)],
+  [[random.random() for _ in range(2)] for _ in range(2000)]
 ]
 
-## Once your collection is enabled with dynamic schema
+## Once your collection is enabled with dynamic schema,
+## you can add non-existing field values.
 data.append([str("dy"*i) for i in range(2000)])
 ```
 
