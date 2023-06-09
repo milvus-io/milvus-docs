@@ -33,7 +33,7 @@ npm install @zilliz/milvus2-sdk-node typescript --save
 
 ## 3. Download sample code HelloMilvus.ts
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/HelloMilvus.ts
+$ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/examples/milvus/HelloMilvus.ts
 ```
 
 ## 4. Scan HelloMilvus.ts
