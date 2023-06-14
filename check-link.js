@@ -80,7 +80,6 @@ const generateValidIds = (dirPath, validMds = [], validPaths = []) => {
 const { validMds: enValidMds, validPaths: enValidPaths } =
   generateValidIds(EN_MDS_PATH);
 
-
 const enMenuMdIds = enIds.filter((v) => v.includes(".md"));
 
 const checkIsIdValid = (arr, validArr) => {
@@ -115,7 +114,11 @@ const checkInnerLink = (paths, validMds) => {
       let ignoreAnchorLink = link.split("#")[0];
       // ignore api reference
       // api reference links with () will beacome .md after match
-      if (link.includes("/api-reference/") || link === '.md') {
+      if (
+        link.includes("/api-reference/") ||
+        link === ".md" ||
+        link.indexOf("**") !== -1
+      ) {
         return;
       }
       if (!validMds.includes(ignoreAnchorLink)) {
