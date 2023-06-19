@@ -6,7 +6,7 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## 2.2.10
+## v2.2.10
 
 Release date: 14 June, 2023
 
@@ -45,11 +45,11 @@ We are excited to announce the release of Milvus 2.2.10! This update includes im
 - Security -
   - [2.2] Bumped [github.com/gin-gonic/gin](http://github.com/gin-gonic/gin) from 1.9.0 to 1.9.1 ([#24830](https://github.com/milvus-io/milvus/pull/24830))
 
-## Performance
+### Performance
 
 - Fixed build index performance downgrade ([#24651](https://github.com/milvus-io/milvus/pull/24651))
 
-## 2.2.9
+## v2.2.9
 
 Release date: 2 June, 2023
 
