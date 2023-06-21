@@ -147,7 +147,7 @@ Read these pages to learn more.
 - [Manage Databases](manage_databases.md)
 - [Multi-tenancy](multi_tenancy.md)
 
-For the use of these new features, please refer to related pages in the User Guides and the [PyMilvus API reference](api-reference/pymilvus/v2.2.x/About.md).
+For the use of these new features, please refer to related pages in the User Guides and the [PyMilvus API reference](https://milvus.io/api-reference/pymilvus/v2.2.x/About.md).
 
 ### Bug fixes
 
