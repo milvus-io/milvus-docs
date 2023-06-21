@@ -12,7 +12,7 @@ Release date: 21 June, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.11         | 2.2.12             | 2.2.7            | 2.2.4          | 2.2.18              |
+| 2.2.11         | 2.2.12             | 2.2.7            | 2.2.5          | 2.2.18              |
 
 We're happy to share that Milvus 2.2.11 is now available! This update includes significant bug fixes, addressing occasional system crashes and ensuring a more stable experience. We've also implemented various optimizations related to monitoring, logging, rate limiting, and interception of cross-cluster requests.
 
