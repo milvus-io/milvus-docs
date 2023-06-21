@@ -93,7 +93,7 @@ To upgrade Milvus from a minor release before v2.2.3 to the latest, run the foll
 
 ```shell
 helm repo update
-helm upgrade --version={{var.milvus_helm_chart_version}} # use the helm chart version here
+helm upgrade my-release milvus/milvus --reuse-values --version={{var.milvus_helm_chart_version}} # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
