@@ -6,6 +6,38 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.11
+
+Release date: 21 June, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.11         | 2.2.12             | 2.2.7            | 2.2.4          | 2.2.18              |
+
+We're happy to share that Milvus 2.2.11 is now available! This update includes significant bug fixes, addressing occasional system crashes and ensuring a more stable experience. We've also implemented various optimizations related to monitoring, logging, rate limiting, and interception of cross-cluster requests.
+
+### Bug fixes
+
+- Fixed an occasional QueryNode panic during load. [#24902](https://github.com/milvus-io/milvus/pull/24902)
+- Fixed a panic in the session module caused by an uninitialized atomic variable. [#25005](https://github.com/milvus-io/milvus/pull/25005)
+- Fixed an issue with read request throttling caused by a miscalculation of queue length twice. [#24440](https://github.com/milvus-io/milvus/pull/24440)
+- Fixed flush hangs after SyncSegments timeout. [#24692](https://github.com/milvus-io/milvus/pull/24692)
+- Fixed missing load of a collection with the same name during the recovery stage. [#24941](https://github.com/milvus-io/milvus/pull/24941)
+- Added a format check for Authorization Tokens. [#25033](https://github.com/milvus-io/milvus/pull/25033)
+
+### Enhancements
+
+- Optimized the panic code logic of key components [#24859](https://github.com/milvus-io/milvus/pull/24859)
+- Updated semver to development v2.2.11-dev [#24938](https://github.com/milvus-io/milvus/pull/24938)
+- Added a cluster validation interceptor to prevent the Cross-Cluster routing issue [#25030](https://github.com/milvus-io/milvus/pull/25030)
+- Added some compaction logs for better issue tracking [#24975](https://github.com/milvus-io/milvus/pull/24975)
+- Added a log to confirm GC finished in RootCoord [#24946](https://github.com/milvus-io/milvus/pull/24946)
+- Prioritized checking the upper limit of Collection numbers in the DataBase [#24951](https://github.com/milvus-io/milvus/pull/24951)
+- Upgraded the dependent milvus-proto/go-api to version 2.2.10 [#24885](https://github.com/milvus-io/milvus/pull/24885)
+- Closed kafka internal consumer properly [#24997](https://github.com/milvus-io/milvus/pull/24997) [#25049](https://github.com/milvus-io/milvus/pull/25049) [#25071](https://github.com/milvus-io/milvus/pull/25071)
+- Restricted the concurrency of sync tasks for each flowgraph in DataNode [#25035](https://github.com/milvus-io/milvus/pull/25035)
+- Updated Minio version [#24897](https://github.com/milvus-io/milvus/pull/24897)
+
 ## 2.2.10
 
 Release date: 14 June, 2023
