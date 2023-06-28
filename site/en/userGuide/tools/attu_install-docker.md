@@ -56,7 +56,7 @@ Edit the downloaded `docker-compose.yml` file using your favorite text editor an
 ```
   attu:
     container_name: attu
-    image: zilliz/attu:v2.2.3
+    image: zilliz/attu:v{{var.attu_release}}
     environment:
       MILVUS_URL: milvus-standalone:19530
     ports:
