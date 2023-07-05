@@ -91,7 +91,7 @@ sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
 
 ```java
 final Integer SEARCH_K = 2;                       // TopK
-final String SEARCH_PARAM = "{\"nprobe\":10, \”offset\”:5}";    // Params
+final String SEARCH_PARAM = "{\"nprobe\":10, \"offset\":5}";    // Params
 ```
 
 ```shell
