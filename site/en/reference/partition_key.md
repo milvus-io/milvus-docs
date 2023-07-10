@@ -55,7 +55,7 @@ connections.connect(host='localhost', port='19530')
 fields = [
     FieldSchema(name='reviewer_id', dtype=DataType.INT64, description="", is_primary=True),
     FieldSchema(name='store_address', dtype=DataType.VARCHAR, description="", max_length=512, is_partition_key=True),
-    FieldSchema(name='review', dtype=DataType.VARCHAR, description="", max_length=8172),
+    FieldSchema(name='review', dtype=DataType.VARCHAR, description="", max_length=16384),
     FieldSchema(name='vector', dtype=DataType.FLOAT_VECTOR, description="", dim=384, is_index=True),
 ]
 
@@ -65,7 +65,9 @@ collection = Collection(name='McDonald_s_Reviews', schema=schema )
 collection.create_index(
     field_name='vector', 
     index_params={
+        # Use your favorite metric type
         "metric_type": "L2", 
+        # Use your favirote index type
         "index_type": "IVF_FLAT", 
         "params": {"nlist": 128}
     }, 
@@ -80,6 +82,8 @@ utility.list_collections()
 ```
 
 If the above code snippets output the name of the collection, it is ready to accept data from the prepared dataset.
+
+For other possible options for `metric_type` and `index_type`, please refer to [Similarity Metrics](metric.md), [In-memory Index](index.md) and [On-disk Index](disk_index.md).
 
 ## Insert Data
 
