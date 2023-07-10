@@ -21,7 +21,7 @@ df = pd.read_csv('McDonald_s_Reviews.csv', encoding="cp1252")
 df.to_json('McDonald_s_Reviews.json', orient='records')
 ```
 
-The raw dataset is in a CSV file, and the above code changes it to a JSON file.
+The raw dataset is in a CSV file, and the above code changes it to a JSON file. Then, we use **text2vec** to convert the review text to corresponding vectors and save the vectors side by side with the review text in each record.
 
 ```python
 import json
@@ -142,6 +142,6 @@ for hits in result:
 
 You can use the partition key feature to achieve multi-tenancy with better search performance. 
 
-To do this, you can assign a tenant-specific value to the partition key field for each entity. Then, when you search or query the collection, you can include the partition key field in the boolean expression to filter by the tenant value. This way, you can isolate data by tenant and avoid scanning unnecessary partitions.
+To do this, you can assign a tenant-specific value as the partition key field for each entity. Then, when you search or query the collection, you can include the partition key field in the boolean expression to filter entities by the tenant-specific value. This way, you can isolate data by tenants and avoid scanning unnecessary partitions.
 
 To learn more about multi-tenancy strategies, read [Multi-tenancy](multi_tenancy.md) for details.
