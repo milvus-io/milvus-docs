@@ -26,7 +26,7 @@ A Milvus cluster ships with a default database, named 'default'. Collections are
 To change the default database, do as follows:
 
 ```python
-db.using_database("book")
+db.using_database("books")
 ```
 
 You can also set a database to use upon connecting to your Milvus cluster as follows:
