@@ -16,7 +16,7 @@ from pymilvus import connections, db
 
 conn = connections.connect(host="127.0.0.1", port=19530)
 
-database = db.create_database("books")
+database = db.create_database("book")
 ```
 
 ## Use a database
@@ -26,7 +26,7 @@ A Milvus cluster ships with a default database, named 'default'. Collections are
 To change the default database, do as follows:
 
 ```python
-db.using_database("books")
+db.using_database("book")
 ```
 
 You can also set a database to use upon connecting to your Milvus cluster as follows:
