@@ -49,6 +49,7 @@ milvusClient.loadCollection(
     .build()
 );
 ```
+<div style="display: none;">
 
 ```shell
 load -c book
@@ -57,6 +58,8 @@ load -c book
 ```curl
 # See the following step.
 ```
+
+</div>
 
 ## Conduct a vector query
 
@@ -74,7 +77,6 @@ res = collection.query(
   offset = 0,
   limit = 10, 
   output_fields = ["book_id", "book_intro"],
-  consistency_level="Strong"
 )
 ```
 
@@ -83,6 +85,8 @@ const results = await milvusClient.query({
   collection_name: "book",
   expr: "book_id in [2,4,6,8]",
   output_fields: ["book_id", "book_intro"],
+  limit: 10,
+  offset: 0,
 });
 ```
 
@@ -93,6 +97,7 @@ queryResult, err := milvusClient.Query(
 	"",                                                     // PartitionName
 	entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
 	[]string{"book_id", "book_intro"}                       // OutputFields
+	entity.SearchQueryOptionFunc.WithLimit(10).WithOffset(0)// queryOptions
 )
 if err != nil {
 	log.Fatal("fail to query collection:", err.Error())
@@ -111,6 +116,8 @@ QueryParam queryParam = QueryParam.newBuilder()
   .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
+
+<div style="display:none;">
 
 ```shell
 query
@@ -160,6 +167,8 @@ Output:
   ]
 }
 ```
+
+</div>
 
 </div>
 
@@ -220,8 +229,12 @@ Output:
 		<td>List of names of the field to return.</td>
 	</tr>
 	<tr>
-		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partitions to query on.</td>
+		<td><code>limit</code> (optional)</td>
+		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code> (optional)</td>
+		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
 	</tr>
 	</tbody>
 </table>
@@ -260,6 +273,18 @@ Output:
 		<td>Name of the field to return.</td>
     	<td>Vector field is not supported in current release.</td>
 	</tr>
+	<tr>
+		<td><code>opts</code></td>
+		<td>Query options in the form of <code>entity.SearchQueryOptionFunc</code>.</td>
+		<td>Options for the search. Possible options are as follows:<ul>
+			<li><code>WithLimit(limit int64)</code> Number of entities to return. This option is to be overwritten by <code>topK</code> for searches.</li>
+			<li><code>WithOffset(offset int64)</code> Number of entities to skip. The sum of this value and that of <code>TopK</code> should be less than 16384.</li>
+			<li><code>WithIgnoreGrowing()</code></li>
+			<li><code>WithSearchQueryConsistencyLevel(cl entity.ConsistencyLevel)</code></li>
+			<li><code>WithTravelTimeStamp(tt int64)</code></li>
+			<li><code>WithGuaranteeTimeStamp(gt int64)</code></li>
+		</ul></td>
+	</tr>
 	</tbody>
 </table>
 
@@ -287,6 +312,14 @@ Output:
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
+	<tr>
+		<td><code>Limit</code> (optional)</td>
+		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> in <code>WithOffset()</code> should be less than 16384.</td>
+	</tr>
+	<tr>
+		<td><code>Offset</code> (optional)</td>
+		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> in <code>WithLimit()</code> should be less than 16384.</td>
+	</tr>
   <tr>
 		<td><code>ConsistencyLevel</code></td>
 		<td>The consistency level used in the query.</td>
@@ -295,7 +328,7 @@ Output:
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none;">
     <thead>
         <tr>
             <th>Option</th>
@@ -312,7 +345,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none;">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -360,7 +393,7 @@ QueryResultsWrapper wrapperQuery = new QueryResultsWrapper(respQuery.getData());
 System.out.println(wrapperQuery.getFieldWrapper("book_id").getFieldData());
 System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 ```
-
+<div style="display:none;">
 ```shell
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
@@ -368,6 +401,7 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 ```curl
 # See the output of the previous step.
 ```
+</div>
 
 ## What's next
 
