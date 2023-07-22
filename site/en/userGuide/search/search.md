@@ -275,11 +275,11 @@ Output:
         <td><code>opt<code></td>
         <td>Options for ANN searches.</td>
         <td><ul>
-			<li><code>Limit</code> Indicates the number of entities to return.</li>
-			<li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>.</li>
-			<li><code>ConsistencyLevel</code> Indicates the consistency level applied during the search.</li>
-			<li><code>Ignore Growing</code> Indicates whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments. </li>
-		</ul></td>
+            <li><code>Limit</code> Indicates the number of entities to return.</li>
+            <li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>.</li>
+            <li><code>ConsistencyLevel</code> Indicates the consistency level applied during the search.</li>
+            <li><code>Ignore Growing</code> Indicates whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments. </li>
+        </ul></td>
     </tr>
     </tbody>
 </table>
