@@ -12,13 +12,16 @@ Release date: 24 July, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.12         | 2.2.13             | 2.2.9            | 2.2.7          | 2.2.20              |
+| 2.2.12         | 2.2.14             | 2.2.9            | 2.2.7          | 2.2.20              |
 
 This minor release is the last one in Milvus 2.2.x that comes with new features. Future minor releases of Milvus 2.2.x will focus on essential bug fixes.
 
 New features in this release include:
 
 - A new set of RESTful APIs that simplify user-side operations.
+
+    Note that you must set a token even if the authentication is disabled in Milvus for now. For details, see [#25873](https://github.com/milvus-io/milvus/pull/25873).
+
 - Improved ability to retrieve vectors during ANN searches, along with better vector-retrieving performance during queries. Users can now set the vector field as one of the output fields in ANN searches and queries against HNSW-, DiskANN-, or IVF-FLAT-indexed collections.
 - Better search performance with reduced overhead, even when dealing with large top-K values, improved write performance in partition-key-enabled or multi-partition scenarios, and enhanced CPU usage in scenarios with large machines.
 

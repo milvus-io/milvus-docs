@@ -23,7 +23,7 @@ The following example builds a 1024-cluster IVF_FLAT index with Euclidean distan
 
 Prepare the index parameters as follows:
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 index_params = {
@@ -56,6 +56,8 @@ final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
 final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
+<div style="display: none">
+
 ```shell
 create index
 
@@ -87,6 +89,8 @@ curl -X 'POST' \
     ]
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -298,7 +302,7 @@ curl -X 'POST' \
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -313,7 +317,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -379,7 +383,7 @@ curl -X 'POST' \
 
 Build the index by specifying the vector field name and index parameters.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection, utility
@@ -428,6 +432,8 @@ milvusClient.createIndex(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 # Follow the previous step.
 ```
@@ -435,6 +441,8 @@ milvusClient.createIndex(
 ```curl
 # Follow the previous step.
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>

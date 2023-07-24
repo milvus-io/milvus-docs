@@ -20,7 +20,7 @@ The following example code demonstrates the steps prior to inserting data.
 
 If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
@@ -106,7 +106,7 @@ curl -X 'POST' \
 
 Insert random data to simulate the original data (Milvus CLI example uses a pre-built, remote CSV file containing similar data).
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 import random
@@ -223,7 +223,7 @@ batch1.timestamp
 
 Insert the second batch of data to simulate the dirty data, among which a piece of data with primary key value `19` and vector value `[1.0,1.0]` is appended as the target data to search with in the following step (Milvus CLI example uses a pre-built, remote CSV file containing similar data).
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 data = [
@@ -323,7 +323,7 @@ Output:
 
 Load the collection and search the target data with the timestamp of the first data batch. With the timestamp specified, Milvus only retrieves the data view at the point of time the timestamp indicates.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 collection.load()
@@ -489,7 +489,7 @@ Output:
 
 If you do not specify the timestamp or specify it with the timestamp of the second data batch, Milvus will return the results from both batches.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 batch2.timestamp

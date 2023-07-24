@@ -15,7 +15,7 @@ A collection consists of one or more partitions. While creating a new collection
 The following example builds a partition `novel` in the collection `book`.
 
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -50,6 +50,8 @@ milvusClient.createPartition(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 create partition -c book -p novel
 ```
@@ -64,6 +66,8 @@ curl -X 'POST' \
     "partition_name": "novel"
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -146,7 +150,7 @@ curl -X 'POST' \
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -169,7 +173,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
     <tr>
       <th>Parameter</th>

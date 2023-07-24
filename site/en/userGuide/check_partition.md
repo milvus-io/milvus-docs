@@ -12,7 +12,7 @@ This topic describes how to check the information of partitions in Milvus.
 
 Verify if a partition exists in the specified collection.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -51,6 +51,8 @@ if (respHasPartition.getData() == Boolean.TRUE) {
 }
 ```
 
+<div style="display: none">
+
 ```shell
 describe partition -c book -p novel
 ```
@@ -72,6 +74,8 @@ Output:
 ```json
 {"status":{},"value":true}
 ```
+
+</div>
 
 </div>
 
@@ -134,7 +138,7 @@ Output:
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -153,7 +157,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -174,7 +178,7 @@ Output:
 
 ## List all partitions
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -207,6 +211,8 @@ R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
 );
 System.out.println(respShowPartitions);
 ```
+
+<div style="display: none">
 
 ```shell
 list partitions -c book
@@ -246,6 +252,7 @@ Output:
   ]
 }
 ```
+</div>
 
 </div>
 
@@ -298,7 +305,7 @@ Output:
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -313,7 +320,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
