@@ -12,7 +12,7 @@ This topic describes how to drop an index in Milvus.
 Dropping an index irreversibly removes all corresponding index files.
 </div>
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -46,6 +46,8 @@ milvusClient.dropIndex(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 delete index -c book
 ```
@@ -60,6 +62,8 @@ curl -X 'DELETE' \
     "field_name": "book_intro"
   }'
 ```
+
+</div>
 
 <table class="language-javascript">
 	<thead>
@@ -118,7 +122,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -133,7 +137,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>
