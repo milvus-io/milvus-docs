@@ -264,8 +264,8 @@ curl -X 'GET' \
 <div class="language-curl">
 Output:
 
-```shell
-# Output of describeCollection
+```json
+// Output of describeCollection
 {
     "code": 200,
     "data": {
@@ -463,8 +463,8 @@ curl -X 'GET' \
 <div class="language-curl">
 Output:
 
-```shell
-# Output of list collections
+```json
+// Output of list collections
 {
    code: 200,
    data: [

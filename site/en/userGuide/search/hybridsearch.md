@@ -17,7 +17,7 @@ The following example shows how to perform a hybrid search on the basis of a reg
 
 All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector search.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -66,7 +66,7 @@ By specifying the boolean expression, you can filter the scalar field of the ent
 
 You can also use dynamic fields in the filter expression and output fields in the search requests. For example, refer to [Dynamic Schema](dynamic_schema.md).
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 search_param = {
@@ -520,7 +520,7 @@ Output:
 
 Check the returned results.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 assert len(res) == 1
