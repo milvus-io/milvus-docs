@@ -7,7 +7,7 @@ summary: Learn how to configure object storage with Milvus Operator.
 
 # Configure Object Storage with Milvus Operator
 
-Milvus uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. This topic introduces how to configure object storage dependencies when you install Milvus with Milvus Operator.
+Milvus uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. This topic introduces how to configure object storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Object Storage with Milvus Operator](https://github.com/milvus-io/milvus-operator/blob/main/docs/administration/manage-dependencies/object-storage.md) in the Milvus Operator repository.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -231,59 +231,6 @@ AWS S3 object storage is not the only choice. You can also use the object storag
         useIAM: true
         # Omit other fields ...  
   ```
-
-### Internal object storage
-
-`inCluster` indicates when a Milvus cluster starts, a MinIO service starts automatically in the cluster.
-
-<div class="alert note">A Milvus cluster only supports using MinIO as the internal object storage service.</div>
-
-#### Example
-
-The following example configures an internal MinIO service.
-
-```YAML
-apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  dependencies:
-    storage: #
-      external: false 
-      type: "MinIO" # Optional ("MinIO", "S3") default:="MinIO"
-      inCluster: 
-        # deletionPolicy of storage when the milvus cluster is deleted
-        deletionPolicy: Retain # Optional ("Delete", "Retain") default="Retain"
-        # When deletionPolicy="Delete" whether the PersistantVolumeClaim shoud be deleted when the storage is deleted
-        pvcDeletion: false
-        values:
-          resources:
-             limits: 
-              cpu: '2'
-              memory: 6Gi
-            requests:
-              cpu: 100m
-              memory: 512Mi
-          statefulset:
-            replicaCount: 6
-  components: {}
-  config: {}    
-```
-
-<div class="alert note">In this example, <code>inCluster.deletionPolicy</code> defines a deleletion policy for data. <code>inCluster.values.resources</code> defines the compute resources that MinIO uses. <code>inCluster.values.statefulset.replicaCount</code> defines the number of replicas of MinIO on each drive.</div>
-
-<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
-
-Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
-
-```Shell
-kubectl apply -f milvuscluster.yaml
-```
-
-<div class="alert note">If <code>my-release</code> is an existing Milvus cluster, <code>milvuscluster.yaml</code> overwrites its configuration. Otherwise, a new Milvus cluster is created.</div>
 
 ## What's next
 
