@@ -213,6 +213,7 @@ In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](https://milvu
 </div>
 
 ```python
+from pymilvus import utility, BulkInsertState
 task = utility.get_bulk_insert_state(task_id=task_id)
 print("Task state:", task.state_name)
 print("Imported files:", task.files)
