@@ -85,11 +85,16 @@ numpy.save('book_props.npy', arr)
 
 You can also add dynamic fields using NumPy files as follows. For details on dynamic fields, refer to [Dynamic Schema](dynamic_schema.md).
 
-```
+<div class="none-filter">
+
+```python
 numpy.save('$meta.py', numpy.array([ json.dumps({x: 2}), json.dumps({y: 8, z: 2}) ]))
 ```
 
+</div>
+
 <div class="alert note">
+
 
 - Use the field name of each column to name the NumPy file. Do not add files named after a field that does not exist in the target collection. There should be one NumPy file for each field.
 - Use the correct value type when creating NumPy arrays. For details, refer to [these examples](#Create-NumPy-files).
