@@ -77,7 +77,7 @@ arr = numpy.array([json.dumps({"year": 2015, "price": 23.43}),
             json.dumps({"year": 2018, "price": 15.05}),
             json.dumps({"year": 2020, "price": 36.68}),
             json.dumps({"year": 2019, "price": 20.14}),
-            json.dumps({"year": 2021, "price": 9.36}))
+            json.dumps({"year": 2021, "price": 9.36})])
 numpy.save('book_props.npy', arr)
 ```
 
