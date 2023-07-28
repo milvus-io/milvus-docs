@@ -32,11 +32,17 @@ According to the implementation methods, the ANNS vector index can be divided in
 ## Indexes supported in Milvus
 
 According to the suited data type, the supported indexes in Milvus can be divided into two categories:
+
 - Indexes for floating-point embeddings:
-  - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product. 
-  - This type of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, ANNOY, and HNSW.
+
+  - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
+
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, ANNOY, and HNSW.
+
 - Indexes for binary embeddings
+
   - For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are Jaccard, Tanimoto, Hamming, Superstructure, and Substructure.
+
   - This type of indexes include BIN_FLAT and BIN_IVF_FLAT.
 
 The following table classifies the indexes that Milvus supports:
@@ -78,6 +84,16 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
+    <td>GPU_IVF_FLAT</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
     <td>IVF_SQ8</td>
     <td>Quantization-based index</td>
     <td>
@@ -90,6 +106,17 @@ The following table classifies the indexes that Milvus supports:
   </tr>  
   <tr>
     <td>IVF_PQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Very high-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts substantial compromise in recall rate</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>GPU_IVF_PQ</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -139,40 +166,55 @@ FLAT is accurate because it takes an exhaustive approach to search, which means 
 
 ### IVF_FLAT
 
-
 IVF_FLAT divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
 
 By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
 
 IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
 
- - Index building parameters
+- Index building parameters
 
-   | Parameter | Description             | Range      |
-   | --------- | ----------------------- | ---------- |
-   | `nlist`   | Number of cluster units | [1, 65536] |
-
+   | Parameter | Description             | Range      | Default Value |
+   | --------- | ----------------------- | ---------- | ------------- |
+   | `nlist`   | Number of cluster units | [1, 65536] | 128 |
 
 - Search parameters
 
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | CPU: [1, nlist] |
+  | Parameter | Description              | Range           | Default Value |
+  | --------- | ------------------------ | --------------- | ------------- |
+  | `nprobe`  | Number of units to query | CPU: [1, nlist] | 8 |
+
+### GPU_IVF_FLAT
+
+Similar to IVF_FLAT, GPU_IVF_FLAT also divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
+
+By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
+
+IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
+
+- Index building parameters
+
+   | Parameter | Description             | Range      | Default Value |
+   | --------- | ----------------------- | ---------- | ------------- |
+   | `nlist`   | Number of cluster units | [1, 65536] | 128 |
+
+- Search parameters
+
+  | Parameter | Description              | Range           | Default Value |
+  | --------- | ------------------------ | --------------- | ------------- |
+  | `nprobe`  | Number of units to query | CPU: [1, nlist] | 8 |
 
 ### IVF_SQ8
-
 
 IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly smaller (~470 GB). Loading all the index files into memory will consume 470 GB of storage.
 
 When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing Scalar Quantization (SQ). This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.
 
-
- - Index building parameters
+- Index building parameters
 
    | Parameter | Description             | Range      |
    | --------- | ----------------------- | ---------- |
    | `nlist`   | Number of cluster units | [1, 65536] |
-
 
 - Search parameters
 
@@ -182,13 +224,14 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
 
 ### IVF_PQ
 
-
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 <div class="alert note">
+
 Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
+
 </div>
 
 - Index building parameters
@@ -205,7 +248,31 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | --------- | ------------------------ | ---------- |
   | `nprobe`  | Number of units to query | [1, nlist] |
 
+### GPU_IVF_PQ
 
+`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
+
+IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
+
+<div class="alert note">
+
+Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
+
+</div>
+
+- Index building parameters
+
+  | Parameter | Description                               | Range               |
+  | --------- | ----------------------------------------- | ------------------- |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          |
+  | `m`       | Number of factors of product quantization | `dim mod m == 0` |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
+
+- Search parameters
+
+  | Parameter | Description              | Range      |
+  | --------- | ------------------------ | ---------- |
+  | `nprobe`  | Number of units to query | [1, nlist] |
 
 ### HNSW
 
@@ -220,16 +287,12 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | `M`              | Maximum degree of the node | [4, 64]  |
   | `efConstruction` | Search scope               | [8, 512] |
 
-
 - Search parameters
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
-
-
 ### ANNOY
-
 
 ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
@@ -241,7 +304,6 @@ There are just two main parameters needed to tune ANNOY: the number of trees `n_
   
 If `search_k` is not provided, it will default to `n * n_trees` where `n` is the number of approximate nearest neighbors. Otherwise, `search_k` and `n_trees` are roughly independent, i.e. the value of `n_trees` will not affect search time if `search_k` is held constant and vice versa. Basically it's recommended to set `n_trees` as large as possible given the amount of memory you can afford, and it's recommended to set `search_k` as large as possible given the time constraints you have for the queries.
 
-
 - Index building parameters
 
   | Parameter | Description                              | Range     |
@@ -252,7 +314,7 @@ If `search_k` is not provided, it will default to `n * n_trees` where `n` is the
 
   | Parameter  | Description                                                  | Range                           |
   | ---------- | ------------------------------------------------------------ | ------------------------------- |
-  | `search_k` | The parameters that controls the search scope.               | [k, inf] |
+  | `search_k` | The parameters that controls the search scope.               | [k, ∞] |
 
 </div>
 
@@ -291,7 +353,6 @@ If `search_k` is not provided, it will default to `n * n_trees` where `n` is the
 
 ### BIN_FLAT
 
-
 This index is exactly the same as FLAT except that this can only be used for binary embeddings.
 
 For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the BIN_FLAT index is a good choice. BIN_FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from BIN_FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
@@ -305,7 +366,6 @@ BIN_FLAT is accurate because it takes an exhaustive approach to search, which me
   | `metric_type` | [Optional] The chosen distance metric. | See [Supported Metrics](metric.md). |
 
 ### BIN_IVF_FLAT
-
 
 This index is exactly the same as IVF_FLAT except that this can only be used for binary embeddings.
 
