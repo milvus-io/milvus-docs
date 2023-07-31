@@ -102,7 +102,7 @@ numpy.save('$meta.py', numpy.array([ json.dumps({x: 2}), json.dumps({y: 8, z: 2}
 
 You can use either MinIO or the local hard disk for storage in Milvus.
 
-The bulk-insert API doesn't directly upload a file. Instead, it passes a relative path (relative to a bucket) to tell the Milvus server where to read the data file. Therefore, you need to upload the data file to the bucket defined by minio.bucketName in the configuration file `milvus.yml`. To upload a file to MinIO or S3, you can use the AWS SDK or MinIO SDK.
+The bulk-insert API does not directly upload a file from your local drive. Instead, it passes a path relative to the root of an object storage bucket to tell the Milvus server where to find the data file. Therefore, you need to upload the data file to the bucket defined by `minio.bucketName` in your Milvus configuration file `milvus.yml`. To upload a file to MinIO or S3, you can use the AWS SDK or MinIO SDK.
 
 For PyMilvus, we provide an [example](https://github.com/milvus-io/pymilvus/blob/2.2/examples/example_bulkinsert_json.py) to show how to use the MinIO SDK to upload files to MinIO and do bulk-insert to Milvus.
 
@@ -194,7 +194,7 @@ In this method, you need to set the name of the target collection as **collectio
 
   - If you upload the data file to a MinIO instance, a valid file path should be relative to the root bucket defined in **"milvus.yml"**, such as **"data/book_id.npy"**.
   - If you upload the data file to the local hard drive, a valid file path should be an absolute path such as **"/tmp/data/book_id.npy"**.
-  - If a collection contains a partition key, you don't need to specify `partition_name`, as data nodes can assign rows to different partitions according to partition key values.
+  - If a collection contains a partition key, you do not need to specify `partition_name`, as data nodes can assign rows to different partitions according to partition key values.
 
   If you have a lot of files to process, consider [creating multiple data-import tasks and have them run in parallel](#Import-multiple-NumPy-files-in-parallel).
 
