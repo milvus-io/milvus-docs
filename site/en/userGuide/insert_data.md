@@ -16,7 +16,9 @@ The following example inserts 2,000 rows of randomly generated data as the examp
 
 ## Prepare data
 
-First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise exception.
+First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise an exception.
+
+Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to [Create a Collection](./create_collection.md#prepare-schema).
 
 {{fragments/multiple_code.md}}
 
@@ -27,6 +29,11 @@ data = [
   [str(i) for i in range(2000)],
   [i for i in range(10000, 12000)],
   [[random.random() for _ in range(2)] for _ in range(2000)],
+  # use `default_value` for a field
+  [], 
+  # or
+  None,
+  # or just omit the field
 ]
 ```
 

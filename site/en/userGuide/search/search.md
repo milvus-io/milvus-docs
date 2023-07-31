@@ -10,7 +10,7 @@ This topic describes how to search entities with Milvus.
 
 A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field, you can perform a [hybrid search](hybridsearch.md) or even a search with [Time Travel](timetravel.md).
 
-The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined. 
+The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined.
 
 
 ## Load collection
@@ -310,7 +310,7 @@ Output:
 	<tbody>
     <tr>
 		<td><code>output_fields</code>(optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>Name of the field to return.</td>
 	</tr>
 	<tr>
 		<td><code>anns_field</code></td>
@@ -468,7 +468,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>Name of the field to return.</td>
 	</tr>
   <tr>
 		<td><code>timeout</code> (optional)</td>
@@ -519,7 +519,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>Name of the field to return.</td>
 	</tr>
 	</tbody>
 </table>
@@ -556,7 +556,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>output_fields</code></td>
 		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+    <td>N/A</td>
 	</tr>
   <tr>
     <td><code>vectors</code></td>
@@ -608,7 +608,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>OutFields</code></td>
 		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+    <td>N/A</td>
 	</tr>
   <tr>
     <td><code>Vectors</code></td>
