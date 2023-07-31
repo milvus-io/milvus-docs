@@ -19,7 +19,10 @@ First, prepare the data to upsert.  The type of data to upsert must match the sc
 
 Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to [Create a Collection](./create_collection.md#prepare-schema).
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 # Generate data to upsert
@@ -67,7 +70,10 @@ embeddingColData := entity.NewColumnFloatVector("embeddings", dim, embeddingList
 
 Upsert the data to the collection.
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 from pymilvus import Collection
