@@ -61,7 +61,7 @@ Milvus supports only one primary key field in a collection.
 
 ### Create a field schema
 
-To reduce the complexity in data inserts, Milvus 2.3.0 or later allows you to specify a default value for each scalar field, excluding a primary key field. This indicates that if you leave a field empty when inserting data, the default value you configured for this field during field schema creation will be used.
+To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field during field schema creation, excluding the primary key field. This indicates that if you leave a field empty when inserting data, the default value you specified for this field applies.
 
 Create a regular field schema:
 
