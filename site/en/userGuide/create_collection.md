@@ -675,7 +675,7 @@ milvusClient.createCollection(createCollectionReq);
 
 ### Parameter `default_value`
 
-- `default_value` supports only for scalar fields except array and JSON formats.
+- `default_value` is available only for non-array and non-JSON scalar fields.
 - Primary key fields cannot be configured with `default_value`.
 - The data type of `default_value` must be the same as that specified in `dtype`. Otherwise, an error can occur.
 - In the case of using `auto_id`, it's not allowed to set all the remaining fields to use default values. That is, when performing insert or upsert operations, you need to specify values for at least one field. Otherwise, an error can occur.
