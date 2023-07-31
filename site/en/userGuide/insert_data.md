@@ -30,16 +30,12 @@ data = [
   [i for i in range(2000)],
   [str(i) for i in range(2000)],
   [i for i in range(10000, 12000)],
-<<<<<<< HEAD
   [[random.random() for _ in range(2)] for _ in range(2000)],
   # use `default_value` for a field
   [], 
   # or
   None,
   # or just omit the field
-=======
-  [[random.random() for _ in range(2)] for _ in range(2000)]
->>>>>>> origin/v2.2.x
 ]
 
 ## Once your collection is enabled with dynamic schema,

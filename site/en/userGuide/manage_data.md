@@ -13,4 +13,4 @@ Data in Milvus are called entities. An entity consists of a group of fields and 
 
 - [Compact Data](compact_data.md): Milvus supports automatic data compaction by default. You can still compact data manually and check the compaction status.
 
-- [Upsert Entities](upsert_entities.md):
+- [Upsert Entities](upsert_entities.md): Upserting is a combination of insert and delete operations. Milvus allows you to upsert entities.
