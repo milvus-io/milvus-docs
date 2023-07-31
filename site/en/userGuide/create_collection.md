@@ -251,7 +251,7 @@ Output:
         </tr>
         <tr>
             <td><code>default_value</code></td>
-            <td>Default value of the field. This parameter supports only for scalar fields except array and JSON formats. You cannot specify a default value for a primary key field. Refer to <a href="#parameter-default_value">Parameter default_value</a>  for more information.</td>
+            <td>Default value of the field. This parameter is available only for non-array and non-JSON scalar fields. You cannot specify a default value for a primary key field. Refer to <a href="#parameter-default_value">Parameter default_value</a>  for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
