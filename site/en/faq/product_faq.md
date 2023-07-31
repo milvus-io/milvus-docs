@@ -45,10 +45,6 @@ Metadata are generated within Milvus. Each Milvus module has its own metadata th
 
 etcd stores Milvus module metadata; MinIO stores entities.
 
-#### Does Milvus' Python SDK have a connection pool?
-
-Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of connections in a connection pool has no upper limit.
-
 #### Does Milvus support inserting and searching data simultaneously?
 
 Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
@@ -112,7 +108,7 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these similarity metrics return different results, check to see if your vectors are normalized
 
 #### Is there a limit to the total number of collections and partitions in Milvus?
-There is no limit on the number of collections. However, the number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
+You can create a maximum of 65536 collections. The number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
 
 #### Why do I get fewer than k vectors when searching for `topk` vectors?
 

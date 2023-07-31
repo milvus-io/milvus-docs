@@ -15,7 +15,7 @@ Since version 2.3.0, Milvus has enhanced its partition operations and now suppor
 - Release a loaded partition.
 - Release a collection that has part of partitions loaded.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Partition
@@ -52,6 +52,8 @@ milvusClient.releasePartitions(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 release -c book -p novel
 ```
@@ -67,6 +69,8 @@ curl -X 'DELETE' \
     "replica_number": 1
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -144,7 +148,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -163,7 +167,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
 	<tr>
 		<th>Parameter</th>

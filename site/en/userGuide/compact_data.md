@@ -20,7 +20,7 @@ To ensure accuracy of searches with Time Travel, Milvus retains the data operati
 
 Compaction requests are processed asynchronously because they are usually time-consuming. 
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -48,6 +48,8 @@ R<ManualCompactionResponse> response = milvusClient.manualCompaction(
 long compactionID = response.getData().getCompactionID();
 ```
 
+<div style="display: none">
+
 ```shell
 compact -c book
 ```
@@ -68,6 +70,8 @@ Output:
 ```json
 {"status":{},"compactionID":434262132129005569}
 ```
+
+</div>
 
 </div>
 
@@ -101,7 +105,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -120,7 +124,7 @@ Output:
 
 You can check the compaction status with the compaction ID returned when the manual compaction is triggered.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 collection.get_compaction_state()
@@ -143,6 +147,8 @@ milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
 );
 ```
 
+<div style="display: none">
+
 ```shell
 show compaction_state -c book
 ```
@@ -163,6 +169,8 @@ Output:
 ```json
 {"status":{},"state":2}
 ```
+
+</div>
 
 </div>
 

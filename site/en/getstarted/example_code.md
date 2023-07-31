@@ -24,10 +24,10 @@ Through running the example code we provided, you will have a primary understand
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v{{var.milvus_python_sdk_version}}/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
 ```
 
 
@@ -113,7 +113,7 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 - Deletes entities by their primary keys:
 
 ```Python
-expr = f"pk in [{ids[0]}, {ids[1]}]"
+expr = f"pk in [{entities[0]}, {entities[1]}]"
 hello_milvus.delete(expr)
 ```
 

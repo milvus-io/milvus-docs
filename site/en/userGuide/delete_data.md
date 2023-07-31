@@ -29,7 +29,7 @@ Milvus only supports deleting entities with clearly specified primary keys, whic
 
 The following example filters data with primary key values of `0` and `1`.
 
-{{fragments/multiple_code.md}}
+{{fragments/sdk_restful.md}}
 
 ```python
 expr = "book_id in [0,1]"
@@ -43,13 +43,17 @@ const expr = "book_id in [0,1]";
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
+<div style="display: none">
+
 ```shell
 delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
 ```
 
+</div>
+
 ```curl
-"expr" = "book_id in [0,1]"
+# See the following section.
 ```
 
 <table class="language-shell">
@@ -76,7 +80,7 @@ The expression to specify entities to be deleted： book_id in [0,1]
 
 Delete the entities with the boolean expression you created. Milvus returns the ID list of the deleted entities.
 
-{{fragments/multiple_code.md}}
+{{fragments/sdk_restful.md}}
 
 ```python
 from pymilvus import Collection
@@ -104,20 +108,25 @@ milvusClient.delete(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 You are trying to delete the entities of collection. This action cannot be undone!
 Do you want to continue? [y/N]: y
 ```
 
+</div>
+
 ```curl
 curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/entities' \
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-    "collection_name": "book",
-    "expr": "book_id in [0,1]"
-  }'
+       "collectionName": "collection1",
+       "id": 1
+     }'
 ```
 
 <div class="language-curl">
@@ -125,10 +134,8 @@ Output:
 
 ```json
 {
-  "status":{},
-  "IDs":{"IdField":{"IntId":{"data":[0,1]}}},
-  "delete_cnt":2,
-  "timestamp":434262178115092482
+    "code": 200,
+    "data": {}
 }
 ```
 
@@ -208,12 +215,12 @@ Output:
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to delete entities from.</td>
+		<td><code>collectionName</code></td>
+		<td>The name of the collection to which this operation applies.</td>
 	</tr>
 	<tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression that specifies the entities to delete.</td>
+		<td><code>id</code></td>
+		<td>The ID of the entity to drop.</td>
 	</tr>
 	</tbody>
 </table>

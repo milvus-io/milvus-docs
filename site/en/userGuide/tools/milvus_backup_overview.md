@@ -26,4 +26,4 @@ To restore from a backup, Milvus Backup creates a new collection in the target M
 
 ## Latest release
 
-- [v0.2.2](https://github.com/zilliztech/milvus-backup/releases/tag/v0.2.2)
+- [v{{var.milvus_backup_release}}](https://github.com/zilliztech/milvus-backup/releases/tag/v{{var.milvus_backup_release}})

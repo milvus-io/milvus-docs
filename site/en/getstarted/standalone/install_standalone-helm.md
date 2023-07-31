@@ -1,7 +1,7 @@
 ---
 id: install_standalone-helm.md
 label: Helm
-order: 1
+order: 2
 group: install_standalone-operator.md
 summary: Learn how to install Milvus stanalone on Kubernetes.
 ---
@@ -112,6 +112,13 @@ $ kubectl port-forward service/my-release-milvus 27017:19530
 Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
+By default, ports forward by kubectl only listen on localhost. Use flag `address` if you want Milvus server to listen on selected IP or all addresses.
+
+```bash
+$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -> 19530
+```
+
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.
@@ -155,6 +162,6 @@ Having installed Milvus, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- [Upgrade Milvus Using Helm Chart](upgrade_milvus_standalone-helm.md).
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).

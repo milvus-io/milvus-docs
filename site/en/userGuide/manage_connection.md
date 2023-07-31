@@ -24,7 +24,7 @@ The example below connects to the Milvus server with host as `localhost` and por
 
 Construct a Milvus connection. Ensure to connect to Milvus server before any operations.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 # Run `python3` in your terminal to operate in the Python interactive mode.
@@ -32,7 +32,7 @@ from pymilvus import connections
 connections.connect(
   alias="default",
   user='username',
-  password='password'
+  password='password',
   host='localhost',
   port='19530'
 )
@@ -218,7 +218,7 @@ A Milvus connection created by the passed parameters.
 
 Disconnect from a Milvus server.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 connections.disconnect("default")

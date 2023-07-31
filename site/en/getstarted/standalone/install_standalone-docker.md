@@ -2,7 +2,7 @@
 id: install_standalone-docker.md
 label: Docker Compose
 related_key: Docker
-order: 2
+order: 0
 group: install_standalone-operator.md
 summary: Learn how to install Milvus stanalone with Docker Compose.
 ---
@@ -16,6 +16,8 @@ This topic describes how to install Milvus standalone using Docker Compose.
 ## Prerequisites
 
 Check [the requirements](prerequisite-docker.md) for hardware and software prior to your installation.
+
+For the users using MacOS 10.14 or later, set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail.
 
 ## Download the `YAML` file
 
@@ -58,6 +60,16 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
 ```
+
+## Connect to Milvus
+
+Verify which local port the Milvus server is listening on. Replace the container name with your own.
+
+```bash
+$ docker port milvus-standalone 19530/tcp
+```
+
+You can connect to Milvus cluster using the local IP address and port number returned by this command.
 
 ## Stop Milvus
 

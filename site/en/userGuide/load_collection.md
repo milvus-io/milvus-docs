@@ -8,7 +8,7 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
-Milvus 2.1 allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput without extra hardware. It is supported on PyMilvus in current release.
+Milvus allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boosts the overall QPS and throughput without extra hardware. Before loading a collection, ensure that you have already indexed it.
 
 <div class="alert warning">
 <ul>
@@ -17,7 +17,7 @@ Milvus 2.1 allows users to load a collection as multiple replicas to utilize the
 </ul>
 </div>
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection, utility
@@ -102,7 +102,7 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 }
 System.out.println(response.getProgress());
 ```
-
+<div style="display: none">
 ```shell
 load -c book
 ```
@@ -123,6 +123,8 @@ Output:
 ```json
 {}
 ```
+
+</div>
 
 </div>
 
@@ -198,7 +200,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -217,7 +219,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
 	<tr>
 		<th>Parameter</th>

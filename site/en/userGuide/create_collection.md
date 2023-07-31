@@ -15,14 +15,14 @@ The following example builds a two-[shard](glossary.md#Sharding) collection name
 ## Prepare Schema
 
 <div class="alert note">
-The collection to create must contain a primary key field and a vector field. INT64 and String are supported data types for primary key fields.
+The collection to create must contain a primary key field and a vector field. INT64 and VarChar are supported data type on primary key field.
 </div>
 
 First, prepare necessary parameters, including the field schema, collection schema, and collection name.
 
 Before defining a collection schema, create a schema for each field in the collection. To reduce the complexity in data inserts, Milvus 2.3.0 or later allows you to specify a default value for each scalar field, excluding a primary key field. This indicates that if you leave a field empty when inserting data, the default value you configured for this field during field schema creation will be used.
 
-{{fragments/multiple_code.md}}
+{{fragments/sdk_restful.md}}
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType
@@ -53,13 +53,14 @@ book_intro = FieldSchema(
 )
 schema = CollectionSchema(
   fields=[book_id, book_name, word_count, book_intro],
-  description="Test book search"
+  description="Test book search",
+  enable_dynamic_field=True
 )
 collection_name = "book"
 ```
 
 ```javascript
-import { MetricType } from "@zilliz/milvus2-sdk-node";
+import { DataType } from "@zilliz/milvus2-sdk-node";
 const params = {
   collection_name: "book",
   description: "Test book search",
@@ -88,6 +89,7 @@ const params = {
       description: "",
     },
   ],
+  enableDynamicField: true
 };
 ```
 
@@ -119,6 +121,7 @@ schema := &entity.Schema{
       },
     },
   },
+  EnableDynamicField: true
 }
 ```
 
@@ -145,60 +148,42 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .addFieldType(fieldType1)
         .addFieldType(fieldType2)
         .addFieldType(fieldType3)
+        .withEnableDynamicField(true)
         .build();
 ```
+
+<div style="display: none">
 
 ```shell
 create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_count -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
 
+</div>
+
 ```curl
 curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection' \
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create'' \
+  -H 'Authorization: Bearer ${TOKEN}'
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-    "collection_name": "book",
-    "schema": {
-      "autoID": false,
-      "description": "Test book search",
-      "fields": [
-        {
-          "name": "book_id",
-          "description": "book id",
-          "is_primary_key": true,
-          "autoID": false,
-          "data_type": 5
-        },
-        {
-          "name": "word_count",
-          "description": "count of words",
-          "is_primary_key": false,
-          "data_type": 5
-        },
-        {
-          "name": "book_intro",
-          "description": "embedded vector of book introduction",
-          "data_type": 101,
-          "is_primary_key": false,
-          "type_params": [
-            {
-              "key": "dim",
-              "value": "2"
-            }
-          ]
-        }
-      ],
-      "name": "book"
-    }
-  }'
+       "dbName": "default",   
+       "collectionName": "medium_articles",
+       "dimension": 256,
+       "metricType": "L2",
+       "primaryField": "id",
+       "vectorField": "vector"
+      }'
 ```
 
 <div class="language-curl">
 Output:
 
 ```json
-{}
+{
+    "code": 200,
+    "data": {}
+}
 ```
 
 </div>
@@ -240,6 +225,7 @@ Output:
                     <li><code>DataType.FLOAT</code> (numpy.float32)</li>
                     <li><code>DataType.DOUBLE</code> (numpy.double)</li>
                     <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
+                    <li><code>DataType.JSON</code> (JSON) </li>
                 </ul>
                 For vector field:
                 <ul>
@@ -504,12 +490,17 @@ Output:
         <tr>
             <td><code>ShardsNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,64]</td>
+            <td>[1,16]</td>
+        </tr>
+        <tr>
+            <td><code>PartitionsNum</code></td>
+            <td>Number of the logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
         </tr>
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -550,90 +541,34 @@ Output:
     </thead>
     <tbody>
         <tr>
-            <td><code>collection_name</code></td>
-            <td>Name of the collection to create.</td>
+            <td><code>dbName</code></td>
+            <td>The name of the database to which the collection to create belongs to.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>name</code> (schema)</td>
-            <td>Must be the same as <code>collection_name</code>, this duplicated field is kept for historical reasons.</td>
-            <td>Same as <code>collection_name</code></td>
-        </tr>
-        <tr>
-            <td><code>autoID</code> (schema)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>description</code> (schema)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>collectionName</code></td>
+            <td>(Required) The name of the collection to create.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
+            <td><code>dimension</code></td>
+            <td>(Required) The number of dimensions for the vector field of the collection.<br>The value ranges from <code>32</code> to <code>32768</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>name</code>(field)</td>
-            <td>Name of the field to create.</td>
+            <td><code>metricType</code></td>
+            <td>The distance metric used for the collection.<br>The value defaults to <code>L2</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>description</code> (field)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>primaryField</code></td>
+            <td>The name of the primary key field.<br>The value defaults to <code>id</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>is_primary_key</code>(Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>autoID</code> (field)(Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>data_type</code></td>
-            <td>Data type of the field to create.</td>
-            <td>
-                Enums:
-                <br>1: "Bool",
-                <br>2: "Int8",
-                <br>3: "Int16",
-                <br>4: "Int32",
-                <br>5: "Int64",
-                <br>10: "Float",
-                <br>11: "Double",
-                <br>20: "String",
-                <br>21: "VarChar",
-                <br>100: "BinaryVector",
-                <br>101: "FloatVector",
-                <br>
-                <br>For primary key field:
-                <ul>
-                    <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
-                </ul>
-                For scalar field:
-                <ul>
-                    <li><code>DataType.BOOL</code> (Boolean)</li>
-                    <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.FLOAT</code> (numpy.float32)</li>
-                    <li><code>DataType.DOUBLE</code> (numpy.double)</li>
-                </ul>
-                For vector field:
-                <ul>
-                    <li><code>BINARY_VECTOR</code> (Binary vector)</li>
-                    <li><code>FLOAT_VECTOR</code> (Float vector)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32,768]</td>
+            <td><code>vectorField</code>(field)</td>
+            <td>The name of the vector field.<br>The value defaults to <code>vector</code>.</td>
+            <td>N/A</td>
         </tr>
     </tbody>
 </table>
@@ -642,7 +577,7 @@ Output:
 
 Then, create a collection with the schema you specified above.
 
-{{fragments/multiple_code.md}}
+{{fragments/multiple_sdk.md}}
 
 ```python
 from pymilvus import Collection
@@ -673,14 +608,6 @@ if err != nil {
 milvusClient.createCollection(createCollectionReq);
 ```
 
-```shell
-# Follow the previous step.
-```
-
-```curl
-# Follow the previous step.
-```
-
 <table class="language-python">
 	<thead>
         <tr>
@@ -698,10 +625,15 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,16]</td>
         </tr>
-	<tr>
-            <td><code>properties: collection.ttl.seconds</code> (optional)</td>
+        <tr>
+            <td><code>num_partitions</code> (optional)</td>
+            <td>Number of logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
+        </tr>
+	    <tr>
+            <td><code>*kwargs: collection.ttl.seconds</code> (optional)</td>
             <td>Collection time to live (TTL) is the expiration time of a collection. Data in an expired collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds.</td>
             <td>The value should be 0 or greater. 0 means TTL is disabled.</td>
         </tr>
@@ -725,19 +657,21 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>shardNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,16]</td>
         </tr>
     </tbody>
 </table>
 
 ## Limits
 
-### Resources
+### Resource configuration
 
-- The length of a collection name cannot exceed 255 characters.
-- The number of partitions in a collection cannot exceed 4,096.
-- The number of fields in a collection cannot exceed 64.
-- The number of shards in a collection cannot exceed 256.
+| Feature                              | Maximum limit  |
+| ------------------------------------ | -------------- |
+| Length of a collection name          | 255 characters |
+| Number of partitions in a collection | 4,096          |
+| Number of fields in a collection     | 64             |
+| Number of shards in a collection     | 16            |
 
 ### Parameter `default_value`
 
@@ -745,7 +679,6 @@ milvusClient.createCollection(createCollectionReq);
 - Primary key fields cannot be configured with `default_value`.
 - The data type of `default_value` must be the same as that specified in `dtype`. Otherwise, an error can occur.
 - In the case of using `auto_id`, it's not allowed to set all the remaining fields to use default values. That is, when performing insert or upsert operations, you need to specify values for at least one field. Otherwise, an error can occur.
-
 
 ## What's next
 
