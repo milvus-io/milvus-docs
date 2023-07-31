@@ -186,7 +186,7 @@ A range search in Milvus can return similar vector results with a distance falli
 | Metric Type  | Configuration                         |
 |--------------|---------------------------------------|
 | L2 and other | `range_filter` <= distance < `radius` |
-| IP           | `radius` < distance <= `range_filter` |
+| IP and cosine| `radius` < distance <= `range_filter` |
 
 ## What's next
 
