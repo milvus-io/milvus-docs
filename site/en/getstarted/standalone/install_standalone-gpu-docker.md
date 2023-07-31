@@ -1,5 +1,5 @@
 ---
-id: install_standalone-docker.md
+id: install_standalone-gpu-docker.md
 label: Docker Compose (GPU)
 related_key: Docker
 order: 0
