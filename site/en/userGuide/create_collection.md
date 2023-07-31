@@ -20,7 +20,7 @@ The collection to create must contain a primary key field and a vector field. IN
 
 First, prepare necessary parameters, including the field schema, collection schema, and collection name.
 
-Before defining a collection schema, create a schema for each field in the collection. To reduce the complexity in data inserts, Milvus 2.3.0 or later allows you to specify a default value for each scalar field, excluding a primary key field. This indicates that if you leave a field empty when inserting data, the default value you configured for this field during field schema creation will be used.
+Before defining a collection schema, create a schema for each field in the collection. To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field, excluding a primary key field. This indicates that if you leave a field empty when inserting data, the default value you configured for this field during field schema creation will be used.
 
 {{fragments/sdk_restful.md}}
 
