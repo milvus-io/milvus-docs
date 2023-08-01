@@ -18,7 +18,10 @@ The following examples show how to conduct a range search on the basis of a regu
 
 All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 from pymilvus import Collection
@@ -45,9 +48,12 @@ Compared to a regular [vector search](search.md), a range search in Milvus passe
 
 Typically, the similarity is measured by the distance between a vector field value and a query vector. Choosing different distance metric types would have a significant impact on the configuration of `radius` and `range_filter`.
 
-For instance, in the case of [L2](../../reference/metric.md#euclidean-distance-l2) distance, the search results must be filtered based on vector field values whose distance is smaller than `radius`. This is because in L2 distance, the smaller the distance, the more similar the vectors are. Based on this knowledge, if you want to filter out part of the most similar vectors not to return, you can specify a valid `range_filter` value that is smaller than `radius`.
+For instance, in the case of [L2](metric.md#euclidean-distance-l2) distance, the search results must be filtered based on vector field values whose distance is smaller than `radius`. This is because in L2 distance, the smaller the distance, the more similar the vectors are. Based on this knowledge, if you want to filter out part of the most similar vectors not to return, you can specify a valid `range_filter` value that is smaller than `radius`.
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 search_params = {
@@ -75,9 +81,12 @@ sp.AddRadius(10.0)
 sp.AddRangeFilter(5.0)
 ```
 
-In the case of [IP](../../reference/metric.md#inner-product-ip) distance, the situation is somewhat different. In terms of IP distance, larger distances represent greater similarity. Therefore, the values of `radius` and `range_filter` in IP distance are reversed compared to L2 distance. That being said, in terms of IP distance, if you use `range_filter` to filter out part of the most similar vectors, a valid `range_filter` value must be greater than `radius`, and the result vectors should be with a distance greater than `radius` but smaller than or equal to `range_filter`.
+In the case of [IP](metric.md#inner-product-ip) distance, the situation is somewhat different. In terms of IP distance, larger distances represent greater similarity. Therefore, the values of `radius` and `range_filter` in IP distance are reversed compared to L2 distance. That being said, in terms of IP distance, if you use `range_filter` to filter out part of the most similar vectors, a valid `range_filter` value must be greater than `radius`, and the result vectors should be with a distance greater than `radius` but smaller than or equal to `range_filter`.
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 search_params = {
@@ -111,7 +120,10 @@ By specifying `radius` and `range_filter` based on distance metric types, you ca
 
 In terms of L2 distance, conduct a range search that returns vectors with a similarity in a range of `5.0` and `10.0`:
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 search_param = {
@@ -146,7 +158,10 @@ fmt.Printf(msgFmt, "start searcching based on vector similarity")
 
 In terms of IP distance, conduct a range search that returns vectors with a similarity in a range of `1.0` and `0.8`:
 
-{{fragments/multiple_code.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#go">GO</a>
+</div>
 
 ```python
 search_param = {
