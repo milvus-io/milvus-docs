@@ -8,7 +8,7 @@ summary: Learn how to search and query data with iterators.
 
 This topic describes how to search and query data with iterators.
 
-Before an iterator is introduced, one common way of querying or searching a large dataset in Milvus is to use `offset` and `limit` parameters in combination, which specify the starting position and the maximum number of items to return respectively. However, this approach may result in performance issues when your database accumulates more data than your server can store in memory, and you still need to paginate through all the data. For more information about `offset` and `limit`, see [Conduct a Vector Similarity Search](../../userGuide/search/search.md#prepare-search-parameters).
+Before an iterator is introduced, one common way of querying or searching a large dataset in Milvus is to use `offset` and `limit` parameters in combination, which specify the starting position and the maximum number of items to return respectively. However, this approach may result in performance issues when your database accumulates more data than your server can store in memory, and you still need to paginate through all the data. For more information about `offset` and `limit`, see [Conduct a Vector Similarity Search](search.md#prepare-search-parameters).
 
 For that to happen the database will need to perform an inefficient full scan every time you request a pagination. This means that if there are 100,000,000 search results and you request an `offset` of 50,000,000, the system will need to fetch all those records (which will not even be needed), cache them in memory, and afterwards only retrieve the 20 results specified in `limit`.
 
@@ -139,12 +139,12 @@ The following table describes the parameters for searching or querying data with
 
 | Parameter | Description |
 | --- | --- |
-| `expr` | Boolean expression used to filter attributes. Find more expression details in [Boolean Expression Rules](../../reference/boolean.md). |
+| `expr` | Boolean expression used to filter attributes. Find more expression details in [Boolean Expression Rules](boolean.md). |
 | `vectors_to_search` | Query vector to search with. |
 | `vector_field` | Name of the vector field. |
-| `search_params` | Search parameters specific to the index. Find more expression details in [Conduct a Vector Similarity Search](../../userGuide/search/search.md#prepare-search-parameters). |
+| `search_params` | Search parameters specific to the index. Find more expression details in [Conduct a Vector Similarity Search](search.md#prepare-search-parameters). |
 | `limit` | Number of results to return per page. |
-| `radius` | Angle where the vector with the least similarity resides. Find more expression details in [Within Range](../../userGuide/search/within_range.md#configure-a-range-for-vector-filtering). |
+| `radius` | Angle where the vector with the least similarity resides. Find more expression details in [Within Range](within_range.md#configure-a-range-for-vector-filtering). |
 | `output_fields` | Name of the field to return. |
 
 ## What's next
