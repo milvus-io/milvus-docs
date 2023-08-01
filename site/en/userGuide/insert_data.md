@@ -18,7 +18,7 @@ The following example inserts 2,000 rows of randomly generated data as the examp
 
 First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise an exception.
 
-Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to [Create a Collection](./create_collection.md#prepare-schema).
+Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to [Create a Collection](create_collection.md#prepare-schema).
 
 Once you enable dynamic schema, you can append dynamic fields in the data. For details, refer to [Dynamic Schema](dynamic_schema.md).
 
