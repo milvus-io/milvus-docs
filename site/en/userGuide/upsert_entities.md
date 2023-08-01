@@ -17,7 +17,7 @@ The following example upserts 3,000 rows of randomly generated data as the examp
 
 First, prepare the data to upsert.  The type of data to upsert must match the schema of the collection, otherwise Milvus will raise an exception.
 
-Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to [Create a Collection](./create_collection.md#prepare-schema).
+Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to [Create a Collection](create_collection.md#prepare-schema).
 
 <div class="multipleCode">
   <a href="#python">Python </a>
