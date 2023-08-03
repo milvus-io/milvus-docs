@@ -193,7 +193,6 @@ In this method, you need to set the name of the target collection as **collectio
   When setting the file paths, note that
 
   - If you upload the data file to a MinIO instance, a valid file path should be relative to the root bucket defined in **"milvus.yml"**, such as **"data/book_id.npy"**.
-  - If you upload the data file to the local hard drive, a valid file path should be an absolute path such as **"/tmp/data/book_id.npy"**.
   - If a collection contains a partition key, you do not need to specify `partition_name`, as data nodes can assign rows to different partitions according to partition key values.
 
   If you have a lot of files to process, consider [creating multiple data-import tasks and have them run in parallel](#Import-multiple-NumPy-files-in-parallel).
