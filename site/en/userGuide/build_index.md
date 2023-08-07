@@ -8,7 +8,7 @@ summary: Learn how to build an index for vectors in Milvus.
 
 This guide describes how to build an index on vectors in Milvus. 
 
-Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search by default.
+Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search.
 
 See [Vector Index](index.md) for more information about the mechanism and varieties of vector indexes.
 

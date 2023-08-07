@@ -5,7 +5,7 @@ summary: Learn how to use Birdwatch to debug Milvus.
 
 # Birdwatcher Usage Guide
 
-This page demonstrates how to install and use Birdwatcher with real cases reported by our users.
+This page demonstrates how to install and use Birdwatcher.
 
 ## Install Birdwatcher
 
@@ -55,9 +55,9 @@ You can download and install the built binary, install it as a common Go module,
     ./birdwatcher
     ```
 
-## Get familiar with Birdwatcher instructions
+## Connect to etcd
 
-Once you start Birdwatcher, you will be greeted by a prompt that reads `Offline >`. Type `help` to view the available commands and flags.
+Once you start Birdwatcher using either of the preceding way, you will be greeted by a prompt that reads `Offline >`. Type `help` to view the available commands and flags.
 
 ```shell
 Offline > help
@@ -84,4 +84,41 @@ Flags:
 Use " [command] --help" for more information about a command.
 ```
 
-In this guide,
+To connect to the etcd of your Milvus instance, run the `connect` command as follows:
+
+```shell
+Offline > connect
+Using meta path: by-dev/meta/
+```
+
+if the above command fails due to an incorrect root path and you know the correct root path, run the following commands to make the connection:
+
+```shell
+Offline > connect --rootPath my-release
+Using meta path: my-release/meta/
+failed to open audit.log file!
+Milvus(my-release) > 
+```
+
+If the above command fails due to an incorrect root path but you do not know the root path, you can run the following commands to make the connection:
+
+```shell
+Offline > connect --dry
+using dry mode, ignore rootPath and metaPath
+```
+
+```shell
+Etcd(127.0.0.1:2379) > find-milvus
+1 candidates found:
+my-release
+```
+
+```shell
+Etcd(127.0.0.1:2379) > use my-release
+Using meta path: my-release/meta/
+failed to open audit.log file!
+Milvus(my-release) >
+```
+
+## Show information
+
