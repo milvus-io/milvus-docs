@@ -108,6 +108,7 @@ curl -X 'POST' \
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
                 <li><code>IP</code> (Inner product)</li>
+                <li><code>COSINE</code> (Cosine similarity)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -128,6 +129,8 @@ curl -X 'POST' \
                 <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
+                <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
+                <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
@@ -145,7 +148,7 @@ curl -X 'POST' \
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
     </tr>
 	</tbody>
 </table>
@@ -166,6 +169,7 @@ curl -X 'POST' \
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
                 <li><code>IP</code> (Inner product)</li>
+                <li><code>COSINE</code> (Cosine similarity)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -186,8 +190,11 @@ curl -X 'POST' \
                 <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
+                <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
+                <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -201,6 +208,9 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+    <tr>
+        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
+    </tr>
 	</tbody>
 </table>
 
@@ -222,9 +232,11 @@ curl -X 'POST' \
                 <li><code>NewIndexIvfFlat</code> (IVF_FLAT)</li>
                 <li><code>NewIndexIvfSQ8</code> (IVF_SQ8)</li>
                 <li><code>NewIndexIvfPQ</code> (IVF_PQ)</li>
+                <li><code>NewIndexGPUIvfFlat</code> (GPU_IVF_FLAT)</li>
+                <li><code>NewIndexGPUIvfPQ</code> (GPU_IVF_PQ)</li>
                 <li><code>NewIndexHNSW</code> (HNSW)</li>
                 <li><code>NewIndexANNOY</code> (ANNOY)</li>
-		<li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
+		        <li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -240,6 +252,7 @@ curl -X 'POST' \
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
                 <li><code>IP</code> (Inner product)</li>
+                <li><code>COSINE</code> (Cosine similarity)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -256,9 +269,9 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
-	    <tr>
-		<td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
-	    </tr>
+    <tr>
+        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
+    </tr>
 	</tbody>
 </table>
 
@@ -280,6 +293,8 @@ curl -X 'POST' \
                 <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
+                <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
+                <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
@@ -297,7 +312,7 @@ curl -X 'POST' \
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
     </tr>
 	</tbody>
 </table>
