@@ -27,7 +27,7 @@ The following table shows how these widely used similarity metrics fit with vari
 <tbody>
   <tr>
     <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li><li>Cosine similarity (COSINE)</li></td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>ANNOY</li><li>DISKANN</li></ul></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -45,12 +45,8 @@ The following table shows how these widely used similarity metrics fit with vari
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li></ul></td>
+    <td class="tg-0pky"><ul><li>Jaccard</li><li>Hamming</li></ul></td>
     <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><ul><li>Superstructure</li><li>Substructure</li></ul></td>
-    <td class="tg-0pky">* BIN_FLAT</td>
   </tr>
 </tbody>
 </table>
@@ -126,34 +122,6 @@ Hamming distance measures binary data strings. The distance between two strings 
 For example, suppose there are two strings, 1101 1001 and 1001 1101.
 
 11011001 ⊕ 10011101 = 01000100. Since, this contains two 1s, the Hamming distance, d (11011001, 10011101) = 2.
-
-### Structural Similarity
-
-When a chemical structure occurs as a part of a larger chemical structure, the former is called a substructure and the latter is called a superstructure. For example, ethanol is a substructure of acetic acid, and acetic acid is a superstructure of ethanol.
-
-Structural similarity is used to determine whether two chemical formulae are similar to each other in that one is the superstructure or substructure of the other.
-
-To determine whether A is a superstructure of B, use the following formula:
-
-![superstructure](../../../assets/superstructure.png "Superstructure")
-
-Where:
-
-- A is the binary representation of a chemical formula to be retrieved
-- B is the binary representation of a chemical formula in the database
-
-Once it returns `0`, **A** is not a superstructure of **B**. Otherwise, the result is the other way around.
-
-To determine whether A is a substructure of B, use the following formula:
-
-![substructure](../../../assets/substructure.png "subsctructure")
-
-Where:
-
-- A is the binary representation of a chemical formula to be retrieved
-- B is the binary representation of a chemical formula in the database
-
-Once it returns `0`, **A** is not a substructure of **B**. Otherwise, the result is the other way around.
 
 ## FAQ
 

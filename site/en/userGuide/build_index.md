@@ -65,9 +65,9 @@ Collection name (book): book
 
 The name of the field to create an index for (book_intro): book_intro
 
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW): IVF_FLAT
 
-Index metric type (L2, IP, HAMMING, TANIMOTO): L2
+Index metric type (L2, IP, HAMMING): L2
 
 Index params nlist: 1024
 
@@ -113,10 +113,7 @@ curl -X 'POST' \
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
-                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
-                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
-                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -132,7 +129,6 @@ curl -X 'POST' \
                 <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
                 <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
-                <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -174,10 +170,7 @@ curl -X 'POST' \
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
-                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
-                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
-                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -193,7 +186,6 @@ curl -X 'POST' \
                 <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
                 <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
-                <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -235,7 +227,6 @@ curl -X 'POST' \
                 <li><code>NewIndexGPUIvfFlat</code> (GPU_IVF_FLAT)</li>
                 <li><code>NewIndexGPUIvfPQ</code> (GPU_IVF_PQ)</li>
                 <li><code>NewIndexHNSW</code> (HNSW)</li>
-                <li><code>NewIndexANNOY</code> (ANNOY)</li>
 		        <li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -257,10 +248,7 @@ curl -X 'POST' \
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
-                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
-                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
-                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -296,7 +284,6 @@ curl -X 'POST' \
                 <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
                 <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
-                <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -360,10 +347,7 @@ curl -X 'POST' \
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
-                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
-                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
-                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -377,7 +361,6 @@ curl -X 'POST' \
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
-                <li><code>ANNOY</code> (ANNOY)</li>
             </ul>
             For binary vectors:
             <ul>

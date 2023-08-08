@@ -37,7 +37,7 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
-  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, ANNOY, and HNSW.
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, and HNSW.
 
 - Indexes for binary embeddings
 
@@ -134,16 +134,6 @@ The following table classifies the indexes that Milvus supports:
         <li>Very high-speed query</li>
         <li>Requires a recall rate as high as possible</li>
         <li>Large memory resources</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>ANNOY</td>
-    <td>Tree-based index</td>
-    <td>
-      <ul>
-        <li>Low-dimensional vectors</li>
-        <li>Will be deprecated in new versions due to its low recall rate.</li>
       </ul>
     </td>
   </tr>
@@ -292,64 +282,6 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
-### ANNOY
-
-ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
-
-There are just two main parameters needed to tune ANNOY: the number of trees `n_trees` and the number of nodes to inspect during searching `search_k`.
-
-- `n_trees` is provided during build time and affects the build time and the index size. A larger value will give more accurate results, but larger indexes.
-
-- `search_k` is provided in runtime and affects the search performance. A larger value will give more accurate results, but will take longer time to return.
-  
-If `search_k` is not provided, it will default to `n * n_trees` where `n` is the number of approximate nearest neighbors. Otherwise, `search_k` and `n_trees` are roughly independent, i.e. the value of `n_trees` will not affect search time if `search_k` is held constant and vice versa. Basically it's recommended to set `n_trees` as large as possible given the amount of memory you can afford, and it's recommended to set `search_k` as large as possible given the time constraints you have for the queries.
-
-- Index building parameters
-
-  | Parameter | Description                              | Range     |
-  | --------- | ---------------------------------------- | --------- |
-  | `n_trees` | The number of trees.                     | [1, 1024] |
-
-- Search parameters
-
-  | Parameter  | Description                                                  | Range                           |
-  | ---------- | ------------------------------------------------------------ | ------------------------------- |
-  | `search_k` | The parameters that controls the search scope.               | [k, ∞] |
-
-</div>
-
-<div class="filter-binary table-wrapper" markdown="block">
-<table>
-<thead>
-  <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>BIN_FLAT</td>
-    <td>N/A</td>
-    <td>
-      <ul>
-        <li>Relatively small dataset</li>
-        <li>Requires a 100% recall rate</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>BIN_IVF_FLAT</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-      </ul>
-    </td>
-  </tr>
-</tbody>
-</table>
 
 ### BIN_FLAT
 

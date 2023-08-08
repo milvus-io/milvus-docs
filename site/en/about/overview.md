@@ -58,7 +58,6 @@ Most of the vector index types supported by Milvus use approximate nearest neigh
 - **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seek a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
 - **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. There is also a GPU version **GPU_IVF_PQ**.
 - **HNSW**: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency.
-- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seek a high recall rate.
 
 See [Vector Index](index.md) for more details.
 
@@ -73,9 +72,6 @@ The metrics that are widely used for floating point embeddings include:
 The metrics that are widely used for binary embeddings include:
 - **Hamming**: This metric is generally used in the field of natural language processing (NLP).
 - **Jaccard**: This metric is generally used in the field of molecular similarity search.
-- **Tanimoto**: This metric is generally used in the field of molecular similarity search.
-- **Superstructure**: This metric is generally used to search for similar superstructure of a molecule.
-- **Substructure**: This metric is generally used  to search for similar substructure of a molecule.
 
 See [Similarity Metrics](metric.md#floating) for more information.
 

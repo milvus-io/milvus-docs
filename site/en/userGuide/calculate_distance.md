@@ -203,10 +203,7 @@ params='[
                 For binary vectors:
                 <ul>
                     <li><code>JACCARD</code> (Jaccard distance)</li>
-                    <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                     <li><code>HAMMING</code> (Hamming distance)</li>
-                    <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
-                    <li><code>SUBSTRUCTURE</code> (Substructure)</li>
                 </ul>
             </td>
         </tr>
