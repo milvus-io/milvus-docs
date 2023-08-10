@@ -373,8 +373,63 @@ Key: querycoord.autobalance, Value: true
 Key: querycoord.segmenttasktimeout, Value: 120000
 ```
 
-## Listen events
+## Backup metrics
 
-You can have Birdwatcher listen events that occurs within Milvus.
+You can have Birdwatcher back up metrics of all components
+
+```shell
+Milvus(my-release) > backup
+Backing up ... 100%(2452/2451)
+backup etcd for prefix  done
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+http://10.244.0.10:9091/metrics
+backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
+```
+
+Then you can check the file in the directory where you start Birdwatcher.
+
+## Probe collections
+
+You can have Birdwatcher probe the status of loaded collections with specified primary keys or mock queries.
+
+### Probe collection with known primary key
+
+In the `probe` command, you should specify the primary key using the `pk` flag, and the collection ID using the `collection` flag.
+
+```shell
+Milvus(by-dev) > probe pk --pk 110 --collection 442844725212299747
+PK 110 found on segment 442844725212299830
+Field id, value: &{long_data:<data:110 > }
+Field title, value: &{string_data:<data:"Human Resources Datafication" > }
+Field title_vector, value: &{dim:768 float_vector:<data:0.022454707 data:0.007861045 data:0.0063843643 data:0.024065714 data:0.013782166 data:0.018483251 data:-0.026526336 ... data:-0.06579628 data:0.00033906146 data:0.030992996 data:-0.028134001 data:-0.01311325 data:0.012471594 > }
+Field article_meta, value: &{json_data:<data:"{\"link\":\"https:\\/\\/towardsdatascience.com\\/human-resources-datafication-d44c8f7cb365\",\"reading_time\":6,\"publication\":\"Towards Data Science\",\"claps\":256,\"responses\":0}" > }
+```
+
+### Probe all collections with mock queries
+
+You can also have Birdwatcher probe all collections with mock queries.
+
+```shell
+Milvus(by-dev) > probe query
+probing collection 442682158191982314
+Found vector field vector(103) with dim[384], indexID: 442682158191990455
+failed to generated mock request probing index type IVF_FLAT not supported yet
+probing collection 442844725212086932
+Found vector field title_vector(102) with dim[768], indexID: 442844725212086936
+Shard my-release-rootcoord-dml_1_442844725212086932v0 leader[298] probe with search success.
+probing collection 442844725212299747
+Found vector field title_vector(102) with dim[768], indexID: 442844725212299751
+Shard my-release-rootcoord-dml_4_442844725212299747v0 leader[298] probe with search success.
+probing collection 443294505839900248
+Found vector field vector(101) with dim[256], indexID: 443294505839900251
+Shard my-release-rootcoord-dml_5_443294505839900248v0 leader[298] probe with search success.
+```
+
 
 
