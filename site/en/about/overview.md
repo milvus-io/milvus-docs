@@ -82,7 +82,6 @@ Milvus makes it easy to add similarity search to your applications. Example appl
 - [Image similarity search](image_similarity_search.md): Images made searchable and instantaneously return the most similar images from a massive database.
 - [Video similarity search](video_similarity_search.md): By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real-time.
 - [Audio similarity search](audio_similarity_search.md): Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.
-- [Molecular similarity search](molecular_similarity_search.md): Blazing fast similarity search, substructure search, or superstructure search for a specified molecule.
 - [Recommender system](recommendation_system.md): Recommend information or products based on user behaviors and needs.
 - [Question answering system](question_answering_system.md): Interactive digital QA chatbot that automatically answers user questions.
 - [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequence.

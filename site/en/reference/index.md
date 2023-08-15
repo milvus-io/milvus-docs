@@ -37,11 +37,11 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
-  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, and HNSW.
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and ScaNN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
 
 - Indexes for binary embeddings
 
-  - For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are Jaccard, Tanimoto, Hamming, Superstructure, and Substructure.
+  - For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are Jaccard and Hamming.
 
   - This type of indexes include BIN_FLAT and BIN_IVF_FLAT.
 
@@ -129,6 +129,17 @@ The following table classifies the indexes that Milvus supports:
   <tr>
     <td>HNSW</td>
     <td>Graph-based index</td>
+    <td>
+      <ul>
+        <li>Very high-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+        <li>Large memory resources</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>ScaNN</td>
+    <td>Quantization-based index</td>
     <td>
       <ul>
         <li>Very high-speed query</li>
@@ -237,6 +248,36 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | Parameter | Description              | Range      |
   | --------- | ------------------------ | ---------- |
   | `nprobe`  | Number of units to query | [1, nlist] |
+
+### ScaNN
+
+ScaNN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.
+
+- Index building parameters
+
+  | Parameter | Description                               | Range               |
+  | --------- | ----------------------------------------- | ------------------- |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          |
+
+  <div class="alert note">
+
+  Unlike IVF_PQ, default values apply to `m` and `nbits` for optimized performance.
+
+  </div>
+
+- Search parameters
+
+  | Parameter | Description              | Range      |
+  | --------- | ------------------------ | ---------- |
+  | `nprobe`  | Number of units to query | [1, nlist] |
+  | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] |
+
+- Range search parameters
+
+  | Parameter | Description              | Range      |
+  | --------- | ------------------------ | ---------- |
+  | `radius`  | Number of units to query | [1, nlist] |
+  | `range_filter` | Number of candidate units to query | [`top_k`, ∞] |
 
 ### GPU_IVF_PQ
 
