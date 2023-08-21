@@ -558,6 +558,4 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 
 ## What's next
 
-- Try [Search with Time Travel](timetravel.md)
-
 {{fragments/api_reference.md}}

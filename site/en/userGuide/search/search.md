@@ -8,7 +8,7 @@ summary: Conduct a vector similarity search with Milvus.
 
 This topic describes how to search entities with Milvus.
 
-A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field, you can perform a [hybrid search](hybridsearch.md) or even a search with [Time Travel](timetravel.md).
+A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. You can perform a [hybrid search](hybridsearch.md) by specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field.
 
 The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined. 
 
@@ -748,6 +748,5 @@ curl -X 'DELETE' \
 - Learn more basic operations of Milvus:
   - [Query vectors](query.md)
   - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
 
 {{fragments/api_reference.md}}
