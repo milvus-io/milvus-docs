@@ -8,7 +8,7 @@ summary: Conduct a vector similarity search with Milvus.
 
 This topic describes how to search entities with Milvus.
 
-A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field, you can perform a [hybrid search](hybridsearch.md) or even a search with [Time Travel](timetravel.md).
+A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. You can perform a [hybrid search](hybridsearch.md) by specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field.
 
 The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined.
 
@@ -209,7 +209,6 @@ Output:
         <td><code>params</code></td>
         <td>Search parameter(s) specific to the specified index type. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
             <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-            <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
         </ul></td>
     </tr>
     </tbody>
@@ -228,7 +227,6 @@ Output:
         <td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
             <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
             <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-            <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
         </ul></td>
     </tr>
     </tbody>
@@ -253,7 +251,6 @@ Output:
                 <li><code>NewIndexIvfSQ8SearchParam(nprobe int)</code> (IVF_SQ8)</li>
                 <li><code>NewIndexIvfPQSearchParam(nprobe int)</code> (RNSG)</li>
                 <li><code>NewIndexHNSWSearchParam(ef int)</code> (HNSW)</li>
-                <li><code>NewIndexANNOYSearchParam(search_k int)</code> (ANNOY)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -300,7 +297,6 @@ Output:
     <td>See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
         <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
         <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-        <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K.</li>
         <li><code>metric_type</code> Indicates the metric type used in the search. It should be the same as the one specified when you index the collection.</li>
         <li><code>limit</code> Indicates the number of entities to return starting from the last skippped entity.</li>
         <li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>.</li>
@@ -752,6 +748,5 @@ curl -X 'DELETE' \
 - Learn more basic operations of Milvus:
   - [Query vectors](query.md)
   - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
 
 {{fragments/api_reference.md}}

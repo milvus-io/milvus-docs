@@ -124,7 +124,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v{{var.milvus_operator_version}}/milvus-operator-{{var.milvus_operator_version}}.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v{{var.milvus_operator_version}}/milvus-operator-{{var.milvus_operator_version}}.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -138,16 +138,16 @@ TEST SUITE: None
 NOTES:
 Milvus Operator Is Starting, use `kubectl get -n milvus-operator deploy/milvus-operator` to check if its successfully installed
 If Operator not started successfully, check the checker's log with `kubectl -n milvus-operator logs job/milvus-operator-checker`
-Full Installation doc can be found in https://github.com/milvus-io/milvus-operator/blob/main/docs/installation/installation.md
-Quick start with `kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_minimum.yaml`
-More samples can be found in https://github.com/milvus-io/milvus-operator/tree/main/config/samples
-CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
+Full Installation doc can be found in https://github.com/zilliztech/milvus-operator/blob/main/docs/installation/installation.md
+Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_minimum.yaml`
+More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
+CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
 #### Install by `kubectl` command
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/deploy/manifests/deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -185,7 +185,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. 
 
 <div class="alert note">
-If you have very limited local resources, you can install a Milvus cluster <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml">using the minimum configuration</a>).
+If you have very limited local resources, you can install a Milvus cluster <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml">using the minimum configuration</a>).
 </div>
 
 ### 1. Deploy a Milvus cluster
@@ -193,7 +193,7 @@ If you have very limited local resources, you can install a Milvus cluster <a hr
 When Milvus Operator starts, run the following command to deploy a Milvus cluster.
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_cluster_default.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
 When the cluster is deployed, you can see the following output.
@@ -443,7 +443,7 @@ $ kubectl delete milvus my-release
 
 <div class="alert note">
 <li>When you delete the Milvus cluster using the default configuration, dependencies like etcd, Pulsar, and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again. </li>
-<li>To delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">configuration file</a>.</li>
+<li>To delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">configuration file</a>.</li>
 
 </div>
 
@@ -460,7 +460,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v{{var.milvus_operator_version}}/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster
@@ -482,7 +482,9 @@ Having installed Milvus, you can:
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
-- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
+- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md)
 
 

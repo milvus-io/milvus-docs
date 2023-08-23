@@ -6,7 +6,7 @@ summary: Learn how to drop an index in Milvus.
 
 # Drop an Index
 
-This topic describes how to drop an index in Milvus. 
+This topic describes how to drop an index in Milvus. Before dropping an index, make sure to release it first.
 
 <div class="alert caution">
 Dropping an index irreversibly removes all corresponding index files.
@@ -161,5 +161,4 @@ curl -X 'DELETE' \
 - Learn more basic operations of Milvus:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
 

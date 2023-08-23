@@ -41,8 +41,23 @@ Helm is a K8s package manager that can help you deploy Milvus quickly.
 1. Add Milvus Helm repository.
 
 ```
-$ helm repo add milvus https://milvus-io.github.io/milvus-helm/
+$ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
+
+<div class="alert note">
+
+The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has been archived and you can get further updates from `https://zilliztech.github.io/milvus-helm/` as follows:
+
+```shell
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+helm repo update
+# upgrade existing helm release
+helm upgrade my-release zilliztech/milvus
+```
+
+The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
+
+</div>
 
 2. Update charts locally.
 
@@ -165,6 +180,7 @@ Having installed Milvus, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
+  - [Manage Databases](manage_databases.md)
   - [Create a collection](create_collection.md)
   - [Create a partition](create_partition.md)
   - [Insert data](insert_data.md)
@@ -175,5 +191,7 @@ Having installed Milvus, you can:
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
-- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
+- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).
