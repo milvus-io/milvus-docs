@@ -84,7 +84,7 @@ Milvus makes it easy to add similarity search to your applications. Example appl
 - [Audio similarity search](audio_similarity_search.md): Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.
 - [Recommender system](recommendation_system.md): Recommend information or products based on user behaviors and needs.
 - [Question answering system](question_answering_system.md): Interactive digital QA chatbot that automatically answers user questions.
-- [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequence.
+- [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequences.
 - [Text search engine](text_search_engine.md): Help users find the information they are looking for by comparing keywords against a database of texts.
 
 See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutions) and [Milvus Adopters](milvus_adopters.md) for more Milvus application scenarios.
