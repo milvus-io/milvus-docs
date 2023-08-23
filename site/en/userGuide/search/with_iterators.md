@@ -149,6 +149,4 @@ The following table describes the parameters for searching or querying data with
 
 ## What's next
 
-- Try [Search with Time Travel](timetravel.md)
-
 {{fragments/api_reference.md}}
