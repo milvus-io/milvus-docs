@@ -205,6 +205,4 @@ A range search in Milvus can return similar vector results with a distance falli
 
 ## What's next
 
-- Try [Search with Time Travel](timetravel.md)
-
 {{fragments/api_reference.md}}
