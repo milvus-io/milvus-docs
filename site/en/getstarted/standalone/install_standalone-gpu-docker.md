@@ -7,6 +7,8 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus GPU standalone with Docker Compose.
 ---
 
+{{tab}}
+
 # Install Milvus Standalone with Docker Compose (GPU)
 
 This guide describes the hardware/software preparations and the procedure to install Milvus with GPU support enabled using Docker Compose.
