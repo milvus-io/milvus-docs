@@ -1,8 +1,13 @@
 ---
 id: with_iterators.md
+label: Conduct a Query with Iterators
 related_key: With Iterators
+order: 1
+group: query.md
 summary: Learn how to search and query data with iterators. 
 ---
+
+{{tab}}
 
 # With Iterators
 
