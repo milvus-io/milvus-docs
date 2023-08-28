@@ -1,8 +1,13 @@
 ---
 id: hybridsearch.md
+label: Conduct a Hybrid Search
 related_key: filter
+order: 1
+group: search.md
 summary: Conduct a Hybrid Search with Milvus.
 ---
+
+{{tab}}
 
 # Conduct a Hybrid Search
 
