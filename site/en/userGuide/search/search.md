@@ -1,6 +1,6 @@
 ---
 id: search.md
-label: Conduct a Vector Similarity Search
+label: Vector Similarity Search
 related_key: search
 order: 0
 group: search.md

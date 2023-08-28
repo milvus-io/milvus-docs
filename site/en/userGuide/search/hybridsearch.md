@@ -1,6 +1,6 @@
 ---
 id: hybridsearch.md
-label: Conduct a Hybrid Search
+label: Hybrid Search
 related_key: filter
 order: 1
 group: search.md
