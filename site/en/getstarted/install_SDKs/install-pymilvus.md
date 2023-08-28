@@ -26,7 +26,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 </div>
 
 ```
-$ python3 -m pip install pymilvus=={{var.milvus_python_sdk_version}}
+$ python3 -m pip install pymilvus=={{var.milvus_python_sdk_real_version}}
 ```
 
 ## Verify installation
