@@ -1,9 +1,9 @@
 ---
 id: within_range.md
-label: Conduct a query within Range
+label: Conduct a Range Search
 related_key: Within Range
 order: 2
-group: query.md
+group: search.md
 summary: Learn how to conduct a range search.
 ---
 
