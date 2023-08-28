@@ -9,7 +9,7 @@ summary: Learn how to conduct a range search.
 
 {{tab}}
 
-# Within Range
+# Conduct a Vector Similarity Search Within a Range
 
 This topic describes how to conduct a range search.
 
