@@ -9,7 +9,7 @@ summary: Learn how to search and query data with iterators.
 
 {{tab}}
 
-# With Iterators
+# Conduct a Query With Iterators
 
 This topic describes how to search and query data with iterators.
 
