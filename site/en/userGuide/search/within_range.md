@@ -1,8 +1,13 @@
 ---
 id: within_range.md
+label: Conduct a query within Range
 related_key: Within Range
+order: 2
+group: query.md
 summary: Learn how to conduct a range search.
 ---
+
+{{tab}}
 
 # Within Range
 
