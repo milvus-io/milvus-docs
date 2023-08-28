@@ -63,14 +63,14 @@ create database -db (text)
 
 | Option | Full name  | Description                                         |
 | :----- | :--------- | :-------------------------------------------------- |
-| -db    | --database | [Required] The datbase name in milvus.              |
+| -db    | --database | [Required] The database name in milvus.              |
 | --help | n/a        | Displays help for using the command.                |
 
 ### Examples
 
 #### Example 1
 
-The following example create the datbase <code>testdb</code>  in milvus.
+The following example create the database <code>testdb</code>  in milvus.
 
 ```shell
 milvus_cli > create database -db testdb
@@ -90,14 +90,14 @@ use database -db (text)
 
 | Option | Full name  | Description                                         |
 | :----- | :--------- | :-------------------------------------------------- |
-| -db    | --database | [Required] The datbase name in milvus.              |
+| -db    | --database | [Required] The database name in milvus.              |
 | --help | n/a        | Displays help for using the command.                |
 
 ### Examples
 
 #### Example 1
 
-The following example use the datbase <code>testdb</code>  in milvus.
+The following example use the database <code>testdb</code>  in milvus.
 
 ```shell
 milvus_cli > use database -db testdb
@@ -116,7 +116,7 @@ list databases
 
 #### Example 1
 
-The following example list the datbases in milvus.
+The following example list the databases in milvus.
 
 ```shell
 milvus_cli > list databases
@@ -136,14 +136,14 @@ delete database -db (text)
 
 | Option | Full name  | Description                                         |
 | :----- | :--------- | :-------------------------------------------------- |
-| -db    | --database | [Required] The datbase name in milvus.              |
+| -db    | --database | [Required] The database name in milvus.              |
 | --help | n/a        | Displays help for using the command.                |
 
 ### Examples
 
 #### Example 1
 
-The following example delete the datbase <code>testdb</code>  in milvus.
+The following example delete the database <code>testdb</code>  in milvus.
 
 ```shell
 milvus_cli > delete database -db testdb
