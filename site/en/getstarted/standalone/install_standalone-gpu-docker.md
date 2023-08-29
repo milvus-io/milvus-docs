@@ -80,7 +80,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 Verify which local port the Milvus server is listening on. Replace the container name with your own.
 
 ```bash
-$ docker port milvus-standalone 19530/tcp
+$ sudo docker port milvus-standalone 19530/tcp
 ```
 
 You can connect to Milvus using the local IP address and port number returned by this command.
