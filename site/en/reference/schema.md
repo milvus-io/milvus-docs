@@ -45,10 +45,20 @@ Milvus supports only one primary key field in a collection.
 		<td>Whether to set the field as the primary key field or not</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Mandatory for the primary key field</td>
 	</tr>
+        <tr>
+	        <td><code>auto_id</code> (Mandatory for primary key field)</td>
+        	<td>Switch to enable or disable automatic ID (primary key) allocation.</td>
+        	<td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+        	<td><code>max_length</code> (Mandatory for VARCHAR field)</td>
+        	<td>Maximum length of strings allowed to be inserted.</td>
+        	<td>[1, 65,535]</td>
+        </tr>
 	<tr>
 		<td>dim</td>
 		<td>Dimension of the vector</td>
-    	<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
+    		<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
 	</tr>
 	<tr>
 		<td>is_partition_key</td>
@@ -136,9 +146,9 @@ A collection schema is the logical definition of a collection. Usually you need 
 		<td>Data type: String.<br/>Optional</td>
 	</tr>
     <tr>
-		<td>auto_id</td>
-		<td>Whether to enable Automatic ID (primary key) allocation or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional</td>
+		<td>partition_key_field</td>
+		<td>Name of a field that is designed to act as the partition key.</td>
+		<td>Data type: String.<br/>Optional</td>
 	</tr>
     <tr>
 		<td>enable_dynamic_field</td>
