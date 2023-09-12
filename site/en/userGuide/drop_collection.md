@@ -13,7 +13,14 @@ Dropping a collection irreversibly deletes all data within it.
 </div>
 
 
-{{fragments/sdk_restful.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+  <a href="#curl">Curl</a>
+</div>
 
 ```python
 from pymilvus import utility
@@ -42,13 +49,10 @@ milvusClient.dropCollection(
 );
 ```
 
-<div style="display: none">
-
-```shell
-delete collection -c book
+```csharp
+var collection = Client.GetCollection("book");
+await collection.DropAsync();
 ```
-
-</div>
 
 ```curl
 curl -X 'DELETE' \
@@ -132,21 +136,6 @@ Output:
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to drop.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
             <td>Name of the collection to drop.</td>
         </tr>
     </tbody>

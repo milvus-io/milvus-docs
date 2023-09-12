@@ -20,7 +20,13 @@ To ensure accuracy of searches with Time Travel, Milvus retains the data operati
 
 Compaction requests are processed asynchronously because they are usually time-consuming. 
 
-{{fragments/multiple_sdk.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+</div>
 
 ```python
 from pymilvus import Collection
@@ -48,32 +54,9 @@ R<ManualCompactionResponse> response = milvusClient.manualCompaction(
 long compactionID = response.getData().getCompactionID();
 ```
 
-<div style="display: none">
-
-```shell
-compact -c book
+```csharp
+await milvusClient.GetCollection("book").CompactAsync();
 ```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/compaction' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collectionID": 434262071120432449
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{"status":{},"compactionID":434262132129005569}
-```
-
-</div>
-
-</div>
 
 <table class="language-javascript">
 	<thead>
@@ -146,33 +129,6 @@ milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
   .build()
 );
 ```
-
-<div style="display: none">
-
-```shell
-show compaction_state -c book
-```
-
-```curl
-curl -X 'GET' \
-  'http://localhost:9091/api/v1/compaction/state' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "compactionID": 434262132129005569
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{"status":{},"state":2}
-```
-
-</div>
-
-</div>
 
 ## What's next
 
