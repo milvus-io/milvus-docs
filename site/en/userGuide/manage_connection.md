@@ -24,7 +24,13 @@ The example below connects to the Milvus server with host as `localhost` and por
 
 Construct a Milvus connection. Ensure to connect to Milvus server before any operations.
 
-{{fragments/multiple_sdk.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+</div>
 
 ```python
 # Run `python3` in your terminal to operate in the Python interactive mode.
@@ -66,13 +72,8 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 );
 ```
 
-```shell
-connect -h localhost -p 19530 -a default
-```
-
-```curl
-curl localhost:9091/api/v1/health
-{"status":"ok"}
+```csharp
+var milvusClient = new MilvusClient("localhost", username: "username", password: "password");
 ```
 
 <table class="language-python">
@@ -171,34 +172,32 @@ curl localhost:9091/api/v1/health
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-h (Optional)</td>
+            <td>host</td>
             <td>The host name. The default is "127.0.0.1".</td>
         </tr>
         <tr>
-            <td>-p (Optional)</td>
-            <td>The port number. The default is "19530".</td>
+            <td>port</td>
+            <td>The port number. The default is 19530.</td>
         </tr>
         <tr>
-            <td>-a (Optional)</td>
+            <td>username</td>
             <td>The alias name of the Milvus link. The default is "default".</td>
         </tr>
         <tr>
-            <td>-D (Optional)</td>
+            <td>password</td>
             <td>Flag to disconnect from the Milvus server specified by an alias. The default alias is "default".</td>
         </tr>
     </tbody>
 </table>
-
-<div class="language-python">
 
 ### Return
 
@@ -218,7 +217,13 @@ A Milvus connection created by the passed parameters.
 
 Disconnect from a Milvus server.
 
-{{fragments/multiple_sdk.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+</div>
 
 ```python
 connections.disconnect("default")
@@ -236,12 +241,8 @@ milvusClient.Close()
 milvusClient.close()
 ```
 
-```shell
-connect -D
-```
-
-```curl
-# Close your HTTP client connection.
+```csharp
+milvusClient.Dispose();
 ```
 
 <table class="language-python">

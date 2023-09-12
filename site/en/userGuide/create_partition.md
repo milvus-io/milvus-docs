@@ -15,7 +15,13 @@ A collection consists of one or more partitions. While creating a new collection
 The following example builds a partition `novel` in the collection `book`.
 
 
-{{fragments/multiple_sdk.md}}
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+</div>
 
 ```python
 from pymilvus import Collection
@@ -50,24 +56,9 @@ milvusClient.createPartition(
 );
 ```
 
-<div style="display: none">
-
-```shell
-create partition -c book -p novel
+```csharp
+var collection = milvusClient.GetCollection("book").CreatePartitionAsync("novel");
 ```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/partition' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "partition_name": "novel"
-  }'
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -150,46 +141,23 @@ curl -X 'POST' \
   </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-c</td>
+            <td>collectionName</td>
             <td>The name of the collection.</td>
         </tr>
         <tr>
-            <td>-p</td>
+            <td>partitionName</td>
             <td>The partition name.</td>
         </tr>
-        <tr>
-            <td>-d (Optional)</td>
-            <td>The description of the partition.</td>
-        </tr>
     </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
-	<thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-	</thead>
-	<tbody>
-    <tr>
-      <td><code>collection_name</code></td>
-      <td>Name of the collection to create a partition in.</td>
-    </tr>
-    <tr>
-      <td><code>partition_name</code></td>
-      <td>Name of the partition to create.</td>
-    </tr>
-	</tbody>
 </table>
 
 ## Limits
