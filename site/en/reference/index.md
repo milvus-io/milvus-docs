@@ -211,7 +211,7 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
 
   | Parameter | Range  |
   | --------- | ------ |
-  | top-K     | <= 256 |
+  | `top-K`   | <= 256 |
 
 ### IVF_SQ8
 
