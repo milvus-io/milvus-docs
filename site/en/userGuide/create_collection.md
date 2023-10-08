@@ -146,8 +146,8 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
 
 ```curl
 curl -X 'POST' \
-  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create'' \
-  -H 'Authorization: Bearer ${TOKEN}'
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
