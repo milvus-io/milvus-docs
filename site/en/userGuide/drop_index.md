@@ -12,6 +12,8 @@ This topic describes how to drop an index in Milvus. Before dropping an index, m
 Dropping an index irreversibly removes all corresponding index files.
 </div>
 
+Drop the only index in a collection:
+
 {{fragments/multiple_sdk.md}}
 
 ```python
@@ -155,6 +157,32 @@ curl -X 'DELETE' \
         </tr>
     </tbody>
 </table>
+
+If a collection contains two or more indexes, specify the name of the index to delete it:
+
+{{fragments/multiple_sdk.md}}
+
+```python
+from pymilvus import Collection
+collection = Collection("book")
+collection.drop_index(index_name='book_intro')
+```
+
+```javascript
+await milvusClient.dropIndex({
+  collection_name: "book",
+  index_name: "book_intro"
+});
+```
+
+```java
+milvusClient.dropIndex(
+  DropIndexParam.newBuilder()
+    .withCollectionName("book")
+    .withIndexName("book_intro")
+    .build()
+);
+```
 
 ## What's next
 
