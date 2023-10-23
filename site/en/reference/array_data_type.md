@@ -69,7 +69,7 @@ connections.connect(host='localhost', port='19530')
 
 # 1. define fields
 fields = [
-    FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True, max_length=100),
+    FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=False, max_length=100),
     FieldSchema(name='title', dtype=DataType.VARCHAR, max_length=512),
     FieldSchema(name='title_vector', dtype=DataType.FLOAT_VECTOR, dim=768),
     # define ARRAY field with VARCHAR elements
@@ -107,6 +107,12 @@ collection.load()
 ## Insert field values
 
 Once the collection is created, you can insert the processed data into it.
+
+<div class="alert note">
+
+If `auto_id` is set to `True` for a collection, insert data without the primary key field. Otherwise, an error can occur during data insert.
+
+</div>
 
 ```python
 # Insert field values
