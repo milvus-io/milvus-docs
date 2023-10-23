@@ -38,6 +38,8 @@ import pandas as pd
 
 # Load the first 100 entities of the downloaded dataset
 df = pd.read_csv('New_Medium_Data.csv', nrows=100)
+for i in range(100):
+	df['title_vector'][i] = eval(df['title_vector'][i])
 
 # Convert the specified fields into arrays
 df['var_array'] = df[['link', 'publication']].values.tolist()
