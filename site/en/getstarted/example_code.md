@@ -19,7 +19,7 @@ Through running the example code we provided, you will have a primary understand
 
 - [Milvus {{var.milvus_release_version}}](install_standalone-docker.md)
 - Python 3 (3.7.1 or later)
-- [PyMilvus {{var.milvus_python_sdk_version}}](install-pymilvus.md)
+- [PyMilvus {{var.milvus_python_sdk_real_version}}](install-pymilvus.md)
 
 
 ## Download example code
