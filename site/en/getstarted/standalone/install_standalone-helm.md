@@ -1,6 +1,7 @@
 ---
 id: install_standalone-helm.md
-label: Helm
+label: Helm (CPU)
+related_key: Helm
 order: 3
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone on Kubernetes.
@@ -8,7 +9,7 @@ summary: Learn how to install Milvus stanalone on Kubernetes.
 
 {{tab}}
 
-# Install Milvus Standalone with Kubernetes
+# Install Milvus Standalone with Kubernetes (CPU)
 
 This topic describes how to install Milvus standalone using Kubernetes (K8s).
 

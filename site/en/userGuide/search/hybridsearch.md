@@ -261,7 +261,7 @@ Output:
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
 	</tr>
 	</tbody>
 </table>
@@ -296,7 +296,7 @@ Output:
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. The vector field does not support in the current release.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
 	</tr>
   <tr>
     <td><code>limit</code> (optional)</td>
@@ -340,8 +340,7 @@ Output:
 	</tr>
   <tr>
 		<td><code>output_fields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
 	</tr>
   <tr>
     <td><code>vectors</code></td>
@@ -416,8 +415,7 @@ Output:
 	</tr>
   <tr>
 		<td><code>OutFields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
 	</tr>
   <tr>
 		<td><code>TopK</code></td>
@@ -480,7 +478,7 @@ Output:
 	<tbody>
     <tr>
 		<td><code>output_fields</code>(optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
 	</tr>
 	<tr>
 		<td><code>anns_field</code></td>
