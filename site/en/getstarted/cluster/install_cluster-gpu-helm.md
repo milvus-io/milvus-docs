@@ -156,7 +156,7 @@ EOF
 In the configuration above, a total of four GPU cards are assigned, with two cards designated for the index node and the other two for the query node.
 
 ```bash
-$ helm install my-release milvus/milvus
+$ helm install my-release milvus/milvus -f custom-values.yaml
 ```
 
 <div class="alert note">
