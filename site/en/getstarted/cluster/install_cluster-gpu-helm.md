@@ -124,7 +124,7 @@ EOF
 ```
 
 ```bash
-$ helm install my-release milvus/milvus
+$ helm install my-release milvus/milvus -f custom-values.yaml
 ```
 
 ### Assign multiple GPU devices
