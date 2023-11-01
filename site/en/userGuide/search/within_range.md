@@ -11,7 +11,7 @@ summary: Learn how to conduct a range search.
 
 # Conduct a Range Search
 
-Understanding how to filter your search results by the proximity of data points is crucial in vector database operations. A range search serves this exact purpose by narrowing down results according to the distance between a query vector and database vectors. This guide will walk you through the process of conducting a range search in Milvus, which consists of a vector similarity search followed by distance-based filtering.
+Understanding how to filter your search results by the proximity of entities is crucial in vector database operations. A range search serves this exact purpose by narrowing down results according to the distance between a query vector and database vectors. This guide will walk you through the process of conducting a range search in Milvus, which consists of a vector similarity search followed by distance-based filtering.
 
 ## Quick steps for a range search
 
