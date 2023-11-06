@@ -71,8 +71,13 @@ connect -h localhost -p 19530 -a default
 ```
 
 ```curl
-curl localhost:19530/api/v1/health
-{"status":"ok"}
+curl --request GET \
+    --url 'localhost:19530/v1/vector/collections' \
+    --header 'Authorization: Bearer <TOKEN>' \
+    --header 'accept: application/json' \
+    --header 'content-type: application/json'
+
+{"code":200,"data":["fouram_sLmXoqnw"]}
 ```
 
 <table class="language-python">
