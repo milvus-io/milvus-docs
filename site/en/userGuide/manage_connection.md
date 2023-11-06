@@ -72,10 +72,7 @@ connect -h localhost -p 19530 -a default
 
 ```curl
 curl --request GET \
-    --url 'localhost:19530/v1/vector/collections' \
-    --header 'Authorization: Bearer <TOKEN>' \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json'
+    --url 'localhost:19530/v1/vector/collections'
 
 {"code":200,"data":["fouram_sLmXoqnw"]}
 ```
