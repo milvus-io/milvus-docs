@@ -12,7 +12,9 @@ Release date: Nov 10, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|----------------|---------------------|
-| 2.3.3          | 2.3.2              | 2.3.3            | 2.3.3          | 2.3.3               |
+| 2.3.3          | 2.3.3              | 2.3.3            | 2.3.3          | 2.3.3               |
+
+Milvus 2.3.3 was a bugfix version that focused on minimizing business interruption during rolling upgrades to less than 30 seconds. Additionally, it aimed to enhance the performance of vector retrieval during searches. Critical bugs related to filtering on array types and the possible appearance of deleted data were addressed. Note that we also bumped Knowhere up to [2.2.2](https://github.com/zilliztech/knowhere/releases/tag/v2.2.2) in this release.
 
 ### Features
 
