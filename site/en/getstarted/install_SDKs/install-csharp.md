@@ -36,5 +36,5 @@ Having installed Milvus C# SDK, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [Milvus C# API reference](/api-reference/java/v{{var.milvus_csharp_sdk_version}}/About.md)
+- Explore [Milvus C# API reference](/api-reference/csharp/v{{var.milvus_csharp_sdk_version}}/About.md)
 
