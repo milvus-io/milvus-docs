@@ -10,7 +10,7 @@ Milvus uses `RocksMQ`, `Pulsar` or `Kafka` for managing logs of recent changes, 
 
 This topic assumes that you have deployed Milvus Operator.
 
-> See [Deploy Milvus Operator](../../installation/installation.md) for more information.
+> See [Deploy Milvus Operator](https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md) for more information.
 
 You need to specify a configuration file for using Milvus Operator to start a Milvus.
 
