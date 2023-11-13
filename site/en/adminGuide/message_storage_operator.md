@@ -252,7 +252,7 @@ Fields used to configure an external Kafka service include:
 The following example configures an external Kafka service.
 
 ```yaml
-apiVersion: milvus.io/v1beta1
+apiVersion: milvus.io/v1alpha1
 kind: MilvusCluster
 metadata:
   name: my-release
