@@ -12,7 +12,7 @@ Release date: Nov 27, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.15         | 2.2.17             | 2.2.15           | 2.2.8         | 2.2.24              |
+| 2.2.16         | 2.2.17             | 2.2.15           | 2.2.8         | 2.2.24              |
 
 Milvus 2.2.16 represents a minor patch release following Milvus 2.2.15. This update primarily concentrates on bolstering system stability, enhancing fault recovery speed, and addressing various identified issues. Notably, the Knowhere version has been updated in this release, leading to quicker loading of DiskAnn indexes.
 
