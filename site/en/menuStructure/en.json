@@ -1110,6 +1110,13 @@
       "order": 5
     },
     {
+      "id": "mmap.md",
+      "title": "MMap-enabled Queries",
+      "label1": "reference",
+      "label2": "",
+      "order": 5
+    },
+    {
       "id": "knowhere.md",
       "title": "Knowhere",
       "label1": "reference",
