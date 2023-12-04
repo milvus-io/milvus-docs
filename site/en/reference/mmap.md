@@ -3,7 +3,7 @@ id: mmap.md
 summary: MMap enables more data in a single node.
 ---
 
-# MMap-enabled Queries
+# MMap-enabled Data Storage
 
 Memory-mapped (MMap) files offer the advantage of accommodating more data on a single node, albeit with a trade-off in performance.
 
@@ -13,7 +13,7 @@ MMap files present a mechanism to map a shared memory region to a file. Leveragi
 
 ## Applicable scenarios
 
-Milvus, designed for storing vector embeddings, typically requires substantial memory capacity. MMap-enabled queries address the challenge of processing larger datasets within constrained memory space. However, as data volume increases, performance gradually degrades. Consequently, MMap-enabled queries are best suited for scenarios where performance is not a critical factor.
+Milvus, designed for storing vector embeddings, typically requires substantial memory capacity. MMap-enabled data storage addresses the challenge of processing larger datasets within constrained memory space. However, as data volume increases, performance gradually degrades. Consequently, MMap-enabled data storage is best suited for scenarios where performance is not a critical factor.
 
 ## Enable MMap
 
