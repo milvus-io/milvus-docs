@@ -32,7 +32,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_relea
 In the same directory as the `docker-compose.yml` file, start up Milvus by running:
 
 ```shell
-$ sudo docker-compose up -d
+$ sudo docker compose up -d
 ```
 
 <div class="alert note">
