@@ -23,8 +23,15 @@ Milvus, designed for storing vector embeddings, typically requires substantial m
 To enable MMap on Milvus, you need to change the configuration file as follows:
 
 ```yaml
+# new-values.yaml
 queryNode:
   mmapDirPath: any/valid/path
+```
+
+After saving the file, apply the changes with the following command:
+
+```shell
+helm upgrade <milvus-release> --reuse-values -f new-values.yaml milvus/milvus
 ```
 
 <div class="alert notes">
