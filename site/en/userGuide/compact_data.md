@@ -36,7 +36,15 @@ const compactionID = res.compactionID;
 ```
 
 ```go
-// This function is under active development on the GO client.
+compactionID, err := milvusClient.ManualCompaction(
+    context.Background(), // ctx
+    "book",               // collection name
+    0,                    // tolerance duration
+)
+if err != nil {
+    log.Fatal("failed to manual compaction:", err.Error())
+}
+
 ```
 
 ```java
@@ -137,7 +145,13 @@ const state = await milvusClient.getCompactionState({
 ```
 
 ```go
-// This function is under active development on the GO client.
+compactionState, err := milvusClient.GetCompactionState(
+    context.Background(), // ctx
+    compactionID,         // compaction id
+)
+if err != nil {
+    log.Fatal("failed to get compaction state:", err.Error())
+}
 ```
 
 ```java
