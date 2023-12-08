@@ -1,5 +1,5 @@
 ---
-id: scale_dependencies.md
+id: scale-dependencies.md
 title: Scale Dependencies
 ---
 
