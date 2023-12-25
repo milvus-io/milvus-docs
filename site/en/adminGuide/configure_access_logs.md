@@ -95,7 +95,7 @@ The default log format used for all methods is the `base` format, which does not
 proxy:
   accessLog:
     enable: true
-    filename: "/var/logs/milvus/access_log.txt"
+    filename: "access_log.txt"
     localPath: "/var/logs/milvus"
     # Define custom formatters for access logs with format and applicable methods
     formatters:
