@@ -285,7 +285,7 @@ Under this section, you can configure proxy port, system limits, etc.
   <tbody>
     <tr>
       <td>The local folder path where the access log file is stored. This parameter can be specified when <code>proxy.accessLog.filename</code> is not empty.</td>
-      <td>/tmp/access_logs</td>
+      <td>/tmp/milvus_access</td>
     </tr>
   </tbody>
 </table>
