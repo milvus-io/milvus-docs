@@ -376,7 +376,7 @@ Under this section, you can configure proxy port, system limits, etc.
   <tbody>
     <tr>
       <td>The path of the object storage for uploading access log files.</td>
-      <td>/access_logs</td>
+      <td>access_log/</td>
     </tr>
   </tbody>
 </table>
