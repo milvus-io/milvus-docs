@@ -12,7 +12,7 @@ Release date: Jan 15, 2024
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|----------------|---------------------|
-| 2.3.4          | 2.3.5              | 2.3.3            | 2.3.4          | 2.3.5               |
+| 2.3.5          | 2.3.5              | 2.3.3            | 2.3.4          | 2.3.5               |
 
 Milvus v2.3.5 marks a significant update focused on improving overall functionality and stability. In this release, we've made enhancements to Role-Based Access Control (RBAC) and Alias, prioritizing user-friendliness. Additionally, various improvements have been implemented to optimize system performance and resource management. A notable feature in v2.3.5 is the reintroduction of the MVCC (Multi-Version Concurrency Control) mechanism, crucial for efficiently managing concurrent and phased queries. This release also addresses critical bug fixes, preventing issues related to data deletion loss, abnormal system panics, and deadlocks, ensuring a more reliable and stable user experience.
 
