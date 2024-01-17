@@ -21,20 +21,18 @@ Milvus v2.3.5 marks a significant update focused on improving overall functional
 - **Role-Based Access Control (RBAC)**
   - Authorize users to query grant information for their roles. ([#29747](https://github.com/milvus-io/milvus/pull/29747))
   - Feature: Add RBAC functionality to alias. ([#29885](https://github.com/milvus-io/milvus/pull/29885))
-- **Alias**
-  - Implemented DescribeAlias and ListAliases interfaces. ([#29896](https://github.com/milvus-io/milvus/pull/29896))
 
 ### Improvements:
 
 - Restore MVCC functionality ([#29749](https://github.com/milvus-io/milvus/pull/29749))
 - Add concurrency for DataCoord segment GC to increase garbage collection speed ([#29557](https://github.com/milvus-io/milvus/pull/29557))
-- Read Azure file without ReadAll to control memory usage ([#29604](https://github.com/milvus-io/milvus/pull/29604))
+- Read Azure files without ReadAll to control memory usage ([#29604](https://github.com/milvus-io/milvus/pull/29604))
 - Support reading hardware metrics for cgroupv2 ([#29847](https://github.com/milvus-io/milvus/pull/29847))
 - Save lite WatchInfo into etcd in DataNode ([#29751](https://github.com/milvus-io/milvus/pull/29751))
 - Support access log printing cluster prefix ([#29646](https://github.com/milvus-io/milvus/pull/29646))
 - Rewrite generation segment plan based on assigning segments to make it more understandable ([#29574](https://github.com/milvus-io/milvus/pull/29574))
 - Performance:
-   - Enhance: use GPU pool for GPU tasks ([#29678](https://github.com/milvus-io/milvus/pull/29678))
+   - Enhancement: Use GPU pool for GPU tasks ([#29678](https://github.com/milvus-io/milvus/pull/29678))
    - Cache collection schema attributes to reduce proxy CPU usage ([#29668](https://github.com/milvus-io/milvus/pull/29668))
    - Pre-allocate result FieldData space to reduce growing slices ([#29726](https://github.com/milvus-io/milvus/pull/29726))
 
@@ -46,7 +44,11 @@ Milvus v2.3.5 marks a significant update focused on improving overall functional
 - Ensure compact operation on DataCoord meta performs as a transaction ([#29776](https://github.com/milvus-io/milvus/pull/29776))
 - Fix panic caused by type assert LocalSegment on Segment ([#29018](https://github.com/milvus-io/milvus/pull/29018))
 - Drop segment meta info with a prefix to avoid etcd txn out of limit ([#29857](https://github.com/milvus-io/milvus/pull/29857))
-- Remove unnecessary lock in config manager ([#29855](https://github.com/milvus-io/milvus/pull/29855))
+- Remove unnecessary lock-in config manager ([#29855](https://github.com/milvus-io/milvus/pull/29855))
+- Rectify memory leaks when reading data from Azure. ([#30006](https://github.com/milvus-io/milvus/pull/30006))
+- Resolve the issue of mistakenly duplicating dynamic fields when handling RESTful insert requests. ([#30043](https://github.com/milvus-io/milvus/pull/30043))
+- Rectify the deadlock issue in the BlockAll operation within the flowgraph. ([#29972](https://github.com/milvus-io/milvus/pull/29972))
+- Resolve the issue of failing to parse lengthy and complex expressions. ([#30021](https://github.com/milvus-io/milvus/pull/30021))
 
 ## v2.3.4
 
