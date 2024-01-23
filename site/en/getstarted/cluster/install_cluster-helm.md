@@ -1,6 +1,6 @@
 ---
 id: install_cluster-helm.md
-label: Helm (CPU)
+label: Helm
 related_key: Kubernetes
 order: 1
 group: install_cluster-milvusoperator.md
