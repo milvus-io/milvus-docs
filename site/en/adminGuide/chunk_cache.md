@@ -9,7 +9,7 @@ The chunk cache mechanism enables Milvus to pre-load data into cache memory on t
 
 ## Background
 
-Before conducting queries to retrieve vectors, you need to load the data from object storage to memory. This is a time-consuming process. Before all data is loaded, Milvus may respond to some vector retrieval requests with a delay.
+Before conducting queries to retrieve vectors, you need to load the data from object storage to the memory cache on the local hard disk of the query nodes. This is a time-consuming process. Before all data is loaded, Milvus may respond to some vector retrieval requests with a delay.
 
 To improve the query performance, Milvus provides a chunk cache mechanism to pre-load data from object storage into the cache memory on the local hard disk before it is needed. When a query request is received, the Segcore first checks if the data is in the cache memory, instead of the object storage. If the data is in the cache memory, Segcore can quickly retrieve it from the cache memory and return the result to the client.
 
