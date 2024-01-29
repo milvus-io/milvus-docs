@@ -13,7 +13,7 @@ Release date: Jan 29, 2024
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|----------------|---------------------|
-| 2.3.7          | 2.3.5              | 2.3.4            | 2.3.5          | 2.3.5               |
+| 2.3.7          | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
 
 Milvus v2.3.7 marks a minor yet impactful update, concentrating on boosting overall functionality and stability. In this release, we have refactored the business logic for a graceful stop to prevent any data loss, introduced support for array and JSON data types through RESTFul APIs, and amped up the speed of index loading. Alongside these enhancements, we've made several tweaks to optimize system performance and resource management. Additionally, this release addresses critical bug fixes as well as issues like memory leaks, load timeouts, and service unavailability, ensuring a more reliable and stable user experience.
 
