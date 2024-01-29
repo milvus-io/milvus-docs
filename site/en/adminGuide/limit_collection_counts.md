@@ -1,9 +1,9 @@
 ---
-id: set_limits_on_collections.md
+id: limit_collection_counts.md
 title: Set Limits on Collection Number
 ---
 
-# Set Limit on Collection Number
+# Limit Collection Counts
 
 A Milvus instance allows up to 65,536 collections. However, too many collections may result in performance issues. Therefore, it is recommended to limit the number of collections created in a Milvus instance.
 

@@ -21,7 +21,7 @@ Milvus v2.3.7 marks a minor yet impactful update, concentrating on boosting over
 
 - **Limit Collection Counts**
 
-  A Milvus instance allows up to 65,536 collections. However, too many collections may result in performance issues. Therefore, it is recommended to limit the number of collections created in a Milvus instance. Read more on [Limit Collection Counts](set_limits_on_collections.md).
+  A Milvus instance allows up to 65,536 collections. However, too many collections may result in performance issues. Therefore, it is recommended to limit the number of collections created in a Milvus instance. Read more on [Limit Collection Counts](limit_collection_counts.md).
 
 - **Chunk Cache**
 
