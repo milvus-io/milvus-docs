@@ -2,7 +2,7 @@
 id: install_standalone-aptyum.md
 label: Dpkg
 related_key: Install
-order: 1
+order: 2
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with dpkg.
 ---
