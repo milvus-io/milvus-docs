@@ -9,9 +9,9 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 
 {{tab}}
 
-# Install Milvus Cluster with Helm
+# Install Milvus Cluster with GPU Support
 
-This topic describes how to install Milvus standalone using Kubernetes with GPU support.  
+Milvus now can use GPU devices to build indexes and perform ANN searches thanks to the contribution from NVIDIA. This guide will show you how to install Milvus with GPU support on your machine.
 
 ## Prerequisites
 
