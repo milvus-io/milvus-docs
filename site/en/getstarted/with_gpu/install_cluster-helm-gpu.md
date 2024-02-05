@@ -1,8 +1,8 @@
 ---
 id: install_cluster-helm-gpu.md
-label: Cluster
+label: Cluster (Helm)
 related_key: Kubernetes
-order: 1
+order: 2
 group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
