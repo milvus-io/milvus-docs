@@ -1,8 +1,8 @@
 ---
 id: install_cluster-helm-gpu.md
-label: Cluster
+label: Cluster (Helm)
 related_key: Kubernetes
-order: 1
+order: 2
 group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
@@ -11,11 +11,17 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 
 # Install Milvus Cluster with Helm
 
-This topic describes how to install Milvus standalone using Kubernetes with CPU-only and GPU support.  
+This topic describes how to install Milvus standalone using Kubernetes with GPU support.  
 
 ## Prerequisites
 
-Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
+Before installing Milvus with GPU support, make sure you have the following prerequisites:
+
+- The compute capability of your GPU device is 6.1, 7.0, 7.5, or 8.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
+
+- You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+- You have installed a Kubernetes cluster, and the `kubectl` command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.
 
 ## Create a K8s Cluster
 

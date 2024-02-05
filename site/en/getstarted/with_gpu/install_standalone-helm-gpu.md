@@ -1,6 +1,6 @@
 ---
 id: install_standalone-helm-gpu.md
-label: Standalone
+label: Standalone (Helm)
 order: 0
 group: install_standalone-helm-gpu.md
 related_key: Docker
