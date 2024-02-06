@@ -149,7 +149,7 @@ The Spark-Milvus Connector supports reading and writing data in the following Mi
 
 ### milvus
 
-In [Quick start](#Quick-start), we use the **milvus** format to write sample data into a Milvus cluster. The **milvus** format is a new data format that supports seamlessly writing Spark DataFrame data into Milvus Collections. This is achieved by batch calls to the Insert API of Milvus SDK. If a collection doesn't exist in Milvus, a new collection will be created based on the schema of the Dataframe. However, the automatically created collection may not support all features of the collection schema. Therefore, it is recommended to create a collection via SDK first and then use spark-milvus for writing. For further information, please refer to the demo.
+In [Quick start](#Quick-start), we use the **milvus** format to write sample data into a Milvus cluster. The **milvus** format is a new data format that supports seamlessly writing Spark DataFrame data into Milvus Collections. This is achieved by batch calls to the Insert API of Milvus SDK. If a collection doesn't exist in Milvus, a new collection will be created based on the schema of the Dataframe. However, the automatically created collection may not support all features of the collection schema. Therefore, it is recommended to create a collection via SDK first and then use spark-milvus for writing. For further information, please refer to [the demo](https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala).
 
 ### milvusbinlog
 
