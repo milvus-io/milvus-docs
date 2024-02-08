@@ -28,7 +28,7 @@ Milvus v2.3.8 is a minor patch release following Milvus v2.3.7. This release inc
 
 ## Critical Bug Fixes
 
-- Fixed panic error caused by watching multiple channels in the Datanodes ([#30316](https://github.com/milvus-io/milvus/pull/30316))
+- Fixed panic error caused by watching multiple channels in the Datanodes ([#30136](https://github.com/milvus-io/milvus/pull/30136))
 - Corrected reading of index parameters from the configuration file ([#30353](https://github.com/milvus-io/milvus/pull/30353))
 - Ensured effectiveness of the db_name parameter for DescribeAlias and ListAliases operations ([#30453](https://github.com/milvus-io/milvus/pull/30453))
 - Resolved proxy startup hang-up due to improper port occupation handling ([#30416](https://github.com/milvus-io/milvus/pull/30416))
