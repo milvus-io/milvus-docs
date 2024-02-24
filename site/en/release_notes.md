@@ -14,13 +14,13 @@ Release date: Feb 23, 2024
 |----------------|--------------------|------------------|----------------|---------------------|
 | 2.3.10         | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
 
-Milvus v2.3.10 is a critical patch release that follows Milvus v2.3.9, featuring several essential bug fixes. A significant fix in this release addresses the issue of missing data in hybrid search results when utilizing partition keys (issue [#30607](https://github.com/milvus-io/milvus/pull/30607)).
+Milvus v2.3.10 is a critical patch release that follows Milvus v2.3.9, featuring several essential bug fixes. A significant fix in this release addresses the issue of missing data in hybrid search results when utilizing partition keys.
 
 Users who have encountered hybrid search issues in release v2.3.5 through v2.3.9, especially those using partition key features, are highly recommended to upgrade to version v2.3.10 promptly.
 
 ### Critical Bug Fixes
 
-- Fixed the upsert error where the primary key field was incorrectly treated as the PartitionKey field ([#30773](https://github.com/milvus-io/milvus/pull/30773)).
+- Fixed the upsert error where the primary key field was incorrectly treated as the PartitionKey field ([Issue #30607](https://github.com/milvus-io/milvus/issues/30607)).
 - Prevented flush blockages by skipping the filling of segmentID in indexBuildCh ([#30749](https://github.com/milvus-io/milvus/pull/30749)).
 
 ### Bug Fixes
