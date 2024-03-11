@@ -48,13 +48,13 @@ This strategy lifts the limit on the maximum number of tenants that a Milvus col
 
 To recap, you can use either or some of the multi-tenancy strategies above to form your own solution. The following table makes comparisons among these strategies in terms of data isolation, search performance, and maximum number of tenants.
 
-|                           | Data isolation | Search perf. | Max. num. of tenants |
-|---------------------------|----------------|--------------|----------------------|
-| Database oriented         | Strong         | Strong       | 64                   |
-| One collection for all    | Weak           | Medium       | N/A                  |
-| One collection per tenant | Strong         | Strong       | Less than 10000      |
-| One partition per tenant  | Medium         | Strong       | 4096                 |
-| Partition-key-based       | Medium         | Strong       | 10000000             |
+|                           | Data isolation | Search perf. | Max. num. of tenants | Recommend scenarios      |
+|---------------------------|----------------|--------------|----------------------|---------------------------------------------------------------------------------------------|
+| Database oriented         | Strong         | Strong       | 64                   |For department-tenants that require different collections for different projects.            |
+| One collection for all    | Weak           | Medium       | N/A                  |For those who have limited resources and are insensive in data isolation.                    |
+| One collection per tenant | Strong         | Strong       | Less than 10,000     |For those who have less than 10,000 tenants in one cluster.                                  |
+| One partition per tenant  | Medium         | Strong       | 4,096                |For those who have less than 4,096 tenants in one collection.                                |
+| Partition-key-based       | Medium         | Strong       | 10,000,000+          |For those who expect millions of tenants in a rapid growth period.                           |
 
 ## What's next
 
