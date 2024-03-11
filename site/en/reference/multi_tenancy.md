@@ -50,11 +50,11 @@ To recap, you can use either or some of the multi-tenancy strategies above to fo
 
 |                           | Data isolation | Search perf. | Max. num. of tenants | Recommend scenarios      |
 |---------------------------|----------------|--------------|----------------------|---------------------------------------------------------------------------------------------|
-| Database oriented         | Strong         | Strong       | 64                   |For department-tenants that require different collections for different projects.            |
-| One collection for all    | Weak           | Medium       | N/A                  |For those who have limited resources and are insensive in data isolation.                    |
-| One collection per tenant | Strong         | Strong       | Less than 10,000     |For those who have less than 10,000 tenants in one cluster.                                  |
-| One partition per tenant  | Medium         | Strong       | 4,096                |For those who have less than 4,096 tenants in one collection.                                |
-| Partition-key-based       | Medium         | Strong       | 10,000,000+          |For those who expect millions of tenants in a rapid growth period.                           |
+| Database oriented         | Strong         | Strong       | 64                   |For those that require collections to vary with projects, especially suitable for data isolation between departments in your organization. |
+| One collection for all    | Weak           | Medium       | N/A                  |For those that have limited resources and are insensitive to data isolation.               |
+| One collection per tenant | Strong         | Strong       | Less than 10,000     |For those that have less than 10,000 tenants per cluster.                                  |
+| One partition per tenant  | Medium         | Strong       | 4,096                |For those that have less than 4,096 tenants per collection.                                |
+| Partition-key-based       | Medium         | Strong       | 10,000,000+          |For those that predict a rapid tenant increase into millions.                              |
 
 ## What's next
 
