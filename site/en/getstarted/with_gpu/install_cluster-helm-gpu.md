@@ -21,6 +21,14 @@ Before installing Milvus with GPU support, make sure you have the following prer
 
 - You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
+  For Ubuntu 22.04 users, you can install the driver and the container toolkit with the following commands:
+
+  ```shell
+  % sudo apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545
+  ```
+
+  For other OS users, please refer to the [official installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian).
+
   You can check whether the driver has been installed correctly by running the following command:
 
   ```shell
