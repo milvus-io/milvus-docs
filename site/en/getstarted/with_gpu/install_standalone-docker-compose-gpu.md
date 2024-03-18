@@ -1,6 +1,6 @@
 ---
 id: install_standalone-docker-compose-gpu.md
-label: Standalone (Docker)
+label: Standalone (Docker Compose)
 related_key: Kubernetes
 order: 1
 group: install_standalone-helm-gpu.md
