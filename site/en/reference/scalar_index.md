@@ -30,7 +30,6 @@ The following table lists the data types that Milvus supports and their correspo
 
 | Data type                     | Default indexing algorithm        |
 | ----------------------------- | --------------------------------- |
-| BOOL                          | STL sort                          |
 | VARCHAR                       | MARISA-trie                       |
 | INT8                          | STL sort                          |
 | INT16                         | STL sort                          |
