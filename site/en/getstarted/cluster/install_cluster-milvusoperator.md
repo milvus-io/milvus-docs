@@ -407,7 +407,7 @@ my-release-pulsar-zookeeper-1                   1/1     Running     0          1
 my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
-When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md).
+When the Milvus cluster is installed, you can learn how to [manage Collections](manage-collections.md).
 
 ## Connect to Milvus
 

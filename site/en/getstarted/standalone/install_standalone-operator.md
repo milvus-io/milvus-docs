@@ -198,7 +198,7 @@ Run the following command to check the status of Milvus you just installed.
 $ kubectl get milvus my-release -o yaml
 ```
 
-When the Milvus is successfully installed, you can learn how to [Connect to Milvus server](manage_connection.md).
+When the Milvus is successfully installed, you can learn how to [manage collections](manage-collections.md).
 
 ## Connect to Milvus
 
