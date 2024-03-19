@@ -234,6 +234,8 @@ schema = CollectionSchema(fields=[int64_field, bf16_vector, fp16_vector])
 
 #### Upgraded Architecture
 
+In this release, we have upgraded the architecture of Milvus. For details, refer to the [Architecture Overview](architecture_overview.md).
+
 #### L0 Segment
 
 In this release, L0 Segment, which is a new type of segment, is available. It only records deleted data. Milvus periodically splits the data in this segment into sealed segments through compaction, which relieves you from frequently flushing data after deletions. The introduction of L0 Segment can significantly reduce the number of small files on the object storage and greatly improve the stability and performance of deletion and upsert operations.
