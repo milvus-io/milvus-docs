@@ -28,7 +28,6 @@ $ go get -u github.com/milvus-io/milvus-sdk-go/v2
 Having installed Milvus GO SDK, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Collections](manage-collections.md)
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)

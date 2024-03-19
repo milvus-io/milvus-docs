@@ -41,7 +41,6 @@ implementation 'io.milvus:milvus-sdk-java:{{var.milvus_java_sdk_real_version}}'
 Having installed Milvus Java SDK, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Collections](manage-collections.md)
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)

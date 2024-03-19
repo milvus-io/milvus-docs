@@ -472,7 +472,6 @@ When you no longer need the K8s cluster in the test environment, you can run `$ 
 Having installed Milvus, you can:
 - Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Databases](manage_databases.md)
   - [Manage Collections](manage-collections.md)
   - [Manage Partitions](manage-partitions.md)

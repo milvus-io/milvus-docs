@@ -44,7 +44,6 @@ $ python3 -c "from pymilvus import Collection"
 Having installed PyMilvus, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Collections](manage-collections.md)
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)
