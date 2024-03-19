@@ -218,5 +218,5 @@ Assume that two array fields `int_array` and `var_array` have been defined. The 
 
 ## What’s next
 
-- [Dynamic Schema](enable_dynamic_schema.md)
-- [JSON](use_json_field.md)
+- [Dynamic Schema](enable-dynamic-schema.md)
+- [JSON](use-json-field.md)

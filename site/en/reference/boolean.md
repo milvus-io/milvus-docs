@@ -324,4 +324,4 @@ Now that you know how bitsets work in Milvus, you might also want to:
 
 - Learn how to conduct a [Multi-Vector Search](multi-vector-search.md).
 - Learn how to [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results.
-- Learn how to [use dynamic fields in building boolean expressions](enabled-dynamic-schema.md).
+- Learn how to [use dynamic fields in building boolean expressions](enable-dynamic-schema.md).

@@ -67,7 +67,7 @@ id: home.md
 
 - [Manage Collections](manage-collections.md)
 - [Insert, Upsert, and Delete](insert-update-delete.md)
-- [Manage Indexes](manage-indexes.md)
+- [Index Vector Fields](index-vector-fields.md)
 - [Single-Vector Search](single-vector-search.md)
 - [Get & Scalar Query](get-and-scalar-query.md)
 </div>
