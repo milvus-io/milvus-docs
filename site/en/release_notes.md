@@ -142,7 +142,7 @@ res = collection.hybrid_search(
                         limit=2)
 ```
 
-For details, read [Multi-Vector Search](multi_vector_search.md) for more.
+For details, read [Multi-Vector Search](multi-vector-search.md) for more.
 
 #### Inverted Index and Fuzzy Match
 
