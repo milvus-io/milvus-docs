@@ -41,11 +41,11 @@ implementation 'io.milvus:milvus-sdk-java:{{var.milvus_java_sdk_real_version}}'
 Having installed Milvus Java SDK, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 
 - Explore [Milvus Java API reference](/api-reference/java/v{{var.milvus_java_sdk_version}}/About.md)
 
