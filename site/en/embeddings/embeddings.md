@@ -154,5 +154,3 @@ The expected output is similar to the following:
 ```python
 Dim: 21 (1, 21)
 ```
-
-<DocCardList />
