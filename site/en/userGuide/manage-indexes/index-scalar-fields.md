@@ -122,25 +122,6 @@ client.list_indexes(
 # ['default_index','inverted_index']
 ```
 
-```java
-import java.util.List;
-import io.milvus.v2.service.index.request.ListIndexesReq;
-
-ListIndexesReq listIndexesReq = ListIndexesReq.builder()
-    .collectionName("test_scalar_index")  // Specify the collection name
-    .build();
-
-List<String> indexNames = client.listIndexes(listIndexesReq);
-
-System.out.println(indexNames);
-
-// Output:
-// [
-//     "default_index",
-//     "inverted_index"
-// ]
-```
-
 ## Limits
 
 - Currently, scalar indexing supports INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, and VARCHAR data types, but not JSON and ARRAY types.
