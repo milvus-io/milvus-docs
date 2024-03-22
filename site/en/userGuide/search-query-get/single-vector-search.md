@@ -6,7 +6,14 @@ summary: This article describes how to search for vectors in a Milvus collection
 
 # Single-Vector Search
 
-After your data is inserted, the next step is to send a `search` request to search for vectors that are similar to your query vector. A single-vector search compares your query vector against the existing vectors in your collection to find the most similar entities, returning their IDs and the distances between them. This process can optionally return the vector values and metadata of the results.
+Once you have inserted your data, the next step is to perform similarity searches on your collection in Milvus.
+
+Milvus allows you to conduct two types of searches, depending on the number of vector fields in your collection:
+
+- **Single-vector search**: If your collection has only one vector field, use the [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) method to find the most similar entities. This method compares your query vector with the existing vectors in your collection and returns the IDs of the closest matches along with the distances between them. Optionally, it can also return the vector values and metadata of the results.
+- **Multi-vector search**: For collections with two or more vector fields, use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.
+
+This guide focuses on how to perform a single-vector search in Milvus. For details on multi-vector search, refer to [hybrid search](https://milvus.io/docs/multi-vector-search.md).
 
 ## Overview
 
