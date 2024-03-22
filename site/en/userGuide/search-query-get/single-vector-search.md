@@ -134,7 +134,7 @@ The output showcases the top 5 neighbors nearest to your query vector, including
 
 ### Bulk-vector search
 
-A bulk-vector search extends the [single-vector search](./single-vector-search#single-vector-search) concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.
+A bulk-vector search extends the [single-vector search](https://milvus.io/docs/single-vector-search.md#Single-Vector-Search) concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.
 
 In a bulk-vector search, you can include several query vectors in the `data` field. The system processes these vectors in parallel, returning a separate result set for each query vector, each set containing the closest matches found within the collection.
 
@@ -372,7 +372,7 @@ Alongside the nearest neighbors, the search results will include the specified f
 
 ## Filtered search
 
-Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in [Boolean Expression Rules](https://milvus.io/docs/boolean.md) and examples in [Get & Scalar Query](./get-and-scalar-query).
+Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in [Boolean Expression Rules](https://milvus.io/docs/boolean.md) and examples in [Get & Scalar Query](https://milvus.io/docs/get-and-scalar-query.md).
 
 For instance, to refine search results based on a string pattern, you can use the __like__ operator. This operator enables string matching by considering prefixes, infixes, and suffixes:
 
@@ -621,7 +621,7 @@ __Limitations__
 
 - __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.
 
-- __Functionality__: Grouping search is not supported by [range search](./single-vector-search#range-search) or [search iterators](./with-iterators#search-with-iterator).
+- __Functionality__: Grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search) or [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator).
 
 ## Search parameters
 
