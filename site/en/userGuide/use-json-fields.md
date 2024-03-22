@@ -43,7 +43,7 @@ For instance, the following is an example of a JSON field that stores the metada
 <li><p>Ensure that all values in a list or array are of the same data type.</p></li>
 <li><p>Any nested dictionaries in a JSON field value will be considered strings.</p></li>
 <li><p>Use only alphanumeric characters and underscores to name JSON keys, as other characters may cause problems with filtering or searching.</p></li>
-<li>Currently, indexing JSON fields is not available, which can make filtering time-consuming.  However, this limitation will be addressed in upcoming releases.</li>
+<li>Currently, indexing JSON fields is not available, which can make filtering time-consuming. However, this limitation will be addressed in upcoming releases.</li>
 </ul>
 
 </div>
