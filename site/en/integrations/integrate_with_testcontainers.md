@@ -34,6 +34,12 @@ testImplementation 'org.testcontainers:milvus:1.19.6'
 go get github.com/testcontainers/testcontainers-go/modules/milvus
 ```
 
+### .NET
+
+```
+dotnet add package Testcontainers.Milvus --version 3.8.0
+```
+
 ## Usage
 
 See [Milvus Module](https://testcontainers.com/modules/milvus/)
@@ -45,3 +51,4 @@ See [Milvus Module](https://testcontainers.com/modules/milvus/)
 * https://www.testcontainers.org/modules/milvus (Java)
 * https://golang.testcontainers.org (Go)
 * https://golang.testcontainers.org/modules/milvus (Go)
+* https://dotnet.testcontainers.org (.NET)
