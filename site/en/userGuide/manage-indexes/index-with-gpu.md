@@ -83,7 +83,7 @@ Here are example configurations for different index types:
     }
     ```
 
-    The __params__ options are identical to those used in __[IVF_FLAT](https://milvus.io/docs/index.md#IVF_FLAT) and [IVF_PQ](https://milvus.io/docs/index.md#IVF_PQ)__.
+    The __params__ options are identical to those used in __[IVF_FLAT](https://milvus.io/docs/index.md#IVF_FLAT)__ and __[IVF_PQ](https://milvus.io/docs/index.md#IVF_PQ)__.
 
 - __GPU_BRUTE_FORCE__ index
 
@@ -149,7 +149,7 @@ Below are example configurations for different index types:
 
     - __itopk_size__: Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (__limit__) value and is typically a power of 2 (e.g., 16, 32, 64, 128).
 
-    - __search_width__: Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance. The default value is __1__.
+    - __search_width__: Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance.
 
     - __min_iterations__ / __max_iterations__: These parameters control the search iteration process. By default, they are set to __0__, and CAGRA automatically determines the number of iterations based on __itopk_size__ and __search_width__. Adjusting these values manually can help balance performance and accuracy.
 
