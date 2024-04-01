@@ -5,6 +5,7 @@ related_key: Docker
 order: 0
 group: install_standalone-docker.md
 summary: Learn how to install Milvus standalone with Docker.
+title: Install Milvus Standalone with Docker
 ---
 
 {{tab}}

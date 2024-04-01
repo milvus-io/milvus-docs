@@ -5,6 +5,7 @@ order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Milvus Operator.
+title: Upgrade Milvus Cluster with Milvus Operator
 ---
 
 {{tab}}
