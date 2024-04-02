@@ -49,7 +49,7 @@ To use sparse vectors in Milvus, prepare vector embeddings in one of the support
     [(2, 0.33), (98, 0.72), ...]
     ```
 
-The following example inserts sparse embeddings into a collection by generating a random sparse matrix for 10,000 entities, each with 10,000 dimensions and a sparsity density of 0.005.
+The following example prepares sparse embeddings by generating a random sparse matrix for 10,000 entities, each with 10,000 dimensions and a sparsity density of 0.005.
 
 ```python
 # Prepare entities with sparse vector representation
@@ -186,7 +186,7 @@ For index building on sparse vectors, take note of the following:
 
 - `params.drop_ratio_build`: The index parameter used specifically for sparse vectors. It controls the proportion of small vector values that are excluded during the indexing process. This parameter enables fine-tuning of the trade-off between efficiency and accuracy by disregarding small values when constructing the index. For instance, if `drop_ratio_build = 0.3`, during the index construction, all values from all sparse vectors are gathered and sorted. The smallest 30% of these values are not included in the index, thereby reducing the computational workload during search.
 
-For information about common index parameters, refer to [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md).
+For more information, refer to [In-memory Index](index.md).
 
 ## Perform ANN search
 
