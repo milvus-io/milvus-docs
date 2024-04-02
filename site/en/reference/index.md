@@ -46,11 +46,18 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - This type of indexes include BIN_FLAT and BIN_IVF_FLAT.
 
+- Indexes for sparse embeddings
+
+  - The distance metric supported for sparse embeddings is `IP` (Inner Product) only.
+
+  - The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
+
 The following table classifies the indexes that Milvus supports:
 
 <div class="filter">
-  <a href="#floating">Floating-point embeddings</a> 
+  <a href="#floating">Floating-point embeddings</a>
   <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper">
@@ -160,6 +167,38 @@ The following table classifies the indexes that Milvus supports:
     <td><ul>
       <li>High-speed query</li>
       <li>Requires a recall rate as high as possible</li>
+    </ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="filter-sparse table-wrapper">
+
+<table id="sparse">
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>SPARSE_INVERTED_INDEX</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li>Depends on relatively small datasets.</li>
+      <li>Requires a 100% recall rate.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>SPARSE_WAND</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li>WAND algorithm accelerated</li>
+      <li>Can get a significant speed improvement while only sacrificing a small amount of recall.</li>
     </ul></td>
   </tr>
 </tbody>
@@ -363,6 +402,39 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
     |----------------------------|---------------------------------------------------------|------------|---------------|
     | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
+### SPARSE_INVERTED_INDEX
+
+This index is a basic inverted index which is organized by dimensions, and each dimension tracks a list of vectors that is non zero at this dimension and the corresponding value. At search time Milvus iterates through each dimension of the query vector and compute scores of vectors that is non zero in those dimensions.
+
+- Index building parameters
+
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `drop_ratio_build` | The proportion of small vector values that are excluded during the indexing process. This parameter enables fine-tuning of the trade-off between efficiency and accuracy by disregarding small values when building the index.              | [0, 1] |
+
+- Search parameters
+
+    | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
+    |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
+
+### SPARSE_WAND
+
+This index shares similarities with `SPARSE_INVERTED_INDEX`, while it utilizes the [Weak-AND](https://dl.acm.org/doi/10.1145/956863.956944) algorithm to further reduce the number of full IP distance evaluations during the search process.
+
+Based on our testing, `SPARSE_WAND` generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero `drop_ratio_search` can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to [Sparse Vector](sparse_vector.md).
+
+- Index building parameters
+
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `drop_ratio_build` | The proportion of small vector values that are excluded during the indexing process. This parameter enables fine-tuning of the trade-off between efficiency and accuracy by disregarding small values when building the index.              | [0, 1] |
+
+- Search parameters
+
+    | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
+    |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
 
 ## FAQ
 
