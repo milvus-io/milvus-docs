@@ -1,6 +1,6 @@
 ---
 id: configure_grafana_loki.md
-title: Congiure Grafana Loki
+title: Configure Grafana Loki
 summary: This topic describes how to collect logs using Loki and query logs for a Milvus cluster using Grafana.
 ---
 
