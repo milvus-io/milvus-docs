@@ -44,7 +44,7 @@ DIMENSION = 1024  # Embeddings size
 COUNT = 100  # How many titles to embed and insert.
 MILVUS_HOST = 'localhost'  # Milvus server URI
 MILVUS_PORT = '19530'
-MODEL_NAME = 'voyage-2'  # Which engine to use, you can change it into `text-embedding-3-large` or `text-embedding-ada-002`
+MODEL_NAME = 'voyage-2'  # Which engine to use, please check https://docs.voyageai.com/docs/embeddings for available models
 client = voyageai.Client(api_key="USE YOUR API KEY HERE")
 ```
 <div class="alert note">
