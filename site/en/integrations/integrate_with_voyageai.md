@@ -1,6 +1,6 @@
 ---
-id: integrate_with_openai.md
-summary: This page discusses vector database integration with OpenAI's embedding API.
+id: integrate_with_voyageai.md
+summary: This page discusses vector database integration with VoyageAI's embedding API.
 ---
 
 # Similarity Search with Milvus and VoyageAI
@@ -47,9 +47,6 @@ MILVUS_PORT = '19530'
 MODEL_NAME = 'voyage-2'  # Which engine to use, please check https://docs.voyageai.com/docs/embeddings for available models
 client = voyageai.Client(api_key="USE YOUR API KEY HERE")
 ```
-<div class="alert note">
-Because the embedding process for a free VoyageAI account is relatively time-consuming, we use a set of data small enough to reach a balance between the script executing time and the precision of the search results. You can change the <code>COUNT</code> constant to fit your needs.
-</div>
 
 This segment deals with Milvus and setting up the database for this use case. Within Milvus, we need to set up a collection and index the collection. For more information on how to use Milvus, look [here](https://milvus.io/docs/example_code.md).
 
