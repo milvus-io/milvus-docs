@@ -5,6 +5,7 @@ label: Python
 order: 0
 group: example_code.md
 summary: Get started with Milvus faster using this Python example code.
+title: Run Milvus using Python
 ---
 
 {{tab}}

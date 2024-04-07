@@ -5,6 +5,7 @@ related_key: filter
 order: 1
 group: search.md
 summary: Conduct a Hybrid Search with Milvus.
+title: Conduct a Hybrid Search
 ---
 
 {{tab}}

@@ -5,6 +5,7 @@ related_key: Within Range
 order: 2
 group: search.md
 summary: Learn how to conduct a range search.
+title: Conduct a Range Search
 ---
 
 {{tab}}

@@ -5,6 +5,7 @@ related_key: query vectors
 order: 0
 group: query.md
 summary: Learn how to query vectors in Milvus.
+title: Conduct a Query
 ---
 
 {{tab}}

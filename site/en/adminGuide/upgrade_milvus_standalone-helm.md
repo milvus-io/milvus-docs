@@ -5,6 +5,7 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Helm Chart.
+title: Upgrade Milvus Standalone with Helm Chart
 ---
 
 {{tab}}
