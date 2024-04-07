@@ -15,11 +15,7 @@ Release date: Apr 7, 2024
 |----------------|--------------------|------------------|----------------|---------------------|
 | 2.3.13         | 2.3.7              | 2.3.5            | 2.3.6          | 2.3.5               |
 
-This release aims to enhance system performance, reliability and observability with key features like improved index information retrieval, secure Minio connections via TLS, and new metrics for better monitoring.  
-
-This release has enriched the RESTful interfaces, allowing users to perform operations related to Partition and Index. Additionally, this release includes some critical bug fixes related to deadlocks and data integrity.
-
-These updates aim to provide a more secure, efficient, and reliable user experience.
+This release aims to enhance system performance, reliability and observability with key features like improved index information retrieval, secure Minio connections via TLS, and new metrics for better monitoring. These updates aim to provide a more secure, efficient, and reliable user experience.
 
 ### Improvements
 
