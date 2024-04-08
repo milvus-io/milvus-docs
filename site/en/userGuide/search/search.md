@@ -5,6 +5,7 @@ related_key: search
 order: 0
 group: search.md
 summary: Conduct a vector similarity search with Milvus.
+title: Conduct a Vector Similarity Search
 ---
 
 {{tab}}

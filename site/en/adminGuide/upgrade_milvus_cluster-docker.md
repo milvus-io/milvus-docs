@@ -1,6 +1,7 @@
 ---
 id: upgrade_milvus_cluster-docker.md
 summary: Learn how to upgrade Milvus cluster with Docker Compose.
+title: Upgrade Milvus Cluster with Docker Compose
 ---
 
 {{tab}}
