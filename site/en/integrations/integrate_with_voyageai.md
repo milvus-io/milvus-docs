@@ -44,11 +44,11 @@ DIMENSION = 1024  # Embeddings size
 COUNT = 100  # How many titles to embed and insert.
 MILVUS_HOST = 'localhost'  # Milvus server URI
 MILVUS_PORT = '19530'
-MODEL_NAME = 'voyage-2'  # Which engine to use, please check https://docs.voyageai.com/docs/embeddings for available models
-client = voyageai.Client(api_key="USE YOUR API KEY HERE")
+MODEL_NAME = 'voyage-2'  # Which model to use, please check https://docs.voyageai.com/docs/embeddings for available models
+client = voyageai.Client(api_key="YOUR_VOYAGEAI_API_KEY")
 ```
 
-This segment deals with Milvus and setting up the database for this use case. Within Milvus, we need to set up a collection and index the collection. For more information on how to use Milvus, look [here](https://milvus.io/docs/example_code.md).
+Then we need to connect to Milvus vector database to store and search the vector embeddings. Within Milvus, we need to create a collection and set up the index. For more information on how to use Milvus, look [here](https://milvus.io/docs/example_code.md).
 
 ```python
 # Connect to Milvus
@@ -83,15 +83,16 @@ Once we have the collection setup we need to start inserting our data. This is i
 # Extract embedding from text using VoyageAI
 def embed(text):
     response = client.embed(
-        texts=text,
-        model=MODEL_NAME
+        texts=[text],
+        model=MODEL_NAME,
+        truncation=False
     )
     return response.embeddings[0]
 
 
 # Insert each title and its embedding
 for idx, text in enumerate(random.sample(sorted(csv_load(FILE)), k=COUNT)):  # Load COUNT amount of random values from dataset
-    ins=[[idx], [(text[:198] + '..') if len(text) > 200 else text], [embed(text)]]  # Insert the title id, the title text, and the title embedding vector
+    ins=[[idx], [text], [embed(text)]]  # Insert the title id, the title text, and the title embedding vector
     collection.insert(ins)
 ```
 
