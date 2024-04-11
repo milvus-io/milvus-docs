@@ -224,7 +224,7 @@ The output is similar to the following:
 
 ## FAQ
 
-- **In which scenarios is multi-vector search recommended?**
+- **In which scenario is multi-vector search recommended?**
 
     Multi-vector search is ideal for complex situations demanding high accuracy, especially when an entity can be represented by multiple, diverse vectors. This applies to cases where the same data, such as a sentence, is processed through different embedding models or when multimodal information (like images, fingerprints, and voiceprints of an individual) is converted into various vector formats. By assigning weights to these vectors, their combined influence can significantly enrich recall and improve the effectiveness of search results.
 
