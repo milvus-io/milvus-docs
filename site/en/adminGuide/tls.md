@@ -504,9 +504,9 @@ tls:
 
 common:
   security:
-    # 0 indicates no authentication
-    # 1 indicated one-way authentication
-    # 2 indicated two-way authentication
+    # tlsMode 0 indicates no authentication
+    # tlsMode 1 indicates one-way authentication
+    # tlsMode 2 indicates two-way authentication
     tlsMode: 2 
  ```
 
