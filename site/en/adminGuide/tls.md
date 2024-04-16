@@ -514,11 +514,11 @@ common:
 
 ### One-way authentication
 
-Server-side needs server.pem and server.key, tlsMode should be 1 in milvus.yaml. Client-side need server.pem,
+Server-side needs server.pem and server.key. Client-side need server.pem,
 
 ### Two-way authentication
 
-Server-side needs server.pem, server.key and ca.pem, tlsMode should be 2 in milvus.yaml. Client-side need client.pem, client.key, ca.pem.
+Server-side needs server.pem, server.key and ca.pem. Client-side need client.pem, client.key, ca.pem.
 
 ## Connect to the Milvus server with TLS
 
