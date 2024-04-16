@@ -263,12 +263,6 @@ authorityKeyIdentifier=keyid,issuer
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 
-subjectAltName = @alt_names
-
-[ alt_names ]
-DNS.1 = localhost
-DNS.2 = *.ronething.cn
-DNS.3 = *.ronething.com
 
 [ v3_ca ]
 
@@ -500,7 +494,7 @@ openssl x509 -req -days 3650 -in server.csr -out server.pem -CA ca.pem -CAkey ca
 
 ## Modify Milvus server configurations
 
-Set `tlsEnabled` to `true` and configure the file paths of `server.pem`, `server.key`, and `ca.pem` for the server in `config/milvus.yaml`.
+Configure the file paths of `server.pem`, `server.key`, and `ca.pem` for the server in `config/milvus.yaml`.
 
 ```
 tls:
@@ -510,16 +504,19 @@ tls:
 
 common:
   security:
-    tlsMode: 2
+    # 0 indicates no authentication
+    # 1 indicated one-way authentication
+    # 2 indicated two-way authentication
+    tlsMode: 2 
  ```
 
 ### One-way authentication
 
-Server need server.pem and server.key. Client-side need server.pem.
+Server-side needs server.pem and server.key, tlsMode should be 1 in milvus.yaml. Client-side need server.pem,
 
 ### Two-way authentication
 
-Server-side need server.pem, server.key and ca.pem. Client-side need client.pem, client.key, ca.pem.
+Server-side needs server.pem, server.key and ca.pem, tlsMode should be 2 in milvus.yaml. Client-side need client.pem, client.key, ca.pem.
 
 ## Connect to the Milvus server with TLS
 
