@@ -35,7 +35,7 @@ mkdir cert && cd cert
 touch openssl.cnf gen.sh
 ```
 
-2. Copy the following configurations into the files. Configuration of `CommonName` is required. `CommonName` refers to the server name that the client needs to specify when connecting.
+2. Copy the following configurations into the files respectively. 
 
 <details><summary><code>openssl.cnf</code></summary>
 
@@ -396,6 +396,8 @@ ess_cert_id_chain	= no	# Must the ESS cert id chain be included?
 </details>
 
 The `openssl.cnf` file is a default OpenSSL configuration file. See [manual page](https://www.openssl.org/docs/manmaster/man5/config.html) for more information. The `gen.sh` file generates relevant certificate files. You can modify the `gen.sh` file for different purposes such as changing the validity period of the certificate file, the length of the certificate key or the certificate file names.
+
+It is necessary to configure the `CommonName` in the `gen.sh` file. The `CommonName` refers to the server name that the client should specify while connecting.
 
 <details><summary><code>gen.sh</code></summary>
 
