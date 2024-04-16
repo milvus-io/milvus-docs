@@ -514,11 +514,11 @@ common:
 
 ### One-way authentication
 
-Server-side needs server.pem and server.key. Client-side need server.pem,
+Server-side needs server.pem and server.key files, client-side needs server.pem file.
 
 ### Two-way authentication
 
-Server-side needs server.pem, server.key and ca.pem. Client-side need client.pem, client.key, ca.pem.
+Server-side needs server.pem, server.key and ca.pem files, client-side needs client.pem, client.key and ca.pem files.
 
 ## Connect to the Milvus server with TLS
 
