@@ -1,6 +1,7 @@
 ---
 id: coordinator_ha.md
 summary: Learn about the motivation and procedure for Milvus coordinators to work in active standby.
+title: Coordinator HA
 ---
 
 # Coordinator HA
@@ -157,7 +158,6 @@ Coordinator HA is disabled by default. You can enable this feature manually by c
 - [rootCoord.activeStandby.enabled](configure_rootcoord.md#rootCoordactiveStandbyenabled)
 - [queryCoord.activeStandby.enabled](configure_querycoord.md#queryCoordactiveStandbyenabled)
 - [dataCoord.activeStandby.enabled](configure_datacoord.md#dataCoordactiveStandbyenabled)
-- [indexCoord.activeStandby.enabled](configure_indexcoord.md#indexCoordativeStandbyenabled)
 
 ## Limits
 

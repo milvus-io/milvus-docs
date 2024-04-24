@@ -2,20 +2,20 @@
 id: index.md
 related_key: index
 summary: Index mechanism in Milvus.
+title: In-memory Index
 ---
 
 # In-memory Index
 
 This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see **[On-disk Index](disk_index.md)**.
 
-Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. 
+Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.
 
-To improve query performance, you can [specify an index type](build_index.md) for each vector field. 
+To improve query performance, you can [specify an index type](index-vector-fields.md) for each vector field.
 
-<div class="alert note"> 
+<div class="alert note">
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
-
 
 ## ANNS vector indexes
 
@@ -28,16 +28,15 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
-
 ## Indexes supported in Milvus
 
 According to the suited data type, the supported indexes in Milvus can be divided into two categories:
 
-- Indexes for floating-point embeddings:
+- Indexes for floating-point embeddings
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
-  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and SCANN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and SCANN<sup>(beta)</sup> for CPU-based ANN searches.
 
 - Indexes for binary embeddings
 
@@ -45,11 +44,18 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - This type of indexes include BIN_FLAT and BIN_IVF_FLAT.
 
+- Indexes for sparse embeddings
+
+  - The distance metric supported for sparse embeddings is `IP` (Inner Product) only.
+
+  - The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
+
 The following table classifies the indexes that Milvus supports:
 
 <div class="filter">
-  <a href="#floating">Floating-point embeddings</a> 
+  <a href="#floating">Floating-point embeddings</a>
   <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper">
@@ -84,16 +90,6 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td>GPU_IVF_FLAT</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
     <td>IVF_SQ8</td>
     <td>Quantization-based index</td>
     <td>
@@ -106,17 +102,6 @@ The following table classifies the indexes that Milvus supports:
   </tr>  
   <tr>
     <td>IVF_PQ</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts substantial compromise in recall rate</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>GPU_IVF_PQ</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -187,8 +172,39 @@ The following table classifies the indexes that Milvus supports:
 
 </div>
 
-### FLAT
+<div class="filter-sparse table-wrapper">
 
+<table id="sparse">
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>SPARSE_INVERTED_INDEX</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li>Depends on relatively small datasets.</li>
+      <li>Requires a 100% recall rate.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>SPARSE_WAND</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm accelerated</li>
+      <li>Can get a significant speed improvement while only sacrificing a small amount of recall.</li>
+    </ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+### FLAT
 
 For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
 
@@ -216,37 +232,17 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
 - Search parameters
 
-  | Parameter | Description              | Range           | Default Value |
-  | --------- | ------------------------ | --------------- | ------------- |
-  | `nprobe`  | Number of units to query | [1, nlist] | 8 |
+  - Common search
 
-### GPU_IVF_FLAT
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `nprobe`                   | Number of units to query                                | [1, nlist] | 8             |
 
-Similar to IVF_FLAT, GPU_IVF_FLAT also divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
+  - Range search
 
-By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
-
-GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
-
-When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.
-
-- Index building parameters
-
-   | Parameter | Description             | Range      | Default Value |
-   | --------- | ----------------------- | ---------- | ------------- |
-   | `nlist`   | Number of cluster units | [1, 65536] | 128 |
-
-- Search parameters
-
-  | Parameter | Description              | Range           | Default Value |
-  | --------- | ------------------------ | --------------- | ------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
-
-- Limits on search
-
-  | Parameter | Range  |
-  | --------- | ------ |
-  | `top-K`   | <= 256 |
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### IVF_SQ8
 
@@ -262,9 +258,17 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
 
 - Search parameters
 
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]  |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### IVF_PQ
 
@@ -288,9 +292,17 @@ Index building parameters and search parameters vary with Milvus distribution. S
 
 - Search parameters
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### SCANN
 
@@ -311,51 +323,18 @@ SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector cl
 
 - Search parameters
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
-  | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] |
+  - Common search
 
-- Range search parameters
+    | Parameter | Description              | Range      | Default value |
+    | --------- | ------------------------ | ---------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist] |               |
+    | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] | |
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `radius`  | Number of units to query | [1, nlist] |
-  | `range_filter` | Number of candidate units to query | [`top_k`, ∞] |
+  - Range search
 
-### GPU_IVF_PQ
-
-`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
-
-IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
-
-<div class="alert note">
-
-Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
-
-When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.
-
-</div>
-
-- Index building parameters
-
-  | Parameter | Description                               | Range               | Default Value |
-  | --------- | ----------------------------------------- | ------------------- | ------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          | 128           |
-  | `m`       | Number of factors of product quantization | `dim mod m == 0`    | 4 |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | 8 |
-
-- Search parameters
-
-  | Parameter | Description              | Range      | Default Value |
-  | --------- | ------------------------ | ---------- | ------------- |
-  | `nprobe`  | Number of units to query | [1, nlist] | 8 |
-
-- Limits on search
-
-  | Parameter | Range   |
-  | --------- | ------- |
-  | `top-K`   | <= 1024 |
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### HNSW
 
@@ -365,16 +344,16 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 - Index building parameters
 
-  | Parameter        | Description                | Range    |
-  | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | (1, 2048)  |
-  | `efConstruction` | Search scope               | (1, int32_max) |
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `M`              | Maximum degree of the node | (2, 2048)    |
+  | `efConstruction` | Size of the dynamic list for the nearest neighbors during the index time. Higher `efConstruction` leads to a may improve index quality at the cost of increased indexing time.              | (1, int_max) |
 
 - Search parameters
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
+  | `ef`      | Size of the dynamic list for the nearest neighbors during the search time. Higher `ef` leads to more accurate but slower search. | [1, int_max]     |
 
 ### BIN_FLAT
 
@@ -400,30 +379,66 @@ By adjusting `nprobe`, an ideal balance between accuracy and speed can be found 
 
 BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in each unit is consistent with the original data.
 
- - Index building parameters
+- Index building parameters
 
    | Parameter | Description             | Range      |
    | --------- | ----------------------- | ---------- |
    | `nlist`   | Number of cluster units | [1, 65536] |
 
+- Search parameters
+
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
+
+### SPARSE_INVERTED_INDEX
+
+Each dimension maintains a list of vectors that have a non-zero value at that dimension. During search, Milvus iterates through each dimension of the query vector and computes scores for vectors that have non-zero values in those dimensions.
+
+- Index building parameters
+
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `drop_ratio_build` | The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.              | [0, 1] |
 
 - Search parameters
 
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]  |
+    | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
+    |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
 
+### SPARSE_WAND
 
-</div>
+This index shares similarities with `SPARSE_INVERTED_INDEX`, while it utilizes the [Weak-AND](https://dl.acm.org/doi/10.1145/956863.956944) algorithm to further reduce the number of full IP distance evaluations during the search process.
+
+Based on our testing, `SPARSE_WAND` generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero `drop_ratio_search` can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to [Sparse Vector](sparse_vector.md).
+
+- Index building parameters
+
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `drop_ratio_build` | The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.               | [0, 1] |
+
+- Search parameters
+
+    | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
+    |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
 
 ## FAQ
-
 
 <details>
 <summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
 {{fragments/faq_flat_ivfflat.md}}
 </details>
-
 
 ## What's next
 

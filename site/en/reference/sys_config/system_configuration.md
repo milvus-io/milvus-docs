@@ -3,6 +3,7 @@ id: system_configuration.md
 related_key: configure
 group: system_configuration.md
 summary: Learn about the system configuration of Milvus.
+title: Milvus System Configurations Checklist
 ---
 
 # Milvus System Configurations Checklist
@@ -96,14 +97,6 @@ Query node performs hybrid search of vector and scalar data on both incremental 
 Under this section, you can configure query node port, graceful time, etc.
 
 See [Query Node-related Configurations](configure_querynode.md) for detailed description for each parameter under this section.
-
-### `indexCoord`
-
-Index coordinator (index coord) manages topology of the index nodes, and maintains index metadata.
-
-Under this section, you can configure index coord address, etc.
-
-See [Index Coordinator-related Configurations](configure_indexcoord.md) for detailed description for each parameter under this section.
 
 ### `indexNode`
 

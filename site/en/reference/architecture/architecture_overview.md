@@ -1,6 +1,7 @@
 ---
 id: architecture_overview.md
-summary: Milvus provides a fast, reliable, and stable vector database built specifically for similarity search and artificial intelligence. 
+summary: Milvus provides a fast, reliable, and stable vector database built specifically for similarity search and artificial intelligence.
+title: Milvus Architecture Overview
 ---
 
 # Milvus Architecture Overview
@@ -11,7 +12,7 @@ Milvus also supports data sharding, data persistence, streaming data ingestion, 
 
 Milvus adopts a shared-storage architecture featuring storage and computing disaggregation and horizontal scalability for its computing nodes. Following the principle of data plane and control plane disaggregation, Milvus comprises [four layers](four_layers.md): access layer, coordinator service, worker node, and storage. These layers are mutually independent when it comes to scaling or disaster recovery.
 
-![Architecture_diagram](../../../../assets/architecture_diagram.png "Milvus architecture.")
+![Architecture_diagram](../../../../assets/milvus_architecture.png "Milvus architecture.")
 
 
 ## What's next

@@ -1,9 +1,10 @@
 ---
 id: boolean.md
 summary: Learn about boolean expression rules in Milvus.
+title: Scalar Filtering Rules
 ---
 
-# Boolean Expression Rules
+# Scalar Filtering Rules
 
 ## Overview
 
@@ -82,7 +83,7 @@ The following table lists the description of each symbol mentioned in the above 
 | SingleExpr   |  SingleExpr, namely single expression, can be either a TermExpr or a CompareExpr.      |
 | LogicalExpr      | A LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or a UnaryLogicalOp on a single LogicalExpr, or a LogicalExpr grouped within parentheses, or a SingleExpr. The LogicalExpr is defined recursively.    |
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
-| MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix constant. |
+| MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix, infix, or suffix constant. |
 | JsonArrayOp | A JsonOp, namely a JSON operator, checks whether the specified identifier contains the specified elements. |
 | ArrayOp | An ArrayOp, namely an array operator, checks whether the specified identifier contains the specified elements. |
 
@@ -230,10 +231,13 @@ VARCHAR not in ["str1", "str2"]
 "200+300 < int64 <= 500+500"
 ```
 
-7. MatchOp (prefix matching)
+7. MatchOp
 
 ```
 VARCHAR like "prefix%"
+VARCHAR like "%suffix"
+VARCHAR like "%middle%"
+VARCHAR like "_suffix"
 ```
 
 8. JsonArrayOp
@@ -319,8 +323,6 @@ VARCHAR like "prefix%"
 
 Now that you know how bitsets work in Milvus, you might also want to:
 
-- Learn how to conduct a  [Hybrid Search](hybridsearch.md).
+- Learn how to conduct a [Multi-Vector Search](multi-vector-search.md).
 - Learn how to [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results.
-- Learn how to [use dynamic fields in building boolean expressions](dynamic_schema.md).
-
-
+- Learn how to [use dynamic fields in building boolean expressions](enable-dynamic-field.md).

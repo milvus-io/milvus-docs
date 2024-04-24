@@ -5,6 +5,7 @@ order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Milvus operator.
+title: Upgrade Milvus Standalone with Milvus Operator
 ---
 
 {{tab}}

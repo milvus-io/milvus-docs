@@ -5,6 +5,7 @@ order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Helm Chart.
+title: Upgrade Milvus Cluster with Helm Chart
 ---
 
 {{tab}}
@@ -39,6 +40,12 @@ The archived repo is still available for the charts up to 4.0.31. For later rele
 
 ```                                       
 NAME                    CHART VERSION   APP VERSION             DESCRIPTION
+zilliztech/milvus       4.1.29          2.4.0                   Milvus is an open-source vector database built ...
+zilliztech/milvus       4.1.24          2.3.11                  Milvus is an open-source vector database built ...
+zilliztech/milvus       4.1.23          2.3.10                  Milvus is an open-source vector database built ...
+zilliztech/milvus       4.1.22          2.3.10                  Milvus is an open-source vector database built ...
+zilliztech/milvus       4.1.21          2.3.10                  Milvus is an open-source vector database built ...
+zilliztech/milvus       4.1.20          2.3.10                  Milvus is an open-source vector database built ...
 zilliztech/milvus       4.1.18          2.3.10                  Milvus is an open-source vector database built ... 
 zilliztech/milvus       4.1.18          2.3.9                   Milvus is an open-source vector database built ...                                       
 zilliztech/milvus       4.1.17          2.3.8                   Milvus is an open-source vector database built ...
@@ -63,8 +70,10 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 
 You can choose the upgrade path for your Milvus as follows:
 
-- [Conduct a rolling upgrade](#Conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v{{var.milvus_release_version}}.
+<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v{{var.milvus_release_version}}.</div>
+
 - [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v{{var.milvus_release_version}}.
+
 - [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v{{var.milvus_release_version}}.
 
 <div style="display: none;">

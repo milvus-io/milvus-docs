@@ -5,6 +5,7 @@ related_key: Docker
 order: 0
 group: install_standalone-docker.md
 summary: Learn how to install Milvus standalone with Docker.
+title: Install Milvus Standalone with Docker
 ---
 
 {{tab}}
@@ -30,7 +31,7 @@ bash standalone_embed.sh start
 ```
 
 - Connect to Milvus
-Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), then run the example code.
+Please refer to [Quickstart](https://milvus.io/docs/quickstart.md), then run the example code.
 
 - Stop Milvus
 
@@ -49,16 +50,16 @@ bash standalone_embed.sh delete
 
 Having installed Milvus, you can:
 
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 - Check [In-memory Index](index.md) for more about CPU-compatible index types.
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Databases](manage_databases.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.

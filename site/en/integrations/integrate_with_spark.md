@@ -1,6 +1,7 @@
 ---
 id: integrate_with_spark.md
 summary: This page discusses the Spark-Milvus connector.
+title: Spark-Milvus Connector User Guide
 ---
 
 # Spark-Milvus Connector User Guide
@@ -67,7 +68,7 @@ sample_df.write \
     .option("milvus.port", "19530") \
     .option("milvus.collection.name", "hello_spark_milvus") \
     .option("milvus.collection.vectorField", "vec") \
-    .option("milvus.collection.vectorDim", "5") \
+    .option("milvus.collection.vectorDim", "8") \
     .option("milvus.collection.primaryKeyField", "id") \
     .format("milvus") \
     .save()

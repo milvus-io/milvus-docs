@@ -1,6 +1,7 @@
 ---
 id: integrate_with_langchain.md
 summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LangChain as the embedding system.
+title: Question Answering over Documents with Milvus and LangChain
 ---
 
 # Question Answering over Documents with Milvus and LangChain
@@ -12,7 +13,7 @@ This guide demonstrates how to build an LLM-driven question-answering applicatio
 Code snippets on this page require **pymilvus** and **langchain** installed. OpenAI's embedding API has also been used to embed docs into the vector store, and therefore **openai** and **tiktoken** are also required. If they are not present on your system, run the following commands to install them.
 
 ```shell
-! python -m pip install --upgrade pymilvus langchain openai tiktoken
+! python -m pip install --upgrade pymilvus langchain langchain-core langchain-community langchain-openai langchain_text_splitters openai tiktoken
 ```
 
 ## Global parameters
@@ -32,12 +33,8 @@ DIMENSION = 768
 OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
-# 4. Set up the connection parameters for your Zilliz Cloud cluster.
-URI = 'YOUR_CLUSTER_ENDPOINT'
-
-# 5. Set up the token for your Zilliz Cloud cluster.
-# You can either use an API key or a set of cluster username and password joined by a colon.
-TOKEN = 'YOUR_CLUSTER_TOKEN'
+# 4. Set up the connection parameters for your Milvus server.
+URI = 'http://localhost:19530'
 ```
 
 ## Prepare data
@@ -49,13 +46,13 @@ Before you dive in, you should finish the following steps:
 - Set up a vector store used to save the vector embeddings.
 
 ```python
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores.zilliz import Zilliz
-from langchain.document_loaders import WebBaseLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chat_models import ChatOpenAI
-from langchain.schema.runnable import RunnablePassthrough
-from langchain.prompts import PromptTemplate
+from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.vectorstores import Milvus
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Use the WebBaseLoader to load specified web pages into documents
 loader = WebBaseLoader([
@@ -99,7 +96,7 @@ After preparing the documents, the next step is to convert them into vector embe
 
 ```python
 embeddings = OpenAIEmbeddings()
-connection_args = { 'uri': URI, 'token': TOKEN }
+connection_args = { 'uri': URI }
 
 vector_store = Milvus(
     embedding_function=embeddings,

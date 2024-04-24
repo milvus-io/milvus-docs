@@ -5,6 +5,7 @@ related_key: Kubernetes
 order: 1
 group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes.
+title: Install Milvus Cluster with Helm
 ---
 
 {{tab}}
@@ -94,7 +95,7 @@ $ helm install my-release milvus/milvus
   <ul>
     <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
     <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
-    <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kuberenetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is not longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kuberenetes v1.25 and later, you can instead run the following command to install Milvus:<br>
+    <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kubernetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is no longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kubernetes v1.25 and later, you can instead run the following command to install Milvus:<br>
     <code>helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
   </ul>
@@ -193,15 +194,15 @@ $ minikube delete
 
 Having installed Milvus, you can:
 
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Databases](manage_databases.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 
 - [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
 - [Scale your Milvus cluster](scaleout.md).

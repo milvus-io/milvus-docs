@@ -5,6 +5,7 @@ related_key: Install
 order: 3
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with dpkg/yum.
+title: Install Milvus Standalone with dpkg/yum
 ---
 
 {{tab}}
@@ -23,16 +24,16 @@ Check [the requirements](prerequisite-docker.md) for hardware and software prior
 ### Install Milvus with dpkg on Ubuntu
 
 ```bash
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.8/milvus_2.3.8-1_amd64.deb
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.10/milvus_2.3.10-1_amd64.deb
 $ sudo apt-get update
-$ sudo dpkg -i milvus_2.3.8-1_amd64.deb
+$ sudo dpkg -i milvus_2.3.10-1_amd64.deb
 $ sudo apt-get -f install
 ```
 
 ### Install Milvus with yum on RedHat9
 
 ```bash
-$ sudo yum install -y https://github.com/milvus-io/milvus/releases/download/v2.3.8/milvus-2.3.8-1.el9.x86_64.rpm
+$ sudo yum install -y https://github.com/milvus-io/milvus/releases/download/v2.3.10/milvus-2.3.10-1.el9.x86_64.rpm
 ```
 
 ## Check the status of Milvus
@@ -64,16 +65,16 @@ $ sudo yum remove -y milvus
 
 Having installed Milvus, you can:
 
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 - Check [In-memory Index](index.md) for more about CPU-compatible index types.
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Databases](manage_databases.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.

@@ -1,6 +1,7 @@
 ---
 id: product_faq.md
 summary: Find answers to frequently asked questions about the world's most advanced vector database.
+title: Product FAQ
 ---
 
 # Product FAQ
@@ -37,7 +38,7 @@ Theoretically, the maximum dataset size Milvus can handle is determined by the h
 
 Milvus deals with two types of data, inserted data and metadata. 
 
-Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage (for now MinIO only) as incremental log.
+Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).
 
 Metadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.
 
@@ -127,7 +128,7 @@ See [Vector Index](index.md) for more information.
 
 #### What is the maximum vector dimension supported in Milvus?
 
-Milvus can manage vectors with up to 32,768 dimensions.
+Milvus can manage vectors with up to 32,768 dimensions by default. You can increase the value of `Proxy.maxDimension` to allow for a larger dimension vector.
 
 #### Does Milvus support Apple M1 CPU?
 
@@ -163,7 +164,15 @@ In Milvus, a vector similarity search retrieves vectors based on similarity calc
 
 #### Why does a float vector value have a precision of 7 decimal digits in Milvus?
 
-Milvus stores vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
+Milvus supports storing vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
+
+#### How does Milvus handle vector data types and precision?
+
+Milvus supports Binary, Float32, Float16, and BFloat16 vector types.
+
+- Binary vectors: Store binary data as sequences of 0s and 1s, used in image processing and information retrieval.
+- Float32 vectors: Default storage with a precision of about 7 decimal digits. Even Float64 values are stored with Float32 precision, leading to potential precision loss upon retrieval.
+- Float16 and BFloat16 vectors: Offer reduced precision and memory usage. Float16 is suitable for applications with limited bandwidth and storage, while BFloat16 balances range and efficiency, commonly used in deep learning to reduce computational requirements without significantly impacting accuracy.
 
 #### Still have questions?
 

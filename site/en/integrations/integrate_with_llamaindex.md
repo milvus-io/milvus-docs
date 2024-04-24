@@ -1,6 +1,7 @@
 ---
 id: integrate_with_llamaindex.md
 summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LlamaIndex as the embedding system.
+title: Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
 ---
 
 # Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
@@ -16,7 +17,7 @@ The RAG system combines a retrieval system with a generative model to generate n
 Code snippets on this page require **pymilvus** and **llamaindex** libraries. You can install them using the following commands:
 
 ```shell
-python3 -m pip install --upgrade pymilvus llamaindex openai
+python3 -m pip install --upgrade pymilvus llama-index openai
 ```
 
 What's more, LlamaIndex requires an LLM model at the backend. In this article, we will use the OpenAI as the LLM backend. You can sign up for a free API key at [OpenAI](https://openai.com/).
@@ -49,11 +50,11 @@ print("Document ID:", documents[0].doc_id)
 # Document ID: d33f0397-b51a-4455-9b0f-88a101254d95
 ```
 
-Now can can create a Milvus collection and insert the documents into it.
+Now you can create a Milvus collection and insert the documents into it.
 
 ```python
-from llama_index.vector_stores import VectorStoreIndex, MilvusVectorStore
-from llama_index.storage.storage_context import StorageContext
+from llama_index.core import VectorStoreIndex, StorageContext
+from llama_index.vector_stores.milvus import MilvusVectorStore
 
 vector_store = MilvusVectorStore(dim=1536, overwrite=True)
 storage_context = StorageContext.from_defaults(vector_store=vector_store)

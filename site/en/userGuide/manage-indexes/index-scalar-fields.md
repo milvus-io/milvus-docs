@@ -1,0 +1,129 @@
+---
+id: index-scalar-fields.md
+order: 2
+summary: This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.
+title: Index Scalar Fields
+---
+
+# Index Scalar Fields
+
+In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.
+
+<div class="alert note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
+
+## Types of scalar indexing
+
+- __[Auto indexing](https://milvus.io/docs/index-scalar-fields.md#Auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.
+
+- __[Custom indexing](https://milvus.io/docs/index-scalar-fields.md#Custom-indexing)__: You specify the exact index type, such as an inverted index. This provides more control over the index type selection.
+
+## Auto indexing
+
+To use auto indexing, omit the __index_type__ parameter so that Milvus can infer the index type based on the scalar field type. For mappings between scalar data types and default indexing algorithms, refer to [Scalar field indexing algorithms](https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms).
+
+Example:
+
+```python
+# Auto indexing
+client = MilvusClient(
+    uri="http://localhost:19530"
+)
+
+index_params = client.create_index_params() # Prepare an empty IndexParams object, without having to specify any index parameters
+
+index_params.add_index(
+    field_name="scalar_1", # Name of the scalar field to be indexed
+    index_type="", # Type of index to be created. For auto indexing, leave it empty or omit this parameter.
+    index_name="default_index" # Name of the index to be created
+)
+
+client.create_index(
+  collection_name="test_scalar_index", # Specify the collection name
+  index_params=index_params
+)
+```
+
+## Custom indexing
+
+To use custom indexing, specify a particular index type in the __index_type__ parameter.
+
+```python
+index_params = client.create_index_params() #  Prepare an IndexParams object
+
+index_params.add_index(
+    field_name="scalar_2", # Name of the scalar field to be indexed
+    index_type="INVERTED", # Type of index to be created
+    index_name="inverted_index" # Name of the index to be created
+)
+
+client.create_index(
+  collection_name="test_scalar_index", # Specify the collection name
+  index_params=index_params
+)
+```
+
+__Methods and Parameters__
+
+- __create_index_params()__
+
+    Prepares an __IndexParams__ object.
+
+- __add_index()__
+
+    Adds index configurations to the __IndexParams__ object.
+
+    - __field_name__ (_string_)
+
+        The name of the scalar field to index.
+
+    - __index_type__ (_string_): 
+
+        The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
+
+        For custom indexing, valid values are:
+
+        - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to Scalar Index.
+
+        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
+
+        - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
+
+    - __index_name__ (_string_)
+
+        The name of the scalar index to create. Each scalar field supports one index.
+
+- __create_index()__
+
+    Creates the index in the specified collection.
+
+    - __collection_name__ (_string_)
+
+        The name of the collection for which the index is created.
+
+    - __index_params__
+
+        The __IndexParams__ object that contains index configurations.
+
+## Verifying the result
+
+Use the __list_indexes()__ method to verify the creation of scalar indexes:
+
+
+
+```python
+client.list_indexes(
+    collection_name="test_scalar_index"  # Specify the collection name
+)
+
+# Output:
+# ['default_index','inverted_index']
+```
+
+## Limits
+
+- Currently, scalar indexing supports INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, and VARCHAR data types, but not JSON and ARRAY types.
+

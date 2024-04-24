@@ -2,6 +2,7 @@
 id: import_data.md
 related_key: bulk load
 summary: Learn how to bulk load data in Milvus.
+title: Import Data
 ---
 
 # Import Data
@@ -11,6 +12,12 @@ This topic describes how to import data in Milvus via bulk load.
 Regular method to insert a large batch of entities to Milvus usually leads to a massive network transmission across client, proxy, Pulsar and data nodes. To avoid such situation, Milvus 2.1 supports loading data from files via bulk load. You can import large amounts of data into a collection by just a few lines of code, and endow atomicity to a whole batch of entities.
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
+
+<div class="alert note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
 
 ## Prepare data file
 
@@ -182,9 +189,9 @@ The state codes and their corresponding descriptions.
 ## What's next
 
 - Learn more basic operations of Milvus:
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+  - [Index Vetor Fields](index-vector-fields.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/tutorial.html)
   - [Node.js API reference](/api-reference/node/v{{var.milvus_node_sdk_version}}/tutorial.html)
