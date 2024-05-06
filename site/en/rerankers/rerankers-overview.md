@@ -20,6 +20,13 @@ PyMilvus model library integrates rerank functions to optimize the order of resu
 | voyageai        | API                 |
 | cohere          | API                 |
 
+<div class="alert note">
+
+- Before using open-source rerankers, make sure to download and install all required dependencies and models.
+
+- For API-based rerankers, get an API key from the provider and set it in the appropriate environment variables or arguments.
+
+</div>
 
 ## Example 1: Use BGE rerank function to rerank documents according to a query
 
