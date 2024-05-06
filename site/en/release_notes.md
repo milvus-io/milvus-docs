@@ -21,15 +21,20 @@ Milvus version 2.4.1 brings numerous improvements and bug fixes that aim to enha
 
 - Discontinued support for delete with an empty filter expression. ([#32472](https://github.com/milvus-io/milvus/pull/32472))
 
+### Features
+
+- Added support for Float16/BFloat16 vector data types in bulk insert ([#32157](https://github.com/milvus-io/milvus/pull/32157))
+- Enhanced sparse float vector to support brute force iterator search and range search ([#32635](https://github.com/milvus-io/milvus/pull/32635))
+
 ### Improvements
 
 - Added declarative resource group api ([#31930](https://github.com/milvus-io/milvus/pull/31930) [#32297](https://github.com/milvus-io/milvus/pull/32297) [#32536](https://github.com/milvus-io/milvus/pull/32536) [#32666](https://github.com/milvus-io/milvus/pull/32666))
-- Added support for Float16/BFloat16 vector data types in bulk insert ([#32157](https://github.com/milvus-io/milvus/pull/32157))
+- Rewrote the collection observer in QueryCoord to make it task-driven([#32441](https://github.com/milvus-io/milvus/pull/32441))
+- Refactored the data structure used in the SyncManager of DataNode to reduce memory usage and prevent errors ([#32673](https://github.com/milvus-io/milvus/pull/32673))
 - Revised the implementation of garbage collection to minimize list operations associated with object storage([#31740](https://github.com/milvus-io/milvus/pull/31740))
-- Enhanced the management of milvus.yaml by automatically generating relevant configuration items in the milvus.yaml file through code([#31832](https://github.com/milvus-io/milvus/pull/31832) [#32357](https://github.com/milvus-io/milvus/pull/32357))
-- Enhanced sparse float vector to support brute force iterator search and range search ([#32635](https://github.com/milvus-io/milvus/pull/32635))
-- Enhanced the performance of the Query by retrieving the data after performing local reduction ([#32346](https://github.com/milvus-io/milvus/pull/32346))
 - Reduced the cpu usage when collection number is high ([#32245](https://github.com/milvus-io/milvus/pull/32245))
+- Enhanced the management of milvus.yaml by automatically generating relevant configuration items in the milvus.yaml file through code([#31832](https://github.com/milvus-io/milvus/pull/31832) [#32357](https://github.com/milvus-io/milvus/pull/32357))
+- Enhanced the performance of the Query by retrieving the data after performing local reduction ([#32346](https://github.com/milvus-io/milvus/pull/32346))
 - Added WithBlock option for etcd client creation ([#32641](https://github.com/milvus-io/milvus/pull/32641))
 - Used client_request_id specified by the client as the TraceID if client provided([#32264](https://github.com/milvus-io/milvus/pull/32264))
 - Added db label to the metrics for the delete and bulk insert operations([#32611](https://github.com/milvus-io/milvus/pull/32611))
@@ -42,8 +47,6 @@ Milvus version 2.4.1 brings numerous improvements and bug fixes that aim to enha
 - Parallelize the applyDelete operation at the segment level to accelerate the processing of Delete messages by the Delegator([#32291](https://github.com/milvus-io/milvus/pull/32291))
 - Used index ([#32232](https://github.com/milvus-io/milvus/pull/32232) [#32505](https://github.com/milvus-io/milvus/pull/32505) [#32533](https://github.com/milvus-io/milvus/pull/32533) [#32595](https://github.com/milvus-io/milvus/pull/32595)) and add cache ([#32580](https://github.com/milvus-io/milvus/pull/32580)) to accelerate frequent filtering operations in QueryCoord.
 - Rewrote the data structure([#32273](https://github.com/milvus-io/milvus/pull/32273)) and refactor code([#32389](https://github.com/milvus-io/milvus/pull/32389) ) to accelerate common operations in DataCood.
-- Refactored the data structure used in the SyncManager of DataNode to reduce memory usage and prevent errors ([#32673](https://github.com/milvus-io/milvus/pull/32673))
-- Rewrote the collection observer in QueryCoord to make it task-driven([#32441](https://github.com/milvus-io/milvus/pull/32441))
 - Removed openblas from conan([#32002](https://github.com/milvus-io/milvus/pull/32002))
 
 ### Bug fixes
