@@ -588,7 +588,7 @@ Provide the path to `server.pem` and ensure the `server_name` matches the `Commo
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://127.0.0.1:19530",
+    uri="http://localhost:19530",
     secure=True,
     server_pem_path="path_to/server.pem",
     server_name="localhost"
@@ -603,7 +603,7 @@ Provide paths to `client.pem`, `client.key`, and `ca.pem`, and ensure the `serve
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://127.0.0.1:19530",
+    uri="http://localhost:19530",
     secure=True,
     client_pem_path="path_to/client.pem",
     client_key_path="path_to/client.key",
