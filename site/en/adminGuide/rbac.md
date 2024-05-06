@@ -25,7 +25,7 @@ After you enable [user authentication](authenticate.md), connect to your Milvus 
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri='http://10.102.9.156:19530', # replace with your own Milvus server address
+    uri='http://localhost:19530', # replace with your own Milvus server address
     token='root:Milvus' # replace with your own Milvus server token
 )
 ```
