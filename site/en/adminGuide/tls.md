@@ -537,7 +537,7 @@ print(f"\nCreate connection...")
 milvus_client = MilvusClient(uri=_URI, secure=True, client_pem_path="cert/client.pem",
                         client_key_path="cert/client.key",
                         ca_pem_path="cert/ca.pem",
-                        server_name='localhost',)
+                        server_name='localhost')
 print(f"\nGet connections:")
 print(milvus_client._get_connection())
 ```
