@@ -527,17 +527,19 @@ Configure the file paths of `client.pem`, `client.key`, and `ca.pem` for the cli
 The following example uses the Milvus Python SDK.
 
 ```
-from pymilvus import connections
+from pymilvus import MilvusClient
 
 _HOST = '127.0.0.1'
 _PORT = '19530'
+_URI = f"https://{_HOST}:{_PORT}"
 
 print(f"\nCreate connection...")
-connections.connect(host=_HOST, port=_PORT, secure=True, client_pem_path="cert/client.pem",
+milvus_client = MilvusClient(uri=_URI, secure=True, client_pem_path="cert/client.pem",
                         client_key_path="cert/client.key",
-                        ca_pem_path="cert/ca.pem", server_name="localhost")
-print(f"\nList connections:")
-print(connections.list_connections())
+                        ca_pem_path="cert/ca.pem",
+                        server_name='localhost')
+print(f"\nGet connections:")
+print(milvus_client._get_connection())
 ```
 
 See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py) for more information.
