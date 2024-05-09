@@ -10,4 +10,4 @@ Milvus stands as the leading vector database among enterprise users, boasting en
 
 ![Milvus Adopters](../../../assets/milvus-adopters.png "Milvus adopters.")
 
-For more information on use scenarios, visit our [blogs](https://milvus.io/blog?#scenarios).
+For more information on customer stories, visit our [blogs](https://zilliz.com/blog?tag=1).
