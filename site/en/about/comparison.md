@@ -10,7 +10,7 @@ When exploring various vector database options, this comprehensive guide will he
 
 ## Milvus highlights
 
-- **Functionality**: Milvus goes beyond basic vector similarity search by supporting advanced functionalities like [sparse vector](https://milvus.io/docs/sparse_vector.md), [bulk-vector](https://milvus.io/docs/multi-vector-search.md), [filtered search](https://milvus.io/docs/single-vector-search.md#Filtered-search), and [multi-vector search](https://milvus.io/docs/multi-vector-search.md) capabilities.
+- **Functionality**: Milvus goes beyond basic vector similarity search by supporting advanced functionalities like [sparse vector](https://milvus.io/docs/sparse_vector.md), [bulk-vector](https://milvus.io/docs/single-vector-search.md#Bulk-vector-search), [filtered search](https://milvus.io/docs/single-vector-search.md#Filtered-search), and [multi-vector search](https://milvus.io/docs/multi-vector-search.md) capabilities.
 
 - **Flexibility**: Milvus accommodates various deployment modes and multiple SDKs, all within a robust, integrated ecosystem.
 
@@ -24,7 +24,7 @@ To compare between Milvus and Pinecone, two vector database solutions, the follo
 
 | Feature | Pinecone | Milvus | Remarks |
 | --- | --- | --- | --- |
-| Deployment Modes | SaaS-only | Light-weight Local, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC | Milvus offers greater flexibility in deployment modes. |
+| Deployment Modes | SaaS-only | Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC | Milvus offers greater flexibility in deployment modes. |
 | Supported SDKs | Python, JavaScript/TypeScript | Python, Java, NodeJS, Go, Restful API, C#, Rust | Milvus supports a wider array of programming languages. |
 | Open-source Status | Closed | Open-source | Milvus is a popular open-source vector database. |
 | Scalability | Scale up/down only | Scale out/in and Scale up/down | Milvus features a distributed architecture for enhanced scalability. |
@@ -49,7 +49,7 @@ Although both serve similar functions as vector databases, the domain-specific t
 
 | Capability | Pinecone | Milvus |
 | --- | --- | --- |
-| Deployment Modes | SaaS-only | Light-weight Local, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC |
+| Deployment Modes | SaaS-only | Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC |
 | Embedding Functions | Not available	 | Support with <a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a> |
 | Data Types | String, Number, Bool, List of String | String, VarChar, Number (Int, Float, Double), Bool, Array, JSON, Float Vector, Binary Vector, BFloat16, Float16, Sparse Vector |
 | Metric and Index Types | Cos, Dot, Euclidean, P-family, S-family | Cosine, IP (Dot), L2 (Euclidean),  Hamming, Jaccard, FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU Indexes |

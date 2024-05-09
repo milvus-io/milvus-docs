@@ -12,36 +12,40 @@ Welcome to the Milvus Roadmap! Join us on our continuous journey to enhance and 
 ## Roadmap
 
 <table>
-    <tr>
-        <th>Category</th>
-        <th>Milvus 2.4.0 (Recently Achieved)</th>
-        <th>Milvus 2.5.0 (Upcoming in Mid-CY24)</th>
-        <th>Future Roadmap (Milvus 3.0 expected within CY24)</th>
-    </tr>
-    <tr>
-        <td><strong>AI-developer Friendly</strong><br>A developer-friendly technology stack, enhanced with the latest AI innovations</td>
-        <td><strong>Multi-Vectors & Hybrid Search</strong><br>Framework for multiplex recall and fusion<br><br><strong>GPU Index Acceleration</strong><br>Support for higher QPS and faster index creation<br><br><strong>Model Libraries in PyMilvus</strong><br>Integrated embedding models for Milvus</td>
-        <td><strong>Sparse Vector (GA)</strong><br>Local feature extraction and keyword search<br><br><strong>Milvus Lite (GA)</strong><br>A lightweight, in-memory version of Milvus<br><br><strong>Embedding Models Gallery</strong><br>Support for image and multi-modal embeddings and reranker models in model libraries</td>
-        <td><strong>Original Data-In and Data-Out</strong><br>Support for Blob data types<br><br><strong>Data Clustering</strong><br>Data co-locality<br><br><strong>Scenario-oriented Vector Search</strong><br>e.g. Multi-target search & NN filtering<br><br><strong>Support Embedding & Reranker Endpoint</strong></td>
-    </tr>
-    <tr>
-        <td><strong>Rich Functionality</strong><br>Enhanced retrieval and data management features</td>
-        <td><strong>Support for FP16, BF16 Datatypes</strong><br>These ML datatypes can help reduce memory usage<br><br><strong>Grouping Search</strong><br>Aggregate split embeddings<br><br><strong>Fuzzy Match and Inverted Index</strong><br>Support for fuzzy matching and inverted indexing for scalar types like varchar and int</td>
-        <td><strong>Inverted Index for Array & JSON</strong><br>Indexing for array and partial support JSON<br><br><strong>Bitset Index</strong><br>Improved execution speed and future data aggregation<br><br><strong>Truncate Collection</strong><br>Allows data clearance while preserving metadata<br><br><strong>Support for NULL and Default Values</strong></td>
-        <td><strong>Support for More Datatypes</strong><br>e.g. Datetime, GIS<br><br><strong>Advanced Text Filtering</strong><br>e.g. Match Phrase<br><br><strong>Primary Key Deduplication</strong></td>
-    </tr>
-    <tr>
-        <td><strong>Cost Efficiency & Architecture</strong><br>Advanced systems emphasizing stability, cost efficiency, scalability, and performance</td>
-        <td><strong>Support for More Collections/Partitions</strong><br>Handles over 10,000 collections in smaller clusters<br><br><strong>Mmap Optimization</strong><br>Balances reduced memory consumption with latency<br><br><strong>Bulk Insert Optimazation</strong><br>Simplifies importing large datasets</td>
-        <td><strong>Lazy Load</strong><br>Data is loaded on-demand through read operations<br><br><strong>Major Compaction</strong><br>Re-distributes data based on configuration to enhance read performance<br><br><strong>Mmap for Growing Data</strong><br>Mmap files for expanding data segments</td>
-        <td><strong>Memory Control</strong><br>Reduces out-of-memory issues and provides global memory management<br><br><strong>LogNode Introduction</strong><br>Ensures global consistency and addresses the single-point bottleneck in root coordination<br><br><strong>Storage Format V2</strong><br>Universal format design lays the groundwork for disk-based data access</td>
-    </tr>
-    <tr>
-        <td><strong>Enterprise Ready</strong><br>Designed to meet the needs of enterprise production environments</td>
-        <td><strong>Milvus CDC</strong><br>Capability for data replication<br><br><strong>Accesslog Enhancement</strong><br>Detailed recording for audit and tracing</td>
-        <td><strong>New Resource Group</strong><br>Enhanced resource management<br><br><strong>Storage Hook</strong><br>Support for Bring Your Own Key (BYOK) encryption</td>
-        <td><strong>Dynamic Replica Number Adjustment</strong><br>Facilitates dynamic changes to the number of replicas<br><br><strong>Dynamic Schema Modification</strong><br>e.g., Add/delete fields, modify varchar lengths<br><br><strong>Rust and C# SDKs</strong></td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Milvus 2.4.0 (Recently Achieved)</th>
+            <th>Milvus 2.5.0 (Upcoming in Mid-CY24)</th>
+            <th>Future Roadmap (Milvus 3.0 Expected within CY24)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>AI-developer Friendly</strong><br><i>A developer-friendly technology stack, enhanced with the latest AI innovations</i></td>
+            <td><strong>Multi-Vectors & Hybrid Search</strong><br><i>Framework for multiplex recall and fusion</i><br><br><strong>GPU Index Acceleration</strong><br><i>Support for higher QPS and faster index creation</i><br><br><strong>Model Library in PyMilvus</strong><br><i>Integrated embedding models for Milvus</i></td>
+            <td><strong>Sparse Vector (GA)</strong><br><i>Local feature extraction and keyword search</i><br><br><strong>Milvus Lite (GA)</strong><br><i>A lightweight, in-memory version of Milvus</i><br><br><strong>Embedding Models Gallery</strong><br><i>Support for image and multi-modal embeddings and reranker models in model libraries</i></td>
+            <td><strong>Original Data-In and Data-Out</strong><br><i>Support for Blob data types</i><br><br><strong>Data Clustering</strong><br><i>Data co-locality</i><br><br><strong>Scenario-oriented Vector Search</strong><br><i>e.g. Multi-target search & NN filtering</i><br><br><strong>Support Embedding & Reranker Endpoint</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Rich Functionality</strong><br><i>Enhanced retrieval and data management features</i></td>
+            <td><strong>Support for FP16, BF16 Datatypes</strong><br><i>These ML datatypes can help reduce memory usage</i><br><br><strong>Grouping Search</strong><br><i>Aggregate split embeddings</i><br><br><strong>Fuzzy Match and Inverted Index</strong><br><i>Support for fuzzy matching and inverted indexing for scalar types like varchar and int</i></td>
+            <td><strong>Inverted Index for Array & JSON</strong><br><i>Indexing for array and partial support JSON</i><br><br><strong>Bitset Index</strong><br><i>Improved execution speed and future data aggregation</i><br><br><strong>Truncate Collection</strong><br><i>Allows data clearance while preserving metadata</i><br><br><strong>Support for NULL and Default Values</strong></td>
+            <td><strong>Support for More Datatypes</strong><br><i>e.g. Datetime, GIS</i><br><br><strong>Advanced Text Filtering</strong><br><i>e.g. Match Phrase</i><br><br><strong>Primary Key Deduplication</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Cost Efficiency & Architecture</strong><br><i>Advanced systems emphasizing stability, cost efficiency, scalability, and performance</i></td>
+            <td><strong>Support for More Collections/Partitions</strong><br><i>Handles over 10,000 collections in smaller clusters</i><br><br><strong>Mmap Optimization</strong><br><i>Balances reduced memory consumption with latency</i><br><br><strong>Bulk Insert Optimazation</strong><br><i>Simplifies importing large datasets</i></td>
+            <td><strong>Lazy Load</strong><br><i>Data is loaded on-demand through read operations</i><br><br><strong>Major Compaction</strong><br><i>Re-distributes data based on configuration to enhance read performance</i><br><br><strong>Mmap for Growing Data</strong><br><i>Mmap files for expanding data segments</i></td>
+            <td><strong>Memory Control</strong><br><i>Reduces out-of-memory issues and provides global memory management</i><br><br><strong>LogNode Introduction</strong><br><i>Ensures global consistency and addresses the single-point bottleneck in root coordination</i><br><br><strong>Storage Format V2</strong><br><i>Universal format design lays the groundwork for disk-based data access</i></td>
+        </tr>
+        <tr>
+            <td><strong>Enterprise Ready</strong><br><i>Designed to meet the needs of enterprise production environments</i></td>
+            <td><strong>Milvus CDC</strong><br><i>Capability for data replication</i><br><br><strong>Accesslog Enhancement</strong><br><i>Detailed recording for audit and tracing</i></td>
+            <td><strong>New Resource Group</strong><br><i>Enhanced resource management</i><br><br><strong>Storage Hook</strong><br><i>Support for Bring Your Own Key (BYOK) encryption</i></td>
+            <td><strong>Dynamic Replica Number Adjustment</strong><br><i>Facilitates dynamic changes to the number of replicas</i><br><br><strong>Dynamic Schema Modification</strong><br><i>e.g., Add/delete fields, modify varchar lengths</i><br><br><strong>Rust and C# SDKs</strong></td>
+        </tr>
+    </tbody>
 </table>
 
 - Our roadmap is typically structured into three parts: the most recent release, the next upcoming release, and a mid-to-long term vision within the next year.
