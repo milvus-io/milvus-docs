@@ -91,10 +91,11 @@ The above code will generate a Milvus collection named **llamalection** on the M
                      multiple ranking strategies into a single score to improve search relevance.
     - For `WeightedRanker`, it expects:
         - 'weights' (list of float): A list of exactly two weights:
-            - 1. The weight for the dense embedding component.
-            - 2. The weight for the sparse embedding component.
-          These weights are used to adjust the importance of the dense and sparse components of the embeddings
-          in the hybrid retrieval process.
+            - The weight for the dense embedding component.
+            - The weight for the sparse embedding component.
+              
+          These weights are used to adjust the importance of the dense and sparse components of the embeddings in the hybrid retrieval process.
+          
     Defaults to an empty dictionary, implying that the ranker will operate with its predefined default settings.
 
 
