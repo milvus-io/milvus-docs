@@ -153,7 +153,7 @@ You should start Milvus with Helm by specifying the release name, the chart, and
 
 Milvus allows you to assign one or more GPU devices to Milvus. 
 
-- Assign a single GPU device(recommended)
+- Assign a single GPU device (recommended)
 
   Run the following commands to assign a single GPU device to Milvus:
 
