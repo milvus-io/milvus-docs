@@ -1,6 +1,8 @@
 ---
 id: import-data.md
+order: 1
 title: Import Data
+summary: This page demonstrates the procedure to import the prepared data.
 ---
 
 # Import data
