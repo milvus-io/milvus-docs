@@ -186,7 +186,7 @@ BUCKET_NAME="milvus-bucket"
 
 # Connections parameters to access the remote bucket
 conn = RemoteBulkWriter.S3ConnectParam(
-    endpoint="10.102.6.239:9000", # the default MinIO service started along with Milvus
+    endpoint="localhost:9000", # the default MinIO service started along with Milvus
     access_key=ACCESS_KEY,
     secret_key=SECRET_KEY,
     bucket_name=BUCKET_NAME,
