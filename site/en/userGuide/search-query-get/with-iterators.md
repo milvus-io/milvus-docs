@@ -146,7 +146,7 @@ while True:
     result = iterator.next()
     if len(result) == 0:
         iterator.close()
-        break;
+        break
         
     results.extend(result)
     
@@ -162,7 +162,7 @@ print(results[:3])
 # 6. Initialize a query iterator
 iterator = collection.query_iterator(
     batch_size=10, # Controls the size of the return each time you call next()
-    expr="color_tag like \"brown_8\""
+    expr="color_tag like \"brown_8\"",
     output_fields=["color_tag"]
 )
 
@@ -173,7 +173,7 @@ while True:
     result = iterator.next()
     if len(result) == 0:
         iterator.close()
-        break;
+        break
         
     results.extend(result)
     
