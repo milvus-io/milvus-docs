@@ -84,7 +84,7 @@
       "isMenu": true
     },
     {
-      "id": "run-milvus-lite.md",
+      "id": "run_milvus-lite.md",
       "title": "Run Milvus Lite",
       "label1": "getstarted",
       "label2": "install-milvus",
