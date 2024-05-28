@@ -75,7 +75,7 @@
       "order": 0
     }, 
     {
-      "id": "install-milvus",
+      "id": "install_milvus",
       "title": "Install Milvus",
       "label1": "getstarted",
       "label2": "",
@@ -84,18 +84,18 @@
       "isMenu": true
     },
     {
-      "id": "milvus_lite.md",
+      "id": "run_milvus-lite.md",
       "title": "Run Milvus Lite",
       "label1": "getstarted",
-      "label2": "install-milvus",
+      "label2": "install_milvus",
       "label3": "",
       "order": 0
     }, 
     {
-      "id": "run_milvus-docker",
+      "id": "run_milvus_docker",
       "title": "Run Milvus in Docker",
       "label1": "getstarted",
-      "label2": "install-milvus",
+      "label2": "install_milvus",
       "label3": "",
       "order": 1,
       "isMenu": true
@@ -104,31 +104,31 @@
       "id": "prerequisite-docker.md",
       "title": "Requirements",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-docker",
+      "label2": "install_milvus",
+      "label3": "run_milvus_docker",
       "order": 0
     }, 
     {
       "id": "install_standalone-docker.md",
       "title": "Docker",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-docker",
+      "label2": "install_milvus",
+      "label3": "run_milvus_docker",
       "order": 1
     }, 
     {
       "id": "install_standalone-docker-compose.md",
       "title": "Docker Compose",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-docker",
+      "label2": "install_milvus",
+      "label3": "run_milvus_docker",
       "order": 2
     }, 
     {
-      "id": "run_milvus-k8s",
+      "id": "run_milvus_k8s",
       "title": "Run Milvus in Kubernetes",
       "label1": "getstarted",
-      "label2": "install-milvus",
+      "label2": "install_milvus",
       "label3": "",
       "order": 2,
       "isMenu": true
@@ -137,31 +137,31 @@
       "id": "prerequisite-helm.md",
       "title": "Requirements",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-k8s",
+      "label2": "install_milvus",
+      "label3": "run_milvus_k8s",
       "order": 0
     },
     {
       "id": "install_cluster-milvusoperator.md",
       "title": "Milvus Operator",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-k8s",
+      "label2": "install_milvus",
+      "label3": "run_milvus_k8s",
       "order": 1
     },
     {
       "id": "install_cluster-helm.md",
       "title": "Helm Chart",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-k8s",
+      "label2": "install_milvus",
+      "label3": "run_milvus_k8s",
       "order": 2
     },
     {
-      "id": "run_milvus-gpu",
+      "id": "run_milvus_gpu",
       "title": "Run Milvus with GPU",
       "label1": "getstarted",
-      "label2": "install-milvus",
+      "label2": "install_milvus",
       "label3": "",
       "order": 3,
       "isMenu": true
@@ -170,24 +170,24 @@
       "id": "prerequisite-gpu.md",
       "title": "Requirements",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-gpu",
+      "label2": "install_milvus",
+      "label3": "run_milvus_gpu",
       "order": 0
     },
     {
       "id": "install_cluster-helm-gpu.md",
-      "title": "Requirements",
+      "title": "Helm Chart",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-gpu",
+      "label2": "install_milvus",
+      "label3": "run_milvus_gpu",
       "order": 1
     },
     {
       "id": "install_standalone-docker-compose-gpu.md",
-      "title": "Requirements",
+      "title": "Docker Compose",
       "label1": "getstarted",
-      "label2": "install-milvus",
-      "label3": "run_milvus-gpu",
+      "label2": "install_milvus",
+      "label3": "run_milvus_gpu",
       "order": 2
     },
     {
