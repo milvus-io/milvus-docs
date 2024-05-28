@@ -1,5 +1,5 @@
 ---
-id: prerequisite-docker.md
+id: prerequisite-gpu.md
 label: GPU requirements
 related_key: GPU
 summary: Learn the necessary preparations before installing Milvus with GPU.

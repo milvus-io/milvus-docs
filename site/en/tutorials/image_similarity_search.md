@@ -1,5 +1,5 @@
 ---
-id: image-search-with-milvus.md
+id: image-similarity-search.md
 summary: image search with Milvus
 title: Image Search with Milvus
 ---
