@@ -150,8 +150,6 @@ In the above setup, you have the flexibility to define various aspects of the co
 
   - For the vector field, you can use __AUTOINDEX__ as the index type and use __COSINE__, __L2__, or __IP__ as the `metric_type`.
 
-  - For scalar fields, including the primary field, Milvus uses __TRIE__ for integers and __STL_SORT__ for strings.
-
     For additional insights into index types, refer to [Index](index.md).
 
 <div class="admonition note">
