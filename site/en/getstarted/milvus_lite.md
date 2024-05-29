@@ -43,6 +43,7 @@ from pymilvus import MilvusClient
 client = MilvusClient("milvus_dem
 ```
 
+
 After running the above code snippet, a database file named **milvus_demo.db** will be generated in the current folder.
 
 ## What's next

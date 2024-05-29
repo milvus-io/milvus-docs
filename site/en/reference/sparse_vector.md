@@ -290,11 +290,11 @@ When using sparse vectors in Milvus, consider the following limits:
 
 - __What data types are supported for sparse embeddings?__
 
-    The dimension part must be an unsigned 32-bit integer, and the value part can be any 32-bit float.
+    The dimension part must be an unsigned 32-bit integer, and the value part can be a non-negative 32-bit floating-point number.
 
 - __Can the dimension of a sparse embedding be any discrete value within the uint32 space?__
 
-    Yes, the dimension of a sparse embedding can be any value from 0 to 4.2 billion (maximum of __uint32__ - 1).
+    Yes, with one exception. The dimension of a sparse embedding can be any value in the range of `[0, maximum of uint32)`. This means you cannot use the maximum value of uint32.
 
 - __Are searches on growing segments conducted through an index or by brute force?__
 
