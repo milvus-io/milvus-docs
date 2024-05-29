@@ -56,7 +56,11 @@ data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} 
 # instruction: https://milvus.io/docs/install_standalone-docker.md.
 milvus_client = MilvusClient("milvus_voyage_demo.db")
 COLLECTION_NAME = "demo_collection"  # Milvus collection name
-# Create a collection to store the vectors and text. 
+# Clear data before inserting
+has_collection = milvus_client.has_collection(COLLECTION_NAME)
+if has_collection:
+    milvus_client.drop_collection(COLLECTION_NAME)
+# Create a collection to store the vectors and text.
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
     dimension=DIMENSION
