@@ -38,7 +38,7 @@ Jina AI provides general purpose embedding models for understanding detailed tex
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
 
-jina_api_key = "<YOUR_Jina_API_KEY>"
+jina_api_key = "<YOUR_JINA_API_KEY>"
 ef = JinaEmbeddingFunction("jina-embeddings-v2-base-en", jina_api_key)
 
 query = "what is information retrieval?"
@@ -56,7 +56,7 @@ Jina AI's bilingual models facilitate communication across languages, enhancing 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
 
-jina_api_key = "<YOUR_Jina_API_KEY>"
+jina_api_key = "<YOUR_JINA_API_KEY>"
 ef = JinaEmbeddingFunction("jina-embeddings-v2-base-de", jina_api_key)
 
 query = "what is information retrieval?"
@@ -74,7 +74,7 @@ Jina AI's code embedding model provides searching ability through code and docum
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
 
-jina_api_key = "<YOUR_Jina_API_KEY>"
+jina_api_key = "<YOUR_JINA_API_KEY>"
 ef = JinaEmbeddingFunction("jina-embeddings-v2-base-code", jina_api_key)
 
 # Case1: Enhanced Code Navigation
@@ -117,7 +117,7 @@ Jina AI also provides rerankers to further enhance retrieval quality after searc
 ```python
 from pymilvus.model.reranker import JinaRerankFunction
 
-jina_api_key = "<YOUR_Jina_API_KEY>"
+jina_api_key = "<YOUR_JINA_API_KEY>"
 
 rf = JinaRerankFunction("jina-reranker-v1-base-en", jina_api_key)
 
