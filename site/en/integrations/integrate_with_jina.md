@@ -4,7 +4,7 @@ summary: This guide demonstrates how to use Jina embeddings and Milvus to conduc
 title: Integrate Milvus with Jina
 ---
 
-# Integrate Milvus with Jina
+# Integrate Milvus with Jina AI
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
@@ -18,21 +18,22 @@ Jina AI's cutting-edge embeddings boast top-tier performance, featuring an 8192 
 
 ## Milvus and Jina AI embeddings
 
-In order to store and search these embeddings efficiently for speed and scale, specific infrastructure designed for this purpose is required. Milvus is a widely known advanced open-source vector database capable of handling large-scale vector data. Milvus enables fast and accurate vector(embedding) search according plenty of metrics. Its scalability allows for seamless handling of massive volumes of image data, ensuring high-performance search operations even as datasets grow. 
+In order to store and search these embeddings efficiently for speed and scale, a vector database is required. Milvus is a popular open-source vector database. In this example we demostrate how to use Jina AI embedding models and Milvus vector database for text semantic search, an importance piece of the Retrieval-Augmented Generation workflow.
 
 ## Examples
 
-Jina embeddings have been integrated into the PyMilvus model library. Now, we will demonstrate code examples to show how to use Jina embeddings in action. 
+Jina AI embeddings have been integrated into the `pymilvus[model]` library.
 
-Before we start, we need to install model library for PyMilvus.
+Before we start, we need to install `pymilvus` and the model library.
 
 ```
 pip install pymilvus
+pip install "pymilvus[model]"
 ``` 
 
 ### General-purpose embeddings
 
-Jina AI's core embedding model, excels in understanding detailed text, making it ideal for semantic search, content classification thus supports advanced sentiment analysis, text summarization, and personalized recommendation systems.
+Jina AI provides general purpose embedding models for understanding detailed text, making it ideal for semantic search, content classification, and intricate language analysis. You can specify the model name with the API key to instantiate the client for Jina AI embedding service.
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
@@ -48,9 +49,9 @@ qvecs = ef.encode_queries([query])
 dvecs = ef.encode_documents([doc])
 ```
 
-### bilingual embeddings
+### Bilingual embeddings
 
-Jina AI's bilingual models enhance multilingual platforms, global support, and cross-lingual content discovery. Designed for German-English and Chinese-English translations, they foster understanding among diverse linguistic groups, simplifying interactions across languages.
+Jina AI's bilingual models facilitate communication across languages, enhancing multilingual platforms, global customer support, and cross-lingual content discovery. Designed to master German-English and Chinese-English translations, these models simplify interactions and foster understanding among diverse linguistic groups. Similar to above, you can specify the model name for the bilingual one. For exmaple, the below shows "jina-embeddings-v2-base-de", a German-English model.
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
@@ -109,7 +110,7 @@ qvecs = ef.encode_queries([query])
 dvecs = ef.encode_documents([doc])
 ```
 
-### Jina Reranker
+### Jina AI Reranker
 
 Jina AI also provides rerankers to further enhance retrieval quality after searching using embeddings.
 
