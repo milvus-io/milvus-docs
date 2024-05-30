@@ -1530,7 +1530,7 @@
     },    
     {
       "id": "integrate_with_snowpark.md",
-      "title": "SnowPark",
+      "title": "Snowflake",
       "label1": "integrations",
       "label2": "",
       "label3": "",

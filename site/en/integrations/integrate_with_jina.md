@@ -1,28 +1,28 @@
 ---
 id: integrate_with_jina.md
-summary: This guide demonstrates how to use JINA embeddings and Milvus to conduct similarity search and retrieval tasks.  
-title: Integrate Milvus with JINA
+summary: This guide demonstrates how to use Jina embeddings and Milvus to conduct similarity search and retrieval tasks.  
+title: Integrate Milvus with Jina
 ---
 
-# Integrate Milvus with JINA
+# Integrate Milvus with Jina
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-This guide demonstrates how to use JINA embeddings and Milvus to conduct similarity search and retrieval tasks.  
+This guide demonstrates how to use Jina embeddings and Milvus to conduct similarity search and retrieval tasks.  
 
-## Who is JINA AI
+## Who is Jina AI
 
 Jina AI, founded in 2020 in Berlin, is a pioneering AI company focused on revolutionizing the future of artificial intelligence through its search foundation. Specializing in multimodal AI, Jina AI aims to empower businesses and developers to harness the power of multimodal data for value creation and cost savings through its integrated suite of components, including embeddings, rerankers, prompt ops, and core infrastructure.
 
 Jina AI's cutting-edge embeddings boast top-tier performance, featuring an 8192 token-length model ideal for comprehensive data representation. Offering multilingual support and seamless integration with leading platforms like OpenAI, these embeddings facilitate cross-lingual applications.
 
-## Milvus and JINA AI embeddings
+## Milvus and Jina AI embeddings
 
 In order to store and search these embeddings efficiently for speed and scale, specific infrastructure designed for this purpose is required. Milvus is a widely known advanced open-source vector database capable of handling large-scale vector data. Milvus enables fast and accurate vector(embedding) search according plenty of metrics. Its scalability allows for seamless handling of massive volumes of image data, ensuring high-performance search operations even as datasets grow. 
 
 ## Examples
 
-JINA embeddings have been integrated into the PyMilvus model library. Now, we will demonstrate code examples to show how to use Jina embeddings in action. 
+Jina embeddings have been integrated into the PyMilvus model library. Now, we will demonstrate code examples to show how to use Jina embeddings in action. 
 
 Before we start, we need to install model library for PyMilvus.
 
@@ -32,12 +32,12 @@ pip install pymilvus
 
 ### General-purpose embeddings
 
-JINA AI's core embedding model, excels in understanding detailed text, making it ideal for semantic search, content classification thus supports advanced sentiment analysis, text summarization, and personalized recommendation systems.
+Jina AI's core embedding model, excels in understanding detailed text, making it ideal for semantic search, content classification thus supports advanced sentiment analysis, text summarization, and personalized recommendation systems.
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
 
-jina_api_key = "<YOUR_JINA_API_KEY>"
+jina_api_key = "<YOUR_Jina_API_KEY>"
 ef = JinaEmbeddingFunction("jina-embeddings-v2-base-en", jina_api_key)
 
 query = "what is information retrieval?"
@@ -50,12 +50,12 @@ dvecs = ef.encode_documents([doc])
 
 ### bilingual embeddings
 
-JINA AI's bilingual models enhance multilingual platforms, global support, and cross-lingual content discovery. Designed for German-English and Chinese-English translations, they foster understanding among diverse linguistic groups, simplifying interactions across languages.
+Jina AI's bilingual models enhance multilingual platforms, global support, and cross-lingual content discovery. Designed for German-English and Chinese-English translations, they foster understanding among diverse linguistic groups, simplifying interactions across languages.
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
 
-jina_api_key = "<YOUR_JINA_API_KEY>"
+jina_api_key = "<YOUR_Jina_API_KEY>"
 ef = JinaEmbeddingFunction("jina-embeddings-v2-base-de", jina_api_key)
 
 query = "what is information retrieval?"
@@ -68,12 +68,12 @@ dvecs = ef.encode_documents([doc])
 
 ### Code embeddings
 
-JINA AI's code embedding model provides searching ability through code and documentation. It supports English and 30 popular programming languages that can be used for enhancing code navigation, streamlined code review and automated documentation assistance.
+Jina AI's code embedding model provides searching ability through code and documentation. It supports English and 30 popular programming languages that can be used for enhancing code navigation, streamlined code review and automated documentation assistance.
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction
 
-jina_api_key = "<YOUR_JINA_API_KEY>"
+jina_api_key = "<YOUR_Jina_API_KEY>"
 ef = JinaEmbeddingFunction("jina-embeddings-v2-base-code", jina_api_key)
 
 # Case1: Enhanced Code Navigation
@@ -109,14 +109,14 @@ qvecs = ef.encode_queries([query])
 dvecs = ef.encode_documents([doc])
 ```
 
-### JINA Reranker
+### Jina Reranker
 
-JINA AI also provides rerankers to further enhance retrieval quality after searching using embeddings.
+Jina AI also provides rerankers to further enhance retrieval quality after searching using embeddings.
 
 ```python
 from pymilvus.model.reranker import JinaRerankFunction
 
-jina_api_key = "<YOUR_JINA_API_KEY>"
+jina_api_key = "<YOUR_Jina_API_KEY>"
 
 rf = JinaRerankFunction("jina-reranker-v1-base-en", jina_api_key)
 
