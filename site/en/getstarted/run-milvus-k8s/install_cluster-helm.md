@@ -73,7 +73,7 @@ $ helm install my-release milvus/milvus
 
 In the above command, `my-release` is the release name, and `milvus/milvus` is the locally installed chart repository. To use a different name, replace `my-release` with the one you see fit.
 
-The command above deploys a Milvus cluster with its components and dependencies using default configurations. To customize these settings, modify the Milvus configuration YAML file. For details on configuration parameters, refer to [Configure Milvus with Helm Charts](https://milvus.io/docs/configure-helm.md) and [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
+The command above deploys a Milvus cluster with its components and dependencies using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
 
 <div class="alert note">
   <ul>

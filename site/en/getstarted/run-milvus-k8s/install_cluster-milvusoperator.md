@@ -169,7 +169,7 @@ Once the Milvus Operator pod is running, you can deploy a Milvus cluster as foll
 $ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
-The command above deploys a Milvus cluster with its components and dependencies in separate pods using default configurations. To customize these settings, modify the Milvus configuration YAML file. For details on configuration parameters, refer to [Configure Milvus with Milvus Operator](https://milvus.io/docs/configure_operator.md) and [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
+The command above deploys a Milvus cluster with its components and dependencies in separate pods using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
 
 <div class="alert note">
 
