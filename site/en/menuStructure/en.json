@@ -842,7 +842,7 @@
     },
     {
       "id": "aws.md",
-      "title": "AWS EC2",
+      "title": "Amazon EC2",
       "label1": "admin_guide",
       "label2": "deployment",
       "label3": "on_cloud",
@@ -850,7 +850,7 @@
     },
     {
       "id": "eks.md",
-      "title": "AWS EKS",
+      "title": "Amazon EKS",
       "label1": "admin_guide",
       "label2": "deployment",
       "label3": "on_cloud",
