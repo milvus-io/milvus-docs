@@ -27,6 +27,36 @@ According to the implementation methods, the ANNS vector index can be categorize
 
 Milvus supports various index types, which are categorized by the type of embedding they handle: **floating-point**, **binary**, and **sparse**.
 
+<div class="filter-floating">
+
+### Indexes for floating-point embeddings
+
+For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (`L2`) and Inner product (`IP`).
+
+These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, and `SCANN` for CPU-based ANN searches.
+
+</div>
+
+<div class="filter-binary">
+
+### Indexes for binary embeddings
+
+For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are `Jaccard` and `Hamming`.
+
+This type of indexes include `BIN_FLAT` and `BIN_IVF_FLAT`.
+
+</div>
+
+<div class="filter-sparse">
+
+### Indexes for sparse embeddings
+
+The distance metric supported for sparse embeddings is `IP` only.
+
+The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
+
+</div>
+
 <div class="filter">
   <a href="#floating">Floating-point embeddings</a>
   <a href="#binary">Binary embeddings</a>
@@ -176,36 +206,6 @@ Milvus supports various index types, which are categorized by the type of embedd
   </tr>
 </tbody>
 </table>
-
-</div>
-
-<div class="filter-floating">
-
-### Indexes for floating-point embeddings
-
-For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (`L2`) and Inner product (`IP`).
-
-These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, and `SCANN` for CPU-based ANN searches.
-
-</div>
-
-<div class="filter-binary">
-
-### Indexes for binary embeddings
-
-For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are `Jaccard` and `Hamming`.
-
-This type of indexes include `BIN_FLAT` and `BIN_IVF_FLAT`.
-
-</div>
-
-<div class="filter-sparse">
-
-### Indexes for sparse embeddings
-
-The distance metric supported for sparse embeddings is `IP` only.
-
-The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
 
 </div>
 
