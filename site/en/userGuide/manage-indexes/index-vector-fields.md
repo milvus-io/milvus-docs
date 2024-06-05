@@ -60,12 +60,6 @@ Milvus provides several index types and metrics to sort field values for efficie
 
 It is recommended to create indexes for both the vector field and scalar fields that are frequently accessed.
 
-<div class="alert note">
-
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
-
-</div>
-
 ## Preparations
 
 As explained in [Manage Collections](manage-collections.md), Milvus automatically generates an index and loads it into memory when creating a collection if any of the following conditions are specified in the collection creation request:
