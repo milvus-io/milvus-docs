@@ -18,6 +18,7 @@ Milvus provides several index types and metrics to sort field values for efficie
 <div class="filter">
   <a href="#floating">Floating point embeddings</a>
   <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
@@ -52,6 +53,25 @@ Milvus provides several index types and metrics to sort field values for efficie
   <tr>
     <td class="tg-0pky"><ul><li>Jaccard</li><li>Hamming</li></ul></td>
     <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="filter-sparse table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
+    <th class="tg-0pky">Index Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">IP</td>
+    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
