@@ -12,8 +12,8 @@ The following table shows how these widely used similarity metrics fit with vari
 
 
 <div class="filter">
-<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
-
+  <a href="#floating">Floating point embeddings</a>
+  <a href="#binary">Binary embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
@@ -40,7 +40,7 @@ The following table shows how these widely used similarity metrics fit with vari
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Distance Metrics</th>
+    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
     <th class="tg-0pky">Index Types</th>
   </tr>
 </thead>
