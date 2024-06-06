@@ -27,6 +27,12 @@ According to the implementation methods, the ANNS vector index can be categorize
 
 Milvus supports various index types, which are categorized by the type of embedding they handle: **floating-point**, **binary**, and **sparse**.
 
+<div class="filter">
+  <a href="#floating">Floating-point embeddings</a>
+  <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
+</div>
+
 <div class="filter-floating">
 
 ### Indexes for floating-point embeddings
@@ -55,12 +61,6 @@ The distance metric supported for sparse embeddings is `IP` only.
 
 The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
 
-</div>
-
-<div class="filter">
-  <a href="#floating">Floating-point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper">
