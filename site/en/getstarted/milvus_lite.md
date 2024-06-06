@@ -71,7 +71,7 @@ When running Milvus Lite, note that some features are not supported. The followi
 | [get_collection_stats()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md) | Supports getting collection statistics.                       |
 | `collection_name`                                                                                                          | Y                                                             |
 | `timeout`                                                                                                                  | Y                                                             |
-| [describe_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md)   | `num_shards` and `consistency_level` in response are invalid. |
+| [describe_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md)   | `num_shards`, `consistency_level`, and `collection_id` in response are invalid. |
 | `timeout`                                                                                                                  | Y                                                             |
 | [has_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md)             | Supports checking if a collection exists.                     |
 | `collection_name`                                                                                                          | Y                                                             |
