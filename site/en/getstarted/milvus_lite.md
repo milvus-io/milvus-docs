@@ -67,7 +67,7 @@ When running Milvus Lite, note that some features are not supported. The followi
 | `num_shards`                                                                                                               | N                                                             |
 | `partition_key_field`                                                                                                      | N                                                             |
 | `num_partitions`                                                                                                           | N                                                             |
-| `consistency_level`                                                                                                        | N (Only supports `Strong`; other levels are invalid)          |
+| `consistency_level`                                                                                                        | N (Only supports `Strong`; Any configuration will be treated as `Strong`.)          |
 | [get_collection_stats()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md) | Supports getting collection statistics.                       |
 | `collection_name`                                                                                                          | Y                                                             |
 | `timeout`                                                                                                                  | Y                                                             |
