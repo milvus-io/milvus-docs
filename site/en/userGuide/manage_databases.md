@@ -633,6 +633,6 @@ function connectToMilvus(dbName="default") {
 
 ## What's next
 
-[Enable RBAC](rbac.md)
+- [Enable RBAC](rbac.md)
 
-[Multi-tenancy](multi_tenancy.md)
+- [Multi-tenancy](multi_tenancy.md)
