@@ -59,6 +59,7 @@
         "label": "Install Milvus",
         "id": "install_milvus",
         "order": 1,
+        "isMenu": true,
         "children": [
           {
             "label": "Run Milvus Lite",
@@ -70,6 +71,7 @@
             "label": "Run Milvus in Docker",
             "id": "run_milvus_docker",
             "order": 1,
+            "isMenu": true,
             "children": [
               {
                 "label": "Requirements",
@@ -89,13 +91,13 @@
                 "order": 2,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           },
           {
             "label": "Run Milvus in Kubernetes",
             "id": "run_milvus_k8s",
             "order": 2,
+            "isMenu": true,
             "children": [
               {
                 "label": "Requirements",
@@ -115,13 +117,13 @@
                 "order": 2,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           },
           {
             "label": "Run Milvus with GPU",
             "id": "run_milvus_gpu",
             "order": 3,
+            "isMenu": true,
             "children": [
               {
                 "label": "Requirements",
@@ -141,11 +143,9 @@
                 "order": 2,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Install SDKs",
@@ -190,6 +190,7 @@
         "label": "Architecture",
         "id": "architecture",
         "order": 0,
+        "isMenu": true,
         "children": [
           {
             "label": "Overview",
@@ -221,8 +222,7 @@
             "order": 5,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Bitset",
@@ -264,6 +264,7 @@
         "label": "Vector Index",
         "id": "vector_index",
         "order": 7,
+        "isMenu": true,
         "children": [
           {
             "label": "In-memory Index",
@@ -283,8 +284,7 @@
             "order": 2,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Scalar Index",
@@ -346,6 +346,7 @@
         "label": "Manage Indexes",
         "id": "manage_indexes",
         "order": 3,
+        "isMenu": true,
         "children": [
           {
             "label": "Index Vector Fields",
@@ -365,8 +366,7 @@
             "order": 2,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Manage Partitions",
@@ -384,6 +384,7 @@
         "label": "Data Import",
         "id": "data_import",
         "order": 6,
+        "isMenu": true,
         "children": [
           {
             "label": "Prepare Source Data",
@@ -397,13 +398,13 @@
             "order": 1,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Search, Query & Get",
         "id": "search_query_get",
         "order": 7,
+        "isMenu": true,
         "children": [
           {
             "label": "Single-Vector Search",
@@ -429,13 +430,13 @@
             "order": 3,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Advanced Features",
         "id": "advanced_features",
         "order": 8,
+        "isMenu": true,
         "children": [
           {
             "label": "Dynamic Field",
@@ -485,8 +486,7 @@
             "order": 7,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       }
     ]
   },
@@ -500,6 +500,7 @@
         "label": "Embeddings",
         "id": "embeddings",
         "order": 0,
+        "isMenu": true,
         "children": [
           {
             "label": "Overview",
@@ -543,13 +544,13 @@
             "order": 6,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Rerankers",
         "id": "rerankers",
         "order": 1,
+        "isMenu": true,
         "children": [
           {
             "label": "Overview",
@@ -581,8 +582,7 @@
             "order": 4,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       }
     ]
   },
@@ -634,11 +634,13 @@
         "label": "Deployment",
         "id": "deployment",
         "order": 0,
+        "isMenu": true,
         "children": [
           {
             "label": "On Premises",
             "id": "on_premises",
             "order": 0,
+            "isMenu": true,
             "children": [
               {
                 "label": "With Docker",
@@ -664,13 +666,13 @@
                 "order": 3,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           },
           {
             "label": "On Clouds",
             "id": "on_cloud",
             "order": 1,
+            "isMenu": true,
             "children": [
               {
                 "label": "Amazon EC2",
@@ -720,16 +722,15 @@
                 "order": 7,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Configuration",
         "id": "configuration",
         "order": 1,
+        "isMenu": true,
         "children": [
           {
             "label": "System Configurations",
@@ -761,18 +762,19 @@
             "order": 4,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Manage Dependencies",
         "id": "manage_dependencies",
         "order": 2,
+        "isMenu": true,
         "children": [
           {
             "label": "With Docker or Helm",
             "id": "docker_helm_dependencies",
             "order": 0,
+            "isMenu": true,
             "children": [
               {
                 "label": "Object Storage",
@@ -792,13 +794,13 @@
                 "order": 2,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           },
           {
             "label": "With Milvus Operator",
             "id": "milvus_operator_dependencies",
             "order": 1,
+            "isMenu": true,
             "children": [
               {
                 "label": "Object Storage",
@@ -818,16 +820,15 @@
                 "order": 2,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Scaling",
         "id": "scaling",
         "order": 4,
+        "isMenu": true,
         "children": [
           {
             "label": "Scale Cluster",
@@ -841,8 +842,7 @@
             "order": 1,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Upgrade",
@@ -867,11 +867,13 @@
         "label": "Monitoring, Alerts & Logs",
         "id": "monitor_alert_log",
         "order": 8,
+        "isMenu": true,
         "children": [
           {
             "label": "Monitoring",
             "id": "monitoring",
             "order": 0,
+            "isMenu": true,
             "children": [
               {
                 "label": "Architecture",
@@ -897,13 +899,13 @@
                 "order": 3,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           },
           {
             "label": "Alerts",
             "id": "alerts",
             "order": 1,
+            "isMenu": true,
             "children": [
               {
                 "label": "Create an Alert",
@@ -911,13 +913,13 @@
                 "order": 0,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           },
           {
             "label": "Logs",
             "id": "logs",
             "order": 2,
+            "isMenu": true,
             "children": [
               {
                 "label": "Configure Grafana Loki",
@@ -931,16 +933,15 @@
                 "order": 1,
                 "children": []
               }
-            ],
-            "isMenu": true
+            ]
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Security",
         "id": "security",
         "order": 9,
+        "isMenu": true,
         "children": [
           {
             "label": "Enable Authentication",
@@ -952,8 +953,8 @@
             "label": "Enable RBAC",
             "id": "rbac.md",
             "order": 1,
-            "children": [],
-            "isMenu": true
+            "isMenu": true,
+            "children": []
           },
           {
             "label": "Encryption in Transit",
@@ -961,8 +962,7 @@
             "order": 2,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       }
     ]
   },
@@ -976,6 +976,7 @@
         "label": "Milvus CLI",
         "id": "cli",
         "order": 0,
+        "isMenu": true,
         "children": [
           {
             "label": "Overview",
@@ -995,8 +996,7 @@
             "order": 2,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Milvus Backup",
@@ -1027,6 +1027,7 @@
         "label": "Milvus CDC",
         "id": "milvus_cdc",
         "order": 3,
+        "isMenu": true,
         "children": [
           {
             "label": "Overview",
@@ -1052,15 +1053,14 @@
             "order": 3,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       },
       {
         "label": "Attu(Milvus GUI)",
         "id": "milvus_attu",
         "order": 4,
-        "children": [],
-        "externalLink": "https://github.com/zilliztech/attu"
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
       },
       {
         "label": "Birdwatcher",
@@ -1091,13 +1091,14 @@
         "label": "Milvus Sizing Tool",
         "id": "sizing",
         "order": 6,
-        "children": [],
-        "externalLink": "https://milvus.io/tools/sizing/"
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
       },
       {
         "label": "Milvus Connectors",
         "id": "milvus_connectors",
         "order": 7,
+        "isMenu": true,
         "children": [
           {
             "label": "Spark",
@@ -1105,8 +1106,7 @@
             "order": 0,
             "children": []
           }
-        ],
-        "isMenu": true
+        ]
       }
     ]
   },
