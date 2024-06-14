@@ -18,11 +18,9 @@ const getMenuIds = (data)=>{
   return data.reduce((acc, cur) => {
     const {children = []} = cur;
     if(children.length){
-      acc.concat(getMenuIds(children))
-      return acc
+     return acc.concat(getMenuIds(children))
     }
-     acc.concat(cur.id)
-     return acc
+    return acc.concat(cur.id)
   },[])
 }
 
