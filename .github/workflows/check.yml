@@ -20,5 +20,4 @@ jobs:
         uses: actions/checkout@v1
       - name: Run Inner Link Check
         run: |
-          npm install
           node check-link.js
