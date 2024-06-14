@@ -663,6 +663,14 @@ export indexParams='[{ \
       <td><code>params</code></td>
       <td>The index type and related settings. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
     </tr>
+    <tr>
+      <td><code>params.index_type</code></td>
+      <td>The type of the index to create.</td>
+    </tr>
+    <tr>
+      <td><code>params.nlist</code></td>
+      <td>The number of cluster units. This applies to IVF-related index types.</td>
+    </tr>
   </tbody>
 </table>
 
