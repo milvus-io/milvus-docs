@@ -13,8 +13,23 @@ const getMenuJson = (path) => {
 	return JSON.parse(doc.toString());
 };
 
+const getMenuIds = (data)=>{
+  if(data?.menuList?.length){
+    return data.menuList.map((v) => v.id);
+  }
+
+  return data.reduce((acc, cur) => {
+    const {children = []} = cur;
+    if(children.length){
+     return acc.concat(getMenuIds(children))
+    }
+    return acc.concat(cur.id)
+  },[])
+}
+
+// there are two version of menu structure now
 const EN_MENU_CONTENT = getMenuJson(EN_MENU_PATH);
-const enIds = EN_MENU_CONTENT.menuList.map((v) => v.id);
+const enIds = getMenuIds(EN_MENU_CONTENT)
 
 // check if id is duplicate in menustructor
 const checkSameId = (ids, prefix = "") => {
