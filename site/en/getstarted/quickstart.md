@@ -23,7 +23,7 @@ $ pip install -U pymilvus
 ```
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**. (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -42,6 +42,8 @@ In Milvus, we need a collection to store vectors and their associated metadata. 
 
 
 ```python
+if client.has_collection(collection_name="demo_collection"):
+    client.drop_collection(collection_name="demo_collection")
 client.create_collection(
     collection_name="demo_collection",
     dimension=768,  # The vectors we will use in this demo has 768 dimensions
@@ -62,7 +64,7 @@ First, install the model library. This package includes essential ML tools such 
 
 
 ```python
-$ pip install "pymilvus[model]"
+!pip install "pymilvus[model]"
 ```
 
 Generate vector embeddings with default model. Milvus expects data to be inserted organized as a list of dictionaries, where each dictionary represents a data record, termed as an entity. 
