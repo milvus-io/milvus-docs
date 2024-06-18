@@ -64,7 +64,7 @@ First, install the model library. This package includes essential ML tools such 
 
 
 ```python
-!pip install "pymilvus[model]"
+$ pip install "pymilvus[model]"
 ```
 
 Generate vector embeddings with default model. Milvus expects data to be inserted organized as a list of dictionaries, where each dictionary represents a data record, termed as an entity. 

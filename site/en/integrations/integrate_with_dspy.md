@@ -28,7 +28,7 @@ Optimizer: Optimizers in DSPy fine-tune the parameters of DSPy programs, such as
 ## Why Milvus in DSPy
 DSPy is a powerful programming framework that boosts RAG applications. Such application needs to retrieve useful information to enhance answer quality, which needs vector database. Milvus is a well-known open-source vector database to improve performance and scalability. With MilvusRM, a retriever module in DSPy, integrating Milvus becomes seamless. Now, developers can easily define and optimize RAG programs using DSPy, taking advantage of Milvus' strong vector search capabilities. This collaboration makes RAG applications more efficient and scalable, combining DSPy's programming capabilities with Milvus' search features.
 
-### Examples
+## Examples
 Now, let's walk through a quick example to demonstrate how to leverage Milvus in DSPy for optimizing a RAG application.
 
 ### Prerequisites
