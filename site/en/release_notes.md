@@ -13,7 +13,7 @@ Release date: June 18, 2024
 
 | Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
 |----------------|--------------------| --------------------| --------------------|
-| 2.4.5          | 2.4.3              | 2.4.1               | 2.4.3               |
+| 2.4.5          | 2.4.4              | 2.4.1               | 2.4.3               |
 
 The release of Milvus 2.4.5 introduces several improvements and bug fixes to enhance performance, stability, and functionality. Milvus 2.4.5 simplifies sparse, float16, and bfloat16 vector search with auto-indexing, speeds up searches, deletions, and compactions with Bloom filter optimizations, and tackles data management through faster loading times and import L0 segment support. It also introduces the sparse HNSW index for efficient high-dimensional sparse data search, enhances the RESTful API with sparse float vector support, and fixes critical bugs for better stability.
 
