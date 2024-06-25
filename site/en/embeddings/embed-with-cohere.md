@@ -2,7 +2,7 @@
 id: embed-with-cohere.md
 order: 9
 summary: This article describes how to use the CohereEmbeddingFunction to encode documents and queries using the Cohere embedding model.
-title: Cohere
+title: Embed Cohere
 ---
 
 # Cohere
@@ -29,17 +29,17 @@ cohere_ef = CohereEmbeddingFunction(
 )
 ```
 
-__Parameters__:
+**Parameters**:
 
-- `model_name` (*string*)
-  
+- `model_name` (_string_)
+
   The name of the Cohere embedding model to use for encoding. You can specify any of the available Cohere embedding model names, for example, `embed-english-v3.0`, `embed-multilingual-v3.0`, etc. If you leave this parameter unspecified, `embed-english-light-v3.0` will be used. For a list of available models, refer to [Embed](https://docs.cohere.com/docs/models#embed).
 
-- `api_key` (*string*)
-  
+- `api_key` (_string_)
+
   The API key for accessing the Cohere API.
 
-- `input_type` (*string*)
+- `input_type` (_string_)
 
   The type of input passed to the model. Required for embedding models v3 and higher.
 
@@ -48,7 +48,7 @@ __Parameters__:
   - `"classification"`: Used for embeddings passed through a text classifier.
   - `"clustering"`: Used for the embeddings run through a clustering algorithm.
 
-- `embedding_types` (*List[str]*)
+- `embedding_types` (_List[str]_)
 
   The type of embeddings you want to get back. Not required and default is None, which returns the Embed Floats response type. Currently, you can only specify a single value for this parameter. Possible values:
 
@@ -90,7 +90,7 @@ Dim: 384 (384,)
 To create embeddings for queries, use the `encode_queries()` method:
 
 ```python
-queries = ["When was artificial intelligence founded", 
+queries = ["When was artificial intelligence founded",
            "Where was Alan Turing born?"]
 
 query_embeddings = cohere_ef.encode_queries(queries)
