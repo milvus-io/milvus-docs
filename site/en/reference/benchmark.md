@@ -4,35 +4,29 @@ summary: Learn about the benchmark result of Milvus.
 title: Milvus 2.2 Benchmark Test Report
 ---
 
-# Milvus 2.2 Benchmark Test Report
+# Milvus Benchmark Test Report
 
-This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out.
+This report shows the major test results of Milvus 2.2.12. It aims to provide a picture of Milvus search performance in various aspects.
 
 <div class="alert note">
   <div style="display: flex;">
       <div style="flex:0.3;">
-        <img src="https://zilliz.com/images/whitepaper/performance.png">
+        <img src="https://assets.zilliz.com/cover_27a5b74750.jpg">
+      </div>
+      <div style="flex:0.7; padding: 10px;">
+        <p>Factors that might influence Milvus performance include:</p>
+        <ul>
+          <li>Network conditions (latency, bandwidth, etc.)</li>
+          <li>Size of data (number of vectors, dimensionality, etc.)</li>
+          <li>Database configurations (index type, index parameters, etc.)</li>
+          <li>Other environmental factors (OS, hardware, etc.)</li>
+        </ul>
       </div>
   </div>
-  <div style="flex:1; padding: 10px; ">
-    <p>We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:</p>
-    <ul>
-      <li>A 2.5x reduction in search latency</li>
-      <li>A 4.5x increase in QPS</li>
-      <li>Billion-scale similarity search with little performance degradation</li>
-      <li>Linear scalability when using multiple replicas</li>
-    </ul>
+  <div style="flex:1;">
     <p>For details, welcome referring to <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">this whitepaper</a> and <a href="https://github.com/zilliztech/VectorDBBench">related benchmark test code</a>. </p>
   </div>
 </div>
-
-## Summary
-
-- Comparing with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.
-- Milvus 2.2.0 has an impressive capability to scale up and scale out:
-  - QPS increases linearly when expanding CPU cores from 8 to 32.
-  - QPS increases linearly when expanding Querynode replicas from 1 to 8.
-
 
 ## Terminology
 
@@ -74,171 +68,71 @@ This report shows the major test results of Milvus 2.2.0. It aims to provide a p
 
 All tests are performed under the following environments.
 
-### Hardware environment
+### Hardware and deployment
 
-| Hardware | Specification                             |
-| -------- | ----------------------------------------- |
-| CPU      | Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz |
-| Memory   | 16\*\32 GB RDIMM, 3200 MT/s               |
-| SSD      | SATA 6 Gbps                               |
+| Machine         | vCPUs | Memory (GB) | Milvus Index Type |
+|-----------------|-------|-------------|-------------------|
+| Amazon EC2 M6id | 16    | 64          | HNSW              |
+| Amazon EC2 M6id | 4     | 16          | DISK_ANN          |
+| Amazon EC2 M6id | 2     | 8           | HNSW              |
+| Amazon EC2 M6id | 2     | 8           | DISK_ANN          |
 
-### Software environment
+### Datasets tested
 
-|    Software   |                                Version                                |
-| ------------- | --------------------------------------------------------------------- |
-|    Milvus     | v2.2.0                                                                |
-| Milvus GO SDK | v2.2.0                                                                |
+| Datasets      | Dimensions | Data Type | Distance          | Size (vectors) |
+|---------------|------------|-----------|-------------------|----------------|
+| Cohere Medium | 768        | Float 32  | Cosine Similarity | 1 M            |
+| OpenAI Medium | 1,536      | Float 32  | Cosine Similarity | 500 K          |
+| Cohere Large  | 768        | Float 32  | Cosine Similarity | 10 M           |
+| OpenAI Large  | 1,536      | Float 32  | Cosine Similarity | 5M             |
 
-### Deployment scheme
+### Metrics
 
-- Milvus instances (standalone or cluster) are deployed via [Helm](https://milvus.io/docs/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
--  Different tests merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus clusters.
-- Unspecified configurations are identical to [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml).
-- Milvus dependencies (MinIO, Pulsar and Etcd) store data on the local SSD in each node.
-- Search requests are sent to the Milvus instances via [Milvus GO SDK](https://github.com/milvus-io/milvus-sdk-go/tree/master/tests).
+ - Throughput: A vector database’s capability to handle concurrent queries per second (QPS). Higher QPS values indicate better vector database performance.
+- Recall Rate: Vector search accuracy of a vector database. Higher recall rates correspond to more accurate vector search results. When the recall rate is:
+  - **≥ 0.95**: High Accuracy 
+  - **Between 0.9-0.95**: Medium Accuracy
+  - **＜0.95**: Low Accuracy
+- P99 Latency: The time that 99% of queries take to complete. Lower latency values indicate better vector database performance. 
 
-### Data sets
+### Evaluation Tools
 
-The test uses the open-source dataset SIFT (128 dimensions) from [ANN-Benchmarks](https://github.com/erikbern/ann-benchmarks/#data-sets).
+We utilized [VectorDBBench](https://github.com/zilliztech/VectorDBBench), an open-source benchmarking tool designed specifically for vector databases, in this performance test. VectorDBBench enables users to rigorously test and compare the performance of various vector database systems, providing valuable insights to identify the most suitable database for their specific use case. By leveraging VectorDBBench, users can base their decisions on actual performance metrics rather than marketing claims or anecdotal evidence, ensuring a more informed and reliable choice.
 
-## Test pipeline
+## Benchmarking results
 
-1. Start a Milvus instance by Helm with respective server configurations as listed in each test.
-2. Connect to the Milvus instance via Milvus GO SDK and get the corresponding test results.
-3. Create a collection.
-4. Insert 1 million SIFT vectors. Build an HNSW index and configure the index parameters by setting `M` to `8` and `efConstruction` to `200`.
-5. Load the collection.
-6. Search with different concurrent numbers with search parameters `nq=1, topk=1, ef=64`, the duration of each concurrency is at least 1 hour.
+In this performance test, we used VectorDBBench to evaluate Milvus's throughput, latency, and recall rate when it conducted a vector search. We used two large and two medium-sized datasets from OpenAI and Cohere for our evaluation. 
 
-## Test results
+### Large-size datasets tested (≥5M vectors)
 
-### Milvus 2.2.0 v.s. Milvus 2.1.0 
+- Cohere Large 10,000,000 vectors (768 dimensions, float32)
+- OpenAI Large 500,000 vectors (1,536 dimensions, float32)
 
-#### Cluster
+#### Milvus configuration
 
-<details>
-    <summary><b>Server configurations (cluster)</b></summary>
+- **Milvus-16c64g-hnsw**: Milvus with 16 vCPUs and 64G of RAM using HNSW index
+- **Milvus-4c16g-disk**: Milvus with 4 vCPUs and 16G of RAM using DISK_ANN index
 
-```yaml
-queryNode:
-  replicas: 1
-  resources:
-    limits:
-      cpu: "12.0"
-      memory: 8Gi
-    requests:
-      cpu: "12.0"
-      memory: 8Gi
-```
+#### Performance results
 
-</details>
+![Benchmarking results for large-size datasets tested (10 M vectors, 768 dimensions)](../../../assets/benchmarking-results-01.png)
 
-**Search performance**
-
-| Milvus | QPS   | RT(TP99) / ms | RT(TP50) / ms | fail/s |
-| ------ |------ |---------------|---------------|--------|
-| 2.1.0  | 6904  | 59            | 28            | 0      |
-| 2.2.0  | 10248 | 63            | 24            | 0      |
-
-![Cluster search performance](../../../assets/cluster_search_performance_210_vs_220.png)
-
-#### Standalone
-
-<details>
-    <summary><b>Server configurations (standalone)</b></summary>
-
-```yaml
-standalone:
-  replicas: 1
-  resources:
-    limits:
-      cpu: "12.0"
-      memory: 16Gi
-    requests:
-      cpu: "12.0"
-      memory: 16Gi
-```
-
-</details>
-
-**Search performance**
-
-| Milvus | QPS  | RT(TP99) / ms  | RT(TP50) / ms | fail/s |
-|------  |------|--------------- |---------------|--------|
-| 2.1.0  | 4287 | 104            | 76            | 0      |
-| 2.2.0  | 7522 | 127            | 79            | 0      |
-
-![Standalone search performance](../../../assets/standalone_search_performance_210_vs_220.png)
-
-### Milvus 2.2.0 Scale-up
-
-Expand the CPU cores in one Querynode to check the capability to scale up.
-
-<details>
-    <summary><b>Server configurations (cluster)</b></summary>
-
- ```yaml   
-queryNode:
-  replicas: 1
-  resources:
-    limits:
-      cpu: "8.0" /"12.0" /"16.0" /"32.0"
-      memory: 8Gi
-    requests:
-      cpu: "8.0" /"12.0" /"16.0" /"32.0"
-      memory: 8Gi
-```
-
-</details>
-
-**Search Performance**
-
-| CPU cores | Concurrent Number | QPS  | RT(TP99) / ms | RT(TP50) / ms | fail/s |
-| ------|------|------|---------------|---------------|--------|
-| 8 | 500 | 7153 | 127            | 83            | 0      |
-| 12 | 300 | 10248 | 63            | 24            | 0      |
-| 16 | 600 | 14135 | 85            | 42            | 0      |
-| 32 | 600 | 20281 | 63            | 28            | 0      |
-
-![Search performance by Querynode CPU cores](../../../assets/search_performance_by_querynode_cpu_cores.png)
-
-### Milvus 2.2.0 Scale-out
-
-Expand more replicas with more Querynodes to check the capability to scale out.
-
-<div class="alert note">
-
-Note: the number of Querynodes equals the `replica_number` when loading the collection.
-
-</div>
-
-<details>
-    <summary><b>Server configurations (cluster)</b></summary>
-
-```yaml
-queryNode:
-  replicas: 1 / 2 / 4 / 8      
-  resources:
-    limits:
-      cpu: "8.0"
-      memory: 8Gi
-    requests:
-      cpu: "8.0"
-      memory: 8Gi
-```
-
-</details>
+![Benchmarking results for large-size datasets tested (5M vectors, 1536 dimensions)](../../../assets/benchmarking-results-02.png)
 
 
-| Replicas | Concurrent Number | QPS  | RT(TP99) / ms | RT(TP50) / ms | fail/s |
-|------|------|------|---------------|---------------|--------|
-| 1 | 500 |  7153 | 127            | 83            | 0      |
-| 2 | 500 |  15903 | 105            | 27            | 0      |
-| 4 | 800 | 19281 | 109            | 40            | 0      |
-| 8 | 1200 | 30655 | 93            | 38            | 0      |
+### Medium-size datasets tested (<5M vectors)
 
-![Search performance by Querynode replicas](../../../assets/search_performance_by_querynode_replicas.png)
+- Cohere Medium 1,000,000 vectors (768 dimensions, float32)
+- OpenAI Medium 500,000 vectors (1,536 dimensions, float32)
 
-## What's next
+#### Milvus configuration
 
-- Try performing Milvus 2.2.0 benchmark tests on your own by referring to [this guide](https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md), except that you should instead use Milvus 2.2 and Pymilvus 2.2 in this guide.
+- **Milvus-2c8g-hnsw**: Milvus with 2 vCPUs and 8G of RAM using HNSW index
+- **Milvus-2c8g-disk**: Milvus with 2 vCPUs and 8G of RAM using DISK_ANN index
+
+
+#### Performance results
+
+![Benchmarking results for medium-size datasets tested (1M vectors, 768 dimensions)](../../../assets/benchmarking-results-03.png)
+
+![Benchmarking results for medium-size datasets tested (500K vectors, 1536 dimensions)](../../../assets/benchmarking-results-04.png)
