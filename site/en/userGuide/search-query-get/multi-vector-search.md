@@ -86,7 +86,7 @@ collection.insert(entities)
 
 ## Step 1: Create Multiple AnnSearchRequest Instances
 
-A multi-vector search uses the `hybrid_search()` API to perform multiple ANN search requests in a single call. Each `AnnSearchRequest` represents a single search request on a specific vector field.
+A hybrid search uses the `hybrid_search()` API to perform multiple ANN search requests in a single call. Each `AnnSearchRequest` represents a single search request on a specific vector field.
 
 The following example creates two `AnnSearchRequest` instances to perform individual similarity searches on two vector fields.
 
