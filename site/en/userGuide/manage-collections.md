@@ -265,7 +265,7 @@ schema = MilvusClient.create_schema(
 
 # 3.2. Add fields to schema
 schema.add_field(field_name="my_id", datatype=DataType.INT64, is_primary=True)
-schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=768)
 ```
 
 ```java
@@ -288,7 +288,7 @@ schema.addField(AddFieldReq.builder()
 schema.addField(AddFieldReq.builder()
     .fieldName("my_vector")
     .dataType(DataType.FloatVector)
-    .dimension(5)
+    .dimension(768)
     .build());
 ```
 
@@ -305,7 +305,7 @@ const fields = [
     {
         name: "my_vector",
         data_type: DataType.FloatVector,
-        dim: 5
+        dim: 768
     },
 ]
 ```
