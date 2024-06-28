@@ -1,17 +1,35 @@
 ---
-id: configure_rootcoord.md
+id: configure_grpc.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure rootCoord for Milvus.
+summary: Learn how to configure grpc for Milvus.
 ---
 
-# rootCoord-related Configurations
+# grpc-related Configurations
 
-Related configuration of rootCoord, used to handle data definition language (DDL) and data control language (DCL) requests
 
-## `rootCoord.dmlChannelNum`
 
-<table id="rootCoord.dmlChannelNum">
+## `grpc.log.level`
+
+<table id="grpc.log.level">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>WARNING</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `grpc.gracefulStopTimeout`
+
+<table id="grpc.gracefulStopTimeout">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -21,54 +39,16 @@ Related configuration of rootCoord, used to handle data definition language (DDL
   <tbody>
     <tr>
       <td>
-        <li>The number of dml channels created at system startup</li>      </td>
-      <td>16</td>
+        <li>second, time to wait graceful stop finish</li>      </td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
 
 
-## `rootCoord.maxPartitionNum`
+## `grpc.client.compressionEnabled`
 
-<table id="rootCoord.maxPartitionNum">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>Maximum number of partitions in a collection</li>      </td>
-      <td>4096</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `rootCoord.minSegmentSizeToEnableIndex`
-
-<table id="rootCoord.minSegmentSizeToEnableIndex">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>It's a threshold. When the segment size is less than this value, the segment will not be indexed</li>      </td>
-      <td>1024</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `rootCoord.enableActiveStandby`
-
-<table id="rootCoord.enableActiveStandby">
+<table id="grpc.client.compressionEnabled">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -84,85 +64,9 @@ Related configuration of rootCoord, used to handle data definition language (DDL
 </table>
 
 
-## `rootCoord.maxDatabaseNum`
+## `grpc.client.dialTimeout`
 
-<table id="rootCoord.maxDatabaseNum">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>Maximum number of database</li>      </td>
-      <td>64</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `rootCoord.maxGeneralCapacity`
-
-<table id="rootCoord.maxGeneralCapacity">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>upper limit for the sum of of product of partitionNumber and shardNumber</li>      </td>
-      <td>65536</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `rootCoord.gracefulStopTimeout`
-
-<table id="rootCoord.gracefulStopTimeout">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>seconds. force stop node without graceful stop</li>      </td>
-      <td>5</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `rootCoord.ip`
-
-<table id="rootCoord.ip">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>if not specified, use the first unicastable address</li>      </td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `rootCoord.port`
-
-<table id="rootCoord.port">
+<table id="grpc.client.dialTimeout">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -172,15 +76,15 @@ Related configuration of rootCoord, used to handle data definition language (DDL
   <tbody>
     <tr>
       <td></td>
-      <td>53100</td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>
 
 
-## `rootCoord.grpc.serverMaxSendSize`
+## `grpc.client.keepAliveTime`
 
-<table id="rootCoord.grpc.serverMaxSendSize">
+<table id="grpc.client.keepAliveTime">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -190,15 +94,15 @@ Related configuration of rootCoord, used to handle data definition language (DDL
   <tbody>
     <tr>
       <td></td>
-      <td>536870912</td>
+      <td>10000</td>
     </tr>
   </tbody>
 </table>
 
 
-## `rootCoord.grpc.serverMaxRecvSize`
+## `grpc.client.keepAliveTimeout`
 
-<table id="rootCoord.grpc.serverMaxRecvSize">
+<table id="grpc.client.keepAliveTimeout">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -208,15 +112,15 @@ Related configuration of rootCoord, used to handle data definition language (DDL
   <tbody>
     <tr>
       <td></td>
-      <td>268435456</td>
+      <td>20000</td>
     </tr>
   </tbody>
 </table>
 
 
-## `rootCoord.grpc.clientMaxSendSize`
+## `grpc.client.maxMaxAttempts`
 
-<table id="rootCoord.grpc.clientMaxSendSize">
+<table id="grpc.client.maxMaxAttempts">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -226,15 +130,15 @@ Related configuration of rootCoord, used to handle data definition language (DDL
   <tbody>
     <tr>
       <td></td>
-      <td>268435456</td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
 
 
-## `rootCoord.grpc.clientMaxRecvSize`
+## `grpc.client.initialBackoff`
 
-<table id="rootCoord.grpc.clientMaxRecvSize">
+<table id="grpc.client.initialBackoff">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -244,7 +148,79 @@ Related configuration of rootCoord, used to handle data definition language (DDL
   <tbody>
     <tr>
       <td></td>
-      <td>536870912</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `grpc.client.maxBackoff`
+
+<table id="grpc.client.maxBackoff">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `grpc.client.minResetInterval`
+
+<table id="grpc.client.minResetInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>1000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `grpc.client.maxCancelError`
+
+<table id="grpc.client.maxCancelError">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>32</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `grpc.client.minSessionCheckInterval`
+
+<table id="grpc.client.minSessionCheckInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>

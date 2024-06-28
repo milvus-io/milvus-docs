@@ -2,17 +2,39 @@
 id: configure_rocksmq.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure RocksMQ for Milvus standalone.
-title: RocksMQ-related Configurations
+summary: Learn how to configure rocksmq for Milvus.
 ---
 
-# RocksMQ-related Configurations
+# rocksmq-related Configurations
 
-This topic introduces the RocksMQ-related configurations of Milvus.
+If you want to enable kafka, needs to comment the pulsar configs
 
-RocksMQ is the underlying engine supporting Milvus standalone's reliable storage and publication/subscription of message streams. It is implemented on the basis of RocksDB.
+kafka:
 
-Under this section, you can configure message size, retention time and size, etc.
+  brokerList: 
+
+  saslUsername: 
+
+  saslPassword: 
+
+  saslMechanisms: 
+
+  securityProtocol: 
+
+  ssl:
+
+    enabled: false # whether to enable ssl mode
+
+    tlsCert:  # path to client's public key (PEM) used for authentication
+
+    tlsKey:  # path to client's private key (PEM) used for authentication
+
+    tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
+
+    tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+
+  readTimeout: 10
+
 
 
 ## `rocksmq.path`
@@ -27,12 +49,28 @@ Under this section, you can configure message size, retention time and size, etc
   <tbody>
     <tr>
       <td>
-        <li>Prefix of the key to where Milvus stores data in RocksMQ.</li>
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
-        <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>
-      </td>
+        <li>The path where the message is stored in rocksmq</li>
+        <li>please adjust in embedded Milvus: /tmp/milvus/rdb_data</li>      </td>
       <td>/var/lib/milvus/rdb_data</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `rocksmq.lrucacheratio`
+
+<table id="rocksmq.lrucacheratio">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>rocksdb cache memory ratio</li>      </td>
+      <td>0.06</td>
     </tr>
   </tbody>
 </table>
@@ -50,10 +88,8 @@ Under this section, you can configure message size, retention time and size, etc
   <tbody>
     <tr>
       <td>
-        <li>The maximum size of messages in each page in RocksMQ. Messages in RocksMQ are checked and cleared (when expired) in batch based on this parameters.</li>
-        <li>Unit: Byte</li>
-      </td>
-      <td>2147483648</td>
+        <li>64 MB, 64 * 1024 * 1024 bytes, The size of each page of messages in rocksmq</li>      </td>
+      <td>67108864</td>
     </tr>
   </tbody>
 </table>
@@ -71,10 +107,8 @@ Under this section, you can configure message size, retention time and size, etc
   <tbody>
     <tr>
       <td>
-        <li>The maximum retention time of acked messages in RocksMQ. Acked messages in RocksMQ are retained for the specified period of time and then cleared.</li>
-        <li>Unit: Minute</li>
-      </td>
-      <td>10080</td>
+        <li>3 days, 3 * 24 * 60 minutes, The retention time of the message in rocksmq.</li>      </td>
+      <td>4320</td>
     </tr>
   </tbody>
 </table>
@@ -92,13 +126,12 @@ Under this section, you can configure message size, retention time and size, etc
   <tbody>
     <tr>
       <td>
-        <li>The maximum retention size of acked messages of each topic in RocksMQ. Acked messages in each topic are cleared if their size exceed this parameter.</li>
-        <li>Unit: MB</li>
-      </td>
+        <li>8 GB, 8 * 1024 MB, The retention size of the message in rocksmq.</li>      </td>
       <td>8192</td>
     </tr>
   </tbody>
 </table>
+
 
 ## `rocksmq.compactionInterval`
 
@@ -112,17 +145,16 @@ Under this section, you can configure message size, retention time and size, etc
   <tbody>
     <tr>
       <td>
-        <li>Time interval to trigger rocksdb compaction to remove deleted data. </li>
-        <li>Unit: Second</li>
-      </td>
+        <li>1 day, trigger rocksdb compaction every day to remove deleted data</li>      </td>
       <td>86400</td>
     </tr>
   </tbody>
 </table>
 
-## `rocksmq.lrucacheratio`
 
-<table id="rocksmq.lrucacheratio">
+## `rocksmq.compressionTypes`
+
+<table id="rocksmq.compressionTypes">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -132,9 +164,10 @@ Under this section, you can configure message size, retention time and size, etc
   <tbody>
     <tr>
       <td>
-        <li>Rocksdb cache memory ratio. </li>
-      </td>
-      <td>0.06</td>
+        <li>compaction compression type, only support use 0,7. 0 means not compress, 7 will use zstd. Length of types means num of rocksdb level.</li>      </td>
+      <td>0,0,7,7,7</td>
     </tr>
   </tbody>
 </table>
+
+
