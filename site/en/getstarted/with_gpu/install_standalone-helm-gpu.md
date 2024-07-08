@@ -6,6 +6,7 @@ group: install_standalone-helm-gpu.md
 related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker.
 title: Install Milvus Standalone with GPU Support
+deprecate: true
 ---
 
 {{tab}}

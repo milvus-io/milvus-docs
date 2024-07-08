@@ -5,6 +5,7 @@ order: 1
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Milvus Operator.
 title: Install Milvus Standalone with Milvus Operator
+deprecate: true
 ---
 
 {{tab}}
