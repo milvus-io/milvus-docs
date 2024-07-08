@@ -6,6 +6,7 @@ order: 3
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with dpkg/yum.
 title: Install Milvus Standalone with dpkg/yum
+deprecate: true
 ---
 
 {{tab}}

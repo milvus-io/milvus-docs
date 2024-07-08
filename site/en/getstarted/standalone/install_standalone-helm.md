@@ -6,6 +6,7 @@ order: 2
 group: install_standalone-docker.md
 summary: Learn how to install Milvus standalone on Kubernetes.
 title: Install Milvus Standalone with Kubernetes
+deprecate: true
 ---
 
 {{tab}}
