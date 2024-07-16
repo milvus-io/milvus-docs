@@ -637,7 +637,7 @@ Milvus offers two ways for you to identify the entities to delete.
 
    <div class='alert note'>
    
-   When using filter expressions to delete entities, ensure the collection has been loadeded. Otherwise, Milvus will return an error.
+   When using filter expressions to delete entities, ensure the collection has been loaded. Otherwise, Milvus will return an error.
 
    </div>
 
