@@ -705,12 +705,6 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Amazon EC2",
-                    "id": "aws.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
                     "label": "Deploy Milvus on AWS",
                     "id": "eks.md",
                     "order": 1,
