@@ -15,9 +15,9 @@ Milvus is an AI-focused vector database tailored for efficient storage and retri
 
 Key features where local disk storage comes into play include:
 
-- **Chunk cache**: Preloads data into local disk cache for faster search.
-- **MMap**: Maps file contents directly into memory for better memory efficiency.
-- **DiskANN Index**: Requires disk storage for efficient index management.
+- [**Chunk cache**](chunk_cache.md): Preloads data into local disk cache for faster search.
+- [**MMap**](mmap.md): Maps file contents directly into memory for better memory efficiency.
+- [**DiskANN Index**](disk_index.md): Requires disk storage for efficient index management.
 
 In this article, we will focus on deploying [Milvus Distributed](install-overview.md#Milvus-Distributed) on cloud platforms, and how to configure the QueryNode to use NVMe disk storage. The following table lists the recommended machine types of various cloud providers.
 
@@ -29,7 +29,7 @@ In this article, we will focus on deploying [Milvus Distributed](install-overvie
 | Alibaba Cloud  |  i3 series   |
 | Tencent Cloud  |  IT5 series  |
 
-These machine types provide NVMe disk storage. You can use the `lst blk` command on the instances of these machine types to check if they have NVMe disk storage. If they do, you can proceed to the next step.
+These machine types provide NVMe disk storage. You can use the `lsblk` command on the instances of these machine types to check if they have NVMe disk storage. If they do, you can proceed to the next step.
 
 ```bash
 $ lsblk | grep nvme
