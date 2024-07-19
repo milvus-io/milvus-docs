@@ -43,9 +43,9 @@ We use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/mi
 Download the zip file and extract documents to the folder `milvus_docs`.
 
 
-```python
-! wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
-! unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
+```bash
+$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
+$ unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 ```
 
 We load all markdown files from the folder `milvus_docs/en/faq`. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.
