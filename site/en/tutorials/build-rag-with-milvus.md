@@ -182,7 +182,7 @@ Let's specify a frequent question about Milvus.
 
 
 ```python
-question = "How is data in milvus?"
+question = "How is data stored in milvus?"
 ```
 
 Search for the question in the collection and retrieve the semantic top-3 matches.
