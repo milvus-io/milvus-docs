@@ -239,7 +239,7 @@ my-release-milvus-datanode-5c686bd65-wxtmf      1/1     Running     0          6
 my-release-milvus-indexnode-5b9787b54-xclbx     1/1     Running     0          6m
 my-release-milvus-proxy-84f67cdb7f-pg6wf        1/1     Running     0          6m
 my-release-milvus-querynode-5bcb59f6-nhqqw      1/1     Running     0          6m
-my-release-milvus-mixcoord-fdcccfc84-9964g     1/1     Running     0          6m
+my-release-milvus-mixcoord-fdcccfc84-9964g      1/1     Running     0          6m
 my-release-minio-0                              1/1     Running     0          14m
 my-release-minio-1                              1/1     Running     0          14m
 my-release-minio-2                              1/1     Running     0          14m
