@@ -1,5 +1,5 @@
 ---
-id: cir-with-milvus.md
+id: cir_with_milvus.md
 summary: Composed Image Retrieval with Milvus
 title: Composed Image Retrieval with Milvus
 ---

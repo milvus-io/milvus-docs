@@ -1316,7 +1316,7 @@
       },
       {
         "label": "Composed Image Retrieval",
-        "id": "cir-with-milvus.md",
+        "id": "cir_with_milvus.md",
         "order": 2,
         "children": []
       },
