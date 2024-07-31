@@ -20,8 +20,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>Name of the default partition when a collection is created</li>      </td>
+      <td>        Name of the default partition when a collection is created      </td>
       <td>_default</td>
     </tr>
   </tbody>
@@ -39,8 +38,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>Name of the index when it is created with name unspecified</li>      </td>
+      <td>        Name of the index when it is created with name unspecified      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -58,8 +56,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>Entity expiration in seconds, CAUTION -1 means never expire</li>      </td>
+      <td>        Entity expiration in seconds, CAUTION -1 means never expire      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -77,8 +74,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>Index slice size in MB</li>      </td>
+      <td>        Index slice size in MB      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -96,8 +92,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>This parameter specify how many times the number of threads is the number of cores in high priority pool</li>      </td>
+      <td>        This parameter specify how many times the number of threads is the number of cores in high priority pool      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -115,8 +110,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>This parameter specify how many times the number of threads is the number of cores in middle priority pool</li>      </td>
+      <td>        This parameter specify how many times the number of threads is the number of cores in middle priority pool      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -134,8 +128,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>This parameter specify how many times the number of threads is the number of cores in low priority pool</li>      </td>
+      <td>        This parameter specify how many times the number of threads is the number of cores in low priority pool      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -153,8 +146,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>milliseconds. it represents the interval (in ms) by which the request arrival time needs to be subtracted in the case of Bounded Consistency.</li>      </td>
+      <td>        milliseconds. it represents the interval (in ms) by which the request arrival time needs to be subtracted in the case of Bounded Consistency.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -172,8 +164,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>seconds. it will force quit the server if the graceful stop process is not completed during this time.</li>      </td>
+      <td>        seconds. it will force quit the server if the graceful stop process is not completed during this time.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -191,8 +182,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>please adjust in embedded Milvus: local, available values are [local, remote, opendal], value minio is deprecated, use remote instead</li>      </td>
+      <td>        please adjust in embedded Milvus: local, available values are [local, remote, opendal], value minio is deprecated, use remote instead      </td>
       <td>remote</td>
     </tr>
   </tbody>
@@ -211,8 +201,8 @@ summary: Learn how to configure common for Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Default value: auto</li>
-        <li>Valid values: [auto, avx512, avx2, avx, sse4_2]</li>
+        <li>Default value: auto</li>      
+        <li>Valid values: [auto, avx512, avx2, avx, sse4_2]</li>      
         <li>This configuration is only used by querynode and indexnode, it selects CPU instruction set for Searching and Index-building.</li>      </td>
       <td>auto</td>
     </tr>
@@ -232,7 +222,7 @@ summary: Learn how to configure common for Milvus.
   <tbody>
     <tr>
       <td>
-        <li>The superusers will ignore some system check processes,</li>
+        <li>The superusers will ignore some system check processes,</li>      
         <li>like the old password verification when updating the credential</li>      </td>
       <td></td>
     </tr>
@@ -251,8 +241,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>default password for root user</li>      </td>
+      <td>        default password for root user      </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -270,8 +259,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>ttl value when session granting a lease to register service</li>      </td>
+      <td>        ttl value when session granting a lease to register service      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -289,8 +277,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>retry times when session sending etcd requests</li>      </td>
+      <td>        retry times when session sending etcd requests      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -308,8 +295,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>whether gather statistics for metrics locks</li>      </td>
+      <td>        whether gather statistics for metrics locks      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -327,8 +313,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>minimum milliseconds for printing durations in info level</li>      </td>
+      <td>        minimum milliseconds for printing durations in info level      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -346,8 +331,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>minimum milliseconds for printing durations in warn level</li>      </td>
+      <td>        minimum milliseconds for printing durations in warn level      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -366,8 +350,8 @@ summary: Learn how to configure common for Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Whether to disable the internal time messaging mechanism for the system. </li>
-        <li>If disabled (set to false), the system will not allow DML operations, including insertion, deletion, queries, and searches. </li>
+        <li>Whether to disable the internal time messaging mechanism for the system. </li>      
+        <li>If disabled (set to false), the system will not allow DML operations, including insertion, deletion, queries, and searches. </li>      
         <li>This helps Milvus-CDC synchronize incremental data</li>      </td>
       <td>true</td>
     </tr>
@@ -386,8 +370,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>trace request info</li>      </td>
+      <td>        trace request info      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -405,8 +388,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>bloom filter initial size</li>      </td>
+      <td>        bloom filter initial size      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -424,8 +406,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>bloom filter type, support BasicBloomFilter and BlockedBloomFilter</li>      </td>
+      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
       <td>BlockedBloomFilter</td>
     </tr>
   </tbody>
@@ -443,8 +424,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>max false positive rate for bloom filter</li>      </td>
+      <td>        max false positive rate for bloom filter      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -462,8 +442,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>batch size when to apply pk to bloom filter</li>      </td>
+      <td>        batch size when to apply pk to bloom filter      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -481,8 +460,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>if true, do clustering compaction and segment prune on partition key field</li>      </td>
+      <td>        if true, do clustering compaction and segment prune on partition key field      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -500,8 +478,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>if true, do clustering compaction and segment prune on vector field</li>      </td>
+      <td>        if true, do clustering compaction and segment prune on vector field      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -519,8 +496,7 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>if true, enable vector clustering key and vector clustering compaction</li>      </td>
+      <td>        if true, enable vector clustering key and vector clustering compaction      </td>
       <td>false</td>
     </tr>
   </tbody>
