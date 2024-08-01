@@ -1,7 +1,7 @@
 ---
-id: multimodel_rag_with_milvus.md
-summary: Hybrid Search with Milvus
-title: Hybrid Search with Milvus
+id: multimodal_rag_with_milvus.md
+summary: Multimodal RAG with Milvus
+title: Multimodal RAG with Milvus
 ---
 
 # Multimodal RAG with Milvus

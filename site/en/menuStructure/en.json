@@ -1327,8 +1327,8 @@
         "children": []
       },
       {
-        "label": "Multi-model RAG",
-        "id": "multimodel_rag_with_milvus.md",
+        "label": "Multimodal RAG",
+        "id": "multimodal_rag_with_milvus.md",
         "order": 4,
         "children": []
       },
