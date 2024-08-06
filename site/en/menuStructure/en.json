@@ -1305,6 +1305,12 @@
         "id": "integrate_with_camel.md",
         "order": 19,
         "children": []
+      },
+      {
+        "label": "Testcontainers",
+        "id": "integrate_with_testcontainers.md",
+        "order": 20,
+        "children": []
       }
     ]
   },
