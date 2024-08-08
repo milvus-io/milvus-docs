@@ -450,7 +450,7 @@ For more information on methods and parameters, refer to [createIndex](https://m
 
 Creating an index on a scalar field can improve the retrieval performance of queries on that field, which is optional but recommended for large datasets.
 
-In this example, we'll create an inverted index on the `color_coord` array field. This will allow us to speed up filtering based on this field. The inverted index demonstrates excellent overall performance, significantly outperforming raw data searches when data is not frequently accessed, and maintaining comparable performance even with frequent access and indexed columns. For more information on inverted indexes, refer to [Scalar Index](scalar_index.md#Inverted-indexing).
+In this example, we'll create an inverted index on the `color_coord` array field. This will allow us to speed up filtering based on this field. The inverted index demonstrates excellent overall performance, significantly outperforming brute force filtering using raw data when data is not frequently retrieved, and maintaining comparable performance with frequent retrieval operations. For more information on inverted indexes, refer to [Scalar Index](scalar_index.md#Inverted-indexing).
 
 <div class="multipleCode">
     <a href="#python">Python </a>
