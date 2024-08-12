@@ -13,6 +13,12 @@ This topic describes how to scale out and scale in a Milvus cluster. We assume t
 
 This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace `queryNode` with the corresponding node type in the command line.
 
+<div class="alert note">
+
+For information on how to scale a cluster with Milvus Operator, refer to [Scale a Cluster with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md).
+
+</div>
+
 ## What is horizontal scaling?
 
 Horizontal scaling includes scaling out and scaling in.

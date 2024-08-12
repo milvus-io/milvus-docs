@@ -7,7 +7,11 @@ title: Scale Dependencies
 
 Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Scaling these components can enhance Milvus's adaptability to different requirements.
 
-For Milvus Operator users, please also refer to [Manage Dependencies For Milvus Operator](manage_dependencies.md)
+<div class="alert note">
+
+For Milvus Operator users, refer to [Manage Dependencies For Milvus Operator](manage_dependencies.md).
+
+</div>
 
 ## Scale MinIO
 
@@ -151,7 +155,15 @@ helm upgrade <milvus-release> --reuse-values -f new-values.yaml milvus/milvus
 
 You can also increase the disk capacity for the Pulsar cluster by manually changing the value of `spec.resources.requests.storage` for each Pulsar bookie's Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.
 
-A Pulsar bookie pod has two types of storage: `journal` and `legers`. For the `journal` type of storage, consider using `ssd` or `gp3` as the storage class.
+A Pulsar bookie pod has two types of storage: `journal` and `legers`. For the `journal` type of storage, consider using `ssd` or `gp3` as the storage class. Here's an example to specify storageclass for pulsar journal.
+```
+pulsar:
+  bookkeeper:
+    volumes:
+      journal:
+        size: 20Gi
+        storageClassName: gp3
+```
 
 ### Add an extra Pulsar broker pod
 

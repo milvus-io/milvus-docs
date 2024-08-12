@@ -735,15 +735,21 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "GCP Layer-7 Load Balancing",
-                    "id": "gcp_layer7.md",
+                    "label": "AWS",
+                    "id": "aws_layer7.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Azure Ingress Nginx",
-                    "id": "ingress.md",
+                    "label": "GCP",
+                    "id": "gcp_layer7.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure",
+                    "id": "ingress.md",
+                    "order": 3,
                     "children": []
                   }
                 ]
@@ -755,15 +761,21 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Google Cloud Storage",
-                    "id": "gcs.md",
+                    "label": "AWS",
+                    "id": "s3.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Azure Blob Storage",
-                    "id": "abs.md",
+                    "label": "GCP",
+                    "id": "gcs.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure",
+                    "id": "abs.md",
+                    "order": 3,
                     "children": []
                   }
                 ]
@@ -1331,12 +1343,6 @@
         "label": "Image Search with Milvus",
         "id": "image_similarity_search.md",
         "order": 1,
-        "children": []
-      },
-      {
-        "label": "Composed Image Retrieval",
-        "id": "cir_with_milvus.md",
-        "order": 2,
         "children": []
       },
       {
