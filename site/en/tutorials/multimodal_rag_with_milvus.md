@@ -169,13 +169,6 @@ milvus_client.insert(
 )
 ```
 
-    DEBUG:pymilvus.milvus_client.milvus_client:Created new connection using: 7f33daeed99a4d8e8a5e28d47673ecc8
-    DEBUG:pymilvus.milvus_client.milvus_client:Successfully created collection: multimodal_rag_demo
-    DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on collection: multimodal_rag_demo
-
-
-
-
 
     {'insert_count': 900,
      'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
