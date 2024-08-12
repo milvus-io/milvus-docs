@@ -4,7 +4,7 @@ summary: Hybrid Search with Milvus
 title: Hybrid Search with Milvus
 ---
 
-# Hybrid Search with Dense and Sparse Vectors in Milvus
+# Hybrid Search with Milvus
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
