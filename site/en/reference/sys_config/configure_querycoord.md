@@ -329,7 +329,7 @@ Related configuration of queryCoord, used to manage topology and load balancing 
   <tbody>
     <tr>
       <td>        the factor of delegator overloaded memory      </td>
-      <td>0.3</td>
+      <td>0.1</td>
     </tr>
   </tbody>
 </table>
@@ -654,6 +654,24 @@ Related configuration of queryCoord, used to manage topology and load balancing 
     <tr>
       <td>        the interval of check executed flag to force to pull dist      </td>
       <td>100</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryCoord.updateCollectionLoadStatusInterval`
+
+<table id="queryCoord.updateCollectionLoadStatusInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        5m, max interval of updating collection loaded status for check health      </td>
+      <td>5</td>
     </tr>
   </tbody>
 </table>

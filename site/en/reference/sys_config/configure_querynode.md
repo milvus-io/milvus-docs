@@ -318,7 +318,7 @@ Related configuration of queryNode, used to run hybrid search between vector and
   <tbody>
     <tr>
       <td>        tmp file size for mmap chunk manager      </td>
-      <td>4</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -336,7 +336,7 @@ Related configuration of queryNode, used to run hybrid search between vector and
   <tbody>
     <tr>
       <td>        disk percentage used in mmap chunk manager      </td>
-      <td>20</td>
+      <td>50</td>
     </tr>
   </tbody>
 </table>
@@ -655,6 +655,24 @@ Related configuration of queryNode, used to run hybrid search between vector and
     <tr>
       <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
       <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.workerPooling.size`
+
+<table id="queryNode.workerPooling.size">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        the size for worker querynode client pool      </td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>

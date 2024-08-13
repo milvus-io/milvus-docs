@@ -497,6 +497,24 @@ Related configuration of proxy, used to validate client requests and reduce the 
 </table>
 
 
+## `proxy.queryNodePooling.size`
+
+<table id="proxy.queryNodePooling.size">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        the size for shardleader(querynode) client pool      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `proxy.http.enabled`
 
 <table id="proxy.http.enabled">
