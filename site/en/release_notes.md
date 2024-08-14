@@ -33,7 +33,6 @@ Milvus 2.4.8 introduced several significant improvements to the system's perform
 - Refactored compaction processes to enable persistent data storage. ([#34268](https://github.com/milvus-io/milvus/pull/34268))
 - Enabled memory-mapped file support for growing segments, improving memory management. ([#34110](https://github.com/milvus-io/milvus/pull/34110))
 - Improved access logs by adding RESTful API support, logging consistency levels, and distinguishing between system and user errors. [[#34295](https://github.com/milvus-io/milvus/pull/34295), [#34352](https://github.com/milvus-io/milvus/pull/34352), [#34396](https://github.com/milvus-io/milvus/pull/34396)]
-- Enabled the configuration of replica numbers and resource groups at the cluster, database, and collection levels, with support for dynamic modifications. [[#34561](https://github.com/milvus-io/milvus/pull/34561), [#33981](https://github.com/milvus-io/milvus/pull/33981), [#35293](https://github.com/milvus-io/milvus/pull/35293)]
 - Utilized the new `range_search_k` parameter in Knowhere to speed up range searches. ([#34709](https://github.com/milvus-io/milvus/pull/34709))
 - Applied blocked Bloom filters to enhance the speed of filter construction and querying. [[#34377](https://github.com/milvus-io/milvus/pull/34377), [#34922](https://github.com/milvus-io/milvus/pull/34922)]
 - Memory Usage Improvements: 
