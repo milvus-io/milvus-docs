@@ -27,6 +27,24 @@ summary: Learn how to configure dataCoord for Milvus.
 </table>
 
 
+## `dataCoord.channel.balanceWithRpc`
+
+<table id="dataCoord.channel.balanceWithRpc">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to enable balance with RPC, default to use etcd watch      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `dataCoord.channel.legacyVersionWithoutRPCWatch`
 
 <table id="dataCoord.channel.legacyVersionWithoutRPCWatch">
@@ -166,24 +184,6 @@ summary: Learn how to configure dataCoord for Milvus.
     <tr>
       <td>        The minimum proportion to datacoord.segment.maxSize to seal a segment. datacoord.segment.maxSize and datacoord.segment.sealProportion together determine if a segment can be sealed.      </td>
       <td>0.12</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `dataCoord.segment.sealProportionJitter`
-
-<table id="dataCoord.segment.sealProportionJitter">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        segment seal proportion jitter ratio, default value 0.1(10%), if seal proportion is 12%, with jitter=0.1, the actuall applied ratio will be 10.8~12%      </td>
-      <td>0.1</td>
     </tr>
   </tbody>
 </table>
@@ -452,42 +452,6 @@ summary: Learn how to configure dataCoord for Milvus.
         <li>Switch value to control if to enable automatic segment compaction during which data coord locates and merges compactable segments in the background.</li>      
         <li>This configuration takes effect only when dataCoord.enableCompaction is set as true.</li>      </td>
       <td>true</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `dataCoord.compaction.dropTolerance`
-
-<table id="dataCoord.compaction.dropTolerance">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Compaction task will be cleaned after finish longer than this time(in seconds)      </td>
-      <td>86400</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `dataCoord.compaction.gcInterval`
-
-<table id="dataCoord.compaction.gcInterval">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        The time interval in seconds for compaction gc      </td>
-      <td>1800</td>
     </tr>
   </tbody>
 </table>

@@ -670,7 +670,7 @@ Related configuration of queryCoord, used to manage topology and load balancing 
   </thead>
   <tbody>
     <tr>
-      <td>        5m, max interval of updating collection loaded status for check health      </td>
+      <td>        5m, max interval for updating collection loaded status      </td>
       <td>5</td>
     </tr>
   </tbody>

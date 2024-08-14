@@ -395,24 +395,6 @@ summary: Learn how to configure common for Milvus.
 </table>
 
 
-## `common.bloomFilterType`
-
-<table id="common.bloomFilterType">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
-      <td>BlockedBloomFilter</td>
-    </tr>
-  </tbody>
-</table>
-
-
 ## `common.maxBloomFalsePositive`
 
 <table id="common.maxBloomFalsePositive">
@@ -426,6 +408,24 @@ summary: Learn how to configure common for Milvus.
     <tr>
       <td>        max false positive rate for bloom filter      </td>
       <td>0.001</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.bloomFilterType`
+
+<table id="common.bloomFilterType">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
+      <td>BasicBloomFilter</td>
     </tr>
   </tbody>
 </table>

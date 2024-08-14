@@ -142,10 +142,17 @@ To configure resources for a specific component, add the component name in the f
             <li><a href="configure_datanode.md">Data node</a></li>
             <li><a href="configure_localstorage.md">Local storage</a></li>
             <li><a href="configure_log.md">Log</a></li>
-            <li><a href="configure_messagechannel.md">Message channel</a></li>
+            <li><a href="configure_msgchannel.md">Message channel</a></li>
             <li><a href="configure_common.md">Common</a></li>
-            <li><a href="configure_knowhere.md">Knowhere</a></li>
-            <li><a href="configure_quota_limits.md">Quota and Limits</a></li>
+            <li><a href="configure_gpu.md">GPU</a></li>
+            <li><a href="configure_grpc.md">GRPC</a></li>
+            <li><a href="configure_indexcoord.md">Index coord</a></li>
+            <li><a href="configure_metastore.md">Metastore</a></li>
+            <li><a href="configure_mq.md">Message Queue</a></li>
+            <li><a href="configure_nasmq.md">Nasmq</a></li>
+            <li><a href="configure_tikv.md">Tikv</a></li>
+            <li><a href="configure_trace.md">Trace</a></li>
+            <li><a href="configure_quotaandlimits.md">Quota and Limits</a></li>
         </ul>
     </td>
   </tr>

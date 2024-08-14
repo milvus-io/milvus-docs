@@ -624,24 +624,6 @@ Related configuration of queryNode, used to run hybrid search between vector and
 </table>
 
 
-## `queryNode.queryStreamBatchSize`
-
-<table id="queryNode.queryStreamBatchSize">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        return batch size of stream query      </td>
-      <td>4194304</td>
-    </tr>
-  </tbody>
-</table>
-
-
 ## `queryNode.bloomFilterApplyParallelFactor`
 
 <table id="queryNode.bloomFilterApplyParallelFactor">
@@ -655,6 +637,24 @@ Related configuration of queryNode, used to run hybrid search between vector and
     <tr>
       <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
       <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.queryStreamBatchSize`
+
+<table id="queryNode.queryStreamBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        return batch size of stream query      </td>
+      <td>4194304</td>
     </tr>
   </tbody>
 </table>

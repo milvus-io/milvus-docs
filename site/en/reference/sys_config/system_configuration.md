@@ -165,6 +165,12 @@ See [dataCoord-related Configurations](configure_datacoord.md) for detailed desc
 
 See [dataNode-related Configurations](configure_datanode.md) for detailed description for each parameter under this section.
 
+### `msgChannel`
+
+This topic introduces the message channel-related configurations of Milvus.
+
+See [msgChannel-related Configurations](configure_msgchannel.md) for detailed description for each parameter under this section.
+
 ### `log`
 
 Configures the system log output.
