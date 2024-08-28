@@ -93,7 +93,7 @@ In addition to primitive data types, Milvus supports various advanced data types
   Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see [Consistency](consistency.md).
 
 - High-throughput Data Import
-  To import a large volume of data into Milvus instead of inserting them one after another, consider using our high-throughput data import tools. For details, refer to [Prepare Source Data](prepare-source-data.md) and [Import Data](import_data.md).
+  To import a large volume of data into Milvus instead of inserting them one after another, consider using our high-throughput data import tools. For details, refer to [Prepare Source Data](prepare-source-data.md) and [Import Data](import-data.md).
 
 - Multi-tenancy Support
   Milvus has implemented a lot of features oriented to multi-tenancy scenarios, including Partition Key, Clustering Key, and more. For details, see [Multi-tenancy Strategies](multi_tenancy.md).

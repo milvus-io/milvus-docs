@@ -79,7 +79,7 @@ common:
     | ------------------ | ----------- | - |
     | `usePartitionKeyAsClusteringKey` | Specifies whether to use the partition key in collections as the clustering key.<br>Setting this to `true` indicates that the partition key is used as the clustering key.<br>You can always override this setting in a collection by explicitly setting a clustering key. | `false` |
 
-To apply the above changes to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md#Configure-Milvus-via-configuration-file) and [Configure Milvus with Milvus Operators](configure_operator.md?tab=component).
+To apply the above changes to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md) and [Configure Milvus with Milvus Operators](configure_operator.md).
 
 ## Collection Configuration
 
