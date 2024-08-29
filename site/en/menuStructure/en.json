@@ -567,6 +567,12 @@
             "id": "embed-with-cohere.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "MGTE",
+            "id": "embed-with-mgte.md",
+            "order": 9,
+            "children": []
           }
         ]
       },
