@@ -1336,6 +1336,18 @@
         "id": "integrate_with_airbyte.md",
         "order": 20,
         "children": []
+      },
+      {
+        "label": "Twelve Labs",
+        "id": "video_search_with_twelvelabs_and_milvus.md",
+        "order": 21,
+        "children": []
+      },
+      {
+        "label": "vLLM",
+        "id": "milvus_rag_with_vllm.md",
+        "order": 22,
+        "children": []
       }
     ]
   },
