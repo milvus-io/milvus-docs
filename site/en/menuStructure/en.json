@@ -1348,12 +1348,6 @@
         "id": "milvus_rag_with_vllm.md",
         "order": 22,
         "children": []
-      },
-      {
-        "label": "Llama Agent",
-        "id": "llama_agents_metadata.md",
-        "order": 23,
-        "children": []
       }
     ]
   },
