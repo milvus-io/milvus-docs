@@ -1752,11 +1752,11 @@ $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
 # }
 ```
 
-### Load a collection partially (Public Review)
+### Load a collection partially (Public Preview)
 
 <div class="alert note">
 
-This feature is currently in public review. The API and functionality may change in the future.
+This feature is currently in public preview. The API and functionality may change in the future.
 
 </div>
 
