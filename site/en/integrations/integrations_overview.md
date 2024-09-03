@@ -36,4 +36,4 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Airbyte & Milvus: Open-Source Data Movement Infrastructure](integrate_with_airbyte.md) | Data Connection | Milvus, Airbyte |
 | [Advanced Video Search: Leveraging Twelve Labs and Milvus for Semantic Retrieval](video_search_with_twelvelabs_and_milvus.md) | Semantic Search | Milvus, Twelve Labs |
 | [Building RAG with Milvus, vLLM, and Llama 3.1](milvus_rag_with_vllm.md) | RAG | Milvus, vLLM, LlamaIndex |
-| [Multi-agent Systems with Mistral AI, Milvus and Llama-agents](llama_agents_metadata.md) | Agent | Milvus, LlamaIndex |
+| [Multi-agent Systems with Mistral AI, Milvus and Llama-agents](llama_agents_metadata.md) | Agent | Milvus, Mistral AI, LlamaIndex |
