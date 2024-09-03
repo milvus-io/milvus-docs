@@ -598,15 +598,3 @@ print(result)
 
 In this notebook, you have seen how you can use llama-agents to perform different actions by calling appropriate tools. By using Mistral Large in combination with Mistral Nemo, we demonstrated how to effectively orchestrate intelligent, resource-efficient systems by leveraging the strengths of different LLMs. We saw that the Agent could pick the collection containing the data requested by the user. 
 
-
-## ⭐️ Github
-We hope you liked this tutorial showcasing how to llama-agents with Milvus and Mistral
-If you liked it and our project, please give us a star on [Github](https://github.com/milvus-io/milvus)! ⭐
-
-![unknown.png](../../../assets/39e0b5d3-83ce-41d6-9939-df14a7b771f5.png)
-
-
-## 🤝 Add me on Linkedin!
-If you have some questions related to Milvus, GenAI, etc, I am Stephen Batifol, you can add me on [LinkedIn](https://www.linkedin.com/in/stephen-batifol/) and I'll gladly help you. 
-
-![unknown.png](../../../assets/50e9e760-3ccb-4407-9232-f5f9df472ed3.png)
