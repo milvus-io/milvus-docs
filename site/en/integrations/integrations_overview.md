@@ -1,5 +1,5 @@
 ---
-id: intgrations_overview.md
+id: integrations_overview.md
 summary: This page provides a list of tutorials for you to interact with Milvus and third-party tools.
 title: Integrations Overview
 ---
