@@ -26,7 +26,7 @@ from pymilvus.model.dense import JinaEmbeddingFunction
 jina_ef = JinaEmbeddingFunction(
     model_name="jina-embeddings-v3", # Defaults to `jina-embeddings-v3`
     api_key=JINAAI_API_KEY, # Provide your Jina AI API key
-    task="retrieval.passage",
+    task="retrieval.passage", # Specify the task
     dimensions=1024, # Defaults to 1024
 )
 ```
@@ -55,7 +55,9 @@ __Parameters__:
 
   The number of dimensions the resulting output embeddings should have. Defaults to 1024. Only supported for embedding models v3 and higher. 
 
-To create embeddings for documents, use the `encode_documents()` method:
+To create embeddings for documents, use the `encode_documents()` method. This method is designed for documents embeddings in asymmetric retrieval tasks, such as indexing documents for search or recommendation tasks. This method uses `retrieval.passage` as the task.
+
+```python:
 
 ```python
 docs = [
@@ -75,18 +77,18 @@ print("Dim:", jina_ef.dim, docs_embeddings[0].shape)
 The expected output is similar to the following:
 
 ```python
-Embeddings: [array([9.80653837e-02, -8.54787454e-02,  7.40123838e-02,  1.35843819e-02,
-       -2.19967533e-02,  1.33830833e-03, -3.48760746e-02, -3.10385060e-02,
-       -3.29966731e-02,  4.74663125e-03,  3.71544659e-02,  3.54884677e-02,
-        8.19305144e-03,  5.87815717e-02, -6.96594734e-03, -1.80472117e-02,
+Embeddings: [array([9.80641991e-02, -8.51697400e-02,  7.36531913e-02,  1.42558888e-02,
+       -2.23589484e-02,  1.68494112e-03, -3.50753777e-02, -3.11530549e-02,
+       -3.26012149e-02,  5.04568312e-03,  3.69836427e-02,  3.48948985e-02,
+        8.19722563e-03,  5.88679723e-02, -6.71099266e-03, -1.82369724e-02,
 ...
-        2.46419664e-02,  3.45800668e-02, -1.69200692e-02, -9.93125699e-03,
-       -2.75502075e-03, -8.65739491e-03, -1.19673612e-03,  6.19480573e-03,
-       -1.12194521e-02, -3.99678349e-02,  3.19652334e-02, -1.26290624e-03])]
+        2.48654783e-02,  3.43279652e-02, -1.66154150e-02, -9.90478322e-03,
+       -2.96043139e-03, -8.57473817e-03, -7.39028037e-04,  6.25024503e-03,
+       -1.08831357e-02, -4.00776342e-02,  3.25369164e-02, -1.42691191e-03])]
 Dim: 1024 (1024,)
 ```
 
-To create embeddings for queries, use the `encode_queries()` method:
+To create embeddings for queries, use the `encode_queries()` method. This method is designed for query embeddings in asymmetric retrieval tasks, such as search queries or questions. This method uses `retrieval.query` as the task.
 
 ```python
 queries = ["When was artificial intelligence founded", 
@@ -101,13 +103,41 @@ print("Dim", jina_ef.dim, query_embeddings[0].shape)
 The expected output is similar to the following:
 
 ```python
-Embeddings: [array([1.56808674e-01, -1.09599777e-01,  7.72696063e-02,  4.67760377e-02,
-        1.53733594e-02, -7.59832468e-03, -4.85197157e-02, -5.92403952e-03,
-       -6.97960034e-02, -7.70699885e-03,  2.15125885e-02,  6.11681007e-02,
-       -2.92598619e-03,  4.61817719e-02, -4.55581546e-02, -2.96330396e-02,
+Embeddings: [array([8.79201014e-03,  1.47551354e-02,  4.02722731e-02, -2.52991207e-02,
+        1.12719582e-02,  3.75947170e-02,  3.97946090e-02, -7.36681819e-02,
+       -2.17952449e-02, -1.16298944e-02, -6.83426252e-03, -5.12507409e-02,
+        5.26071340e-02,  6.75181448e-02,  3.92445624e-02, -1.40817231e-02,
 ...
-        1.55469291e-02,  1.38307717e-02, -2.73534227e-02, -3.65062617e-02,
-        2.18395051e-02,  1.39937887e-03,  4.28919913e-03, -2.25632302e-02,
-       -6.35706726e-03, -2.17475481e-02,  2.49613114e-02, -6.89568091e-03])]
+        8.81703943e-03,  4.24629413e-02, -2.32944116e-02, -2.05193572e-02,
+       -3.22035812e-02,  2.81896023e-03,  3.85326855e-02,  3.64372656e-02,
+       -1.65050142e-02, -4.26847413e-02,  2.02664156e-02, -1.72684863e-02])]
 Dim 1024 (1024,)
+```
+
+To create embeddings of inputs for similarity matching (such as STS or symmetric retrieval tasks), text classification, clustering, or reranking tasks, use the appropriate `task` parameter value when instantiating the `JinaEmbeddingFunction` class.
+
+
+```python
+from pymilvus.model.dense import JinaEmbeddingFunction
+
+jina_ef = JinaEmbeddingFunction(
+    model_name="jina-embeddings-v3", # Defaults to `jina-embeddings-v3`
+    api_key=JINA_API_KEY, # Provide your Jina AI API key
+    task="text-matching",
+    dimensions=1024, # Defaults to 1024
+)
+
+texts = [
+    "Follow the white rabbit.",  # English
+    "Sigue al conejo blanco.",  # Spanish
+    "Suis le lapin blanc.",  # French
+    "跟着白兔走。",  # Chinese
+    "اتبع الأرنب الأبيض.",  # Arabic
+    "Folge dem weißen Kaninchen.",  # German
+]
+
+embeddings = jina_ef(texts)
+
+# Compute similarities
+print(embeddings[0] @ embeddings[1].T)
 ```
