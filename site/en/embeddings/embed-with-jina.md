@@ -24,8 +24,9 @@ Then, instantiate the `JinaEmbeddingFunction`:
 from pymilvus.model.dense import JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(
-    model_name="jina-embeddings-v2-base-en", # Defaults to `jina-embeddings-v2-base-en`
-    api_key=JINAAI_API_KEY # Provide your Jina AI API key
+    model_name="jina-embeddings-v3", # Defaults to `jina-embeddings-v3`
+    api_key=JINAAI_API_KEY, # Provide your Jina AI API key
+    dimensions=512, # Output embedding dimensions
 )
 ```
 
@@ -33,11 +34,15 @@ __Parameters__:
 
 - `model_name` (*string*)
   
-  The name of the Jina AI embedding model to use for encoding. You can specify any of the available Jina AI embedding model names, for example, `jina-embeddings-v2-base-en`, `jina-embeddings-v2-small-en`, etc. If you leave this parameter unspecified, `jina-embeddings-v2-base-en` will be used. For a list of available models, refer to [Jina Embeddings](https://jina.ai/embeddings).
+  The name of the Jina AI embedding model to use for encoding. You can specify any of the available Jina AI embedding model names, for example, `jina-embeddings-v3`, `jina-embeddings-v2-base-en`, etc. If you leave this parameter unspecified, `jina-embeddings-v3` will be used. For a list of available models, refer to [Jina Embeddings](https://jina.ai/embeddings).
 
 - `api_key` (*string*)
   
   The API key for accessing the Jina AI API.
+
+- `dimensions` (*int*)
+
+  The number of dimensions the resulting output embeddings should have. Only supported in `jina-embeddings-v3`. The valid value is between 1 to 1024. We recommend to choose a value larger than 32.
 
 To create embeddings for documents, use the `encode_documents()` method:
 
@@ -67,7 +72,7 @@ Embeddings: [array([-4.88487840e-01, -4.28095880e-01,  4.90086500e-01, -1.632743
        -2.04462400e-01,  7.14229800e-01, -1.66823000e-01,  8.72551440e-01,
         5.53560140e-01,  8.92506300e-01, -2.39408610e-01, -4.22413560e-01,
        -3.19551350e-01,  5.59153850e-01,  2.44338100e-01, -8.60452100e-01])]
-Dim: 768 (768,)
+Dim: 512 (512,)
 ```
 
 To create embeddings for queries, use the `encode_queries()` method:
@@ -93,5 +98,5 @@ Embeddings: [array([-5.99164660e-01, -3.49827350e-01,  8.22405160e-01, -1.186327
        -1.84993740e-02,  9.38629150e-01,  2.74858470e-02,  1.09396360e+00,
         3.96270750e-01,  7.44445800e-01, -1.95404050e-01, -6.08383200e-01,
        -3.75076300e-01,  3.87512200e-01,  8.11889650e-01, -3.76407620e-01])]
-Dim 768 (768,)
+Dim 512 (512,)
 ```
