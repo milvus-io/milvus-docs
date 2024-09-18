@@ -55,6 +55,10 @@ __Parameters__:
 
   The number of dimensions the resulting output embeddings should have. Defaults to 1024. Only supported for embedding models v3 and higher. 
 
+- `late_chunking` (*bool*)
+
+  This parameter controls whether to use the new chunking method [Jina AI introduced last month](https://arxiv.org/abs/2409.04701) for encoding a batch of sentences. Defaults to `False`. When set to `True`, Jina AI API will concatenate all sentences in the input field and feed them as a single string to the model. Internally, the model embeds this long concatenated string and then performs late chunking, returning a list of embeddings that matches the size of the input list. 
+
 To create embeddings for documents, use the `encode_documents()` method. This method is designed for documents embeddings in asymmetric retrieval tasks, such as indexing documents for search or recommendation tasks. This method uses `retrieval.passage` as the task.
 
 ```python:
