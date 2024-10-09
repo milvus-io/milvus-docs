@@ -17,19 +17,14 @@ Release date: October 9, 2024
 
 Milvus v2.3.22 introduces several improvements and bug fixes, including:
 
-### Improvements
+### Features
 
-- Git clone with retry mechanism ([#36262](https://github.com/milvus-io/milvus/pull/36262))
-- [pipeline] list all status before uninstall helm release ([#36043](https://github.com/milvus-io/milvus/pull/36043))
-- Friendly for docker cache ([#35793](https://github.com/milvus-io/milvus/pull/35793))
-- Show pod status and delete pvc during pipeline dear down stage ([#35786](https://github.com/milvus-io/milvus/pull/35786))
-- Turnoff use_asan in ci  ([#35722](https://github.com/milvus-io/milvus/pull/35722))
+- [cherry-pick] changes to propagate traceid from client  ([#34640](https://github.com/milvus-io/milvus/pull/34640))
 
 ### Bug fixes
 
 - Fix a security vulnerability ([#36155](https://github.com/milvus-io/milvus/pull/36155))
 - Fix proxy panic after getimportstate failed ([#35541](https://github.com/milvus-io/milvus/pull/35541))
-- [cherry-pick] changes to propagate traceid from client  ([#34640](https://github.com/milvus-io/milvus/pull/34640))
 
 ## v2.3.21
 
