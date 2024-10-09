@@ -97,6 +97,7 @@ print("Dim:", embedding_fn.dim, vectors[0].shape)  # Dim: 768 (768,)
 # to demo metadata filtering later.
 data = [
     {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
+    for i in range(len(vectors))
 ]
 
 print("Data has", len(data), "entities, each with fields: ", data[0].keys())
@@ -222,7 +223,7 @@ In addition to vector search, you can also perform other types of searches:
 
 ### Query
 
-A query() is an operation that retrieves all entities matching a cretria, such as a [filter expression](https://milvus.io/docs/boolean.md) or matching some ids.
+A query() is an operation that retrieves all entities matching a criteria, such as a [filter expression](https://milvus.io/docs/boolean.md) or matching some ids.
 
 For example, retrieving all entities whose scalar field has a particular value:
 

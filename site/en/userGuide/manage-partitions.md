@@ -806,6 +806,22 @@ console.log(res)
 // 
 ```
 
+To load specified fields in one or more partitions, do as follows:
+
+```python
+client.load_partitions(
+    collection_name="quick_setup",
+    partition_names=["partitionA"],
+    load_fields=["id", "vector"],
+    skip_load_dynamic_field=True
+)
+```
+
+Note that only the fields listed in `load_fields` can be used as filtering conditions and output fields in searches and queries. You should always include the primary key in the list. The field names excluded from loading will not be available for filtering or output.
+
+You can use `skip_load_dynamic_field=True` to skip loading the dynamic field. Milvus treats the dynamic field as a single field, so all the keys in the dynamic field will be included or excluded together.
+
+
 ### Release Partitions
 
 <div class="language-python">
@@ -1025,7 +1041,7 @@ console.log(res)
 
 - __What is the maximum number of partitions that can be created?__
 
-    By default, Milvus allows a maximum of 4,096 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
+    By default, Milvus allows a maximum of 1,024 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
 
 - __How can I differentiate between partitions and partition keys?__
 
