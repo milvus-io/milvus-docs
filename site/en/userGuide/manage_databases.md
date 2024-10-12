@@ -359,7 +359,7 @@ function connectToMilvus(dbName = "default") {
   role.grant("Collection", "*", _PRIVILEGE_INSERT)
   print(role.list_grants())
   print(role.list_grant("Collection", "*"))
-  role.revoke("Global", "*", _PRIVILEGE_INSERT)
+  role.revoke("Collection", "*", _PRIVILEGE_INSERT)
   ```
 
   ```java
@@ -473,7 +473,7 @@ function connectToMilvus(dbName = "default") {
   role.grant("Collection", "*", _PRIVILEGE_INSERT)
   print(role.list_grants())
   print(role.list_grant("Collection", "*"))
-  role.revoke("Global", "*", _PRIVILEGE_INSERT)
+  role.revoke("Collection", "*", _PRIVILEGE_INSERT)
   ```
 
   ```java
@@ -565,7 +565,7 @@ function connectToMilvus(dbName = "default") {
   role.grant("Collection", "*", _PRIVILEGE_INSERT, db_name=db_name)
   print(role.list_grants(db_name=db_name))
   print(role.list_grant("Collection", "*", db_name=db_name))
-  role.revoke("Global", "*", _PRIVILEGE_INSERT, db_name=db_name)
+  role.revoke("Collection", "*", _PRIVILEGE_INSERT, db_name=db_name)
   ```
 
   ```java
