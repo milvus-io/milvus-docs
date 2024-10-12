@@ -13,7 +13,7 @@ Release Date: October 12, 2024
 
 | Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|---------------------|
-| 2.4.13         | 2.4.7              | 2.4.5            | 2.4.9               |
+| 2.4.13         | 2.4.8              | 2.4.5            | 2.4.9               |
 
 Milvus 2.4.13 introduces dynamic replica load, allowing users to adjust the number of collection replicas without needing to release and reload the collection. This version also addresses several critical bugs related to bulk importing, expression parsing, load balancing, and failure recovery. Additionally, significant improvements have been made to MMAP resource usage and import performance, enhancing overall system efficiency. We highly recommend upgrading to this release for better performance and stability.
 
