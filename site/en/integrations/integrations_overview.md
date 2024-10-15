@@ -44,5 +44,4 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Evaluation with Arize Pheonix](evaluation_with_phoenix.md) | Evaluation & Observability | Milvus, Arize Pheonix |
 | [Deploying Dify with Milvus](dify_with_milvus.md) | Ochestration | Milvus, Dify |
 | [Building a RAG System Using Langflow with Milvus](rag_with_langflow.md) | Ochestration | Milvus, Langflow |
-| [Contextual Retrieval with Milvus](contextual_retrieval_with_milvus.md) | Quickstart | Milvus |
 | [Build RAG on Arm Architecture](build_rag_on_arm.md) | RAG | Milvus, Arm |
