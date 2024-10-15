@@ -1,5 +1,5 @@
 ---
-id: contextual_retrieval_with_milvus.md
+id: build_rag_on_arm.md
 summary: In this tutorial, you learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based infrastructures. For vector storage, we utilize Zilliz Cloud, the fully-managed Milvus vector database. Zilliz Cloud is available on major cloud such as AWS, GCP and Azure. In this demo we use Zilliz Cloud deployed on AWS with Arm machines. For LLM, we use the Llama-3.1-8B model on the AWS Arm-based server CPU using llama.cpp. 
 title: Build RAG on Arm Architecture
 ---
