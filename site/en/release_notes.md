@@ -21,7 +21,7 @@ Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milv
 
 - Load original key if timestamp is MaxTimestamp ([#36935](https://github.com/milvus-io/milvus/pull/36935))
 
-## v2.4.13
+## [Deprecated] v2.4.13
 
 Release Date: October 12, 2024
 
