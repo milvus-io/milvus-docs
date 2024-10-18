@@ -1,5 +1,5 @@
 ---
-id: configure-trace.md
+id: config_jaeger_tracing.md
 title: Configure Trace
 related_key: Jaeger, Milvus, Trace
 summary: This guide provides instructions on how to configure Jaeger to collect traces for Milvus.
