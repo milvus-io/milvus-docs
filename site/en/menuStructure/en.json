@@ -1599,7 +1599,7 @@
       },
       {
         "label": "Use ColPali for Multi-Modal Retrieval",
-        "id": "use_ColPALI_with_milvus.md",
+        "id": "use_ColPali_with_milvus.md",
         "order": 7,
         "children": []
       },
