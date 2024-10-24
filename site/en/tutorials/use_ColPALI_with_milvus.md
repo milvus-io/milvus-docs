@@ -1,5 +1,5 @@
 ---
-id: use_ColPALI_with_milvus.md
+id: use_ColPali_with_milvus.md
 summary: In this notebook, we refer to this kind of multi-vector representation as "ColBERT embeddings" for generality. However, the actual model being used is the ColPali model. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPali for retrieving pages based on a given query.
 title: Use ColPali for Multi-Modal Retrieval with Milvus
 ---
