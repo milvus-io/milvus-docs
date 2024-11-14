@@ -27,7 +27,7 @@ scrape_configs:
     - targets: ['localhost:9090']
 
    # Allows ephemeral and batch jobs to expose their metrics to Prometheus 
-  - job_name: 'pushgateway'
+  - job_name: 'milvus-standalone'
     honor_labels: true
     metrics_path: /metrics
     static_configs:

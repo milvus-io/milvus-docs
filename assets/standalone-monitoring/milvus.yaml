@@ -1005,10 +1005,6 @@ trace:
     secure: true
   initTimeoutSeconds: 10 # segcore initialization timeout in seconds, preventing otlp grpc hangs forever
 
-metrics:
-  serviceMontior:
-    enabled: true
-
 #when using GPU indexing, Milvus will utilize a memory pool to avoid frequent memory allocation and deallocation.
 #here, you can set the size of the memory occupied by the memory pool, with the unit being MB.
 #note that there is a possibility of Milvus crashing when the actual memory demand exceeds the value set by maxMemSize.

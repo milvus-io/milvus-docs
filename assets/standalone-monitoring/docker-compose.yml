@@ -64,6 +64,7 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
+    user: root
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -71,11 +72,12 @@ services:
     restart: unless-stopped
     volumes:
       - ./prometheus:/etc/prometheus
-      - prom_data:/prometheus
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/prometheus:/prometheus
 
   grafana:
     image: grafana/grafana
     container_name: grafana
+    user: root
     ports:
       - 3000:3000
     restart: unless-stopped
@@ -86,9 +88,7 @@ services:
       - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/main.yml
       - ./grafana/dashboards:/var/lib/grafana/dashboards
-
-volumes:
-  prom_data:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/grafana:/var/lib/grafana
 
 networks:
   default:
