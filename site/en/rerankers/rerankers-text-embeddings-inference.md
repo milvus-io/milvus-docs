@@ -26,7 +26,7 @@ pip install --upgrade pymilvus
 pip install "pymilvus[model]"
 ```
 
-Then, instantiate the `JinaRerankFunction`:
+Then, instantiate the `TEIRerankFunction`:
 
 ```python
 from pymilvus.model.reranker import TEIRerankFunction
