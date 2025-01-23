@@ -5,9 +5,19 @@ summary: Milvus supports the deployment of open source reranker models by TEI th
 title: text-embeddings-inference(TEI) - Rerankers
 ---
 
-# Jina AI
+# text-embeddings-inference(TEI)
 
-Milvus supports [Jina AI reranker models](https://jina.ai/reranker/) through the JinaRerankFunction class. This functionality allows you to score the relevance of query-document pairs effectively.
+Text Embeddings Inference (TEI) is a comprehensive toolkit designed for efficient deployment and serving of open source text embeddings models. It enables high-performance extraction for the most popular models, including bge-reranker-large, roberta-base-go_emotions.
+
+Key Features:
+- Streamlined Deployment
+- Efficient Resource Utilization
+- Dynamic Batching
+- Optimized Inference
+- Safetensors weight loading
+- Production-Ready
+
+TEI Deployment Reference Documentation https://github.com/huggingface/text-embeddings-inference
 
 To use this feature, install the necessary dependencies:
 
