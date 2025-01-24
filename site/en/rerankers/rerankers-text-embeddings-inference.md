@@ -17,7 +17,7 @@ Key Features:
 - Safetensors weight loading
 - Production-Ready
 
-TEI Deployment Reference Documentation https://github.com/huggingface/text-embeddings-inference
+💡 **Tip:** Ensure that the TEI service is running before proceeding. TEI Deployment Reference Documentation https://github.com/huggingface/text-embeddings-inference
 
 To use this feature, install the necessary dependencies:
 
