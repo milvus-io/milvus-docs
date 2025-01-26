@@ -23,6 +23,8 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Use ColPali for Multi-Modal Retrieval with Milvus](use_ColPali_with_milvus.md) | Quickstart | vector search |
 | [Vector Visualization](vector_visualization.md) | Quickstart | vector search |
 | [Movie Recommendation with Milvus](movie_recommendation_with_milvus.md) | Recommendation System | vector search |
+| [Multimodal Retrieval with Amazon Reviews Dataset and LLVM Reranking](multimodal_retrieval_amazon_reviews.md) | Multimodal Retrieval | vector search, hybrid search |
+| [Multimodal Similarity Search on the WikiArt Dataset](multimodal_retrieval_wikiart.md) | Multimodal Retrieval | vector search, hybrid search |
 | [Funnel Search with Matryoshka Embeddings](funnel_search_with_matryoshka.md) | Quickstart | vector search |
 | [Question Answering System](question_answering_system.md) | Question Answering | vector search |
 | [Recommender System](recommendation_system.md) | Recommendation System | vector search |

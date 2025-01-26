@@ -2081,21 +2081,33 @@
         "children": []
       },
       {
+        "label": "Amazon Reviews Dataset",
+        "id": "multimodal_retrieval_amazon_reviews.md",
+        "order": 13,
+        "children": []        
+      },
+      {
+        "label": "WikiArt Dataset",
+        "id": "multimodal_retrieval_wikiart.md",
+        "order": 14,
+        "children": []
+      },
+      {
         "label": "Funnel Search with Matryoshka Embeddings",
         "id": "funnel_search_with_matryoshka.md",
-        "order": 13,
+        "order": 15,
         "children": []
       },
       {
         "label": "Quickstart with Attu",
         "id": "quickstart_with_attu.md",
-        "order": 14,
+        "order": 16,
         "children": []        
       },
       {
         "label": "Use AsyncMilvusClient with asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
-        "order": 15,
+        "order": 17,
         "children": []            
       },
       {
