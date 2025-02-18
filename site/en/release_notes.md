@@ -36,6 +36,7 @@ We’re thrilled to announce the release of Milvus 2.4.22, focusing on enhanced 
 
 ### Bug fixes
 
+- Fixed an issue where imports failed due to 0 row num ([#39903](https://github.com/milvus-io/milvus/pull/39903)).
 - Fixed an issue where Checkpoint target lag metrics might leak after a collection is released ([#39842](https://github.com/milvus-io/milvus/pull/39842))
 - Fixed a potential partial partition load timeout issue ([#39834](https://github.com/milvus-io/milvus/pull/39834))
 - Fixed an issue where index mmap could be incorrectly enabled ([#39805](https://github.com/milvus-io/milvus/pull/39805))
