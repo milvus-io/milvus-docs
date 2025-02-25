@@ -144,7 +144,7 @@ import "github.com/milvus-io/milvus/client/v2/entity"​
 schema := entity.NewSchema().WithDynamicFieldEnabled(true).​
         WithField(entity.NewField().WithName("my_id").WithIsAutoID(true).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).​
         WithField(entity.NewField().WithName("my_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5)).​
-        WithField(entity.NewField().WithName("my_varchar").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512))thDim(5))​
+        WithField(entity.NewField().WithName("my_varchar").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512).WithDim(5))​
 
 ```
 
