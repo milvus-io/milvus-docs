@@ -275,7 +275,7 @@ In the multi-tenancy scenario, you can designate the scalar field related to ten
 ![Partition Key Isolation](../../../../assets/partition-key-isolation.png)
 
 As shown in the above figure, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.
-Once you have enabled Partition Key Isolation, you can include only a specific value in the Partition-key-based filter so that Milvus can restrict the search scope within the entities included in the index that match.
+Once you have enabled Partition Key Isolation, you must include only one specific value in the Partition-key-based filter so that Milvus can restrict the search scope within the entities included in the index that match.
 
 <div class="alert note">
 
@@ -351,4 +351,4 @@ curl --request POST \
 
 ```
 
-Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in [Set Partition Numbers](#Set-Partition-Numbers). Note that the Partition-Key-based filter should include only a specific Partition Key value.
+Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in [Set Partition Numbers](#Set-Partition-Numbers). Note that the Partition-Key-based filter must include only one specific Partition Key value.
