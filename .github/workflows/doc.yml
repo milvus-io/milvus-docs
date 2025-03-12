@@ -15,7 +15,6 @@ on:
       order:
         description: "Order among Sibling Docs"
         type: string
-        required: true
       outputDir:
         description: "Output Directory"
         type: string
@@ -53,8 +52,8 @@ jobs:
               -m "🔥 Start building doc pages in [ ${{ github.event.inputs.doc }} ] ..."
             node scripts/index.js \
               -m ${{ github.event.inputs.manual }} \
-              -d ${{ github.event.inputs.doc }} \
-              -o ${{ github.event.inputs.outputDir }} \
+              -d "${{ github.event.inputs.doc }}" \
+              -o "${{ github.event.inputs.outputDir }}" \
               -p ${{ github.event.inputs.order }} \
               -r
           else
@@ -62,8 +61,8 @@ jobs:
               -m "🔥 Start building doc page [ ${{ github.event.inputs.doc }} ] ..."
             node scripts/index.js \
               -m ${{ github.event.inputs.manual }} \
-              -d ${{ github.event.inputs.doc }} \
-              -o ${{ github.event.inputs.outputDir }} \
+              -d "${{ github.event.inputs.doc }}" \
+              -o "${{ github.event.inputs.outputDir }}" \
               -p ${{ github.event.inputs.order }}
           fi
       - name: create pull request
