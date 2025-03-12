@@ -10,7 +10,7 @@ module.exports = function (context, options) {
         extendCli(cli) {
             cli.command('report-to-lark')
                .description('Send messages to lark')
-               .option('-rId, --receiveId <receiveId>', 'A unique ID for the message receiver, possible types are open_id, user_id, union_id, email, chat_id', context.siteConfig.plugins.filter(plugin => plugin[0].includes('report-to-lark'))[0][1].receiveId)
+               .option('-rId, --receiveId <receiveId>', 'A unique ID for the message receiver, possible types are open_id, user_id, union_id, email, chat_id')
                .option('-m, --msg <message>', 'message')
                .action(async (options) => {
                     const receiveId = options.receiveId
