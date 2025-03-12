@@ -388,12 +388,6 @@
             "id": "drop-collection.md",
             "order": 8,
             "children": []
-          },
-          {
-            "label": "Set Collection TTL",
-            "id": "set-collection-ttl.md",
-            "order": 9,
-            "children": []
           }
         ]
       },
