@@ -39,7 +39,8 @@ jobs:
         uses: actions/checkout@v4
       - name: install dependencies
         run: cd scripts && npm install
-      - name: fetch doc by name
+      - if: ${{ github.event.inputs.recursive }} 
+        name: fetch multiple docs
         env: 
           APP_ID: ${{ secrets.APP_ID }}
           APP_SECRET: ${{ secrets.APP_SECRET }}
@@ -47,24 +48,32 @@ jobs:
           SPACE_ID: ${{ secrets.SPACE_ID }}
           FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}     
         run: |
-          if [ "${{ github.event.inputs.recursive }}" = true ]; then
+          node scripts/report.js \
+            -rId "${{ secrets.RECEIVE_ID }}"
+            -m "🔥 Start building doc pages in [ ${{ github.event.inputs.doc }} ] ..."
+          node scripts/index.js \
+            -m ${{ github.event.inputs.manual }} \
+            -d "${{ github.event.inputs.doc }}" \
+            -o "${{ github.event.inputs.outputDir }}" \
+            -p ${{ github.event.inputs.order }} \
+            -r
+      - if: ${{ !github.event.inputs.recursive }} 
+        name: fetch a single doc
+        env: 
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          FEISHU_HOST: ${{ vars.FEISHU_HOST }}
+          SPACE_ID: ${{ secrets.SPACE_ID }}
+          FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}     
+        run: |
             node scripts/report.js \
-              -m "🔥 Start building doc pages in [ ${{ github.event.inputs.doc }} ] ..."
-            node scripts/index.js \
-              -m ${{ github.event.inputs.manual }} \
-              -d "${{ github.event.inputs.doc }}" \
-              -o "${{ github.event.inputs.outputDir }}" \
-              -p ${{ github.event.inputs.order }} \
-              -r
-          else
-            node scripts/report.js \
+              -rId "${{ secrets.RECEIVE_ID }}"
               -m "🔥 Start building doc page [ ${{ github.event.inputs.doc }} ] ..."
             node scripts/index.js \
               -m ${{ github.event.inputs.manual }} \
               -d "${{ github.event.inputs.doc }}" \
               -o "${{ github.event.inputs.outputDir }}" \
               -p ${{ github.event.inputs.order }}
-          fi
       - name: create pull request
         id: cpr
         uses: peter-evans/create-pull-request@v4
@@ -83,7 +92,8 @@ jobs:
           FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}
         run: |
           node scripts/report.js \
-              -m "🔥 A PR has been ${{ steps.cpr.outputs.pull-request-operation }} at: #${{ steps.cpr.outputs.pull-request-url }}."
+            -rId "${{ secrets.RECEIVE_ID }}"
+            -m "🔥 A PR has been ${{ steps.cpr.outputs.pull-request-operation }} at: #${{ steps.cpr.outputs.pull-request-url }}."
   failure:
     needs: fetch-doc-by-name
     runs-on: ubuntu-latest
@@ -94,9 +104,10 @@ jobs:
     - name: checkout repo
       uses: actions/checkout@v4
     - name: report failure
-      run : |
-        yarn
-        npx docusaurus report-to-lark -m "🔥 Build failed! Please check the logs."
+      run: |
+        node scripts/report.js \
+          -rId "${{ secrets.RECEIVE_ID }}"
+          -m "🔥 Build failed! Please check the logs."
       env:
         APP_ID: ${{ secrets.APP_ID }}
         APP_SECRET: ${{ secrets.APP_SECRET }}
@@ -110,10 +121,13 @@ jobs:
       uses: actions/setup-node@v4.0.1
     - name: checkout repo
       uses: actions/checkout@v4
+    - name: install dependencies
+      run: cd scripts && npm install
     - name: report success
-      run : |
-        yarn
-        npx docusaurus report-to-lark -m "🔥 Build succeeded!"  
+      run: |
+        node scripts/report.js \
+          -rId "${{ secrets.RECEIVE_ID }}"
+          -m "🔥 Build succeeds!"
       env:
         APP_ID: ${{ secrets.APP_ID }}
         APP_SECRET: ${{ secrets.APP_SECRET }}
