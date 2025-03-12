@@ -76,29 +76,10 @@ knowledge_base = PDFUrlKnowledgeBase(
 knowledge_base.load(recreate=False)  # Comment out after first run
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #000080; text-decoration-color: #000080">INFO    </span> Creating collection                                                                                       
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #000080; text-decoration-color: #000080">INFO    </span> Loading knowledge base                                                                                    
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #000080; text-decoration-color: #000080">INFO    </span> Reading: <span style="color: #0000ff; text-decoration-color: #0000ff; text-decoration: underline">https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf</span>                                      
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #000080; text-decoration-color: #000080">INFO    </span> Added <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span> documents to knowledge base                                                                       
-</pre>
-
-
+    INFO    Creating
+    INFO    Loading knowledge  
+    INFO    Reading: https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf       
+    INFO    Added documents to knowledge base                                                                             
 
 ## Use agent to response to a question
 Integrate the knowledge base into an agent, then we can ask the agent a question and get a response.

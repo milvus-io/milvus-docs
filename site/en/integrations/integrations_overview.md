@@ -64,4 +64,6 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Integrate Milvus with Phidata](integrate_with_phidata.md) | Agents | Milvus, Phidata |
 | [Building RAG with Milvus and Crawl4AI](build_RAG_with_milvus_and_crawl4ai.md) | Data Sources | Milvus, Crawl4AI |
 | [Building RAG with Milvus and Firecrawl](build_RAG_with_milvus_and_firecrawl.md) | Data Sources | Milvus, Firecrawl |
+| [Build RAG with Llama Stack with Milvus](llama_stack_with_milvus.md) | Orchestration | Milvus, Llama Stack |
+| [RAG with Milvus and LlamaIndex Async API](llamaindex_milvus_async.md) | Ochestration | Milvus, LlamaIndex |
 
