@@ -1,4 +1,4 @@
-name: "fetch lark doc by name (manual)"
+name: doc
 on: 
   workflow_dispatch:
     inputs:
