@@ -480,7 +480,7 @@ Once you've inserted data into your collection, you can perform full text search
 
 ```python
 search_params = {​
-    'params': {'drop_ratio_search': 0.2},​
+    'params': {'drop_ratio_search': 0.2},​ # Proportion of small vector values to ignore during the search
 }​
 ​
 client.search(​
@@ -499,7 +499,7 @@ import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.response.SearchResp;
 
 Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("drop_ratio_search", 0.2);
+searchParams.put("drop_ratio_search", 0.2); // Proportion of small vector values to ignore during the search
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("demo")
         .data(Collections.singletonList(new EmbeddedText("whats the focus of information retrieval?")))
@@ -516,7 +516,7 @@ await client.search(
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
     limit: 3,
-    params: {'drop_ratio_search': 0.2},
+    params: {'drop_ratio_search': 0.2}, // Proportion of small vector values to ignore during the search
 )
 ```
 
@@ -537,7 +537,7 @@ curl --request POST \
     ],
     "searchParams":{
         "params":{
-            "drop_ratio_search":0.2
+            "drop_ratio_search":0.2 # Proportion of small vector values to ignore during the search
         }
     }
 }'

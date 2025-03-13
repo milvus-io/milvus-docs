@@ -246,7 +246,7 @@ index_params.add_index(​
     index_name="sparse_index",​
     index_type="SPARSE_INVERTED_INDEX",  # Index type for sparse vectors​
     metric_type="IP",  # Currently, only IP (Inner Product) is supported for sparse vectors​
-    params={"inverted_index_algo": "DAAT_MAXSCORE"},  # The ratio of small vector values to be dropped during indexing​
+    params={"inverted_index_algo": "DAAT_MAXSCORE"},  # Algorithm used for building and querying the index
 )​
 
 ```
@@ -266,7 +266,7 @@ IndexParam indexParamForDenseField = IndexParam.builder()​
         .build();​
 ​
 Map<String, Object> sparseParams = new HashMap<>();​
-sparseParams.put("inverted_index_algo": "DAAT_MAXSCORE");​
+sparseParams.put("inverted_index_algo": "DAAT_MAXSCORE");​ // Algorithm used for building and querying the index
 IndexParam indexParamForSparseField = IndexParam.builder()​
         .fieldName("sparse")​
         .indexName("sparse_index")​
