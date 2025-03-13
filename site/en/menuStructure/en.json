@@ -372,21 +372,27 @@
             "children": []
           },
           {
+            "label": "Set Collection TTL",
+            "id": "set-collection-ttl.md",
+            "order": 6,
+            "children": []
+          },
+          {
             "label": "Manage Partitions",
             "id": "manage-partitions.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Manage Aliases",
             "id": "manage-aliases.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Drop Collection",
             "id": "drop-collection.md",
-            "order": 8,
+            "order": 9,
             "children": []
           }
         ]
@@ -1880,7 +1886,7 @@
             "id": "llama_stack_with_milvus.md",
             "order": 12,
             "children": []
-          }          
+          }
         ]
       },
       {
