@@ -49,7 +49,7 @@ jobs:
           FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}     
         run: |
           node scripts/report.js \
-            -rId "${{ secrets.RECEIVE_ID }}" \
+            -r "${{ secrets.RECEIVE_ID }}" \
             -m "🔥 Start building doc pages in [ ${{ github.event.inputs.doc }} ] ..."
           node scripts/index.js \
             -m ${{ github.event.inputs.manual }} \
@@ -67,7 +67,7 @@ jobs:
           FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}     
         run: |
             node scripts/report.js \
-              -rId "${{ secrets.RECEIVE_ID }}" \
+              -r "${{ secrets.RECEIVE_ID }}" \
               -m "🔥 Start building doc page [ ${{ github.event.inputs.doc }} ] ..."
             node scripts/index.js \
               -m ${{ github.event.inputs.manual }} \
@@ -92,7 +92,7 @@ jobs:
           FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}
         run: |
           node scripts/report.js \
-            -rId "${{ secrets.RECEIVE_ID }}" \
+            -r "${{ secrets.RECEIVE_ID }}" \
             -m "🔥 A PR has been ${{ steps.cpr.outputs.pull-request-operation }} at: #${{ steps.cpr.outputs.pull-request-url }}."
   failure:
     needs: fetch-doc-by-name
@@ -106,7 +106,7 @@ jobs:
     - name: report failure
       run: |
         node scripts/report.js \
-          -rId "${{ secrets.RECEIVE_ID }}" \
+          -r "${{ secrets.RECEIVE_ID }}" \
           -m "🔥 Build failed! Please check the logs."
       env:
         APP_ID: ${{ secrets.APP_ID }}
@@ -126,7 +126,7 @@ jobs:
     - name: report success
       run: |
         node scripts/report.js \
-          -rId "${{ secrets.RECEIVE_ID }}" \
+          -r "${{ secrets.RECEIVE_ID }}" \
           -m "🔥 Build succeeds!"
       env:
         APP_ID: ${{ secrets.APP_ID }}

@@ -54,8 +54,10 @@ program
                   outputPath = path.join(outputDir, existing_files[0]);
                } else if (existing_files.length > 0 && milvusDocsGen.__is_new(page_id)) {
                   console.error(`Document ${page_id} already exists in output directory, but not recorded in the menu structure. Will skip it...`)
+                  process.exit(1);
                } else {
                   console.error(`Document ${page_id} does not exist in output directory. You need to specify an output directory.`)
+                  process.exit(1);
                }
             } else {
                console.log(`Document ${page_id} will be written to folder ${path.join(outputDir, output)}...`)
@@ -99,8 +101,10 @@ program
                   outputPath = path.join(outputDir, existing_files[0]);
                } else if (existing_files.length > 0 && milvusDocsGen.__is_new(page_id)) {
                   console.error(`Document ${page_id} already exists in output directory, but not recorded in the menu structure. Will skip it...`)
+                  process.exit(1);
                } else {
                   console.error(`Document ${page_id} does not exist in output directory. You need to specify an output directory.`)
+                  process.exit(1);
                }
             } else {
                console.log(`Document ${page_id} will be written to folder ${path.join(outputDir, output)}...`)
