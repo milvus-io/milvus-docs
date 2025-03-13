@@ -1,6 +1,6 @@
 ---
 id: full_text_search_with_milvus.md
-Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.
+summary: Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.
 title: Hybrid Search with Full Text and Semantic Search in Milvus
 ---
 
