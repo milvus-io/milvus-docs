@@ -82,6 +82,18 @@ To enable HPA in a Milvus cluster managed by the Milvus Operator, follow these s
            target:
              type: Utilization
              averageUtilization: 60
+     behavior:
+       scaleUp:
+         policies:
+           - type: Pods
+             value: 1
+             periodSeconds: 30
+       scaleDown:
+         stabilizationWindowSeconds: 300
+         policies:
+           - type: Pods
+             value: 1
+             periodSeconds: 60
    ```
 
    Replace `my-release` in `metadata.name` and `spec.scaleTargetRef.name` with your actual Milvus cluster name (e.g., `<your-release-name>-milvus-proxy-hpa` and `<your-release-name>-milvus-proxy`).
