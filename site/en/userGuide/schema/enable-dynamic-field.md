@@ -264,6 +264,103 @@ curl --request POST \​
 
 ```
 
+### Index a scalar field in the dynamic field
+
+When you enable a dynamic field, any undefined scalar fields are stored as key-value pairs in JSON format. Milvus supports creating an index on such an undefined scalar field, effectively by building a JSON path index. Here's how it works:
+
+1. **Choose the dynamic field key** you want to index. For example, `"color"` in the example above. 
+2. **Decide on a cast type** for the values found at that key. Milvus will parse the dynamic field, extract the values under the specified key, and cast them to the type you configure.
+    - Supported `json_cast_type` values are `bool` (or `BOOL`), `double` (or `DOUBLE`), and `varchar` (or `VARCHAR`).
+    - If parsing or casting fails (for example, trying to parse a string as double), those rows will be skipped in the index.
+3. **Specify the JSON path** to that key as `json_path`. Since the dynamic field is stored as JSON, you can specify something like `"color"`, or if you have nested structures, you can specify deeper paths (e.g. `my_json["field"]["subfield"]`).
+4. **Create an INVERTED index**. Currently, only `INVERTED` type is supported for JSON path indexing.
+
+For details on parameters and considerations, refer to [Index a JSON field](use-json-fields.md).
+
+Below is an example of how to create an index on the `"color"` field:
+
+```python
+# Prepare index parameters
+index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name="color",               # Name of the "column" you see in queries (the dynamic key).
+    index_type="INVERTED",            # Currently only "INVERTED" is supported for indexing JSON fields.
+    index_name="color_index",         # Assign a name to this index.
+    params={
+        "json_path": "color",         # JSON path to the key you want to index.
+        "json_cast_type": "varchar"   # Type to which Milvus will cast the extracted values.
+    }
+)
+
+# Create the index
+client.create_index(
+    collection_name="my_dynamic_collection",
+    index_params=index_params
+)
+```
+
+```java
+import io.milvus.v2.common.IndexParam;
+
+List<IndexParam> indexes = new ArrayList<>();
+
+Map<String,Object> extraParams = new HashMap<>();
+extraParams.put("json_path", "color");
+extraParams.put("json_cast_type", "varchar");
+indexes.add(IndexParam.builder()
+        .fieldName("color")
+        .indexName("color_index")
+        .indexType(IndexParam.IndexType.INVERTED)
+        .extraParams(extraParams)
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("my_dynamic_collection")
+        .indexParams(indexes)
+        .build());
+```
+
+```javascript
+const index_params = {
+    field_name: "color",               // Name of the "column" you see in queries (the dynamic key).
+    index_type: "INVERTED",            // Currently only "INVERTED" is supported for indexing JSON fields.
+    index_name: "color_index",         // Assign a name to this index.
+    params:{
+        "json_path": "color",          // JSON path to the key you want to index.
+        "json_cast_type": "varchar"   // Type to which Milvus will cast the extracted values.
+    }
+}
+
+// Create the index
+await client.create_index({
+    collection_name: "my_dynamic_collection",
+    index_params: index_params
+});
+```
+
+```curl
+# restful
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "my_dynamic_collection",
+    "indexParams": [
+        {
+            "fieldName": "color",
+            "indexName": "color_index",
+            "indexType": "INVERTED",
+            "params": {
+                "json_path": "color",
+                "json_cast_type": "varchar"
+            }
+        }
+    ]
+}'
+```
+
 ### Query and search with dynamic field​
 
 Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the `color` field, which is not defined in the schema, by using the dynamic field.​
