@@ -14,7 +14,7 @@ Release date: March 21, 2025
 
 | Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
 |----------------|--------------------|---------------------|------------------|
-| 2.5.7          | 2.5.5              | 2.5.6               | 2.5.6            |
+| 2.5.7          | 2.5.6              | 2.5.6               | 2.5.6            |
 
 We’re excited to announce the release of Milvus 2.5.7, highlighted by the newly introduced JSON Path Index feature. This allows you to build inverted indexes on dynamic or JSON columns to significantly improve query performance. Alongside this new functionality, we've made numerous enhancements and bug fixes for better reliability, more refined error handling, and improved usability. We encourage you to upgrade or try it out, and as always, your feedback is greatly appreciated as we continue to improve Milvus!
 
