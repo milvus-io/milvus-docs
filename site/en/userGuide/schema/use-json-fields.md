@@ -44,6 +44,7 @@ Here’s how to define a collection schema that includes a JSON field:​
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -126,6 +127,24 @@ const schema = [
 
 ```
 
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName("pk").
+    WithDataType(entity.FieldTypeInt64).
+    WithIsAutoID(true),
+).WithField(entity.NewField().
+    WithName("embedding").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(3),
+).WithField(entity.NewField().
+    WithName("metadata").
+    WithDataType(entity.FieldTypeJSON),
+)
+```
+
 ```curl
 export jsonField='{
     "fieldName": "metadata",
@@ -181,6 +200,7 @@ In this example, we will create two indexes on different paths inside the JSON f
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -260,6 +280,13 @@ const indexParams = [
 
 ```
 
+```go
+jsonIndex1 := index.NewJSONPathIndex(index.Inverted, "varchar", `metadata["product_info"]["category"]`)
+jsonIndex2 := index.NewJSONPathIndex(index.Inverted, "double", `metadata["price"]`)
+indexOpt1 := milvusclient.NewCreateIndexOption("my_json_collection", "meta", jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption("my_json_collection", "meta", jsonIndex2)
+```
+
 ```curl
 # restful
 curl --request POST \
@@ -330,6 +357,7 @@ The following example creates an index on the vector field embedding, using the 
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -370,6 +398,11 @@ indexParams.push({
 ));
 ```
 
+```go
+vectorIndex := index.NewAutoIndex(entity.COSINE)
+indexOpt := milvusclient.NewCreateIndexOption("my_json_collection", "embedding", vectorIndex)
+```
+
 ```curl
 export indexParams='[
         {
@@ -389,6 +422,7 @@ Once the schema and index are defined, create a collection that includes string 
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -420,6 +454,15 @@ await client.create_collection({
 
 ```
 
+```go
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_json_collection", schema).
+        WithIndexOptions(indexOpt1, indexOpt2, indexOpt))
+    if err != nil {
+        // handler err
+    }
+}
+```
+
 ```curl
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -441,6 +484,7 @@ After creating the collection, insert entities that match the schema.
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -548,6 +592,42 @@ await client.insert({
 
 ```
 
+```go
+import (
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_json_collection").
+    WithInt64Column("pk", []int64{1, 2, 3, 4}).
+    WithFloatVectorColumn("embedding", 3, [][]float32{
+        {0.12, 0.34, 0.56},
+        {0.56, 0.78, 0.90},
+        {0.91, 0.18, 0.23},
+        {0.56, 0.38, 0.21},
+    }).WithColumns(
+    column.NewColumnJSONBytes("metadata", [][]byte{
+        []byte(`{
+        "product_info": {"category": "electronics", "brand": "BrandA"},
+        "price": 99.99,
+        "in_stock": True,
+        "tags": ["summer_sale"]
+    }`),
+        []byte(`null`),
+        []byte(`null`),
+        []byte(`"metadata": {
+        "product_info": {"category": None, "brand": "BrandB"},
+        "price": 59.99,
+        "in_stock": None
+    }`),
+    }),
+))
+if err != nil {
+    // handle err
+}
+fmt.Println(resp)
+```
+
 ```curl
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -604,6 +684,7 @@ For JSON fields that allow null values, the field will be treated as null if the
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -665,6 +746,18 @@ await client.query({
 
 ```
 
+```go
+rs, err := cli.Query(ctx, milvusclient.NewQueryOption("my_json_collection").
+    WithFilter("metadata is not null").
+    WithOutputFields("metadata", "pk"))
+if err != nil {
+    // handle error
+}
+
+fmt.Println(rs.GetColumn("pk"))
+fmt.Println(rs.GetColumn("metadata"))
+```
+
 ```curl
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
@@ -686,6 +779,7 @@ To retrieve entities where `metadata["product_info"]["category"]` is `"electroni
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -742,6 +836,18 @@ const res = await client.query({
 // }
 ```
 
+```go
+rs, err := cli.Query(ctx, milvusclient.NewQueryOption("my_json_collection").
+    WithFilter(`metadata["product_info"]["category"] == "electronics"`).
+    WithOutputFields("metadata", "pk"))
+if err != nil {
+    // handle error
+}
+
+fmt.Println(rs.GetColumn("pk"))
+fmt.Println(rs.GetColumn("metadata"))
+```
+
 ```curl
 # restful
 curl --request POST \
@@ -765,6 +871,7 @@ In addition to basic scalar field filtering, you can combine vector similarity s
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
 
@@ -831,6 +938,26 @@ await client.search({
     filter: 'metadata["category"] == "electronics" and metadata["price"] < 150',
 });
 
+```
+
+```go
+queryVector := []float32{0.3, -0.6, -0.1}
+
+annParam := index.NewCustomAnnParam()
+annParam.WithExtraParam("nprobe", 10)
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "my_json_collection", // collectionName
+    5,                    // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithOutputFields("metadata").WithAnnParam(annParam))
+if err != nil {
+    log.Fatal("failed to perform basic ANN search collection: ", err.Error())
+}
+
+for _, resultSet := range resultSets {
+    log.Println("IDs: ", resultSet.IDs)
+    log.Println("Scores: ", resultSet.Scores)
+}
 ```
 
 ```curl
