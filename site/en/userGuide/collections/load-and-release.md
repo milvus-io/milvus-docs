@@ -270,7 +270,7 @@ if err != nil {
 ```
 
 ```bash
-# REST 缺失
+# REST
 ```
 
 If you choose to load specific fields, it is worth noting that only the fields included in `load_fields` can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in `load_fields`.
