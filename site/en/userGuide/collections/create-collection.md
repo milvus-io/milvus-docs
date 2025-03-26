@@ -16,11 +16,11 @@ You can determine every aspect of a collection, including its schema, index para
 
 To create a collection, you need to
 
-- [Create schema](create-collection.md#null)
+- [Create schema](create-collection.md#Create-Schema)
 
-- [Set index parameters](create-collection.md#null) (Optional)
+- [Set index parameters](create-collection.md#Optional-Set-Index-Parameters) (Optional)
 
-- [Create collection](create-collection.md#null)
+- [Create collection](create-collection.md#Create-a-Collection)
 
 ## Create Schema
 
@@ -384,7 +384,7 @@ curl --request POST \
 }"
 ```
 
-You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation. For details on how to create indexes for an existing collection, refer to [AUTOINDEX Explained](https://zilliverse.feishu.cn/wiki/EA2twSf5oiERMDkriKScU9GInc4).
+You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation. .
 
 The following code snippet demonstrates how to create a collection without a collection, and the load status of the collection remains unloaded upon creation.
 
@@ -577,7 +577,7 @@ curl --request POST \
 
 ### Enable mmap
 
-Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. For details on mmap, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. For details on mmap, refer to [Use mmap](mmap.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
