@@ -2,7 +2,7 @@
 id: embed-with-gemini.md
 order: 2
 summary: Milvus integrates with OpenAI's models via the GeminiEmbeddingFunction class.
-title: OpenAI
+title: Gemini
 ---
 
 # Gemini
