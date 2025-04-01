@@ -85,59 +85,59 @@ In addition to primitive data types, Milvus supports various advanced data types
 
 ### Acceleration
 
-- Search Algorithms
+- Search Algorithms:
   Milvus supports a set of tunable indexing and search algorithms. For details, see [In-memory Index](index.md), [On-disk Index](disk_index.md), and [GPU Index](gpu_index.md).
 
-- Partitions and Partition Keys
+- Partitions and Partition Keys:
   Partitions are sub-divisions of a Milvus collection. You can choose a scalar field as the partition key for better search performance. For details, see [Manage Partitions](manage-partitions.md) and [Use Partition Key](use-partition-key.md).
 
-- Tunable Consistency Model
+- Tunable Consistency Model:
   Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see [Consistency](consistency.md).
 
-- High-throughput Data Import
+- High-throughput Data Import:
   To import a large volume of data into Milvus instead of inserting them one after another, consider using our high-throughput data import tools. For details, refer to [Prepare Source Data](prepare-source-data.md) and [Import Data](import-data.md).
 
-- Multi-tenancy Support
+- Multi-tenancy Support:
   Milvus has implemented a lot of features oriented to multi-tenancy scenarios, including Partition Key, Clustering Key, and more. For details, see [Multi-tenancy Strategies](multi_tenancy.md).
 
 ### Security and Authorization
 
-- Tunable Consistency Model
+- Tunable Consistency Model:
   Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see [Consistency](consistency.md).
 
-- Data Isolation and Resource Control
+- Data Isolation and Resource Control:
   For multi-tenancy scenarios, data isolation is the basic security requirement. Milvus implements several features to resolve your security concerns. For details, see [Manage Resource Groups](resource_group.md) and [Clustering Compaction](clustering-compaction.md).
 
 ### AI Integrations
 
-- Embedding Model Integrations
+- Embedding Model Integrations:
   Embedding Models convert unstructured data to their numeric representation in high-dimensional data space so that you can store them in Milvus. Currently, PyMilvus, the Python SDK, integrates several embedding models so that you can quickly prepare your data into vector embeddings. For details, see [Embedding Overview](embeddings.md).
 
-- Reranking Model Integrations
+- Reranking Model Integrations:
   In the realm of information retrieval and generative AI, a reranker is an essential tool that optimizes the order of results from initial searches. PyMilvus also integrates several reranking models to optimize the order of results returned from initial searches. For details, refer to [Rerankers Overview](rerankers-overview.md).
 
-- LangChain and other AI Tool Integrations
+- LangChain and other AI Tool Integrations:
   In the GenAI era, tools, such as LangChain, gain much attentions from application developers. As a core component, Milvus usually serves as the vector stores in such tools. To learn how to integrate Milvus in your favorite AI tools, refer to our [Integrations](integrate_with_openai.md) and [Tutorials](build-rag-with-milvus.md).
 
 ### Tools and Ecosystem
 
-- Attu
+- Attu:
   Attu is an all-in-one intuitive GUI that helps you manage Milvus and the data it stores. For details, refer to the [Attu](https://github.com/zilliztech/attu) repository.
 
-- Birdwatcher
+- Birdwatcher:
   Birdwatcher is a debugging tool for Milvus. Using it to connect to etcd, you can check the state of your Milvus system or configure it on the fly. For details, refer to [BirdWatcher](birdwatcher_overview.md).
 
-- Promethus & Grafana integrations
+- Promethus & Grafana integrations:
   Prometheus is an open-source system monitoring and alerting toolkit for Kubernetes. Grafana is an open-source visualizing stack that can connect with all data sources. You can use Promethus & Grafana as the monitoring service provider to visually monitor the performance of Milvus distributed. For details, see [Deploying Monitoring Services](monitor.md).
 
-- Milvus Backup
+- Milvus Backup:
   Milvus Backup is a tool that allows users to back up and restore Milvus data. It provides both CLI and API to fit itself into different application scenarios. For details, refer to [Milvus Backup](milvus_backup_overview.md).
 
-- Milvus Capture Data Change (CDC)
+- Milvus Capture Data Change (CDC):
   Milvus-CDC can capture and synchronize incremental data in Milvus instances and ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery. For details, refer to [Milvus CDC](milvus-cdc-overview.md).
 
-- Milvus Connectors
+- Milvus Connectors:
   Milvus has planned a set of connectors for you to seamlessly integrate Milvus with third-party tools, such as Apache Spark. Currently, you can use our Spark Connector to feed your Milvus data to Apache Spark for machine-learning processing. For details, refer to [Spark-Milvus Connector](integrate_with_spark.md).
 
-- Vector Transmission Services (VTS)
+- Vector Transmission Services (VTS):
   Milvus provides a set of tools for you to transfer your data between a Milvus instance and a bunch of data sources, including Zilliz clusters, Elasticsearch, Postgres (PgVector), and another Milvus instance. For details, refer to [VTS](https://github.com/zilliztech/vts).
