@@ -18,11 +18,14 @@ Release date: April 1, 2025
 
 We’re excited to announce the release of Milvus 2.5.8, featuring enhancements to JSON expressions, UTF-8 validation, memory usage, and balancing logic. This version also includes multiple important bug fixes to improve concurrency and data handling. We encourage you to upgrade or give it a try, and as always, your feedback helps us continually refine Milvus!
 
-### Improvements
+### Features
 
 - Support JSON `null`/`exists` expressions ([#41002](https://github.com/milvus-io/milvus/pull/41002))
-- Balance the collection with the largest row count first ([#40958](https://github.com/milvus-io/milvus/pull/40958))
 - Support parsing sparse vectors from Parquet structs in bulk inserts ([#40874](https://github.com/milvus-io/milvus/pull/40874))
+
+### Improvements
+
+- Balance the collection with the largest row count first ([#40958](https://github.com/milvus-io/milvus/pull/40958))
 - Support UTF-8 string validation during import ([#40746](https://github.com/milvus-io/milvus/pull/40746))
 - Add UTF-8 validation for all VARCHAR fields ([#40993](https://github.com/milvus-io/milvus/pull/40993))
 - Avoid re-query if hybrid search only requests the PK as output field ([#40906](https://github.com/milvus-io/milvus/pull/40906))
