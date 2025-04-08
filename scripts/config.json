@@ -64,6 +64,11 @@
                         "token": "WeYVbC63So5YT2xSV5EcHf8qn3f",
                         "type": "image",
                         "alt_text": "schema-hands-on"
+                    },
+                    {
+                        "token": "X0Ttw7v2ShGLqjb9WFVcGxYLnSf",
+                        "type": "board",
+                        "alt_text": "vector-index-anatomy"
                     }
                 ]
             }
