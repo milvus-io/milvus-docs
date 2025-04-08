@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "Alter Collection Field",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "Hands-On",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -1244,7 +1250,7 @@
             "label": "Scale with HPA",
             "id": "hpa.md",
             "order": 1,
-            "children": []            
+            "children": []
           },
           {
             "label": "Scale Dependencies",
@@ -1940,13 +1946,13 @@
             "label": "OpenAI",
             "id": "openai_agents_milvus.md",
             "order": 4,
-            "children": []            
+            "children": []
           },
           {
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
-            "children": []             
+            "children": []
           }
         ]
       },
@@ -1983,7 +1989,7 @@
             "label": "MindsDB",
             "id": "integration_with_mindsdb.md",
             "order": 4,
-            "children": []            
+            "children": []
           }
         ]
       },
