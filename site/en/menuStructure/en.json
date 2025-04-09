@@ -2119,6 +2119,12 @@
             "id": "build_RAG_with_milvus_and_feast.md",
             "order": 9,
             "children": []
+          },
+          {
+            "label": "Mistral OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
           }
         ]
       },
