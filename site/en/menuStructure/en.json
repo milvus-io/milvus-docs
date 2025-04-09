@@ -2125,6 +2125,12 @@
             "id": "mistral_ocr_with_milvus.md",
             "order": 10,
             "children": []
+          },
+          {
+            "label": "Docling",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []            
           }
         ]
       },
@@ -2252,6 +2258,12 @@
         "children": []
       },
       {
+        "label": "Text-to-Image Search with Milvus",
+        "id": "text_image_search.md",
+        "order": 16,
+        "children": []
+      },
+      {
         "label": "Explore More",
         "id": "explore-more",
         "order": 99,
@@ -2290,12 +2302,6 @@
             "label": "Text Search Engine",
             "id": "text_search_engine.md",
             "order": 10,
-            "children": []
-          },
-          {
-            "label": "Text to Image Search Engine",
-            "id": "text_image_search.md",
-            "order": 11,
             "children": []
           },
           {
