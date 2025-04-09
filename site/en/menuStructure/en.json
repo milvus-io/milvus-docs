@@ -1854,6 +1854,12 @@
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "Full-text Search",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
