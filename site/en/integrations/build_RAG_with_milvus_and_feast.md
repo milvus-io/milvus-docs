@@ -18,9 +18,10 @@ In this tutorial, we will build a Retrieval-Augmented Generation (RAG) pipeline 
 Essentially, we'll use Feast to inject documents and structured data (i.e., features) into the context of an LLM (Large Language Model) to power a RAG Application (Retrieval Augmented Generation) with Milvus as the online vector database.
 
 
-# Why [Feast](https://github.com/feast-dev/feast)? 
+# Why Feast? 
 
 Feast solves several common issues in this flow:
+
 1. **Online retrieval:** At inference time, LLMs often need access to data that isn't readily 
    available and needs to be precomputed from other data sources.
    * Feast manages deployment to a variety of online stores (e.g. Milvus, DynamoDB, Redis, Google Cloud Datastore) and 
@@ -34,24 +35,32 @@ Feast solves several common issues in this flow:
      data.
 
 We will:
+
 1. Deploy a local feature store with a **Parquet file offline store** and **Milvus online store**.
 2. Write/materialize the data (i.e., feature values) from the offline store (a parquet file) into the online store (Milvus).
 3. Serve the features using the Feast SDK with Milvus's vector search capabilities
 4. Inject the document into the LLM's context to answer questions
 
+<div class="alert note">
 
-> This tutorial is based on the official Milvus integration guide from the [Feast Repository](https://github.com/feast-dev/feast/blob/master/examples/rag/milvus-quickstart.ipynb). While we strive to keep this tutorial up-to-date, if you encounter any discrepancies, please refer to the official guide and feel free to open an issue in our repository for any necessary updates.
+This tutorial is based on the official Milvus integration guide from the [Feast Repository](https://github.com/feast-dev/feast/blob/master/examples/rag/milvus-quickstart.ipynb). While we strive to keep this tutorial up-to-date, if you encounter any discrepancies, please refer to the official guide and feel free to open an issue in our repository for any necessary updates.
+
+</div>
 
 ## Preparation
 
 ### Dependencies 
 
 
-```python
-! pip install 'feast[milvus]' openai -U -q
+```shell
+$ pip install 'feast[milvus]' openai -U -q
 ```
 
-> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
+<div class="alert note">
+
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
+
+</div>
 
 We will use OpenAI as our LLM provider. You can login to its official website and prepare the [OPENAI_API_KEY](https://platform.openai.com/api-keys) as an environment variable.
 
@@ -86,7 +95,9 @@ feature_repo/
 ### Key Configuration Files
 
 #### 1. feature_store.yaml
+
 This file configures the feature store infrastructure:
+
 ```yaml
 project: rag
 provider: local
@@ -105,18 +116,23 @@ offline_store:
 ```
 
 This configuration establishes:
+
 - Milvus as the online store for fast vector retrieval
 - File-based offline storage for historical data processing
 - Vector search capabilities with COSINE similarity
 
 #### 2. example_repo.py
+
 Contains the feature definitions for our city data, including:
+
 - Entity definitions for cities
 - Feature views for city information and embeddings
 - Schema specifications for the vector database
 
 #### 3. Data Directory
+
 Contains our pre-processed Wikipedia city data with:
+
 - City descriptions and summaries
 - Pre-computed embeddings (384-dimensional vectors)
 - Associated metadata like city names and states
