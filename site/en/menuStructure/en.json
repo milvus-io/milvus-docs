@@ -1871,9 +1871,22 @@
           },
           {
             "label": "HayStack",
-            "id": "integrate_with_haystack.md",
+            "id": "haystack",
             "order": 4,
-            "children": []
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []                
+              },
+              {
+                "label": "Full-text Search",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Kotaemon",
@@ -2093,6 +2106,12 @@
             "label": "VectorETL",
             "id": "ETL_using_vectorETL.md",
             "order": 8,
+            "children": []
+          },
+          {
+            "label": "Feast",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
             "children": []
           }
         ]
