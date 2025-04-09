@@ -34,4 +34,4 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Image Deduplication](image_deduplication_system.md) | Deduplication | vector search |
 | [Quickstart with Attu](quickstart_with_attu.md) | Quickstart | vector search |
 | [Use AsyncMilvusClient with asyncio](use-async-milvus-client-with-asyncio.md) | AsyncIO | AsyncIO, vector search |
-
+| [Text-to-Image Search with Milvus](text_image_search.md) | Semantic Search | vector search |
