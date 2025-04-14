@@ -226,35 +226,38 @@ Now let's prepare some questions with its corresponding ground truth answers. We
 
 
 ```python
+from ragas
+from ragas import EvaluationDataset
 from datasets import Dataset
 import pandas as pd
 
-question_list = [
+user_input_list = [
     "what is the hardware requirements specification if I want to build Milvus and run from source code?",
     "What is the programming language used to write Knowhere?",
     "What should be ensured before running code coverage?",
 ]
-ground_truth_list = [
+reference_list = [
     "If you want to build Milvus and run from source code, the recommended hardware requirements specification is:\n\n- 8GB of RAM\n- 50GB of free disk space.",
     "The programming language used to write Knowhere is C++.",
     "Before running code coverage, you should make sure that your code changes are covered by unit tests.",
 ]
-contexts_list = []
-answer_list = []
-for question in tqdm(question_list, desc="Answering questions"):
-    answer, contexts = my_rag.answer(question, return_retrieved_text=True)
-    contexts_list.append(contexts)
-    answer_list.append(answer)
+retrieved_contexts_list = []
+response_list = []
+
+for user_input in tqdm(user_input_list, desc="Answering questions"):
+    response, retrieved_context = my_rag.answer(user_input, return_retrieved_text=True)
+    retrieved_contexts_list.append(retrieved_context)
+    response_list.append(response)
 
 df = pd.DataFrame(
     {
-        "question": question_list,
-        "contexts": contexts_list,
-        "answer": answer_list,
-        "ground_truth": ground_truth_list,
+        "user_input": user_input_list,
+        "retrieved_contexts": retrieved_contexts_list,
+        "response": response_list,
+        "reference": reference_list,
     }
 )
-rag_results = Dataset.from_pandas(df)
+rag_results = EvaluationDataset.from_pandas(df)
 df
 ```
 
@@ -282,10 +285,10 @@ df
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>question</th>
-      <th>contexts</th>
-      <th>answer</th>
-      <th>ground_truth</th>
+      <th>user_input</th>
+      <th>retrieved_contexts</th>
+      <th>response</th>
+      <th>reference</th>
     </tr>
   </thead>
   <tbody>
@@ -325,32 +328,28 @@ Ragas provides a set of metrics that is easy to use. We take `Answer relevancy`,
 
 ```python
 from ragas import evaluate
-from ragas.metrics import (
-    answer_relevancy,
-    faithfulness,
-    context_recall,
-    context_precision,
-)
+from ragas.metrics import AnswerRelevancy, Faithfulness, ContextRecall, ContextPrecision
 
-result = evaluate(
-    rag_results,
+from ragas.llms import LangchainLLMWrapper
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4o-mini")
+evaluator_llm = LangchainLLMWrapper(llm)
+
+results = evaluate(
+    dataset=rag_results,
     metrics=[
-        answer_relevancy,
-        faithfulness,
-        context_recall,
-        context_precision,
+        AnswerRelevancy(llm=evaluator_llm),
+        Faithfulness(llm=evaluator_llm),
+        ContextRecall(llm=evaluator_llm),
+        ContextPrecision(llm=evaluator_llm),
     ],
 )
-
-result
+results
 ```
 
 
-    Evaluating:   0%|          | 0/12 [00:00<?, ?it/s]
-
-
-
-
+    Evaluating: 100%|██████████| 12/12 [00:00<?, ?it/s]
 
     {'answer_relevancy': 0.9445, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}
 
