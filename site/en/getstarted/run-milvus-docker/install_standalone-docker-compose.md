@@ -43,7 +43,7 @@ After starting up Milvus,
 
 - Containers named **milvus-standalone**, **milvus-minio**, and **milvus-etcd** are up.
   - The **milvus-etcd** container does not expose any ports to the host and maps its data to **volumes/etcd** in the current folder.
-  - The **milvus-minio** container serves ports **9090** and **9091** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.
+  - The **milvus-minio** container serves ports **9000** and **9001** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.
   - The **milvus-standalone** container serves ports **19530** locally with the default settings and maps its data to **volumes/milvus** in the current folder.
 
 You can check if the containers are up and running using the following command:
@@ -55,10 +55,10 @@ $ sudo docker-compose ps
 --------------------------------------------------------------------------------------------------------------------
 milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9001->9001/tcp
 ```
 
-You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
+You can also access Milvus WebUI at `http://127.0.0.1:9001/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
 
 ## Stop and delete Milvus
 
