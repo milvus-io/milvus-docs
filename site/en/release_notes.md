@@ -25,7 +25,7 @@ Milvus 2.5.10 delivers improved search and load performance, enhanced metrics re
 - Optimize performance for LIKE expressions ([#41222](https://github.com/milvus-io/milvus/pull/41222))
 - Optimize index format for improved load performance ([#41041](https://github.com/milvus-io/milvus/pull/41041))
 - RESTful: make the default timeout configurable ([#41225](https://github.com/milvus-io/milvus/pull/41225))
-- Enable SVE support for L2 metric computation in FP16 / NY functions (knowhere #1134)
+- Enable SVE support for L2 metric computation in FP16 / NY functions ([knowhere #1134](https://github.com/zilliztech/knowhere/pull/1134))
 
 ### Bug fixes
 
