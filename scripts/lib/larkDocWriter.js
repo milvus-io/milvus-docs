@@ -1296,6 +1296,58 @@ class larkDocWriter {
         return this.page_blocks.find(x => x['block_id'] === block_id);
     }
 
+    async __equation(element, elements, asis=false) {
+        let content = element['equation']['content'];
+        let style = element['equation']['text_element_style'];
+
+        let prev = elements[elements.indexOf(element) - 1] || null;
+        let prev_element_type = prev? prev['equation'] ? 'equation' : 'text_run' : null;
+
+        if (!(prev && prev[prev_element_type]['content'].endsWith('\n'))) content = content.trimEnd();
+
+        if (!content.match(/^\s+$/) && !asis) {
+            console.log(content)
+            if (style['inline_code']) {
+                content = this.__style_markdown(element, elements, 'inline_code', '`');
+            } else {                
+                if (style['bold']) {
+                    content = this.__style_markdown(element, elements, 'bold', '**');
+                }
+
+                if (style['italic']) {
+                    content = this.__style_markdown(element, elements, 'italic', '*');
+                }
+
+                if (style['strikethrough']) {
+                    content = this.__style_markdown(element, elements, 'strikethrough', '~~');
+                }
+
+                if ('link' in style) {
+                    const url = await this.__convert_link(decodeURIComponent(style['link']['url']))
+
+                    var prefix = [...content.matchAll(/(^\*\*|^\*|^~~)/g)]
+                    var suffix = [...content.matchAll(/(\*\*$|\*$|~~$)/g)]
+
+                    if (prefix.length > 0) {
+                        prefix = prefix[0][0]
+                    } else {
+                        prefix = ''
+                    }
+
+                    if (suffix.length > 0) {
+                        suffix = suffix[0][0]
+                    } else {
+                        suffix = ''
+                    }
+
+                    content = `${prefix}[${content.replace(prefix, '').replace(suffix, '')}](${url})${suffix}`;
+                }
+            }
+        }
+
+        return content;        
+    }
+
     async __text_run(element, elements, asis=false) {
         let content = element['text_run']['content'];
         let style = element['text_run']['text_element_style'];
@@ -1343,34 +1395,37 @@ class larkDocWriter {
     }
 
     __style_markdown(element, elements, style_name, decorator) {
-        let content = element['text_run']['content'];
-        let style = element['text_run']['text_element_style'];
+        let element_type = element['equation'] ? 'equation' : 'text_run';
+        let content = element[element_type]['content'];
+        let style = element[element_type]['text_element_style'];
 
         let prev = elements[elements.indexOf(element) - 1] || null;
+        let prev_element_type = prev? prev['equation'] ? 'equation' : 'text_run' : null;
         let next = elements[elements.indexOf(element) + 1] || null;
+        let next_element_type = next? next['equation'] ? 'equation' : 'text_run' : null;
 
         if (!content.match(/^\s+$/)) {
             // single element
-            if ((!prev || (prev && !prev['text_run']['text_element_style'][style_name])) && style[style_name] && (!next || (next && !next['text_run']['text_element_style'][style_name]))) {
+            if ((!prev || (prev && !prev[prev_element_type]['text_element_style'][style_name])) && style[style_name] && (!next || (next && !next[next_element_type]['text_element_style'][style_name]))) {
                 let prefix_spaces = content.match(/^\s*/)[0];
                 let suffix_spaces = content.match(/\s*$/)[0];
                 content = `${prefix_spaces}${decorator}${content.trim()}${decorator}${suffix_spaces}`;
             }
 
             // first element
-            if ((!prev || (prev && !prev['text_run']['text_element_style'][style_name])) && style[style_name] && next && next['text_run']['text_element_style'][style_name]) {
+            if ((!prev || (prev && !prev[prev_element_type]['text_element_style'][style_name])) && style[style_name] && next && next[next_element_type]['text_element_style'][style_name]) {
                 let prefix_spaces = content.match(/^\s*/)[0];
                 content = `${prefix_spaces}${decorator}${content.trimStart()}`;
             }
 
             // last element
-            if (prev && prev['text_run']['text_element_style'][style_name] && style[style_name] && (!next || (next && !next['text_run']['text_element_style'][style_name]))) {
+            if (prev && prev[prev_element_type]['text_element_style'][style_name] && style[style_name] && (!next || (next && !next[next_element_type]['text_element_style'][style_name]))) {
                 let suffix_spaces = content.match(/\s*$/)[0];
                 content = `${content.trimEnd()}${decorator}${suffix_spaces}`;
             }
 
             // middle element
-            if (prev && prev['text_run']['text_element_style'][style_name] && style[style_name] && next && next['text_run']['text_element_style'][style_name]) {
+            if (prev && prev[prev_element_type]['text_element_style'][style_name] && style[style_name] && next && next[next_element_type]['text_element_style'][style_name]) {
                 content = `${content}`;
             }
         }
@@ -1453,6 +1508,9 @@ class larkDocWriter {
             }
             if ('mention_doc' in element) {
                 paragraph += await this.__mention_doc(element);
+            }
+            if ('equation' in element) {
+                paragraph += await this.__equation(element, elements);
             }
         }
 
