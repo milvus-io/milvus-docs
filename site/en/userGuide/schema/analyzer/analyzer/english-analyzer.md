@@ -73,7 +73,14 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard",
+        "filter": []any{"lowercase", map[string]any{
+            "type":     "stemmer",
+            "language": "english",
+        }, map[string]any{
+            "type":       "stop",
+            "stop_words": "_english_",
+        }}}
 ```
 
 ```bash
@@ -125,7 +132,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "english"}
 ```
 
 ```bash
@@ -179,7 +186,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "english", "stop_words": []string{"a", "an", "the"}}
 ```
 
 ```bash
@@ -217,7 +224,9 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("type", "english");
+analyzerParams.put("stop_words", Arrays.asList("a", "an", "the"));
 ```
 
 ```javascript
@@ -225,7 +234,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "english", "stop_words": []string{"a", "an", "the"}}
 ```
 
 ```bash

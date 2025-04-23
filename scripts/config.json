@@ -69,6 +69,11 @@
                         "token": "No8KwR6wPhTIP6bKEqGcbBDWngc",
                         "type": "board",
                         "alt_text": "use-dense-vector"
+                    },
+                    {
+                        "token": "K2SXwCq8ThyBnGb9LxFceCk5nwe",
+                        "type": "board",
+                        "alt_text": "upsert-entities-workflow"
                     }
                 ]
             }

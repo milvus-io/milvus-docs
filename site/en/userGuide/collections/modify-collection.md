@@ -75,7 +75,6 @@ const res = await client.renameCollection({
 import (
     "context"
     "fmt"
-    "log"
 
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
@@ -83,21 +82,22 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "127.0.0.1:19530"
+milvusAddr := "localhost:19530"
 token := "root:Milvus"
 
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 if err != nil {
-    log.Fatal("failed to connect to milvus server: ", err.Error())
+    fmt.Println(err.Error())
+    // handle error
 }
+defer client.Close(ctx)
 
-defer cli.Close(ctx)
-
-err = cli.RenameCollection(ctx, milvusclient.NewRenameCollectionOption("my_collection", "my_new_collection"))
+err = client.RenameCollection(ctx, milvusclient.NewRenameCollectionOption("my_collection", "my_new_collection"))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 ```
@@ -163,31 +163,9 @@ res = await client.alterCollection({
 ```
 
 ```go
-import (
-    "context"
-    "fmt"
-    "log"
-
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/pkg/common"
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
-
-milvusAddr := "127.0.0.1:19530"
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty(common.CollectionTTLConfigKey, 60))
 if err != nil {
-    log.Fatal("failed to connect to milvus server: ", err.Error())
-}
-
-defer cli.Close(ctx)
-
-err = cli.AlterCollection(ctx, milvusclient.NewAlterCollectionOption("my_collection").WithProperty(common.CollectionTTLConfigKey, 60))
-if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 ```
@@ -265,7 +243,11 @@ client.dropCollectionProperties({
 ```
 
 ```go
-// TODO
+err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption("my_collection", common.CollectionTTLConfigKey))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash

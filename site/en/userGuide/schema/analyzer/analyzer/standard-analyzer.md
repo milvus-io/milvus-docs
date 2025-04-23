@@ -35,7 +35,7 @@ analyzer_params = {
 
 ```java
 Map<String, Object> analyzerParams = new HashMap<>();
-analyzerParams.put("type", "english");
+analyzerParams.put("tokenizer", "standard");
 analyzerParams.put("filter", Collections.singletonList("lowercase"));
 ```
 
@@ -47,7 +47,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
 ```
 
 ```bash
@@ -90,7 +90,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "standard"}
 ```
 
 ```bash
@@ -119,7 +119,7 @@ Example configuration of custom stop words:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
+    <a href="#plaintext">plaintext</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -143,8 +143,8 @@ analyzer_params = {
 }
 ```
 
-```go
-// go
+```plaintext
+analyzerParams = map[string]any{"type": "standard", "stop_words": []string{"of"}}
 ```
 
 ```bash
@@ -173,7 +173,9 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("type", "standard");
+analyzerParams.put("stop_words", Collections.singletonList("for"));
 ```
 
 ```javascript
@@ -181,7 +183,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "standard", "stop_words": []string{"for"}}
 ```
 
 ```bash
