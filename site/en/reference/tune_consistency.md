@@ -1,5 +1,5 @@
 ---
-id: consistency.md
+id: tune_consistency.md
 title: "Consistency Level"
 summary: "As a distributed vector database, Milvus offers multiple levels of consistency to ensure that each node or replica can access the same data during read and write operations. Currently, the supported levels of consistency include Strong, Bounded, Eventually, and Session, with Bounded being the default level of consistency used."
 ---

@@ -300,7 +300,7 @@
       },
       {
         "label": "Consistency Level",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
