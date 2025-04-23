@@ -97,7 +97,7 @@ export analyzerParams='{
     }'
 ```
 
-The configuration of the `standard` built-in analyzer above is equivalent to setting up a [custom analyzer](analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc) with the following parameters, where `tokenizer` and `filter` options are explicitly defined to achieve similar functionality:
+The configuration of the `standard` built-in analyzer above is equivalent to setting up a [custom analyzer](analyzer-overview.md#Custom-analyzer) with the following parameters, where `tokenizer` and `filter` options are explicitly defined to achieve similar functionality:
 
 <div class="multipleCode">
     <a href="#python">Python</a>

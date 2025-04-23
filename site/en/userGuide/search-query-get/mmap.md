@@ -76,7 +76,7 @@ queryNode:
    </tr>
 </table>
 
-To apply the above settings to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md#Configure-Milvus-via-configuration-file) and [Configure Milvus with Milvus Operators](configure_operator.md?tab=component).
+To apply the above settings to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md#Configure-Milvus-via-configuration-file) and [Configure Milvus with Milvus Operators](configure_operator.md).
 
 Sometimes, global mmap settings are not flexible when facing particular use cases. To apply alternate settings to a specific collection or its indexes, consider configuring mmap specific to a collection, a field, or an index. You need to release and load a collection before the changes to the mmap settings take effect.
 

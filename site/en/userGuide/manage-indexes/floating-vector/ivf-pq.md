@@ -44,7 +44,7 @@ The PQ process involves these key stages:
 
 1. **Compressed representation**: The final compressed representation consists of `m` indices, one from each subspace, collectively referred to as **PQ codes**. This encoding reduces the storage requirement from *D × 32* bits (assuming 32-bit floating-point numbers) to *m* × *nbits* bits, achieving substantial compression while preserving the ability to approximate vector distances.
 
-For more details on parameter tuning and optimization, refer to [Index params](ivf-pq.md#share-DTR0dzkvtoA6W3xWhxXccXlPnXc).
+For more details on parameter tuning and optimization, refer to [Index params](ivf-pq.md#Index-params).
 
 <div class="alert note">
 
@@ -88,7 +88,7 @@ The **IVF_PQ** index combines the strengths of **IVF** and **PQ** to accelerate 
 
 1. **Fine-grained comparison with PQ**: Within the selected clusters, PQ uses compressed and quantized vector representations to compute approximate distances quickly.
 
-The performance of the **IVF_PQ** index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in [Index params](ivf-pq.md#share-VLZTdDIjOoc227xopOkc51BsnWd).
+The performance of the **IVF_PQ** index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in [Index params](ivf-pq.md#Index-params).
 
 ## Build index
 
@@ -121,9 +121,9 @@ In this configuration:
 
     - `m`: Number of sub-vectors to split the vector into.
 
-    To learn more building parameters available for the `IVF_PQ` index, refer to [Index building params](ivf-pq.md#share-T3sRdR48XoUPnnxkKbzcwm3qnDf).
+    To learn more building parameters available for the `IVF_PQ` index, refer to [Index building params](ivf-pq.md#Index-building-params).
 
-Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](https://zilliverse.feishu.cn/wiki/EmcowmwYpiFbWgkmnqfcMf3knVc?from=from_copylink).
+Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
 
 ## Search on index
 
@@ -151,7 +151,7 @@ In this configuration:
 
     - `nprobe`: Number of clusters to search for.
 
-    To learn more search parameters available for the `IVF_PQ` index, refer to [Index-specific search params](ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg).
+    To learn more search parameters available for the `IVF_PQ` index, refer to [Index-specific search params](ivf-pq.md#Index-specific-search-params).
 
 ## Index params
 
@@ -159,7 +159,7 @@ This section provides an overview of the parameters used for building an index a
 
 ### Index building params
 
-The following table lists the parameters that can be configured in `params` when [building an index](ivf-pq.md#share-Yskfdwjk8oAcedxFiYbcoQd8nNg).
+The following table lists the parameters that can be configured in `params` when [building an index](ivf-pq.md#Build-index).
 
 <table>
    <tr>
@@ -193,7 +193,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](ivf-pq.md#share-WeJ2d7tzCojBMvxsZqhcccvrnke).
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](ivf-pq.md#Search-on-index).
 
 <table>
    <tr>

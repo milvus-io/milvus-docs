@@ -934,7 +934,7 @@ curl --request POST \
 
 <div class="alert note">
 
-For more information on how nullable and default value settings take effect, refer to [Applicable rules](nullable-and-default.md#share-FciZdpB0zoXmGwxMxgecYuP6nHc). 
+For more information on how nullable and default value settings take effect, refer to [Applicable rules](nullable-and-default.md#Applicable-rules). 
 
 </div>
 

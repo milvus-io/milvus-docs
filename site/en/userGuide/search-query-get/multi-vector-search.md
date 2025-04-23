@@ -251,7 +251,7 @@ During sparse vector searches, you can simplify the process of generating sparse
 
 #### Create index
 
-After defining the collection schema, it is necessary to set up the vector indexes and the similarity metrics. In this example, an index of the **AUTOINDEX** type is created for both the dense vector field `dense`, and the sparse vector field `sparse`. You can use other index types as you see fit. To learn about the types of indexes supported, see [available index types](index-vector-fields.md?tab=floating).
+After defining the collection schema, it is necessary to set up the vector indexes and the similarity metrics. In this example, an index of the **AUTOINDEX** type is created for both the dense vector field `dense`, and the sparse vector field `sparse`. You can use other index types as you see fit. To learn about the types of indexes supported, see [available index types](index-vector-fields.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>

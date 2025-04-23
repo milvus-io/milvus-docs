@@ -34,7 +34,7 @@ The performance of HNSW depends on several key parameters that control both the 
 
 - `ef`: The number of neighbors evaluated during a search. Increasing `ef` improves the likelihood of finding the nearest neighbors but slows down the search process.
 
-For details on how to adjust these settings to suit your needs, refer to [Index params](hnsw.md#share-SzXPd3FmaoxFadxW6accos8Gnjb).
+For details on how to adjust these settings to suit your needs, refer to [Index params](hnsw.md#Index-params).
 
 ## Build index
 
@@ -70,9 +70,9 @@ In this configuration:
 
     - `efConstruction`: Number of candidate neighbors considered for connection during index construction.
 
-    To learn more building parameters available for the `HNSW` index, refer to [Index building params](hnsw.md#share-NvY1dS2DJoy1bJxV6VtcPSNgnmg).
+    To learn more building parameters available for the `HNSW` index, refer to [Index building params](hnsw.md#Index-building-params).
 
-Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](https://zilliverse.feishu.cn/wiki/EmcowmwYpiFbWgkmnqfcMf3knVc?from=from_copylink).
+Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
 
 ## Search on index
 
@@ -100,7 +100,7 @@ In this configuration:
 
     - `ef`: Number of neighbors to consider during a search.
 
-    To learn more search parameters available for the `HNSW` index, refer to [Index-specific search params](hnsw.md#share-WMfpdSEkJo8jhLxLuPacdGwUnqb).
+    To learn more search parameters available for the `HNSW` index, refer to [Index-specific search params](hnsw.md#Index-specific-search-params).
 
 ## Index params
 
@@ -108,7 +108,7 @@ This section provides an overview of the parameters used for building an index a
 
 ### Index building params
 
-The following table lists the parameters that can be configured in `params` when [building an index](hnsw.md#share-XHj5dth7toPnF6xK4CTc1ZR3neh).
+The following table lists the parameters that can be configured in `params` when [building an index](hnsw.md#Build-index).
 
 <table>
    <tr>
@@ -133,7 +133,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw.md#share-C3FddJOHWoxdl9xd54scAhhVnCb).
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw.md#Search-on-index).
 
 <table>
    <tr>

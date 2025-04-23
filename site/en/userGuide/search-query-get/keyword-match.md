@@ -20,7 +20,7 @@ Milvus integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power it
 
 1. [Analyzer](analyzer-overview.md): The analyzer processes input text by tokenizing it into individual words, or tokens, and then applying filters as needed. This allows Milvus to build an index based on these tokens.
 
-1. [Indexing](https://zilliverse.feishu.cn/wiki/NDLBwtFIuihc5wkq37KchzqLnrc): After text analysis, Milvus creates an inverted index that maps each unique token to the documents containing it.
+1. [Indexing](index-explained.md): After text analysis, Milvus creates an inverted index that maps each unique token to the documents containing it.
 
 When a user performs a text match, the inverted index is used to quickly retrieve all documents containing the terms. This is much faster than scanning through each document individually.
 
@@ -568,8 +568,6 @@ curl --request POST \
 - Enabling term matching for a field triggers the creation of an inverted index, which consumes storage resources. Consider storage impact when deciding to enable this feature, as it varies based on text size, unique tokens, and the analyzer used.
 
 - Once you've defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.
-
-- Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the `run_analyzer` method to review the tokenization output. For more information, refer to [Analyzer Overview](analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT).
 
 - Escape rules in `filter` expressions:
 

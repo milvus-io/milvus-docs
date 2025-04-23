@@ -1459,6 +1459,12 @@
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Drop Users & Roles",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
               }
             ]
           },

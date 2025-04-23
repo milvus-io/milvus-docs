@@ -164,7 +164,7 @@ Milvus 2.5 introduces a new version of API which streamlines the grant operation
        <tr>
          <td><p>Compaction</p></td>
          <td><p>Manually trigger compaction</p></td>
-         <td><p><a href="v2.0.x/compact_data.md">Compact</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Compact</a></p></td>
        </tr>
        <tr>
          <td><p>RenameCollection</p></td>
@@ -211,17 +211,17 @@ Milvus 2.5 introduces a new version of API which streamlines the grant operation
          <td rowspan="3"><p>Index Privileges</p></td>
          <td><p>IndexDetail</p></td>
          <td><p>View the details of an index</p></td>
-         <td><p><a href="index-vector-fields.md?tab=floating">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+         <td><p><a href="index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
        </tr>
        <tr>
          <td><p>CreateIndex</p></td>
          <td><p>Create an index</p></td>
-         <td><p><a href="index-vector-fields.md?tab=floating">CreateIndex</a></p></td>
+         <td><p><a href="index-vector-fields.md">CreateIndex</a></p></td>
        </tr>
        <tr>
          <td><p>DropIndex</p></td>
          <td><p>Drop an index</p></td>
-         <td><p><a href="index-vector-fields.md?tab=floating">DropIndex</a></p></td>
+         <td><p><a href="index-vector-fields.md">DropIndex</a></p></td>
        </tr>
        <tr>
          <td rowspan="10"><p>Resource Management Privileges</p></td>
@@ -309,52 +309,52 @@ Milvus 2.5 introduces a new version of API which streamlines the grant operation
          <td rowspan="10"><p>RBAC Privileges</p></td>
          <td><p>CreateOwnership</p></td>
          <td><p>Create a user or a role</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/CnzkwQBW3i7bE3kVtLzcqQLtn9d">CreateUser/CreateRole</a></p></td>
+         <td><p><a href="users_and_roles.md">CreateUser/CreateRole</a></p></td>
        </tr>
        <tr>
          <td><p>UpdateUser</p></td>
          <td><p>Update the password of a user</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/CnzkwQBW3i7bE3kVtLzcqQLtn9d">UpdateCredential</a></p></td>
+         <td><p><a href="users_and_roles.md">UpdateCredential</a></p></td>
        </tr>
        <tr>
          <td><p>DropOwnership</p></td>
          <td><p>Drop a user password or a role</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/OqZnwJHrJilLPukfvp5cSgnmnTh">DeleteCredential/DropRole</a></p></td>
+         <td><p><a href="drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
        </tr>
        <tr>
          <td><p>SelectOwnership</p></td>
          <td><p>View all users that are granted a specific role</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/ZsNZwn1MkiOtH9kFU35cyRgVnue">SelectRole/SelectGrant</a></p></td>
+         <td><p><a href="grant_roles.md">SelectRole/SelectGrant</a></p></td>
        </tr>
        <tr>
          <td><p>ManageOwnership</p></td>
          <td><p>Manage a user or a role or grant a role to a user</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/ZsNZwn1MkiOtH9kFU35cyRgVnue">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
+         <td><p><a href="privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
        </tr>
        <tr>
          <td><p>SelectUser</p></td>
          <td><p>View all roles granted to a user</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/ZsNZwn1MkiOtH9kFU35cyRgVnue">SelectUser</a></p></td>
+         <td><p><a href="grant_roles.md">SelectUser</a></p></td>
        </tr>
        <tr>
          <td><p>CreatePrivilegeGroup</p></td>
          <td><p>Create a privilege group</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/FpV8wdWcZiDwnQkBloucYF7wnUg">CreatePrivilegeGroup</a></p></td>
+         <td><p><a href="privilege_group.md">CreatePrivilegeGroup</a></p></td>
        </tr>
        <tr>
          <td><p>DropPrivilegeGroup</p></td>
          <td><p>Drop a privilege group</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/FpV8wdWcZiDwnQkBloucYF7wnUg">DropPrivilegeGroup</a></p></td>
+         <td><p><a href="privilege_group.md">DropPrivilegeGroup</a></p></td>
        </tr>
        <tr>
          <td><p>ListPrivilegeGroups</p></td>
          <td><p>View all privilege groups in the current instance</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/FpV8wdWcZiDwnQkBloucYF7wnUg">ListPrivilegeGroups</a></p></td>
+         <td><p><a href="privilege_group.md">ListPrivilegeGroups</a></p></td>
        </tr>
        <tr>
          <td><p>OperatePrivilegeGroup</p></td>
          <td><p>Add privileges to or remove privileges from a privilege group</p></td>
-         <td><p><a href="https://zilliverse.feishu.cn/wiki/FpV8wdWcZiDwnQkBloucYF7wnUg">OperatePrivilegeGroup</a></p></td>
+         <td><p><a href="privilege_group.md">OperatePrivilegeGroup</a></p></td>
        </tr>
     </table>
 

@@ -34,7 +34,7 @@ Now if we set `nprobe` to 3 instead of 1, we get the following result:
 
 ![IVF FLAT Workflow 2](../../../../../assets/IVF-FLAT-workflow-2.png)
 
-By increasing the `nprobe` value, you can include more partitions in the search, which can help ensure that the nearest embedding to the query is not missed, even if it resides in a different partition. However, this comes at the cost of increased search time, as more candidates need to be evaluated. For more information on index parameter tuning, refer to [Index params](ivf-flat.md#share-XhzCdCibaosygYxP6gicPo1Wnsg).
+By increasing the `nprobe` value, you can include more partitions in the search, which can help ensure that the nearest embedding to the query is not missed, even if it resides in a different partition. However, this comes at the cost of increased search time, as more candidates need to be evaluated. For more information on index parameter tuning, refer to [Index params](ivf-flat.md#Index-params).
 
 ## Build index
 
@@ -67,9 +67,9 @@ In this configuration:
 
     - `nlist`: Number of clusters to divide the dataset.
 
-    To learn more building parameters available for the `IVF_FLAT` index, refer to [Index building params](ivf-flat.md#share-Mu14dy2nBoTtUHxWOMTcfgWknKc).
+    To learn more building parameters available for the `IVF_FLAT` index, refer to [Index building params](ivf-flat.md#Index-building-params).
 
-Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](https://zilliverse.feishu.cn/wiki/EmcowmwYpiFbWgkmnqfcMf3knVc?from=from_copylink).
+Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
 
 ## Search on index
 
@@ -97,7 +97,7 @@ In this configuration:
 
     - `nprobe`: Number of clusters to search for.
 
-    To learn more search parameters available for the `IVF_FLAT` index, refer to [Index-specific search params](ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg).
+    To learn more search parameters available for the `IVF_FLAT` index, refer to [Index-specific search params](ivf-flat.md#Index-specific-search-params).
 
 ## Index params
 
@@ -105,7 +105,7 @@ This section provides an overview of the parameters used for building an index a
 
 ### Index building params
 
-The following table lists the parameters that can be configured in `params` when [building an index](ivf-flat.md#share-OF9vdGFqTolG5hxnLZ1cDv7Ynph).
+The following table lists the parameters that can be configured in `params` when [building an index](ivf-flat.md#Build-index).
 
 <table>
    <tr>
@@ -124,7 +124,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](ivf-flat.md#share-AXO7dYHlCo6hJXxhq8ucZhKCnhd).
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](ivf-flat.md#Search-on-index).
 
 <table>
    <tr>

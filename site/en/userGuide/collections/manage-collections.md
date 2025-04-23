@@ -92,7 +92,9 @@ In addition, Milvus also provides enhancements to improve search performance and
 
 - [Use Partition Key](use-partition-key.md)
 
-- [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb)
+- [Use mmap](mmap.md)
+
+- [Clustering Compaction](clustering-compaction.md)
 
 ## Partition
 
@@ -122,5 +124,5 @@ You can set functions for Milvus to derive fields upon collection creation. For 
 
 Distributed database systems usually use the consistency level to define the data sameness across data nodes and replicas. You can set separate consistency levels when you create a collection or conduct similarity searches within the collection. The applicable consistency levels are **Strong**, **Bounded Staleness**, **Session**, and **Eventually**.
 
- For details on these consistency levels, refer to [Consistency Level](consistency.md).
+ For details on these consistency levels, refer to [Consistency Level](tune_consistency.md).
 

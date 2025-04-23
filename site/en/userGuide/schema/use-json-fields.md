@@ -40,7 +40,7 @@ A [JSON](https://en.wikipedia.org/wiki/JSON) field is a scalar field that stores
 
     - `'a'b'` and `"a"b"` are considered invalid.
 
-- **JSON Indexing**: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to [Considerations on JSON indexing](use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e).
+- **JSON Indexing**: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to [Considerations on JSON indexing](use-json-fields.md#Considerations-on-JSON-indexing).
 
 ## Add JSON field
 
@@ -388,7 +388,7 @@ curl --request POST \
    </tr>
 </table>
 
-**Considerations on JSON indexing**
+#### Considerations on JSON indexing
 
 - **Filtering logic**:
 
@@ -404,7 +404,7 @@ curl --request POST \
 
 - **Numeric precision**:
 
-    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds , it loses precision, and queries on those out-of-range values may not match exactly.
+    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds 2^{53}, it loses precision, and queries on those out-of-range values may not match exactly.
 
 - **Data integrity**:
 

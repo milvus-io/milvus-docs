@@ -18,7 +18,7 @@ ANN searches depend on pre-built indexes, and the search throughput, memory usag
 
 To reduce the learning curve, Milvus provides **AUTOINDEX**. With **AUTOINDEX**, Milvus can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness. 
 
-For details on AUTOINDEX and applicable metric types, refer to [AUTOINDEX Explained](https://zilliverse.feishu.cn/wiki/EA2twSf5oiERMDkriKScU9GInc4) and [Metric Types](metric.md). In this section, you will find detailed information about the following topics:
+In this section, you will find detailed information about the following topics:
 
 - [Single-vector search](single-vector-search.md#Single-Vector-Search)
 
@@ -1019,5 +1019,9 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
 - Use mmap
 
-    For details on mmap-settings, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+    For details on mmap-settings, refer to [Use mmap](mmap.md).
+
+- Clustering Compaction
+
+    For details on clustering compactions, refer to [Clustering Compaction](clustering-compaction.md).
 

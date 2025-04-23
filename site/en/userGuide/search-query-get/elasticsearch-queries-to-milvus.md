@@ -34,7 +34,7 @@ The table below outlines some Elasticsearch query patterns and their correspondi
      <td colspan="3"><p><strong>Term-level queries</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="elasticsearch-queries-to-milvus.md#null">IDs</a></p></td>
+     <td><p><a href="elasticsearch-queries-to-milvus.md#IDs">IDs</a></p></td>
      <td><p><code>in</code> operator</p></td>
      <td rowspan="6"><p>Both provide the same or similar set of capabilities when these Elasticsearch queries are used in the filter context.</p></td>
    </tr>
@@ -43,7 +43,7 @@ The table below outlines some Elasticsearch query patterns and their correspondi
      <td><p><code>like</code> operator</p></td>
    </tr>
    <tr>
-     <td><p><a href="elasticsearch-queries-to-milvus.md#null">Range query</a></p></td>
+     <td><p><a href="elasticsearch-queries-to-milvus.md#Range-query">Range query</a></p></td>
      <td><p>Comparison operators like <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, and <code>&lt;=</code></p></td>
    </tr>
    <tr>
@@ -55,11 +55,11 @@ The table below outlines some Elasticsearch query patterns and their correspondi
      <td><p><code>in</code> operator</p></td>
    </tr>
    <tr>
-     <td><p><a href="elasticsearch-queries-to-milvus.md#null">Wildcard query</a></p></td>
+     <td><p><a href="elasticsearch-queries-to-milvus.md#Wildcard-query">Wildcard query</a></p></td>
      <td><p><code>like</code> operator</p></td>
    </tr>
    <tr>
-     <td><p><a href="elasticsearch-queries-to-milvus.md#null">Boolean query</a></p></td>
+     <td><p><a href="elasticsearch-queries-to-milvus.md#Boolean-query">Boolean query</a></p></td>
      <td><p>Logical operators like <code>AND</code></p></td>
      <td><p>Both provide similar sets of capabilities when used in the filter context.</p></td>
    </tr>
@@ -67,12 +67,12 @@ The table below outlines some Elasticsearch query patterns and their correspondi
      <td colspan="3"><p><strong>Vector queries</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="elasticsearch-queries-to-milvus.md#null">kNN query</a></p></td>
+     <td><p><a href="elasticsearch-queries-to-milvus.md#Knn-query">kNN query</a></p></td>
      <td><p>Search</p></td>
      <td><p>Milvus provides more advanced vector search capabilities.</p></td>
    </tr>
    <tr>
-     <td><p><a href="elasticsearch-queries-to-milvus.md#Reciprocal-Rank-Fusion">Reciprocal rank fusion</a></p></td>
+     <td><p><a href="elasticsearch-queries-to-milvus.md#Reciprocal-rank-fusion">Reciprocal rank fusion</a></p></td>
      <td><p>Hybrid Search</p></td>
      <td><p>Milvus supports multiple reranking strategies.</p></td>
    </tr>
@@ -412,7 +412,7 @@ resp = client.search(
 
 ```
 
-Milvus, as a specialized vector database, uses index types to optimize vector searches. Typically, it prioritizes approximate nearest neighbor (ANN) search for high-dimensional vector data. While brute-force kNN search with the FLAT index type delivers precise results, it is both time-consuming and resource-intensive. In contrast, ANN search using AUTOINDEX or other index types balances speed and accuracy, offering significantly faster and more resource-efficient performance than kNN. For details on index types and AUTOINDEX, you can read [Manage Indexes](https://zilliverse.feishu.cn/wiki/NDLBwtFIuihc5wkq37KchzqLnrc) and [AUTOINDEX Explained](https://zilliverse.feishu.cn/wiki/EA2twSf5oiERMDkriKScU9GInc4).
+Milvus, as a specialized vector database, uses index types to optimize vector searches. Typically, it prioritizes approximate nearest neighbor (ANN) search for high-dimensional vector data. While brute-force kNN search with the FLAT index type delivers precise results, it is both time-consuming and resource-intensive. In contrast, ANN search using AUTOINDEX or other index types balances speed and accuracy, offering significantly faster and more resource-efficient performance than kNN. 
 
 A similar equivalence to the above vector query in Mlivus goes like this:
 

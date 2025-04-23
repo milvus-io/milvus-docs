@@ -128,7 +128,7 @@ common:
    </tr>
 </table>
 
-To apply the above changes to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md#Configure-Milvus-via-configuration-file) and [Configure Milvus with Milvus Operators](configure_operator.md?tab=component).
+To apply the above changes to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md#Configure-Milvus-via-configuration-file) and [Configure Milvus with Milvus Operators](configure_operator.md).
 
 ### Collection Configuration
 
