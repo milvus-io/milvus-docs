@@ -785,9 +785,7 @@ class larkDocWriter {
     }
 
     async __text(text) {
-        let content = await this.__text_elements(text['elements'])
-
-        return content.replace(/\$/gm, '&#36;')
+        return await this.__text_elements(text['elements'])
     }
 
     async __heading(heading, level) {
