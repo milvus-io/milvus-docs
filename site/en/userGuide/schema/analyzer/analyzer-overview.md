@@ -173,8 +173,6 @@ Milvus offers the following built-in analyzers, each designed for specific text 
 
 - `chinese`: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.
 
-For a list of built-in analyzers and their customizable settings, refer to [Built-in Analyzer Reference](built-in-analyzers).
-
 ### Custom analyzer
 
 For more advanced text processing, custom analyzers in Milvus allow you to build a tailored text-handling pipeline by specifying both a **tokenizer** and **filters**. This setup is ideal for specialized use cases where precise control is required.
@@ -225,8 +223,6 @@ export analyzerParams='{
        "type": "whitespace"
     }'
 ```
-
-For a list of tokenizers available to choose from, refer to [Tokenizer Reference](tokenizers).
 
 #### Filter
 
@@ -363,8 +359,6 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         ]
     }'
     ```
-
-    For a list of available filter types and their specific parameters, refer to [Filter Reference](filters).
 
 ## Example use
 
