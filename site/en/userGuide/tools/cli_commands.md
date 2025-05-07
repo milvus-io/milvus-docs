@@ -817,6 +817,31 @@ Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 ```
 
+## insert row
+
+Inserts a row of data into a collection.
+
+<h3 id="insert-row">Syntax</h3>
+
+```shell
+insert row
+```
+
+<h3 id="insert-row">Interactive Example</h3>
+
+```shell
+milvus_cli > insert row
+
+Collection name: car
+Partition name [_default]: _default
+Enter value for id (INT64): 1
+Enter value for vector (FLOAT_VECTOR): [1.0, 2.0, 3.0]
+Enter value for color (INT64): 100
+Enter value for brand (VARCHAR): Toyota
+
+Inserted successfully.
+```
+
 ## list users
 
 Lists all users.
