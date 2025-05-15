@@ -414,7 +414,7 @@ curl --request POST \
 
 ### Insert data
 
-Insert the sparse-dense vectors into the the collection `demo`.
+Insert the sparse-dense vectors into the collection `demo`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -535,7 +535,7 @@ curl --request POST \
 
 Hybrid Search is implemented by creating multiple `AnnSearchRequest` in the `hybrid_search()` function, where each `AnnSearchRequest` represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an `AnnSearchRequest` for each vector field.
 
-By configuring the `expr` parameter in an `AnnSearchRequest`, you can set the filtering conditions for your hybrid sesarch. Please refer to [Filtered Search](filtered-search.md) and [Filtering](filtering).
+By configuring the `expr` parameter in an `AnnSearchRequest`, you can set the filtering conditions for your hybrid search. Please refer to [Filtered Search](filtered-search.md) and [Filtering](filtering).
 
 <div class="alert note">
 
