@@ -102,6 +102,6 @@ See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration
   - [Upgrade Milvus Cluster](upgrade_milvus_cluster-operator.md)
   - [Upgrade Milvus Standalone](upgrade_milvus_standalone-operator.md)
 - If you are ready to deploy your cluster on clouds:
-  - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
-  - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
-  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
+  - Learn how to [Deploy Milvus on Amazon EKS with Terraform](../adminGuide/clouds/aws/eks.md)
+  - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](../adminGuide/clouds/gcp/gcp.md)
+  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](../adminGuide/clouds/azure/azure.md)
