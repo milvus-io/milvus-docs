@@ -607,6 +607,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "label": "Multi-language Analyzers",
+                "id": "multi-language-analyzers.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1243,7 +1249,7 @@
             ]
           },
           {
-            "label": "Use Pulsa with Milvus",
+            "label": "Use Pulsar with Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -2196,6 +2202,12 @@
             "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
+            "children": []
+          },
+          {
+            "label": "NLWeb",
+            "id": "NLWeb_with_milvus.md",
+            "order": 12,
             "children": []
           }
         ]

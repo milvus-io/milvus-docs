@@ -90,7 +90,6 @@ List<JsonObject> data = Arrays.asList(
         gson.fromJson("{\"id\": 8, \"vector\": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], \"color\": \"white_9381\"}", JsonObject.class),
         gson.fromJson("{\"id\": 9, \"vector\": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], \"color\": \"purple_4976\"}", JsonObject.class)
 );
-
 InsertReq insertReq = InsertReq.builder()
         .collectionName("quick_setup")
         .data(data)
