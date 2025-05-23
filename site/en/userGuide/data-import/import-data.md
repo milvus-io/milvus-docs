@@ -323,7 +323,7 @@ The possible values are as follows:
 
 - Each import file size should not exceed **16 GB**.
 
-- The maximum number of files per import request should not exceed **1024**.  
+- The maximum number of files per import request should not exceed **1024**. Each import request can have at most 16GB per file * 1024 files = 16TB of data.
 
 - The maximum number of concurrent import requests is limited to **1024**.
 
