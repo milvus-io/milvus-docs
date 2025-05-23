@@ -536,6 +536,7 @@ class MilvusDocsGen extends larkDocWriter {
             await this.__wait(timeout * 1000)
             await this.__fetch_doc_blocks(document_id, page_token, blocks)
         } else {
+            console.log(response)
             return null;
         }
     }
