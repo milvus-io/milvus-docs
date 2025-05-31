@@ -59,7 +59,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Build RAG on Arm Architecture](build_rag_on_arm.md) | RAG | Milvus, Arm |
 | [Build RAG with Milvus and Fireworks AI](build_RAG_with_milvus_and_fireworks.md) | LLMs | Milvus, Fireworks AI |
 | [Build RAG with Milvus and Lepton AI](build_RAG_with_milvus_and_lepton.md) | LLMs | Milvus, Lepton AI |
-| [Build RAG with Milvus and SiliconFlow](build_RAG_with_milvus_and_siliconflow) | LLMs | Milvus, SiliconFlow |
+| [Build RAG with Milvus and SiliconFlow](build_RAG_with_milvus_and_siliconflow.md) | LLMs | Milvus, SiliconFlow |
 | [Build a RAG with Milvus and Unstructured](rag_with_milvus_and_unstructured.md) | Data Sources | Milvus, Unstructured |
 | [Build RAG with Milvus + PII Masker](RAG_with_pii_and_milvus.md) | Data Sources | Milvus, PII Masker |
 | [Knowledge Table with Milvus](knowledge_table_with_milvus.md) | Knowledge Engineering | Knowledge Table, Milvus |
@@ -72,3 +72,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Integrate Milvus with MindsDB](integration_with_mindsdb.md) | Knowledge Engineering | Milvus, MindsDB |
 | [Build RAG with Milvus and Feast](build_RAG_with_milvus_and_feast.md) | Data Sources | Milvus, Feast |
 | [Build RAG with Milvus and Docling](build_RAG_with_milvus_and_docling.md) | Data Sources | Milvus, Docling |
+| [Building RAG with Milvus and EmbedAnything](build_RAG_with_milvus_and_embedAnything.md) | Embedding | Milvus, EmbedAnything |
+| [Getting Started with Milvus and n8n](milvus_and_n8n.md) | Orchestration | Milvus, n8n |
+| [Use Milvus in AnythingLLM](use_milvus_in_anythingllm.md) | Orchestration | Milvus, AnythingLLM |
+| [Using NLWeb with Milvus](NLWeb_with_milvus.md) | Data Sources | Milvus, NLWeb |
