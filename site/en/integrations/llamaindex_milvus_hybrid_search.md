@@ -294,7 +294,7 @@ class ExampleEmbeddingFunction(BaseSparseEmbeddingFunction):
 
 ## Customize hybrid reranker
 
-Milvus supports two types of [reranking strategies](https://milvus.io/docs/reranking.md): Reciprocal Rank Fusion (RRF) and Weighted Scoring. The default ranker in `MilvusVectorStore` hybrid search is RRF with k=60. To customize the hybrid ranker, modify the following parameters:
+Milvus supports two types of [reranking strategies](https://milvus.io/docs/weighted-ranker.md): Reciprocal Rank Fusion (RRF) and Weighted Scoring. The default ranker in `MilvusVectorStore` hybrid search is RRF with k=60. To customize the hybrid ranker, modify the following parameters:
 
 - `hybrid_ranker (str)`: Specifies the type of ranker used in hybrid search queries. Currently only supports ["RRFRanker", "WeightedRanker"]. Defaults to "RRFRanker".
 - `hybrid_ranker_params (dict, optional)`: Configuration parameters for the hybrid ranker. The structure of this dictionary depends on the specific ranker being used:

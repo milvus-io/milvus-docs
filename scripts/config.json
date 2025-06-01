@@ -344,6 +344,11 @@
                         "token": "FwO1bZlbBogz0SxsXg5cE4WYnxb",
                         "type": "image",
                         "alt_text": "gpu-index-performance"
+                    },
+                    {
+                        "token": "G5VxbkoZLowCcLxEtfmcQl2Yn6d",
+                        "type": "image",
+                        "alt_text": "inverted"
                     }
                 ]
             }
