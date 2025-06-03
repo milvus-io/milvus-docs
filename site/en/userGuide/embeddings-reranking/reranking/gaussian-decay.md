@@ -144,6 +144,7 @@ result = milvus_client.search(
     anns_field="dense",                   # Vector field to search
     limit=10,                             # Number of results
     output_fields=["name", "cuisine", "distance"],  # Fields to return
+    #  highlight-next-line
     ranker=ranker,                        # Apply the decay ranker
     consistency_level="Strong"
 )
@@ -176,6 +177,7 @@ sparse = AnnSearchRequest(
 hybrid_results = milvus_client.hybrid_search(
     collection_name,
     [dense, sparse],                      # Multiple search requests
+    #  highlight-next-line
     ranker=ranker,                        # Same decay ranker
     limit=10,
     output_fields=["name", "cuisine", "distance"]

@@ -58,6 +58,7 @@ results = milvus_client.search(
     anns_field="dense_vector",                   # Vector field to search
     limit=5,                                     # Number of results to return
     output_fields=["document"],                  # Include text field for reranking
+    #  highlight-next-line
     ranker=tei_ranker,                         # Apply tei reranking
     consistency_level="Strong"
 )
@@ -90,6 +91,7 @@ sparse_search = AnnSearchRequest(
 hybrid_results = milvus_client.hybrid_search(
     collection_name="your_collection",
     [dense_search, sparse_search],              # Multiple search requests
+    #  highlight-next-line
     ranker=tei_ranker,                        # Apply tei reranking to combined results
     limit=5,                                   # Final number of results
     output_fields=["document"]

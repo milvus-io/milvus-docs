@@ -195,6 +195,7 @@ results = client.search(
     anns_field="vector_field",
     limit=10,
     output_fields=["document"],  # Include the text field in outputs
+    #  highlight-next-line
     ranker=model_ranker,  # Apply the model ranker here
     consistency_level="Strong"
 )
@@ -226,6 +227,7 @@ sparse_request = AnnSearchRequest(
 hybrid_results = client.hybrid_search(
     collection_name,
     [dense_request, sparse_request],
+    #  highlight-next-line
     ranker=model_ranker,  # Same model ranker works with hybrid search
     limit=10,
     output_fields=["document"]

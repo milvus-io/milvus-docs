@@ -314,6 +314,7 @@ results = milvus_client.search(
     anns_field="vector_field",
     limit=10,
     output_fields=["document", "timestamp"],  # Include the decay field in outputs to see values
+    #  highlight-next-line
     ranker=decay_ranker,                      # Apply the decay ranker here
     consistency_level="Strong"
 )
@@ -345,6 +346,7 @@ sparse_request = AnnSearchRequest(
 hybrid_results = milvus_client.hybrid_search(
     collection_name,
     [dense_request, sparse_request],
+    #  highlight-next-line
     ranker=decay_ranker,                      # Same decay ranker works with hybrid search
     limit=10,
     output_fields=["document", "timestamp"]

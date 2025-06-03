@@ -156,6 +156,7 @@ result = milvus_client.search(
     anns_field="dense",                   # Vector field to search
     limit=10,                             # Number of results
     output_fields=["title", "venue", "event_date"], # Fields to return
+    #  highlight-next-line
     ranker=ranker,                        # Apply the decay ranker
     consistency_level="Strong"
 )
@@ -189,6 +190,7 @@ hybrid_results = milvus_client.hybrid_search(
     collection_name,
     [dense, sparse],                      # Multiple search requests
     ranker=ranker,                        # Same decay ranker
+    #  highlight-next-line
     limit=10,
     output_fields=["title", "venue", "event_date"]
 )
