@@ -633,12 +633,6 @@
             "id": "add-fields-to-an-existing-collection.md",
             "order": 13,
             "children": []
-          },
-          {
-            "label": "Hands-On",
-            "id": "schema-hands-on.md",
-            "order": 14,
-            "children": []
           }
         ]
       },
