@@ -2,6 +2,7 @@
 id: add-fields-to-an-existing-collection.md
 title: "Add Fields to an Existing Collection"
 summary: "Milvus allows you to dynamically add new fields to existing collections, making it easy to evolve your data schema as your application needs change. This guide shows you how to add fields in different scenarios using practical examples."
+beta: Milvus 2.6.x
 ---
 
 # Add Fields to an Existing Collection

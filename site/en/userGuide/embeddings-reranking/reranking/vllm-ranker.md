@@ -91,6 +91,7 @@ results = client.search(
     anns_field="dense_vector",                   # Vector field to search
     limit=5,                                     # Number of results to return
     output_fields=["document"],                  # Include text field for reranking
+    #  highlight-next-line
     ranker=vllm_ranker,                         # Apply vLLM reranking
     consistency_level="Strong"
 )
