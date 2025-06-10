@@ -10,7 +10,7 @@ Built on top of popular vector search libraries including Faiss, HNSW, DiskANN, 
 
 Milvus also supports data sharding, streaming data ingestion, dynamic schema, search combine vector and scalar data, multi-vector and hybrid search, sparse vector and many other advanced functions. The platform offers performance on demand and can be optimized to suit any embedding retrieval scenario. We recommend deploying Milvus using Kubernetes for optimal availability and elasticity. 
 
-Milvus adopts a shared-storage architecture featuring storage and computing disaggregation and horizontal scalability for its computing nodes. Following the principle of data plane and control plane disaggregation, Milvus comprises [four layers](four_layers.md): access layer, coordinator service, worker node, and storage. These layers are mutually independent when it comes to scaling or disaster recovery.
+Milvus adopts a shared-storage architecture featuring storage and computing disaggregation and horizontal scalability for its computing nodes. With the latest implementation of Woodpecker as a zero-disk WAL storage layer, the Milvus architecture has become more elastic and adaptable, reducing operational complexity and making it more suitable for cloud-native environments. Following the principle of data plane and control plane disaggregation, Milvus comprises [four layers](four_layers.md): access layer, coordinator service, worker node, and storage. These layers are mutually independent when it comes to scaling or disaster recovery.
 
 ![Architecture_diagram](../../../../assets/milvus_architecture.png "Milvus architecture.")
 
