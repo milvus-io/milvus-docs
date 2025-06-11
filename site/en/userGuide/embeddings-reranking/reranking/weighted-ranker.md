@@ -209,44 +209,98 @@ When using the WeightedRanker strategy, it is necessary to input weight values. 
 
 For example, suppose there are two basic ANN search requests in a Hybrid Search: text search and image search. If the text search is considered more important, it should be assigned a greater weight.
 
+<div class="alert note">
+
+Milvus 2.6.x and later let you configure reranking strategies directly via the `Function` API. If you’re using an earlier release (before v2.6.0), refer to the [Reranking](v2.5.x/reranking.md) documentation for setup instructions.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
-from pymilvus import WeightedRanker
+from pymilvus import Function, FunctionType
 
-# Create a Weighted Ranker for multimodal search 
-# Weight for first search path (0.8) and second search path (0.3)
-rerank= WeightedRanker(0.8, 0.3) 
+rerank = Function(
+    name="weight",
+    input_field_names=[], # Must be an empty list
+    function_type=FunctionType.RERANK,
+    params={
+        "reranker": "weighted", 
+        "weights": [0.1, 0.9],
+        "norm_score": True  # Optional
+    }
+)
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
-
-WeightedRanker rerank = new WeightedRanker(Arrays.asList(0.8f, 0.3f))
-```
-
-```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
-
-reranker := milvusclient.NewWeightedReranker([]float64{0.8, 0.3})
+// Java
 ```
 
 ```javascript
-rerank: WeightedRanker(0.8, 0.3)
+// Nodejs
+```
+
+```go
+// Go
 ```
 
 ```bash
-export rerank='{
-        "strategy": "ws",
-        "params": {"weights": [0.8,0.3]}
-    }'
+# Restful
 ```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Required?</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value/Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code>name</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Unique identifier for this Function</p></td>
+     <td><p><code>"weight"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>input_field_names</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>List of vector fields to apply the function to (must be empty for Weighted Ranker)</p></td>
+     <td><p>[]</p></td>
+   </tr>
+   <tr>
+     <td><p><code>function_type</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>The type of Function to invoke; use <code>RERANK</code> to specify a reranking strategy</p></td>
+     <td><p><code>FunctionType.RERANK</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>params.reranker</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Specifies the reranking method to use.
+ Must be set to <code>weighted</code> to use Weighted Ranker.</p></td>
+     <td><p><code>"weighted"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>params.weights</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Array of weights corresponding to each search path; values ∈ [0,1].
+ For details, refer to <a href="weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mechanism of Weighted Ranker</a>.</p></td>
+     <td><p><code>[0.1, 0.9]</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>params.norm_score</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Whether to normalize raw scores (using arctan) before weighting.
+ For details, refer to <a href="weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mechanism of Weighted Ranker</a>.</p></td>
+     <td><p><code>True</code></p></td>
+   </tr>
+</table>
 
 ### Apply to hybrid search
 
@@ -261,8 +315,12 @@ Weighted Ranker is designed specifically for hybrid search operations that combi
 </div>
 
 ```python
-# Python
-from pymilvus import AnnSearchRequest
+from pymilvus import MilvusClient, AnnSearchRequest
+
+# Connect to Milvus server
+milvus_client = MilvusClient(uri="http://localhost:19530")
+
+# Assume you have a collection setup
 
 # Define text vector search request
 text_search = AnnSearchRequest(
