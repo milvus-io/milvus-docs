@@ -211,7 +211,7 @@ For example, suppose there are two basic ANN search requests in a Hybrid Search:
 
 <div class="alert note">
 
-Milvus 2.6.x and later let you configure reranking strategies directly via the `Function` API. If you’re using an earlier release (before v2.6.0), refer to the [Reranking](v2.5.x/reranking.md) documentation for setup instructions.
+Milvus 2.6.x and later let you configure reranking strategies directly via the `Function` API. If you’re using an earlier release (before v2.6.0), refer to the [Reranking](https://milvus.io/docs/2.5.x/reranking.md#Reranking) documentation for setup instructions.
 
 </div>
 
