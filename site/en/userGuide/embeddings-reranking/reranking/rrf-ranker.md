@@ -214,46 +214,90 @@ When using the RRF reranking strategy, you need to configure the parameter `k`. 
 
 After your collection is set up with multiple vector fields, create an RRF Ranker with an appropriate smoothing parameter:
 
+<div class="alert note">
+
+Milvus 2.6.x and later let you configure reranking strategies directly via the `Function` API. If you’re using an earlier release (before v2.6.0), refer to the [Reranking](https://milvus.io/docs/2.5.x/reranking.md#Reranking) documentation for setup instructions.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
-from pymilvus import RRFRanker
+from pymilvus import Function, FunctionType
 
-ranker = RRFRanker(100)
+ranker = Function(
+    name="rrf",
+    input_field_names=[], # Must be an empty list
+    function_type=FunctionType.RERANK,
+    params={
+        "reranker": "rrf", 
+        "k": 100  # Optional
+    }
+)
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-RRFRanker ranker = new RRFRanker(100);
-```
-
-```go
-ranker := milvusclient.NewRRFReranker().WithK(100)
+// Java
 ```
 
 ```javascript
-ranker: RRFRanker("100")
+// Nodejs
+```
+
+```go
+// Go
 ```
 
 ```bash
-"ranker": {
-    "strategy": "rrf",
-    "params": {
-        "k": 100
-    }
-}
-export ranker='{
-        "strategy": "rrf",
-        "params": {"k": 100}
-    }'
+# Restful
 ```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Required?</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value/Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code>name</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Unique identifier for this Function</p></td>
+     <td><p><code>"rrf"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>input_field_names</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>List of vector fields to apply the function to (must be empty for RRF Ranker)</p></td>
+     <td><p>[]</p></td>
+   </tr>
+   <tr>
+     <td><p><code>function_type</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>The type of Function to invoke; use <code>RERANK</code> to specify a reranking strategy</p></td>
+     <td><p><code>FunctionType.RERANK</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>params.reranker</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Specifies the reranking method to use.
+ Must be set to <code>rrf</code> to use RRF Ranker.</p></td>
+     <td><p><code>"weighted"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>params.k</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Smoothing parameter that controls the impact of document ranks; higher <code>k</code> reduces sensitivity to top ranks. Range: (0, 16384); default: <code>60</code>.
+ For details, refer to <a href="rrf-ranker.md#Mechanism-of-RRF-Ranker">Mechanism of RRF Ranker</a>.</p></td>
+     <td><p><code>100</code></p></td>
+   </tr>
+</table>
 
 ### Apply to hybrid search
 
@@ -268,8 +312,12 @@ RRF Ranker is designed specifically for hybrid search operations that combine mu
 </div>
 
 ```python
-# Python
-from pymilvus import AnnSearchRequest
+from pymilvus import MilvusClient, AnnSearchRequest
+
+# Connect to Milvus server
+milvus_client = MilvusClient(uri="http://localhost:19530")
+
+# Assume you have a collection setup
 
 # Define text vector search request
 text_search = AnnSearchRequest(
