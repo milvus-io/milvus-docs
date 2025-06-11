@@ -235,6 +235,12 @@
             "children": []
           },
           {
+            "label": "Woodpecker",
+            "id": "woodpecker_architecture.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Knowhere",
             "id": "knowhere.md",
             "order": 5,
