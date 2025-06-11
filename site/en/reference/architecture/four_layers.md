@@ -65,7 +65,11 @@ Object storage stores snapshot files of logs, index files for scalar and vector 
 
 ### WAL storage
 
-WAL storage is a critical component for ensuring data durability and consistency in distributed systems. It includes various write-ahead log services such as Kafka, Pulsar, and Woodpecker. Woodpecker, in particular, represents a cloud-native, zero-disk architecture that leverages cloud object storage for enhanced scalability and reduced operational complexity. This layer ensures that all write operations are logged before being committed, providing a reliable mechanism for data recovery and consistency across the system.
+Write-Ahead Log (WAL) storage is the foundation of data durability and consistency in distributed systems. Before any change is committed, it’s first recorded in a log—ensuring that, in the event of a failure, you can recover exactly where you left off.
+
+Common WAL implementations include Kafka, Pulsar, and Woodpecker. Unlike traditional disk-based solutions, Woodpecker adopts a cloud-native, zero-disk design that writes directly to object storage. This approach scales effortlessly with your needs and simplifies operations by removing the overhead of managing local disks.
+
+By logging every write operation ahead of time, the WAL layer guarantees a reliable, system-wide mechanism for recovery and consistency—no matter how complex your distributed environment grows.
 
 
 ## What's next
