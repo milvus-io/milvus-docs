@@ -1,12 +1,12 @@
 ---
 id: streaming_service.md
 title: "Streaming architecture"
-summary: 
+summary: "The Streaming Service is a concept for Milvus internal streaming system module, built around the Write-Ahead Log (WAL) to support various streaming-related function."
 ---
 
 # Streaming Service Architecture
 
-The **Streaming Service** is a concept for Milvus's internal streaming system module, built around the Write-Ahead Log (WAL) to support various streaming-related function. These include streaming data ingestion/subscription, fault recovery of cluster state, conversion of streaming data into historical data, and growing data queries. Architecturally, the Streaming Service is composed of three main components:
+The **Streaming Service** is a concept for Milvus internal streaming system module, built around the Write-Ahead Log (WAL) to support various streaming-related function. These include streaming data ingestion/subscription, fault recovery of cluster state, conversion of streaming data into historical data, and growing data queries. Architecturally, the Streaming Service is composed of three main components:
 
 ![Streaming Distributed Arc](../../../../assets/streaming_distributed_arch.png "Streaming Service Architecture")
 
