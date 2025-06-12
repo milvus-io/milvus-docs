@@ -49,7 +49,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:
 
-- To upgrade Milvus from v2.2.3 you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
+- To upgrade Milvus from v2.2.3, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
 - To upgrade Milvus from a minor release before v2.2.3 to {{var.milvus_release_version}}, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
 - To upgrade Milvus from v2.1.x to {{var.milvus_release_version}}, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
 
