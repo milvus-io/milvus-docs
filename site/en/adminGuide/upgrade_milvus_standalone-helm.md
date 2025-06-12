@@ -15,6 +15,12 @@ title: Upgrade Milvus Standalone with Helm Chart
 
 This guide describes how to upgrade your Milvus standalone with Milvus Helm charts. 
 
+<div class="alert note">
+
+Upgrading from Milvus 2.5.x (or earlier versions) to {{var.milvus_release_version}} involves significant architectural changes that make this upgrade **irreversible**. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, **you cannot roll back to a previous version once the upgrade is completed**. For details on the architectural changes introduced in {{var.milvus_release_version}}, refer to [Milvus Architecture Overview](architecture_overview.md).
+
+</div>
+
 ## Prerequisites
 - Helm version >= 3.14.0
 - Kubernetes version >= 1.20.0
@@ -91,6 +97,21 @@ You can choose the upgrade path for your Milvus as follows:
 - [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v{{var.milvus_release_version}}.
 
 - [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v{{var.milvus_release_version}}.
+
+<div class="alert warning">
+
+**Special Notice for Upgrades to Milvus {{var.milvus_release_version}}**
+
+If you are upgrading **TO** Milvus {{var.milvus_release_version}} from any previous version (including 2.5.x), please be aware that:
+
+1. **This upgrade is irreversible** - Once completed, you cannot roll back to previous versions
+2. **Architectural changes** - New components like Streaming Node will be introduced, and some existing components may be removed
+3. **Same upgrade commands** - Despite the architectural changes, the Helm upgrade commands remain the same as documented below
+4. **Backup essential** - Always create a complete backup before starting the upgrade process
+
+The standard upgrade procedures below apply to all versions, including {{var.milvus_release_version}}, but remember the irreversible nature when upgrading to {{var.milvus_release_version}}.
+
+</div>
 
 <div style="display:none;">
 
