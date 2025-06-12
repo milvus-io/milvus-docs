@@ -15,6 +15,12 @@ title: Upgrade Milvus Standalone with Helm Chart
 
 This guide describes how to upgrade your Milvus standalone with Milvus Helm charts. 
 
+<div class="alert note">
+
+Upgrading from Milvus 2.5.x (or earlier versions) to {{var.milvus_release_version}} involves significant architectural changes that make this upgrade **irreversible**. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, **you cannot roll back to a previous version once the upgrade is completed**. For details on the architectural changes introduced in {{var.milvus_release_version}}, refer to [Milvus Architecture Overview](architecture_overview.md).
+
+</div>
+
 ## Prerequisites
 - Helm version >= 3.14.0
 - Kubernetes version >= 1.20.0
