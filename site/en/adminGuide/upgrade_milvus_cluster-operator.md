@@ -14,11 +14,12 @@ title: Upgrade Milvus Cluster with Milvus Operator
 
 This guide describes how to upgrade your Milvus cluster with Milvus operator. 
 
-## Ensure you're using a mixcoord instead of separate coordinators
+## Before you start
 
-Ever since Milvus 2.6.0, the separate coordinators have been removed and replaced by a mixcoord. So before you proceed with the upgrade, ensure that your Milvus cluster is using mixcoord.
+As of Milvus 2.6.0, the legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`. Before upgrading, make sure your CRD spec uses `mixCoord` rather than individual coordinator components.
 
-If you are using the separate coordinators, you can change your specification to use mixcoord as follows:
+If you are using the separate coordinators, modify your specification:
+
 ```yaml
 apiVersion: milvus.io/v1beta1
 kind: Milvus
