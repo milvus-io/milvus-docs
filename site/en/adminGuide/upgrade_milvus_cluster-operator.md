@@ -14,6 +14,28 @@ title: Upgrade Milvus Cluster with Milvus Operator
 
 This guide describes how to upgrade your Milvus cluster with Milvus operator. 
 
+## Ensure you're using a mixcoord instead of separate coordinators
+
+Ever since Milvus 2.6.0, the separate coordinators have been removed and replaced by a mixcoord. So before you proceed with the upgrade, ensure that your Milvus cluster is using mixcoord.
+
+If you are using the separate coordinators, you can change your specification to use mixcoord as follows:
+```yaml
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: my-release
+spec:
+  components:
+    mixCoord:
+      replicas: 1 # set to 1 or more
+    dataCoord:
+      replicas: 0
+    queryCoord:
+      replicas: 0
+    indexCoord:
+      replicas: 0
+```
+
 ## Upgrade your Milvus operator
 
 Run the following command to upgrade the version of your Milvus Operator to v{{var.milvus_operator_version}}.
@@ -26,9 +48,11 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:
 
-- To upgrade Milvus from v2.2.3 or later releases to {{var.milvus_release_version}}, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
+- To upgrade Milvus from v2.2.3 you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
 - To upgrade Milvus from a minor release before v2.2.3 to {{var.milvus_release_version}}, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
 - To upgrade Milvus from v2.1.x to {{var.milvus_release_version}}, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
+
+> **Note**: It's highly recommended to upgrade one minor version at a time, and to use the latest stable release of that minor version. For example, if you are upgrading from v2.4.x to v2.6.x, you should first upgrade to the latest v2.4.x, then to the latest v2.5.x, and finally to v2.6.x. This ensures that you are using the latest stable release of each minor version, which is more likely to be compatible with your existing data and configurations.
 
 ## Conduct a rolling upgrade
 
@@ -48,6 +72,9 @@ spec:
     enableRollingUpdate: true
     imageUpdateMode: rollingUpgrade # Default value, can be omitted
     image: milvusdb/milvus:v{{var.milvus_release_tag}}
+    # Milvus Operator recognizes the image tag as a semantic version, and decides what to do based on the version.
+    # So in case you're using a non-sermantic verison image tag, you may also need to set the `version` field so that Milvus Operator can recognize the version correctly
+    version: v{{var.milvus_release_version}}
 ```
 
 In this above configuration file, set `spec.components.enableRollingUpdate` to `true` and set `spec.components.image` to the desired Milvus version.
