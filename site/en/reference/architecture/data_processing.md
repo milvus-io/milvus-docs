@@ -10,26 +10,26 @@ This article provides a detailed description of the implementation of data inser
 
 ## Data insertion
 
-You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (*vchannel*). As the following figure shows, Milvus bind each vchannel with a physical channel (*pchannel*), and pchannel will bind with determined streaming node.
+You can choose how many shards a collection uses in Milvus—each shard maps to a virtual channel (*vchannel*). As illustrated below, Milvus then assigns every *vchannel* to a physical channel (*pchannel*), and each *pchannel* is bound to a specific Streaming Node.
 
-![VChannel PChannel And StreamingNode](../../../../assets/pvchannel_wal.png "VChannel, PChannel And StreamingNode.")
+![VChannel PChannel and StreamingNode](../../../../assets/pvchannel_wal.png "VChannel, PChannel and StreamingNode.")
 
 After data verification, the proxy will split the written message into various data package of shards according to the specified shard routing rules. 
 
 ![Channels 1](../../../../assets/channels_1.jpg "Each shard corresponds to a vchannel.")
 
-Then the written data of one **shard (vchannel)** is sent to the corresponding streaming node of pchannel.
+Then the written data of one shard (*vchannel*) is sent to the corresponding Streaming Node of *pchannel*.
 
 ![write flow](../../../../assets/written_data_flow.png "Flow of write operation")
 
-The streaming node will bind a TSO (Timestamp Orcale) to each data package to determine the order of operation, check the consistency checks of written data and writing to the underlying WAL. Written data will no longer be lost after writing into WAL, streaming node will recover the data from wal from crash.
+The Streaming Node assigns a Timestamp Oracle (TSO) to each data packet to establish a total ordering of operations. It performs consistency checks on the payload before writing it into the underlying write-ahead log (WAL). Once data is durably committed to the WAL, it’s guaranteed not to be lost—even in the event of a crash, the Streaming Node can replay the WAL to fully recover all pending operations.
 
-Meanwhile, streaming node will asynchronously split the written data into a series of segments, there are two different segments:
+Meanwhile, the StreamingNode also asynchronously chops the committed WAL entries into discrete segments. There are two segment types:
 
-- **growing segment**: any data that has not been presisted into the object storage.
-- **sealed segment**: all data has been persisted into the object storage, the data of sealed segment is immutable.
+- **Growing segment**: any data that has not been presisted into the object storage.
+- **Sealed segment**: all data has been persisted into the object storage, the data of sealed segment is immutable.
 
-The moment when a growing segment is converted into a sealed segment is called a flush. Streaming node will flush a growing segment when there's no more data of these data can be read from underlying wal.
+The transition of a growing segment into a sealed segment is called a flush. The Streaming Node triggers a flush as soon as it has ingested and written all available WAL entries for that segment—i.e., when there are no more pending records in the underlying write-ahead log—at which point the segment is finalized and made read-optimized.
 
 
 ## Index building
@@ -52,15 +52,19 @@ Data query refers to the process of searching a specified collection for *k* num
 
 ![Data query](../../../../assets/data_query.jpg "Data query in Milvus.")
 
-A collection in Milvus is split into multiple segments, the streaming node loads growing segment and maintain the real-time growing data, the query nodes loads sealed segment. 
-When a query/search request arrives, proxy broadcast the request to all streaming node related shard lateds for concurrent search.
-When a query request arrives, the proxy concurrently requests the streaming node where the cooresponding shards are located.
-The streaming node generates a query plan and queries growing data on this node, as well as requests remote query nodes to query historical data, then redunce all the results into query result of a single shard.
-Finally, the proxy collects all shard results and reduces them to the final result and retruns.
+A collection in Milvus is split into multiple segments; the Streaming Node loads growing segments and maintains real-time data, while the Query Nodes load sealed segments.
+
+When a query/search request arrives, the proxy broadcasts the request to all Streaming Nodes responsible for the related shards for concurrent search.
+
+When a query request arrives, the proxy concurrently requests the Streaming Nodes that hold the corresponding shards to execute the search.
+
+Each Streaming Node generates a query plan, searches its local growing data, and simultaneously contacts remote Query Nodes to retrieve historical results, then aggregates these into a single shard result.
+
+Finally, the proxy collects all shard results, merges them into the final outcome, and returns it to the client.
 
 ![Handoff](../../../../assets/handoff.jpg "Handoff in Milvus.")
 
-When the growing segment on streaming node is flushed into a seald segment or data node complete a compaction. A *handoff* operation initiated by coordinator turns growing data to historical data. Coordinator will distribute sealed segments evenly among all query nodes according to memory usage, CPU overhead, and segment number and release the redundant segment.
+When the growing segment on a Streaming Node is flushed into a sealed segment—or when a Data Node completes a compaction—the Coordinator initiates a handoff operation to convert that growing data into historical data. The Coordinator then evenly distributes the sealed segments across all Query Nodes, balancing memory usage, CPU overhead, and segment count, and releases any redundant segment.
 
 ## What's next
 
