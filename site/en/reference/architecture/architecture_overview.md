@@ -10,9 +10,9 @@ Built on top of popular vector search libraries including Faiss, HNSW, DiskANN, 
 
 Milvus also supports data sharding, streaming data ingestion, dynamic schema, search combine vector and scalar data, multi-vector and hybrid search, sparse vector and many other advanced functions. The platform offers performance on demand and can be optimized to suit any embedding retrieval scenario. We recommend deploying Milvus using Kubernetes for optimal availability and elasticity. 
 
-Following the principle of data plane and control plane disaggregation, Milvus comprises [four layers](four_layers.md): access layer, coordinator, worker node (Streaming node, Query node, Data node), and storage (WAL, Meta, Object Storage), each of which can be scaled out or recovered without impacting the others.
+Following the principle of data plane and control plane disaggregation, Milvus comprises [four layers](four_layers.md): access layer, coordinator, worker node (Streaming Node, Query Node, Data Node), and storage (WAL, Meta, Object Storage), each of which can be scaled out or recovered without impacting the others.
 
-Milvus adopts a shared-storage architecture with fully disaggregated storage and compute layers, enabling horizontal scaling of compute nodes. By implementing Woodpecker as a zero-disk write-ahead-log (WAL) layer, Milvus becomes increasingly elastic and cloud-native, while also reducing operational overhead. By separating stream processing into StreamingNode (SN), batch processing into QueryNode (QN) and DataNode (DN), Milvus achieves high performance while meeting real-time processing requirements simultaneously.
+Milvus adopts a shared-storage architecture with fully disaggregated storage and compute layers, enabling horizontal scaling of compute nodes. By implementing Woodpecker as a zero-disk WAL layer, Milvus becomes increasingly elastic and cloud-native, while also reducing operational overhead. By separating stream processing into StreamingNode (SN), batch processing into QueryNode (QN) and DataNode (DN), Milvus achieves high performance while meeting real-time processing requirements simultaneously.
 
 ![Architecture_diagram](../../../../assets/milvus_architecture_2_6.png "Milvus architecture.")
 
