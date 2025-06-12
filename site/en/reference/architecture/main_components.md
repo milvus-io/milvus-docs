@@ -6,15 +6,15 @@ title: Main Components
 
 # Main Components
 
-**Milvus cluster** includes four components and three third-party dependencies. All component can be deployed on Kubernetes, independently from each other. 
+A Milvus cluster comprises five core components and three third-party dependencies. Each component can be deployed independently on Kubernetes: 
 
 ## Milvus components
 
-- Coordinator: Exactly one
-- Proxy: At least one
-- Streaming node: At least one
-- Query node: At least one
-- Data node: At least one
+- Coordinator: exactly one per cluster
+- Proxy: one or more per cluster
+- Streaming Node: one or more per cluster
+- Query Node: one or more per cluster
+- Data Node: one or more per cluster
 
 ## Third-party dependencies
 
@@ -34,11 +34,11 @@ Additionally, in standalone mode, simpler WAL implementation, such as woodpecker
 
 ![Standalone_architecture](../../../../assets/standalone_architecture.jpg "Milvus standalone architecture.")
 
-For now, Milvus standalone cannot be upgraded "online" to Milvus cluster if the WAL Storage support the cluster mode.
+Currently, you cannot perform an online upgrade from a standalone Milvus instance to a Milvus cluster, even if the WAL storage backend supports cluster mode.
 
 ### Cluster
 
-A distributed deployment mode of Milvus where each component runs independently and can be scaled out to provide elasticity. This setup is suitable for large datasets and high-load scenarios.
+A distributed deployment mode of Milvus where each component runs independently and can be scaled out for elasticity. This setup is suitable for large datasets and high-load scenarios.
 
 ![Distributed_architecture](../../../../assets/distributed_architecture.jpg "Milvus cluster architecture.")
 
