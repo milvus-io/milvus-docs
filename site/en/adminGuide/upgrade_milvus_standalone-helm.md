@@ -98,21 +98,6 @@ You can choose the upgrade path for your Milvus as follows:
 
 - [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v{{var.milvus_release_version}}.
 
-<div class="alert warning">
-
-**Special Notice for Upgrades to Milvus {{var.milvus_release_version}}**
-
-If you are upgrading **TO** Milvus {{var.milvus_release_version}} from any previous version (including 2.5.x), please be aware that:
-
-1. **This upgrade is irreversible** - Once completed, you cannot roll back to previous versions
-2. **Architectural changes** - New components like Streaming Node will be introduced, and some existing components may be removed
-3. **Same upgrade commands** - Despite the architectural changes, the Helm upgrade commands remain the same as documented below
-4. **Backup essential** - Always create a complete backup before starting the upgrade process
-
-The standard upgrade procedures below apply to all versions, including {{var.milvus_release_version}}, but remember the irreversible nature when upgrading to {{var.milvus_release_version}}.
-
-</div>
-
 <div style="display:none;">
 
 ## Conduct a rolling upgrade
