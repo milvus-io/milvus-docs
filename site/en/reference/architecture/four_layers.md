@@ -6,8 +6,6 @@ title: Storage/Computing Disaggregation
 
 # Storage/Computing Disaggregation
 
-
-
 Following the principle of data plane and control plane disaggregation, Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.
 
 ## Access layer
@@ -19,14 +17,14 @@ Composed of a group of stateless proxies, the access layer is the front layer of
 
 ## Coordinator
 
-The **Coordinator** is the brain of Milvus. At any given time, there is exactly one active coordinator globally in one Milvus. It is responsible for managing the cluster topology, scheduling various types of task and promising the cluster-level consistency.
+The **Coordinator** serves as the brain of Milvus. At any moment, exactly one Coordinator is active across the entire cluster, responsible for maintaining the cluster topology, scheduling all task types, and promising cluster-level consistency.
 
 The following are some of the tasks handled by the **Coordinator**:
 
-- **DDL/DCL/TSO Management**: Handles data definition language (DDL) and data control language (DCL) requests, such as creating or deleting collections, partitions, or indexes, as well as managing TSO (timestamp Oracle) and time ticker issuing.
-- **Streaming Service Management**: bind the WAL (Write-Ahead Log) with Streaming Nodes and provide service discovery for the streaming service.
-- **Query Management**: Manages topology and load balancing for the Query Nodes, provides and manage the serving query views to guide the query routing.
-- **Historical Data Management**: Distributes offline tasks such as compaction and index-building to DataNodes, manages the topology of segments and data views. 
+- **DDL/DCL/TSO Management**: Handles data definition language (DDL) and data control language (DCL) requests, such as creating or deleting collections, partitions, or indexes, as well as managing timestamp Oracle (TSO) and time ticker issuing.
+- **Streaming Service Management**: Binds the Write-Ahead Log (WAL) with Streaming Nodes and provides service discovery for the streaming service.
+- **Query Management**: Manages topology and load balancing for the Query Nodes, and provides and manages the serving query views to guide the query routing.
+- **Historical Data Management**: Distributes offline tasks such as compaction and index-building to Data Nodes, and manages the topology of segments and data views. 
 
 ## Worker nodes
 
