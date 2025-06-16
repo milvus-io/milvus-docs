@@ -682,12 +682,8 @@ curl --request POST \
      <td><p>Proportion of low-importance terms to ignore during search. For details, refer to <a href="sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
-   </tr>
-   <tr>
      <td><p><code>data</code></p></td>
-     <td><p>The raw query text.</p></td>
+     <td><p>Raw query text in natural language. Milvus automatically converts your text query into sparse vectors using the BM25 function - <strong>do not</strong> provide pre-computed vectors.</p></td>
    </tr>
    <tr>
      <td><p><code>anns_field</code></p></td>
