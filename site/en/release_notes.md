@@ -92,7 +92,7 @@ For more information, refer to [Phrase Match](phrase-match.md).
 
 To optimize resource utilization for large datasets, Milvus 2.6 introduces a cache layer that supports tiered data management. The QueryNode now implements lazy loading, pulling only the required data and indexes from object storage into memory at query time. A built-in LRU eviction policy automatically offloads inactive data, allowing the system to process datasets larger than the available memory and reducing hardware costs.   
 
-#### MinHash LSH Index 
+#### MinHash LSH Index (Beta)
 
 To address the need for data deduplication in model training, Milvus 2.6 adds support for MINHASH_LSH indexes. This feature provides a computationally efficient and scalable method for estimating Jaccard similarity between documents to identify near-duplicates. Users can generate MinHash signatures for their text documents during preprocessing and use the MINHASH_LSH index in Milvus to efficiently find similar content in large-scale datasets, improving data cleaning and model quality.   
 
