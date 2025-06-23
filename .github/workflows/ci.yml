@@ -50,6 +50,7 @@ jobs:
           rm -rf `cat version.json | jq -r .version`
           mkdir `cat version.json | jq -r .version`
           cp -avr ../milvus-docs/** ./`cat version.json | jq -r .version`
+          git checkout -- version.json
           git add .
           git commit -m "Release new docs to master"
           git push -f origin master
