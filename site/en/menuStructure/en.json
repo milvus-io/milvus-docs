@@ -1965,6 +1965,12 @@
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Asynchronous Search",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2266,12 +2272,6 @@
             "label": "Fireworks",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {
