@@ -18,6 +18,10 @@ Release date: July 2, 2025
 
 We're excited to announce Milvus 2.5.14! This release delivers a range of performance and stability enhancements, including a separate chunk cache pool, auto-indexing for JSON fields, and local caching for BM25 segment statistics. This version also resolves several critical bugs, such as a thread explosion in the file watcher and potential panics in QueryCoord, to ensure a more robust and reliable system. We encourage you to upgrade to 2.5.14 to benefit from these latest updates!
 
+### Dependency upgrade
+
+- Upgraded Minio to RELEASE.2024-05-28T17-19-04Z to fix a few CVEs ([#43063](https://github.com/milvus-io/milvus/pull/43063)).
+
 ### Improvements
 
 - Added a separate chunk cache pool ([#42901](https://github.com/milvus-io/milvus/pull/42901)).
@@ -40,7 +44,6 @@ We're excited to announce Milvus 2.5.14! This release delivers a range of perfor
 
 ### Bug fixes
 
-- Upgraded Minio to RELEASE.2024-05-28T17-19-04Z to fix a few CVEs ([#43063](https://github.com/milvus-io/milvus/pull/43063)).
 - Pre-allocated sufficient IDs during data import to avoid failures ([#42935](https://github.com/milvus-io/milvus/pull/42935)).
 - Updated Tantivy to fix a thread explosion in the file watcher ([#42828](https://github.com/milvus-io/milvus/pull/42828), [#42713](https://github.com/milvus-io/milvus/pull/42713)).
 - Fixed an issue where filtered data became invisible under TTL ([#42944](https://github.com/milvus-io/milvus/pull/42944)).
