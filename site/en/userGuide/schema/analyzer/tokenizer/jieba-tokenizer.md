@@ -27,7 +27,7 @@ With the simple configuration, you only need to set the tokenizer to `"jieba"`. 
 ```python
 # Simple configuration: only specifying the tokenizer name
 analyzer_params = {
-    "tokenizer": "jieba",  # Use the default settings: dict=["_default_"], mode="search", hmm=true
+    "tokenizer": "jieba",  # Use the default settings: dict=["_default_"], mode="search", hmm=True
 }
 ```
 
@@ -69,7 +69,7 @@ analyzer_params = {
     "type": "jieba",          # Tokenizer type, fixed as "jieba"
     "dict": ["_default_"],     # Use the default dictionary
     "mode": "search",          # Use search mode for improved recall (see mode details below)
-    "hmm": true                # Enable HMM for probabilistic segmentation
+    "hmm": True                # Enable HMM for probabilistic segmentation
 }
 ```
 
@@ -114,7 +114,7 @@ analyzer_params = {
         "type": "jieba",           # Fixed tokenizer type
         "dict": ["customDictionary"],  # Custom dictionary list; replace with your own terms
         "mode": "exact",           # Use exact mode (non-overlapping tokens)
-        "hmm": false               # Disable HMM; unmatched text will be split into individual characters
+        "hmm": False               # Disable HMM; unmatched text will be split into individual characters
     }
 }
 ```
