@@ -68,7 +68,7 @@ Once the index parameters are configured, you can create the index by using the 
 
 Once the index is built and entities are inserted, you can perform similarity searches on the index.
 
-```bash
+```python
 search_params = {
     "params": {
         "reorder_k": 10, # Number of candidates to refine
