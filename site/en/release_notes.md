@@ -8,6 +8,45 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.15
+
+Release date: July 23, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.15          | 2.5.14            | 2.5.12              | 2.5.11           |
+
+We're excited to announce Milvus 2.5.15! This version enhances your experience by fixing a series of functionality bugs, including ones that may severely damage the metadata causing data loss when collection is renamed. It also delivers a range of general performance and stability enhancements, while resolving numerous bugs to ensure a more robust system. **We encourage you to upgrade to 2.5.15, especially if you are currently on 2.5.14, and explore these latest updates!**
+
+### Improvements
+
+- Updated Knowhere version to fix a sparse vector brute force bug ([#43398](https://github.com/milvus-io/milvus/pull/43398)).
+- Implemented meta saving with txn limits ([#43287](https://github.com/milvus-io/milvus/pull/43287)).
+- Applied load config changes after QueryCoord restart ([#43236](https://github.com/milvus-io/milvus/pull/43236)).
+- Refined variable-length-type memory usage ([#43093](https://github.com/milvus-io/milvus/pull/43093)).
+- Reordered RootCoord shutdown to be last in coordinator stop sequence ([#43024](https://github.com/milvus-io/milvus/pull/43024)).
+- Updated CMake version to 3.31.8 ([#43004](https://github.com/milvus-io/milvus/pull/43004)).
+
+### Bug fixes
+
+- Skipped remove operation if key exists in save set ([#43426](https://github.com/milvus-io/milvus/pull/43426)).
+- Fixed null bitmap offset alignment when loading multi-chunk data ([#43411](https://github.com/milvus-io/milvus/pull/43411), [#43342](https://github.com/milvus-io/milvus/pull/43342)).
+- Updated Tantivy to fix directory removing race condition ([#43401](https://github.com/milvus-io/milvus/pull/43401)).
+- Fixed an issue by calling `AlterCollection` only when renaming collections ([#43421](https://github.com/milvus-io/milvus/pull/43421)).
+- Made `MultiSaveAndRemove` execute removal operations first ([#43409](https://github.com/milvus-io/milvus/pull/43409)).
+- Used disk segment max size for collections with both sparse and dense vectors ([#43195](https://github.com/milvus-io/milvus/pull/43195)).
+- Fixed text match bug by adapting to multi-chunk model ([#43297](https://github.com/milvus-io/milvus/pull/43297)).
+- Fixed incorrect bitset for division comparison when the right operand is negative ([#43180](https://github.com/milvus-io/milvus/pull/43180)).
+- Voided unnecessary copying when getting JSON chunks ([#43183](https://github.com/milvus-io/milvus/pull/43183), [#43202](https://github.com/milvus-io/milvus/pull/43202)).
+- Prevented delegator from becoming unserviceable due to shard leader changes ([#43309](https://github.com/milvus-io/milvus/pull/43309)).
+- Fixed text match index and JSON key stats index leaks when segments are released ([#43308](https://github.com/milvus-io/milvus/pull/43308)).
+- Fixed `RegeneratePartitionStats` failure after restoring clustering compaction tasks ([#43206](https://github.com/milvus-io/milvus/pull/43206)).
+- Added error handling for invalid function parameters to prevent panics ([#43190](https://github.com/milvus-io/milvus/pull/43190)).
+- Removed space trimming logic when validating collection names ([#43138](https://github.com/milvus-io/milvus/pull/43138)).
+- Added field mmap property checks before applying collection-level settings ([#43091](https://github.com/milvus-io/milvus/pull/43091)).
+- Fixed index creation being blocked by failed sort stats ([#43061](https://github.com/milvus-io/milvus/pull/43061)).
+- Fixed exclude nodes clearing logic in load balancer retry mechanism ([#43002](https://github.com/milvus-io/milvus/pull/43002)).
+
 ## v2.5.14
 
 Release date: July 2, 2025
@@ -249,7 +288,7 @@ Release date: April 11, 2025
 |----------------|--------------------|---------------------|------------------|
 | 2.5.9          | 2.5.6              | 2.5.7               | 2.5.7            |
 
-We’re excited to announce Milvus 2.5.9, bringing improved performance for JSON key statistics, enhanced indexing capabilities, and several critical bug fixes that bolster stability and data handling. We encourage you to upgrade or give this version a try, and as always, your feedback is greatly appreciated as we continue to refine Milvus.
+We're excited to announce Milvus 2.5.9, bringing improved performance for JSON key statistics, enhanced indexing capabilities, and several critical bug fixes that bolster stability and data handling. We encourage you to upgrade or give this version a try, and as always, your feedback is greatly appreciated as we continue to refine Milvus.
 
 ### Improvements
 
@@ -291,7 +330,7 @@ Release date: April 1, 2025
 |----------------|--------------------|---------------------|------------------|
 | 2.5.8          | 2.5.6              | 2.5.7               | 2.5.6            |
 
-We’re excited to announce the release of Milvus 2.5.8, featuring enhancements to JSON expressions, UTF-8 validation, memory usage, and balancing logic. This version also includes multiple important bug fixes to improve concurrency and data handling. We encourage you to upgrade or give it a try, and as always, your feedback helps us continually refine Milvus!
+We're excited to announce the release of Milvus 2.5.8, featuring enhancements to JSON expressions, UTF-8 validation, memory usage, and balancing logic. This version also includes multiple important bug fixes to improve concurrency and data handling. We encourage you to upgrade or give it a try, and as always, your feedback helps us continually refine Milvus!
 
 ### Features
 
@@ -336,7 +375,7 @@ Release date: March 21, 2025
 |----------------|--------------------|---------------------|------------------|
 | 2.5.7          | 2.5.6              | 2.5.6               | 2.5.6            |
 
-We’re excited to announce the release of Milvus 2.5.7, highlighted by the newly introduced JSON Path Index feature. This allows you to build inverted indexes on dynamic or JSON columns to significantly improve query performance. Alongside this new functionality, we've made numerous enhancements and bug fixes for better reliability, more refined error handling, and improved usability. We encourage you to upgrade or try it out, and as always, your feedback is greatly appreciated as we continue to improve Milvus!
+We're excited to announce the release of Milvus 2.5.7, highlighted by the newly introduced JSON Path Index feature. This allows you to build inverted indexes on dynamic or JSON columns to significantly improve query performance. Alongside this new functionality, we've made numerous enhancements and bug fixes for better reliability, more refined error handling, and improved usability. We encourage you to upgrade or try it out, and as always, your feedback is greatly appreciated as we continue to improve Milvus!
 
 ### Features
 
@@ -366,7 +405,7 @@ We’re excited to announce the release of Milvus 2.5.7, highlighted by the newl
 - Added clear bitmap input for every batch loop ([#40722](https://github.com/milvus-io/milvus/pull/40722))
 - Protected `GetSegmentIndexes` with an RLock ([#40720](https://github.com/milvus-io/milvus/pull/40720))
 - Avoided segmentation faults caused by retrieving empty vector datasets ([#40546](https://github.com/milvus-io/milvus/pull/40546))
-- Fixed JSON index “not-equal” filter ([#40648](https://github.com/milvus-io/milvus/pull/40648))
+- Fixed JSON index "not-equal" filter ([#40648](https://github.com/milvus-io/milvus/pull/40648))
 - Fixed null offset loading in the inverted index ([#40524](https://github.com/milvus-io/milvus/pull/40524))
 - Fixed the garbage cleanup logic of `jsonKey` stats and improved the JSON key stats filter ([#40039](https://github.com/milvus-io/milvus/pull/40039))
 - Caught invalid JSON pointer errors ([#40626](https://github.com/milvus-io/milvus/pull/40626))
@@ -385,7 +424,7 @@ Release date: March 10, 2025
 |----------------|--------------------|---------------------|------------------|
 | 2.5.6          | 2.5.5              | 2.5.5               | 2.5.5            |
 
-We’re excited to announce the release of Milvus 2.5.6, featuring valuable enhancements to toolchains, logging, metrics, and array handling, as well as multiple bug fixes for improved reliability and performance. This update includes refined concurrency handling, more robust compaction tasks, and other key improvements. We encourage you to upgrade or try it out, and as always, we welcome your feedback to help us continuously improve Milvus!
+We're excited to announce the release of Milvus 2.5.6, featuring valuable enhancements to toolchains, logging, metrics, and array handling, as well as multiple bug fixes for improved reliability and performance. This update includes refined concurrency handling, more robust compaction tasks, and other key improvements. We encourage you to upgrade or try it out, and as always, we welcome your feedback to help us continuously improve Milvus!
 
 ### Improvements
 
@@ -532,7 +571,7 @@ Release date: January 23, 2025
 |----------------|--------------------|---------------------|------------------|
 | 2.5.4          | 2.5.4              | 2.5.4               | 2.5.4            |
 
-We’re excited to announce the release of Milvus 2.5.4, which introduces key performance optimizations and new features such as PartitionKey isolation, Sparse Index with DAAT MaxScore, and enhanced locking mechanisms. A standout highlight of this release is its support for 10,000 collections and 1 million partitions, marking a major milestone for multi-tenant use cases. This version also addresses multiple bugs that improve overall stability and reliability, two of the critical bugs may cause data loss. We encourage you to upgrade or try out this latest release, and we look forward to your feedback in helping us continually refine Milvus!
+We're excited to announce the release of Milvus 2.5.4, which introduces key performance optimizations and new features such as PartitionKey isolation, Sparse Index with DAAT MaxScore, and enhanced locking mechanisms. A standout highlight of this release is its support for 10,000 collections and 1 million partitions, marking a major milestone for multi-tenant use cases. This version also addresses multiple bugs that improve overall stability and reliability, two of the critical bugs may cause data loss. We encourage you to upgrade or try out this latest release, and we look forward to your feedback in helping us continually refine Milvus!
 
 ### Features
 
@@ -544,7 +583,7 @@ We’re excited to announce the release of Milvus 2.5.4, which introduces key pe
 ### Improvements
 
 - Support 10K collections and 1million partitions in one cluster ([#37630](https://github.com/milvus-io/milvus/pull/37630))
-- Cached segments’ delta information to accelerate the Query Coordinator ([#39349](https://github.com/milvus-io/milvus/pull/39349))
+- Cached segments' delta information to accelerate the Query Coordinator ([#39349](https://github.com/milvus-io/milvus/pull/39349))
 - Read metadata concurrently at the collection level to speed up failure recovery ([#38900](https://github.com/milvus-io/milvus/pull/38900))
 - Refined lock granularity in QueryNode ([#39282](https://github.com/milvus-io/milvus/pull/39282)), ([#38907](https://github.com/milvus-io/milvus/pull/38907))
 - Unified style by using CStatus to handle NewCollection CGO calls ([#39303](https://github.com/milvus-io/milvus/pull/39303))
