@@ -12,9 +12,31 @@ title: Upgrade Milvus Standalone with Docker Compose
 
 # Upgrade Milvus Standalone with Docker Compose
 
-This topic describes how to upgrade your Milvus using Docker Compose. 
+This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v{{var.milvus_release_version}} using Docker Compose.
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v{{var.milvus_release_version}}.
+## Before you start
+
+### What's new in v{{var.milvus_release_version}}
+
+Upgrading from Milvus 2.5.x to {{var.milvus_release_version}} involves significant architectural changes:
+
+- **New components**: Introduction of Streaming Node for enhanced data processing
+- **Component optimizations**: Enhanced performance and streamlined architecture
+
+<div class="alert note">
+This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For more information on architecture changes, refer to <a href="architecture_overview.md">Milvus Architecture Overview</a>.
+</div>
+
+### Requirements
+
+**System requirements:**
+- Docker and Docker Compose installed
+- Milvus standalone deployed via Docker Compose
+
+**Compatibility requirements:**
+- Milvus v2.6.0-rc1 is **not compatible** with v{{var.milvus_release_version}}. Direct upgrades from release candidates are not supported.
+- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
+- You **must** upgrade to v2.5.16 before upgrading to v{{var.milvus_release_version}}.
 
 <div class="alter note">
 
@@ -24,23 +46,80 @@ Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-
 
 ## Upgrade process
 
-In normal cases, you can upgrade Milvus as follows:
+### Step 1: Download updated Docker Compose files
 
-1. Change the Milvus image tag in `docker-compose.yaml`.
+Before upgrading, download the latest Docker Compose configuration files:
+
+```bash
+# Download the latest docker-compose.yaml
+wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml -O docker-compose.yaml
+```
+
+<div class="alert note">
+Always download the latest configuration files to ensure compatibility with the new version and access to new features.
+</div>
+
+### Step 2: Upgrade to v2.5.16
+
+<div class="alert-note">
+
+Skip this step if your standalone deployment is already running v2.5.16 or higher.
+
+</div>
+
+1. Update the Milvus image tag in your `docker-compose.yaml` to v2.5.16:
 
     ```yaml
     ...
     standalone:
       container_name: milvus-standalone
-      image: milvusdb/milvus:v{{var.milvus_release_version}}
+      image: milvusdb/milvus:v2.5.16
     ```
 
-2. Run the following commands to perform the upgrade.
+2. Apply the upgrade:
 
-    ```shell
+    ```bash
     docker compose down
     docker compose up -d
     ```
+
+3. Verify the upgrade:
+
+    ```bash
+    docker compose ps
+    ```
+
+### Step 3: Upgrade to v{{var.milvus_release_version}}
+
+Once v2.5.16 is running successfully, upgrade to v{{var.milvus_release_version}}:
+
+1. Update the Milvus image tag in your `docker-compose.yaml`:
+
+    ```yaml
+    ...
+    standalone:
+      container_name: milvus-standalone
+      image: milvusdb/milvus:v{{var.milvus_release_tag}}
+    ```
+
+2. Apply the final upgrade:
+
+    ```bash
+    docker compose down
+    docker compose up -d
+    ```
+
+## Verify the upgrade
+
+Confirm your standalone deployment is running the new version:
+
+```bash
+# Check container status
+docker compose ps
+
+# Check Milvus version
+docker compose logs standalone | grep "version"
+```
 
 ## What's next
 - You might also want to learn how to:
