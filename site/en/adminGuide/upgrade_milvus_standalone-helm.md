@@ -24,8 +24,10 @@ Upgrading from Milvus 2.5.x to {{var.milvus_release_version}} involves significa
 - **New components**: Introduction of Streaming Node and other new components
 - **Component optimizations**: Enhanced performance and streamlined architecture
 
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="architecture_overview.md">Milvus Architecture Overview</a>.
+
 <div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For details on architectural changes, refer to <a href="architecture_overview.md">Milvus Architecture Overview</a>.
+This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed.
 </div>
 
 ### Requirements
@@ -61,10 +63,16 @@ The Milvus Helm Charts repo at <code>https://milvus-io.github.io/milvus-helm/</c
 
 ### Step 2: Upgrade to v2.5.16
 
+<div class="alert-note">
+
+Skip this step if your standalone deployment is already running v2.5.16 or higher.
+
+</div>
+
 Upgrade your Milvus standalone to v2.5.16:
 
 ```bash
-helm upgrade my-release milvus/milvus \
+helm upgrade my-release zilliztech/milvus \
   --set image.all.tag="v2.5.16" \
   --reset-then-reuse-values \
   --version={{var.milvus_helm_chart_version}}
@@ -73,9 +81,6 @@ helm upgrade my-release milvus/milvus \
 Wait for the upgrade to complete:
 
 ```bash
-# Monitor the upgrade progress
-kubectl get pods -w
-
 # Verify all pods are ready
 kubectl get pods
 ```
@@ -85,7 +90,7 @@ kubectl get pods
 Once v2.5.16 is running successfully, upgrade to v{{var.milvus_release_version}}:
 
 ```bash
-helm upgrade my-release milvus/milvus \
+helm upgrade my-release zilliztech/milvus \
   --set image.all.tag="v{{var.milvus_release_tag}}" \
   --reset-then-reuse-values \
   --version={{var.milvus_helm_chart_version}}
@@ -97,10 +102,7 @@ Confirm your standalone deployment is running the new version:
 
 ```bash
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=milvus
-
-# Verify Helm release
-helm list
+kubectl get pods
 ```
 
 For additional support, consult the [Milvus documentation](https://milvus.io/docs) or [community forum](https://github.com/milvus-io/milvus/discussions).
