@@ -86,7 +86,38 @@ helm install my-release zilliztech/milvus \
 
 **Deploy Milvus cluster:**
 
-The following command deploys a Milvus cluster with optimized settings for v{{var.milvus_release_version}}:
+The following command deploys a Milvus cluster with optimized settings for v{{var.milvus_release_version}}, using WoodPecker as the recommended message queue:
+
+```bash
+helm install my-release zilliztech/milvus \
+  --set image.all.tag=v{{var.milvus_release_version}} \
+  --set pulsarv3.enabled=false \
+  --set woodpecker.enabled=true \
+  --set streaming.enabled=true \
+  --set indexNode.enabled=false
+```
+
+**What this command does:**
+- Uses **WoodPecker** as the message queue (recommended for reduced maintenance)
+- Enables the new **Streaming Node** component for improved performance
+- Disables the legacy **Index Node** (functionality is now handled by Data Node)
+- Disables Pulsar to use WoodPecker instead
+
+<div class="alert note">
+
+**Architecture Changes in Milvus 2.6.x:**
+
+- **Message Queue**: **WoodPecker** is now recommended (reduces infrastructure maintenance compared to Pulsar)
+- **New Component**: **Streaming Node** is introduced and enabled by default  
+- **Merged Components**: **Index Node** and **Data Node** are combined into a single **Data Node**
+
+For complete architecture details, refer to the [Architecture Overview](architecture_overview.md).
+
+</div>
+
+**Alternative Message Queue Options:**
+
+If you prefer to use **Pulsar** (traditional choice) instead of WoodPecker:
 
 ```bash
 helm install my-release zilliztech/milvus \
@@ -95,28 +126,8 @@ helm install my-release zilliztech/milvus \
   --set indexNode.enabled=false
 ```
 
-**What this command does:**
-- Enables the new **Streaming Node** component for improved performance
-- Disables the legacy **Index Node** (functionality is now handled by Data Node)
-
-<div class="alert note">
-
-**Architecture Changes in Milvus 2.6.x:**
-
-- **Message Queue**: Uses **Pulsar** by default (same as previous versions)
-- **New Component**: **Streaming Node** is introduced and enabled by default  
-- **Merged Components**: **Index Node** and **Data Node** are combined into a single **Data Node**
-
-For complete architecture details, refer to the [Architecture Overview](architecture_overview.md).
-
-</div>
-
-**Command parameters:**
-- `my-release`: Your deployment name (use letters, numbers, and dashes only)
-- `zilliztech/milvus`: The Helm chart repository
-
 **Next steps:**
-The command above deploys Milvus with default configurations. For production use:
+The command above deploys Milvus with recommended configurations. For production use:
 - Use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to optimize settings based on your data size
 - Review [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md) for advanced configuration options
 

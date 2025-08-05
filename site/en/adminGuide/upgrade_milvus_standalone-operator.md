@@ -20,14 +20,11 @@ This guide describes how to upgrade your Milvus standalone deployment from v2.5.
 
 Upgrading from Milvus 2.5.x to {{var.milvus_release_version}} involves significant architectural changes:
 
-- **New components**: Introduction of Streaming Node and other new components
-- **Component optimizations**: Enhanced performance and streamlined architecture for standalone deployments
+- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
+- **New components**: Introduction of Streaming Node for enhanced data processing
+- **Component removal**: `dataNode` and `indexNode` have been removed and consolidated
 
-This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="architecture_overview.md">Milvus Architecture Overview</a>.
-
-<div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed.
-</div>
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
 
 ### Requirements
 
@@ -38,6 +35,7 @@ This upgrade is <strong>irreversible</strong>. You cannot roll back to a previou
 
 **Compatibility requirements:**
 - Milvus v2.6.0-rc1 is **not compatible** with v{{var.milvus_release_version}}. Direct upgrades from release candidates are not supported.
+- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
 - You **must** upgrade to v2.5.16 before upgrading to v{{var.milvus_release_version}}.
 
 ## Upgrade process
