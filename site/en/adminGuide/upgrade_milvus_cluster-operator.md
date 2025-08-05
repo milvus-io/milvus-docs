@@ -92,6 +92,9 @@ kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
 Wait for completion:
 
 ```bash
+# Monitor the upgrade progress
+kubectl get pods -w
+
 # Verify all pods are ready
 kubectl get pods
 ```
