@@ -3,7 +3,7 @@ name: preview
 on:
   push:
     branches:
-      - preview
+      - v2.7.x
   release:
     types: [released]
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
         with:
-          ref: preview
+          ref: v2.7.x
 
       - name: Extract branch name
         shell: bash
