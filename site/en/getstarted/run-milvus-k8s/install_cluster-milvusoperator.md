@@ -40,12 +40,12 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When custom resources are defined, you can use K8s APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
-You can install Milvus Operator in either of the following ways:
+<div class="filter">
+  <a href="#helm">Helm</a>
+  <a href="#kubectl">Kubectl</a>
+</div>
 
-- [With Helm](#Install-with-Helm)
-- [With kubectl](#Install-with-kubectl)
-
-### Install with Helm
+<div class="filter-helm">
 
 Run the following command to install Milvus Operator with Helm.
 
@@ -74,8 +74,6 @@ More samples can be found in https://github.com/zilliztech/milvus-operator/tree/
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
-<div class="alert note">
-
 If you have installed Milvus Operator before, upgrade it using the following command:
 
 ```shell
@@ -87,7 +85,7 @@ helm upgrade milvus-operator \
 
 </div>
 
-### Install with kubectl
+<div class="filter-kubectl">
 
 Run the following command to install Milvus Operator with `kubectl`.
 
@@ -123,6 +121,8 @@ NAME                               READY   STATUS    RESTARTS   AGE
 milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 ```
 
+</div>
+
 ## Deploy Milvus
 
 ### 1. Deploy a Milvus cluster
@@ -130,10 +130,17 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 Once the Milvus Operator pod is running, you can deploy a Milvus cluster as follows.
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 ```
 
-The command above deploys a Milvus cluster with its components and dependencies in separate pods using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
+The command above deploys a Milvus cluster with **WoodPecker** as the message queue (recommended for v{{var.milvus_release_version}}) and all new architectural components including the Streaming Node. 
+
+**Architecture highlights in this deployment:**
+- **Message Queue**: Uses WoodPecker (reduces infrastructure maintenance)
+- **Streaming Node**: Enabled for enhanced data processing
+- **Mix Coordinator**: Consolidated coordinator components for improved efficiency
+
+To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
 
 <div class="alert note">
 
@@ -142,7 +149,7 @@ The command above deploys a Milvus cluster with its components and dependencies 
 
 </div>
 
-#### 2. Check Milvus cluster status
+### 2. Check Milvus cluster status
 
 Run the following command to check Milvus cluster status
 
@@ -159,21 +166,21 @@ metadata:
 ...
 status:
   conditions:
-  - lastTransitionTime: "2021-11-02T05:59:41Z"
+  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
     reason: StorageReady
     status: "True"
     type: StorageReady
-  - lastTransitionTime: "2021-11-02T06:06:23Z"
+  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
     message: Pulsar is ready
     reason: PulsarReady
     status: "True"
     type: PulsarReady
-  - lastTransitionTime: "2021-11-02T05:59:41Z"
+  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
     message: Etcd endpoints is healthy
     reason: EtcdReady
     status: "True"
     type: EtcdReady
-  - lastTransitionTime: "2021-11-02T06:12:36Z"
+  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
     message: All Milvus components are healthy
     reason: MilvusClusterHealthy
     status: "True"
