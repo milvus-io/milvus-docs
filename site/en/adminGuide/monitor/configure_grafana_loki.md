@@ -10,9 +10,35 @@ This guide provides instructions on how to configure Loki to collect logs and Gr
 
 In this guide, you will learn how to:
 
-- Deploy [Loki](https://grafana.com/docs/loki/latest/get-started/overview/) and [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/) on a Milvus cluster using Helm.
+- Deploy [Loki](https://grafana.com/docs/loki/latest/get-started/overview/) and [Alloy](https://grafana.com/docs/alloy/latest/) on a Milvus cluster using Helm.
 - Configure object storage for Loki.
 - Query logs using Grafana.
+
+For reference, [Promatil](https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent) will be deprecated.
+So we instead introduce Alloy that the official grafana labs suggested as new agent.
+
+# Introduction
+
+Before diving into how to build a logging system with Milvus, We’d like to first introduce the mechanisms of the logging system being used.
+Broadly speaking, there are two main structures you can apply. 
+Please note that the mechanism to be introduced can be applied regardless of whether the [log functionality](https://milvus.io/docs/configure_log.md) in Milvus is enabled.
+
+## 1. Using host volumes of kubernetes worker node
+
+Kubernetes worker nodes periodically write stream logs generated from pods scheduled on those nodes to a specific path in the node’s file system as files with a `.log` extension, we will leverage this feature.
+Next, we will deploy Alloy, which acts as an agent, as a DaemonSet on the worker nodes.
+This Alloy will share the path where the log files are stored on the worker nodes via a host volume.
+As a result, the log files from the Milvus pods will be visible inside the Alloy pod, and Alloy will read these files and send them to Loki.
+
+![Logging with k8s worker node host volume](../../../../assets/monitoring/logging_HostVolume.png "logging with host volume sharing.")
+
+## 2. Using kubernetes API server
+
+Kubernetes API server is one of the control plane components. Alloy is not necessarily deployed as daemonset. This is work well as deployment.
+Instead, Alloy must request to kubernetes API server for fetching stream logs of milvus pods and get them.
+Finally, Alloy will send the stream logs to Loki.
+
+![Logging with k8s API Server](../../../../assets/monitoring/logging_K8sApi.png "logging with k8s api server.")
 
 ## Prerequisites
 
@@ -79,26 +105,112 @@ kubectl create ns loki
 helm install --values loki.yaml loki grafana/loki -n loki
 ```
 
-## Deploy Promtail
+## Deploy Alloy
 
-Promtail is a log collection agent for Loki. It reads logs from Milvus pods and sends them to Loki.
+The ways to install Alloy is various. You can refer official Alloy [documentation](https://grafana.com/docs/alloy/latest/set-up/install/).
+We will show you Alloy [configuration](https://grafana.com/docs/alloy/latest/configure/).
 
-### 1. Create Promtail Configuration
-
-Create a `promtail.yaml` configuration file:
+### 1. Using host volumes of kubernetes worker node
 
 ```yaml
-config:
-  clients:
-    - url: http://loki-gateway/loki/api/v1/push
+alloy:
+  enableReporting: false
+  resources: {}
+  configMap:
+    create: true
+    content: |-
+      loki.write "remote_loki" {
+        endpoint {
+          url       = "http://loki-gateway/loki/api/v1/push"
+          tenant_id = "your tenant"
+        }
+      }
+      
+      loki.source.file "milvus_logs" {
+        targets = local.file_match.milvus_log_files.targets
+        forward_to = [loki.write.remote_loki.receiver]
+      }
+      
+      local.file_match "milvus_log_files" {
+        path_targets = [
+          {"__path__" = "/your/worker/node/var/log/pods/milvus_milvus-*/**/*.log"},
+        ]
+      }
+  # mount to pods with host volume
+  mounts:
+    extra:
+      - name: log-pods
+        mountPath: /host/var/log/pods
+        readOnly: true
+
+controller:
+  type: 'daemonset'
+  replicas: 1
+  # make volume that use host volume in worker node
+  volumes:
+    extra:
+      - name: log-pods
+        hostPath:
+          path: /var/log/pods
+  tolerations: []
+  nodeSelector: {}
+  podDisruptionBudget:
+    enabled: false
+  autoscaling:
+    enabled: false
+service:
+  enabled: true
+  type: ClusterIP
+serviceMonitor:
+  enabled: false
+ingress:
+  enabled: false
 ```
 
-### 2. Install Promtail
+### 2. Using kubernetes API server
 
-Install Promtail using Helm:
+```yaml
+alloy:
+  enableReporting: false
+  resources: {}
+  configMap:
+    create: true
+    content: |-
+      loki.write "remote_loki" {
+        endpoint {
+          url       = "http://loki-gateway/loki/api/v1/push"
+          tenant_id = "your tenant"
+        }
+      }
 
-```shell
-helm install  --values promtail.yaml promtail grafana/promtail -n loki
+      discovery.kubernetes "milvus_pod" {
+        role = "pod"
+        selectors {
+          role = "pod"
+          label = "app.kubernetes.io/instance=milvus"
+        }
+      }
+
+      loki.source.kubernetes "milvus_pod_logs" {
+        targets = discovery.kubernetes.milvus_pod.output
+        forward_to = [loki.write.remote_loki.receiver]
+      }
+controller:
+  type: 'deployment'
+  replicas: 1
+  tolerations: []
+  nodeSelector: {}
+  podDisruptionBudget:
+    enabled: false
+  autoscaling:
+    enabled: false
+service:
+  enabled: true
+  type: ClusterIP
+serviceMonitor:
+  enabled: false
+ingress:
+  enabled: false
 ```
 
 ## Query Logs with Grafana
