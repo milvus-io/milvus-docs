@@ -14,18 +14,18 @@ In this guide, you will learn how to:
 - Configure object storage for Loki.
 - Query logs using Grafana.
 
-For reference, [Promatil](https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent) will be deprecated.
-So we instead introduce Alloy that the official grafana labs suggested as new agent.
+For reference, [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent) will be deprecated.
+So we instead introduce Alloy, which has been officially suggested by Grafana Labs as the new agent.
 
 # Introduction
 
-Before diving into how to build a logging system with Milvus, We’d like to first introduce the mechanisms of the logging system being used.
+Before diving into how to build a logging system with Milvus, we’d like to first introduce the mechanisms of the logging system being used.
 Broadly speaking, there are two main structures you can apply. 
 Please note that the mechanism to be introduced can be applied regardless of whether the [log functionality](https://milvus.io/docs/configure_log.md) in Milvus is enabled.
 
 ## 1. Using host volumes of kubernetes worker node
 
-Kubernetes worker nodes periodically write stream logs generated from pods scheduled on those nodes to a specific path in the node’s file system as files with a `.log` extension, we will leverage this feature.
+kubernetes worker nodes periodically write stream logs generated from pods scheduled on those nodes to a specific path in the node’s file system as files with a `.log` extension, we will leverage this feature.
 Next, we will deploy Alloy, which acts as an agent, as a DaemonSet on the worker nodes.
 This Alloy will share the path where the log files are stored on the worker nodes via a host volume.
 As a result, the log files from the Milvus pods will be visible inside the Alloy pod, and Alloy will read these files and send them to Loki.
@@ -34,7 +34,7 @@ As a result, the log files from the Milvus pods will be visible inside the Alloy
 
 ## 2. Using kubernetes API server
 
-Kubernetes API server is one of the control plane components. Alloy is not necessarily deployed as daemonset. This is work well as deployment.
+kubernetes API server is one of the control plane components. Alloy doesn't necessarily need to be deployed as a DaemonSet. It works well as a Deployment. This is work well as Deployment.
 Instead, Alloy must request to kubernetes API server for fetching stream logs of milvus pods and get them.
 Finally, Alloy will send the stream logs to Loki.
 
