@@ -16,7 +16,7 @@ This page illustrates how to install Milvus standalone with a pre-built RPM/DEB 
 
 ## Download the RPM/DEB Package
 
-You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases).
+You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v{{ var.milvus_release_version }}).
 
 - For x86_64/amd64, download the **{{ var.milvus_deb_amd64 }}** or **{{ var.milvus_rpm_amd64 }}** package.
 - For ARM64, download the **{{ var.milvus_deb_arm64 }}** or **{{ var.milvus_rpm_arm64 }}** package.
