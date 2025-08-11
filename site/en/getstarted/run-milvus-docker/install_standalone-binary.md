@@ -12,6 +12,7 @@ This page illustrates how to install Milvus standalone with a pre-built RPM/DEB 
 
 ## Prerequisites
 
+- You have already installed libstdc++ 8.5.0 or a later version
 - [Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation.
 
 ## Download the RPM/DEB Package
