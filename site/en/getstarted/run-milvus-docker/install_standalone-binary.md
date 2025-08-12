@@ -17,15 +17,15 @@ This page illustrates how to install Milvus standalone with a pre-built RPM/DEB 
 
 ## Download the RPM/DEB Package
 
-You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v{{ var.milvus_release_version }}).
+You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v{{var.milvus_release_version}}).
 
-- For x86_64/amd64, download the **{{ var.milvus_deb_amd64 }}** or **{{ var.milvus_rpm_amd64 }}** package.
-- For ARM64, download the **{{ var.milvus_deb_arm64 }}** or **{{ var.milvus_rpm_arm64 }}** package.
+- For x86_64/amd64, download the **{{var.milvus_deb_amd64}}** or **{{var.milvus_rpm_amd64}}** package.
+- For ARM64, download the **{{var.milvus_deb_arm64}}** or **{{var.milvus_rpm_arm64}}** package.
 
 The following command assumes that you are going to run Milvus Standalone on a x86_64/amd64 machine.
 
 ```shell
-wget https://github.com/milvus-io/milvus/releases/download/v{{ var.milvus_release_version }}/{{ var.milvus_rpm_amd64 }} -O {{ var.milvus_rpm_amd64 }}
+wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_version}}/{{var.milvus_rpm_amd64}} -O {{var.milvus_rpm_amd64}}
 ```
 
 ## Install the RPM/DEB Package
@@ -35,14 +35,14 @@ To install the RPM/DEB package, you can use the package manager of your system.
 For RPM-based systems (such as CentOS, Fedora, and RHEL), use the `yum` command to install the package.
 
 ```shell
-yum install -y ./milvus_2.6.0-1_amd64.rpm
+yum install -y ./{{var.milvus_rpm_amd64}}
 rpm -qa| grep milvus
 ```
 
 For DEB-based systems (such as Ubuntu and Debian), use the `apt` command to install the package.
 
 ```shell
-apt install -y  ./milvus_2.6.0-1_amd64.rpm
+apt install -y  ./{{var.milvus_rpm_amd64}}
 dpkg -l | grep milvus
 ```
 
