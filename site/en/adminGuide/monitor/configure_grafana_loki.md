@@ -34,7 +34,7 @@ As a result, the log files from the Milvus pods will be visible inside the Alloy
 
 ## 2. Using kubernetes API server
 
-kubernetes API server is one of the control plane components. Alloy doesn't necessarily need to be deployed as a DaemonSet. It works well as a Deployment. This is work well as Deployment.
+kubernetes API server is one of the control plane components. Alloy doesn't necessarily need to be deployed as a DaemonSet. It works well as a Deployment. It works well as a Deployment.
 Instead, Alloy must request to kubernetes API server for fetching stream logs of milvus pods and get them.
 Finally, Alloy will send the stream logs to Loki.
 
@@ -107,11 +107,12 @@ helm install --values loki.yaml loki grafana/loki -n loki
 
 ## Deploy Alloy
 
-The ways to install Alloy is various. You can refer official Alloy [documentation](https://grafana.com/docs/alloy/latest/set-up/install/).
+You can configure alloy and deploy alloy based on Helm chart. Refer to the official Alloy [documentation](https://grafana.com/docs/alloy/latest/set-up/install/) for more installation options.
 We will show you Alloy [configuration](https://grafana.com/docs/alloy/latest/configure/).
 
-### 1. Using host volumes of kubernetes worker node
-
+### Create Alloy Configuration
+#### 1. Using host volumes of kubernetes worker node
+`alloy.yaml`:
 ```yaml
 alloy:
   enableReporting: false
@@ -122,7 +123,6 @@ alloy:
       loki.write "remote_loki" {
         endpoint {
           url       = "http://loki-gateway/loki/api/v1/push"
-          tenant_id = "your tenant"
         }
       }
       
@@ -167,8 +167,8 @@ ingress:
   enabled: false
 ```
 
-### 2. Using kubernetes API server
-
+#### 2. Using kubernetes API server
+`alloy.yaml`:
 ```yaml
 alloy:
   enableReporting: false
@@ -179,38 +179,23 @@ alloy:
       loki.write "remote_loki" {
         endpoint {
           url       = "http://loki-gateway/loki/api/v1/push"
-          tenant_id = "your tenant"
         }
       }
 
       discovery.kubernetes "milvus_pod" {
         role = "pod"
-        selectors {
-          role = "pod"
-          label = "app.kubernetes.io/instance=milvus"
-        }
       }
 
       loki.source.kubernetes "milvus_pod_logs" {
         targets = discovery.kubernetes.milvus_pod.output
         forward_to = [loki.write.remote_loki.receiver]
       }
-controller:
-  type: 'deployment'
-  replicas: 1
-  tolerations: []
-  nodeSelector: {}
-  podDisruptionBudget:
-    enabled: false
-  autoscaling:
-    enabled: false
-service:
-  enabled: true
-  type: ClusterIP
-serviceMonitor:
-  enabled: false
-ingress:
-  enabled: false
+```
+
+### Install Alloy
+
+```shell
+helm install --values alloy.yaml alloy grafana/alloy -n loki
 ```
 
 ## Query Logs with Grafana
