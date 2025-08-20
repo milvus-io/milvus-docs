@@ -142,29 +142,6 @@ alloy:
       - name: log-pods
         mountPath: /host/var/log/pods
         readOnly: true
-
-controller:
-  type: 'daemonset'
-  replicas: 1
-  # make volume that use host volume in worker node
-  volumes:
-    extra:
-      - name: log-pods
-        hostPath:
-          path: /var/log/pods
-  tolerations: []
-  nodeSelector: {}
-  podDisruptionBudget:
-    enabled: false
-  autoscaling:
-    enabled: false
-service:
-  enabled: true
-  type: ClusterIP
-serviceMonitor:
-  enabled: false
-ingress:
-  enabled: false
 ```
 
 #### 2. Using kubernetes API server
