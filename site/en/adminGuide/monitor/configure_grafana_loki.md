@@ -34,7 +34,7 @@ As a result, the log files from the Milvus pods will be visible inside the Alloy
 
 ## 2. Using kubernetes API server
 
-kubernetes API server is one of the control plane components. Alloy doesn't necessarily need to be deployed as a DaemonSet. It works well as a Deployment. It works well as a Deployment.
+kubernetes API server is one of the control plane components. Alloy doesn't necessarily need to be deployed as a DaemonSet. It works well as a Deployment.
 Instead, Alloy must request to kubernetes API server for fetching stream logs of milvus pods and get them.
 Finally, Alloy will send the stream logs to Loki.
 
