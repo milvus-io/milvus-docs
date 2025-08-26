@@ -108,7 +108,7 @@ az storage container create -n testmilvus --account-name milvustesting1
 
 - get secret key, use the first value
 ```bash
-az storage account keys list --account-name milvustesting2
+az storage account keys list --account-name milvustesting1
 ```
 
 - Add values.yaml
