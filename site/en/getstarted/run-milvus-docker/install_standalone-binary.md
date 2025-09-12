@@ -42,7 +42,7 @@ rpm -qa| grep milvus
 For DEB-based systems (such as Ubuntu and Debian), use the `apt` command to install the package.
 
 ```shell
-apt install -y  ./{{var.milvus_rpm_amd64}}
+apt install -y  ./{{var.milvus_deb_amd64}}
 dpkg -l | grep milvus
 ```
 
