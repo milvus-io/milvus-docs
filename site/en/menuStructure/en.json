@@ -448,15 +448,9 @@
                 "children": []
               },
               {
-                "label": "JSON Indexing",
-                "id": "json-field.md",
-                "order": 2,
-                "children": []
-              },
-              {
                 "label": "JSON Shredding",
                 "id": "json-shredding.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               }
             ]
