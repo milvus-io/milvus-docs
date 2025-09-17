@@ -174,45 +174,6 @@ This section demonstrates how to create indexes on different types of JSON data 
 
 ### Sample JSON structure
 
-<div class="multipleCode">
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-    <a href="#json">JSON</a>
-</div>
-
 ```json
 {
   "metadata": { 
