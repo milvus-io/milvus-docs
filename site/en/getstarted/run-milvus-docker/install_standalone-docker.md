@@ -33,7 +33,7 @@ $ bash standalone_embed.sh start
 
 **What's new in v{{var.milvus_release_version}}:**
 - **Streaming Node**: Enhanced data processing capabilities
-- **WoodPecker MQ**: Improved message queue with reduced maintenance overhead
+- **Woodpecker MQ**: Improved message queue with reduced maintenance overhead, see [Use Woodpecker](use-woodpecker.md) for detail
 - **Optimized Architecture**: Consolidated components for better performance
 
 Always download the latest script to ensure you get the most recent configurations and architecture improvements.
