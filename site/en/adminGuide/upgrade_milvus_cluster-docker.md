@@ -12,6 +12,12 @@ This topic describes how to upgrade your Milvus using Docker Compose.
 
 In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v{{var.milvus_release_version}}.
 
+<div class="alert note">
+
+{{fragments/mq_upgrade_limitation.md}}
+
+</div>
+
 ## Upgrade Milvus by changing its image
 
 In normal cases, you can upgrade Milvus as follows:

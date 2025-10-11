@@ -37,6 +37,8 @@ This upgrade process ensures proper migration to the new architecture. For more 
 - If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
 - You **must** upgrade to v2.5.16 or later before upgrading to v{{var.milvus_release_version}}.
 
+{{fragments/mq_upgrade_limitation.md}}
+
 <div class="alter note">
 
 Due to security concerns, Milvus upgrades its MinIO to {{var.minio_release}} with the release of v{{var.milvus_release_version}}.
