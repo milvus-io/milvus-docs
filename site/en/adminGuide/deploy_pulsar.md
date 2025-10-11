@@ -11,6 +11,12 @@ Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stre
 
 You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s and configure Kafka on K8s.
 
+<div class="alert note">
+
+{{fragments/mq_upgrade_limitation.md}}
+
+</div>
+
 ## Configure Pulsar with Docker Compose
 
 ### 1. Configure Pulsar
