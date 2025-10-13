@@ -41,7 +41,7 @@ This upgrade process ensures proper migration to the new architecture. For more 
 
 <div class="alter note">
 
-Due to security concerns, Milvus upgrades its MinIO to {{var.minio_release}} with the release of v{{var.milvus_release_version}}. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to [this guide](https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2).
+Due to security concerns, Milvus upgrades its MinIO to {{var.minio_release}} with the release of v{{var.milvus_release_version}}.
 
 </div>
 
