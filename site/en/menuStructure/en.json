@@ -56,15 +56,9 @@
         "children": []
       },
       {
-        "label": "Data Model Design for Search",
-        "id": "schema-hands-on.md",
-        "order": 1,
-        "children": []
-      },
-      {
         "label": "Install Milvus",
         "id": "install_milvus",
-        "order": 2,
+        "order": 1,
         "isMenu": true,
         "children": [
           {
@@ -174,7 +168,7 @@
       {
         "label": "Install SDKs",
         "id": "install_sdks",
-        "order": 3,
+        "order": 2,
         "children": [
           {
             "label": "PyMilvus",
@@ -205,7 +199,7 @@
       {
         "label": "Connect to Milvus Server",
         "id": "connect-to-milvus-server.md",
-        "order": 4,
+        "order": 3,
         "children": []
       }
     ]
@@ -668,6 +662,26 @@
             "id": "add-fields-to-an-existing-collection.md",
             "order": 16,
             "children": []
+          },
+          {
+            "label": "Best Practices",
+            "id": "best-practices",
+            "isMenu": true,
+            "order": 17,
+            "children": [
+              {
+                "label": "Data Model Design for Search",
+                "id": "schema-hands-on.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Data Model Design with an Array of Structs",
+                "id": "best-practices-for-array-of-structs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
