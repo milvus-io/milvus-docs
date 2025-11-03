@@ -1,7 +1,8 @@
 ---
 id: roadmap.md
-title: "Milvus Roadmap"
-summary: "Milvus Product Roadmap"
+title: Milvus Roadmap
+related_key: Milvus roadmap
+summary: Milvus is an open-source vector database built to power AI applications. Here is our roadmap to guide our development.
 ---
 
 # Milvus Roadmap
