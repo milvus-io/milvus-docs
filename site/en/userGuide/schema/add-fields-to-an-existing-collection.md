@@ -331,9 +331,9 @@ Expected behavior:
 
 ## FAQ
 
-### Can I enable dynamic schema functionality by adding a `#meta` field?
+### Can I enable dynamic schema functionality by adding a `$meta` field?
 
-No, you cannot use `add_collection_field` to add a `#meta` field to enable dynamic field functionality. For example, the code below will not work:
+No, you cannot use `add_collection_field` to add a `$meta` field to enable dynamic field functionality. For example, the code below will not work:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -400,7 +400,7 @@ To enable dynamic schema functionality:
 
 ### What happens when I add a field with the same name as a dynamic field key?
 
-When your collection has dynamic field enabled (`#meta` exists), you can add static fields that have the same name as existing dynamic field keys. The new static field will mask the dynamic field key, but the original dynamic data is preserved.
+When your collection has dynamic field enabled (`$meta` exists), you can add static fields that have the same name as existing dynamic field keys. The new static field will mask the dynamic field key, but the original dynamic data is preserved.
 
 To avoid possible conflicts in field names, consider the name for the field to add by referring to existing fields and dynamic field keys before actually adding it.
 
@@ -575,7 +575,7 @@ Expected behavior:
 
 - **New entities** must use the static field's data type (`INT64`)
 
-- **Original dynamic field key values** are preserved and accessible via `#meta` syntax
+- **Original dynamic field key values** are preserved and accessible via `$meta` syntax
 
 - **The static field masks the dynamic field key** in normal queries
 
