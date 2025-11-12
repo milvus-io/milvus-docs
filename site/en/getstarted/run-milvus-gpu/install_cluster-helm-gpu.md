@@ -82,7 +82,7 @@ Milvus with GPU support allows you to assign one or more GPU devices.
 
   ```bash
   cat <<EOF > custom-values.yaml
-  indexNode:
+  dataNode:
     resources:
       requests:
         nvidia.com/gpu: "1"
@@ -126,7 +126,7 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
 
   ```bash
   cat <<EOF > custom-values.yaml
-  indexNode:
+  dataNode:
     resources:
       requests:
         nvidia.com/gpu: "2"
@@ -141,11 +141,11 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
   EOF
   ```
 
-  In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting `extraEnv` in the configuration file as follows:
+  In the configuration above, the dataNode and queryNode share two GPUs. To assign different GPUs to the dataNode and the queryNode, you can modify the configuration accordingly by setting `extraEnv` in the configuration file as follows:
 
   ```bash
   cat <<EOF > custom-values.yaml
-  indexNode:
+  dataNode:
     resources:
       requests:
         nvidia.com/gpu: "1"
@@ -184,7 +184,7 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
 
   ```bash
   cat <<EOF > custom-values.yaml
-  indexNode:
+  dataNode:
     resources:
       requests:
         nvidia.com/gpu: "2"
@@ -199,11 +199,11 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
   EOF
   ```
 
-  In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting extraEnv in the configuration file as follows:
+  In the configuration above, the dataNode and queryNode share two GPUs. To assign different GPUs to the dataNode and the queryNode, you can modify the configuration accordingly by setting extraEnv in the configuration file as follows:
 
   ```bash
   cat <<EOF > custom-values.yaml
-  indexNode:
+  dataNode:
     resources:
       requests:
         nvidia.com/gpu: "1"
