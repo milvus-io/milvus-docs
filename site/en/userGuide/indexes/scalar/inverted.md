@@ -22,27 +22,21 @@ Use INVERTED indexes when you need to:
 
 ## How INVERTED indexes work
 
-Milvus uses [Tantivy](https://github.com/quickwit-oss/tantivy) to implement inverted indexing. Here's the process:
+An **INVERTED index** in Milvus maps each unique field value (term) to the set of document IDs where that value occurs. This structure enables fast lookups for fields with repeated or categorical values.
 
-1. **Tokenization**: Milvus breaks down your data into searchable terms
+As shown in the diagram, the process works in two steps:
 
-2. **Term dictionary**: Creates a sorted list of all unique terms
+1. **Forward mapping (ID → Term):** Each document ID points to the field value it contains.
 
-3. **Inverted lists**: Maps each term to the documents containing it
+1. **Inverted mapping (Term → IDs):** Milvus collects unique terms and builds a reverse mapping from each term to all IDs that contain it.
 
-For example, given these two sentences:
+For example, the value **"electronics"** maps to IDs **1** and **3**, while **"books"** maps to IDs **2** and **5**.
 
-- **"Milvus is a cloud-native vector database"**
+![How Inverted Index Works](../../../../../assets/how-inverted-index-works.png)
 
-- **"Milvus is very good at performance"**
+When you filter for a specific value (e.g., `category == "electronics"`), Milvus simply looks up the term in the index and retrieves the matching IDs directly. This avoids scanning the full dataset and enables fast filtering, especially for categorical or repeated values.
 
-The inverted index maps terms like **"Milvus"** → **[Document 0, Document 1]**, **"cloud-native"** → **[Document 0]**, and **"performance"** → **[Document 1]**.
-
-![Inverted Index](../../../../../assets/inverted-index.png)
-
-When you filter by a term, Milvus looks up the term in the dictionary and instantly retrieves all matching documents.
-
-INVERTED indexes support all scalar field types: **BOOL**, **INT8**, **INT16**, **INT32**, **INT64**, **FLOAT**, **DOUBLE**, **VARCHAR**, **JSON**, and **ARRAY**. However, the index parameters for indexing a JSON field are slightly different from regular scalar fields.
+INVERTED indexes support all scalar field types, such as **BOOL**, **INT8**, **INT16**, **INT32**, **INT64**, **FLOAT**, **DOUBLE**, **VARCHAR**, **JSON**, and **ARRAY**. However, the index parameters for indexing a JSON field are slightly different from regular scalar fields.
 
 ## Create indexes on non-JSON fields
 
@@ -105,7 +99,26 @@ client.create_index(
 )
 ```
 
-For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to [JSON Field](use-json-fields.md).
+For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to [JSON Indexing](json-indexing.md).
+
+## Drop an index
+
+Use the `drop_index()` method to remove an existing index from a collection.
+
+<div class="alert note">
+
+- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
+
+- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
+
+</div>
+
+```python
+client.drop_index(
+    collection_name="my_collection",   # Name of the collection
+    index_name="category_index" # Name of the index to drop
+)
+```
 
 ## Best practices
 
@@ -121,5 +134,5 @@ For detailed information about JSON field indexing, including supported paths, d
 
 - Learn about [other index types](index-explained.md)
 
-- See [JSON field indexing](use-json-fields.md#Index-values-inside-the-JSON-field) for advanced JSON indexing scenarios
+- See [JSON Indexing](json-indexing.md) for advanced JSON indexing scenarios
 
