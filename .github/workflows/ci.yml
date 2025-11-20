@@ -53,5 +53,6 @@ jobs:
           git checkout -- version.json
           git add .
           git commit -m "Release new docs to master"
-          git push -f origin master
+          git rebase HEAD~1 --signoff
+          git push --force-with-lease origin master
         continue-on-error: true
