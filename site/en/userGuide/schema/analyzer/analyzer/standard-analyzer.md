@@ -8,13 +8,19 @@ summary: "The standard analyzer is the default analyzer in Milvus, which is auto
 
 The `standard` analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It uses grammar-based tokenization, making it effective for most languages.
 
+<div class="alert note">
+
+The `standard` analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Japanese, and Korean require dictionary-based tokenizations. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
+
+</div>
+
 ## Definition
 
 The `standard` analyzer consists of:
 
-- **Tokenizer**: Uses the `standard` tokenizer to split text into discrete word units based on grammar rules. For more information, refer to [Standard](standard-tokenizer.md).
+- **Tokenizer**: Uses the `standard` tokenizer to split text into discrete word units based on grammar rules. For more information, refer to [Standard Tokenizer](standard-tokenizer.md).
 
-- **Filter**: Uses the `lowercase`[ filter](lowercase-filter.md) to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to
+- **Filter**: Uses the `lowercase` filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to [Lowercase](lowercase-filter.md).
 
 The functionality of the `standard` analyzer is equivalent to the following custom analyzer configuration:
 
@@ -119,7 +125,7 @@ Example configuration of custom stop words:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -143,7 +149,7 @@ analyzer_params = {
 }
 ```
 
-```plaintext
+```go
 analyzerParams = map[string]any{"type": "standard", "stop_words": []string{"of"}}
 ```
 
@@ -209,16 +215,43 @@ analyzerParams='{
 </div>
 
 ```python
+from pymilvus import (
+    MilvusClient,
+)
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
 # Sample text to analyze
 sample_text = "The Milvus vector database is built for scale!"
 
 # Run the standard analyzer with the defined configuration
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
+result = client.run_analyzer(sample_text, analyzer_params)
 print("Standard analyzer output:", result)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+List<String> texts = new ArrayList<>();
+texts.add("The Milvus vector database is built for scale!");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript
@@ -226,7 +259,33 @@ print("Standard analyzer output:", result)
 ```
 
 ```go
-// go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"The Milvus vector database is built for scale!"}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash

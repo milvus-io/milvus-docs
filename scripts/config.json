@@ -264,6 +264,261 @@
                         "token": "GzOrwUHnEhaPGybcp7ActPwsnMh",
                         "type": "board",
                         "alt_text": "partition-key-level-multi-tenancy"
+                    },
+                    {
+                        "token": "ZDYIwC1HwhTrdlbfOgNcOZ4OnWg",
+                        "type": "board",
+                        "alt_text": "multi-language-analyzers-workflow"
+                    },
+                    {
+                        "token": "AFrdwVT8ChT11ibs9lpcuN7onZc",
+                        "type": "board",
+                        "alt_text": "phrase-match-workflow"
+                    },
+                    {
+                        "token": "Lm87w7BjYhr0KDb9o1jclNKEnyd",
+                        "type": "board",
+                        "alt_text": "embedding-function-overview"
+                    },
+                    {
+                        "token": "TOGywbCvChKRBnbfSOhcZAtgnsd",
+                        "type": "board",
+                        "alt_text": "credential-config-overflow"
+                    },
+                    {
+                        "token": "GdmNwbkN8haZO8bpQkOc2NIWnqF",
+                        "type": "board",
+                        "alt_text": "weighted-ranker"
+                    },
+                    {
+                        "token": "M2SawupkSh2NZxbX7SAcwqZZnxd",
+                        "type": "board",
+                        "alt_text": "rrf-ranker"
+                    },
+                    {
+                        "token": "DP1AbcqZPoyfqhxpJ2icptjQnfc",
+                        "type": "image",
+                        "alt_text": "gaussian-decay"
+                    },
+                    {
+                        "token": "YaRsbolv9oqomcxrFe5cXBa4nNg",
+                        "type": "image",
+                        "alt_text": "exp-decay"
+                    },
+                    {
+                        "token": "LNwQbV5FYo7OYbxaA1VcetPgnUh",
+                        "type": "image",
+                        "alt_text": "linear-decay"
+                    },
+                    {
+                        "token": "LGZkwu1axhFdHZbCYFTcLMGSnKd",
+                        "type": "board",
+                        "alt_text": "model-ranker-overview"
+                    },
+                    {
+                        "token": "NM0aw26hDheLAZb2HBxc7Q3lnNf",
+                        "type": "board",
+                        "alt_text": "ivf-sq8"
+                    },
+                    {
+                        "token": "AOH0wbTaVhlJNSbno27clhgvnfb",
+                        "type": "board",
+                        "alt_text": "hnsw-sq"
+                    },
+                    {
+                        "token": "URUZwdAsohi8FFbwZRbcGXvfnSf",
+                        "type": "board",
+                        "alt_text": "hnsw-prq"
+                    },
+                    {
+                        "token": "ZNCRw2rmKhEbD0bv0ojc25uGnEd",
+                        "type": "board",
+                        "alt_text": "diskann"
+                    },
+                    {
+                        "token": "We6iwS81khrTgBbZ8uOcywTdnHf",
+                        "type": "board",
+                        "alt_text": "diskann-2"
+                    },
+                    {
+                        "token": "FwO1bZlbBogz0SxsXg5cE4WYnxb",
+                        "type": "image",
+                        "alt_text": "gpu-index-performance"
+                    },
+                    {
+                        "token": "G5VxbkoZLowCcLxEtfmcQl2Yn6d",
+                        "type": "image",
+                        "alt_text": "inverted"
+                    },
+                    {
+                        "token": "VPhswBhHmhJrh3byaVnc3onYnPc",
+                        "type": "board",
+                        "alt_text": "sparse-vector-representation"
+                    },
+                    {
+                        "token": "A7FvwnB5bhpBlKbgrzYcQijbnxg",
+                        "type": "board",
+                        "alt_text": "sparse-vector-workflow"
+                    },
+                    {
+                        "token": "Qx7UwgI6jhrku8bAxZqcYxZMnSe",
+                        "type": "board",
+                        "alt_text": "hybrid-search-workflow"
+                    },
+                    {
+                        "token": "Kc3Cweq1AhAmMGbrVgRcTlTKnUf",
+                        "type": "board",
+                        "alt_text": "data-model-anatomy"
+                    },
+                    {
+                        "token": "AF0fbMmXVoCJwrxCPR3c0fZMnwf",
+                        "type": "image",
+                        "alt_text": "inverted-index"
+                    },
+                    {
+                        "token": "CCzEwT7uchMqI6bsxRJcK1qenEh",
+                        "type": "board",
+                        "alt_text": "minhash-workflow"
+                    },
+                    {
+                        "token": "E1dewMnqshua0ib7aHmcL10lnIe",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-1"
+                    },
+                    {
+                        "token": "PhSMwS74rh25oybv9Docmfionze",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-2"
+                    },
+                    {
+                        "token": "RfmMwNkIvhlUFSb11alcP8fqnmf",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-3"
+                    },
+                    {
+                        "token": "O0jWb6cbwoXcfox5iWxcWI6Dn8b",
+                        "type": "image",
+                        "alt_text": "code-helper-enabled"
+                    },
+                    {
+                        "token": "TnCybwPveoYMFlx5TZZc4ilRnDs",
+                        "type": "image",
+                        "alt_text": "code-helper-disabled"
+                    },
+                    {
+                        "token": "CzVgbjBstouIBIxA8xxcwot2nlb",
+                        "type": "image",
+                        "alt_text": "cursor-mcp-settings"
+                    },
+                    {
+                        "token": "Q8KqbLpT6oVcztxu76UcTV6TnNh",
+                        "type": "image",
+                        "alt_text": "cherry-studio-mcp-settings"
+                    },
+                    {
+                        "token": "K2NgbMhGdopLbvxSb2JcHcfBnWb",
+                        "type": "image",
+                        "alt_text": "scann"
+                    },
+                    {
+                        "token": "NZcFw5PuxhQcl1bUG60cS54QnMu",
+                        "type": "board",
+                        "alt_text": "language-detection-workflow"
+                    },
+                    {
+                        "token": "JwMZwIYUwhbSZ4bjhxcc1PfNnvx",
+                        "type": "board",
+                        "alt_text": "analyzer-workflow"
+                    },
+                    {
+                        "token": "QZqlwniNDhE82ZbzE09cd7uHnWd",
+                        "type": "board",
+                        "alt_text": "build-ngram-index"
+                    },
+                    {
+                        "token": "BVPlwaN7Lh7UZibGopwcAcYQn1d",
+                        "type": "board",
+                        "alt_text": "build-ngram-index-2"
+                    },
+                    {
+                        "token": "XKwRwOPv6hqzpTb3ue8cbM8WnGe",
+                        "type": "board",
+                        "alt_text": "accelerate-queries"
+                    },
+                    {
+                        "token": "Q3LawAQIKht1FKbsM3EcoQAHnvc",
+                        "type": "board",
+                        "alt_text": "upsert-in-override-mode"
+                    },
+                    {
+                        "token": "NZNKwxm9ahmi87b487TcuCrNn4c",
+                        "type": "board",
+                        "alt_text": "upsert-in-merge-mode"
+                    },
+                    {
+                        "token": "Hq0awfjC7h0Ty3bvsUEcasOHncb",
+                        "type": "board",
+                        "alt_text": "boost-ranker-mechanism"
+                    },
+                    {
+                        "token": "FcrMw6pY8h2jE8b2PQ3cp4fTnch",
+                        "type": "board",
+                        "alt_text": "json-shredding-flow"
+                    },
+                    {
+                        "token": "TfyKbOUpdoPiFwxlux0cHLzKnGh",
+                        "type": "image",
+                        "alt_text": "birdwatcher-output"
+                    },
+                    {
+                        "token": "A19NwPlGIh1YrGbSBZKcNKz0nhd",
+                        "type": "board",
+                        "alt_text": "how-inverted-index-works"
+                    },
+                    {
+                        "token": "Go7LwrPc5hbNsFbUCPGclwCQn6c",
+                        "type": "board",
+                        "alt_text": "full-load-mode-vs-tiered-storage-mode"
+                    },
+                    {
+                        "token": "UPcawSYlfhgi2pbaODccXCvbnnd",
+                        "type": "board",
+                        "alt_text": "querynode-loading-workflow"
+                    },
+                    {
+                        "token": "Asy8w0umqh9jJ1biNUHcialonfd",
+                        "type": "board",
+                        "alt_text": "how-retree-works"
+                    },
+                    {
+                        "token": "PATjwyoKzhPELnb14kBcnAEAnGv",
+                        "type": "board",
+                        "alt_text": "dataset-model"
+                    },
+                    {
+                        "token": "S5cHwsXsPhOLfQb3Tatc4jqAn9e",
+                        "type": "board",
+                        "alt_text": "bitmap"
+                    },
+                    {
+                        "token": "F4IVwmrXPh7HujbBSXlcw98HnNf",
+                        "type": "board",
+                        "alt_text": "aisaq-vs-diskann"
+                    },
+                    {
+                        "token": "NuokbSgbroyVPQx14fKcm37bnoh",
+                        "type": "image",
+                        "alt_text": "deduplication-workflow"
+                    },
+                    {
+                        "token": "IbpqwpTFghdA37bU6dDc5eCUnfh",
+                        "type": "board",
+                        "alt_text": "load-workflow"
+                    },
+                    {
+                        "token": "SAO6wxDUYhoqqtbRwYecjjFUnIf",
+                        "type": "board",
+                        "alt_text": "querynode-load-workflow"
                     }
                 ]
             }

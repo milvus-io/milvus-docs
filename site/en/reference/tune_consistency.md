@@ -67,8 +67,8 @@ When creating a collection, you can set the consistency level for the searches a
 client.create_collection(
     collection_name="my_collection",
     schema=schema,
-    # highlight-next
-    consistency_level="Strong",
+    # highlight-next-line
+    consistency_level="Bounded",
 )
 ```
 
@@ -76,7 +76,7 @@ client.create_collection(
 CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
         .collectionName("my_collection")
         .collectionSchema(schema)
-        // highlight-next
+        // highlight-next-line
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 client.createCollection(createCollectionReq);
@@ -144,7 +144,7 @@ You can always change the consistency level for a specific search. The following
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -156,7 +156,7 @@ res = client.search(
     search_params={"metric_type": "IP"}，
     # highlight-start
     consistency_level="Bounded",
-    # highlight-next
+    # highlight-next-line
 )
 ```
 
@@ -172,7 +172,7 @@ SearchReq searchReq = SearchReq.builder()
 SearchResp searchResp = client.search(searchReq);
 ```
 
-```plaintext
+```go
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     "my_collection", // collectionName
     3,               // limit
@@ -209,7 +209,8 @@ You can always change the consistency level for a specific search. The following
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -220,7 +221,7 @@ res = client.query(
     limit=3，
     # highlight-start
     consistency_level="Eventually",
-    # highlight-next
+    # highlight-next-line
 )
 ```
 
@@ -236,7 +237,7 @@ QueryReq queryReq = QueryReq.builder()
  QueryResp getResp = client.query(queryReq);
 ```
 
-```plaintext
+```go
 resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
     WithFilter("color like \"red%\"").
     WithOutputFields("vector", "color").
@@ -246,6 +247,19 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "color like \"red_%\"",
+    "consistencyLevel": "Bounded",
+    "limit": 3
+}'
 ```
 
 This parameter is also available in the query iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.

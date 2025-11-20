@@ -8,6 +8,12 @@ summary: "The jieba tokenizer processes Chinese text by breaking it down into it
 
 The `jieba` tokenizer processes Chinese text by breaking it down into its component words.
 
+<div class="alert note">
+
+The `jieba` tokenizer preserves punctuation marks as separate tokens in the output. For example, `"你好！世界。"` becomes `["你好", "！", "世界", "。"]`. To remove these standalone punctuation tokens, use the [`removepunct`](removepunct-filter.md) filter.
+
+</div>
+
 ## Configuration
 
 Milvus supports two configuration approaches for the `jieba` tokenizer: a simple configuration and a custom configuration.
@@ -27,7 +33,7 @@ With the simple configuration, you only need to set the tokenizer to `"jieba"`. 
 ```python
 # Simple configuration: only specifying the tokenizer name
 analyzer_params = {
-    "tokenizer": "jieba",  # Use the default settings: dict=["_default_"], mode="search", hmm=true
+    "tokenizer": "jieba",  # Use the default settings: dict=["_default_"], mode="search", hmm=True
 }
 ```
 
@@ -69,7 +75,7 @@ analyzer_params = {
     "type": "jieba",          # Tokenizer type, fixed as "jieba"
     "dict": ["_default_"],     # Use the default dictionary
     "mode": "search",          # Use search mode for improved recall (see mode details below)
-    "hmm": true                # Enable HMM for probabilistic segmentation
+    "hmm": True                # Enable HMM for probabilistic segmentation
 }
 ```
 
@@ -114,7 +120,7 @@ analyzer_params = {
         "type": "jieba",           # Fixed tokenizer type
         "dict": ["customDictionary"],  # Custom dictionary list; replace with your own terms
         "mode": "exact",           # Use exact mode (non-overlapping tokens)
-        "hmm": false               # Disable HMM; unmatched text will be split into individual characters
+        "hmm": False               # Disable HMM; unmatched text will be split into individual characters
     }
 }
 ```
@@ -152,12 +158,22 @@ analyzerParams = map[string]any{"type": "jieba", "dict": []any{"customDictionary
    </tr>
    <tr>
      <td><p><code>dict</code></p></td>
-     <td><p>A list of dictionaries that the analyzer will load as its vocabulary source. Built-in options:</p><ul><li><p><code>"_default_"</code>: Loads the engine's built‑in Simplified‑Chinese dictionary. For details, refer to <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code>"_extend_default_"</code>: Loads everything in <code>"_default_"</code> plus an additional Traditional‑Chinese supplement. For details, refer to <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>You can also mix the built‑in dictionary with any number of custom dictionaries. Example: <code>["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>A list of dictionaries that the analyzer will load as its vocabulary source. Built-in options:</p>
+<ul>
+<li><p><code>"_default_"</code>: Loads the engine's built‑in Simplified‑Chinese dictionary. For details, refer to <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
+<li><p><code>"_extend_default_"</code>: Loads everything in <code>"_default_"</code> plus an additional Traditional‑Chinese supplement. For details, refer to <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
+<p>You can also mix the built‑in dictionary with any number of custom dictionaries. Example: <code>["_default_", "结巴分词器"]</code>.</p></li>
+</ul></td>
      <td><p><code>["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code>mode</code></p></td>
-     <td><p>The segmentation mode. Possible values:</p><ul><li><p><code>"exact"</code>: Tries to segment the sentence in the most precise manner, making it ideal for text analysis.</p></li><li><p><code>"search"</code>: Builds on exact mode by further breaking down long words to improve recall, making it suitable for search engine tokenization.</p><p>For more information, refer to <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li></ul></td>
+     <td><p>The segmentation mode. Possible values:</p>
+<ul>
+<li><p><code>"exact"</code>: Tries to segment the sentence in the most precise manner, making it ideal for text analysis.</p></li>
+<li><p><code>"search"</code>: Builds on exact mode by further breaking down long words to improve recall, making it suitable for search engine tokenization.</p>
+<p>For more information, refer to <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li>
+</ul></td>
      <td><p><code>"search"</code></p></td>
    </tr>
    <tr>
@@ -214,7 +230,7 @@ analyzerParams = map[string]any{"type": "jieba", "dict": []any{"结巴分词器"
 # restful
 ```
 
-### Verification using `run_analyzer`
+### Verification using `run_analyzer` | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -225,16 +241,39 @@ analyzerParams = map[string]any{"type": "jieba", "dict": []any{"结巴分词器"
 </div>
 
 ```python
+from pymilvus import (
+    MilvusClient,
+)
+
+client = MilvusClient(uri="http://localhost:19530")
+
 # Sample text to analyze
 sample_text = "milvus结巴分词器中文测试"
 
 # Run the standard analyzer with the defined configuration
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-print(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+print("Standard analyzer output:", result)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+List<String> texts = new ArrayList<>();
+texts.add("milvus结巴分词器中文测试");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript
@@ -242,7 +281,33 @@ print(result)
 ```
 
 ```go
-// go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"milvus结巴分词器中文测试"}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash

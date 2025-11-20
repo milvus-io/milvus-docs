@@ -4,10 +4,10 @@ summary: This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmen
 title: Evaluation with Ragas
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
@@ -28,7 +28,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```shell
-$ pip install --upgrade pymilvus openai requests tqdm pandas ragas
+$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas
 ```
 
 <div class="alert note">
@@ -109,7 +109,7 @@ Use the following pieces of information enclosed in <context> tags to provide an
             collection_name=self.collection_name,
             dimension=embedding_dim,
             metric_type="IP",  # Inner product distance
-            consistency_level="Strong",  # Strong consistency level
+            consistency_level="Bounded",  # Strong consistency level
         )
 
     def load(self, texts: List[str]):

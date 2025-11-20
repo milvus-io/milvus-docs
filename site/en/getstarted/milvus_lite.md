@@ -32,16 +32,17 @@ Please note that Milvus Lite is only suitable for small scale vector search use 
 ## Set up Milvus Lite
 
 ```shell
-pip install -U pymilvus
+pip install -U pymilvus[milvus-lite]
 ```
 
-We recommend using `pymilvus`. Since `milvus-lite` is included in `pymilvus` version 2.4.2 or above, you can `pip install` with `-U` to force update to the latest version and `milvus-lite` is automatically installed.
+We recommend using `pymilvus`. You can `pip install` with `-U` to force update to the latest version and `milvus-lite` will be automatically installed.
 
 If you want to explicitly install `milvus-lite` package, or you have installed an older version of `milvus-lite` and would like to update it, you can do `pip install -U milvus-lite`.
 
 ## Connect to Milvus Lite
 
 In `pymilvus`, specify a local file name as uri parameter of MilvusClient will use Milvus Lite.
+
 ```python
 from pymilvus import MilvusClient
 client = MilvusClient("./milvus_demo.db")
@@ -55,7 +56,7 @@ After running the above code snippet, a database file named **milvus_demo.db** w
 ## Examples
 
 Following is a simple demo showing how to use Milvus Lite for text search. There are more comprehensive [examples](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials) for using Milvus Lite to build applications
-such as [RAG](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb), [image search](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb), and using Milvus Lite in popular RAG framework such as [LangChain](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb) and [LlamaIndex](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb)!
+such as [RAG](https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb), [image search](https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb), and using Milvus Lite in popular RAG framework such as [LangChain](https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb) and [LlamaIndex](https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb)!
 
 ```python
 from pymilvus import MilvusClient

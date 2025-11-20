@@ -4,10 +4,10 @@ summary: This tutorial demonstrates how to implement full-text and hybrid search
 title: Full-text search with Milvus and Haystack
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
@@ -106,7 +106,7 @@ document_store = MilvusDocumentStore(
             output_field_names="sparse_vector",
         )
     ],
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
     drop_old=True,  # Drop the old collection if it exists and recreate it.
 )
 ```
@@ -179,7 +179,7 @@ document_store = MilvusDocumentStore(
             output_field_names="sparse_vector",
         )
     ],
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
     drop_old=True,  # Drop the old collection and recreate it.
 )
 ```
@@ -295,7 +295,7 @@ document_store = MilvusDocumentStore(
             enable_match=True,  # Whether to enable match.
         )
     ],
-    consistency_level="Strong",
+    consistency_level="Bounded",
     drop_old=True,
 )
 
@@ -340,7 +340,7 @@ For more concept details, e.g., `analyzer`, `tokenizer`, `filter`, `enable_match
 We have learned how to use the basic BM25 build-in function in Haystack and Milvus and prepared a loaded `document_store`. Let's introduce an optimized RAG implementation with hybrid search.
 
 
-![](https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1)
+![](https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1)
 
 This diagram shows the Hybrid Retrieve & Reranking process, combining BM25 for keyword matching and dense vector search for semantic retrieval. Results from both methods are merged, reranked, and passed to an LLM to generate the final answer.
 

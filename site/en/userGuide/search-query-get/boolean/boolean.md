@@ -20,6 +20,8 @@ Milvus supports several basic operators for filtering data:
 
 - **Logical Operators**: `AND`, `OR`, and `NOT` combine multiple conditions into complex expressions.
 
+- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators).
+
 ### Example: Filtering by Color
 
 To find entities with primary colors (red, green, or blue) in a scalar field `color`, use the following filter expression:
@@ -145,4 +147,10 @@ Milvus uses Tantivy to support inverted indexing and term-based text search. The
 1. **Indexing**: Creates an inverted index mapping unique tokens to documents.
 
 For more details, refer to [Text Match](keyword-match.md).
+
+#### `PHRASE_MATCH` operator | Milvus 2.6.x
+
+The **PHRASE_MATCH** operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.
+
+For more details, refer to [Phrase Match](phrase-match.md).
 

@@ -4,10 +4,10 @@ summary: This tutorial walks you through the process of building a Retrieval-Aug
 title: "Building a RAG Pipeline: Loading Data from S3 into Milvus"
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_from_s3_with_milvus.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_from_s3_with_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_from_s3_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_from_s3_with_milvus.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
@@ -20,7 +20,7 @@ This tutorial walks you through the process of building a Retrieval-Augmented Ge
 
 
 ```shell
-$ pip install --upgrade --quiet pymilvus openai requests tqdm boto3 langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+$ pip install --upgrade --quiet pymilvus milvus-lite openai requests tqdm boto3 langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
 ```
 
 <div class="alert note">
@@ -119,7 +119,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": "./milvus_demo.db",
     },
-    drop_old=True,  # Drop the old Milvus collection if it exists
+    drop_old=False,  # Drop the old Milvus collection if it exists
 )
 ```
 

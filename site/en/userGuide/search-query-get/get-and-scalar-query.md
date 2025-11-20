@@ -8,6 +8,12 @@ summary: "In addition to ANN searches, Milvus also supports metadata filtering t
 
 In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.
 
+<div class="alert note">
+
+If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
+
+</div>
+
 ## Overview
 
 A Collection can store various types of scalar fields. You can have Milvus filter Entities based on one or more scalar fields. Milvus offers three types of queries: Query, Get, and QueryIterator. The table below compares these three query types.
@@ -33,36 +39,15 @@ A Collection can store various types of scalar fields. You can have Milvus filte
    </tr>
    <tr>
      <td><p>Mandatory parameters</p></td>
-     <td><ul>
-<li>Collection name</li>
-<li>Primary keys</li>
-</ul></td>
-     <td><ul>
-<li>Collection name</li>
-<li>Filtering expressions</li>
-</ul></td>
-     <td><ul>
-<li><p>Collection name</p></li>
-<li><p>Filtering expressions</p></li>
-<li><p>Number of entities to return per query</p></li>
-</ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Primary keys</p></li></ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li></ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li><li><p>Number of entities to return per query</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Optional parameters</p></td>
-     <td><ul>
-<li>Partition name</li>
-<li>Output fields</li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return in total</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return in total</p></li><li><p>Output fields</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Returns</p></td>
@@ -76,7 +61,7 @@ For more on metadata filtering, refer to .
 
 ## Use Get
 
-When you need to find entities by their primary keys, you can use the **Get** method. The following code examples assume that there are three fields named `id`, `vector`, and `color` in your collection and return the entities with primary keys `1`, `2`, and `3`.
+When you need to find entities by their primary keys, you can use the **Get** method. The following code examples assume that there are three fields named `id`, `vector`, and `color` in your collection.
 
 ```python
 [
@@ -125,6 +110,7 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.GetReq
 import io.milvus.v2.service.vector.request.GetResp
+import io.milvus.v2.service.vector.response.QueryResp;
 import java.util.*;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
@@ -258,9 +244,9 @@ QueryReq queryReq = QueryReq.builder()
         .limit(3)
         .build();
 
-QueryResp getResp = client.query(queryReq);
+QueryResp queryResp = client.query(queryReq);
 
-List<QueryResp.QueryResult> results = getResp.getQueryResults();
+List<QueryResp.QueryResult> results = queryResp.getQueryResults();
 for (QueryResp.QueryResult result : results) {
     System.out.println(result.getEntity());
 }
@@ -620,5 +606,136 @@ curl --request POST \
     "outputFields": ["vector", "color"],
     "id": [0, 1, 2]
 }'
+```
+
+## Random Sampling with Query
+
+To extract a representative subset of data from your collection for data exploration or development testing, use the `RANDOM_SAMPLE(sampling_factor)` expression, where the `sampling_factor` is a float between 0 and 1 representing the percentage of data to sample.
+
+<div class="alert note">
+
+For detailed usage, advanced examples, and best practices, refer to [Random Sampling](random-sampling.md).
+
+</div>
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# Sample 1% of the entire collection
+res = client.query(
+    collection_name="my_collection",
+    # highlight-next-line
+    filter="RANDOM_SAMPLE(0.01)",
+    output_fields=["vector", "color"]
+)
+
+print(f"Sampled {len(res)} entities from collection")
+
+# Combine with other filters - first filter, then sample
+res = client.query(
+    collection_name="my_collection", 
+    # highlight-next-line
+    filter="color like \"red%\" AND RANDOM_SAMPLE(0.005)",
+    output_fields=["vector", "color"],
+    limit=10
+)
+
+print(f"Found {len(res)} red items in sample")
+```
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.GetReq
+import io.milvus.v2.service.vector.request.GetResp
+import io.milvus.v2.service.vector.request.QueryReq
+import io.milvus.v2.service.vector.request.QueryResp
+import java.util.*;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("RANDOM_SAMPLE(0.01)")
+        .outputFields(Arrays.asList("vector", "color"))
+        .build();
+
+QueryResp getResp = client.query(queryReq);
+for (QueryResp.QueryResult result : getResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
+
+queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("color like \"red%\" AND RANDOM_SAMPLE(0.005)")
+        .outputFields(Arrays.asList("vector", "color"))
+        .limit(10)
+        .build();
+
+getResp = client.query(queryReq);
+for (QueryResp.QueryResult result : getResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
+```
+
+```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    return err
+}
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("RANDOM_SAMPLE(0.01)").
+    WithOutputFields("vector", "color"))
+if err != nil {
+    return err
+}
+
+resultSet, err = client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("color like \"red%\" AND RANDOM_SAMPLE(0.005)").
+    WithLimit(10).
+    WithOutputFields("vector", "color"))
+if err != nil {
+    return err
+}
+```
+
+```javascript
+// node
+```
+
+```bash
+# restful
 ```
 

@@ -8,7 +8,7 @@ summary: "In text processing, an analyzer is a crucial component that converts r
 
 In text processing, an **analyzer** is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: **tokenizer** and **filter**. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.
 
-In Milvus, analyzers are configured during collection creation when you add `VARCHAR` fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to [Text Match](keyword-match.md) or [Full Text Search](full-text-search.md).
+In Milvus, analyzers are configured during collection creation when you add `VARCHAR` fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to  [Full Text Search](full-text-search.md), [Phrase Match](phrase-match.md), or [Text Match](keyword-match.md).
 
 <div class="alert note">
 
@@ -48,7 +48,8 @@ Milvus provides two types of analyzers to meet different text processing needs:
 
 <div class="alert note">
 
-If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard](standard-analyzer.md).
+- If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard Analyzer](standard-analyzer.md). 
+- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
 
 </div>
 
@@ -119,15 +120,49 @@ result = client.run_analyzer(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+List<String> texts = new ArrayList<>();
+texts.add("An efficient system relies on a robust analyzer to correctly process text for various applications.");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript
-// javascript
+// javascrip# Sample text to analyze
+const text = "An efficient system relies on a robust analyzer to correctly process text for various applications."
+
+// Run analyzer
+const result = await client.run_analyzer({
+    text,
+    analyzer_params
+});
 ```
 
 ```go
-// go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"An efficient system relies on a robust analyzer to correctly process text for various applications."}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash
@@ -533,6 +568,18 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     ```java
     Map<String, Object> analyzerParamsBuiltin = new HashMap<>();
     analyzerParamsBuiltin.put("type", "english");
+
+    List<String> texts = new ArrayList<>();
+    texts.add("Milvus simplifies text ana
+    
+    lysis for search.");
+    
+    RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+            .texts(texts)
+            .analyzerParams(analyzerParams)
+            .build());
+    List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
+    
     ```
 
     ```javascript
@@ -540,10 +587,29 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     const analyzerParamsBuiltIn = {
       type: "english",
     };
+
+    const sample_text = "Milvus simplifies text analysis for search.";
+    const result = await client.run_analyzer({
+        text: sample_text, 
+        analyzer_params: analyzer_params_built_in
+    });
+    
     ```
 
     ```go
     analyzerParams := map[string]any{"type": "english"}
+
+    bs, _ := json.Marshal(analyzerParams)
+    texts := []string{"Milvus simplifies text analysis for search."}
+    option := milvusclient.NewRunAnalyzerOption(texts).
+        WithAnalyzerParams(string(bs))
+    
+    result, err := client.RunAnalyzer(ctx, option)
+    if err != nil {
+        fmt.Println(err.Error())
+        // handle error
+    }
+    
     ```
 
     ```bash
@@ -607,6 +673,15 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
                     }}
             )
     );
+    
+    List<String> texts = new ArrayList<>();
+    texts.add("Milvus provides flexible, customizable analyzers for robust text processing.");
+    
+    RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+            .texts(texts)
+            .analyzerParams(analyzerParams)
+            .build());
+    List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
     ```
 
     ```javascript
@@ -625,6 +700,11 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         },
       ],
     };
+    const sample_text = "Milvus provides flexible, customizable analyzers for robust text processing.";
+    const result = await client.run_analyzer({
+        text: sample_text, 
+        analyzer_params: analyzer_params_built_in
+    });
     ```
 
     ```go
@@ -637,6 +717,17 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
             "type": "stop",
             "stop_words": []string{"of", "to"},
         }}}
+        
+    bs, _ := json.Marshal(analyzerParams)
+    texts := []string{"Milvus provides flexible, customizable analyzers for robust text processing."}
+    option := milvusclient.NewRunAnalyzerOption(texts).
+        WithAnalyzerParams(string(bs))
+    
+    result, err := client.RunAnalyzer(ctx, option)
+    if err != nil {
+        fmt.Println(err.Error())
+        // handle error
+    }
     ```
 
     ```bash
@@ -844,3 +935,14 @@ if err != nil {
 ```bash
 # restful
 ```
+
+## What's next
+
+After configuring an analyzer, you can integrate with text retrieval features provided by Milvus. For details:
+
+- [Full Text Search](full-text-search.md)
+
+- [Text Match](keyword-match.md)
+
+- [Phrase Match](phrase-match.md)
+

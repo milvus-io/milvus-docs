@@ -36,6 +36,7 @@ There are also other limitations for specifying the message storage:
   - Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.
 - The message storage cannot be changed while the Milvus system is running. 
 - Only Kafka 2.x or 3.x verison is supported.
+- **Upgrade limitations**: {{fragments/mq_upgrade_limitation.md}}
 
 ## Configure RocksMQ
 RocksMQ is the default message storage in Milvus standalone. 

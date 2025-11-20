@@ -525,9 +525,11 @@ You can set properties for the collection to create to make it fit into your ser
 
 ### Set Shard Number
 
-Shards are horizontal slices of a collection. Each shard corresponds to a data input channel. Every collection has a shard by default. You can set the appropriate number of shards when creating a collection based on the expected throughput and the volume of the data to insert into the collection.
+Shards are horizontal slices of a collection, and each shard corresponds to a data input channel. By default, every collection has one shard. You can specify the number of shards when creating a collection to better suit your data volume and workload.
 
-In common cases, consider increasing the shard number by one every time the expected throughput increases by 500 MB/s or the volume of data to insert increases by 100 GB. This suggestion is based on our own experience and may not completely fit in your application scenarios. You can tune this number to fit your own needs or just use the default value.
+As a general guideline, consider the following when setting the number of shards:
+- **Data size:** A common practice is to have one shard for every 200 million entities. You can also estimate based on the total data size, for example, adding one shard for every 100 GB of data you plan to insert.
+- **Stream node utilization:** If your Milvus instance has multiple stream nodes, using multiple shards is recommended. This ensures that the data insertion workload is distributed across all available stream nodes, preventing some from being idle while others are overloaded.
 
 The following code snippet demonstrates how to set the shard number when you create a collection.
 
@@ -554,7 +556,7 @@ client.create_collection(
 CreateCollectionReq customizedSetupReq3 = CreateCollectionReq.builder()
     .collectionName("customized_setup_3")
     .collectionSchema(collectionSchema)
-    // highlight-next-line
+    # highlight-next-line
     .numShards(1)
     .build();
 client.createCollection(customizedSetupReq3);
@@ -564,7 +566,7 @@ client.createCollection(customizedSetupReq3);
 const createCollectionReq = {
     collection_name: "customized_setup_3",
     schema: schema,
-    // highlight-next-line
+    # highlight-next-line
     shards_num: 1
 }
 ```
@@ -626,7 +628,7 @@ import io.milvus.param.Constant;
 CreateCollectionReq customizedSetupReq4 = CreateCollectionReq.builder()
         .collectionName("customized_setup_4")
         .collectionSchema(schema)
-        // highlight-next-line
+        # highlight-next-line
         .property(Constant.MMAP_ENABLED, "false")
         .build();
 client.createCollection(customizedSetupReq4);
@@ -652,7 +654,7 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
-```plaintext
+```bash
 export params='{
     "mmap.enabled": True
 }'
@@ -705,7 +707,7 @@ import io.milvus.param.Constant;
 CreateCollectionReq customizedSetupReq5 = CreateCollectionReq.builder()
         .collectionName("customized_setup_5")
         .collectionSchema(schema)
-        // highlight-next-line
+        # highlight-next-line
         .property(Constant.TTL_SECONDS, "86400")
         .build();
 client.createCollection(customizedSetupReq5);
@@ -715,11 +717,11 @@ client.createCollection(customizedSetupReq5);
 const createCollectionReq = {
     collection_name: "customized_setup_5",
     schema: schema,
-    // highlight-start
+    # highlight-start
     properties: {
         "collection.ttl.seconds": 86400
     }
-    // highlight-end
+    # highlight-end
 }
 ```
 
@@ -769,7 +771,7 @@ When creating a collection, you can set the consistency level for searches and q
 client.create_collection(
     collection_name="customized_setup_6",
     schema=schema,
-    # highlight-next
+    # highlight-next-line
     consistency_level="Bounded",
 )
 ```
@@ -781,7 +783,7 @@ import io.milvus.v2.common.ConsistencyLevel;
 CreateCollectionReq customizedSetupReq6 = CreateCollectionReq.builder()
         .collectionName("customized_setup_6")
         .collectionSchema(schema)
-        // highlight-next-line
+        # highlight-next-line
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 client.createCollection(customizedSetupReq6);
@@ -791,9 +793,9 @@ client.createCollection(customizedSetupReq6);
 const createCollectionReq = {
     collection_name: "customized_setup_6",
     schema: schema,
-    // highlight-next
+    # highlight-next-line
     consistency_level: "Bounded",
-    // highlight-end
+    # highlight-end
 }
 
 client.createCollection(createCollectionReq);

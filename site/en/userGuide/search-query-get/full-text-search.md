@@ -70,7 +70,7 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-schema = MilvusClient.create_schema()
+schema = client.create_schema()
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True, auto_id=True)
 schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=1000, enable_analyzer=True)
@@ -201,7 +201,7 @@ In this configuration,
 
 - `id`: serves as the primary key and is automatically generated with `auto_id=True`.
 
-- `text`: stores your raw text data for full text search operations. The data type must be `VARCHAR`, as `VARCHAR` is Milvus string data type for text storage. Set `enable_analyzer=True` to allow Milvus to tokenize the text. By default, Milvus uses the `standard`[ analyzer](standard-analyzer.md) for text analysis. To configure a different analyzer, refer to [Analyzer Overview](analyzer-overview.md).
+- `text`: stores your raw text data for full text search operations. The data type must be `VARCHAR`, as `VARCHAR` is Milvus string data type for text storage. Set `enable_analyzer=True` to allow Milvus to tokenize the text. By default, Milvus uses the [`standard`](standard-analyzer.md)[ analyzer](standard-analyzer.md) for text analysis. To configure a different analyzer, refer to [Analyzer Overview](analyzer-overview.md).
 
 - `sparse`: a vector field reserved to store internally generated sparse embeddings for full text search operations. The data type must be `SPARSE_FLOAT_VECTOR`.
 
@@ -339,7 +339,7 @@ After defining the schema with necessary fields and the built-in function, set u
 </div>
 
 ```python
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name="sparse",
@@ -358,17 +358,26 @@ index_params.add_index(
 ```java
 import io.milvus.v2.common.IndexParam;
 
+Map<String,Object> params = new HashMap<>();
+params.put("inverted_index_algo", "DAAT_MAXSCORE");
+params.put("bm25_k1", 1.2);
+params.put("bm25_b", 0.75);
+
 List<IndexParam> indexes = new ArrayList<>();
 indexes.add(IndexParam.builder()
         .fieldName("sparse")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .extraParams(params)
         .build());    
 ```
 
 ```go
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse",
     index.NewAutoIndex(entity.MetricType(entity.BM25)))
+    .WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
+    .WithExtraParam("bm25_k1", 1.2)
+    .WithExtraParam("bm25_b", 0.75)
 ```
 
 ```javascript
@@ -376,7 +385,12 @@ const index_params = [
   {
     field_name: "sparse",
     metric_type: "BM25",
-    index_type: "AUTOINDEX",
+    index_type: "SPARSE_INVERTED_INDEX",
+    params: {
+        "inverted_index_algo": "DAAT_MAXSCORE",
+        "bm25_k1": 1.2,
+        "bm25_b": 0.75
+    }
   },
 ];
 ```
@@ -386,7 +400,12 @@ export indexParams='[
         {
             "fieldName": "sparse",
             "metricType": "BM25",
-            "indexType": "AUTOINDEX"
+            "indexType": "AUTOINDEX",
+            "params":{
+               "inverted_index_algo": "DAAT_MAXSCORE",
+               "bm25_k1": 1.2,
+               "bm25_b": 0.75
+            }
         }
     ]'
 ```
@@ -579,8 +598,11 @@ search_params = {
 
 client.search(
     collection_name='my_collection', 
+    # highlight-start
     data=['whats the focus of information retrieval?'],
     anns_field='sparse',
+    output_fields=['text'], # Fields to return in search results; sparse field cannot be output
+    # highlight-end
     limit=3,
     search_params=search_params
 )
@@ -631,6 +653,7 @@ await client.search(
     collection_name: 'my_collection', 
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
+    output_fields: ['text'],
     limit: 3,
     params: {'drop_ratio_search': 0.2},
 )
@@ -678,11 +701,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code>data</code></p></td>
-     <td><p>The raw query text.</p></td>
+     <td><p>Raw query text in natural language. Milvus automatically converts your text query into sparse vectors using the BM25 function - do not provide pre-computed vectors.</p></td>
    </tr>
    <tr>
      <td><p><code>anns_field</code></p></td>
      <td><p>The name of the field that contains internally generated sparse vectors.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>output_fields</code></p></td>
+     <td><p>List of field names to return in search results. Supports all fields <strong>except the sparse vector field</strong> containing BM25-generated embeddings. Common output fields include the primary key field (e.g., <code>id</code>) and the original text field (e.g., <code>text</code>). For more information, refer to <a href="full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code>limit</code></p></td>
@@ -690,3 +717,60 @@ curl --request POST \
    </tr>
 </table>
 
+## FAQ
+
+### Can I output or access the sparse vectors generated by the BM25 function in full text search?
+
+No, the sparse vectors generated by the BM25 function are not directly accessible or outputable in full text search. Here are the details:
+
+- The BM25 function generates sparse vectors internally for ranking and retrieval
+
+- These vectors are stored in the sparse field but cannot be included in `output_fields`
+
+- You can only output the original text fields and metadata (like `id`, `text`)
+
+Example:
+
+```python
+# ❌ This throws an error - you cannot output the sparse field
+client.search(
+    collection_name='my_collection', 
+    data=['query text'],
+    anns_field='sparse',
+    # highlight-next-line
+    output_fields=['text', 'sparse']  # 'sparse' causes an error
+    limit=3,
+    search_params=search_params
+)
+
+# ✅ This works - output text fields only
+client.search(
+    collection_name='my_collection', 
+    data=['query text'],
+    anns_field='sparse',
+    # highlight-next-line
+    output_fields=['text']
+    limit=3,
+    search_params=search_params
+)
+```
+
+### Why do I need to define a sparse vector field if I can't access it?
+
+The sparse vector field serves as an internal search index, similar to database indexes that users don't directly interact with.
+
+**Design Rationale**:
+
+- Separation of Concerns: You work with text (input/output), Milvus handles vectors (internal processing)
+
+- Performance: Pre-computed sparse vectors enable fast BM25 ranking during queries
+
+- User Experience: Abstracts away complex vector operations behind a simple text interface
+
+**If you need vector access**:
+
+- Use manual sparse vector operations instead of full text search
+
+- Create separate collections for custom sparse vector workflows
+
+For details, refer to [Sparse Vector](sparse_vector.md).

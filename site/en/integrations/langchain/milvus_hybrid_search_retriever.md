@@ -124,8 +124,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 ```
 
@@ -200,8 +200,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 ```
 
@@ -229,8 +229,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -272,8 +272,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -291,7 +291,7 @@ Please keep the order of list of index params consistent with the order of `vect
 </div>
 
 ### Rerank the candidates
-After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose [WeightedRanker](https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker) or [RRFRanker](https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker) depending on your requirements. You can refer to the [Reranking](https://milvus.io/docs/reranking.md#Reranking) for more information.
+After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose [WeightedRanker](https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker) or [RRFRanker](https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker) depending on your requirements. You can refer to the [Reranking](https://milvus.io/docs/weighted-ranker.md#Reranking) for more information.
 
 Here is an example for weighted reranking:
 
@@ -305,8 +305,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 
 query = "What are the novels Lila has written and what are their contents?"
@@ -399,8 +399,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 ```
 
