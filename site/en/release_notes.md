@@ -24,7 +24,6 @@ We are excited to announce the release of Milvus 2.6.6, featuring a range of pow
 - STL_SORT index now supports VARCHAR and TIMESTAMPTZ datatype.
 - You may now enable dynamic field of an existing collection by altering it.
 - Fixed cve-2025-63811.
-- MIN_HASH and JSON flat index are now GA!
 
 ### Features
 
