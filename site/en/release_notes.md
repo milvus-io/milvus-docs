@@ -28,7 +28,6 @@ We are excited to announce the release of Milvus 2.6.6, featuring a range of pow
 ### Features
 
 - Added new config and enabled dynamic update configs ([#45363](https://github.com/milvus-io/milvus/pull/45363))
-- Milvus supported Huawei Cloud IAM verification ([#45312](https://github.com/milvus-io/milvus/pull/45312))
 
 ### Improvements
 
