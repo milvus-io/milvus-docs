@@ -2,7 +2,6 @@
 id: timestamptz-field.md
 title: "TIMESTAMPTZ Field"
 summary: "Applications that track time across regions, such as e-commerce systems, collaboration tools, or distributed logging, need precise handling of timestamps with time zones. The TIMESTAMPTZ data type in Milvus provides this capability by storing timestamps with their associated time zone."
-beta: Milvus 2.6.6+
 ---
 
 # TIMESTAMPTZ Field
@@ -216,14 +215,14 @@ Use arithmetic operators like `==`, `!=`, `<`, `>`, `<=`, `>=`. For a full list 
 The example below filters entities with timestamps (`tsz`) that are not equal to **2025-01-03T00:00:00+08:00**:
 
 <div class="multipleCode">
-    <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```bash
+```python
 # Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
 # highlight-next-line
 expr = "tsz != ISO '2025-01-03T00:00:00+08:00'"
