@@ -193,13 +193,13 @@ These parameters influence how AISAQ performs searches. Adjusting them can impac
      <td><p><code>vectors_beamwidth</code></p></td>
      <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode).</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, 4] must be <= <em>beamwidth</em></p><p><strong>Default value</strong>: <code>1</code></p></td>
-     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to excessive resource contention, as each neighboring PQ vectors group may contain up to max_degree vectors.</p><p>In most cases, we recommend you set a value of 1.</p></td>
+     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to excessive resource contention, as each neighboring PQ vector group may contain up to max_degree vectors.</p><p>In most cases, we recommend you set a value of 1.</p></td>
    </tr>
    <tr>
      <td><p><code>pq_read_page_cache_size</code></p></td>
      <td><p>PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true).</p><p>The PQ read cache memory is reused across all AISAQ segments.</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, 33554432]</p><p><strong>Default value</strong>: <code>5242880 (5MiB)</code></p></td>
-     <td><p>Larger cache improves query performance but increases DRAM usage.</p><p>Recommended values range from 2 MiB for small segments (1 M vectors), 5 MiB for medium segments (50 M vectors) and 10 MiB for large segments (250 M vector).</p></td>
+     <td><p>Larger cache improves query performance but increases DRAM usage.</p><p>Recommended values range from 2 MiB for small segments (1 M vectors), 5 MiB for medium segments (50 M vectors) and 10 MiB for large segments (250 M vectors).</p></td>
    </tr>
 </table>
 
