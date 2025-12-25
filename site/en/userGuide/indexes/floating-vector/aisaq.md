@@ -49,7 +49,7 @@ Scale mode:  optimized for applications with more relaxed latency constraints, s
 
 **AISAQ-performance** achieves “Near-Zero DRAM footprint” by moving PQ data from memory to disk while maintaining low IOPS through data colocation and redundancy.
 
-- Each node’s raw vector, edge list, and its neighbours’ PQ data are stored together on disk.
+- Each node’s raw vector, edge list, and its neighbors’ PQ data are stored together on disk.
 
 - This layout ensures that visiting a node (e.g., vector 0) still requires only a single disk I/O.
 
@@ -138,7 +138,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
      <td><p><code>num_entry_points</code></p></td>
      <td><p>Number of candidate entry points to optimize search entry-point selection.</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, 1000]</p><p><strong>Default value</strong>: <code>100</code></p></td>
-     <td><p>High values may reduce the search time by starting the search from a closer entry point.</p><p>Set higher values for large segments (e.g  for 10M vectors and above use value of 1000).</p></td>
+     <td><p>High values may reduce the search time by starting the search from a closer entry point.</p><p>Set higher values for large segments (e.g. for 10M vectors and above use value of 1000).</p></td>
    </tr>
    <tr>
      <td><p><code>pq_code_budget_gb_ratio</code></p></td>
@@ -162,7 +162,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
      <td><p><code>search_cache_budget_gb_ratio</code></p></td>
      <td><p>Controls the amount of DRAM to be used for caching frequently accessed index nodes</p><p>This cache is loaded during index load and used during search to reduce IOs.</p></td>
      <td><p><strong>Type</strong>: Float</p><p><strong>Range</strong>: [0.0, 0.3)</p><p><strong>Default value</strong>: <code>0</code></p></td>
-     <td><p>A higher value allocates more memory for caching,  reducing disk IOs but consuming more system memory. A lower value uses less memory for caching, potentially increasing the need for disk access.</p></td>
+     <td><p>A higher value allocates more memory for caching, reducing disk IOs but consuming more system memory. A lower value uses less memory for caching, potentially increasing the need for disk access.</p></td>
    </tr>
 </table>
 
