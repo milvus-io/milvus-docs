@@ -90,7 +90,6 @@ In this configuration:
 - `params`: Additional configuration options for searching on the index.
 
     - `reorder_k`: Number of candidates to refine during the re-ranking phase.
-
     - `nprobe`: Number of clusters to search for.
 
     To learn more search parameters available for the `SCANN` index, refer to [Index-specific search params](scann.md#Index-specific-search-params).
