@@ -92,7 +92,7 @@ knowhere:
       search_list: 16 # During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency
       beamwidth: 8 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read the index nodes
       vectors_beamwidth: 1 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode)
-      pq_read_page_cache_size: 5242880 (5MiB) # PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in perfromance mode and applicable only when rearrange is true). The PQ read cache  memory is reused across all AiSAQ segments
+      pq_read_page_cache_size: 5242880 (5MiB) # PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true). The PQ read cache  memory is reused across all AiSAQ segments
 ```
 
 ## AISAQ parameters
@@ -126,7 +126,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
      <td><p><code>inline_pq</code></p></td>
      <td><p>Number of PQ vectors stored inline per Index node (read when node is accessed, to reduce IO)</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, <em>max_degree</em>]</p><p><strong>Default value</strong>: <code>-1</code></p></td>
-     <td><p>Higher values of <code>inline_pq</code> improve perfromance but increase disk space.</p><p>Set <code>inline_pq</code>=0 for AiSAQ in scale mode.</p><p>Set <code>inline_pq</code>=-1 to automatically fill any unused space in the index with PQ vectors for further optimization of AiSAQ in scale mode.</p><p>Set <code>inline_pq</code>=<em>max_degree</em> for AiSAQ in performance mode.</p><p><code>inline_pq</code> settings in between 0 and <em>max_degree</em> enable an adjustable balance between performance and disk-space consumption.</p></td>
+     <td><p>Higher values of <code>inline_pq</code> improve performance but increase disk space.</p><p>Set <code>inline_pq</code>=0 for AiSAQ in scale mode.</p><p>Set <code>inline_pq</code>=-1 to automatically fill any unused space in the index with PQ vectors for further optimization of AiSAQ in scale mode.</p><p>Set <code>inline_pq</code>=<em>max_degree</em> for AiSAQ in performance mode.</p><p><code>inline_pq</code> settings in between 0 and <em>max_degree</em> enable an adjustable balance between performance and disk-space consumption.</p></td>
    </tr>
    <tr>
      <td><p><code>rearrange</code></p></td>
