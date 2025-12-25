@@ -9,9 +9,9 @@ beta: Milvus 2.6.4+
 
 AISAQ is a disk-based vector index that extends [DISKANN](diskann.md) to handle billion-scale datasets with a minimal DRAM footprint. 
 
-Unlike DISKANN, which keeps compressed vectors in memory, AiSAQ is designed with a “Near-Zero DRAM Architecture” which means holding all data structures in SSD.
+Unlike DISKANN, which keeps compressed vectors in memory, AISAQ is designed with a “Near-Zero DRAM Architecture” which means holding all data structures in SSD.
 
-AiSAQ enables running ultra-high scale databases using standard servers while offering operation modes to balance performance and storage costs.
+AISAQ enables running ultra-high scale databases using standard servers while offering operation modes to balance performance and storage costs.
 
 ## How AISAQ works
 
@@ -92,14 +92,14 @@ knowhere:
       search_list: 16 # During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency
       beamwidth: 8 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read the index nodes
       vectors_beamwidth: 1 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode)
-      pq_read_page_cache_size: 5242880 (5MiB) # PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true). The PQ read cache  memory is reused across all AiSAQ segments
+      pq_read_page_cache_size: 5242880 (5MiB) # PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true). The PQ read cache memory is reused across all AISAQ segments
 ```
 
 ## AISAQ parameters
 
 AISAQ inherits some parameters from DISKANN - `max_degree`, `search_list_size`, and `pq_code_budget_gb_ratio`.
 
-### Index building params
+### Index-building params
 
 These parameters influence how the AISAQ index is constructed. Adjusting them can affect the index size, build time, and search quality.
 
@@ -126,7 +126,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
      <td><p><code>inline_pq</code></p></td>
      <td><p>Number of PQ vectors stored inline per Index node (read when node is accessed, to reduce IO)</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, <em>max_degree</em>]</p><p><strong>Default value</strong>: <code>-1</code></p></td>
-     <td><p>Higher values of <code>inline_pq</code> improve performance but increase disk space.</p><p>Set <code>inline_pq</code>=0 for AiSAQ in scale mode.</p><p>Set <code>inline_pq</code>=-1 to automatically fill any unused space in the index with PQ vectors for further optimization of AiSAQ in scale mode.</p><p>Set <code>inline_pq</code>=<em>max_degree</em> for AiSAQ in performance mode.</p><p><code>inline_pq</code> settings in between 0 and <em>max_degree</em> enable an adjustable balance between performance and disk-space consumption.</p></td>
+     <td><p>Higher values of <code>inline_pq</code> improve performance but increase disk space.</p><p>Set <code>inline_pq</code>=0 for AISAQ in scale mode.</p><p>Set <code>inline_pq</code>=-1 to automatically fill any unused space in the index with PQ vectors for further optimization of AISAQ in scale mode.</p><p>Set <code>inline_pq</code>=<em>max_degree</em> for AISAQ in performance mode.</p><p><code>inline_pq</code> settings in between 0 and <em>max_degree</em> enable an adjustable balance between performance and disk-space consumption.</p></td>
    </tr>
    <tr>
      <td><p><code>rearrange</code></p></td>
@@ -166,7 +166,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
    </tr>
 </table>
 
-### Index search params
+### Index-search params
 
 These parameters influence how AISAQ performs searches. Adjusting them can impact search speed, latency, and resource usage.
 
@@ -193,11 +193,11 @@ These parameters influence how AISAQ performs searches. Adjusting them can impac
      <td><p><code>vectors_beamwidth</code></p></td>
      <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode).</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, 4] must be <= <em>beamwidth</em></p><p><strong>Default value</strong>: <code>1</code></p></td>
-     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to extremely excessive resource contention, as each neighboring PQ vectors group may contain up to max_degree vectors.</p><p>In most cases, we recommend you set a value of 1.</p></td>
+     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to excessive resource contention, as each neighboring PQ vectors group may contain up to max_degree vectors.</p><p>In most cases, we recommend you set a value of 1.</p></td>
    </tr>
    <tr>
      <td><p><code>pq_read_page_cache_size</code></p></td>
-     <td><p>PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true).</p><p>The PQ read cache  memory is reused across all AiSAQ segments.</p></td>
+     <td><p>PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true).</p><p>The PQ read cache memory is reused across all AISAQ segments.</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, 33554432]</p><p><strong>Default value</strong>: <code>5242880 (5MiB)</code></p></td>
      <td><p>Larger cache improves query performance but increases DRAM usage.</p><p>Recommended values range from 2 MiB for small segments (1 M vectors), 5 MiB for medium segments (50 M vectors) and 10 MiB for large segments (250 M vector).</p></td>
    </tr>
