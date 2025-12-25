@@ -144,7 +144,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
      <td><p><code>pq_code_budget_gb_ratio</code></p></td>
      <td><p>Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data.</p></td>
      <td><p><strong>Type</strong>: Float</p><p><strong>Range</strong>: (0.0, 0.25]</p><p><strong>Default value</strong>: <code>0.125</code></p></td>
-     <td><p>A higher ratio leads to more accurate search results, effectively storing more information about the original vectors but increase computational complexity during search.</p><p>In most cases, we recommend you set a value within this range: (0.0417, 0.25].</p></td>
+     <td><p>A higher ratio leads to more accurate search results, effectively storing more information about the original vectors but increases computational complexity during search.</p><p>In most cases, we recommend you set a value within this range: (0.0417, 0.25].</p></td>
    </tr>
    <tr>
      <td><p><code>disk_pq_code_budget_gb_ratio</code></p></td>
