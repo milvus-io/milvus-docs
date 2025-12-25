@@ -11,7 +11,7 @@ AISAQ is a disk-based vector index that extends [DISKANN](diskann.md) to handle 
 
 Unlike DISKANN, which keeps compressed vectors in memory, AiSAQ is designed with a “Near-Zero DRAM Architecture” which means holding all data structures in SSD.
 
-AiSAQ’s enables running ultra-high scale databases using standard servers while offering operation modes to balance performance and storage costs.
+AiSAQ enables running ultra-high scale databases using standard servers while offering operation modes to balance performance and storage costs.
 
 ## How AISAQ works
 
@@ -53,7 +53,7 @@ Scale mode:  optimized for applications with more relaxed latency constraints, s
 
 - This layout ensures that visiting a node (e.g., vector 0) still requires only a single disk I/O.
 
-- Due to the fact that PQ data is redundantly stored near multiple nodes, the index file size increases significantly, consuming more disk space.
+- Since PQ data is redundantly stored near multiple nodes, the index file size increases significantly, consuming more disk space.
  
 
 #### AISAQ-scale mode
@@ -82,17 +82,17 @@ knowhere:
       max_degree: 56 # Controls the maximum number of connections (edges) each data point can have in the Vamana graph
       search_list_size: 100 # During index construction, this parameter defines the size of the candidate pool used when searching for the nearest neighbors for each node. For every node being added to the graph, the algorithm maintains a list of the search_list_size best candidates found so far. The search for neighbors stops when this list can no longer be improved. From this final candidate pool, the top max_degree nodes are selected to form the final edges
       inline_pq: -1 # Number of PQ vectors stored inline per Index node (read when node is accessed, to reduce IO)
-      rearrange: true # Re-arrange the PQ vectors data structure to improve data locality and reduce disk accesses during search (ignored in perfromance mode)
+      rearrange: true # Re-arrange the PQ vectors data structure to improve data locality and reduce disk accesses during search (ignored in performance mode)
       num_entry_points: 100 # Number of candidate entry points to optimize search entry-point selection
       pq_code_budget_gb_ratio: 0.125 # Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data
       disk_pq_code_budget_gb_ratio: 0.25 # Controls the size of the PQ codes of the high precision vectors stored in the index (used for re-ranking), compared to the size of the uncompressed data
-      pq_cache_size: 0 # PQ vector cache size in DRAM (bytes). The PQ vector cache is loaded during Index load and used during search to reduce IOs (ignored in perfromance mode)
+      pq_cache_size: 0 # PQ vectors cache size in DRAM (bytes). The PQ vectors cache is loaded during Index load and used during search to reduce IOs (ignored in performance mode)
       search_cache_budget_gb_ratio: 0 # Controls the amount of DRAM to be used for caching frequently accessed index nodes. This cache is loaded during index load and used during search to reduce IOs
     search:
       search_list: 16 # During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency
       beamwidth: 8 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read the index nodes
-      vectors_beamwidth: 1 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in perfromance mode)
-      pq_read_page_cache_size: 5242880 (5MiB) # PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vector (ignored in perfromance mode and applicable only when rearrange is true). The PQ read cache  memory is reused across all AiSAQ segments
+      vectors_beamwidth: 1 # Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode)
+      pq_read_page_cache_size: 5242880 (5MiB) # PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in perfromance mode and applicable only when rearrange is true). The PQ read cache  memory is reused across all AiSAQ segments
 ```
 
 ## AISAQ parameters
@@ -130,7 +130,7 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
    </tr>
    <tr>
      <td><p><code>rearrange</code></p></td>
-     <td><p>Re-arrange the PQ vectors data structure to improve data locality and reduce disk accesses during search (ignored in perfromance mode).</p></td>
+     <td><p>Re-arrange the PQ vectors data structure to improve data locality and reduce disk accesses during search (ignored in performance mode).</p></td>
      <td><p><strong>Type</strong>: Boolean</p><p><strong>Range</strong>: [true, false]</p><p><strong>Default value</strong>: <code>true</code></p></td>
      <td><p>When true, reduces IOs during search with only minor increase in memory and in index build time.</p></td>
    </tr>
@@ -144,17 +144,17 @@ These parameters influence how the AISAQ index is constructed. Adjusting them ca
      <td><p><code>pq_code_budget_gb_ratio</code></p></td>
      <td><p>Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data.</p></td>
      <td><p><strong>Type</strong>: Float</p><p><strong>Range</strong>: (0.0, 0.25]</p><p><strong>Default value</strong>: <code>0.125</code></p></td>
-     <td><p>A higher ratio leads to more accurate search results, effectively storing more information about the original vectors but increae computational complexity during search.</p><p>In most cases, we recommend you set a value within this range: (0.0417, 0.25].</p></td>
+     <td><p>A higher ratio leads to more accurate search results, effectively storing more information about the original vectors but increase computational complexity during search.</p><p>In most cases, we recommend you set a value within this range: (0.0417, 0.25].</p></td>
    </tr>
    <tr>
      <td><p><code>disk_pq_code_budget_gb_ratio</code></p></td>
      <td><p>Controls the size of the PQ codes of the high precision vectors stored in the index (used for re-ranking), compared to the size of the uncompressed data.</p></td>
      <td><p><strong>Type</strong>: Float</p><p><strong>Range</strong>: [0, 0.25]</p><p><strong>Default value</strong>: <code>0.25</code></p></td>
-     <td><p>With the default value of 0.25, vectors will be quantized to 25% of their original size (4× compression), reducing disk footprint with reletivly minimal accuracy impact.</p><p>Set value of 0 to store full precision vectors in disk index for re-ranking. A larger value offers a higher recall rate but increases disk usage.</p></td>
+     <td><p>With the default value of 0.25, vectors will be quantized to 25% of their original size (4× compression), reducing disk footprint with relatively minimal accuracy impact.</p><p>Set value of 0 to store full precision vectors in disk index for re-ranking. A larger value offers a higher recall rate but increases disk usage.</p></td>
    </tr>
    <tr>
      <td><p><code>pq_cache_size</code></p></td>
-     <td><p>PQ vector cache size in DRAM (bytes). The PQ vector cache is loaded during Index load and used during search to reduce IOs (ignored in perfromance mode).</p></td>
+     <td><p>PQ vectors cache size in DRAM (bytes). The PQ vectors cache is loaded during Index load and used during search to reduce IOs (ignored in performance mode).</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, 1073741824]</p><p><strong>Default value</strong>: <code>0</code></p></td>
      <td><p>Larger cache improves query performance but increases DRAM usage.</p></td>
    </tr>
@@ -191,13 +191,13 @@ These parameters influence how AISAQ performs searches. Adjusting them can impac
    </tr>
    <tr>
      <td><p><code>vectors_beamwidth</code></p></td>
-     <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in perfromance mode).</p></td>
+     <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode).</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, 4] must be <= <em>beamwidth</em></p><p><strong>Default value</strong>: <code>1</code></p></td>
-     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to extreemly excessive resource contention, as each neighboring PQ vector group may contain up to max_degree vectors.</p><p>In most cases, we recommend you set a value of 1.</p></td>
+     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to extremely excessive resource contention, as each neighboring PQ vectors group may contain up to max_degree vectors.</p><p>In most cases, we recommend you set a value of 1.</p></td>
    </tr>
    <tr>
      <td><p><code>pq_read_page_cache_size</code></p></td>
-     <td><p>PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vector (ignored in perfromance mode and applicable only when rearrange is true).</p><p>The PQ read cache  memory is reused across all AiSAQ segments.</p></td>
+     <td><p>PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true).</p><p>The PQ read cache  memory is reused across all AiSAQ segments.</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [0, 33554432]</p><p><strong>Default value</strong>: <code>5242880 (5MiB)</code></p></td>
      <td><p>Larger cache improves query performance but increases DRAM usage.</p><p>Recommended values range from 2 MiB for small segments (1 M vectors), 5 MiB for medium segments (50 M vectors) and 10 MiB for large segments (250 M vector).</p></td>
    </tr>
