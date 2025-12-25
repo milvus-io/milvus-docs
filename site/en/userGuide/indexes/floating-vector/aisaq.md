@@ -9,7 +9,7 @@ beta: Milvus 2.6.4+
 
 AISAQ is a disk-based vector index that extends [DISKANN](diskann.md) to handle billion-scale datasets with a minimal DRAM footprint. 
 
-Unlike DISKANN, which keeps compressed vectors in memory, AISAQ is designed with a “Near-Zero DRAM Architecture” which means holding all data structures in SSD.
+Unlike DISKANN, which keeps compressed vectors in memory, AISAQ is designed with a "Near-Zero DRAM Architecture" which means holding all data structures on SSD.
 
 AISAQ enables running ultra-high scale databases using standard servers while offering operation modes to balance performance and storage costs.
 
