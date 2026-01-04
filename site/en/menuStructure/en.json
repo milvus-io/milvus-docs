@@ -1017,9 +1017,15 @@
             "children": []
           },
           {
+            "label": "Text Highlighter",
+            "id": "text-highlighter.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Phrase Match",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
