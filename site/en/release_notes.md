@@ -20,13 +20,13 @@ We are pleased to announce the release of Milvus 2.6.9! This update introduces h
 
 ### Features
 
-- Added highlight scores to search results to improve relevance visualization ([#47021](https://github.com/milvus-io/milvus/pull/47021))
-- Added a storage version label metric for better observability ([#47014](https://github.com/milvus-io/milvus/pull/47014))
-- Query coord now supports segment reopen when manifest path changes ([#46921](https://github.com/milvus-io/milvus/pull/46921))
-- Added support for reopening segments when data or schema changes occur ([#46412](https://github.com/milvus-io/milvus/pull/46412))
+- Supported searching by primary keys ([#46528](https://github.com/milvus-io/milvus/pull/46528))
 
 ### Improvements
 
+- Added a storage version label metric for better observability ([#47014](https://github.com/milvus-io/milvus/pull/47014))
+- QueryCoord now supports segment reopen when manifest path changes ([#46921](https://github.com/milvus-io/milvus/pull/46921))
+- Added support for reopening segments when data or schema changes occur ([#46412](https://github.com/milvus-io/milvus/pull/46412))
 - Improved slow log performance and efficiency ([#47086](https://github.com/milvus-io/milvus/pull/47086))
 - Added storage version upgrade compaction policy to facilitate version migrations ([#47011](https://github.com/milvus-io/milvus/pull/47011))
 - Eliminated extra memory copy operations for C++ logging to improve performance ([#46992](https://github.com/milvus-io/milvus/pull/46992))
@@ -51,10 +51,10 @@ We are pleased to announce the release of Milvus 2.6.9! This update introduces h
 - Fixed compilation issues on macOS 14 ([#47048](https://github.com/milvus-io/milvus/pull/47048))
 - Used revision as streaming service discovery global version for better consistency ([#47023](https://github.com/milvus-io/milvus/pull/47023))
 - Ensured all futures complete on exception to prevent use-after-free crashes ([#46960](https://github.com/milvus-io/milvus/pull/46960))
-- Fixed shard interceptor incorrectly skipping flushallmsg operations ([#47004](https://github.com/milvus-io/milvus/pull/47004))
+- Fixed shard interceptor incorrectly skipping `FlushAllMsg` operations ([#47004](https://github.com/milvus-io/milvus/pull/47004))
 - Added valid range validation for collection TTL to prevent invalid configurations ([#47010](https://github.com/milvus-io/milvus/pull/47010))
-- Fixed getcredentialinfo not caching RPC responses ([#46945](https://github.com/milvus-io/milvus/pull/46945))
-- Fixed issue where alterfunction could not be invoked when multiple functions become invalid ([#46986](https://github.com/milvus-io/milvus/pull/46986))
+- Fixed `GetCredentialInfo` not caching RPC responses ([#46945](https://github.com/milvus-io/milvus/pull/46945))
+- Fixed issue where `AlterFunction` could not be invoked when multiple functions become invalid ([#46986](https://github.com/milvus-io/milvus/pull/46986))
 - Fixed inverted index null offset file not being compacted ([#46950](https://github.com/milvus-io/milvus/pull/46950))
 - Fixed crash when using is_null_expr on indexed JSON fields ([#46894](https://github.com/milvus-io/milvus/pull/46894))
 - Added check for allow_insert_auto_id flag in RESTful v2 insert API ([#46931](https://github.com/milvus-io/milvus/pull/46931))
@@ -63,7 +63,7 @@ We are pleased to announce the release of Milvus 2.6.9! This update introduces h
 - Quota center now ignores delegator when it is in recovering state ([#46858](https://github.com/milvus-io/milvus/pull/46858))
 - Aligned WKT/WKB conversion options to ensure consistent behavior across operations ([#46874](https://github.com/milvus-io/milvus/pull/46874))
 - Fixed voyageai model int8 bug ([#46821](https://github.com/milvus-io/milvus/pull/46821))
-- Fixed missing handling of flushallmsg in recovery storage operations ([#46803](https://github.com/milvus-io/milvus/pull/46803))
+- Fixed missing handling of `FlushAllMsg` in recovery storage operations ([#46803](https://github.com/milvus-io/milvus/pull/46803))
 - Fixed missing shardclientmgr field in querytask to prevent panic ([#46838](https://github.com/milvus-io/milvus/pull/46838))
 - Used leaderid for leaderaction stale check in scheduler to improve accuracy ([#46788](https://github.com/milvus-io/milvus/pull/46788))
 - Restored tenant/namespace support for Pulsar that was lost in 2.6 ([#46759](https://github.com/milvus-io/milvus/pull/46759))
