@@ -25,7 +25,7 @@ You can download the RPM/DEB package according to your system architecture from 
 The following command assumes that you are going to run Milvus Standalone on a x86_64/amd64 machine.
 
 ```shell
-wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_version}}/{{var.milvus_rpm_amd64}} -O {{var.milvus_rpm_amd64}}
+wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_deb_release}}/{{var.milvus_rpm_amd64}} -O {{var.milvus_rpm_amd64}}
 ```
 
 ## Install the RPM/DEB Package
