@@ -10,30 +10,17 @@ Find out what’s new in Milvus! This page summarizes new features, improvements
 
 ## v2.6.10
 
-Release date: February 4, 2026
+Release date: February 5, 2026
 
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
 |:-------------- |:------------------|:--------------------|:-----------------|:---------------|
 | 2.6.10        | 2.6.8                | 2.6.9                 | 2.6.13              | 2.6.1            |
 
-We are pleased to announce the release of Milvus 2.6.10! This update introduces a new truncate API and strengthens security controls around KMS key revocation. It also improves query and storage performance through reduced data-loading overhead, better I/O pipelining in Storage V2, and multiple scheduler and balancing optimizations. This release further expands RESTful capabilities (including search by primary key) and fixes a number of stability issues across compaction, logging, and recovery workflows. We recommend all users on the 2.6 branch upgrade to this version for improved reliability and performance.
-
-### Features
-
-- Added a truncate API to remove collection data more efficiently ([#47308](https://github.com/milvus-io/milvus/pull/47308))
+We are pleased to announce the release of Milvus 2.6.10! This update strengthens security controls around KMS key revocation and improves search and storage performance through automatic FP32-to-FP16/BF16 conversion, optimized segment loading, and updated auto-index configurations. This release also fixes a number of stability issues across compaction, query pagination, and recovery workflows. We recommend all users on the 2.6 branch upgrade to this version for improved reliability and performance.
 
 ### Improvements
 
 - Added support to stop WAL consumption when a KMS key is revoked ([#47018](https://github.com/milvus-io/milvus/pull/47018))
-- Reduced unnecessary `PinWrapper` copies in `searchPksWith` to improve query performance ([#47531](https://github.com/milvus-io/milvus/pull/47531))
-- Normalized constant-folded boolean expressions to `AlwaysTrueExpr`/`AlwaysFalseExpr` during rewriting for simpler plans ([#47493](https://github.com/milvus-io/milvus/pull/47493))
-- Added RESTful `search_by_pk` support ([#47318](https://github.com/milvus-io/milvus/pull/47318))
-- Optimized “latest delete snapshot” handling to reduce overhead ([#47409](https://github.com/milvus-io/milvus/pull/47409))
-- Added support for user-specified warmup settings ([#47343](https://github.com/milvus-io/milvus/pull/47343))
-- Added `LoadWithStrategyAsync` to enable true I/O pipelining in Storage V2 ([#47427](https://github.com/milvus-io/milvus/pull/47427))
-- Optimized MixCoord's CPU and memory usage by avoiding redundant calculations in the balance checker ([#47190](https://github.com/milvus-io/milvus/pull/47190))
-- Added sparse filtering support in search ([#47447](https://github.com/milvus-io/milvus/pull/47447))
-- Reduced memory allocations and copies during data loading ([#47088](https://github.com/milvus-io/milvus/pull/47088))
 - Updated the default auto-index configuration for vector fields ([#47388](https://github.com/milvus-io/milvus/pull/47388))
 - Disabled storage-version upgrade compaction by default ([#47383](https://github.com/milvus-io/milvus/pull/47383))
 - Added automatic FP32-to-FP16/BF16 conversion in search ([#47241](https://github.com/milvus-io/milvus/pull/47241))
@@ -51,16 +38,9 @@ We are pleased to announce the release of Milvus 2.6.10! This update introduces 
 
 ### Bug fixes
 
-- Removed `segment_loader` pre-reserve logic for warmup fields/indexes to avoid incorrect reservations ([#47463](https://github.com/milvus-io/milvus/pull/47463))
-- Updated `log_*` macros to use `{}` placeholders to avoid treating error messages as format strings ([#47485](https://github.com/milvus-io/milvus/pull/47485))
-- Fixed bloom filter memory leak when a worker node crashes ([#47451](https://github.com/milvus-io/milvus/pull/47451))
-- Used actual data timestamps for imported segment positions ([#47370](https://github.com/milvus-io/milvus/pull/47370))
-- Rebuilt WAL messages on each append retry to avoid panics ([#47480](https://github.com/milvus-io/milvus/pull/47480))
-- Filled in the log and memory size fields in `TextIndexStats` metadata ([#47476](https://github.com/milvus-io/milvus/pull/47476))
-- Reduced the empty timetick filtering interval to improve timetick handling ([#47471](https://github.com/milvus-io/milvus/pull/47471))
-- ***Fixed incorrect group results during pagination of grouped queries ([#47248](https://github.com/milvus-io/milvus/pull/47248))
+- Fixed incorrect group results during pagination of grouped queries ([#47248](https://github.com/milvus-io/milvus/pull/47248))
 - Added boundary validation for threadpool resize operations ([#47367](https://github.com/milvus-io/milvus/pull/47367))
-- ***Improved error message handling when the error type is missing ([#47369](https://github.com/milvus-io/milvus/pull/47369))
+- Improved error message handling when the error type is missing ([#47369](https://github.com/milvus-io/milvus/pull/47369))
 - Prevented coredumps and improved diagnostics for `PhyReScoresNode` ([#47341](https://github.com/milvus-io/milvus/pull/47341))
 - Reverted a compaction change related to “fast finish” when L0 compaction hits zero (L1/L2) ([#47336](https://github.com/milvus-io/milvus/pull/47336))
 - Prevented server crashes on division/modulo by zero in filter expressions ([#47306](https://github.com/milvus-io/milvus/pull/47306))
