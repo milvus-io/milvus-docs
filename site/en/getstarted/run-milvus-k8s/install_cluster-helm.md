@@ -46,10 +46,10 @@ $ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 
 <div class="alert note">
 
-The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has been archived and you can get further updates from `https://zilliztech.github.io/milvus-helm/` as follows:
+The Milvus Helm Charts repo at `https://github.com/milvus-io/milvus-helm` has been archived and you can get further updates from `https://github.com/zilliztech/milvus-helm` as follows:
 
 ```shell
-helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 # upgrade existing helm release
 helm upgrade my-release zilliztech/milvus
@@ -248,7 +248,7 @@ Having installed Milvus in Docker, you can:
 
 - [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
 - [Scale your Milvus cluster](scaleout.md).
-- Deploy your Milvu cluster on clouds:
+- Deploy your Milvus cluster on clouds:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)

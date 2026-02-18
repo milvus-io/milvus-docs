@@ -3,10 +3,10 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: Learn how to install Milvus standalone with Docker Compose.
-title: Run Milvus with Docker Compose
+title: Run Milvus with Docker Compose (Linux)
 ---
 
-# Run Milvus with Docker Compose
+# Run Milvus with Docker Compose (Linux)
 
 This page illustrates how to launch a Milvus instance in Docker using Docker Compose.
 
@@ -49,7 +49,7 @@ After starting up Milvus,
 You can check if the containers are up and running using the following command:
 
 ```shell
-$ sudo docker compose ps
+$ sudo docker-compose ps
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ Having installed Milvus in Docker, you can:
 
 - [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
 - [Scale your Milvus cluster](scaleout.md).
-- Deploy your Milvu cluster on clouds:
+- Deploy your Milvus cluster on clouds:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)

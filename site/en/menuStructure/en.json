@@ -86,15 +86,21 @@
                 "children": []
               },
               {
-                "label": "Docker",
+                "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Docker Compose",
+                "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "Docker Desktop (Windows)",
+                "id": "install_standalone-windows.md",
+                "order": 3,
                 "children": []
               }
             ]
@@ -302,12 +308,6 @@
         "label": "Reranking",
         "id": "reranking.md",
         "order": 9,
-        "children": []
-      },
-      {
-        "label": "Users and Roles",
-        "id": "users_and_roles.md",
-        "order": 10,
         "children": []
       },
       {
@@ -637,50 +637,6 @@
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "label": "Milvus Migration",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "Overview",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Install Migration Tool",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "From Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "From Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "From Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "From Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
       }
     ]
   },
@@ -1028,6 +984,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "Trace",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Jaeger Tracing",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1044,6 +1014,12 @@
             "children": []
           },
           {
+            "label": "Users, Privileges, and Roles",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Enable RBAC",
             "id": "rbac.md",
             "order": 1,
@@ -1054,6 +1030,12 @@
             "label": "Encryption in Transit",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Connect to Kafka with SASL/SSL",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1201,6 +1183,13 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Powershell Milvus Client",
+        "id": "milvus_powershell",
+        "order": 8,
+        "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
+        "children": []
       }
     ]
   },
@@ -1293,6 +1282,42 @@
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Fireworks",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "SiliconFlow",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gemini",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
           }
         ]
       }, 
@@ -1323,7 +1348,7 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
-              }
+              }              
             ]
           },
           {
@@ -1368,6 +1393,30 @@
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []            
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
+            "children": []
           }
         ]
       }, 
@@ -1387,7 +1436,13 @@
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
-          }
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
+          }       
         ]
       }, 
       {
@@ -1405,6 +1460,18 @@
             "label": "Vanna",
             "id": "integrate_with_vanna.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Knowledge Table",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1468,6 +1535,18 @@
             "id": "apify_milvus_rag.md",
             "order": 2,
             "children": []            
+          },
+          {
+            "label": "Unstructured",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []            
+          },
+          {
+            "label": "PII Masker",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []            
           }
         ]
       },  
@@ -1481,7 +1560,13 @@
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
-          }
+          },
+          {
+            "label": "Arm",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
+          }          
         ]
       }
     ]
@@ -1505,33 +1590,81 @@
         "children": []
       },
       {
-        "label": "Image Search with Milvus",
-        "id": "image_similarity_search.md",
+        "label": "Advanced RAG",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
+        "children": []        
+      },
+      {
+        "label": "Full-Text Search with Milvus",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
         "children": []
       },
       {
         "label": "Hybrid Search with Milvus",
         "id": "hybrid_search_with_milvus.md",
-        "order": 3,
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Image Search with Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
         "children": []
       },
       {
         "label": "Multimodal RAG",
         "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
+        "order": 6,
         "children": []
       },
       {
         "label": "Graph RAG with Milvus",
         "id": "graph_rag_with_milvus.md",
-        "order": 5,
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Contextual Retrieval",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "HDBSCAN Clustering",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Use ColPali for Multi-Modal Retrieval",
+        "id": "use_ColPali_with_milvus.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Vector Visualization",
+        "id": "vector_visualization.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "Movie Recommendation",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "Funnel Search with Matryoshka Embeddings",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 13,
         "children": []
       },
       {
         "label": "Explore More",
         "id": "explore-more",
-        "order": 4,
+        "order": 99,
         "children": [
           {
             "label": "Question Answering System",

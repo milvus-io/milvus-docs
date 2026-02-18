@@ -13,7 +13,11 @@ Setting `nlist` is scenario-specific. As a rule of thumb, the recommended value 
 
 The size of each segment is determined by the `datacoord.segment.maxSize` parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing `datacoord.segment.maxSize` by the size of each entity.
 
+**Example**: If each vector is 50 KB, then $n = \frac{512\, \text{MB} \times 1024\, \text{KB/MB}}{50\, \text{KB per entity}} = 10,485 \text{ entities}$
+For the number of clusters, `nlist` $= 4 \times \sqrt{n} = 410$.
+
 Setting `nprobe` is specific to the dataset and scenario, and involves a trade-off between accuracy and query performance. We recommend finding the ideal value through repeated experimentation.
+If the data volume of the entities is within the millions, you might consider using brute-force search. In other words, set `nprobe` to `nlist`.
 
 The following charts are results from a test running on the sift50m dataset and IVF_SQ8 index, which compares recall and query performance of different `nlist`/`nprobe` pairs.
 
@@ -22,7 +26,7 @@ The following charts are results from a test running on the sift50m dataset and 
 
 #### Why do queries sometimes take longer on smaller datasets?
 
-Query operations are conducted on segments. indexes reduce the amount of time it takes to query a segment. If a segment has not been indexed, Milvus resorts to brute-force search on the raw data—drastically increasing query time.
+Query operations are conducted on segments. Indexes reduce the amount of time it takes to query a segment. If a segment has not been indexed, Milvus resorts to brute-force search on the raw data—drastically increasing query time.
 
 Therefore, it usually takes longer to query on a small dataset (collection) because it has not built index. This is because the sizes of its segments have not reached the index-building threshold set by `rootCoord.minSegmentSizeToEnableindex`. Call `create_index()` to force Milvus to index segments that have reached the threshold but not yet been automatically indexed, significantly improving query performance.
 
@@ -69,4 +73,4 @@ However, indexing a VARCHAR field does not speed up:
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. Feel free to ask questions, share ideas, and help others.
-- Join our [Slack Channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to find support and engage with our open-source community.
+- Join our [Discord Server](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.

@@ -20,7 +20,7 @@ Milvus supports only one primary key field in a collection.
 <table class="properties">
 	<thead>
 	<tr>
-		<th>Properties</td>
+		<th>Properties</th>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
@@ -53,7 +53,7 @@ Milvus supports only one primary key field in a collection.
         </tr>
         <tr>
         	<td><code>max_length</code> (Mandatory for VARCHAR field)</td>
-        	<td>Maximum length of strings allowed to be inserted.</td>
+        	<td>Maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit.</td>
         	<td>[1, 65,535]</td>
         </tr>
 	<tr>
@@ -138,7 +138,7 @@ A collection schema is the logical definition of a collection. Usually you need 
 <table class="properties">
 	<thead>
 	<tr>
-		<th>Properties</td>
+		<th>Properties</th>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
@@ -189,7 +189,8 @@ schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id
 Create a collection with the schema specified:
 
 ```python
-from pymilvus import Collection
+from pymilvus import Collection,connections
+conn = connections.connect(host="127.0.0.1", port=19530)
 collection_name1 = "tutorial_1"
 collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
 ```

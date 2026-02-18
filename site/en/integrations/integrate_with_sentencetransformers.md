@@ -6,222 +6,171 @@ title: Movie Search Using Milvus and SentenceTransformers
 
 # Movie Search Using Milvus and SentenceTransformers
 
-In this example, we are going to be going over a Wikipedia article search using Milvus and the SentenceTransformers library. The dataset we are searching through is the Wikipedia-Movie-Plots Dataset found on [Kaggle](https://www.kaggle.com/datasets/jrobischon/wikipedia-movie-plots). For this example, we have rehosted the data in a public google drive.
+In this example, we will search movie plot summaries using Milvus and the SentenceTransformers library. The dataset we will use is [Wikipedia Movie Plots with Summaries](https://huggingface.co/datasets/vishnupriyavr/wiki-movie-plots-with-summaries) hosted on HuggingFace.
 
-Let's get started.
+Let's get started!
 
-## Installing requirements
+## Required Libraries
 
-For this example, we are going to be using `pymilvus` to connect to use Milvus, `sentencetransformers` to generate vector embeddings, and `gdown` to download the example dataset.
+For this example, we will use `pymilvus` to connect to use Milvus, `sentence-transformers` to generate vector embeddings, and `datasets` to download the example dataset.
 
 ```shell
-pip install pymilvus sentence-transformers gdown
+pip install pymilvus sentence-transformers datasets tqdm
 ```
-
-## Grabbing the data
-
-We are going to use `gdown` to grab the zip from Google Drive and then decompress it with the built-in `zipfile` library.
 
 ```python
-import gdown
-url = 'https://drive.google.com/uc?id=11ISS45aO2ubNCGaC3Lvd3D7NT8Y7MeO8'
-output = './movies.zip'
-gdown.download(url, output)
-
-import zipfile
-
-with zipfile.ZipFile("./movies.zip","r") as zip_ref:
-    zip_ref.extractall("./movies")
+from datasets import load_dataset
+from pymilvus import MilvusClient
+from pymilvus import FieldSchema, CollectionSchema, DataType
+from sentence_transformers import SentenceTransformer
+from tqdm import tqdm
 ```
 
-## Global parameters
+We'll define some global parameters,
+```python
+embedding_dim = 384
+collection_name = "movie_embeddings"
+```
 
-Here we can find the main arguments that need to be modified for running with your own accounts. Beside each is a description of what it is.
+## Downloading and Opening the Dataset
+In a single line, `datasets` allows us to download and open a dataset. The library will cache the dataset locally and use that copy next time it is run. Each row contains the details of a movie that has an accompanying Wikipedia article. We make use of the `Title`, `PlotSummary`, `Release Year`, and `Origin/Ethnicity` columns.
 
 ```python
-# Milvus Setup Arguments
-COLLECTION_NAME = 'movies_db'  # Collection name
-DIMENSION = 384  # Embeddings size
-COUNT = 1000  # Number of vectors to insert
-MILVUS_HOST = 'localhost'
-MILVUS_PORT = '19530'
-
-# Inference Arguments
-BATCH_SIZE = 128
-
-# Search Arguments
-TOP_K = 3
+ds = load_dataset("vishnupriyavr/wiki-movie-plots-with-summaries", split="train")
+print(ds)
 ```
 
-## Setting up Milvus
-
+## Connecting to the Database
 At this point, we are going to begin setting up Milvus. The steps are as follows:
 
-1. Connect to the Milvus instance using the provided URI.
-
-    ```python
-    from pymilvus import connections
-
-    # Connect to Milvus Database
-    connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
-    ```
-
-2. If the collection already exists, drop it.
-
-    ```python
-    from pymilvus import utility
-
-    # Remove any previous collections with the same name
-    if utility.has_collection(COLLECTION_NAME):
-        utility.drop_collection(COLLECTION_NAME)
-    ```
-
-3. Create the collection that holds the id, title of the movie, and the embeddings of the plot text.
-
-    ```python
-    from pymilvus import FieldSchema, CollectionSchema, DataType, Collection
-
-
-    # Create collection which includes the id, title, and embedding.
-    fields = [
-        FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True),
-        FieldSchema(name='title', dtype=DataType.VARCHAR, max_length=200),  # VARCHARS need a maximum length, so for this example they are set to 200 characters
-        FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
-    ]
-    schema = CollectionSchema(fields=fields)
-    collection = Collection(name=COLLECTION_NAME, schema=schema)
-    ```
-
-4. Create an index on the newly created collection and load it into memory.
-
-    ```python
-    # Create an IVF_FLAT index for collection.
-    index_params = {
-        'metric_type':'L2',
-        'index_type':"IVF_FLAT",
-        'params':{'nlist': 1536}
-    }
-    collection.create_index(field_name="embedding", index_params=index_params)
-    collection.load()
-    ```
-
-Once these steps are done the collection is ready to be inserted into and searched. Any data added will be indexed automatically and be available to search immediately. If the data is very fresh, the search might be slower as brute force searching will be used on data that is still in process of getting indexed.
-
-## Inserting the data
-
-For this example, we are going to use the SentenceTransformers miniLM model to create embeddings of the plot text. This model returns 384-dim embeddings.
-
-In these next few steps we will be: 
-
-1. Loading the data.
-2. Embedding the plot text data using SentenceTransformers.
-3. Inserting the data into Milvus.
+1. Create a Milvus Lite database in a local file. (Replace this URI to the server address for Milvus Standalone and Milvus Distributed.)
 
 ```python
-import csv
-from sentence_transformers import SentenceTransformer
+client = MilvusClient(uri="./sentence_transformers_example.db")
+```
 
-transformer = SentenceTransformer('all-MiniLM-L6-v2')
+2. Create the data schema. This specifies the fields that comprise an element including the dimension of the vector embedding.
 
-# Extract the book titles
-def csv_load(file):
-    with open(file, newline='') as f:
-        reader = csv.reader(f, delimiter=',')
-        for row in reader:
-            if '' in (row[1], row[7]):
-                continue
-            yield (row[1], row[7])
+```python
+fields = [
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
+    FieldSchema(name="title", dtype=DataType.VARCHAR, max_length=256),
+    FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=embedding_dim),
+    FieldSchema(name="year", dtype=DataType.INT64),
+    FieldSchema(name="origin", dtype=DataType.VARCHAR, max_length=64),
+]
 
+schema = CollectionSchema(fields=fields, enable_dynamic_field=False)
+client.create_collection(collection_name=collection_name, schema=schema)
+```
 
-# Extract embedding from text using OpenAI
-def embed_insert(data):
-    embeds = transformer.encode(data[1]) 
-    ins = [
-            data[0],
-            [x for x in embeds]
+3. Define the vector search indexing algorithm. Milvus Lite support FLAT index type, whereas Milvus Standalone and Milvus Distributed implement a wide variety of methods such as IVF, HNSW and DiskANN. For the small scale of data in this demo, any search index type suffices so we use the simplest one FLAT here.
+
+```python
+index_params = client.prepare_index_params()
+index_params.add_index(field_name="embedding", index_type="FLAT", metric_type="IP")
+client.create_index(collection_name, index_params)
+```
+
+Once these steps are done, we are ready to insert data into the collection and perform a search. Any data added will be indexed automatically and be available to search immediately. If the data is very fresh, the search might be slower as brute force searching will be used on data that is still in process of getting indexed.
+
+## Inserting the Data
+
+For this example, we are going to use the SentenceTransformers miniLM model to create embeddings of the plot text. This model returns 384-dimension embeddings.
+
+```python
+model = SentenceTransformer("all-MiniLM-L12-v2")
+```
+
+We loop over the rows of the data, embed the plot summary field, and insert entities into the vector database. In general, you should perform this step over batches of data items to maximize CPU or GPU throughput for the embedding model, as we do here.
+
+```python
+for batch in tqdm(ds.batch(batch_size=512)):
+    embeddings = model.encode(batch["PlotSummary"])
+    data = [
+        {"title": title, "embedding": embedding, "year": year, "origin": origin}
+        for title, embedding, year, origin in zip(
+            batch["Title"], embeddings, batch["Release Year"], batch["Origin/Ethnicity"]
+        )
     ]
-    collection.insert(ins)
-
-import time
-
-data_batch = [[],[]]
-
-count = 0
-
-for title, plot in csv_load('./movies/plots.csv'):
-    if count <= COUNT:
-        data_batch[0].append(title)
-        data_batch[1].append(plot)
-        if len(data_batch[0]) % BATCH_SIZE == 0:
-            embed_insert(data_batch)
-            data_batch = [[],[]]
-        count += 1
-    else:
-        break
-
-# Embed and insert the remainder
-if len(data_batch[0]) != 0:
-    embed_insert(data_batch)
-
-# Call a flush to index any unsealed segments.
-collection.flush()
+    res = client.insert(collection_name=collection_name, data=data)
 ```
 
 <div class="alert note">
 
-The above operation is relatively time-consuming because embedding takes time. To keep the time consumed at an acceptable level, try setting `COUNT` in [Global parameters](#Global-parameters) to an appropriate value. Take a break and enjoy a cup of coffee!
+The above operation is relatively time-consuming because embedding takes time. This step takes around 2 minutes using the CPU on a 2023 MacBook Pro and will be much faster with dedicated GPUs. Take a break and enjoy a cup of coffee!
 
 </div>
 
-## Performing the search
-
-With all the data inserted into Milvus, we can start performing our searches. In this example, we are going to search for movies based on the plot. Because we are doing a batch search, the search time is shared across the movie searches. 
+## Performing the Search
+With all the data inserted into Milvus, we can start performing our searches. In this example, we are going to search for movies based on plot summaries from Wikipedia. Because we are doing a batch search, the search time is shared across the movie searches. (Can you guess what movie I had in mind to retrieve based on the query description text?)
 
 ```python
-# Search for titles that closest match these phrases.
-search_terms = ['A movie about cars', 'A movie about monsters']
+queries = [
+    'A shark terrorizes an LA beach.',
+    'An archaeologist searches for ancient artifacts while fighting Nazis.',
+    'Teenagers in detention learn about themselves.',
+    'A teenager fakes illness to get off school and have adventures with two friends.',
+    'A young couple with a kid look after a hotel during winter and the husband goes insane.',
+    'Four turtles fight bad guys.'
+    ]
 
 # Search the database based on input text
-def embed_search(data):
-    embeds = transformer.encode(data) 
-    return [x for x in embeds]
+def embed_query(data):
+    vectors = model.encode(data)
+    return [x for x in vectors]
 
-search_data = embed_search(search_terms)
 
-start = time.time()
-res = collection.search(
-    data=search_data,  # Embeded search value
-    anns_field="embedding",  # Search across embeddings
-    param={},
-    limit = TOP_K,  # Limit to top_k results per search
-    output_fields=['title']  # Include title field in result
+query_vectors = embed_query(queries)
+
+res = client.search(
+    collection_name=collection_name,
+    data=query_vectors,
+    filter='origin == "American" and year > 1945 and year < 2000',
+    anns_field="embedding",
+    limit=3,
+    output_fields=["title"],
 )
-end = time.time()
 
-for hits_i, hits in enumerate(res):
-    print('Title:', search_terms[hits_i])
-    print('Search Time:', end-start)
-    print('Results:')
+for idx, hits in enumerate(res):
+    print("Query:", queries[idx])
+    print("Results:")
     for hit in hits:
-        print( hit.entity.get('title'), '----', hit.distance)
+        print(hit["entity"].get("title"), "(", round(hit["distance"], 2), ")")
     print()
 ```
 
-The output should be similar to the following:
+The results are:
 
 ```shell
-Title: A movie about cars
-Search Time: 0.08636689186096191
+Query: An archaeologist searches for ancient artifacts while fighting Nazis.
 Results:
-Youth's Endearing Charm ---- 1.0954499244689941
-From Leadville to Aspen: A Hold-Up in the Rockies ---- 1.1019384860992432
-Gentlemen of Nerve ---- 1.1331942081451416
+Love Slaves of the Amazons ( 0.4 )
+A Time to Love and a Time to Die ( 0.39 )
+The Fifth Element ( 0.39 )
 
-Title: A movie about monsters
-Search Time: 0.08636689186096191
+Query: Teenagers in detention learn about themselves.
 Results:
-The Suburbanite ---- 1.0666425228118896
-Youth's Endearing Charm ---- 1.1072258949279785
-The Godless Girl ---- 1.1511223316192627
+The Breakfast Club ( 0.54 )
+Up the Academy ( 0.46 )
+Fame ( 0.43 )
+
+Query: A teenager fakes illness to get off school and have adventures with two friends.
+Results:
+Ferris Bueller's Day Off ( 0.48 )
+Fever Lake ( 0.47 )
+Losin' It ( 0.39 )
+
+Query: A young couple with a kid look after a hotel during winter and the husband goes insane.
+Results:
+The Shining ( 0.48 )
+The Four Seasons ( 0.42 )
+Highball ( 0.41 )
+
+Query: Four turtles fight bad guys.
+Results:
+Teenage Mutant Ninja Turtles II: The Secret of the Ooze ( 0.47 )
+Devil May Hare ( 0.43 )
+Attack of the Giant Leeches ( 0.42 )
 ```
 

@@ -191,7 +191,7 @@ The output of the above code snippet includes the names of the partitions within
 
 ## Create Partitions
 
-You can add more partitions to the collection. A collection can have up to 1,024 partitions.
+You can add more partitions to the collection. A collection can have up to 4,096 partitions.
 
 <div class="language-python">
 
@@ -719,7 +719,7 @@ client.load_partitions(
     partition_names=["partitionA", "partitionB"]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name="quick_setup",
     partition_name="partitionA"
 )
@@ -730,7 +730,7 @@ res = client.get_load_status(
 #     "state": "<LoadState: Loaded>"
 # }
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name="quick_setup",
     partition_name="partitionB"
 )
@@ -921,7 +921,7 @@ client.release_partitions(
     partition_names=["_default", "partitionA", "partitionB"]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name="quick_setup",
 )
 
@@ -1041,7 +1041,7 @@ console.log(res)
 
 - __What is the maximum number of partitions that can be created?__
 
-    By default, Milvus allows a maximum of 4,096 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
+    By default, Milvus allows a maximum of 1,024 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
 
 - __How can I differentiate between partitions and partition keys?__
 

@@ -14,12 +14,22 @@ title: Upgrade Milvus Cluster with Helm Chart
 
 This guide describes how to upgrade your Milvus cluster with Milvus Helm charts. 
 
+## Prerequisites
+- Helm version >= 3.14.0
+- Kubernetes version >= 1.20.0
+
+<div class="alert note">
+
+Since Milvus-Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your helm to v3.14 or later version, and be sure to add the `--reset-then-reuse-values` option whenever you use `helm upgrade`.
+
+</div>
+
 ## Check Milvus Helm Chart
 
 Run the following commands to check new Milvus versions. 
 
 ```
-$ helm repo update
+$ helm repo update zilliztech
 $ helm search repo zilliztech/milvus --versions
 ```
 
@@ -31,7 +41,7 @@ The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has be
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
 # upgrade existing helm release
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
@@ -122,8 +132,8 @@ sh rollingUpdate.sh -n default -i my-release -o update -t {{var.milvus_release_v
 To upgrade Milvus from a minor release before v2.2.3 to the latest, run the following commands:
 
 ```shell
-helm repo update
-helm upgrade my-release zilliztech/milvus --reuse-values --version={{var.milvus_helm_chart_version}} # use the helm chart version here
+helm repo update zilliztech
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version={{var.milvus_helm_chart_version}} # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
@@ -214,43 +224,43 @@ The following table lists the operations you can do for meta migration.
 4. Migrate the Milvus metadata.
 5. Start Milvus components with a new image.
 
-#### 2. Upgrade Milvus from v2.1.x to {{var.milvus_release_version}}
+#### 2. Upgrade Milvus from v2.1.x to 2.2.0
 
-The following commands assume that you upgrade Milvus from v2.1.4 to {{var.milvus_release_version}}. Change them to the versions that fit your needs.
+The following commands assume that you upgrade Milvus from v2.1.4 to 2.2.0. Change them to the versions that fit your needs.
 
 1. Specify Milvus instance name, source Milvus version, and target Milvus version.
 
     ```
-    ./migrate.sh -i my-release -s 2.1.4 -t {{var.milvus_release_version}}
+    ./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
     ```
 
 2. Specify the namespace with `-n` if your Milvus is not installed in the default K8s namespace.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t {{var.milvus_release_version}}
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0
     ```
 
 3. Specify the root path with `-r` if your Milvus is installed with the custom `rootpath`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t {{var.milvus_release_version}} -r by-dev
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev
     ```
 
 4. Specify the image tag with `-w` if your Milvus is installed with a custom `image`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t {{var.milvus_release_version}} -r by-dev -w milvusdb/milvus:v{{var.milvus_release_tag}}
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -w milvusdb/milvus:v2.2.0
     ```
 
 5. Set `-d true` if you want to automatically remove the migration pod after the migration is completed.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t {{var.milvus_release_version}} -w milvusdb/milvus:v{{var.milvus_release_tag}} -d true
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d true
     ```
 
 6. Rollback and migrate again if the migration fails.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t {{var.milvus_release_version}} -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t {{var.milvus_release_version}} -r by-dev -o migrate -w milvusdb/milvus:v{{var.milvus_release_tag}}
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
     ```
