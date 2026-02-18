@@ -6,8 +6,6 @@ title: Milvus Hybrid Search Retriever
 
 # Milvus Hybrid Search Retriever
 
-## Overview
-
 Hybrid search combines the strengths of different search paradigms to enhance retrieval accuracy and robustness. It leverages the capabilities of both dense vector search and sparse vector search, as well as combinations of multiple dense vector search strategies, ensuring comprehensive and precise retrieval for diverse queries.
 
 ![](../../../../assets/hybrid_and_rerank.png)
@@ -126,8 +124,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
-    drop_old=True,
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 ```
 
@@ -202,8 +200,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
-    drop_old=True,
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 ```
 
@@ -231,8 +229,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
-    drop_old=True,
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -274,8 +272,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
-    drop_old=True,
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -307,8 +305,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
-    drop_old=True,
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 
 query = "What are the novels Lila has written and what are their contents?"
@@ -401,8 +399,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
-    drop_old=True,
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    drop_old=False,
 )
 ```
 

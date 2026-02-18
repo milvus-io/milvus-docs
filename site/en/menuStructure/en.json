@@ -56,9 +56,15 @@
         "children": []
       },
       {
+        "label": "Data Model Design for Search",
+        "id": "schema-hands-on.md",
+        "order": 1,
+        "children": []
+      },
+      {
         "label": "Install Milvus",
         "id": "install_milvus",
-        "order": 1,
+        "order": 2,
         "isMenu": true,
         "children": [
           {
@@ -162,7 +168,7 @@
       {
         "label": "Install SDKs",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -300,7 +306,7 @@
       },
       {
         "label": "Consistency Level",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -348,12 +354,6 @@
             "children": []
           },
           {
-            "label": "Create Collection Instantly",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "View Collections",
             "id": "view-collections.md",
             "order": 3,
@@ -372,21 +372,27 @@
             "children": []
           },
           {
+            "label": "Set Collection TTL",
+            "id": "set-collection-ttl.md",
+            "order": 6,
+            "children": []
+          },
+          {
             "label": "Manage Partitions",
             "id": "manage-partitions.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Manage Aliases",
             "id": "manage-aliases.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Drop Collection",
             "id": "drop-collection.md",
-            "order": 8,
+            "order": 9,
             "children": []
           }
         ]
@@ -518,7 +524,19 @@
                   {
                     "label": "Jieba",
                     "id": "jieba-tokenizer.md",
-                    "order": 1,
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Lindera",
+                    "id": "lindera-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "ICU",
+                    "id": "icu-tokenizer.md",
+                    "order": 4,
                     "children": []
                   }
                 ]
@@ -581,14 +599,32 @@
                     "id": "stemmer-filter.md",
                     "order": 8,
                     "children": []
+                  },
+                  {
+                    "label": "Remove Punct",
+                    "id": "removepunct-filter.md",
+                    "order": 9,
+                    "children": []
+                  },
+                  {
+                    "label": "Regex",
+                    "id": "regex-filter.md",
+                    "order": 10,
+                    "children": []
                   }
                 ]
+              },
+              {
+                "label": "Multi-language Analyzers",
+                "id": "multi-language-analyzers.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
           {
-            "label": "Hands-On",
-            "id": "schema-hands-on.md",
+            "label": "Alter Collection Field",
+            "id": "alter-collection-field.md",
             "order": 12,
             "children": []
           }
@@ -626,9 +662,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "Index Explained",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Vector Indexes",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -666,7 +708,7 @@
           {
             "label": "Scalar Indexes",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -736,14 +778,14 @@
           {
             "label": "Filtering",
             "id": "filtering",
-            "order":6,
+            "order": 6,
             "children": [
               {
                 "label": "Filtering Explained",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
-              },    
+              },
               {
                 "label": "Basic Operators",
                 "id": "basic-operators.md",
@@ -767,7 +809,7 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
-              }                 
+              }
             ]
           },
           {
@@ -783,21 +825,33 @@
             "children": []
           },
           {
+            "label": "Phrase Match",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Elasticsearch Queries to Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Search Iterators",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Use Partition Key",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 12,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 10,
+            "order": 13,
             "children": []
           }
         ]
@@ -886,6 +940,18 @@
             "label": "mGTE",
             "id": "embed-with-mgte.md",
             "order": 12,
+            "children": []
+          },
+          {
+            "label": "Model2Vec",
+            "id": "embed-with-model2vec.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "Gemini",
+            "id": "embed-with-gemini.md",
+            "order": 14,
             "children": []
           }
         ]
@@ -1189,7 +1255,7 @@
             ]
           },
           {
-            "label": "Use Pulsa with Milvus",
+            "label": "Use Pulsar with Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1223,9 +1289,15 @@
             "children": []
           },
           {
+            "label": "Scale with HPA",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Scale Dependencies",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]
@@ -1393,7 +1465,7 @@
                 "id": "rbac.md",
                 "order": 0,
                 "children": []
-              },              
+              },
               {
                 "label": "Users, Privileges, and Roles",
                 "id": "users_and_roles.md",
@@ -1416,6 +1488,12 @@
                 "label": "Grant Roles",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Drop Users & Roles",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -1489,7 +1567,7 @@
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
-              }, 
+              },
               {
                 "label": "Migrate Between Instances in One Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
@@ -1507,7 +1585,7 @@
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
-              }             
+              }
             ]
           }
         ]
@@ -1645,6 +1723,252 @@
         "children": []
       },
       {
+        "label": "Orchestration",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "LangChain",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "Basic Usage",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "RAG",
+                "id": "integrate_with_langchain.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Hybrid Search",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Full-text Search",
+                "id": "full_text_search_with_langchain.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "LlamaIndex",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_llamaindex.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Milvus Async API",
+                "id": "llamaindex_milvus_async.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Full-text Search",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Hybrid Search",
+                "id": "llamaindex_milvus_hybrid_search.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Metadata Filtering",
+                "id": "llamaindex_milvus_metadata_filter.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "FastGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "HayStack",
+            "id": "haystack",
+            "order": 4,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Full-text Search",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Kotaemon",
+            "id": "kotaemon_with_milvus.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Dify",
+            "id": "dify_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Llama Stack",
+            "id": "llama_stack_with_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "n8n",
+            "id": "milvus_and_n8n.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "AnythingLLM",
+            "id": "use_milvus_in_anythingllm.md",
+            "order": 14,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Agents",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "MemGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Camel",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Agno",
+            "id": "integrate_with_agno.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "openai_agents_milvus.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "MCP",
+            "id": "milvus_and_mcp.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Evaluation & Observability",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "Ragas",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "LangFuse",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "FiftyOne",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Arize Pheonix",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "DeepEval",
+            "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "AIMon",
+            "id": "AIMon_milvus_integration.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Embedding Models",
         "id": "integrate-embeddings-models",
         "order": 1,
@@ -1702,9 +2026,15 @@
             "id": "integrate_with_bentoml.md",
             "order": 5,
             "children": []
+          },
+          {
+            "label": "EmbedAnything",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
+            "children": []
           }
         ]
-      }, 
+      },
       {
         "label": "LLMs",
         "id": "integrate-llms",
@@ -1765,143 +2095,7 @@
             "children": []
           }
         ]
-      }, 
-      {
-        "label": "Orchestration",
-        "id": "orchestrate-with-milvus",
-        "order": 3,
-        "children": [
-          {
-            "label": "LangChain",
-            "id": "langchain",
-            "order": 0,
-            "children": [
-              {
-                "label": "Basic Usage",
-                "id": "basic_usage_langchain.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "RAG",
-                "id": "integrate_with_langchain.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Hybrid Search",
-                "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Full-text Search",
-                "id": "full_text_search_with_langchain.md",
-                "order": 4,
-                "children": []
-              }              
-            ]
-          },
-          {
-            "label": "LlamaIndex",
-            "id": "llamaindex",
-            "order": 1,
-            "children": [
-              {
-                "label": "RAG",
-                "id": "integrate_with_llamaindex.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "DSPy",
-            "id": "integrate_with_dspy.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "FastGPT",
-            "id": "integrate_with_fastgpt.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "HayStack",
-            "id": "integrate_with_haystack.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "Kotaemon",
-            "id": "kotaemon_with_milvus.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Dify",
-            "id": "dify_with_milvus.md",
-            "order": 6,
-            "children": []            
-          },
-          {
-            "label": "Langflow",
-            "id": "rag_with_langflow.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "DocsGPT",
-            "id": "use_milvus_in_docsgpt.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "PrivateGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Dynamiq",
-            "id": "milvus_rag_with_dynamiq.md",
-            "order": 11,
-            "children": []
-          }          
-        ]
-      }, 
-      {
-        "label": "Agents",
-        "id": "integrate-agents",
-        "order": 4,
-        "children": [
-          {
-            "label": "MemGPT",
-            "id": "integrate_with_memgpt.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Camel",
-            "id": "integrate_with_camel.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Mem0",
-            "id": "quickstart_mem0_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Phidata",
-            "id": "integrate_with_phidata.md",
-            "order": 3,
-            "children": []
-          }        
-        ]
-      }, 
+      },
       {
         "label": "Knowledge Engineering",
         "id": "knowledge-engineering",
@@ -1930,41 +2124,10 @@
             "id": "build_RAG_with_milvus_and_cognee.md",
             "order": 3,
             "children": []
-          }
-        ]
-      },  
-      {
-        "label": "Evaluation & Observability",
-        "id": "evaluation-observability",
-        "order": 6,
-        "children": [
-          {
-            "label": "Ragas",
-            "id": "integrate_with_ragas.md",
-            "order": 0,
-            "children": []
           },
           {
-            "label": "LangFuse",
-            "id": "integrate_with_langfuse.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "FiftyOne",
-            "id": "integrate_with_voxel51.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Arize Pheonix",
-            "id": "evaluation_with_phoenix.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "DeepEval",
-            "id": "evaluation_with_deepeval.md",
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
             "order": 4,
             "children": []
           }
@@ -1991,34 +2154,70 @@
             "label": "Apify",
             "id": "apify_milvus_rag.md",
             "order": 2,
-            "children": []            
+            "children": []
           },
           {
             "label": "Unstructured",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
-            "children": []            
+            "children": []
           },
           {
             "label": "PII Masker",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
-            "children": []            
+            "children": []
           },
           {
             "label": "Firecrawl",
             "id": "build_RAG_with_milvus_and_firecrawl.md",
             "order": 5,
-            "children": []            
+            "children": []
           },
           {
             "label": "Crawl4AI",
             "id": "build_RAG_with_milvus_and_crawl4ai.md",
             "order": 6,
-            "children": []            
-          }                   
+            "children": []
+          },
+          {
+            "label": "AWS S3",
+            "id": "build_RAG_from_s3_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "VectorETL",
+            "id": "ETL_using_vectorETL.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Feast",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Mistral OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Docling",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "NLWeb",
+            "id": "NLWeb_with_milvus.md",
+            "order": 12,
+            "children": []
+          }
         ]
-      },  
+      },
       {
         "label": "Others",
         "id": "other-integrations",
@@ -2035,7 +2234,7 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
-          }          
+          }
         ]
       }
     ]
@@ -2051,7 +2250,7 @@
         "id": "tutorials-overview.md",
         "order": 0,
         "children": []
-      },           
+      },
       {
         "label": "Build RAG with Milvus",
         "id": "build-rag-with-milvus.md",
@@ -2062,8 +2261,8 @@
         "label": "Advanced RAG",
         "id": "how_to_enhance_your_rag.md",
         "order": 2,
-        "children": []        
-      }, 
+        "children": []
+      },
       {
         "label": "Full-Text Search with Milvus",
         "id": "full_text_search_with_milvus.md",
@@ -2081,7 +2280,7 @@
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
-      },      
+      },
       {
         "label": "Multimodal RAG",
         "id": "multimodal_rag_with_milvus.md",
@@ -2134,13 +2333,19 @@
         "label": "Quickstart with Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
-        "children": []        
+        "children": []
       },
       {
         "label": "Use AsyncMilvusClient with asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
-        "children": []            
+        "children": []
+      },
+      {
+        "label": "Text-to-Image Search with Milvus",
+        "id": "text_image_search.md",
+        "order": 16,
+        "children": []
       },
       {
         "label": "Explore More",
@@ -2181,12 +2386,6 @@
             "label": "Text Search Engine",
             "id": "text_search_engine.md",
             "order": 10,
-            "children": []
-          },
-          {
-            "label": "Text to Image Search Engine",
-            "id": "text_image_search.md",
-            "order": 11,
             "children": []
           },
           {

@@ -6,8 +6,8 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and Camel
 
 # Retrieval-Augmented Generation (RAG) with Milvus and Camel
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
 
 This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using CAMEL and Milvus.
 
@@ -53,7 +53,7 @@ with open("local_data/camel paper.pdf", "wb") as file:
 ```
 
 ## 1. Customized RAG
-In this section we will set our customized RAG pipeline, we will take `VectorRetriever` as an example. We will set `OpenAIEmbedding` as the embeddding model and `MilvusStorage` as the storage for it.
+In this section we will set our customized RAG pipeline, we will take `VectorRetriever` as an example. We will set `OpenAIEmbedding` as the embedding model and `MilvusStorage` as the storage for it.
 
 To set OpenAI embedding, we need to set the `OPENAI_API_KEY` in below.
 
@@ -109,7 +109,7 @@ vector_retriever = VectorRetriever(
 )
 ```
 
-We use integrated `Unstructured Module` to split the content into small chunks, the content will be splited automacitlly with its `chunk_by_title` function, the max character for each chunk is 500 characters, which is a suitable length for `OpenAIEmbedding`. All the text in the chunks will be embed and stored to the vector storage instance, it will take some time, please wait.
+We use integrated `Unstructured Module` to split the content into small chunks, the content will be split automatically with its `chunk_by_title` function, the max character for each chunk is 500 characters, which is a suitable length for `OpenAIEmbedding`. All the text in the chunks will be embedded and stored to the vector storage instance, it will take some time, please wait.
 
 
 ```python
@@ -166,7 +166,7 @@ What you need to do is:
 - Set remote url and api key for Milvus
 - Give a query
 
-The Auto RAG pipeline would create collections for given content input paths, the collection name will be set automaticlly based on the content input path name, if the collection exists, it will do the retrieve directly.
+The Auto RAG pipeline would create collections for given content input paths, the collection name will be set automatically based on the content input path name, if the collection exists, it will do the retrieve directly.
 
 
 ```python

@@ -52,7 +52,7 @@ The Milvus Helm Charts repo at `https://github.com/milvus-io/milvus-helm` has be
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 # upgrade existing helm release
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
@@ -231,7 +231,7 @@ Run the following command to upgrade your running Milvus cluster to the latest v
 
 ```shell
 $ helm repo update
-$ helm upgrade my-release zilliztech/milvus
+$ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 ## Uninstall Milvus
@@ -265,5 +265,5 @@ Having installed Milvus in Docker, you can:
 - Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
+- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).

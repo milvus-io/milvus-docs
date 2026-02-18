@@ -6,8 +6,8 @@ title: Build RAG with Milvus and DeepSeek
 
 # Build RAG with Milvus and DeepSeek
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
 
 [DeepSeek](https://www.deepseek.com/) enables developers to build and scale AI applications with high-performance language models. It offers efficient inference, flexible APIs, and advanced Mixture-of-Experts (MoE) architectures for robust reasoning and retrieval tasks.  
 
@@ -135,7 +135,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type="IP",  # Inner product distance
-    consistency_level="Strong",  # Strong consistency level
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
 )
 ```
 

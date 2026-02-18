@@ -1,0 +1,134 @@
+name: doc
+on: 
+  workflow_dispatch:
+    inputs:
+      manual:
+        description: "Manual"
+        type: choice
+        required: true
+        options:
+          - 'guides'
+      doc:
+        description: "Doc Name"
+        type: string
+        required: true
+      order:
+        description: "Order among Sibling Docs"
+        type: string
+      outputDir:
+        description: "Output Directory"
+        type: string
+      recursive:
+        description: "Recursive"
+        type: boolean
+        default: false
+      staff:
+        description: "Staff"
+        type: string
+        required: true
+jobs:
+  fetch-doc-by-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: set up Environment
+        uses: actions/setup-node@v4.0.1
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: install dependencies
+        run: cd scripts && npm install
+      - if: ${{ github.event.inputs.recursive }} 
+        name: fetch multiple docs
+        env: 
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          FEISHU_HOST: ${{ vars.FEISHU_HOST }}
+          SPACE_ID: ${{ secrets.SPACE_ID }}
+          FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}     
+        run: |
+          node scripts/report.js \
+            -r "${{ secrets.RECEIVE_ID }}" \
+            -m "🔥 Start building doc pages in [ ${{ github.event.inputs.doc }} ] ..."
+          node scripts/index.js \
+            -m ${{ github.event.inputs.manual }} \
+            -d "${{ github.event.inputs.doc }}" \
+            -o "${{ github.event.inputs.outputDir }}" \
+            -p ${{ github.event.inputs.order }} \
+            -r
+      - if: ${{ !github.event.inputs.recursive }} 
+        name: fetch a single doc
+        env: 
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          FEISHU_HOST: ${{ vars.FEISHU_HOST }}
+          SPACE_ID: ${{ secrets.SPACE_ID }}
+          FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}     
+        run: |
+            node scripts/report.js \
+              -r "${{ secrets.RECEIVE_ID }}" \
+              -m "🔥 Start building doc page [ ${{ github.event.inputs.doc }} ] ..."
+            node scripts/index.js \
+              -m ${{ github.event.inputs.manual }} \
+              -d "${{ github.event.inputs.doc }}" \
+              -o "${{ github.event.inputs.outputDir }}" \
+              -p ${{ github.event.inputs.order }}
+      - name: create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "update doc ${{ github.event.inputs.doc }} by name"
+          title: "update doc ${{ github.event.inputs.doc }} by name"
+          body: "update doc ${{ github.event.inputs.doc }} by name. ${{ github.event.inputs.staff }} triggered this action."
+          branch: "update-docs-${{ github.event.inputs.staff }}"  
+      - name: check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        env: 
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          FEISHU_HOST: ${{ vars.FEISHU_HOST }}
+          SPACE_ID: ${{ secrets.SPACE_ID }}
+          FIGMA_API_KEY: ${{ secrets.FIGMA_API_KEY }}
+        run: |
+          node scripts/report.js \
+            -r "${{ secrets.RECEIVE_ID }}" \
+            -m "🔥 A PR has been ${{ steps.cpr.outputs.pull-request-operation }} at: #${{ steps.cpr.outputs.pull-request-url }}."
+  failure:
+    needs: fetch-doc-by-name
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+    - name: set up Environment
+      uses: actions/setup-node@v4.0.1
+    - name: checkout repo
+      uses: actions/checkout@v4
+    - name: report failure
+      run: |
+        node scripts/report.js \
+          -r "${{ secrets.RECEIVE_ID }}" \
+          -m "🔥 Build failed! Please check the logs."
+      env:
+        APP_ID: ${{ secrets.APP_ID }}
+        APP_SECRET: ${{ secrets.APP_SECRET }}
+        FEISHU_HOST: ${{ vars.FEISHU_HOST }}
+  success:
+    needs: fetch-doc-by-name
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+    - name: set up Environment
+      uses: actions/setup-node@v4.0.1
+    - name: checkout repo
+      uses: actions/checkout@v4
+    - name: install dependencies
+      run: cd scripts && npm install
+    - name: report success
+      run: |
+        node scripts/report.js \
+          -r "${{ secrets.RECEIVE_ID }}" \
+          -m "🔥 Build succeeds!"
+      env:
+        APP_ID: ${{ secrets.APP_ID }}
+        APP_SECRET: ${{ secrets.APP_SECRET }}
+        FEISHU_HOST: ${{ vars.FEISHU_HOST }}
