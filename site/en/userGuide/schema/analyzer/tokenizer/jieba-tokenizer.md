@@ -239,7 +239,7 @@ analyzerParams := map[string]interface{}{
 # restful
 ```
 
-### Verification using `run_analyzer`
+### Verification using `run_analyzer`  | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
