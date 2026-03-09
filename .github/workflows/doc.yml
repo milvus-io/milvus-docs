@@ -64,12 +64,10 @@ jobs:
           IFS=',' read -ra DOCS <<< "${{ env.DOC }}"
           for doc in "${DOCS[@]}"; do
             doc=$(echo "$doc" | xargs)
-            node scripts/index.js \
-              -m ${{ env.MANUAL }} \
-              -d "$doc" \
-              -o "${{ env.OUTPUT }}" \
-              -p ${{ env.ORDER }} \
-              -r
+            args=(-m ${{ env.MANUAL }} -d "$doc" -r)
+            [ -n "${{ env.OUTPUT }}" ] && args+=(-o "${{ env.OUTPUT }}")
+            [ -n "${{ env.ORDER }}" ]  && args+=(-p ${{ env.ORDER }})
+            node scripts/index.js "${args[@]}"
           done
       - if: ${{ env.RECURSIVE != 'true' }}
         name: fetch a single doc
@@ -86,11 +84,10 @@ jobs:
           IFS=',' read -ra DOCS <<< "${{ env.DOC }}"
           for doc in "${DOCS[@]}"; do
             doc=$(echo "$doc" | xargs)
-            node scripts/index.js \
-              -m ${{ env.MANUAL }} \
-              -d "$doc" \
-              -o "${{ env.OUTPUT }}" \
-              -p ${{ env.ORDER }}
+            args=(-m ${{ env.MANUAL }} -d "$doc")
+            [ -n "${{ env.OUTPUT }}" ] && args+=(-o "${{ env.OUTPUT }}")
+            [ -n "${{ env.ORDER }}" ]  && args+=(-p ${{ env.ORDER }})
+            node scripts/index.js "${args[@]}"
           done
       - name: create pull request
         id: cpr
