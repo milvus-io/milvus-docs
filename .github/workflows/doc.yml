@@ -89,10 +89,12 @@ jobs:
             [ -n "${{ env.ORDER }}" ]  && args+=(-p ${{ env.ORDER }})
             node scripts/index.js "${args[@]}"
           done
-      - name: sanitize branch name
+      - name: sanitize staff name
         id: branch
         run: |
-          sanitized=$(echo "${{ env.STAFF }}" | tr -cs 'a-zA-Z0-9-' '-' | sed 's/-*$//')
+          ascii=$(echo "${{ env.STAFF }}" | sed 's/[^ -~]//g' | xargs)
+          sanitized=$(echo "$ascii" | tr -cs 'a-zA-Z0-9-' '-' | sed 's/-*$//')
+          echo "ascii=${ascii}" >> $GITHUB_OUTPUT
           echo "name=update-docs-${sanitized}" >> $GITHUB_OUTPUT
       - name: create pull request
         id: cpr
@@ -100,7 +102,7 @@ jobs:
         with:
           commit-message: "update doc ${{ env.DOC }} by name"
           title: "update doc ${{ env.DOC }} by name"
-          body: "update doc ${{ env.DOC }} by name. ${{ env.STAFF }} triggered this action."
+          body: "update doc ${{ env.DOC }} by name. ${{ steps.branch.outputs.ascii }} triggered this action."
           branch: ${{ steps.branch.outputs.name }}
       - name: check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
