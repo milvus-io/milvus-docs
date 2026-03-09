@@ -89,6 +89,11 @@ jobs:
             [ -n "${{ env.ORDER }}" ]  && args+=(-p ${{ env.ORDER }})
             node scripts/index.js "${args[@]}"
           done
+      - name: sanitize branch name
+        id: branch
+        run: |
+          sanitized=$(echo "${{ env.STAFF }}" | tr -cs 'a-zA-Z0-9-' '-' | sed 's/-*$//')
+          echo "name=update-docs-${sanitized}" >> $GITHUB_OUTPUT
       - name: create pull request
         id: cpr
         uses: peter-evans/create-pull-request@v4
@@ -96,7 +101,7 @@ jobs:
           commit-message: "update doc ${{ env.DOC }} by name"
           title: "update doc ${{ env.DOC }} by name"
           body: "update doc ${{ env.DOC }} by name. ${{ env.STAFF }} triggered this action."
-          branch: "update-docs-${{ env.STAFF }}"
+          branch: ${{ steps.branch.outputs.name }}
       - name: check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
         env:
@@ -118,6 +123,8 @@ jobs:
       uses: actions/setup-node@v4.0.1
     - name: checkout repo
       uses: actions/checkout@v4
+    - name: install dependencies
+      run: cd scripts && npm install
     - name: report failure
       run: |
         node scripts/report.js \
