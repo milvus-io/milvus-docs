@@ -2323,6 +2323,12 @@
             "id": "use_milvus_in_anythingllm.md",
             "order": 14,
             "children": []
+          },
+          {
+            "label": "Exa",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 15,
+            "children": []
           }
         ]
       },
