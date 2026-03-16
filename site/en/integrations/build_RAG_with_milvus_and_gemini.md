@@ -435,7 +435,7 @@ for query in text_queries:
 
 
     
-![png](build_RAG_with_milvus_and_gemini_files/build_RAG_with_milvus_and_gemini_38_1.png)
+![Vanilla RAG Pipeline](../../../assets/build_RAG_with_milvus_and_gemini_38_1.png)
     
 
 
@@ -446,7 +446,7 @@ for query in text_queries:
 
 
     
-![png](build_RAG_with_milvus_and_gemini_files/build_RAG_with_milvus_and_gemini_38_3.png)
+![HyDE](../../../assets/build_RAG_with_milvus_and_gemini_38_3.png)
     
 
 
@@ -457,7 +457,7 @@ for query in text_queries:
 
 
     
-![png](build_RAG_with_milvus_and_gemini_files/build_RAG_with_milvus_and_gemini_38_5.png)
+![Hybrid Retrieval and Reranking](../../../assets/build_RAG_with_milvus_and_gemini_38_5.png)
     
 
 
