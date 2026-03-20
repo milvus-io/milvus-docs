@@ -2,6 +2,7 @@
 id: tiered-storage-overview.md
 title: "Tiered Storage Overview"
 summary: "In Milvus, the traditional full-load mode requires each QueryNode to load all data fields and indexes of a segment at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets."
+beta: Milvus 2.6.4+
 ---
 
 # Tiered Storage Overview
