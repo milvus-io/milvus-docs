@@ -2,6 +2,7 @@
 id: warm-up.md
 title: "Warm Up"
 summary: "Warm Up complements Tiered Storage by preloading selected fields or indexes into the cache before a segment becomes queryable. You can configure warmup at the cluster, collection, or individual field/index level, allowing fine-grained control over first-query latency and resource usage."
+beta: Milvus 2.6.4+
 ---
 
 # Warm Up
@@ -138,7 +139,7 @@ queryNode:
    </tr>
 </table>
 
-## Configure warmup at collection level
+## Configure warmup at collection level | Milvus 2.6.11+
 
 Collection-level warmup allows you to override cluster defaults for a specific collection. This is useful when a collection has different access patterns than the cluster-wide baseline.
 
@@ -207,7 +208,7 @@ client.alter_collection_properties(
    </tr>
 </table>
 
-## Configure warmup at field level
+## Configure warmup at field level | Milvus 2.6.11+
 
 Field-level warmup provides the finest granularity, allowing you to control warmup behavior for individual fields. This is useful when specific fields have unique access patterns.
 
@@ -253,7 +254,7 @@ client.alter_collection_field(
 )
 ```
 
-## Configure warmup at index level
+## Configure warmup at index level | Milvus 2.6.11+
 
 Index-level warmup allows you to control preloading for individual indexes, independent of the underlying field's warmup setting.
 
