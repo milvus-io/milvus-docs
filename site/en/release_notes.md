@@ -17,7 +17,6 @@ Release date: March 23, 2026
 | -------------- | ------------------ | ------------------- | ---------------- | -------------- |
 | 2.6.13         | 2.6.10             | 2.6.11              | 2.6.16           | 2.6.1          |
 
-
 ### Features
 
 #### Gemini embedding model support ([#48223](https://github.com/milvus-io/milvus/pull/48223))
