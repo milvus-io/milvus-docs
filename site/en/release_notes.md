@@ -137,7 +137,7 @@ We are pleased to announce the release of Milvus 2.6.11! This update continues t
 - Fixed an issue where collection metadata could contain an invalid database name ([#47721](https://github.com/milvus-io/milvus/pull/47721))
 - Ensured exclusive control-channel messages acquire a global lock in the lock interceptor ([#47678](https://github.com/milvus-io/milvus/pull/47678))
 - Fixed channel exclusive mode state loss and vchannel list handling issues ([#47702](https://github.com/milvus-io/milvus/pull/47702))
-- Fixed index building to use the correct global offset for `null_offset`_ in `BuildIndexFromFieldData` ([#47708](https://github.com/milvus-io/milvus/pull/47708))
+- Fixed index building to use the correct global offset for `null_offset` in `BuildIndexFromFieldData` ([#47708](https://github.com/milvus-io/milvus/pull/47708))
 - Improved v2.5/v2.6 compatibility handling in `SyncTargetVersion` (QueryNode) ([#47693](https://github.com/milvus-io/milvus/pull/47693))
 - Handled `broadcastToAll` messages on the control channel in recovery storage ([#47640](https://github.com/milvus-io/milvus/pull/47640))
 - Added `warmupKey` to the `CheckParams` filter to make `CreateIndex` idempotent ([#47607](https://github.com/milvus-io/milvus/pull/47607))
