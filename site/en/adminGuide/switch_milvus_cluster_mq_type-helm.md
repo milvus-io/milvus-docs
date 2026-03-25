@@ -17,7 +17,7 @@ This feature is pending release and is subject to change. Please reach out to Mi
 ## Prerequisites
 
 - A running Milvus cluster instance installed via [Helm](install_cluster-helm.md).
-- The Milvus instance has been upgraded to the latest version that supports this Switch MQ feature (v2.6.13 or later).
+- The Milvus instance has been upgraded to the latest version that supports this Switch MQ feature (v2.6.14 or later).
 
 ## Switch from builtin/external Pulsar/Kafka to Woodpecker (MinIO)
 

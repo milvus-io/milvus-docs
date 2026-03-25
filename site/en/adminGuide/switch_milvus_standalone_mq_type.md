@@ -17,7 +17,7 @@ This feature is pending release and is subject to change. Please reach out to Mi
 ## Prerequisites
 
 - A running Milvus Standalone instance installed via [Docker Compose](install_standalone-docker-compose.md).
-- The Milvus instance has been upgraded to the latest version that supports this Switch MQ feature (v2.6.13 or later).
+- The Milvus instance has been upgraded to the latest version that supports this Switch MQ feature (v2.6.14 or later).
 
 ## General workflow
 
