@@ -6,7 +6,7 @@ summary: Rules for AI coding assistants to implement search, hybrid search, and 
 
 {{fragments/ai_prompt_howto.md}}
 
-Rules for implementing similarity search, hybrid search, filtered search, and full-text search in Milvus, including AnnSearchRequest constraints and ranker usage. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](ai_prompts_landing.md).
+Rules for implementing similarity search, hybrid search, filtered search, and full-text search in Milvus, including AnnSearchRequest constraints and ranker usage. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
 
 ## Full prompt
 
