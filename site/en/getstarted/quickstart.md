@@ -303,4 +303,15 @@ Milvus provides REST and gRPC API, with client libraries in languages such as [P
 
 For schema design, Milvus supports flexible schema design, where you can define the fields and their data types, including vector fields. You can also define the index type and parameters for each field. For more information, see [Data Model Design for Search](https://milvus.io/docs/schema-hands-on.md).
 
-If you are using AI coding assistants or building AI agent applications, check out [Milvus for AI Agents](milvus_for_agents.md) to explore agent skills, MCP servers, and curated prompts that help your AI tools write correct Milvus code.
+## Milvus for AI Agents
+
+<div class="card-wrapper">
+
+<div class="start_card_container">
+  <a href="milvus_for_agents.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Milvus for AI Agents</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Using AI coding assistants or building agent applications? Explore agent skills, MCP servers, and curated prompts that help your AI tools write correct Milvus code.</p>
+  </a>
+</div>
+
+</div>
