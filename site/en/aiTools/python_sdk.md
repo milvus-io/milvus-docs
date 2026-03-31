@@ -6,7 +6,7 @@ summary: Rules for AI coding assistants to write correct Milvus Python code usin
 
 {{fragments/ai_prompt_howto.md}}
 
-Rules for writing correct Milvus Python code using the MilvusClient interface, including ORM migration, connection patterns, and common operations. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](ai_prompts_landing.md).
+Rules for writing correct Milvus Python code using the MilvusClient interface, including ORM migration, connection patterns, and common operations. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
 
 ## Full prompt
 
