@@ -4,9 +4,11 @@ title: "Prompt: Milvus Index Selection"
 summary: Rules for AI coding assistants to choose and configure Milvus indexes.
 ---
 
-{{fragments/ai_prompt_howto.md}}
+# Index Selection
 
 Decision guides and configuration rules for choosing and tuning Milvus indexes, including AUTOINDEX, HNSW, DiskANN, IVF, and sparse indexes. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
+
+{{fragments/ai_prompt_howto.md}}
 
 ## Full prompt
 

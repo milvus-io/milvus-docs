@@ -4,11 +4,11 @@ title: "AGENTS.md for Milvus"
 summary: Rules and patterns for AI coding agents that generate, review, or debug Milvus vector database code using PyMilvus.
 ---
 
-{{fragments/ai_prompt_howto.md}}
-
 # AGENTS.md — Milvus
 
 Milvus is an open-source vector database for similarity search, hybrid search, and RAG. You interact with it through the PyMilvus SDK's `MilvusClient` interface. Copy the full prompt below into your AI tool to apply these rules automatically. For detailed task-specific prompts, see [AI Prompts](milvus_for_agents.md).
+
+{{fragments/ai_prompt_howto.md}}
 
 ## Full prompt
 
