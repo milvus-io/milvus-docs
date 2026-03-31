@@ -4,9 +4,11 @@ title: "Prompt: Milvus Python SDK"
 summary: Rules for AI coding assistants to write correct Milvus Python code using MilvusClient.
 ---
 
-{{fragments/ai_prompt_howto.md}}
+# Python SDK
 
 Rules for writing correct Milvus Python code using the MilvusClient interface, including ORM migration, connection patterns, and common operations. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
+
+{{fragments/ai_prompt_howto.md}}
 
 ## Full prompt
 
