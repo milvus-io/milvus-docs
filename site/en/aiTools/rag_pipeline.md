@@ -6,7 +6,7 @@ summary: Rules for AI coding assistants to build RAG pipelines with Milvus.
 
 {{fragments/ai_prompt_howto.md}}
 
-End-to-end rules for building RAG pipelines with Milvus, including ingestion, chunking, embedding, hybrid retrieval with BM25, and document updates with upsert. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](ai_prompts_landing.md).
+End-to-end rules for building RAG pipelines with Milvus, including ingestion, chunking, embedding, hybrid retrieval with BM25, and document updates with upsert. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
 
 ## Full prompt
 
