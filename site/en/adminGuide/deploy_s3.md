@@ -7,7 +7,7 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
 
 # Configure Object Storage with Docker Compose or Helm
 
-Milvus uses MinIO for object storage by default, but it also supports using [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) as persistent object storage for log and index files. This topic describes how to configure S3 for Milvus. You can skip this topic if you are satisfied with MinIO.
+Milvus uses MinIO for object storage by default, but it also supports using [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) or any S3-compatible service (such as [Tigris](https://www.tigrisdata.com/)) as persistent object storage for log and index files. This topic describes how to configure S3 for Milvus. You can skip this topic if you are satisfied with MinIO.
 
 You can configure S3 with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s. 
 
@@ -89,6 +89,48 @@ To install Milvus and configure S3, run the following command using your values.
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true  --set minio.enabled=false --set externalS3.enabled=true --set externalS3.host=<your_s3_endpoint> --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name>
 ```
+## S3-Compatible Providers
+
+Milvus works with any S3-compatible object storage. The examples above use generic placeholders. Below are provider-specific values to help you get started.
+
+### Tigris
+
+[Tigris](https://www.tigrisdata.com/) is S3-compatible object storage with zero egress fees and a free tier (5 GB). Create a bucket and access key pair from the [Tigris Dashboard](https://console.tigris.dev/). Access keys are prefixed with `tid_` and secrets with `tsec_`.
+
+**Docker Compose** (`milvus.yaml`):
+
+```yaml
+minio:
+  address: t3.storage.dev
+  port: 443
+  accessKeyID: tid_YOUR_ACCESS_KEY
+  secretAccessKey: tsec_YOUR_SECRET_KEY
+  useSSL: true
+  bucketName: "milvus"
+  region: auto
+  cloudProvider: aws
+```
+
+**Helm** (`values.yaml`):
+
+```yaml
+minio:
+  enabled: false
+
+externalS3:
+  enabled: true
+  host: "t3.storage.dev"
+  port: "443"
+  accessKey: "tid_YOUR_ACCESS_KEY"
+  secretKey: "tsec_YOUR_SECRET_KEY"
+  useSSL: true
+  bucketName: "milvus"
+  region: auto
+  cloudProvider: aws
+```
+
+<div class="alert note">Set <code>cloudProvider</code> to <code>aws</code> for any S3-compatible service that uses signature v4, including Tigris.</div>
+
 ## What's next
 
 Learn how to configure other Milvus dependencies with Docker Compose or Helm:
