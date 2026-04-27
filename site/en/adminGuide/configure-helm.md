@@ -20,7 +20,7 @@ You can configure Milvus with a configuration file `values.yaml`.
 
 ### Download a configuration file
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) `values.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml) `values.yaml` directly or with the following command.
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml
@@ -92,7 +92,6 @@ Sorted by:
             <li><a href="configure_indexcoord.md">Index coord</a></li>
             <li><a href="configure_metastore.md">Metastore</a></li>
             <li><a href="configure_mq.md">Message Queue</a></li>
-            <li><a href="configure_natsmq.md">Natsmq</a></li>
             <li><a href="configure_tikv.md">Tikv</a></li>
             <li><a href="configure_trace.md">Trace</a></li>
             <li><a href="configure_quotaandlimits.md">Quota and Limits</a></li>

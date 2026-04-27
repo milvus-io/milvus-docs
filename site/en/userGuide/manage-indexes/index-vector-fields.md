@@ -9,6 +9,12 @@ title: Index Vector Fields
 
 This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection. 
 
+<div class="alert warning">
+
+This page has been deprecated. For the latest implementation, refer to [IVF_FLAT](ivf-flat.md), [HNSW](hnsw.md), and more.
+
+</div>
+
 ## Overview
 
 Leveraging the metadata stored in an index file, Milvus organizes your data in a specialized structure, facilitating rapid retrieval of requested information during searches or queries.
@@ -71,10 +77,22 @@ Milvus provides several index types and metrics to sort field values for efficie
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+
+<div class="alert note">
+
+From Milvus 2.5.4 onward, `SPARSE_WAND` is being deprecated. Instead, it is recommended to use `"inverted_index_algo": "DAAT_WAND"` for equivalency while maintaining compatibility. For more information, refer to [Sparse Vector](sparse_vector.md#Set-index-params-for-vector-field).
+
+</div>
 
 </div>
 

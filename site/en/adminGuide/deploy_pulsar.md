@@ -11,6 +11,12 @@ Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stre
 
 You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s and configure Kafka on K8s.
 
+<div class="alert note">
+
+{{fragments/mq_upgrade_limitation.md}}
+
+</div>
+
 ## Configure Pulsar with Docker Compose
 
 ### 1. Configure Pulsar
@@ -60,6 +66,61 @@ extraConfigFiles:
 ```
 
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Pulsar configurations.
+
+```shell
+helm install <your_release_name> milvus/milvus -f values.yaml
+```
+
+## Configure Woodpecker with Helm
+
+For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
+
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](use-woodpecker.md).
+                                    |
+### Using the YAML file
+
+1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file.
+
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    woodpecker:
+      meta:
+        type: etcd # The Type of the metadata provider. currently only support etcd.
+        prefix: woodpecker # The Prefix of the metadata provider. default is woodpecker.
+      client:
+        segmentAppend:
+          queueSize: 10000 # The size of the queue for pending messages to be sent of each log.
+          maxRetries: 3 # Maximum number of retries for segment append operations.
+        segmentRollingPolicy:
+          maxSize: 256M # Maximum size of a segment.
+          maxInterval: 10m # Maximum interval between two segments, default is 10 minutes.
+          maxBlocks: 1000 # Maximum number of blocks in a segment
+        auditor:
+          maxInterval: 10s # Maximum interval between two auditing operations, default is 10 seconds.
+      logstore:
+        segmentSyncPolicy:
+          maxInterval: 200ms # Maximum interval between two sync operations, default is 200 milliseconds.
+          maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
+          maxBytes: 256M # Maximum size of write buffer in bytes.
+          maxEntries: 10000 # Maximum entries number of write buffer.
+          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
+          maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
+          maxFlushThreads: 32 # Maximum number of threads to flush data
+        segmentCompactionPolicy:
+          maxSize: 2M # The maximum size of the merged files.
+          maxParallelUploads: 4 # The maximum number of parallel upload threads for compaction.
+          maxParallelReads: 8 # The maximum number of parallel read threads for compaction.
+        segmentReadPolicy:
+          maxBatchSize: 16M # Maximum size of a batch in bytes.
+          maxFetchThreads: 32 # Maximum number of threads to fetch data.
+      storage:
+        type: minio # The Type of the storage provider. Valid values: [minio, local]
+        rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
+```
+
+2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Woodpecker configurations.
 
 ```shell
 helm install <your_release_name> milvus/milvus -f values.yaml
@@ -122,64 +183,6 @@ extraConfigFiles:
 <div class="alert warning">
 
 Changing the message store is not recommended. If this is you want to do this, stop all DDL operations, then call the FlushAll API to flush all collections, and finally stop Milvus in the end before you actually change the message store.
-
-</div>
-
-## Configure NATS with Helm
-
-NATS is an experimental message store alternative to RocksMQ. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [NATS-related configurations](configure_natsmq.md).
-
-- If you start Milvus with NATS and want to change its settings, you can run `helm upgrade -f ` with the changed settings in the following YAML file.
-
-- If you have installed Milvus standalone with a message store other than NATS and want to change it to NATS, run `helm upgrade -f ` with the following YAML file after you flushed all collections and stopped Milvus.
-
-```yaml
-extraConfigFiles:
-  user.yaml: |+
-    mq:
-      type: natsmq
-    natsmq:
-      # server side configuration for natsmq.
-      server: 
-        # 4222 by default, Port for nats server listening.
-        port: 4222 
-        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
-        storeDir: /var/lib/milvus/nats 
-        # (B) 16GB by default, Maximum size of the 'file' storage.
-        maxFileStore: 17179869184 
-        # (B) 8MB by default, Maximum number of bytes in a message payload.
-        maxPayload: 8388608 
-        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
-        maxPending: 67108864 
-        # (√ms) 4s by default, waiting for initialization of natsmq finished.
-        initializeTimeout: 4000 
-        monitor:
-          # false by default, If true enable debug log messages.
-          debug: false 
-          # true by default, If set to false, log without timestamps.
-          logTime: true 
-          # no log file by default, Log file path relative to.. .
-          logFile: 
-          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
-          logSizeLimit: 0 
-        retention:
-          # (min) 3 days by default, Maximum age of any message in the P-channel.
-          maxAge: 4320 
-          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
-          maxBytes:
-          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
-          maxMsgs: 
-```
-
-<div class="alert note">
-
-**Choose between RocksMQ and NATS?**
-
-RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go's garbage collector (GC).
-
-In the scenario where the data packet is smaller than 64 kb, RocksDB outperforms in terms of memory usage, CPU usage, and response time. On the other hand, if the data packet is greater than 64 kb, NATS excels in terms of response time with sufficient memory and ideal GC scheduling.
-
-Currently, you are advised to use NATS only for experiments.
 
 </div>
 

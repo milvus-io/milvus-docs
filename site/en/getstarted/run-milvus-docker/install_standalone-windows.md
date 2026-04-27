@@ -31,7 +31,7 @@ If you are more familiar with PowerShell or Windows Command Prompt, the command 
 2. Download the installation script and save it as `standalone.bat`.​
 
     ```powershell
-    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​
+    C:\>Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
     ```
 
@@ -127,7 +127,7 @@ Once you have installed Docker Desktop on Microsoft Windows, you can access the 
 
     ```powershell
     # Download the configuration file and rename it as docker-compose.yml​
-    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
     ​
     # Start Milvus​
     C:\>docker compose up -d​
@@ -163,7 +163,7 @@ The procedure is similar to using Docker Compose to install Milvus in Linux syst
 2. Download the Milvus configuration file.​
 
     ```shell
-    $ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​
+    $ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml -O docker-compose.yml​
 
     ```
 
@@ -254,4 +254,29 @@ To deal with the error prompted during Milvus startup that reads "Read config fa
 ![List Milvus config files](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png)
 
 ​
+## What's next
+
+Having installed Milvus in Docker, you can:
+
+- Check [Quickstart](quickstart.md) to see what Milvus can do.
+
+- Learn the basic operations of Milvus:
+  - [Manage Databases](manage_databases.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
+
+- [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
+- [Scale your Milvus cluster](scaleout.md).
+- Deploy your Milvu cluster on clouds:
+  - [Amazon EKS](eks.md)
+  - [Google Cloud](gcp.md)
+  - [Microsoft Azure](azure.md)
+- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
+- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
+- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
+- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
+- [Monitor Milvus with Prometheus](monitor.md).
 

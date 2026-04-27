@@ -17,12 +17,11 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Try Managed Milvus For Free!</h2>
-    <p class="promotion-desc">Try Zilliz Cloud for free! The easiest way to experience Milvus!</p>
+    <p class="promotion-desc">Zilliz Cloud is hassle-free, powered by Milvus and 10x faster.</p>
   </div>
 
   <div class="cta-wrapper">
-    <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>
-    <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud China</a>
+    <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a>
   </div>
 </div>
 
@@ -67,8 +66,9 @@ id: home.md
 
 - [Manage Collections](manage-collections.md)
 - [Insert, Upsert, and Delete](insert-update-delete.md)
-- [Index Vector Fields](index-vector-fields.md)
 - [Single-Vector Search](single-vector-search.md)
+- [Hybrid Search](multi-vector-search.md)
+- [Get & Scalar Query](get-and-scalar-query.md)
 - [Milvus for AI Agents](milvus_for_agents.md)
 </div>
 
@@ -87,7 +87,7 @@ id: home.md
 
 - [System Configuration](system_configuration.md)
 - [Architecture Overview](architecture_overview.md)
-- [Vector Index](index.md)
+- [Index Explained](index-explained.md)
 - [Similarity Metrics](metric.md)
 - [Glossary](glossary.md)
 </div>
@@ -98,11 +98,12 @@ id: home.md
 
 ## What's new in docs
 
-_Mar 2024 - Milvus 2.4.0 release_
+_March 2026 - Milvus 2.6.x updates_
 
-- Added guidance on how to [conduct hybrid search](multi-vector-search.md).
-- Added description of [GPU index](gpu_index.md).
-- Added guidance on how to [embed your data using PyMilvus](embeddings.md).
-- Added descriptions of [Milvus CDC](milvus-cdc-overview.md).
+- Added [Milvus for AI Agents](milvus_for_agents.md) section with prompt guides.
+- Added guidance on how to use [Gemini embedding function](google-gemini.md).
+- Added guidance on how to [search by primary keys](primary-key-search.md).
+- Added guidance on how to use [text highlighter](text-highlighter.md) in search results.
+- Added descriptions of [geometry field](geometry-field.md), [timestamptz field](timestamptz-field.md), [tiered storage](tiered-storage-overview.md), and [array of structs](array-of-structs.md).
 
 </div>
