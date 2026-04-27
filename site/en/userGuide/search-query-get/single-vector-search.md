@@ -1,7 +1,7 @@
 ---
 id: single-vector-search.md
 title: "Basic Vector Search"
-summary: "Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Milvus provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches."
+summary: "Run basic ANN searches in Milvus with query vectors, output fields, filters, ranges, and iterators."
 ---
 
 # Basic Vector Search
@@ -30,7 +30,7 @@ In this section, you will find detailed information about the following topics:
 
 - [Bulk-vector search](single-vector-search.md#Bulk-Vector-Search)
 
-- [ANN search in partition](single-vector-search.md#ANN-Search-in-Partition)
+- [ANN search in partitions](single-vector-search.md#ANN-Search-in-Partition)
 
 - [Use output fields](single-vector-search.md#Use-Output-Fields)
 
@@ -540,6 +540,18 @@ for hits in res:
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -d '{
+    "collectionName": "quick_setup",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3,
+    "searchParams": {
+      "metric_type": "IP"
+    }
+  }'
 ```
 
 ## ANN Search in Partition
@@ -871,6 +883,97 @@ curl --request POST \
 # }
 ```
 
+## Sort Search Results by Scalar Fields | Milvus 3.0.x
+
+By default, Milvus orders search results by their similarity score to the query vector. If you want the returned entities to follow a scalar field order, add `order_by_fields` to the search request.
+
+Each item in `order_by_fields` specifies a scalar field and a sort direction. Use `"asc"` for ascending order or `"desc"` for descending order. If you omit `order`, Milvus sorts the field in ascending order.
+
+The following example sorts search results by `price` from low to high. Include the sort field in `output_fields` if you want to inspect the field value in the response.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+res = client.search(
+    collection_name="product_catalog",
+    data=query_vectors,
+    anns_field="embedding",
+    limit=20,
+    output_fields=["id", "price", "rating", "category"],
+    # highlight-start
+    order_by_fields=[
+        {"field": "price", "order": "asc"}
+    ],
+    # highlight-end
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+You can also sort by multiple scalar fields. Milvus applies the fields in the order that you specify. In the following example, Milvus sorts results by `price` in ascending order. For entities with the same `price`, Milvus then sorts by `rating` in descending order.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+res = client.search(
+    collection_name="product_catalog",
+    data=query_vectors,
+    anns_field="embedding",
+    limit=20,
+    output_fields=["id", "price", "rating", "category"],
+    # highlight-start
+    order_by_fields=[
+        {"field": "price", "order": "asc"},
+        {"field": "rating", "order": "desc"},
+    ],
+    # highlight-end
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+For entities with the same values in all specified order-by fields, Milvus keeps the original similarity-score order.
+
 ## Use Limit and Offset
 
 You may notice that the parameter `limit` carried in the search requests determines the number of entities to include in the search results. This parameter specifies the maximum number of entities to return in a single search, and it is usually termed **top-K**.
@@ -1058,6 +1161,20 @@ res = client.search(
 
 ```bash
 # restful
+export QUERY_VECTOR='[0.1, 0.2, 0.3, 0.4]'
+
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+-H "Content-Type: application/json" \
+-d '{
+  "collectionName": "quick_setup",
+  "annsField": "vector",
+  "data": ['"$QUERY_VECTOR"'],
+  "limit": 3,
+  "searchParams": {
+    "metric_type": "IP",
+    "timezone": "America/Havana"
+  }
+}'
 ```
 
 ## Enhancing ANN Search
