@@ -120,6 +120,12 @@ curl --request POST \
 
 You can modify collection-level properties after a collection is created.
 
+<div class="alert note">
+
+All the properties listed in this section apply only to managed collections.
+
+</div>
+
 ### Supported properties
 
 <table>
@@ -153,7 +159,7 @@ You can modify collection-level properties after a collection is created.
    </tr>
 </table>
 
-### Example 1: Set collection TTL
+### Example 1: Set collection-level TTL
 
 The following code snippet demonstrates how to set collection TTL.
 
@@ -175,19 +181,15 @@ client.alter_collection_properties(
 ```
 
 ```java
-import io.milvus.v2.service.collection.request.AlterCollectionReq;
-import java.util.HashMap;
-import java.util.Map;
+import io.milvus.param.Constant;
+import io.milvus.v2.service.collection.request.AlterCollectionPropertiesReq;
 
-Map<String, String> properties = new HashMap<>();
-properties.put("collection.ttl.seconds", "60");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
-        .properties(properties)
+        .property(Constant.TTL_SECONDS, "60")
         .build();
 
-client.alterCollection(alterCollectionReq);
+client.alterCollectionProperties(alterCollectionReq);
 ```
 
 ```javascript
@@ -216,14 +218,54 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "test_collection",
+    "collectionName": "my_collection",
     "properties": {
         "collection.ttl.seconds": 60
     }
 }'
 ```
 
-### Example 2: Enable mmap
+### Example 2: Set entity-level TTL | Milvus 3.0.x
+
+The following code snippet designates an existing `TIMESTAMPTZ` field (`expire_at`) as the TTL field for entity-level TTL. The collection must already contain a `TIMESTAMPTZ` field with that name, and `collection.ttl.seconds` must not be set — the two TTL modes are mutually exclusive.
+
+For the full entity-level TTL workflow (schema setup, insert, query, refresh, drop), refer to [Set entity-level TTL](set-collection-ttl.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient
+
+client.alter_collection_properties(
+    collection_name="my_collection",
+    # highlight-next-line
+    properties={"ttl_field": "expire_at"}
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Example 3: Enable mmap
 
 The following code snippet demonstrates how to enable mmap.
 
@@ -245,15 +287,12 @@ client.alter_collection_properties(
 ```
 
 ```java
-Map<String, String> properties = new HashMap<>();
-properties.put("mmap.enabled", "True");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
-        .properties(properties)
+        .property(Constant.MMAP_ENABLED, "True")
         .build();
 
-client.alterCollection(alterCollectionReq);
+client.alterCollectionProperties(alterCollectionReq);
 ```
 
 ```javascript
@@ -285,7 +324,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   }'
 ```
 
-### Example 3: Enable partition key
+### Example 4: Enable partition key
 
 The following code snippet demonstrates how to enable the partition key.
 
@@ -307,15 +346,12 @@ client.alter_collection_properties(
 ```
 
 ```java
-Map<String, String> properties = new HashMap<>();
-properties.put("partitionkey.isolation", "True");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
-        .properties(properties)
+        .property("partitionkey.isolation", "True")
         .build();
 
-client.alterCollection(alterCollectionReq);
+client.alterCollectionProperties(alterCollectionReq);
 ```
 
 ```javascript
@@ -348,7 +384,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   }'
 ```
 
-### Example 4: Enable dynamic field
+### Example 5: Enable dynamic field
 
 The following code snippet demonstrates how to enable the dynamic field.
 
@@ -370,15 +406,12 @@ client.alter_collection_properties(
 ```
 
 ```java
-Map<String, String> properties = new HashMap<>();
-properties.put("dynamicfield.enabled", "True");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
-        .properties(properties)
+        .property("dynamicfield.enabled", "True")
         .build();
 
-client.alterCollection(alterCollectionReq);
+client.alterCollectionProperties(alterCollectionReq);
 ```
 
 ```javascript
@@ -411,7 +444,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   }'
 ```
 
-### Example 5: Enable allow_insert_auto_id
+### Example 6: Enable allow_insert_auto_id
 
 The `allow_insert_auto_id` property allows a collection with AutoID enabled to accept user-provided primary key values during insert, upsert, and bulk import. When set to **"true"**, Milvus uses the user-provided primary key value if present; otherwise it auto-generates. Default is **"false"**.
 
@@ -435,15 +468,12 @@ client.alter_collection_properties(
 ```
 
 ```java
-Map<String, String> properties = new HashMap<>();
-properties.put("allow_insert_auto_id", "True");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
-        .properties(properties)
+        .property("allow_insert_auto_id", "True")
         .build();
 
-client.alterCollection(alterCollectionReq);
+client.alterCollectionProperties(alterCollectionReq);
 ```
 
 ```javascript
@@ -476,7 +506,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   }'
 ```
 
-### Example 6: Set collection time zone
+### Example 7: Set collection time zone
 
 You can set a default time zone for your collection using the `timezone` property. This determines how time-related data is interpreted and displayed for all operations within the collection, including data insertion, querying, and results presentation.
 
@@ -501,15 +531,12 @@ client.alter_collection_properties(
 ```
 
 ```java
-Map<String, String> properties = new HashMap<>();
-properties.put("timezone", "Asia/Shanghai");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
-        .properties(properties)
+        .property("timezone", "Asia/Shanghai")
         .build();
 
-client.alterCollection(alterCollectionReq);
+client.alterCollectionProperties(alterCollectionReq);
 ```
 
 ```javascript
