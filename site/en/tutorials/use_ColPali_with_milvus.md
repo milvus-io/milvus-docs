@@ -4,16 +4,22 @@ summary: In this notebook, we refer to this kind of multi-vector representation 
 title: Use ColPali for Multi-Modal Retrieval with Milvus
 ---
 
-# Use ColPali for Multi-Modal Retrieval with Milvus
-
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
+# Use ColPali for Multi-Modal Retrieval with Milvus
+
 Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a "MaxSim" operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.
+
+<div class="alert warning">
+
+This page has been deprecated. For the latest example of the use of CoPali with Milvus, refer to [Sesarch with Embedding Lists](search-with-embedding-lists.md).
+
+</div>
 
 ![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/colpali_formula.png)
 
@@ -27,12 +33,13 @@ ColPali is a method that combines ColBERT's multi-vector representation with Pal
 
 ## Preparation
 
+
 ```shell
 $ pip install pdf2image
-$ pip pymilvus
+$ pip install pymilvus
 $ pip install colpali_engine
 $ pip install tqdm
-$ pip instal pillow
+$ pip install pillow
 ```
 
 ## Prepare the data
@@ -59,7 +66,6 @@ import concurrent.futures
 
 client = MilvusClient(uri="milvus.db")
 ```
-
 
 <div class="alert note">
 

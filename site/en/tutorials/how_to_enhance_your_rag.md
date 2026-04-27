@@ -186,3 +186,4 @@ While a vanilla RAG pipeline may appear simple, achieving optimal business perfo
 This article summarizes various popular approaches to enhancing the performance of your RAG applications. We also provided clear illustrations to help you quickly understand these concepts and techniques and expedite their implementation and optimization. 
 
 You can get the simple implementations of the major approaches listed in this article at this [GitHub link](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag).
+

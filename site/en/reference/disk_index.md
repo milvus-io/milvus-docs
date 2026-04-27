@@ -1,13 +1,13 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Disk index mechanism in Milvus.
+summary: Disk index mechanism in Milvus for disk-optimized vector search.
 title: On-disk Index
 ---
 
 # On-disk Index
 
-This article introduces an on-disk indexing algorithm named DiskANN. Based on Vamana graphs, DiskANN powers efficient searches within large datasets.
+This article introduces DiskANN, an on-disk indexing algorithm for disk-optimized vector searches. Based on Vamana graphs, DiskANN powers efficient on-disk vector searches within large datasets.
 
 To improve query performance, you can [specify an index type](index-vector-fields.md) for each vector field. 
 
@@ -17,11 +17,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
 
 ## Prerequisites
 
-To use DiskANN, note that
+To use DiskANN in Milvus, note that
 
-- DiskANN is disabled by default. If you prefer in-memory index over on-disk index, you are advised to disable this feature for a better performance.
-  - To disable it, you can change `queryNode.enableDisk` to `false` in your milvus configuration file.
-  - To enable it again, you can set `queryNode.enableDisk` to `true`.
 - The Milvus instance runs on Ubuntu 18.04.6 or a later release.
 - The Milvus data path should be mounted to an NVMe SSD for full performance:
   - For a Milvus Standalone instance, the data path should be **/var/lib/milvus/data** in the container where the instance runs.
@@ -54,7 +51,7 @@ DiskANN is tunable. You can modify DiskANN-related parameters in `${MILVUS_ROOT_
 DiskIndex:
   MaxDegree: 56
   SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
+  PQCodeBudgetGBRatio: 0.125
   SearchCacheBudgetGBRatio: 0.125
   BeamWidthRatio: 4.0
 ...
@@ -64,7 +61,7 @@ DiskIndex:
 | --- | --- | --- | --- |
 | `MaxDegree` | Maximum degree of the Vamana graph. <br/> A larger value offers a higher recall rate but increases the size of and time to build the index. | [1, 512] | 56 | 
 | `SearchListSize` | Size of the candidate list. <br/> A larger value increases the time spent on building the index but offers a higher recall rate. <br/> Set it to a value smaller than `MaxDegree` unless you need to reduce the index-building time. | [1, int32_max] | 100 |
-| `PQCodeBugetGBRatio` | Size limit on the PQ code. <br/> A larger value offers a higher recall rate but increases memory usage. | (0.0, 0.25] | 0.125 |
+| `PQCodeBudgetGBRatio` | Size limit on the PQ code. <br/> A larger value offers a higher recall rate but increases memory usage. | (0.0, 0.25] | 0.125 |
 | `SearchCacheBudgetGBRatio` | Ratio of cached node numbers to raw data. <br/> A larger value improves index-building performance with increased memory usage. | [0.0, 0.3) | 0.10 |
 | `BeamWidthRatio` | Ratio between the maximum number of IO requests per search iteration and CPU number. | [1, max(128 / CPU number, 16)] | 4.0 |
 

@@ -7,15 +7,17 @@ summary: Learn how to configure mq for Milvus.
 
 # mq-related Configurations
 
-Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.
+Milvus supports four MQ: rocksmq(based on RockDB), Pulsar, Kafka and Woodpecker.
 
 You can change your mq by setting mq.type field.
 
 If you don't set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.
 
-1. standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka
+1. standalone(local) mode: rocksmq(default) > Pulsar > Kafka
 
-2. cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)
+2. cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)
+
+3. Woodpecker can be used in both standalone and cluster mode by setting mq.type to woodpecker.
 
 ## `mq.type`
 
@@ -30,7 +32,7 @@ If you don't set mq.type field as default, there is a note about enabling priori
     <tr>
       <td>
         <li>Default value: "default"</li>      
-        <li>Valid values: [default, pulsar, kafka, rocksmq, natsmq]</li>      </td>
+        <li>Valid values: [default, pulsar, kafka, rocksmq, woodpecker]</li>      </td>
       <td>default</td>
     </tr>
   </tbody>
@@ -86,6 +88,24 @@ If you don't set mq.type field as default, there is a note about enabling priori
     <tr>
       <td>        pursuit mode buffer size in bytes      </td>
       <td>8388608</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.pursuitBufferTime`
+
+<table id="mq.pursuitBufferTime">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        pursuit mode buffer time in seconds      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>
@@ -158,6 +178,60 @@ If you don't set mq.type field as default, there is a note about enabling priori
     <tr>
       <td>        Default value: "3", the timeout(in seconds) that target sends msgPack      </td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.dispatcher.maxDispatcherNumPerPchannel`
+
+<table id="mq.dispatcher.maxDispatcherNumPerPchannel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum number of dispatchers per physical channel, primarily to limit the number of consumers and prevent performance issues(e.g., during recovery when a large number of channels are watched).      </td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.dispatcher.retrySleep`
+
+<table id="mq.dispatcher.retrySleep">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        register retry sleep time in seconds      </td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.dispatcher.retryTimeout`
+
+<table id="mq.dispatcher.retryTimeout">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        register retry timeout in seconds      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

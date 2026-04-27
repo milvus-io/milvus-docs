@@ -57,15 +57,17 @@ See [minio-related Configurations](configure_minio.md) for detailed description 
 
 ### `mq`
 
-Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.
+Milvus supports four MQ: rocksmq(based on RockDB), Pulsar, Kafka and Woodpecker.
 
 You can change your mq by setting mq.type field.
 
 If you don't set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.
 
-1. standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka
+1. standalone(local) mode: rocksmq(default) > Pulsar > Kafka
 
-2. cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)
+2. cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)
+
+3. Woodpecker can be used in both standalone and cluster mode by setting mq.type to woodpecker.
 
 See [mq-related Configurations](configure_mq.md) for detailed description for each parameter under this section.
 
@@ -81,7 +83,7 @@ If you want to enable kafka, needs to comment the pulsar configs
 
 kafka:
 
-  brokerList: 
+  brokerList: localhost:9092
 
   saslUsername: 
 
@@ -108,14 +110,6 @@ kafka:
 
 
 See [rocksmq-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
-
-### `natsmq`
-
-natsmq configuration.
-
-more detail: https://docs.nats.io/running-a-nats-service/configuration
-
-See [natsmq-related Configurations](configure_natsmq.md) for detailed description for each parameter under this section.
 
 ### `rootCoord`
 
@@ -185,9 +179,15 @@ See [grpc-related Configurations](configure_grpc.md) for detailed description fo
 
 ### `tls`
 
-Configure the proxy tls enable.
+Configure external tls.
 
 See [tls-related Configurations](configure_tls.md) for detailed description for each parameter under this section.
+
+### `internaltls`
+
+Configure internal tls.
+
+See [internaltls-related Configurations](configure_internaltls.md) for detailed description for each parameter under this section.
 
 ### `common`
 
@@ -242,4 +242,22 @@ See [trace-related Configurations](configure_trace.md) for detailed description 
 #maxMemSize will the whole available GPU memory.
 
 See [gpu-related Configurations](configure_gpu.md) for detailed description for each parameter under this section.
+
+### `streamingNode`
+
+Any configuration related to the streaming node server.
+
+See [streamingNode-related Configurations](configure_streamingnode.md) for detailed description for each parameter under this section.
+
+### `streaming`
+
+Any configuration related to the streaming service.
+
+See [streaming-related Configurations](configure_streaming.md) for detailed description for each parameter under this section.
+
+### `knowhere`
+
+Any configuration related to the knowhere vector search engine
+
+See [knowhere-related Configurations](configure_knowhere.md) for detailed description for each parameter under this section.
 

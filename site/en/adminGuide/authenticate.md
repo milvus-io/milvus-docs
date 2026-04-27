@@ -33,7 +33,7 @@ To enable user authentication for your Milvus server, set common.security.author
 common:
 ...
   security:
-    authorizationEnabled: false
+    authorizationEnabled: true
 ...
 ```
 
@@ -57,7 +57,7 @@ extraConfigFiles:
 
 <div class="filter-operator">
 
-To enable authentication, set `spec.common.security.authorizationEnabled` to `true` in the `Milvus` CRD. For more information on Milvus CRD, refer to [Configure Milvus with Milvus Operator](https://milvus.io/docs/configure_operator.md?tab=component).
+To enable authentication, set `spec.config.common.security.authorizationEnabled` to `true` in the `Milvus` CRD. For more information on Milvus CRD, refer to [Configure Milvus with Milvus Operator](https://milvus.io/docs/configure_operator.md?tab=component).
 
 ```yaml
 apiVersion: milvus.io/v1beta1
