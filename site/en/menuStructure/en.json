@@ -322,6 +322,12 @@
             "children": []
           },
           {
+            "label": "Create an External Collection",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "View Collections",
             "id": "view-collections.md",
             "order": 3,
@@ -474,15 +480,21 @@
             "children": []
           },
           {
-            "label": "Nullable & Default",
+            "label": "Nullable Fields",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Default Values",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Analyzer Overview",
@@ -628,6 +640,12 @@
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
+                  },
+                  {
+                    "label": "Synonym",
+                    "id": "synonym-filter.md",
+                    "order": 11,
+                    "children": []
                   }
                 ]
               },
@@ -642,26 +660,32 @@
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "Manage File Resources",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
           {
             "label": "Alter Collection Field",
             "id": "alter-collection-field.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "Add Fields to an Existing Collection",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
+            "order": 17,
             "children": []
           },
           {
             "label": "Best Practices",
             "id": "best-practices",
             "isMenu": true,
-            "order": 17,
+            "order": 18,
             "children": [
               {
                 "label": "Data Model Design for Search",
@@ -997,15 +1021,21 @@
                 "children": []
               },
               {
+                "label": "StructArray Operators",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Random Sampling",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Geometry Operators",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1136,6 +1166,12 @@
                 "label": "Google Gemini",
                 "id": "google-gemini.md",
                 "order": 10,
+                "children": []
+              },
+              {
+                "label": "MinHash Function",
+                "id": "minhash-function.md",
+                "order": 11,
                 "children": []
               }
             ]
@@ -1269,9 +1305,41 @@
             "children": []
           },
           {
+            "label": "Force Merge Compaction",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Snapshots",
+            "id": "snapshots",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Overview",
+                "id": "snapshots.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Manage Snapshots",
+                "id": "manage-snapshots.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Use Cases",
+                "id": "snapshot-use-cases.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Tiered Storage",
             "id": "tiered_storage",
-            "order": 2,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
