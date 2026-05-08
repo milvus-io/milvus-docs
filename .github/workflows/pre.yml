@@ -39,10 +39,11 @@ jobs:
           git clone https://.:${{ secrets.P_GITHUB_TOKEN }}@github.com/milvus-io/web-content.git target
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
+          VERSION=$(jq -r .version ./milvus-docs/version.json)
           cd target
-          rm -rf preview
-          mkdir preview
-          cp -avr ../milvus-docs/** ./preview
+          rm -rf "$VERSION"
+          mkdir "$VERSION"
+          cp -avr ../milvus-docs/** "./$VERSION"
           git add .
-          git commit -m "Release new docs  preview"
+          git commit -m "Release v3.0.x prerelease docs to master"
           git push -f origin master

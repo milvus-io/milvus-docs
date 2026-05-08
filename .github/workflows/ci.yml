@@ -3,7 +3,7 @@ name: dev
 on:
   push:
     branches:
-      - v2.6.x
+      - v3.0.x
   release:
     types: [released]
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
         with:
-          ref: v2.6.x
+          ref: v3.0.x
 
       - name: Extract branch name
         shell: bash
@@ -51,6 +51,6 @@ jobs:
           mkdir "$VERSION"
           cp -avr ../milvus-docs/** "./$VERSION"
           git add .
-          git commit -m "Release new docs to master"
+          git commit -m "Release v3.0.x docs to master"
           git push -f origin master
         continue-on-error: true
