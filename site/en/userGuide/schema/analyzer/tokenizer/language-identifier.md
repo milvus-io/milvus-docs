@@ -15,7 +15,7 @@ By intelligently routing text data to the appropriate processing pipeline, the `
 
 The `language_identifier` performs a series of steps to process a text string, a workflow that is critical for users to understand how to configure it correctly.
 
-![Language Detection Workflow](../../../../../../assets/language-detection-workflow.png)
+![Language Detection Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png)
 
 1. **Input:** The workflow begins with a text string as input.
 

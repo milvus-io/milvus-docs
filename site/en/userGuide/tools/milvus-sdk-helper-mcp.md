@@ -26,8 +26,8 @@ The following figure compares the effects of generating code with and without th
      <th><p>MCP code helper <strong>disabled</strong></p></th>
    </tr>
    <tr>
-     <td><p><img width="400" src="../../../../assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img width="400"src="../../../../assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img width="400" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img width="400"src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Use the officially recommended latest MilvusClient interface to create a Collection</p></td>
@@ -43,7 +43,7 @@ Find your AI IDE, configure it with one click, and unlock a worry-free coding jo
 
 Go to: `Settings` -> `Cursor Settings` -> `Tools & Intergrations` -> `Add new global MCP server`
 
-![Cursor Mcp Settings](../../../../assets/cursor-mcp-settings.png)
+![Cursor Mcp Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cursor-mcp-settings.png)
 
 Pasting the following configuration into your Cursor `~/.cursor/mcp.json` file is the recommended approach. You may also install a specific project by creating `.cursor/mcp.json` in your project folder. See [Cursor MCP docs](https://docs.cursor.com/context/model-context-protocol) for more info.
 
@@ -142,7 +142,7 @@ Cherry Studio allows for visual MCP server configuration through its settings in
 
 1. Save the configuration to activate the server.
 
-![Cherry Studio Mcp Settings](../../../../assets/cherry-studio-mcp-settings.png)
+![Cherry Studio Mcp Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cherry-studio-mcp-settings.png)
 
 ## Cline
 

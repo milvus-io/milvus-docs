@@ -1,7 +1,7 @@
 ---
 id: grouping-search.md
 title: "Grouping Search"
-summary: "A grouping search allows Milvus to group the search results by the values in a specified field to aggregate data at a higher level. For example, you can use a basic ANN search to find books similar to the one at hand, but you can use a grouping search to find the book categories that may involve the topics discussed in that book. This topic describes how to use Grouping Search along with key considerations."
+summary: "Use grouping search to aggregate ANN search results by a field value and reduce duplicate entities."
 ---
 
 # Grouping Search
@@ -14,11 +14,11 @@ When entities in the search results share the same value in a scalar field, this
 
 Assume a collection stores multiple documents (denoted by **docId**). To retain as much semantic information as possible when converting documents into vectors, each document is split into smaller, manageable paragraphs (or **chunks**) and stored as separate entities. Even though the document is divided into smaller sections, users are often still interested in identifying which documents are most relevant to their needs.
 
-![Ann Search](../../../../assets/ann-search.png)
+![Ann Search](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png)
 
 When performing an Approximate Nearest Neighbor (ANN) search on such a collection, the search results may include several paragraphs from the same document, potentially causing other documents to be overlooked, which may not align with the intended use case.
 
-![Grouping Search](../../../../assets/grouping-search.png)
+![Grouping Search](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png)
 
 To improve the diversity of search results, you can add the `group_by_field` parameter in the search request to enable Grouping Search. As shown in the diagram, you can set `group_by_field` to `docId`. Upon receiving this request, Milvus will:
 
@@ -366,6 +366,58 @@ In the example above:
 - `strict_group_size`: This boolean parameter controls whether the system should strictly enforce the count set by `group_size`. When `strict_group_size=True`, the system will attempt to include the exact number of entities specified by `group_size` in each group (e.g., two paragraphs), unless there isn’t enough data in that group. By default (`strict_group_size=False`), the system prioritizes meeting the number of groups specified by the `limit` parameter, rather than ensuring each group contains `group_size` entities. This approach is generally more efficient in cases where data distribution is uneven.
 
 For additional parameter details, refer to [search](https://docs.zilliz.com/reference/python/python/Vector-search).
+
+## Order groups by a scalar field | Milvus 3.0.x
+
+You can combine Grouping Search with `order_by_fields` to order groups by a scalar field. This is useful when you want diverse results across groups, but still want the groups to follow a business-relevant order such as price or rating.
+
+The following example groups search results by `category`, returns up to three entities per group, and orders the returned groups by `price` from low to high.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+res = client.search(
+    collection_name="product_catalog",
+    data=query_vectors,
+    anns_field="embedding",
+    limit=20,
+    group_by_field="category",
+    group_size=3,
+    strict_group_size=True,
+    output_fields=["category", "price", "rating"],
+    # highlight-start
+    order_by_fields=[
+        {"field": "price", "order": "asc"}
+    ],
+    # highlight-end
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+In the request above, `limit=20` means Milvus selects up to 20 groups, not 20 entities. Because `group_size=3`, the flat result list can contain up to 60 entities in total.
+
+When you use `order_by_fields` with `group_by_field`, Milvus orders groups by the specified scalar field value of each group's top entity. Within each group, entities remain ordered by their similarity score to the query vector.
 
 ## Considerations
 

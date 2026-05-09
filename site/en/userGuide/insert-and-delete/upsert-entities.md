@@ -18,7 +18,7 @@ An upsert in Milvus works in either **override** or **merge** mode.
 
 An upsert request that works in override mode combines an insert and a delete. When an `upsert` request for an existing entity is received, Milvus inserts the data carried in the request payload and deletes the existing entity with the original primary key specified in the data at the same time. 
 
-![Upsert In Override Mode](../../../../assets/upsert-in-override-mode.png)
+![Upsert In Override Mode](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png)
 
 If the target collection has `autoid` enabled on its primary field, Milvus will generate a new primary key for the data carried in the request payload before inserting it.
 
@@ -28,7 +28,7 @@ For fields with `nullable` enabled, you can omit them in the `upsert` request if
 
 You can also use the `partial_update` flag to make an upsert request work in merge mode. This allows you to include only the fields that need updating in the request payload.
 
-![Upsert In Merge Mode](../../../../assets/upsert-in-merge-mode.png)
+![Upsert In Merge Mode](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png)
 
 To perform a merge, set `partial_update` to `True` in the `upsert` request along with the primary key and the fields to update with their new values. 
 

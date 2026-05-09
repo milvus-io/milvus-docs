@@ -49,7 +49,7 @@ The main workflow of the WeightedRanker strategy is as follows:
 
 1. **Merge Scores**: The weighted scores (score_1_weighted, score_2_weighted) are ranked from highest to lowest to produce a final set of scores (score_final).
 
-![Weighted Ranker](../../../../../assets/weighted-ranker.png)
+![Weighted Ranker](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/weighted-ranker.png)
 
 ## Example of Weighted Ranker
 

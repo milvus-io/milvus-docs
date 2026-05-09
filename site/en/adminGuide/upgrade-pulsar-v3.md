@@ -57,15 +57,15 @@ If you have only a small number of collections in your working Milvus deployment
 
 1. Select every collection in all your databases, get into the `Segments` panel, Click the `Flush` button​
 
-    ![Segment panel of a collection](../../../assets/attu-select-collection.png)
+    ![Segment panel of a collection](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png)
 
 2. Then upon the popup, Click `Flush` again.​
 
-    ![Data flush prompt in Attu](../../../assets/data-flush-prompt.png)
+    ![Data flush prompt in Attu](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png)
 
 3. Then wait until all collections' Persistent Segment States are `Flushed`.​
 
-    ![View data flush status in Attu](../../../assets/view-data-peristent-process.png)
+    ![View data flush status in Attu](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png)
 
 #### Approach 2: Using management API
 

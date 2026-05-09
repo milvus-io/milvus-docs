@@ -24,7 +24,7 @@ Woodpecker's core innovation is its zero-disk architecture:
 - Metadata managed through distributed key-value stores like **etcd**
 - No local disk dependencies for core operations
 
-![woodpecker layers](../../../../assets/woodpecker_layers.png "woodpecker layers.")
+![woodpecker layers](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_layers.png "woodpecker layers.")
 
 ## Architecture components
 
@@ -43,7 +43,7 @@ Woodpecker offers two deployment modes to match your specific needs:
 
 MemoryBuffer mode provides a simple and lightweight deployment option where Woodpecker's embedded client temporarily buffers incoming writes in memory and periodically flushes them to a cloud object storage service. In this mode, the memory buffer is embedded directly into the client, enabling efficient batching before flushing to S3. Metadata is managed using **etcd** to ensure consistency and coordination. This mode is best suited for batch-heavy workloads in smaller-scale deployments or production environments that prioritize simplicity over performance, especially when low write latency is not critical. The write latency in this mode is generally between 200-500 ms.
 
-![woodpecker memory mode deployment](../../../../assets/woodpecker_memorybuffer_mode_deployment.png "woodpecker memory mode deployment.")
+![woodpecker memory mode deployment](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_memorybuffer_mode_deployment.png "woodpecker memory mode deployment.")
 
 ### QuorumBuffer - Optimized for low-latency, high-durability
 
@@ -53,7 +53,7 @@ A write is considered successful once the client successfully replicates data to
 
 The result is a streamlined, robust WAL layer ideal for mission-critical production environments where consistency, availability, and fast recovery are essential.
 
-![woodpecker quorum mode deployment](../../../../assets/woodpecker_quorumbuffer_mode_deployment.png "woodpecker memory mode deployment.")
+![woodpecker quorum mode deployment](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_quorumbuffer_mode_deployment.png "woodpecker memory mode deployment.")
 
 ## Performance benchmarks
 

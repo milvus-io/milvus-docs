@@ -1,7 +1,7 @@
 ---
 id: minhash-lsh.md
 title: "MINHASH_LSH"
-summary: "Efficient deduplication and similarity search are critical for large-scale machine learning datasets, especially for tasks like cleaning training corpora for Large Language Models (LLMs). When dealing with millions or billions of documents, traditional exact matching becomes too slow and costly."
+summary: "Use MinHash LSH indexes to speed up near-duplicate detection and Jaccard similarity search on large text datasets."
 ---
 
 # MINHASH_LSH
@@ -136,7 +136,7 @@ For more information about this metric type, refer to [MHJACCARD](metric.md#MHJA
 
 The deduplication process powered by MinHash LSH allows Milvus to efficiently identify and filter out near-duplicate text or structured records before inserting them into the collection.
 
-<img src="../../../../../assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600">
+![It9wwbcfwhft0rbwosacgltzneb](../../../../../assets/it9wwbcfwhft0rbwosacgltzneb.png)
 
 1. **Chunk & preprocess**: Split incoming text data or structured data (e.g., records, fields) into chunks; normalize text (lowercasing, punctuation removal), and remove stopwords as needed.
 
@@ -153,6 +153,16 @@ The deduplication process powered by MinHash LSH allows Milvus to efficiently id
 ## Prerequisites
 
 Before using MinHash LSH in Milvus, you must first generate **MinHash signatures**. These compact binary signatures approximate Jaccard similarity between sets and are required for `MHJACCARD`-based search in Milvus.
+
+<div class="alert note">
+
+You can prepare MinHash signatures for the `MINHASH_LSH` index in two ways:
+
+- Generate signatures yourself using external tools and insert them into a BINARY_VECTOR field, or
+
+- Use the built-in MinHash function to automatically generate compatible binary vectors from text. For the end-to-end workflow and configuration options of the MinHash function, see [MinHash Function](minhash-function.md).
+
+</div>
 
 ### Choose a method to generate MinHash signatures
 
@@ -614,7 +624,7 @@ The following table lists the parameters that can be configured in `search_param
    <tr>
      <td><p><code>refine_k</code></p></td>
      <td><p>Number of candidates to retrieve before Jaccard refinement. Only effective when <code>mh_search_with_jaccard</code> is <code>true</code>.</p></td>
-     <td><p>[<em>top_k</em>, *top_k * 10*]</p></td>
+     <td><p>[<em>top_k</em>, <em>top_k &ast; 10</em>]</p></td>
      <td><p>Set to 2-5x the desired <em>top_k</em> for good recall-performance balance. Higher values improve recall but increase computation cost.</p></td>
    </tr>
    <tr>

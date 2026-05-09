@@ -42,7 +42,7 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
     For example, with `min_gram=2` and `max_gram=3`, the string `"AI database"` is broken down as follows:
 
-![Build Ngram Index](../../../../../assets/build-ngram-index.png)
+![Build Ngram Index](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index.png)
 
     - **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
 
@@ -70,7 +70,7 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
     For instance, if the 2-gram `"AI"` appears in documents with IDs 1, 5, 6, 8, and 9, the index records `{"AI": [1, 5, 6, 8, 9]}`. This index is then used at query time to quickly narrow the search scope.
 
-![Build Ngram Index 2](../../../../../assets/build-ngram-index-2.png)
+![Build Ngram Index 2](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index-2.png)
 
     <div class="alert note">
     
@@ -82,7 +82,7 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
 When a `LIKE` filter is executed, Milvus uses the NGRAM index to accelerate the query in the following steps:
 
-![Accelerate Queries](../../../../../assets/accelerate-queries.png)
+![Accelerate Queries](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png)
 
 1. **Extract the query term:** The contiguous substring without wildcards is extracted from the `LIKE` expression (e.g., `"%database%"` becomes `"database"`).
 

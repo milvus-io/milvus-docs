@@ -15,7 +15,7 @@ different object storage.
 The diagram below illustrates the backup and restore process using
 different object storage.
 
-![multi-storage-backup-and-restore.png](../../../../../../assets/multi-storage-backup-and-restore.png)
+![multi-storage-backup-and-restore.png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-storage-backup-and-restore.png)
 
 Assume we have two Milvus instances, `milvus_A` and `milvus_B`, utilizing
 different object storage. In this example, our goal is to complete the

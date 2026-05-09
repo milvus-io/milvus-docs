@@ -16,7 +16,7 @@ In Milvus, filtered searches are categorized into two types — **standard filte
 
 If a collection contains both vector embeddings and their metadata, you can filter metadata before ANN search to improve the relevancy of the search result. Once Milvus receives a search request carrying a filtering condition, it restricts the search scope within the entities matching the specified filtering condition.
 
-![Filtered Search](../../../../assets/filtered-search.png)
+![Filtered Search](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png)
 
 As shown in the above diagram, the search request carries `chunk like "%red%"` as the filtering condition, indicating that Milvus should conduct the ANN search within all the entities that have the word `red` in the `chunk` field. Specifically, Milvus does the following:
 
@@ -30,7 +30,7 @@ As shown in the above diagram, the search request carries `chunk like "%red%"` a
 
 The standard filtering process effectively narrows the search scope to a small range. However, overly complex filtering expressions may result in very high search latency. In such cases, iterative filtering can serve as an alternative, helping to reduce the workload of scalar filtering.
 
-![Iterative Filtering](../../../../assets/iterative-filtering.png)
+![Iterative Filtering](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png)
 
 As illustrated in the diagram above, a search with iterative filtering performs the vector search in iterations. Each entity returned by the iterator undergoes scalar filtering, and this process continues until the specified topK results are achieved.
 

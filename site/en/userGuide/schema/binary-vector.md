@@ -16,7 +16,7 @@ Binary vectors are a method of encoding complex objects (like images, text, or a
 
 The diagram below shows how binary vectors represent the presence of keywords in text content. In this example, a 10-dimensional binary vector is used to represent two different texts (**Text 1** and **Text 2**), where each dimension corresponds to a word in the vocabulary: 1 indicates the presence of the word in the text, while 0 indicates its absence.
 
-![Binary Vector](../../../../assets/binary-vector.png)
+![Binary Vector](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png)
 
 Binary vectors have the following characteristics:
 
@@ -32,7 +32,7 @@ Binary vectors can be generated through various methods. In text processing, pre
 
 After binary vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.
 
-![Use Binary Vector](../../../../assets/use-binary-vector.png)
+![Use Binary Vector](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png)
 
 <div class="alert note">
 

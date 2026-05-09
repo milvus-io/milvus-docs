@@ -24,7 +24,7 @@ Milvus integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power it
 
 When a user performs a text match, the inverted index is used to quickly retrieve all documents containing the terms. This is much faster than scanning through each document individually.
 
-![Keyword Match](../../../../assets/keyword-match.png)
+![Keyword Match](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png)
 
 ## Enable text match
 

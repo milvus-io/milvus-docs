@@ -8,7 +8,7 @@ title: Milvus Hybrid Search Retriever
 
 Hybrid search combines the strengths of different search paradigms to enhance retrieval accuracy and robustness. It leverages the capabilities of both dense vector search and sparse vector search, as well as combinations of multiple dense vector search strategies, ensuring comprehensive and precise retrieval for diverse queries.
 
-![](../../../../assets/hybrid_and_rerank.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid_and_rerank.png)
 
 This diagram illustrates the most common hybrid search scenario, which is the dense + sparse hybrid search. In this case, candidates are retrieved using both semantic vector similarity and precise keyword matching. Results from these methods are merged, reranked, and passed to an LLM to generate the final answer. This approach balances precision and semantic understanding, making it highly effective for diverse query scenarios.
 

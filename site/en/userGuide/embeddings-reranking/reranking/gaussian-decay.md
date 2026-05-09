@@ -55,7 +55,7 @@ If your application requires a natural feeling of declining relevance without ha
 
 Gaussian decay creates a smooth, bell-shaped curve that gradually reduces relevance as distance increases from an ideal point. Named after mathematician Carl Friedrich Gauss, this distribution appears frequently in nature and statistics, which explains why it feels so intuitive to human perception.
 
-![Gaussian Decay](../../../../../assets/gaussian-decay.png)
+![Gaussian Decay](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gaussian-decay.png)
 
 The graph above shows how Gaussian decay would affect restaurant rankings in a mobile search app:
 

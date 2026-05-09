@@ -36,7 +36,7 @@ Tokenizers support only UTF-8 format. Support for other formats will be added in
 
 The workflow below shows how an analyzer processes text.
 
-![Analyzer Process Workflow](../../../../../assets/analyzer-process-workflow.png)
+![Analyzer Process Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-process-workflow.png)
 
 ## Analyzer types
 

@@ -18,7 +18,7 @@ In Milvus, an analyzer processes the text stored in this field to make it search
 
 An analyzer works in a simple, two-stage pipeline:
 
-![Analyzer Workflow](../../../../../assets/analyzer-workflow.png)
+![Analyzer Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png)
 
 1. **Tokenization (required):** This initial stage applies a **tokenizer** to break a continuous string of text into discrete, meaningful units called tokens. The tokenization method can vary significantly depending on the language and content type.
 

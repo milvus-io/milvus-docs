@@ -21,7 +21,7 @@ This page has been deprecated. For the latest example of the use of CoPali with 
 
 </div>
 
-![](../../../assets/colpali_formula.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/colpali_formula.png)
 
 MaxSim function compares a query with a document (what you're searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query
 

@@ -24,7 +24,7 @@ PRQ is a multi-stage vector compression approach that combines two complementary
 
 The following figure shows how it works.
 
-![Hnsw Prq](../../../../../assets/hnsw-prq.png)
+![Hnsw Prq](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw-prq.png)
 
 1. **Product Quantization (PQ)**
 

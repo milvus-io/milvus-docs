@@ -31,7 +31,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="install_standalone-docker.md">
-    <img src="../../../assets/home_install.svg" alt="icon" />
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
     <p class="link-btn">Install Milvus</p>
   </a>
   <p>Learn how to install Milvus using either Docker Compose or on Kubernetes.</p>
@@ -39,7 +39,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="quickstart.md">
-    <img src="../../../assets/home_quick_start.svg" alt="icon" />
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">Quick Start</p>
   </a>
   <p>Learn how to quickly run Milvus with sample code.</p>
@@ -47,7 +47,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img src="../../../assets/home_bootcamp.svg" alt="icon" />
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
     <p class="link-btn">Bootcamp</p>
   </a>
   <p>

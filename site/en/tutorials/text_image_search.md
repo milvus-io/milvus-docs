@@ -222,4 +222,4 @@ display(concatenated_image)
 
 
     
-![png](../../../assets/text_image_search_with_milvus_20_1.png)
+![png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_image_search_with_milvus_20_1.png)

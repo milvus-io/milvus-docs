@@ -14,7 +14,7 @@ it from the backup within the same Milvus instance.
 The diagram below illustrates the backup and restore process within a
 single Milvus instance.
 
-![single-instance-backup-and-restore.png](../../../../../../assets/single-instance-backup-and-restore.png)
+![single-instance-backup-and-restore.png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png)
 
 Assume we have a Milvus instance, `milvus_A`, using a bucket named
 `bucket_A` for data storage. In this example, our goal is to complete the

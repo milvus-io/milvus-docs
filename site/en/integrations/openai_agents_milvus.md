@@ -25,7 +25,7 @@ The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, eas
 
 In combination with Python, these primitives are powerful enough to express complex relationships between tools and agents, and allow you to build real-world applications without a steep learning curve. In addition, the SDK comes with built-in tracing that lets you visualize and debug your agentic flows, as well as evaluate them and even fine-tune models for your application.
 
-![](../../../assets/openai-agent.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png)
 
 ## Milvus
 

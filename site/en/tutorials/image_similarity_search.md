@@ -187,7 +187,7 @@ display(concatenated_image)
 
 
     
-![png](../../../assets/image_search_with_milvus_14_1.png)
+![png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_search_with_milvus_14_1.png)
     
 
 
@@ -197,7 +197,7 @@ display(concatenated_image)
 
 
     
-![Results](../../../assets/results.png)
+![Results](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png)
     
 
 

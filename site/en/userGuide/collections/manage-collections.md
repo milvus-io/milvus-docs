@@ -14,7 +14,7 @@ A collection is a two-dimensional table with fixed columns and variant rows. Eac
 
 The following chart shows a collection with eight columns and six entities.
 
-![Collection Explained](../../../../assets/collection-explained.png)
+![Collection Explained](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-explained.png)
 
 ## Schema and Fields
 

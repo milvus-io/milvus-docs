@@ -12,7 +12,7 @@ To streamline the process of granting privileges, it is recommended that you com
 
 A privilege group consists of multiple privileges.
 
-![Privilege Group Illustrated](../../../assets/privilege-group-illustrated.png)
+![Privilege Group Illustrated](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png)
 
 As shown in the figure above, suppose you need to grant three different privileges to a role.
 

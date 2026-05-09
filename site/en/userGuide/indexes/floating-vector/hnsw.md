@@ -24,7 +24,7 @@ Here's how it works:
 
 1. **Final** **refinement**: This process continues until the bottom layer is reached, where a final refinement step identifies the nearest neighbors.
 
-![HNSW](../../../../../assets/hnsw.png)
+![HNSW](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png)
 
 The performance of HNSW depends on several key parameters that control both the structure of the graph and the search behavior. These include:
 

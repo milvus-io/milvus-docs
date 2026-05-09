@@ -113,7 +113,7 @@ In Milvus, you can use either a JSON field or an Array-of-Structs field to creat
 
 The diagram below illustrates how we can model this dataset using the schema illustrated in the following schema:
 
-![Dataset Model](../../../../assets/dataset-model.png)
+![Dataset Model](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dataset-model.png)
 
 The above diagram illustrates the structure of a video clip, which comprises the following fields:
 

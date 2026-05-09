@@ -255,7 +255,7 @@ For more concept details, e.g., `analyzer`, `tokenizer`, `filter`, `enable_match
 We have learned how to use the basic BM25 build-in function in LangChain and Milvus. Let's introduce an optimized RAG implementation with hybrid search and reranking.
 
 
-![](../../../../assets/hybrid_and_rerank.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid_and_rerank.png)
 
 This diagram shows the Hybrid Retrieve & Reranking process, combining BM25 for keyword matching and vector search for semantic retrieval. Results from both methods are merged, reranked, and passed to an LLM to generate the final answer.
 

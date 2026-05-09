@@ -67,7 +67,7 @@ All time parameters (`origin`, `offset`, `scale`) must use the same unit as the 
 
 </div>
 
-![Exp Decay](../../../../../assets/exp-decay.png)
+![Exp Decay](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/exp-decay.png)
 
 The graph above shows how exponential decay would affect news article rankings in a digital news platform:
 

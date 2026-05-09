@@ -26,7 +26,7 @@ SQ is a method for compressing vectors by representing them with fewer bits. For
 
 - **SQ6** uses 6 bits to represent each floating-point value, resulting in 64 discrete levels.
 
-![Hnsw Sq](../../../../../assets/hnsw-sq.png)
+![Hnsw Sq](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw-sq.png)
 
 This reduction in precision dramatically decreases the memory footprint and speeds up the computation while retaining the essential structure of the data.
 

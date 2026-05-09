@@ -18,7 +18,7 @@ Milvus supports multi-tenancy at four levels: **Database**, **Collection**, **Pa
 
 With database-level multi-tenancy, each tenant receives a corresponding [database](manage_databases.md) containing one or more collections. 
 
-![Database Level Multi Tenancy](../../../assets/database-level-multi-tenancy.png)
+![Database Level Multi Tenancy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png)
 
 - **Scalability**: The database-level multi-tenancy strategy  supports a maximum of 64 tenants by default.
 
@@ -32,7 +32,7 @@ With database-level multi-tenancy, each tenant receives a corresponding [databas
 
 With collection-level multi-tenancy, each tenant is assigned a [collection](manage-collections.md), offering strong data isolation. 
 
-![Collection Level Multi Tenancy](../../../assets/collection-level-multi-tenancy.png)
+![Collection Level Multi Tenancy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png)
 
 - **Scalability**: Since a cluster can hold up to 65,536 collections by default, this strategy can accommodate the same number of tenants within the cluster.
 
@@ -46,7 +46,7 @@ With collection-level multi-tenancy, each tenant is assigned a [collection](mana
 
 In partition-level multi-tenancy, each tenant is assigned to a manually created [partition](manage-partitions.md) within a shared collection. 
 
-![Partition Level Multi Tenancy](../../../assets/partition-level-multi-tenancy.png)
+![Partition Level Multi Tenancy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png)
 
 - **Scalability**: A collection can hold up to 1,024 partitions per collection, allowing for the same number of tenants within it.
 
@@ -60,7 +60,7 @@ In partition-level multi-tenancy, each tenant is assigned to a manually created 
 
 With this strategy, all tenants share a single collection and schema, but each tenant's data is automatically routed into 16 physically isolated partitions based on the [partition key](use-partition-key.md) value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated. 
 
-![Partition Key Level Multi Tenancy](../../../assets/partition-key-level-multi-tenancy.png)
+![Partition Key Level Multi Tenancy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png)
 
 - **Scalability**: The partition key-level strategy offers the most scalable approach, supporting millions of tenants.
 

@@ -34,7 +34,7 @@ http://${MILVUS_PROXY_IP}:9091/webui
 
 Milvus Web UI provides the following features:
 
-![Milvus Web UI overview](../../../../assets/milvus-webui-overview.png)
+![Milvus Web UI overview](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png)
 
 - [Home](#Home)
 
@@ -72,7 +72,7 @@ Milvus Web UI provides the following features:
 
 On the Home page, you can find the following information:
 
-![Milvus Web UI Home](../../../../assets/webui-home.png)
+![Milvus Web UI Home](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png)
 
 - **System information**: View system information, including information about the deployment mode, image used in the deployment, and related information.
 
@@ -86,7 +86,7 @@ On the Home page, you can find the following information:
 
 On the Collections page, you can view the list of databases and collections currently in Milvus and check their details.
 
-![Milvus Web UI Collections](../../../../assets/webui-collections.png)
+![Milvus Web UI Collections](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png)
 
 - **Database**: View the list of databases currently in Milvus and their details.
 
@@ -94,11 +94,11 @@ On the Collections page, you can view the list of databases and collections curr
 
     You can click on a collection to view its details, including the number of fields, partitions, indexes, and other information in detail.   
 
-    ![Milvus Web UI Collection Details](../../../../assets/webui-collection-details.png)
+    ![Milvus Web UI Collection Details](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png)
 
 ## Query
 
-![Milvus Web UI Query Page](../../../../assets/webui-query.png)
+![Milvus Web UI Query Page](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png)
 
 - **Segments**: View the list of segments and their details, including the segment ID, corresponding collection, state, size, etc.
 
@@ -110,7 +110,7 @@ On the Collections page, you can view the list of databases and collections curr
 
 ## Data
 
-![Milvus Web UI Data Page](../../../../assets/webui-data.png)
+![Milvus Web UI Data Page](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png)
 
 - **Segments**: View the list of segments from the data nodes/coordinators and their details, including the segment ID, corresponding collection, state, size, etc.
 
@@ -118,7 +118,7 @@ On the Collections page, you can view the list of databases and collections curr
 
 ## Tasks
 
-![Milvus Web UI Tasks Page](../../../../assets/webui-tasks.png)
+![Milvus Web UI Tasks Page](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png)
 
 - **Tasks**: View the list of tasks running in Milvus, including the task type, state, and actions.
 
@@ -134,13 +134,13 @@ On the Collections page, you can view the list of databases and collections curr
 
 ## Slow requests
 
-![Milvus Web UI Slow Requests Page](../../../../assets/webui-slow-requests.png)
+![Milvus Web UI Slow Requests Page](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png)
 
 - **Slow requests**: A slow request is a search or a query that has a latency longer than the value of `proxy.slowQuerySpanInSeconds` specified in the configuration. The list of slow requests displays all slow requests in the last 15 minutes.
 
 ## Configurations
 
-![Milvus Web UI Configurations Page](../../../../assets/webui-configurations.png)
+![Milvus Web UI Configurations Page](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png)
 
 - **Configurations**: View the list of Milvus runtime configurations and their values.
 

@@ -72,7 +72,7 @@ Based on this data, the keys would be classified as follows:
 
 The classification from [Phase 1](json-shredding.md#Phase-1-Ingestion--key-classification) dictates the storage layout. Milvus uses a columnar format optimized for queries.
 
-![Json Shredding Flow](../../../../assets/json-shredding-flow.png)
+![Json Shredding Flow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/json-shredding-flow.png)
 
 - **Shredded columns**: For **typed** and **dynamic** **keys**, data is written to dedicated columns. This columnar storage allows for fast, direct scans during queries, as Milvus can read only the required data for a given key without processing the entire document.
 
@@ -227,7 +227,7 @@ This test focused on querying sparse, nested keys that fall into the "shared" ca
 
     1. First, check if the data has been built by using the `show segment --format table` command in the [Birdwatcher](birdwatcher_usage_guides.md) tool. If successful, the output will contain `shredding_data/` and `shared_key_index/` under the **Json Key Stats** field.
 
-        ![Birdwatcher Output](../../../../assets/birdwatcher-output.png)
+        ![Birdwatcher Output](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher-output.png)
 
     1. Next, verify that the data has been loaded by running `show loaded-json-stats` on the query node. The output will display details about the loaded shredded data for each query node.
 
