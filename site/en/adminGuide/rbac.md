@@ -14,7 +14,7 @@ The RBAC model can improve the efficiency of access control management. For exam
 
 ## RBAC key concepts
 
-![Users Roles Privileges](../../../assets/users-roles-privileges.png)
+![Users Roles Privileges](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png)
 
 There are four major components in the RBAC model.
 

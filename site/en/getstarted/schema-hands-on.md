@@ -10,7 +10,7 @@ Information Retrieval systems, also known as search engines, are essential for v
 
 Milvus allows you to specify the search data model through a collection schema, organizing unstructured data, their dense or sparse vector representations, and structured metadata. Whether you're working with text, images, or other data types, this hands-on guide will help you understand and apply key schema concepts to design a search data model in practice.
 
-![Data Model Anatomy](../../../assets/data-model-anatomy.png)
+![Data Model Anatomy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png)
 
 ## Data Model
 

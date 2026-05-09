@@ -38,7 +38,7 @@ You can also combine multiple Boost Rankers to implement a more dynamic and robu
 
 The following diagram illustrates the main workflow of Boost Rankers.
 
-![Boost Ranker Mechanism](../../../../../assets/boost-ranker-mechanism.png)
+![Boost Ranker Mechanism](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png)
 
 When you insert data, Milvus distributes it across segments. During a search, each segment returns a set of candidates, and Milvus ranks these candidates from all segments to produce the final results. When a search request includes a Boost Ranker, Milvus applies it to the candidate results from each segment to prevent potential precision loss and improve recall. 
 

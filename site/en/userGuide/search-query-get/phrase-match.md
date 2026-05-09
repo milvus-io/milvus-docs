@@ -15,7 +15,7 @@ However, in real-world scenarios, strict phrase matching can be too rigid. You m
 
 Powered by the [Tantivy](https://github.com/quickwit-oss/tantivy) search engine library, phrase match works by analyzing the positional information of words within documents. The diagram below illustrates the process:
 
-![Phrase Match Workflow](../../../../assets/phrase-match-workflow.png)
+![Phrase Match Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png)
 
 1. **Document Tokenization**: When you insert documents into Milvus, the text is split into tokens (individual words or terms) using an analyzer, with positional information recorded for each token. For example, **doc_1** is tokenized into **["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]**. For more information on analyzers, refer to [Analyzer Overview](analyzer-overview.md).
 

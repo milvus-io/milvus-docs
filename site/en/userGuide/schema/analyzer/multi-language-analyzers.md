@@ -23,7 +23,7 @@ Multi‑language analyzers resolve this issue by allowing you to configure multi
 
 The following diagram shows the workflow of configuring and using multi-language analyzers in Milvus:
 
-![Multi Language Analyzers Workflow](../../../../../assets/multi-language-analyzers-workflow.png)
+![Multi Language Analyzers Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-language-analyzers-workflow.png)
 
 1. **Configure Multi-language Analyzers**: 
 

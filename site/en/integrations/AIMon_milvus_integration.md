@@ -477,7 +477,7 @@ Now, we will improve the quality score by adding in a vector DB. This will also 
 There are two main components we need to be aware of: Ingestion and RAG based Q&A. The ingestion pipeline processes the transcripts from the Meeting Bank dataset and stores it in the Milvus Vector database. The RAG Q&A pipeline processes a user query by first retrieving the relevant documents from the vector store. These documents will then be used as grounding documents for the LLM to generate its response. We leverage AIMon to calculate the quality score and continuously monitor the application for [hallucination](https://docs.aimon.ai/detectors/hallucination), , [instruction adherence](https://docs.aimon.ai/detectors/instruction_adherence),  [context relevance](https://docs.aimon.ai/checker-models/context_relevance). These are the same 3 metrics we used to define the `quality` score above.
 
 
-![workflow](../../../assets/aimon-workflow.png)
+![workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png)
 
 Below are some utility functions to pre-process and compute embeddings for documents.
 

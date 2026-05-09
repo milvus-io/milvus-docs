@@ -34,7 +34,7 @@ To learn more about its technical details , refer to [IVF_FLAT](ivf-flat.md).
 
 The PQ process involves these key stages:
 
-![Ivf Pq 1](../../../../../assets/ivf-pq-1.png)
+![Ivf Pq 1](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-pq-1.png)
 
 1. **Dimension decomposition**: The algorithm begins by decomposing each high-dimensional vector into `m` equal-sized sub-vectors. This decomposition transforms the original D-dimensional space into `m` disjoint subspaces, where each subspace contains *D/m* dimensions. The parameter `m` controls the granularity of the decomposition and directly influences the compression ratio.
 
@@ -78,7 +78,7 @@ When performing similarity search with a query vector, PQ enables efficient dist
 
     - Sum these `m` distances to obtain the approximate distance based on a specific metric type (e.g. Euclidean distance).
 
-![Ivf Pq 2](../../../../../assets/ivf-pq-2.png)
+![Ivf Pq 2](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-pq-2.png)
 
 ### IVF + PQ
 

@@ -17,7 +17,7 @@ AISAQ enables running ultra-high scale databases using standard servers while of
 
 The diagram above compares the storage layouts of **DISKANN**, **AISAQ-Performance**, and **AISAQ-Scale**, showing how data (raw vectors, edge lists, and PQ codes) is distributed between RAM and disk.
 
-![Aisaq Vs Diskann](../../../../../assets/aisaq-vs-diskann.png)
+![Aisaq Vs Diskann](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aisaq-vs-diskann.png)
 
 ### Foundation: DISKANN recap
 

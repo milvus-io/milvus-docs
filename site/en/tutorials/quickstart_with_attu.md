@@ -41,7 +41,7 @@ To use Milvus Standalone locally:
 4. Click  to access your database.
 
 <p align="center">
-  <img src="../../../assets/attu_login_page.png" alt="Attu Login Page" width="80%">
+  <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_login_page.png" alt="Attu Login Page" width="80%">
 </p>
 
 ---
@@ -137,8 +137,8 @@ Now we can visualize the data schema and inserted entities using Attu's interfac
 
 Additionally, we can view the inserted data, including ID, vector embeddings, and dynamic fields storing metadata such as text content. The interface supports filtering and querying based on specified conditions or dynamic fields.
 <p align="center">
-  <img src="../../../assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
-  <img src="../../../assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
+  <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
+  <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
 </p>
 
 
@@ -154,7 +154,7 @@ Navigate to the **Vector Search** tab in Attu.
 The results are displayed in a table, showing IDs, similarity scores, and dynamic fields for each matching entity.  
 
 <p align="center">
-  <img src="../../../assets/attu_searched_table.png" alt="Search Results Table" width="80%">
+  <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
 
 ---
@@ -166,7 +166,7 @@ Click the **Explore** button in the results panel to visualize the relationships
 - The **connected nodes** represent the search results, clicking them will display the detailed information of the corresponding node.
 
 <p align="center">
-  <img src="../../../assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
+  <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 
 ---
@@ -177,7 +177,7 @@ Double-click on any result node to expand its connections. This action reveals a
 This expanded view allows for deeper exploration of how data points are related, based on vector similarity.
 
 <p align="center">
-  <img src="../../../assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">
+  <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">
 </p>
 
 ---

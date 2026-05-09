@@ -12,7 +12,7 @@ Sparse vectors are an important method of capturing surface-level term matching 
 
 A sparse vector is a special high-dimensional vector where most elements are zero, and only a few dimensions have non-zero values. As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., `[0.3, 0.8, 0.2, 0.3, 0.1]`). In contrast, sparse vectors store only non-zero elements and their indices of the dimension, often represented as key-value pairs of `{ index: value}` (e.g., `[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]`). 
 
-![Sparse Vector Representation](../../../../assets/sparse-vector-representation.png)
+![Sparse Vector Representation](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png)
 
 With tokenization and scoring, documents can be represented as bag-of-words vectors, where each dimension corresponds to a specific word in the vocabulary. Only the words present in the document have non-zero values, creating a sparse vector representation. Sparse vectors can be generated using two approaches:
 
@@ -22,7 +22,7 @@ With tokenization and scoring, documents can be represented as bag-of-words vect
 
 Sparse vectors and the original text can be stored in Milvus for efficient retrieval. The diagram below outlines the overall process.
 
-![Sparse Vector Workflow](../../../../assets/sparse-vector-workflow.png)
+![Sparse Vector Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png)
 
 <div class="alert note">
 

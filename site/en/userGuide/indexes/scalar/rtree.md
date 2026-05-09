@@ -21,7 +21,7 @@ Milvus uses an `RTREE` index to efficiently organize and filter geometry data, f
 
 1. **Add the root node:** Add a root node whose MBR covers all internal groups, resulting in a height-balanced tree structure.
 
-![How Retree Works](../../../../../assets/how-retree-works.png)
+![How Retree Works](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-retree-works.png)
 
 ### Phase 2: Accelerate queries
 

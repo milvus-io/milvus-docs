@@ -97,7 +97,7 @@ vector_store = Milvus(
 
 **Sequence Diagram:**
 
-![](../../../../assets/langchain_milvus_dito_langchain_embedding.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langchain_milvus_dito_langchain_embedding.png)
 
 **Characteristics:**
 - Client directly calls embedding API
@@ -110,7 +110,7 @@ Milvus 2.6's Text Embedding Function (Data In Data Out) allows the Milvus server
 
 **Sequence Diagram:**
 
-![](../../../../assets/langchain_milvus_dito_milvus_embedding.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langchain_milvus_dito_milvus_embedding.png)
 
 **Characteristics:**
 - Milvus server calls embedding API

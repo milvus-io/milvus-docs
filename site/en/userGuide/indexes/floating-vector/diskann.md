@@ -24,7 +24,7 @@ The Vamana graph is central to DISKANN’s disk-based strategy. It can handle ve
 
 The following figure shows how a Vamana graph is constructed.
 
-![Diskann](../../../../../assets/diskann.png)
+![Diskann](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png)
 
 1. **Initial random connections:** Each data point (vector) is represented as a node in the graph. These nodes are initially connected randomly, forming a dense network. Typically, a node starts with around 500 edges (or connections) for broad connectivity.
 
@@ -62,7 +62,7 @@ For technical details on the underlying PQ method, refer to [IVF_PQ](ivf-pq.md#s
 
 Once the index (the Vamana graph on disk and PQ codes in memory) is built, DISKANN performs ANN searches as follows:
 
-![Diskann 2](../../../../../assets/diskann-2.png)
+![Diskann 2](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png)
 
 1. **Query and entry point:** A query vector is provided to locate its nearest neighbors. DISKANN starts from a selected entry point in the Vamana graph, often a node near the global centroid of the dataset. The global centroid represents the average of all vectors, which helps to minimize the traversal distance through the graph to find desired neighbors.
 

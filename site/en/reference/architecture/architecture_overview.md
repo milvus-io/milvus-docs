@@ -12,7 +12,7 @@ Milvus is an **open-source**, **cloud-native** vector database designed for high
 
 The following diagram illustrates Milvus's high-level architecture, showcasing its modular, scalable, and cloud-native design with fully disaggregated storage and compute layers.
 
-![Architecture_diagram](../../../../assets/milvus_architecture_2_6.png "Milvus architecture.")
+![Architecture_diagram](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture_2_6.png "Milvus architecture.")
 
 ## Architectural Principles
 

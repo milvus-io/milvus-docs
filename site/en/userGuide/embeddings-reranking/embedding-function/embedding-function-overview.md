@@ -106,7 +106,7 @@ The following diagram shows how the Function works in Milvus.
 
 1. **Return results**: Milvus returns top-matching results to the application.
 
-![Embedding Function Overview](../../../../../assets/embedding-function-overview.png)
+![Embedding Function Overview](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png)
 
 ## Configure credentials
 
@@ -124,7 +124,7 @@ Milvus lets you supply embedding service credentials in two ways:
 
 The following diagram shows the process of configuring credentials via Milvus configuration file (`milvus.yaml`) and then calling the Function within Milvus.
 
-![Credential Config Overflow](../../../../../assets/credential-config-overflow.png)
+![Credential Config Overflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png)
 
 ### Step 1: Add credentials to Milvus configuration file
 

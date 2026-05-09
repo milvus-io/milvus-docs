@@ -52,7 +52,7 @@ Here's how SQ8 works:
 
 Suppose you have a dimension value of 1.2, with a minimum value of -1.7 and a maximum value of 2.3. The following figure shows how SQ8 is applied to convert a float32 value to an int8 integer.
 
-![Ivf Sq8](../../../../../assets/ivf-sq8.png)
+![Ivf Sq8](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png)
 
 ### IVF + SQ8
 

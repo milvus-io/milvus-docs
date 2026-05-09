@@ -6,7 +6,7 @@ title: Funnel Search with Matryoshka Embeddings
 
 # Funnel Search with Matryoshka Embeddings
 
-<div style='margin: auto; width: 50%;'><img src='../../../assets/funnel-search.png' width='100%'></div>
+<div style='margin: auto; width: 50%;'><img src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 When building efficient vector search systems, one key challenge is managing storage costs while maintaining acceptable latency and recall. Modern embedding models output vectors with hundreds or thousands of dimensions, creating significant storage and computational overhead for the raw vector and index.
 
 Traditionally, the storage requirements are reduced by applying a quantization or dimensionality reduction method just before building the index. For instance, we can save storage by lowering the precision using Product Quantization (PQ) or the number of dimensions using Principal Component Analysis (PCA). These methods analyze the entire vector set to find a more compact one that maintains the semantic relationships between vectors.
@@ -583,7 +583,7 @@ Recall is much poorer than funnel search or regular search as expected (the embe
 ## Summary
 
 Here is a comparison of our search results across methods:
-<div style='margin: auto; width: 80%;'><img src='../../../assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img src='../../../assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img src='../../../assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 We have shown how to use Matryoshka embeddings with Milvus for performing a more efficient semantic search algorithm called "funnel search." We also explored the importance of the reranking and pruning steps of the algorithm, as well as a failure mode when the initial candidate list is too small. Finally, we discussed how the order of the dimensions is important when forming sub-embeddings - it must be in the same way for which the model was trained. Or rather, it is only because the model was trained in a certain way that prefixes of the embeddings are meaningful. Now you know how to implement Matryoshka embeddings and funnel search to reduce the storage costs of semantic search without sacrificing too much retrieval performance!

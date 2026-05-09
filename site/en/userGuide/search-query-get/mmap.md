@@ -12,7 +12,7 @@ Memory mapping (Mmap) enables direct memory access to large files on disk, allow
 
 Milvus uses collections to organize vector embeddings and their metadata, and each row in the collection represents an entity. As shown in the left figure below, the vector field stores vector embeddings, and the scalar fields store their metadata. When you have created indexes on certain fields and loaded the collection, Milvus loads the created indexes and field raw data into memory.
 
-![Mmap Illustrated](../../../../assets/mmap-illustrated.png)
+![Mmap Illustrated](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/mmap-illustrated.png)
 
 Milvus is a memory-intensive database system, and the memory size available determines the capacity of a collection. Loading fields containing a large volume of data into memory is impossible if the data size exceeds the memory capacity, which is the usual case for AI-driven applications. 
 

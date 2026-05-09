@@ -12,7 +12,7 @@ Powered by the [ScaNN](https://github.com/google-research/google-research/blob/m
 
 ScaNN is built to solve one of the biggest challenges in vector search: efficiently finding the most relevant vectors in high-dimensional spaces, even as datasets grow larger and more complex. Its architecture breaks down the vector search process into distinct stages:
 
-![Scann](../../../../../assets/scann.png)
+![Scann](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scann.png)
 
 1. **Partitioning**: Divides the dataset into clusters. This method narrows the search space by focusing only on relevant data subsets instead of scanning the entire dataset, saving time and processing resources. ScaNN often uses clustering algorithms, such as [k-means](https://zilliz.com/blog/k-means-clustering), to identify clusters, which allows it to perform similarity searches more efficiently.
 

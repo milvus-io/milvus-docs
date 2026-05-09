@@ -54,7 +54,7 @@ The main workflow of the RRFRanker strategy is as follows:
 
 1. **Aggregate Rankings**: Re-rank the search results based on the combined rankings to produce the final results.
 
-![Rrf Ranker](../../../../../assets/rrf-ranker.png)
+![Rrf Ranker](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/rrf-ranker.png)
 
 ## Example of RRF Ranker
 

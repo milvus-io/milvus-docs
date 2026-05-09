@@ -20,7 +20,7 @@ The term **IVF_FLAT** stands for **Inverted File Flat**, which encapsulates its 
 
 The following figure shows how it works:
 
-![IVF FLAT Workflow](../../../../../assets/IVF-FLAT-workflow.png)
+![IVF FLAT Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow.png)
 
 This indexing method speeds up the search process, but it comes with a potential drawback: the candidate found as the nearest to the query embedding may not be the exact nearest one. This can happen if the nearest embedding to the query embedding resides in a cluster different from the one selected based on the nearest centroid (see visualization below).
 
@@ -32,7 +32,7 @@ To address this issue, **IVF_FLAT** provides two hyperparameters that we can tun
 
 Now if we set `nprobe` to 3 instead of 1, we get the following result:
 
-![IVF FLAT Workflow 2](../../../../../assets/IVF-FLAT-workflow-2.png)
+![IVF FLAT Workflow 2](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow-2.png)
 
 By increasing the `nprobe` value, you can include more partitions in the search, which can help ensure that the nearest embedding to the query is not missed, even if it resides in a different partition. However, this comes at the cost of increased search time, as more candidates need to be evaluated. For more information on index parameter tuning, refer to [Index params](ivf-flat.md#Index-params).
 

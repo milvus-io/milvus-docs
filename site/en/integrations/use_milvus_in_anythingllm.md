@@ -26,23 +26,23 @@ This guide will walk you through configuring Milvus as the vector database in An
 ## 2. Configure Milvus as the Vector Database
 
 1. Open AnythingLLM and click the **settings** icon in the lower left corner  
-   ![Open Settings](../../../assets/anythingllm_dashboard.png)
+   ![Open Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_dashboard.png)
 
 
 2. In the left menu, select `AI Providers` > `Vector Database`  
-   ![Select Vector Database](../../../assets/anythingllm_config.png)
+   ![Select Vector Database](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_config.png)
 
 3. In the Vector Database Provider dropdown, select **Milvus** (or Zilliz Cloud)  
-   ![Choose Milvus](../../../assets/anythingllm_vectordb.png)
+   ![Choose Milvus](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_vectordb.png)
 
 4. Fill in your Milvus connection details (for local Milvus). Here is an example:
    - **Milvus DB Address**: `http://localhost:19530`
    - **Milvus Username**: `root`
    - **Milvus Password**: `Milvus`
-   ![Milvus Connection](../../../assets/anythingllm_milvus.png)
+   ![Milvus Connection](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_milvus.png)
 
    > If using Zilliz Cloud, enter your Cluster Endpoint and API Token instead:  
-   ![Zilliz Cloud Connection](../../../assets/anythingllm_zilliz_cloud.png)
+   ![Zilliz Cloud Connection](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_zilliz_cloud.png)
 
 5. Click **Save changes** to apply your settings.
 
@@ -51,26 +51,26 @@ This guide will walk you through configuring Milvus as the vector database in An
 ## 3. Create a Workspace and Upload Documents
 
 1. Enter your workspace and click the **upload** icon to open the document upload dialog  
-   ![Open Upload Dialog](../../../assets/anythingllm_upload_file.png)
+   ![Open Upload Dialog](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_file.png)
 
 2. You can upload a wide variety of data sources:
    - **Local files**: PDF, Word, CSV, TXT, audio files, etc.
    - **Web pages**: Paste a URL and fetch website content directly.
 
-   ![Upload Documents](../../../assets/anythingllm_upload_interface.png)
+   ![Upload Documents](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_interface.png)
 
 3. After uploading or fetching, click **Move to Workspace** to move the document or data into your current workspace  
-   ![Move to Workspace](../../../assets/anythingllm_move_to_workspace.png)
+   ![Move to Workspace](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_move_to_workspace.png)
 
 4. Select the document or data and click **Save and Embed**. AnythingLLM will automatically chunk, embed, and store your content in Milvus  
-   ![Save and Embed](../../../assets/anythingllm_save_and_embed.png)
+   ![Save and Embed](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_save_and_embed.png)
 
 ---
 
 ## 4. Chat and Retrieve Answers from Milvus
 
 1. Return to the workspace chat interface and ask questions. AnythingLLM will search your Milvus vector database for relevant content and use the LLM to generate answers  
-   ![Chat with Docs](../../../assets/anythingllm_chat.png)
+   ![Chat with Docs](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_chat.png)
 
 ---
 

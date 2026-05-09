@@ -15,7 +15,7 @@ different buckets within the same object storage.
 The diagram below illustrates the backup and restore process using
 different buckets within the same object storage.
 
-![cross-bucket-backup-and-restore.png](../../../../../../assets/cross-bucket-backup-and-restore.png)
+![cross-bucket-backup-and-restore.png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cross-bucket-backup-and-restore.png)
 
 Assume we have two Milvus instances, `milvus_A` and `milvus_B`, both
 utilizing the default MinIO storage engine for object storage. These

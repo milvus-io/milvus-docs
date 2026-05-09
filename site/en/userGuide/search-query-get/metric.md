@@ -126,7 +126,7 @@ Essentially, Euclidean distance measures the length of a segment that connects 2
 
 The formula for Euclidean distance is as follows:
 
-![Euclidean Metric](../../../../assets/euclidean-metric.png)
+![Euclidean Metric](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png)
 
 where **a = (a<sub>0</sub>, a<sub>1</sub>,..., a<sub>n-1</sub>)** and **b = (b<sub>0</sub>, b<sub>1</sub>,..., b<sub>n-1</sub>)** are two points in n-dimensional Euclidean space.
 
@@ -142,7 +142,7 @@ Milvus only calculates the value before applying the square root when Euclidean 
 
 The IP distance between two embeddings is defined as follows:
 
-![IP Formula](../../../../assets/IP-formula.png)
+![IP Formula](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png)
 
 IP is more useful if you need to compare non-normalized data or when you care about magnitude and angle.
 
@@ -154,11 +154,11 @@ If you use IP to calculate similarities between embeddings, you must normalize y
 
 Suppose X' is normalized from embedding X:
 
-![Normalize Formula](../../../../assets/normalize-formula.png)
+![Normalize Formula](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png)
 
 The correlation between the two embeddings is as follows:
 
-![Correlation Between Embeddings](../../../../assets/correlation-between-embeddings.png)
+![Correlation Between Embeddings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png)
 
 ## Cosine similarity
 
@@ -166,7 +166,7 @@ Cosine similarity uses the cosine of the angle between two sets of vectors to me
 
 To calculate the cosine similarity between two sets of vectors **A = (a<sub>0</sub>, a<sub>1</sub>,..., a<sub>n-1</sub>)** and **B = (b<sub>0</sub>, b<sub>1</sub>,..., b<sub>n-1</sub>)**, use the following formula:
 
-![Cosine Similarity](../../../../assets/cosine-similarity.png)
+![Cosine Similarity](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png)
 
 The cosine similarity is always in the interval **[-1, 1]**. For example, two proportional vectors have a cosine similarity of **1**, two orthogonal vectors have a similarity of **0**, and two opposite vectors have a similarity of **-1**. The larger the cosine, the smaller the angle between the two vectors, indicating that these two vectors are more similar to each other.
 
@@ -176,11 +176,11 @@ By subtracting their cosine similarity from 1, you can get the cosine distance b
 
 JACCARD distance coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-![JACCARD Similarity Coefficient Formula](../../../../assets/JACCARD-similarity-coefficient-formula.png)
+![JACCARD Similarity Coefficient Formula](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png)
 
 JACCARD distance measures the dissimilarity between data sets and is obtained by subtracting the JACCARD similarity coefficient from 1. For binary variables, JACCARD distance is equivalent to the Tanimoto coefficient.
 
-![JACCARD Distance Formula](../../../../assets/JACCARD-distance-formula.png)
+![JACCARD Distance Formula](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png)
 
 ## MHJACCARD
 

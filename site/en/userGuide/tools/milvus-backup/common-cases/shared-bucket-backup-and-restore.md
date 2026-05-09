@@ -15,7 +15,7 @@ for object storage, with distinct root paths for each instance.
 The diagram below illustrates the backup and restore process using a
 shared bucket.
 
-![shared-bucket-backup-and-restore.png](../../../../../../assets/shared-bucket-backup-and-restore.png)
+![shared-bucket-backup-and-restore.png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/shared-bucket-backup-and-restore.png)
 
 Assume we have Milvus instances, `milvus_A` and `milvus_B`, both utilizing
 the default MinIO storage engine for object storage. These instances

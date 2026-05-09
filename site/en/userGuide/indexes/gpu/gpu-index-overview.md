@@ -10,7 +10,7 @@ Building an index with GPU support in Milvus can significantly improve search pe
 
 The following figure compares query throughput (queries per second) across index configurations, hardware setups, vector datasets (Cohere and OpenAI), and search batch sizes, showing that `GPU_CAGRA` consistently outperforms other methods.
 
-![Gpu Index Performance](../../../../../assets/gpu-index-performance.png)
+![Gpu Index Performance](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu-index-performance.png)
 
 ## Configure GPU memory pool for Milvus
 

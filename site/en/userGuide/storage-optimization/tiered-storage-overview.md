@@ -41,13 +41,13 @@ While both full-load and Tiered Storage modes handle the same data, they differ 
 
 The diagram below shows these differences.
 
-![Full Load Mode Vs Tiered Storage Mode](../../../../assets/full-load-mode-vs-tiered-storage-mode.png)
+![Full Load Mode Vs Tiered Storage Mode](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/full-load-mode-vs-tiered-storage-mode.png)
 
 ### QueryNode loading workflow
 
 Under Tiered Storage, the workflow of Tiered Storage has these phases:
 
-![Querynode Load Workflow](../../../../assets/querynode-load-workflow.png)
+![Querynode Load Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/querynode-load-workflow.png)
 
 #### Phase 1: Lazy load
 

@@ -18,7 +18,7 @@ A bitmap index consists of two main components: bitmaps and keys. Keys represent
 
 Consider a collection of documents with fields **Category** and **Public**. We want to retrieve documents that fall into the **Tech** category and are open to the **Public**. In this case, the keys for our bitmap indexes are **Tech** and **Public**.
 
-![Bitmap](../../../../../assets/bitmap.png)
+![Bitmap](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png)
 
 As shown in the figure, the bitmap indexes for **Category** and **Public** are:
 

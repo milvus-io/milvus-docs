@@ -69,7 +69,7 @@ All time parameters (`origin`, `offset`, `scale`) must use the same unit as the 
 
 </div>
 
-![Linear Decay](../../../../../assets/linear-decay.png)
+![Linear Decay](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/linear-decay.png)
 
 The graph above shows how linear decay would affect event listings on a ticketing platform:
 

@@ -8,7 +8,7 @@ summary: "The Streaming Service is a concept for Milvus internal streaming syste
 
 The **Streaming Service** is a concept for Milvus internal streaming system module, built around the Write-Ahead Log (WAL) to support various streaming-related function. These include streaming data ingestion/subscription, fault recovery of cluster state, conversion of streaming data into historical data, and growing data queries. Architecturally, the Streaming Service is composed of three main components:
 
-![Streaming Distributed Arc](../../../../assets/streaming_distributed_arch.png "Streaming Service Architecture")
+![Streaming Distributed Arc](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png "Streaming Service Architecture")
 
 - **Streaming Coordinator**: A logical component in the coordinator node. It uses Etcd for service discovery to locate available streaming nodes and is responsible for binding WAL to the corresponding streaming nodes. It also registers service to expose the WAL distribution topology, allowing streaming clients to know the appropriate streaming node for a given WAL.
 
@@ -26,7 +26,7 @@ The Streaming Service is a log-driven streaming system, so all write operations 
 
 The message order in Milvus may resemble the following:
 
-![Message Order](../../../../assets/message_order.png "Message order")
+![Message Order](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png "Message order")
 
 ## WAL Component
 
@@ -52,7 +52,7 @@ The **Recovery Storage** component always runs on the streaming node that corres
 
 - It also handles in-memory state recovery for the WAL component on the streaming node.
 
-![Recovery Storage](../../../../assets/recovery_storage.png "Recovery Storage")
+![Recovery Storage](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png "Recovery Storage")
 
 ## Query Delegator
 
@@ -66,10 +66,10 @@ The Query Delegator always coexists with the WAL component on the same streaming
 
 By separating computing nodes from storage, Milvus can easily transfer WAL from one streaming node to another, achieving high availability in streaming service.
 
-![wal lifetime](../../../../assets/wal_lifetime.png "wal lifetime")
+![wal lifetime](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png "wal lifetime")
 
 ## Wait for Ready
 
 When wal is going to move to new streaming node, the client will find that old streaming node reject some requests. Meanwhile, the WAL will be recovered at new streaming node, the client will wait for the wal on new streaming node ready to serve.
 
-![wait for ready](../../../../assets/streaming_wait_for_ready.png "wait for ready")
+![wait for ready](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png "wait for ready")

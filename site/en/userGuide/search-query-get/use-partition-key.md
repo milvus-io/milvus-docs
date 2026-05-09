@@ -14,7 +14,7 @@ In Milvus, you can use partitions to implement data segregation and improve sear
 
 Milvus introduces the Partition Key for you to reuse partitions in data segregation to overcome the limit on the number of partitions you can create in a collection. When creating a collection, you can use a scalar field as the Partition Key. Once the collection is ready, Milvus creates the specified number of partitions inside the collection. Upon receiving an inserted entity, Milvus calculates a hash value using the Partition Key value of the entity, executes a modulo operation based on the hash value and the `partitions_num` property of the collection to obtain the target partition ID, and stores the entity in the target partition.
 
-![Partition Vs Partition Key](../../../../assets/partition-vs-partition-key.png)
+![Partition Vs Partition Key](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png)
 
 The following figure illustrates how Milvus processes the search requests in a collection with or without the Partition Key feature enabled. 
 
@@ -22,7 +22,7 @@ The following figure illustrates how Milvus processes the search requests in a c
 
 - If the Partition Key is enabled, Milvus determines the search scope based on the Partition Key value specified in a search filter and scans only the entities within the partitions that match.
 
-![With And Without Partition Key](../../../../assets/with-and-without-partition-key.png)
+![With And Without Partition Key](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/with-and-without-partition-key.png)
 
 ## Use Partition Key
 
@@ -346,7 +346,7 @@ You have to replace `partition_key` with the name of the field that is designate
 
 In the multi-tenancy scenario, you can designate the scalar field related to tenant identities as the partition key and create a filter based on a specific value in this scalar field. To further improve search performance in similar scenarios, Milvus introduces the Partition Key Isolation feature.
 
-![Partition Key Isolation](../../../../assets/partition-key-isolation.png)
+![Partition Key Isolation](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png)
 
 As shown in the above figure, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.
 

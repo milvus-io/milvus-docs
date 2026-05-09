@@ -32,7 +32,7 @@ As shown in the diagram, the process works in two steps:
 
 For example, the value **"electronics"** maps to IDs **1** and **3**, while **"books"** maps to IDs **2** and **5**.
 
-![How Inverted Index Works](../../../../../assets/how-inverted-index-works.png)
+![How Inverted Index Works](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png)
 
 When you filter for a specific value (e.g., `category == "electronics"`), Milvus simply looks up the term in the index and retrieves the matching IDs directly. This avoids scanning the full dataset and enables fast filtering, especially for categorical or repeated values.
 

@@ -32,7 +32,7 @@ Full text search in Milvus follows the workflow below:
 
 1. **BM25 relevance scoring**: At search time, Milvus applies the BM25 scoring function to compute document relevance and return ranked results that best match the query terms.
 
-![Full Text Search](../../../../assets/full-text-search.png)
+![Full Text Search](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/full-text-search.png)
 
 To use full text search, follow these main steps:
 

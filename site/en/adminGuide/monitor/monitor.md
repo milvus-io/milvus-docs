@@ -20,7 +20,7 @@ The ServiceMonitor Custom Resource Definition (CRD) enables you to declaratively
 
 The following image illustrates Prometheus workflow.
 
-![Prometheus_architecture](../../../../assets/prometheus_architecture.png "The Prometheus architecture.")
+![Prometheus_architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_architecture.png)
 
 ## Prerequisites
 
@@ -112,11 +112,11 @@ After enabling the ServiceMonitor, you can access the Prometheus dashboard at `h
 
 Click on the `Status` tab and then `Targets`. You should see the targets of the Milvus components.
 
-![Prometheus_targets](../../../../assets/prometheus_targets.png "The Prometheus targets.")
+![Prometheus_targets](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_targets.png "The Prometheus targets.")
 
 Click on the `Graph` tab and enter the expression `up{job="default/my-release"}` in the expression input box. You should see the metrics of the Milvus components.
 
-![Prometheus_graph](../../../../assets/prometheus_graph.png "The Prometheus graph.")
+![Prometheus_graph](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_graph.png "The Prometheus graph.")
 
 ### 4. Check the ServiceMonitor
 

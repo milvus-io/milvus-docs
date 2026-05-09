@@ -23,7 +23,7 @@ Model Ranker transforms Milvus search by integrating advanced language models th
 
 Model rankers integrate language model understanding capabilities into the Milvus search process through a well-defined workflow:
 
-![Model Ranker Overview](../../../../../assets/model-ranker-overview.png)
+![Model Ranker Overview](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png)
 
 1. **Initial query**: Your application sends a query to Milvus
 
