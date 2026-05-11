@@ -100,9 +100,9 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: "update doc ${{ env.DOC }} by name"
-          title: "update doc ${{ env.DOC }} by name"
-          body: "update doc ${{ env.DOC }} by name. ${{ steps.branch.outputs.ascii }} triggered this action."
+          commit-message: "update doc ${{ env.DOC }} by name [${{ github.ref_name }}]"
+          title: "update doc ${{ env.DOC }} by name [${{ github.ref_name }}]"
+          body: "update doc ${{ env.DOC }} by name on branch ${{ github.ref_name }}. ${{ steps.branch.outputs.ascii }} triggered this action."
           branch: ${{ steps.branch.outputs.name }}
       - name: check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
