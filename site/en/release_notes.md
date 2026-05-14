@@ -14,7 +14,7 @@ Release date: May 14, 2026
 
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
 | -------------- | ------------------ | ------------------- | ---------------- | -------------- |
-| 2.6.16         | 2.6.12             | 2.6.13              | 2.6.18           | 2.6.4          |
+| 2.6.16         | 2.6.13             | 2.6.14              | 2.6.19           | 2.6.4          |
 
 We are excited to announce the release of Milvus v2.6.16! This release delivers major stability and performance improvements across L0 compaction, streaming node resource isolation, and proxy query failover, along with critical fixes for delete consistency, replica scaling, and rolling upgrade scenarios.
 
@@ -26,8 +26,8 @@ We are excited to announce the release of Milvus v2.6.16! This release delivers 
 - Added fast-fail retry capping and delegator stall detection so proxy queries failover to a healthy QueryNode immediately instead of burning the full backoff budget on a dead node ([#49103](https://github.com/milvus-io/milvus/pull/49103))
 - Allowed simultaneous pchannel increase and cluster/topology changes in replication config validation ([#49214](https://github.com/milvus-io/milvus/pull/49214))
 - Reduced proxy tail latency and memory pressure during traffic storms by fast-failing Enqueue before TSO/ID allocation and using a non-blocking edge-triggered task notifier ([#49259](https://github.com/milvus-io/milvus/pull/49259))
-- Added a $partial_update field to the proxy access log for Upsert requests, exposing both explicit and implicitly promoted partial-update flags ([#49361](https://github.com/milvus-io/milvus/pull/49361))
-- Accelerated TermExpr IN evaluation with a SIMD (AVX2/AVX512) batch filter, significantly improving query performance for IN predicates ([#49427](https://github.com/milvus-io/milvus/pull/49427))
+- Added a `$partial_update` field to the proxy access log for Upsert requests, exposing both explicit and implicitly promoted partial-update flags ([#49361](https://github.com/milvus-io/milvus/pull/49361))
+- Accelerated `TermExpr IN` evaluation with a SIMD (AVX2/AVX512) batch filter, significantly improving query performance for `IN` predicates ([#49427](https://github.com/milvus-io/milvus/pull/49427))
 - Bumped Go SDK to v2.6.4 with full struct-array support (vector sub-fields, EmbeddingList search, schema validation), gRPC authority configuration, and preserved default gRPC dial options when custom DialOptions are provided ([#49443](https://github.com/milvus-io/milvus/pull/49443))
 - Upgraded lz4_flex to 0.11.6 in the Tantivy binding to remediate CVE-2026-32829 ([#49507](https://github.com/milvus-io/milvus/pull/49507))
 - Bypassed Knowhere search-pool scheduling for vector iterators to reduce per-Next overhead in iterator-heavy group-by search paths ([#49547](https://github.com/milvus-io/milvus/pull/49547))
@@ -41,7 +41,7 @@ We are excited to announce the release of Milvus v2.6.16! This release delivers 
 - Fixed silent delete loss caused by L0 compaction missing target segments due to inherited incorrect positions from imported data, and corrected DmlPosition aggregation in mix/clustering compaction ([#47154](https://github.com/milvus-io/milvus/pull/47154), [#47187](https://github.com/milvus-io/milvus/pull/47187), [#48910](https://github.com/milvus-io/milvus/pull/48910))
 - Fixed an issue where collections with inverted indexes failed to load due to incorrect handling of sliced index files ([#48542](https://github.com/milvus-io/milvus/pull/48542))
 - Fixed an issue where queries on nullable array fields with bitmap indexes could return incorrect results due to missing null value persistence ([#49073](https://github.com/milvus-io/milvus/pull/49073))
-- Fixed an issue where queries using NOT over templated expressions (e.g. not (field in {vals})) returned wrong results or triggered QueryNode assertion failures ([#49184](https://github.com/milvus-io/milvus/pull/49184))
+- Fixed an issue where queries using NOT over templated expressions (e.g. `not (field in {vals})`) returned wrong results or triggered QueryNode assertion failures ([#49184](https://github.com/milvus-io/milvus/pull/49184))
 - Made config writes synchronously visible in the same process and ensured QueryCoord compliance reports Ready only after leaked segments/channels are released, preventing premature node termination during scale-down ([#49212](https://github.com/milvus-io/milvus/pull/49212))
 - Fixed an issue where L0 deltas could be incorrectly skipped, causing stale or incorrect query results ([#49228](https://github.com/milvus-io/milvus/pull/49228))
 - Fixed an internal error when using IS NULL / IS NOT NULL with ARRAY element access; the expression is now rejected at parse time with a clear validation error ([#49244](https://github.com/milvus-io/milvus/pull/49244))
