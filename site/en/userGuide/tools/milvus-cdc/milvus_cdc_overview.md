@@ -10,6 +10,8 @@ Milvus CDC (Change Data Capture) replicates data changes from one Milvus cluster
 
 In a primary-standby topology, one cluster acts as the primary and accepts writes. One or more standby clusters continuously receive changes from the primary and can serve read traffic. When the primary cluster becomes unavailable or needs maintenance, you can switch service traffic to a standby cluster.
 
+![CDC workflow](../../../../assets/cdc-overview.png)
+
 ## What Milvus CDC Is
 
 Milvus CDC is designed for cross-cluster replication and disaster recovery. It keeps one or more standby clusters aligned with a primary cluster by forwarding WAL changes from the current primary to each standby.
