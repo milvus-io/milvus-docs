@@ -121,7 +121,7 @@ Memory-mapped files enable efficient data handling by mapping file contents dire
 
 ## Milvus CDC
 
-[Milvus CDC](https://milvus.io/docs/milvus_cdc_overview.md) (change data capture) replicates data changes from one Milvus cluster to another for primary-standby disaster recovery.
+[Milvus CDC](https://milvus.io/docs/milvus_cdc_overview.md) (change data capture) is a tool used to replicate data changes from one Milvus cluster to another for primary-standby disaster recovery.
 
 ## Milvus CLI
 
