@@ -6,25 +6,23 @@ title: Milvus CDC
 
 # Milvus CDC
 
-Milvus CDC (Change Data Capture) replicates data changes from one Milvus cluster to another. Starting from Milvus v2.6, you can use CDC to build a primary-standby disaster recovery topology for Milvus.
+Milvus CDC (Change Data Capture) replicates data changes from one Milvus cluster to another. You can use CDC to build a primary-standby disaster recovery topology for Milvus.
 
 In a primary-standby topology, one cluster acts as the primary and accepts writes. One or more standby clusters continuously receive changes from the primary and can serve read traffic. When the primary cluster becomes unavailable or needs maintenance, you can switch service traffic to a standby cluster.
 
 ![CDC workflow](../../../../assets/cdc-overview.png)
 
-## What Milvus CDC Is
+## Architecture
 
-Milvus CDC is designed for cross-cluster replication and disaster recovery. It keeps one or more standby clusters aligned with a primary cluster by forwarding WAL changes from the current primary to each standby.
+A typical topology contains:
 
-CDC focuses on role-based replication:
-
-- The **primary** cluster accepts reads and writes.
-- A **standby** cluster continuously receives replicated changes from the primary.
-- A standby can serve reads, but it does not accept writes until it becomes the primary.
-
-For setup instructions, see [Set Up CDC Replication](set_up_cdc_replication.md). For role-change procedures, see [Switchover](cdc_switchover.md) and [Failover](cdc_failover.md).
-
-## Supported Topologies
+- **Primary cluster**: The source cluster for replication. It accepts reads and writes.
+- **Standby cluster**: A target cluster for replication. It receives changes from the primary and is read-only while it remains a standby.
+- **CDC node**: A Milvus component that forwards WAL changes from the current primary to standby clusters. Deploy CDC on each cluster that may become primary after switchover or failover.
+- **Replication topology**: The configured source-to-target relationship, such as cluster-a -> cluster-b.
+The following is an illustration of the topology. 
+![CDC workflow](../../../../assets/cdc-overview.png)
+### Supported Topologies
 
 The most common CDC deployment is one primary and one standby:
 
@@ -42,7 +40,7 @@ Primary cluster A  -- CDC replication -->  Standby cluster B
                   \-- CDC replication -->  Standby cluster C
 ```
 
-Milvus CDC does not support multi-primary or active-active writes.
+Milvus CDC does not support multi-primary or active-active deployments, where two or more clusters accept write traffic at the same time.
 
 ## Primary and Standby Behavior
 
