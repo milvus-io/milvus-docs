@@ -1003,39 +1003,45 @@
                 "children": []
               },
               {
+                "label": "Pattern Matching",
+                "id": "pattern-matching.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "Filtering Templating",
                 "id": "filtering-templating.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "JSON Operators",
                 "id": "json-operators.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "Array Operators",
                 "id": "array-operators.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "StructArray Operators",
                 "id": "struct-array-operators.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Random Sampling",
                 "id": "random-sampling.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "Geometry Operators",
                 "id": "geometry-operators.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               }
             ]
