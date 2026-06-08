@@ -1966,13 +1966,26 @@
         "children": [
           {
             "label": "Milvus Cluster switch MQ Type",
-            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "id": "switch_milvus_cluster_mq_type",
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Helm Chart",
+                "id": "switch_milvus_cluster_mq_type-helm.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Milvus Operator",
+                "id": "switch_milvus_cluster_mq_type-operator.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Milvus Standalone switch MQ type",
-            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "id": "switch_milvus_standalone_mq_type.md",
             "order": 1,
             "children": []
           }
