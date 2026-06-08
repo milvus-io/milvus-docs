@@ -33,10 +33,11 @@ Creating milvus-standalone ... done
 
 <div class="alert note">
 
-**What's new in v{{var.milvus_release_version}}:**
-- **Enhanced Architecture**: Features the new Streaming Node and optimized components
-- **Updated Dependencies**: Includes the latest MinIO and etcd versions
-- **Improved Configuration**: Optimized settings for better performance
+**Default deployment (v{{var.milvus_release_version}}):** `docker compose up -d` starts three containers — `milvus-etcd` (metadata), `milvus-minio` (object storage), and `milvus-standalone`. The message queue is **Woodpecker (embedded, local-filesystem WAL backend)**, so no separate message-queue container is required.
+
+**Message-queue default by version:**
+- **2.5.x** — default message queue is **RocksMQ**.
+- **2.6.x and later** — default message queue is **Woodpecker (embedded)**.
 
 Always download the latest Docker Compose configuration to ensure compatibility with v{{var.milvus_release_version}} features.
 
@@ -105,6 +106,28 @@ $ sudo docker compose down
 # Delete service data
 $ sudo rm -rf volumes
 ```
+
+## Upgrading from Milvus 2.5.x to 2.6.x
+
+{{fragments/mq_upgrade_limitation.md}}
+
+Because 2.6.x changes the default message queue to Woodpecker, an instance running **RocksMQ** on 2.5.x must **explicitly pin RocksMQ before upgrading** — otherwise the upgrade would attempt to change the message queue, which is not supported. After downloading the 2.6.x Docker Compose file, set the message-queue type back to `rocksmq` in your `user.yaml` override, then upgrade:
+
+```yaml
+# user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade
+mq:
+  type: rocksmq
+```
+
+To switch the message queue *after* upgrading, see [Switch MQ Type](switch_milvus_standalone_mq_type.md).
+
+## Optional dependencies
+
+This deployment runs **Woodpecker** (local-filesystem WAL) for messaging, **etcd** for metadata, and **MinIO** for object storage. To use a different message queue or connect external object storage / metadata, see:
+
+- Message queue: [Woodpecker](use-woodpecker.md) (default) · [Pulsar](deploy_pulsar.md) · [Kafka](deploy_pulsar.md#Configure-Kafka-with-Helm) · [RocksMQ](deploy_pulsar.md#Configure-RocksMQ-with-Helm)
+- Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
+- Metadata: [etcd](deploy_etcd.md)
 
 ## What's next
 
