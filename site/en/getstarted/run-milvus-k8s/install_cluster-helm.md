@@ -94,11 +94,13 @@ helm install my-release zilliztech/milvus \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
+  --set streaming.woodpecker.embedded=false \
   --set indexNode.enabled=false
 ```
 
 **What this command does:**
 - Uses **Woodpecker** as the message queue (recommended for reduced maintenance)
+- Runs **Woodpecker as a dedicated service** (a separate StatefulSet), not embedded in the streaming node
 - Enables the new **Streaming Node** component for improved performance
 - Disables the legacy **Index Node** (functionality is now handled by Data Node)
 - Disables Pulsar to use Woodpecker instead
@@ -115,16 +117,7 @@ For complete architecture details, refer to the [Architecture Overview](architec
 
 </div>
 
-**Alternative Message Queue Options:**
-
-If you prefer to use **Pulsar** (traditional choice) instead of Woodpecker:
-
-```bash
-helm install my-release zilliztech/milvus \
-  --set image.all.tag=v{{var.milvus_release_version}} \
-  --set streaming.enabled=true \
-  --set indexNode.enabled=false
-```
+**Alternative message queues:** To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see [Optional dependencies](#optional-dependencies).
 
 **Next steps:**
 The command above deploys Milvus with recommended configurations. For production use:
@@ -136,14 +129,6 @@ The command above deploys Milvus with recommended configurations. For production
 **Important notes:**
 
 - **Release naming**: Use only letters, numbers, and dashes (no dots allowed)
-- **Kubernetes v1.25+**: If you encounter PodDisruptionBudget issues, use this workaround:
-  ```bash
-  helm install my-release zilliztech/milvus \
-    --set pulsar.bookkeeper.pdb.usePolicy=false \
-    --set pulsar.broker.pdb.usePolicy=false \
-    --set pulsar.proxy.pdb.usePolicy=false \
-    --set pulsar.zookeeper.pdb.usePolicy=false
-  ```
 
 For more information, see [Milvus Helm Chart](https://artifacthub.io/packages/helm/milvus/milvus) and [Helm documentation](https://helm.sh/docs/).
 
@@ -168,23 +153,26 @@ my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
 my-release-milvus-mixcoord-7fb9488465-dmbbj      1/1    Running   0        3m23s
 my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
 my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
-my-release-milvus-streaming-node-xxxxxxxxx       1/1    Running   0        3m24s
+my-release-milvus-streamingnode-7b8cfc769c-mqmsm  1/1    Running   0        3m24s
+my-release-milvus-woodpecker-0                   1/1    Running   0        3m24s
+my-release-milvus-woodpecker-1                   1/1    Running   0        3m24s
+my-release-milvus-woodpecker-2                   1/1    Running   0        3m24s
+my-release-milvus-woodpecker-3                   1/1    Running   0        3m24s
 my-release-minio-0                               1/1    Running   0        3m23s
 my-release-minio-1                               1/1    Running   0        3m23s
 my-release-minio-2                               1/1    Running   0        3m23s
 my-release-minio-3                               1/1    Running   0        3m23s
-my-release-pulsar-autorecovery-86f5dbdf77-lchpc  1/1    Running   0        3m24s
-my-release-pulsar-bookkeeper-0                   1/1    Running   0        3m23s
-my-release-pulsar-bookkeeper-1                   1/1    Running   0        98s
-my-release-pulsar-broker-556ff89d4c-2m29m        1/1    Running   0        3m23s
-my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 ```
 
 **Key components to verify:**
-- **Milvus components**: `mixcoord`, `datanode`, `querynode`, `proxy`, `streaming-node`
-- **Dependencies**: `etcd` (metadata), `minio` (object storage), `pulsar` (message queue)
+- **Milvus components**: `mixcoord`, `datanode`, `querynode`, `proxy`, `streamingnode`
+- **Dependencies**: `etcd` (metadata), `minio` (object storage), `woodpecker` (message queue)
+
+<div class="alert note">
+
+With `streaming.woodpecker.embedded=false`, Woodpecker runs as a **dedicated StatefulSet** (`my-release-milvus-woodpecker`, 4 replicas by default) fronted by a headless service, using MinIO as its storage backend — so the cluster has a separate `woodpecker` pod set, distinct from the streaming node.
+
+</div>
 
 You can also access the **Milvus WebUI** at `http://127.0.0.1:9091/webui/` once port forwarding is set up (see next step). For details, refer to [Milvus WebUI](milvus-webui.md).
 
@@ -284,7 +272,7 @@ The above command renders chart templates for a Milvus cluster and saves the out
 
 <div class="alert note">
 
-- To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run `helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus > milvus_manifest.yaml` instead to render chart templates for a Milvus instance in a standalone mode.
+- To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run `helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false --set standalone.messageQueue=woodpecker --set woodpecker.enabled=true --set streaming.enabled=true zilliztech/milvus > milvus_manifest.yaml` instead to render chart templates for a Milvus instance in a standalone mode.
 - To change Milvus configurations, download the [`value.yaml`](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) template, place your desired settings in it, and use `helm template -f values.yaml my-release zilliztech/milvus > milvus_manifest.yaml` to render the manifest accordingly.
 
 </div>
@@ -341,6 +329,14 @@ Run the following command to uninstall Milvus.
 ```bash
 $ helm uninstall my-release
 ```
+
+## Optional dependencies
+
+This deployment runs **Woodpecker** as the message queue, **etcd** for metadata, and **MinIO** for object storage. To use a different message queue or connect external object storage / metadata, see:
+
+- Message queue: [Woodpecker](use-woodpecker.md) (default) · [Pulsar](mq_pulsar.md) · [Kafka](deploy_pulsar.md#Configure-Kafka-with-Helm) · [RocksMQ](deploy_pulsar.md#Configure-RocksMQ-with-Helm)
+- Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
+- Metadata: [etcd](deploy_etcd.md)
 
 ## What's next
 
