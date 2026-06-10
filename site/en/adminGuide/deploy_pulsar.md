@@ -75,7 +75,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 
 For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
 
-For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](use-woodpecker.md).
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](woodpecker.md).
                                     |
 ### Using the YAML file
 

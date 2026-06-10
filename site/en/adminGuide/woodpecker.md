@@ -1,20 +1,19 @@
 ---
-id: use-woodpecker.md
-title: Use Woodpecker
+id: woodpecker.md
+title: Woodpecker
 related_key: Woodpecker
-summary: Learn how to enable woodpecker as the WAL in milvus.
-beta: Milvus 2.6.x
+summary: Learn how Woodpecker works as the default message queue (WAL) in Milvus, and how to run it in embedded or service mode.
 ---
 
-# Use Woodpecker
+# Woodpecker
 
-This guide explains how to enable and use Woodpecker as the Write-Ahead Log (WAL) in Milvus 2.6.x. Woodpecker is a cloud‑native WAL designed for object storage, offering high throughput, low operational overhead, and seamless scalability. For architecture and benchmark details, see [Woodpecker](woodpecker_architecture.md).
+Woodpecker is the **default message queue (write-ahead log, WAL)** in Milvus starting from 2.6.x. It is a cloud‑native WAL designed for object storage, offering high throughput, low operational overhead, and seamless scalability. For architecture and benchmark details, see [Woodpecker](woodpecker_architecture.md).
 
 ## Overview
 
-- Starting from Milvus 2.6, Woodpecker is an optional WAL that provides ordered writes and recovery as the logging service.
-- As a message queue choice, it behaves similarly to Pulsar/Kafka and can be enabled via configuration.
-- Two storage backends are supported: local file system (`local`) and object storage (`minio`/S3-compatible).
+- Starting from Milvus 2.6, Woodpecker is the **default** WAL/message queue, providing ordered writes and recovery as the logging service. No external message-queue service (such as Pulsar or Kafka) is required.
+- Woodpecker can run **embedded** in the Milvus/streaming node (default), or as a **dedicated service** with its own pods (distributed/cluster only).
+- It supports three `storage.type` modes: object storage (`minio`, the default), local file system (`local`), and the dedicated `service`. See [Deployment modes](#Deployment-modes).
 
 ## Quick start
 
@@ -84,17 +83,19 @@ Key notes:
 
 ## Deployment modes
 
-Milvus supports both Standalone and Cluster modes. Woodpecker storage backend support matrix:
+Woodpecker supports three `storage.type` modes:
 
-|                   | `storage.type=local`     | `storage.type=minio`     |
-| ----------------- | ------------------------ | ------------------------ |
-| Milvus Standalone | Supported                 | Supported                 |
-| Milvus Cluster    | Limited (needs shared FS) | Supported                 |
+| `storage.type` | How Woodpecker runs | WAL backend | Milvus Standalone | Milvus Distributed (cluster) |
+| -------------- | ------------------- | ----------- | ----------------- | ---------------------------- |
+| `minio` (default) | Embedded in the Milvus/streaming node | Object storage (MinIO/S3‑compatible) | Supported | Supported |
+| `local` | Embedded in the Milvus/streaming node | Local file system | Supported | Limited (all nodes need a shared FS, e.g. NFS) |
+| `service` | **Dedicated Woodpecker service** (its own pods) | Object storage (MinIO/S3‑compatible) | **Not supported** | Supported |
 
 Notes:
 
 - With `minio`, Woodpecker shares the same object storage with Milvus (MinIO/S3/GCS/OSS, etc.).
 - With `local`, a single‑node local disk is only suitable for Standalone. If all pods can access a shared file system (e.g., NFS), Cluster mode can also use `local`.
+- **`service` mode runs Woodpecker as a separate, independently scalable service and is only available for distributed/cluster deployments.** Standalone deployments use the embedded modes (`minio` or `local`).
 
 ## Object storage compatibility for `storage.type=minio`
 
@@ -156,7 +157,7 @@ Run the following command to uninstall the Milvus cluster.
 kubectl delete milvus my-release
 ```
 
-If you need to adjust Woodpecker parameters, follow the settings described in [message storage config](deploy_pulsar.md).
+If you need to adjust Woodpecker parameters, follow the settings described in [Configuration](#Configuration).
 
 ### Enable Woodpecker for a Milvus Cluster on Kubernetes (Helm Chart, storage=minio)
 
@@ -187,7 +188,7 @@ helm install my-release zilliztech/milvus \
   --set streaming.enabled=true
 ```
 
-After deployment, follow the docs to port‑forward and connect. To adjust Woodpecker parameters, follow the settings described in [message storage config](deploy_pulsar.md).
+After deployment, follow the docs to port‑forward and connect. To adjust Woodpecker parameters, follow the settings described in [Configuration](#Configuration).
 
 ### Enable Woodpecker for Milvus Standalone in Docker (storage=local)
 
@@ -236,6 +237,35 @@ EOF'
 # Restart the container to apply the changes
 docker restart milvus-standalone
 ```
+
+### Enable Woodpecker service mode for a Milvus Cluster (Helm)
+
+For distributed/cluster deployments, you can run Woodpecker as a **dedicated service** (separate pods) instead of embedded in the streaming node by setting `streaming.woodpecker.embedded=false`:
+
+```bash
+helm install my-release zilliztech/milvus \
+  --set image.all.tag=v{{var.milvus_release_version}} \
+  --set pulsarv3.enabled=false \
+  --set woodpecker.enabled=true \
+  --set streaming.enabled=true \
+  --set streaming.woodpecker.embedded=false \
+  --set indexNode.enabled=false
+```
+
+This deploys Woodpecker as a dedicated StatefulSet (`my-release-milvus-woodpecker`, 4 replicas by default) fronted by a headless service, gossip-clustered on ports `18080` (service), `17946` (gossip), and `9091` (metrics), with MinIO as its storage backend. The cluster then includes a separate `woodpecker` pod set:
+
+```
+my-release-milvus-woodpecker-0
+my-release-milvus-woodpecker-1
+my-release-milvus-woodpecker-2
+my-release-milvus-woodpecker-3
+```
+
+<div class="alert note">
+
+Woodpecker `service` mode is for **distributed/cluster** deployments only — standalone deployments run Woodpecker embedded (`minio` or `local`). Milvus Operator does not yet support Woodpecker service mode.
+
+</div>
 
 ## Throughput tuning tips
 

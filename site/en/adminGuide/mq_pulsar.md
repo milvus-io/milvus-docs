@@ -44,5 +44,5 @@ For detailed Pulsar parameters across deployment methods, see:
 
 ## What's next
 
-- [Woodpecker (default message queue)](use-woodpecker.md)
+- [Woodpecker (default message queue)](woodpecker.md)
 - [Switch MQ Type for Milvus Cluster](switch_milvus_cluster_mq_type-helm.md)

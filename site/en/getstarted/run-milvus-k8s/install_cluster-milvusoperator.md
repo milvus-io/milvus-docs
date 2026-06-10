@@ -136,7 +136,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/
 The command above deploys a Milvus cluster with **Woodpecker** as the message queue (recommended for v{{var.milvus_release_version}}) and all new architectural components including the Streaming Node. 
 
 **Architecture highlights in this deployment:**
-- **Message Queue**: [Uses Woodpecker](use-woodpecker.md) (reduces infrastructure maintenance)
+- **Message Queue**: [Uses Woodpecker](woodpecker.md) (reduces infrastructure maintenance)
 - **Streaming Node**: Enabled for enhanced data processing
 - **Mix Coordinator**: Consolidated coordinator components for improved efficiency
 
@@ -316,7 +316,7 @@ $ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator
 
 This deployment uses **Woodpecker** as the message queue, **etcd** for metadata, and **MinIO** for object storage, all provisioned by Milvus Operator. To use a different backend with the Operator, see:
 
-- Message queue: [Woodpecker](use-woodpecker.md) (default) · [Pulsar](message_storage_operator.md#Configure-Pulsar) · [Kafka](message_storage_operator.md#Configure-Kafka) · [RocksMQ](message_storage_operator.md#Configure-RocksMQ)
+- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](message_storage_operator.md#Configure-Pulsar) · [Kafka](message_storage_operator.md#Configure-Kafka) · [RocksMQ](message_storage_operator.md#Configure-RocksMQ)
 - Object storage: [Configure object storage with Milvus Operator](object_storage_operator.md)
 - Metadata: [Configure etcd with Milvus Operator](meta_storage_operator.md)
 

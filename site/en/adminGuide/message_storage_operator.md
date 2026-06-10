@@ -85,7 +85,7 @@ spec:
 
 ## Configure Woodpecker
 
-Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Use Woodpecker](use-woodpecker.md).
+Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Use Woodpecker](woodpecker.md).
 
 ## Configure Pulsar
 

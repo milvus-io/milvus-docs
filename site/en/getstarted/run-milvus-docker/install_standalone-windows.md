@@ -8,7 +8,7 @@ title: Run Milvus in Docker (Windows)
 
 # Run Milvus in Docker (Windows)
 
-> By default, this deployment runs **Woodpecker** (local filesystem) as its message queue, so no external message-queue service is required. See [Use Woodpecker](use-woodpecker.md).
+> By default, this deployment runs **Woodpecker** (local filesystem) as its message queue, so no external message-queue service is required. See [Use Woodpecker](woodpecker.md).
 
 This page demonstrates how to run Milvus on Windows using Docker Desktop for Windows.​
 
