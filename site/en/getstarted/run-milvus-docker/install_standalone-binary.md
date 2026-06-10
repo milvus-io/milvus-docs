@@ -74,6 +74,12 @@ If Milvus is running successfully, you should see the following output:
 
 You can find the Milvus binary at `/usr/bin/milvus`, the systemd service file at `/lib/systemd/system/milvus.service`, and the dependencies at `/usr/lib/milvus/`.
 
+<div class="alert note">
+
+By default, Milvus Standalone runs **Woodpecker** (local filesystem) as its message queue with embedded etcd, so no external messaging or metadata service is required. See [Use Woodpecker](use-woodpecker.md).
+
+</div>
+
 ## (Optional) Update Milvus configurations
 
 You can modify the Milvus configurations in the `/etc/milvus/configs/milvus.yaml` file. For example, to change the `proxy.healthCheckTimeout` to `1000` ms, you can search for the target parameter and modify accordingly. For applicable configuration items, refer to [System Configuration](system_configuration.md).

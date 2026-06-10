@@ -3,10 +3,12 @@ id: install_standalone-windows.md
 label: Docker
 related_key: Docker
 summary: Learn how to install Milvus standalone with Docker Desktop for Windows.
-title: Run Milvus in Docker (Linux)
+title: Run Milvus in Docker (Windows)
 ---
 
 # Run Milvus in Docker (Windows)
+
+> By default, this deployment runs **Woodpecker** (local filesystem) as its message queue, so no external message-queue service is required. See [Use Woodpecker](use-woodpecker.md).
 
 This page demonstrates how to run Milvus on Windows using Docker Desktop for Windows.​
 
