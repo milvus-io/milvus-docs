@@ -80,7 +80,7 @@ helm install my-release zilliztech/milvus \
   --set streaming.enabled=true
 ```
 
-**Note**: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the [Architecture Overview](architecture_overview.md) and [Use Woodpecker](use-woodpecker.md).
+**Note**: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. Standalone deployments run Woodpecker **embedded** in the Milvus pod; the dedicated Woodpecker **service** (separate pods) is used for **distributed/cluster** deployments only. For details, refer to the [Architecture Overview](architecture_overview.md) and [Use Woodpecker](use-woodpecker.md).
 
 </div>
 
