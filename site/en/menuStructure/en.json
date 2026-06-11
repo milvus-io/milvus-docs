@@ -1478,6 +1478,32 @@
     "order": 9,
     "children": [
       {
+        "label": "Overview",
+        "id": "data-infra-integration-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Metadata",
+        "id": "metadata",
+        "isMenu": true,
+        "order": 1,
+        "children": [
+          {
+            "label": "etcd",
+            "id": "etcd.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Object Storage",
+        "id": "object-storage.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "Message Queue (mqType)",
         "id": "mqtype",
         "isMenu": true,
@@ -1499,7 +1525,20 @@
             "label": "Pulsar",
             "id": "mq_pulsar.md",
             "order": 2,
-            "children": []
+            "children": [
+              {
+                "label": "Upgrade to Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Continue Using Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Kafka",
@@ -1688,86 +1727,6 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
-          }
-        ]
-      },
-      {
-        "label": "Manage Dependencies",
-        "id": "manage_dependencies",
-        "order": 2,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "With Docker or Helm",
-            "id": "docker_helm_dependencies",
-            "order": 0,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Object Storage",
-                "id": "deploy_s3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Meta Storage",
-                "id": "deploy_etcd.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Message Storage",
-                "id": "deploy_pulsar.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "With Milvus Operator",
-            "id": "milvus_operator_dependencies",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Object Storage",
-                "id": "object_storage_operator.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Meta Storage",
-                "id": "meta_storage_operator.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Message Storage",
-                "id": "message_storage_operator.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Use Pulsar with Milvus",
-            "id": "pulsar_dependencies",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Upgrade to Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Continue Using Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
           }
         ]
       },
