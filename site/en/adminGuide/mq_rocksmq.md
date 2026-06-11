@@ -63,9 +63,9 @@ bash standalone_embed.sh delete
 ## Notes
 
 - **Upgrading from 2.5.x to 2.6.x:** {{fragments/mq_upgrade_limitation.md}} Because 2.6.x changes the standalone default to Woodpecker, pin `mq.type: rocksmq` in your `user.yaml` **before** upgrading if you want to keep RocksMQ.
-- To change the message queue of a running instance, see [Switch from RocksMQ to Woodpecker](switch_milvus_standalone_mq_type.md).
+- To change the message queue of a running instance, see [Switch from RocksMQ to Woodpecker](switch-rocksmq-woodpecker.md).
 
 ## What's next
 
 - [Woodpecker (default message queue)](woodpecker.md)
-- [Switch from RocksMQ to Woodpecker](switch_milvus_standalone_mq_type.md)
+- [Switch from RocksMQ to Woodpecker](switch-rocksmq-woodpecker.md)

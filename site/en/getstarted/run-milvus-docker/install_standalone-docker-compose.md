@@ -119,7 +119,7 @@ mq:
   type: rocksmq
 ```
 
-To switch the message queue *after* upgrading, see [Switch MQ Type](switch_milvus_standalone_mq_type.md).
+To switch the message queue *after* upgrading, see [Switch MQ Type](switch-mq-type.md).
 
 ## Optional dependencies
 

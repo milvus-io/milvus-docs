@@ -21,12 +21,12 @@ Milvus relies on a message queue (write-ahead log, WAL) to manage logs of recent
 
 - Each Milvus instance uses exactly one message queue.
 - {{fragments/mq_upgrade_limitation.md}}
-- To change the message queue of a running instance, see [Switch MQ Type](switch_milvus_cluster_mq_type-helm.md) (supported from v2.6.14).
+- To change the message queue of a running instance, see [Switch MQ Type](switch-mq-type.md) (supported from v2.6.14).
 
 </div>
 
 ## Choosing a message queue
 
 - **New deployments (2.6.x / 3.x):** use **Woodpecker** (the default). Standalone runs it embedded; distributed can run it embedded or as a dedicated [service](woodpecker.md#Deployment-modes).
-- **Existing Pulsar or Kafka users:** Pulsar and Kafka remain fully supported. Keep them, or [switch to Woodpecker](switch_milvus_cluster_mq_type-helm.md).
+- **Existing Pulsar or Kafka users:** Pulsar and Kafka remain fully supported. Keep them, or [switch to Woodpecker](switch-mq-type.md).
 - **RocksMQ:** standalone only, and superseded by embedded Woodpecker from 2.6.x onward.
