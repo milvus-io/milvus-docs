@@ -7,7 +7,7 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 
 # Configure Message Storage with Docker Compose or Helm
 
-Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Pulsar is the default message storage system. This topic introduces how to configure message storage with Docker Compose or Helm.
+Milvus uses a message queue for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Starting from Milvus 2.6.x, Woodpecker is the default message queue; this topic introduces how to configure Pulsar or Kafka with Docker Compose or Helm.
 
 You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s and configure Kafka on K8s.
 

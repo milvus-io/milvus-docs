@@ -76,7 +76,7 @@ You can find the Milvus binary at `/usr/bin/milvus`, the systemd service file at
 
 <div class="alert note">
 
-By default, Milvus Standalone runs **Woodpecker** (local filesystem) as its message queue with embedded etcd, so no external messaging or metadata service is required. See [Use Woodpecker](woodpecker.md).
+By default, Milvus Standalone runs **Woodpecker** (local filesystem) as its message queue with embedded etcd, so no external messaging or metadata service is required. See [Woodpecker](woodpecker.md).
 
 </div>
 

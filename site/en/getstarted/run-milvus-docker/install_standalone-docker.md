@@ -33,7 +33,7 @@ $ bash standalone_embed.sh start
 
 **What's new in v{{var.milvus_release_version}}:**
 - **Streaming Node**: Enhanced data processing capabilities
-- **Woodpecker MQ (default)**: This Docker deployment runs Woodpecker as the message queue with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Use Woodpecker](woodpecker.md).
+- **Woodpecker MQ (default)**: This Docker deployment runs Woodpecker as the message queue with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 - **Optimized Architecture**: Consolidated components for better performance
 
 Always download the latest script to ensure you get the most recent configurations and architecture improvements.

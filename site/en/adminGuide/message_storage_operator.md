@@ -38,7 +38,7 @@ There are also other limitations for specifying the message storage:
 - **Upgrade limitations**: {{fragments/mq_upgrade_limitation.md}}
 
 ## Configure RocksMQ
-RocksMQ is the default message storage in Milvus standalone. 
+RocksMQ was the default message storage in Milvus standalone up to 2.5.x (superseded by Woodpecker from 2.6.x). 
 
 <div class="alert note">
 
@@ -85,7 +85,7 @@ spec:
 
 ## Configure Woodpecker
 
-Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Use Woodpecker](woodpecker.md).
+Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Woodpecker](woodpecker.md).
 
 ## Configure Pulsar
 
@@ -185,7 +185,7 @@ kubectl apply -f milvuscluster.yaml
 
 ## Configure Kafka
 
-Pulsar is the default message storage in a Milvus cluster. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
+Pulsar was the default message storage in a Milvus cluster up to 2.5.x (superseded by Woodpecker from 2.6.x). If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
 
 `kafka` supports `external` and `inCluster`.
 
