@@ -117,7 +117,7 @@ For complete architecture details, refer to the [Architecture Overview](architec
 
 </div>
 
-**Alternative message queues:** To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see [Optional dependencies](#optional-dependencies).
+**Alternative message queues:** To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see [Optional dependencies](#Optional-dependencies).
 
 **Next steps:**
 The command above deploys Milvus with recommended configurations. For production use:
@@ -311,7 +311,7 @@ $ for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker
 $ kubectl apply -f milvus_manifest.yaml
 ```
 
-Till now, you can follow steps [2](#2-Check-Milvus-cluster-status) and [3](#3-Forward-a-local-port-to-Milvus) of the online install to check the cluster status and forward a local port to Milvus.
+Till now, you can follow steps [2](#2-Check-Milvus-cluster-status) and [3](#3-Connect-to-Milvus) of the online install to check the cluster status and forward a local port to Milvus.
 
 ## Upgrade running Milvus cluster
 
@@ -334,7 +334,7 @@ $ helm uninstall my-release
 
 This deployment runs **Woodpecker** as the message queue, **etcd** for metadata, and **MinIO** for object storage. To use a different message queue or connect external object storage / metadata, see:
 
-- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](mq_pulsar.md) · [Kafka](deploy_pulsar.md#Configure-Kafka-with-Helm) · [RocksMQ](deploy_pulsar.md#Configure-RocksMQ-with-Helm)
+- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](mq_pulsar.md) · [Kafka](mq_kafka.md) · [RocksMQ](mq_rocksmq.md)
 - Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
 - Metadata: [etcd](deploy_etcd.md)
 

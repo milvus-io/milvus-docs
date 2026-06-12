@@ -52,7 +52,7 @@ woodpecker:
       maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
       maxBytes: 256M # Maximum size of write buffer in bytes.
       maxEntries: 10000 # Maximum entries number of write buffer.
-      maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+      maxFlushRetries: 5 # Maximum number of flush retries.
       retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
       maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
       maxFlushThreads: 32 # Maximum number of threads to flush data
@@ -286,10 +286,11 @@ Batch Insert Demo
 ```python
 from pymilvus import MilvusClient
 import random
+import time
 
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri="http://<Proxy Pod IP>:27017",
+    uri="http://<Proxy Pod IP>:19530",
 )
 
 # 2. Create a collection

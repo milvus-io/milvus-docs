@@ -33,7 +33,7 @@ woodpecker:
 Restart the Milvus instance to apply the configuration:
 
 ```shell
-docker-compose restart
+docker compose restart
 ```
 
 ### Step 3: Execute the MQ switch

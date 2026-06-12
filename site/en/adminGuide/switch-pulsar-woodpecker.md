@@ -112,7 +112,7 @@ extraConfigFiles:
 ```
 
 ```shell
-helm upgrade -i my-release milvus/milvus \
+helm upgrade -i my-release zilliztech/milvus \
   --set pulsarv3.enabled=true \
   --set woodpecker.enabled=false \
   --set streaming.enabled=true \

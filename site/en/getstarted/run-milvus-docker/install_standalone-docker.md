@@ -110,7 +110,7 @@ $ bash standalone_embed.sh delete
 
 By default this deployment runs **Woodpecker** (local-filesystem WAL) as the message queue and an **embedded etcd** for metadata — nothing else to install. To use a different message queue or connect external object storage / metadata, see:
 
-- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](deploy_pulsar.md) · [Kafka](deploy_pulsar.md#Configure-Kafka-with-Helm) · [RocksMQ](deploy_pulsar.md#Configure-RocksMQ-with-Helm)
+- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](mq_pulsar.md) · [Kafka](mq_kafka.md) · [RocksMQ](mq_rocksmq.md)
 - Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
 - Metadata: [etcd](deploy_etcd.md)
 
