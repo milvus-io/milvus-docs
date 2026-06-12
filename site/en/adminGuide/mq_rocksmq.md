@@ -5,19 +5,19 @@ title: RocksMQ
 
 # Use RocksMQ as the Milvus Message Queue
 
-RocksMQ is an embedded message queue (WAL) bundled with Milvus, available for **Milvus Standalone only**. It was the default message queue for standalone deployments up to 2.5.x; from 2.6.x, Milvus Standalone uses embedded [Woodpecker](woodpecker.md) by default.
+RocksMQ is an embedded message queue (WAL) bundled with Milvus, available for **Milvus Standalone only**. It was the default standalone message queue in earlier Milvus versions; in Milvus 3.x, Milvus Standalone uses embedded [Woodpecker](woodpecker.md) by default.
 
 ## Version compatibility
 
 - **Standalone only** — RocksMQ is **not** supported in Milvus Distributed (cluster). See the [message queue support matrix](mqtype-overview.md#Supported-message-queues).
 - RocksMQ ships with Milvus, so there is no separate version to install.
-- It was the default standalone message queue up to 2.5.x, and is superseded by embedded Woodpecker from 2.6.x onward.
+- It was the default standalone message queue in earlier Milvus versions, and is superseded by embedded Woodpecker in Milvus 3.x.
 
 ## Deploy Milvus Standalone with RocksMQ using Docker
 
 ### Install
 
-Follow [Run Milvus in Docker](install_standalone-docker.md). On Milvus 2.6.x and later the standalone default is Woodpecker, so set the message-queue type to RocksMQ explicitly:
+Follow [Run Milvus in Docker](install_standalone-docker.md). In Milvus 3.x the standalone default is Woodpecker, so set the message-queue type to RocksMQ explicitly:
 
 ```bash
 mkdir milvus-rocksmq && cd milvus-rocksmq

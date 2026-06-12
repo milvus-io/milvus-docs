@@ -12,4 +12,4 @@ Milvus builds on open data infrastructure for its core dependencies. This chapte
 - **[Object Storage](object-storage.md)** — Milvus stores index files and binary logs in MinIO, AWS S3, or other S3-compatible / cloud object storage.
 - **[Message Queue](mqtype-overview.md)** — Milvus uses a write-ahead log (WAL): Woodpecker (default), Pulsar, Kafka, or RocksMQ.
 
-By default, a new Milvus 2.6.x / 3.x deployment runs with **Woodpecker** as the message queue, **etcd** for metadata, and **MinIO** for object storage — no extra messaging infrastructure required.
+By default, a new Milvus 3.x deployment runs with **Woodpecker** as the message queue, **etcd** for metadata, and **MinIO** for object storage — no extra messaging infrastructure required.

@@ -5,7 +5,7 @@ title: Pulsar
 
 # Use Pulsar as the Milvus Message Queue
 
-Apache Pulsar is one of the message-queue (WAL) backends Milvus supports for **distributed (cluster)** deployments. Starting from Milvus 2.6.x, [Woodpecker](woodpecker.md) is the default message queue; Pulsar remains fully supported for users who prefer it. Pulsar is used with Milvus Distributed (cluster) only — standalone deployments use embedded Woodpecker or [RocksMQ](mq_rocksmq.md).
+Apache Pulsar is one of the message-queue (WAL) backends Milvus supports. In Milvus 3.x, [Woodpecker](woodpecker.md) is the default message queue; Pulsar remains fully supported for users who prefer it. Pulsar is primarily used with Milvus Distributed (cluster); standalone deployments typically use embedded Woodpecker or [RocksMQ](mq_rocksmq.md).
 
 ## Version compatibility
 
@@ -25,6 +25,8 @@ To deploy a Milvus cluster that uses the bundled Pulsar (instead of Woodpecker),
 ```bash
 helm install my-release zilliztech/milvus \
   --set image.all.tag=v{{var.milvus_release_version}} \
+  --set pulsarv3.enabled=true \
+  --set woodpecker.enabled=false \
   --set streaming.enabled=true \
   --set indexNode.enabled=false
 ```
@@ -41,22 +43,22 @@ helm install my-release zilliztech/milvus \
 
 ### Configure
 
-To connect Milvus to an **external** Pulsar service, put the Pulsar connection settings in a `values.yaml` override and disable the bundled Pulsar:
+To connect Milvus to an **external** Pulsar service, disable the bundled Pulsar and enable `externalPulsar` in a `values.yaml` override:
 
 ```yaml
-extraConfigFiles:
-  user.yaml: |+
-    pulsar:
-      address: localhost   # Address of Pulsar
-      port: 6650           # Port of Pulsar
-      webport: 80          # Web port of Pulsar; use 8080 if connecting directly without a proxy
-      maxMessageSize: 5242880  # 5 MB, maximum size of each message
-      tenant: public
-      namespace: default
+pulsarv3:
+  enabled: false
+externalPulsar:
+  enabled: true
+  host: <your_pulsar_host>
+  port: 6650
+  maxMessageSize: "5242880"  # 5 MB, maximum size of each message
+  tenant: public
+  namespace: default
 ```
 
 ```bash
-helm install my-release zilliztech/milvus --set pulsarv3.enabled=false -f values.yaml
+helm install my-release zilliztech/milvus -f values.yaml
 ```
 
 ### Uninstall

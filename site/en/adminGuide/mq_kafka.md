@@ -5,7 +5,7 @@ title: Kafka
 
 # Use Kafka as the Milvus Message Queue
 
-Apache Kafka is one of the message-queue (WAL) backends Milvus supports for **distributed (cluster)** deployments. Starting from Milvus 2.6.x, [Woodpecker](woodpecker.md) is the default message queue; Kafka remains fully supported for users who prefer it. Kafka is used with Milvus Distributed (cluster) only — standalone deployments use embedded Woodpecker or [RocksMQ](mq_rocksmq.md).
+Apache Kafka is one of the message-queue (WAL) backends Milvus supports. In Milvus 3.x, [Woodpecker](woodpecker.md) is the default message queue; Kafka remains fully supported for users who prefer it. Kafka is primarily used with Milvus Distributed (cluster); standalone deployments typically use embedded Woodpecker or [RocksMQ](mq_rocksmq.md).
 
 ## Version compatibility
 
@@ -16,18 +16,19 @@ Apache Kafka is one of the message-queue (WAL) backends Milvus supports for **di
 
 ### Install and configure
 
-To use an external Kafka service, put the Kafka connection settings in a `values.yaml` override, then install Milvus with it:
+To use an external Kafka service, disable the bundled Pulsar and enable `externalKafka` in a `values.yaml` override, then install Milvus with it:
 
 ```yaml
-extraConfigFiles:
-  user.yaml: |+
-    kafka:
-      brokerList:
-        - <your_kafka_address>:<your_kafka_port>
-      saslUsername:
-      saslPassword:
-      saslMechanisms: PLAIN
-      securityProtocol: SASL_SSL
+pulsarv3:
+  enabled: false
+externalKafka:
+  enabled: true
+  brokerList: <your_kafka_address>:<your_kafka_port>
+  securityProtocol: SASL_SSL
+  sasl:
+    mechanisms: PLAIN
+    username: ""
+    password: ""
 ```
 
 ```bash

@@ -7,7 +7,7 @@ summary: Learn how to configure message storage with Milvus Operator.
 
 # Configure Message Storage with Milvus Operator
 
-Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Message Storage with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md) in the Milvus Operator repository.
+In Milvus 3.x, Woodpecker is the default message queue (see [Woodpecker](woodpecker.md)). With Milvus Operator, you can also configure RocksMQ, Pulsar, or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Message Storage with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md) in the Milvus Operator repository.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -31,8 +31,8 @@ The table below shows whether RocksMQ, Pulsar, Kafka, and Woodpecker are support
 
 There are also other limitations for specifying the message storage:
 - Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
-  - standalone mode:  RocksMQ (default) > Pulsar > Kafka
-  - cluster mode: Pulsar (default) > Kafka
+  - standalone mode: Woodpecker (default) > RocksMQ > Pulsar > Kafka
+  - cluster mode: Woodpecker (default) > Pulsar > Kafka
 - The message storage cannot be changed while the Milvus system is running. 
 - Only Kafka 2.x or 3.x verison is supported.
 - **Upgrade limitations**: {{fragments/mq_upgrade_limitation.md}}

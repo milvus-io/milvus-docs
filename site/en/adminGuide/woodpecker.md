@@ -7,11 +7,11 @@ summary: Learn how Woodpecker works as the default message queue (WAL) in Milvus
 
 # Woodpecker
 
-Woodpecker is the **default message queue (write-ahead log, WAL)** in Milvus starting from 2.6.x. It is a cloud‑native WAL designed for object storage, offering high throughput, low operational overhead, and seamless scalability. For architecture and benchmark details, see [Woodpecker](woodpecker_architecture.md).
+Woodpecker is the **default message queue (write-ahead log, WAL)** in Milvus 3.x. It is a cloud‑native WAL designed for object storage, offering high throughput, low operational overhead, and seamless scalability. For architecture and benchmark details, see [Woodpecker](woodpecker_architecture.md).
 
 ## Overview
 
-- Starting from Milvus 2.6, Woodpecker is the **default** WAL/message queue, providing ordered writes and recovery as the logging service. No external message-queue service (such as Pulsar or Kafka) is required.
+- In Milvus 3.x, Woodpecker is the **default** WAL/message queue, providing ordered writes and recovery as the logging service. No external message-queue service (such as Pulsar or Kafka) is required.
 - Woodpecker can run **embedded** in the Milvus/streaming node (default), or as a **dedicated service** with its own pods (distributed/cluster only).
 - It supports three `storage.type` modes: object storage (`minio`, the default), local file system (`local`), and the dedicated `service`. See [Deployment modes](#Deployment-modes).
 

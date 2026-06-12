@@ -6,13 +6,13 @@ summary: Overview of the message queue (mqType) options Milvus supports, and whi
 
 # Message Queue Overview
 
-Milvus relies on a message queue (write-ahead log, WAL) to manage logs of recent changes, output stream logs, and provide log subscriptions. Starting from Milvus 2.6.x, **Woodpecker** is the default message queue and requires no separate messaging infrastructure. Pulsar, Kafka, and RocksMQ remain supported for specific scenarios.
+Milvus relies on a message queue (write-ahead log, WAL) to manage logs of recent changes, output stream logs, and provide log subscriptions. In Milvus 3.x, **Woodpecker** is the default message queue and requires no separate messaging infrastructure. Pulsar, Kafka, and RocksMQ remain supported for specific scenarios.
 
 ## Supported message queues
 
 | Message queue | Milvus Standalone | Milvus Distributed (cluster) | Default in | Notes |
 | --- | :---: | :---: | --- | --- |
-| [Woodpecker](woodpecker.md) | ✔️ (embedded) | ✔️ (embedded or service) | **2.6.x and later** (both modes) | Default and recommended. Cloud-native WAL on object storage; no external service required. |
+| [Woodpecker](woodpecker.md) | ✔️ (embedded) | ✔️ (embedded or service) | **Milvus 3.x** (both modes) | Default and recommended. Cloud-native WAL on object storage; no external service required. |
 | [Pulsar](mq_pulsar.md) | ✔️ | ✔️ | ≤ 2.5.x (cluster default) | Supported, external or bundled. |
 | [Kafka](mq_kafka.md) | ✔️ | ✔️ | — | Supported. Only Kafka 2.x or 3.x. |
 | [RocksMQ](mq_rocksmq.md) | ✔️ | ✖️ | ≤ 2.5.x (standalone default) | Supported for **standalone only**. |
@@ -27,6 +27,6 @@ Milvus relies on a message queue (write-ahead log, WAL) to manage logs of recent
 
 ## Choosing a message queue
 
-- **New deployments (2.6.x / 3.x):** use **Woodpecker** (the default). Standalone runs it embedded; distributed can run it embedded or as a dedicated [service](woodpecker.md#Deployment-modes).
+- **New deployments (Milvus 3.x):** use **Woodpecker** (the default). Standalone runs it embedded; for distributed (cluster), the recommended default is a dedicated [service](woodpecker.md#Deployment-modes) deployed with Helm, and embedded is also supported.
 - **Existing Pulsar or Kafka users:** Pulsar and Kafka remain fully supported. Keep them, or [switch to Woodpecker](switch-mq-type.md).
-- **RocksMQ:** standalone only, and superseded by embedded Woodpecker from 2.6.x onward.
+- **RocksMQ:** standalone only, and superseded by embedded Woodpecker in Milvus 3.x.
