@@ -1032,7 +1032,7 @@ You should define a field explicitly in the schema instead of using a dynamic fi
 
 - **You want to avoid indexing inconsistencies**: Data in dynamic field keys is more prone to inconsistency in type or structure. Using a fixed schema helps ensure data quality, especially if you plan to use indexing or casting.
 
-If you decide that a dynamic field key should become an explicit scalar field in an existing collection, refer to [Alter Collection Schema](add-fields-to-an-existing-collection.md). Existing collection-level dynamic field settings are managed through collection properties; for details, refer to [Modify Collection](../collections/modify-collection.md).
+If you decide that a dynamic field key should become an explicit scalar field in an existing collection, refer to [Alter Collection Schema](add-fields-to-an-existing-collection.md). Existing collection-level dynamic field settings are managed through collection properties; for details, refer to [Modify Collection](modify-collection.md).
 
 ### Can I create multiple indexes on the same dynamic field key with different data types?
 

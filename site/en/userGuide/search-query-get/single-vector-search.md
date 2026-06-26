@@ -10,7 +10,7 @@ Based on an index file recording the sorted order of vector embeddings, the Appr
 
 <div class="alert note">
 
-If you add new fields after the collection has been created, searches that include these fields return the defined default values or `NULL` for entities that have not explicitly set values. For details, refer to [Alter Collection Schema](../schema/add-fields-to-an-existing-collection.md).
+If you add new fields after the collection has been created, searches that include these fields return the defined default values or `NULL` for entities that have not explicitly set values. For details, refer to [Alter Collection Schema](add-fields-to-an-existing-collection.md).
 
 </div>
 
