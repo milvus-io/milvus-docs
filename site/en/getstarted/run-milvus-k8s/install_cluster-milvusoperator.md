@@ -30,6 +30,24 @@ Milvus Operator is a solution that helps you deploy and manage a full Milvus ser
 
 - Before installing Milvus, it is recommended to use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to estimate the hardware requirements based on your data size. This helps ensure optimal performance and resource allocation for your Milvus installation.
 
+- Install [cert-manager](https://cert-manager.io/) (v1.5 or later). Milvus Operator relies on an admission webhook whose TLS certificate is issued by cert-manager, so cert-manager must be **running before** you install the operator (the operator chart does not bundle it). Install it and wait for its pods to become ready:
+
+    ```bash
+    kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.3/cert-manager.yaml
+    kubectl wait --for=condition=Available -n cert-manager --all deployments --timeout=300s
+    ```
+
+    Confirm the three cert-manager pods are `Running`:
+
+    ```bash
+    $ kubectl get pods -n cert-manager
+
+    NAME                                       READY   STATUS    RESTARTS   AGE
+    cert-manager-7d75f47cd8-xxxxx              1/1     Running   0          2m
+    cert-manager-cainjector-78f5d5cf9c-xxxxx   1/1     Running   0          2m
+    cert-manager-webhook-7f4d5c9b8c-xxxxx      1/1     Running   0          2m
+    ```
+
 <div class="alert note">
 
 If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
