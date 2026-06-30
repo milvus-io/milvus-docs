@@ -192,26 +192,23 @@ After deployment, follow the docs to port‑forward and connect. To adjust Woodp
 
 ### Enable Woodpecker for Milvus Standalone in Docker (storage=local)
 
-Follow [Run Milvus in Docker](install_standalone-docker.md). Example:
+In Milvus 3.x, the Docker standalone deployment uses Woodpecker with the **local filesystem** as its WAL backend **by default** — no extra configuration is required. Follow [Run Milvus in Docker](install_standalone-docker.md):
 
 ```bash
 mkdir milvus-wp && cd milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-# Create user.yaml to enable Woodpecker with local filesystem
-cat > user.yaml <<'EOF'
-mq:
-  type: woodpecker
-woodpecker:
-  storage:
-    type: local
-    rootPath: /var/lib/milvus/woodpecker
-EOF
-
 bash standalone_embed.sh start
 ```
 
-To further change Woodpecker settings, update `user.yaml` and run `bash standalone_embed.sh restart`.
+To tune Woodpecker, edit the generated `user.yaml` after the first start and run `bash standalone_embed.sh restart` to apply the changes (a fresh `start` regenerates `user.yaml`, so apply edits with `restart`):
+
+```yaml
+# user.yaml
+woodpecker:
+  logstore:
+    segmentSyncPolicy:
+      maxFlushThreads: 16
+```
 
 ### Enable Woodpecker for Milvus Standalone with Docker Compose (storage=minio)
 
@@ -252,7 +249,7 @@ helm install my-release zilliztech/milvus \
   --set indexNode.enabled=false
 ```
 
-This deploys Woodpecker as a dedicated StatefulSet (`my-release-milvus-woodpecker`, 4 replicas by default) fronted by a headless service, gossip-clustered on ports `18080` (service), `17946` (gossip), and `9091` (metrics), with MinIO as its storage backend. The cluster then includes a separate `woodpecker` pod set:
+This deploys Woodpecker as a dedicated StatefulSet (`my-release-milvus-woodpecker`, 4 replicas by default) fronted by a headless service, gossip-clustered on ports `18080` (service), `17946` (gossip), and `9091` (metrics), with MinIO as its storage backend. The service needs a quorum of **3** nodes; the default of **4** replicas keeps the quorum while tolerating a single node failure, so do not set `woodpecker.replicaCount` below 3. The cluster then includes a separate `woodpecker` pod set:
 
 ```
 my-release-milvus-woodpecker-0

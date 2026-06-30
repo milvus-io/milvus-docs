@@ -33,7 +33,7 @@ Creating milvus-standalone ... done
 
 <div class="alert note">
 
-**Default deployment (v{{var.milvus_release_version}}):** `docker compose up -d` starts three containers — `milvus-etcd` (metadata), `milvus-minio` (object storage), and `milvus-standalone`. The message queue is **Woodpecker (embedded, local-filesystem WAL backend)**, so no separate message-queue container is required.
+**Default deployment (v{{var.milvus_release_version}}):** `docker compose up -d` starts three containers — `milvus-etcd` (metadata), `milvus-minio` (object storage), and `milvus-standalone`. The message queue is **Woodpecker (embedded, with MinIO / object storage as its WAL backend)**, so no separate message-queue container is required.
 
 **Message-queue default by version:**
 - **2.5.x** — default message queue is **RocksMQ**.

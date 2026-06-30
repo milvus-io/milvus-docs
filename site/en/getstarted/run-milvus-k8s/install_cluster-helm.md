@@ -170,7 +170,7 @@ my-release-minio-3                               1/1    Running   0        3m23s
 
 <div class="alert note">
 
-With `streaming.woodpecker.embedded=false`, Woodpecker runs as a **dedicated StatefulSet** (`my-release-milvus-woodpecker`, 4 replicas by default) fronted by a headless service, using MinIO as its storage backend — so the cluster has a separate `woodpecker` pod set, distinct from the streaming node.
+With `streaming.woodpecker.embedded=false`, Woodpecker runs as a **dedicated StatefulSet** (`my-release-milvus-woodpecker`, 4 replicas by default — a quorum of 3 nodes plus one spare for fault tolerance; do not set `woodpecker.replicaCount` below 3) fronted by a headless service, using MinIO as its storage backend — so the cluster has a separate `woodpecker` pod set, distinct from the streaming node.
 
 </div>
 

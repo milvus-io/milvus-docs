@@ -17,20 +17,28 @@ RocksMQ is an embedded message queue (WAL) bundled with Milvus, available for **
 
 ### Install
 
-Follow [Run Milvus in Docker](install_standalone-docker.md). In Milvus 3.x the standalone default is Woodpecker, so set the message-queue type to RocksMQ explicitly:
+Follow [Run Milvus in Docker](install_standalone-docker.md). In Milvus 3.x the standalone default is Woodpecker, so switch the message-queue type to RocksMQ explicitly. The bootstrap script writes a fresh `user.yaml` on the **first** `start`, so set the type **after** that first start and then `restart` to apply (a `restart` preserves `user.yaml`):
 
 ```bash
 mkdir milvus-rocksmq && cd milvus-rocksmq
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
-# Create user.yaml to use RocksMQ
+# 1. First start — boots the container and writes a default user.yaml
+bash standalone_embed.sh start
+
+# 2. Set the message queue to RocksMQ
 cat > user.yaml <<'EOF'
 mq:
   type: rocksmq
 EOF
 
-bash standalone_embed.sh start
+# 3. Restart to apply the change
+bash standalone_embed.sh restart
 ```
+
+<div class="alert note">
+Switching <code>mq.type</code> this way is meant for a <b>brand-new</b> instance (no collections yet). To change the message queue of an instance that already holds data, follow the <a href="switch-rocksmq-woodpecker.md">switch procedure</a> instead.
+</div>
 
 ### Configure
 
