@@ -46,7 +46,7 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 After running the installation script:
 
-- A docker container named milvus has been started at port **19530**.
+- A docker container named milvus-standalone has been started at port **19530**.
 - An embed etcd is installed along with Milvus in the same container and serves at port **2379**. Its configuration file is mapped to **embedEtcd.yaml** in the current folder.
 - To change the default Milvus configuration, add your settings to the **user.yaml** file in the current folder and then restart the service.
 - The Milvus data volume is mapped to **volumes/milvus** in the current folder.
