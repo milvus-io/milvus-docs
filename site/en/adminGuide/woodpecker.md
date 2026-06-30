@@ -237,7 +237,7 @@ docker restart milvus-standalone
 
 ### Enable Woodpecker service mode for a Milvus Cluster (Helm)
 
-For distributed/cluster deployments, you can run Woodpecker as a **dedicated service** (separate pods) instead of embedded in the streaming node by setting `streaming.woodpecker.embedded=false`:
+Woodpecker **service mode** is a **Milvus 3.0** feature. For distributed/cluster deployments, you can run Woodpecker as a **dedicated service** (separate pods) instead of embedded in the streaming node by setting `streaming.woodpecker.embedded=false`:
 
 ```bash
 helm install my-release zilliztech/milvus \
@@ -265,6 +265,10 @@ Woodpecker `service` mode is for **distributed/cluster** deployments only — st
 
 ## Throughput tuning tips
 
+Woodpecker's throughput and latency profile differs between **embedded** mode and **service** mode (a Milvus 3.0 feature). The guidance below is organized by mode.
+
+### Embedded mode
+
 Based on the benchmarks and backend limits in [Woodpecker](woodpecker_architecture.md), optimize end‑to‑end write throughput from the following aspects:
 
 - Storage‑side
@@ -278,7 +282,12 @@ Based on the benchmarks and backend limits in [Woodpecker](woodpecker_architectu
   - Use larger batch sizes and more concurrent writers/clients.
   - Control refresh/index build timing (batch up before triggering) to avoid frequent small writes.
 
-Batch Insert Demo
+### Service mode (Milvus 3.0+)
+
+Service mode keeps the high write throughput of an object-storage-backed WAL while adding low latency (see [Latency](#Latency)). The storage-side and client-side tuning above still applies; in addition, because Woodpecker runs as its own service, you scale write capacity horizontally by adding replicas (`woodpecker.replicaCount`, default 4), and writes benefit from one-RTT quorum replication and topology-aware reads that avoid broker forwarding.
+
+**Batch insert demo** — use the following to measure write throughput:
+
 ```python
 from pymilvus import MilvusClient
 import random
@@ -323,11 +332,24 @@ for j in range(batch_count):
     print(f"Inserted {j}th vectors endTime:{time.time()} costTime:{time.time() - start_time}")
 ```
 
-## Latency 
+## Latency
 
-Woodpecker is a cloud-native WAL designed for object storage with trade-offs between throughput, cost, and latency. The currently supported lightweight embedded mode prioritizes cost and throughput optimization, as most scenarios only require data to be written within a certain time rather than demanding low latency for individual write requests. Therefore, Woodpecker employs batched writes, with default intervals of 10ms for local filesystem storage backends and 200ms for MinIO-like storage backends. During slow write operations, the maximum latency equals the interval time plus flush time.
+### Embedded mode
+
+Woodpecker is a cloud-native WAL designed for object storage with trade-offs between throughput, cost, and latency. The lightweight embedded mode prioritizes cost and throughput optimization, as most scenarios only require data to be written within a certain time rather than demanding low latency for individual write requests. Therefore, Woodpecker employs batched writes, with default intervals of 10ms for local filesystem storage backends and 200ms for MinIO-like storage backends. During slow write operations, the maximum latency equals the interval time plus flush time.
 
 Note that batch insertion is triggered not only by time intervals but also by batch size, which defaults to 2MB.
+
+### Service mode (Milvus 3.0+)
+
+Service mode brings **millisecond-level write latency** — on the same order as a traditional three-replica local-disk WAL — while keeping cost low. In a typical three-replica, cross-AZ deployment, write latency stays in the millisecond range. It achieves this through:
+
+- **One-RTT quorum writes** — client-driven replication completes a quorum write within a single round trip, with cross-AZ traffic fixed at two replicas' worth of data (versus the extra ~1/3 cross-AZ traffic typical of broker/leader-based replication).
+- **Topology-aware single-hop reads** — each read goes directly to the nearest replica instead of being forwarded through a broker, avoiding the random cross-AZ reads (≈2/3 cross-AZ read traffic) of broker-based systems.
+- **Immediate object-storage upload after segment rolling** — each segment tracks its full lifecycle and uploads to object storage as soon as it rolls, keeping the local-disk footprint and storage cost low without trading away latency.
+- **No continuous node-to-node replication** — logs persist to object storage acting as shared storage, so failover only re-uploads surviving replicas (no whole-node copy), scaling is not bound by inter-node replication bandwidth, and large-scale node replacement causes no replication storms.
+
+In cross-AZ deployments, service mode also saves roughly **1/3 of write** and **2/3 of read** cross-AZ network traffic compared with broker-based log systems. For the full design and cost analysis, see [Woodpecker Architecture](woodpecker_architecture.md).
 
 For details on architecture, deployment modes (MemoryBuffer / QuorumBuffer), and performance, see [Woodpecker Architecture](woodpecker_architecture.md).
 
