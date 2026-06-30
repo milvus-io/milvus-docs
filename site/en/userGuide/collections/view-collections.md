@@ -108,6 +108,14 @@ If you have already created a collection named `quick_setup`, the result of the 
 ["quick_setup"]
 ```
 
+<div class="alert note">
+
+Use `list_collections()` when you need to retrieve all collection names in the current database.
+To check whether a specific collection exists, use the dedicated existence check instead.
+For example, in Python, call `client.has_collection(collection_name="quick_setup")` rather than scanning the list returned by `list_collections()`.
+
+</div>
+
 ## Describe Collection
 
 You can also obtain the details of a specific collection. The following example assumes that you have already created a collection named quick_setup.
