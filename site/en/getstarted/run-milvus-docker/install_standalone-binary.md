@@ -17,7 +17,7 @@ This page illustrates how to install Milvus standalone with a pre-built RPM/DEB 
 
 ## Download the RPM/DEB Package
 
-You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v{{var.milvus_release_version}}).
+You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v{{var.milvus_deb_release}}).
 
 - For x86_64/amd64, download the **{{var.milvus_deb_amd64}}** or **{{var.milvus_rpm_amd64}}** package.
 - For ARM64, download the **{{var.milvus_deb_arm64}}** or **{{var.milvus_rpm_arm64}}** package.
@@ -73,6 +73,12 @@ If Milvus is running successfully, you should see the following output:
 ```
 
 You can find the Milvus binary at `/usr/bin/milvus`, the systemd service file at `/lib/systemd/system/milvus.service`, and the dependencies at `/usr/lib/milvus/`.
+
+<div class="alert note">
+
+By default, Milvus Standalone runs **Woodpecker** (local filesystem) as its message queue with embedded etcd, so no external messaging or metadata service is required. See [Woodpecker](woodpecker.md).
+
+</div>
 
 ## (Optional) Update Milvus configurations
 
