@@ -67,13 +67,13 @@ analyzer_params = {
 
 This analyzer applies the following processing steps:
 
-- **Tokenization**: Uses the [`thai`](../tokenizer/thai-tokenizer.md) tokenizer to segment Thai text into word tokens without relying on whitespace. The tokenizer filters out whitespace and punctuation-only segments.
+- **Tokenization**: Uses the [`thai`](thai-tokenizer.md) tokenizer to segment Thai text into word tokens without relying on whitespace. The tokenizer filters out whitespace and punctuation-only segments.
 - **Case normalization**: Uses the `lowercase` filter, which affects Latin letters in mixed Thai/English text.
 - **Digit normalization**: Uses the `decimaldigit` filter to convert Thai digits and other Unicode decimal digits to ASCII digits.
 - **Stop-word removal**: Uses the `stop` filter with the built-in `_thai_` dictionary.
 - **No stemming**: The built-in `thai` analyzer does not apply a `stemmer` filter.
 
-After defining `analyzer_params`, you can apply the analyzer to a `VARCHAR` field when defining a collection schema. For details, refer to [Example use](../analyzer-overview.md#Example-use).
+After defining `analyzer_params`, you can apply the analyzer to a `VARCHAR` field when defining a collection schema. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
 ## Examples
 

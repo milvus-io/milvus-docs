@@ -13,7 +13,7 @@ The `arabic_normalization` filter is a built-in token filter for Arabic text. It
 
 <div class="alert note">
 
-For Arabic text, use the built-in [`arabic`](../analyzer/arabic-analyzer.md) analyzer in most cases. The built-in analyzer includes this filter together with standard tokenization, lowercasing, decimal digit normalization, Arabic stemming, and Arabic stop-word removal. Use `arabic_normalization` directly only when you need to build a custom analyzer pipeline.
+For Arabic text, use the built-in [`arabic`](arabic-analyzer.md) analyzer in most cases. The built-in analyzer includes this filter together with standard tokenization, lowercasing, decimal digit normalization, Arabic stemming, and Arabic stop-word removal. Use `arabic_normalization` directly only when you need to build a custom analyzer pipeline.
 
 </div>
 

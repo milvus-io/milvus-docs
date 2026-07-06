@@ -13,7 +13,7 @@ The `decimaldigit` filter is a built-in token filter that converts Unicode decim
 
 <div class="alert note">
 
-For Arabic text, the built-in [`arabic`](../analyzer/arabic-analyzer.md) analyzer already includes the `decimaldigit` filter. Use `decimaldigit` directly when you need digit normalization in a custom analyzer pipeline.
+For Arabic text, the built-in [`arabic`](arabic-analyzer.md) analyzer already includes the `decimaldigit` filter. Use `decimaldigit` directly when you need digit normalization in a custom analyzer pipeline.
 
 </div>
 

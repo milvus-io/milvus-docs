@@ -13,7 +13,7 @@ The `thai` tokenizer segments Thai text into word tokens without relying on spac
 
 <div class="alert note">
 
-For Thai text, use the built-in [`thai`](../analyzer/thai-analyzer.md) analyzer in most cases. The built-in analyzer includes this tokenizer together with lowercasing, decimal digit normalization, and Thai stop-word removal. Use the `thai` tokenizer directly only when you need to build a custom analyzer pipeline.
+For Thai text, use the built-in [`thai`](thai-analyzer.md) analyzer in most cases. The built-in analyzer includes this tokenizer together with lowercasing, decimal digit normalization, and Thai stop-word removal. Use the `thai` tokenizer directly only when you need to build a custom analyzer pipeline.
 
 </div>
 
@@ -27,7 +27,7 @@ analyzer_params = {
 
 The `thai` tokenizer has no configurable parameters.
 
-The tokenizer can work with one or more filters. For example, the following configuration uses the `thai` tokenizer with the [`lowercase`](../filter/lowercase-filter.md) and [`decimaldigit`](../filter/decimaldigit-filter.md) filters:
+The tokenizer can work with one or more filters. For example, the following configuration uses the `thai` tokenizer with the [`lowercase`](lowercase-filter.md) and [`decimaldigit`](decimaldigit-filter.md) filters:
 
 ```python
 analyzer_params = {
@@ -46,10 +46,10 @@ The tokenizer applies the following behavior:
 - **Thai segmentation**: Segments Thai text into word tokens without relying on whitespace.
 - **Whitespace and punctuation filtering**: Filters out whitespace and punctuation-only segments. This differs from the [`icu`](icu-tokenizer.md) tokenizer, which can preserve punctuation and spaces as tokens.
 - **Mixed-script text**: Emits Latin word tokens in mixed Thai/English text.
-- **Tokenizer only**: Does not lowercase tokens, normalize Unicode digits, or remove stop words. Add filters or use the built-in [`thai`](../analyzer/thai-analyzer.md) analyzer for those steps.
+- **Tokenizer only**: Does not lowercase tokens, normalize Unicode digits, or remove stop words. Add filters or use the built-in [`thai`](thai-analyzer.md) analyzer for those steps.
 - **Position semantics**: Uses character-based token positions that include skipped whitespace and punctuation, which keeps phrase and proximity matching behavior consistent with other non-Latin tokenizers.
 
-After defining `analyzer_params`, you can apply the analyzer to a `VARCHAR` field when defining a collection schema. For details, refer to [Example use](../analyzer-overview.md#Example-use).
+After defining `analyzer_params`, you can apply the analyzer to a `VARCHAR` field when defining a collection schema. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
 ## Examples
 

@@ -78,7 +78,7 @@ This analyzer applies the following processing steps:
 - **Stemming**: Uses the `stemmer` filter with `language` set to `arabic`.
 - **Stop-word removal**: Uses the `stop` filter with the built-in `_arabic_` dictionary.
 
-After defining `analyzer_params`, you can apply the analyzer to a `VARCHAR` field when defining a collection schema. For details, refer to [Example use](../analyzer-overview.md#Example-use).
+After defining `analyzer_params`, you can apply the analyzer to a `VARCHAR` field when defining a collection schema. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
 ## Examples
 
