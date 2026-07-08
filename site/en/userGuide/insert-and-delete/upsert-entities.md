@@ -584,7 +584,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/upsert" \
 # }
 ```
 
-## Upsert ARRAY fields in merge mode
+## Upsert ARRAY fields in merge mode | Milvus 2.6.17+
 
 Before Milvus v2.6.17, updating part of an `ARRAY` field required a client-side read-modify-write flow: query the existing array, change it in application code, and upsert the full replacement value. Partial-update operators (`ARRAY_APPEND` and `ARRAY_REMOVE`) let you send only the elements to append or remove, which reduces client-side logic and avoids the extra read before the upsert.
 
