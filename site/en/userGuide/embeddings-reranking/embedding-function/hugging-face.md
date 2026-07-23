@@ -2,7 +2,7 @@
 id: hugging-face.md
 title: "Hugging Face"
 summary: "This topic describes how to use hosted Hugging Face Inference Providers for text embedding in Milvus."
-beta: Milvus 2.6.20+
+beta: Milvus v2.6.20+
 ---
 
 # Hugging Face

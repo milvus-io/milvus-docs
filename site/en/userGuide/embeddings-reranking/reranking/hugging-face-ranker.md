@@ -2,7 +2,7 @@
 id: hugging-face-ranker.md
 title: "Hugging Face Ranker"
 summary: "This topic describes how to rerank Milvus search results with hosted Hugging Face sentence-similarity models."
-beta: Milvus 2.6.20+
+beta: Milvus v2.6.20+
 ---
 
 # Hugging Face Ranker
