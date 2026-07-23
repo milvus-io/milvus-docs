@@ -167,6 +167,7 @@ hugging_face_ranker = Function(
     name="hugging_face_semantic_ranker",
     input_field_names=["document"],
     function_type=FunctionType.RERANK,
+    # highlight-start
     params={
         "reranker": "model",
         "provider": "huggingface",
@@ -176,6 +177,7 @@ hugging_face_ranker = Function(
         "credential": "huggingface_apikey",
         "max_client_batch_size": 32,
     },
+    # highlight-end
 )
 ```
 
@@ -206,6 +208,7 @@ results = client.search(
     anns_field="dense",
     limit=3,
     output_fields=["document"],
+    # highlight-next-line
     ranker=hugging_face_ranker,
     consistency_level="Strong",
 )

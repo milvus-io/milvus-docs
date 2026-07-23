@@ -118,6 +118,7 @@ schema.add_field(
 schema.add_field(
     field_name="dense",
     datatype=DataType.FLOAT_VECTOR,
+    # highlight-next-line
     dim=384,
 )
 ```
@@ -130,6 +131,7 @@ text_embedding_function = Function(
     input_field_names=["document"],
     output_field_names=["dense"],
     function_type=FunctionType.TEXTEMBEDDING,
+    # highlight-start
     params={
         "provider": "huggingface",
         "model_name": "sentence-transformers/all-MiniLM-L6-v2",
@@ -139,6 +141,7 @@ text_embedding_function = Function(
         "truncate": "true",
         "max_client_batch_size": 128,
     },
+    # highlight-end
 )
 
 schema.add_function(text_embedding_function)
