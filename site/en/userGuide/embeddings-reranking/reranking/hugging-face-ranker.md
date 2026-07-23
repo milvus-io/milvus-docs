@@ -27,7 +27,7 @@ Hugging Face Ranker runs after the initial vector search:
 1. **Request similarity scores.** Milvus sends the query as `source_sentence` and the candidate texts as `sentences` through `hf-inference` to the Hugging Face `sentence-similarity` pipeline.
 1. **Rerank the candidates.** Hugging Face returns one score per candidate. Milvus orders candidates from highest to lowest score and returns the reranked results.
 
-### How similarity scores are calculated
+**How similarity scores are calculated**
 
 ![How Hugging Face Ranker calculates similarity scores](../../../../../assets/hugging-face-ranker-scoring.png)
 
