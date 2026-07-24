@@ -1,7 +1,7 @@
 ---
 id: upgrade_milvus_standalone-docker.md
 label: Docker Compose
-order: 1
+order: 2
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Docker Compose.
@@ -12,113 +12,76 @@ title: Upgrade Milvus Standalone with Docker Compose
 
 # Upgrade Milvus Standalone with Docker Compose
 
-This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v{{var.milvus_release_version}} using Docker Compose.
+This guide describes how to upgrade a Milvus 2.6.x standalone deployment to v{{var.milvus_release_version}} with Docker Compose.
 
-## Before you start
+<div class="alert note">
 
-### What's new in v{{var.milvus_release_version}}
+This procedure has been validated with the official Milvus 2.6.20 standalone Docker Compose configuration. The upgrade retained etcd, MinIO, Woodpecker, and the existing data directories, and changed only the Milvus image to `milvusdb/milvus:v{{var.milvus_release_tag}}`.
 
-Upgrading from Milvus 2.5.x to {{var.milvus_release_version}} involves significant architectural changes:
+</div>
 
-- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
-- **New components**: Introduction of Streaming Node for enhanced data processing
-- **Component removal**: `indexNode` removed and consolidated
+## Prerequisites
 
-This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
-
-### Requirements
-
-**System requirements:**
-- Docker and Docker Compose installed
-- Milvus standalone deployed via Docker Compose
-
-**Compatibility requirements:**
-- Milvus v2.6.0-rc1 is **not compatible** with v{{var.milvus_release_version}}. Direct upgrades from release candidates are not supported.
-- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
-- You **must** upgrade to v2.5.16 or later before upgrading to v{{var.milvus_release_version}}.
+- Docker Engine and Docker Compose V2
+- An existing Milvus 2.6.x standalone deployment managed by Docker Compose
+- The Docker Compose file and configuration used for the existing deployment
+- A current backup of Milvus metadata and persistent data
 
 {{fragments/mq_upgrade_limitation.md}}
 
-<div class="alter note">
+<div class="alert warning">
 
-Due to security concerns, Milvus upgrades its MinIO to {{var.minio_release}} with the release of v{{var.milvus_release_version}}.
+Do not replace your current Compose file or change dependency versions as part of this procedure. Keep the existing etcd, object storage, message queue, volumes, and configuration. Update only the Milvus image tag.
+
+This procedure does not validate a downgrade or rollback by changing the Milvus image back to 2.6.x. After v{{var.milvus_release_version}} writes data, an image-only rollback can fail to read the updated state. If the upgrade fails, stop writes and use a recovery plan that restores the pre-upgrade metadata and persistent data backups. Validate the recovery plan in a non-production environment first.
 
 </div>
 
 ## Upgrade process
 
-### Step 1: Upgrade to v2.5.16
+### Step 1: Back up the current configuration
 
-<div class="alert note">
+Save a copy of the current Compose file and any mounted Milvus configuration files:
 
-Skip this step if your standalone deployment is already running v2.5.16 or higher.
+```bash
+cp docker-compose.yml docker-compose-before-upgrade.yml
+```
 
-</div>
+Confirm that the current containers are healthy before starting the upgrade:
 
-1. Edit your existing `docker-compose.yaml` file and update the Milvus image tag to v2.5.16:
+```bash
+docker compose ps
+```
 
-    ```yaml
-    ...
-    standalone:
-      container_name: milvus-standalone
-      image: milvusdb/milvus:v2.5.16
-    ...
-    ```
+### Step 2: Update the Milvus image
 
-2. Apply the upgrade to v2.5.16:
+In the existing Compose file, update only the image for the `standalone` service:
 
-    ```bash
-    docker compose down
-    docker compose up -d
-    ```
+```yaml
+services:
+  standalone:
+    image: milvusdb/milvus:v{{var.milvus_release_tag}}
+```
 
-3. Verify the v2.5.16 upgrade:
+Pull the target image and recreate only the Milvus container:
 
-    ```bash
-    docker compose ps
-    ```
+```bash
+docker compose pull standalone
+docker compose up --detach standalone
+```
 
-### Step 2: Upgrade to v{{var.milvus_release_version}}
-
-Once v2.5.16 is running successfully, upgrade to v{{var.milvus_release_version}}:
-
-1. Edit your existing `docker-compose.yaml` file and update both the Milvus and MinIO image tags:
-
-    ```yaml
-    ...
-    minio:
-      container_name: milvus-minio
-      image: minio/minio:{{var.minio_release}}
-
-    ...
-    standalone:
-      container_name: milvus-standalone
-      image: milvusdb/milvus:v{{var.milvus_release_tag}}
-    ```
-
-2. Apply the final upgrade:
-
-    ```bash
-    docker compose down
-    docker compose up -d
-    ```
+Docker Compose keeps the existing etcd and object-storage containers running and reuses the configured data directories.
 
 ## Verify the upgrade
 
-Confirm your standalone deployment is running the new version:
+Check the container status and the image used by the Milvus container:
 
 ```bash
-# Check container status
 docker compose ps
 
-# Check Milvus version
-docker compose logs standalone | grep "version"
+docker compose images standalone
+
+docker compose logs --tail 100 standalone
 ```
 
-## What's next
-- You might also want to learn how to:
-  - [Scale a Milvus cluster](scaleout.md)
-- If you are ready to deploy your cluster on clouds:
-  - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
-  - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
-  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
+Verify that the `standalone` service is healthy, its image is `milvusdb/milvus:v{{var.milvus_release_tag}}`, and the existing collections remain queryable and searchable. Complete these checks before you enable any v{{var.milvus_release_version}}-specific feature.
