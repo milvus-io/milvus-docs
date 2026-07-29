@@ -254,6 +254,8 @@ To deal with the error prompted during Milvus startup that reads "Read config fa
 ![List Milvus config files](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png)
 
 ​
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus in Docker, you can:
@@ -279,4 +281,3 @@ Having installed Milvus in Docker, you can:
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).
-

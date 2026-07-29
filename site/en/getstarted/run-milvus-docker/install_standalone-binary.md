@@ -102,6 +102,8 @@ For DEB-based systems:
 apt remove milvus
 ```
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus Standalone, you can:

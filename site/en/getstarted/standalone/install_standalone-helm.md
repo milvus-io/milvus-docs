@@ -184,6 +184,8 @@ Delete the cluster, the minikube VM, and all resources you created including per
 $ minikube delete
 ```
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus, you can:

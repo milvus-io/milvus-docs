@@ -54,7 +54,7 @@ If your answers to the questions above are yes, you should use the StructArray.
 
 - **Data types**
 
-    When you create a collection, you can use the Struct type as the data type for the elements in an Array field. However, you cannot add a StructArray to an existing collection, and Milvus does not support using the Struct type as the data type for a collection field.
+    When you create a collection, you can use the Struct type as the data type for the elements in an Array field. Starting from Milvus 3.0.0, you can also add a StructArray field to an existing collection with `add_collection_struct_field()`. For details, refer to [Alter Collection Schema](add-fields-to-an-existing-collection.md#add-structarray-fields--milvus-300). Milvus does not support using the Struct type as the data type for a collection field.
 
     The Structs in an Array field share the same schema, which should be defined when you create the Array field.
 
