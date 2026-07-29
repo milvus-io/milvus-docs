@@ -320,6 +320,8 @@ This deployment uses **Woodpecker** as the message queue, **etcd** for metadata,
 - Object storage: [Configure object storage with Milvus Operator](object_storage_operator.md)
 - Metadata: [Configure etcd with Milvus Operator](meta_storage_operator.md)
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus in Docker, you can:
