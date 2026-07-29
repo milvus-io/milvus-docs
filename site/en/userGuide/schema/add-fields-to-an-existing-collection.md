@@ -137,7 +137,7 @@ After the field is added, entities that already existed in the collection return
 
 Use `add_collection_struct_field()` to add a StructArray field that accepts arrays of Struct elements. To add a StructArray field, do as follows:
 
-1. Create a Struct schema that contains the necessary sub-fields of supported data types. For applicable data types, refer to [StructArray](array-of-structs.md#Data-types).
+1. Create a Struct schema that contains the necessary sub-fields of supported data types. For applicable data types, refer to [StructArray Limits](structarray-limits.md#Supported-subfield-data-types).
 
 1. Reference the Struct schema created above and set the maximum capacity of the field in `add_collection_struct_field()`.
 
