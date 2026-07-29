@@ -128,6 +128,8 @@ This deployment runs **Woodpecker** (embedded, MinIO WAL backend) for messaging,
 - Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
 - Metadata: [etcd](deploy_etcd.md)
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus in Docker, you can:
