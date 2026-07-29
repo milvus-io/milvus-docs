@@ -104,3 +104,4 @@ kubectl get pods --namespace <namespace> \
 ```
 
 Verify that all required workloads are ready, all Milvus components use `v{{var.milvus_release_tag}}`, and your existing collections remain queryable and searchable. Complete these checks before you enable any v{{var.milvus_release_version}}-specific feature.
+{{fragments/storage_v3_upgrade_note.md}}
