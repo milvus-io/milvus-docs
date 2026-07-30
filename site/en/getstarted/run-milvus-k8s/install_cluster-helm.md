@@ -88,7 +88,7 @@ helm install my-release zilliztech/milvus \
 
 <div class="alert note">
 
-When deploying Milvus with Woodpecker in service mode, use **Milvus 3.0.1 or later** together with **Woodpecker v0.1.36 or later**. The Woodpecker client dependency in Milvus 3.0.0 does not include the compaction cleanup that reclaims storage used by obsolete data or the group commit optimization.
+For Woodpecker service mode, we recommend using the upcoming Milvus 3.0.1 or a later release with Woodpecker v0.1.36 or later for compaction cleanup and group commit optimizations.
 
 </div>
 
