@@ -86,6 +86,12 @@ helm install my-release zilliztech/milvus \
 
 **Deploy Milvus cluster:**
 
+<div class="alert note">
+
+When deploying Milvus with Woodpecker in service mode, use **Milvus 3.0.1 or later** together with **Woodpecker v0.1.36 or later**. The Woodpecker client dependency in Milvus 3.0.0 does not include the compaction cleanup that reclaims storage used by obsolete data or the group commit optimization.
+
+</div>
+
 The following command deploys a Milvus cluster with optimized settings for v{{var.milvus_release_version}}, using Woodpecker as the recommended message queue:
 
 ```bash

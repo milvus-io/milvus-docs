@@ -237,6 +237,12 @@ docker restart milvus-standalone
 
 ### Enable Woodpecker service mode for a Milvus Cluster (Helm)
 
+<div class="alert note">
+
+When deploying Milvus with Woodpecker in service mode, use **Milvus 3.0.1 or later** together with **Woodpecker v0.1.36 or later**. The Woodpecker client dependency in Milvus 3.0.0 does not include the compaction cleanup that reclaims storage used by obsolete data or the group commit optimization.
+
+</div>
+
 Woodpecker **service mode** is a **Milvus 3.0** feature. For distributed/cluster deployments, you can run Woodpecker as a **dedicated service** (separate pods) instead of embedded in the streaming node by setting `streaming.woodpecker.embedded=false`:
 
 ```bash
