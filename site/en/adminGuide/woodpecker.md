@@ -239,7 +239,7 @@ docker restart milvus-standalone
 
 <div class="alert note">
 
-For Woodpecker service mode, we recommend using the upcoming Milvus 3.0.1 or a later release with Woodpecker v0.1.36 or later for compaction cleanup and group commit optimizations.
+For Woodpecker service mode, we recommend using the upcoming Milvus 3.0.1 or a later release with Woodpecker v0.1.37 or later for compaction cleanup and group commit optimizations.
 
 </div>
 
