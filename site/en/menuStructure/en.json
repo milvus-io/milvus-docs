@@ -902,6 +902,12 @@
                 "id": "aisaq.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "SVS_VAMANA",
+                "id": "svs-vamana.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
