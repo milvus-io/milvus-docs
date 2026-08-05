@@ -27,7 +27,7 @@ We are excited to announce the release of Milvus v2.6.22! This release improves 
 - Improved DataCoord compaction by enabling storage-version compaction by default ([#51946](https://github.com/milvus-io/milvus/pull/51946))
 - Optimized GIS queries by enabling split and fusion optimization by default, reducing query latency by up to 9.31x in measured cases ([#52009](https://github.com/milvus-io/milvus/pull/52009))
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed incorrect GIS filtering and boost rescore results for queries using offset input, large segments, or growing segments ([#50751](https://github.com/milvus-io/milvus/pull/50751), [#51487](https://github.com/milvus-io/milvus/pull/51487))
 - Fixed incorrect JSON query results and integer precision loss in mixed-type IN, NOT IN, and combined filter expressions ([#51556](https://github.com/milvus-io/milvus/pull/51556), [#51627](https://github.com/milvus-io/milvus/pull/51627))
