@@ -41,7 +41,7 @@ A factory string accepted by upstream Faiss is not automatically supported by Mi
 
 ## How it works
 
-![FAISS index passthrough workflow](../../../../assets/faiss-index-flow.svg)
+![FAISS index passthrough workflow](../../../../assets/faiss-index-flow.png)
 
 For index building, Milvus forwards `faiss_index_name`, the vector field type, the metric, and other build parameters to the Knowhere FAISS adapter. The adapter calls `faiss::index_factory()` for `FLOAT_VECTOR` fields or `faiss::index_binary_factory()` for `BINARY_VECTOR` fields. The resulting object is a native Faiss index managed through the normal Milvus index lifecycle.
 
