@@ -78,8 +78,36 @@ Use the following matrix to choose the right StructArray path.
 
 ## Understand the two search models
 
-| ### EmbeddingList search EmbeddingList search treats the vectors inside a StructArray vector subfield as one embedding list for the parent entity. The query is also an embedding list. Milvus compares the query embedding list with the stored embedding list by using a `MAX_SIM*` metric and returns matching entities. - Query data: embedding list. - Metric family: `MAX_SIM*`. - Result granularity: entity level. - Best for: document-level or page-level late-interaction retrieval. | ### Element-level search Element-level search treats each Struct element as an independent vector-search candidate. Each hit represents a matched element inside the StructArray field, and ungrouped results can expose the element offset. - Query data: regular vector. - Metric family: regular vector metrics. - Result granularity: Struct element level. - Best for: chunk-level, clip-level, or patch-level retrieval. |
-| --- | --- |
+<table>
+  <thead>
+    <tr>
+      <th scope="col"><h3>EmbeddingList search</h3></th>
+      <th scope="col"><h3>Element-level search</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>EmbeddingList search treats the vectors inside a StructArray vector subfield as one embedding list for the parent entity. The query is also an embedding list. Milvus compares the query embedding list with the stored embedding list by using a <code>MAX_SIM*</code> metric and returns matching entities.</p>
+        <ul>
+          <li>Query data: embedding list.</li>
+          <li>Metric family: <code>MAX_SIM*</code>.</li>
+          <li>Result granularity: entity level.</li>
+          <li>Best for: document-level or page-level late-interaction retrieval.</li>
+        </ul>
+      </td>
+      <td>
+        <p>Element-level search treats each Struct element as an independent vector-search candidate. Each hit represents a matched element inside the StructArray field, and ungrouped results can expose the element offset.</p>
+        <ul>
+          <li>Query data: regular vector.</li>
+          <li>Metric family: regular vector metrics.</li>
+          <li>Result granularity: Struct element level.</li>
+          <li>Best for: chunk-level, clip-level, or patch-level retrieval.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="alert note">
 
