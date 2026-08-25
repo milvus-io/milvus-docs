@@ -77,6 +77,11 @@ The examples below use a product collection with brand, category, color, price, 
 
 <summary>Set up the example collection</summary>
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 from pymilvus import DataType, MilvusClient, SearchAggregation, TopHits
 
@@ -219,6 +224,70 @@ search_params = {
 }
 ```
 
+```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530").token("root:Milvus").build());
+String collectionName = "product_search_aggregation";
+
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder().build();
+schema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(true).autoID(false).build());
+schema.addField(AddFieldReq.builder().fieldName("embedding").dataType(DataType.FloatVector).dimension(5).build());
+schema.addField(AddFieldReq.builder().fieldName("name").dataType(DataType.VarChar).maxLength(200).build());
+schema.addField(AddFieldReq.builder().fieldName("brand").dataType(DataType.VarChar).maxLength(100).build());
+schema.addField(AddFieldReq.builder().fieldName("category").dataType(DataType.VarChar).maxLength(100).build());
+schema.addField(AddFieldReq.builder().fieldName("color").dataType(DataType.VarChar).maxLength(50).build());
+schema.addField(AddFieldReq.builder().fieldName("price").dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName("rating").dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName("in_stock").dataType(DataType.Bool).build());
+
+client.createCollection(CreateCollectionReq.builder().collectionName(collectionName).collectionSchema(schema)
+        .indexParams(Collections.singletonList(IndexParam.builder().fieldName("embedding")
+                .indexType(IndexParam.IndexType.AUTOINDEX).metricType(IndexParam.MetricType.COSINE).build()))
+        .build());
+
+List<JsonObject> data = Arrays.asList(
+        product(1, new float[]{0.12f, 0.42f, 0.18f, 0.66f, 0.31f}, "Runner A1", "Brand A", "running_shoes", "black", 129.99, 4.7, true),
+        product(2, new float[]{0.10f, 0.39f, 0.20f, 0.61f, 0.29f}, "Trail A2", "Brand A", "running_shoes", "blue", 139.99, 4.6, true),
+        product(3, new float[]{0.14f, 0.44f, 0.19f, 0.68f, 0.33f}, "Runner B1", "Brand B", "running_shoes", "white", 159.99, 4.8, true),
+        product(4, new float[]{0.16f, 0.41f, 0.22f, 0.62f, 0.30f}, "Runner C1", "Brand C", "running_shoes", "red", 119.99, 4.4, false),
+        product(5, new float[]{0.48f, 0.20f, 0.59f, 0.15f, 0.71f}, "Jacket A1", "Brand A", "jackets", "black", 99.99, 4.5, true),
+        product(6, new float[]{0.45f, 0.18f, 0.55f, 0.17f, 0.69f}, "Jacket B1", "Brand B", "jackets", "blue", 89.99, 4.3, true),
+        product(7, new float[]{0.09f, 0.38f, 0.17f, 0.60f, 0.27f}, "Runner A3", "Brand A", "running_shoes", "black", 159.99, 4.8, true),
+        product(8, new float[]{0.13f, 0.43f, 0.21f, 0.65f, 0.32f}, "Runner A4", "Brand A", "running_shoes", "black", 149.99, 4.9, true));
+client.insert(InsertReq.builder().collectionName(collectionName).data(data).build());
+
+List<Float> queryVector = Arrays.asList(0.11f, 0.40f, 0.19f, 0.64f, 0.30f);
+
+private static JsonObject product(long id, float[] embedding, String name, String brand,
+                                  String category, String color, double price, double rating,
+                                  boolean inStock) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", id);
+    row.add("embedding", new Gson().toJsonTree(embedding));
+    row.addProperty("name", name);
+    row.addProperty("brand", brand);
+    row.addProperty("category", category);
+    row.addProperty("color", color);
+    row.addProperty("price", price);
+    row.addProperty("rating", rating);
+    row.addProperty("in_stock", inStock);
+    return row;
+}
+```
+
 </details>
 
 The setup above configures `COSINE` for both the vector index and the search parameters. Therefore, later examples use `{"_score": "desc"}` to place higher cosine similarity first. For a distance metric such as `L2`, use `{"_score": "asc"}`.
@@ -230,6 +299,11 @@ Use this pattern when you need to compare groups of retrieved entities using cal
 If your goal is only to improve result diversity by returning one or more entities per field value, use [Grouping Search](grouping-search.md) instead.
 
 The following configuration creates up to three brand buckets, calculates metrics for each bucket, and sorts the buckets by average price:
+
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
 
 ```python
 aggregation = SearchAggregation(
@@ -254,7 +328,33 @@ aggregation = SearchAggregation(
 )
 ```
 
+```java
+import io.milvus.v2.service.vector.request.aggregation.AggDirection;
+import io.milvus.v2.service.vector.request.aggregation.MetricOps;
+import io.milvus.v2.service.vector.request.aggregation.MetricSpec;
+import io.milvus.v2.service.vector.request.aggregation.OrderSpec;
+import io.milvus.v2.service.vector.request.aggregation.SearchAggregation;
+import io.milvus.v2.service.vector.request.aggregation.SortSpec;
+import io.milvus.v2.service.vector.request.aggregation.TopHitsSpec;
+import java.util.Collections;
+
+SearchAggregation aggregation = SearchAggregation.builder()
+        .fields(Collections.singletonList("brand"))
+        .size(3)
+        .addMetric("product_count", MetricSpec.builder().op(MetricOps.COUNT).fieldName("*").build())
+        .addMetric("avg_price", MetricSpec.builder().op(MetricOps.AVG).fieldName("price").build())
+        .addMetric("min_price", MetricSpec.builder().op(MetricOps.MIN).fieldName("price").build())
+        .addOrder(OrderSpec.builder().key("avg_price").direction(AggDirection.DESC).build())
+        .addOrder(OrderSpec.builder().key("_key").direction(AggDirection.ASC).build())
+        .build();
+```
+
 Pass the object to the `search_aggregation` parameter of `MilvusClient.search()`:
+
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
 
 ```python
 result = client.search(
@@ -274,6 +374,20 @@ result = client.search(
     # highlight-next-line
     search_aggregation=aggregation,
 )
+```
+
+```java
+SearchResp result = client.search(SearchReq.builder()
+        .collectionName(collectionName)
+        .data(Collections.singletonList(new FloatVec(queryVector)))
+        .annsField("embedding")
+        .limit(10)
+        .searchParams(Collections.singletonMap("metric_type", "COSINE"))
+        .outputFields(Arrays.asList("name", "brand", "category", "color", "price", "rating", "in_stock"))
+        .searchAggregation(aggregation)
+        .build());
+
+List<AggregationBucket> buckets = result.getAggregationBuckets().get(0);
 ```
 
 When `search_aggregation` is set, PyMilvus returns no ordinary entity hits in `result[0]`. Read the bucket response from `result.agg_buckets[0]` instead. The `output_fields` parameter controls which scalar fields appear in each returned `AggregationHit.fields` mapping; Milvus can still use metric-source and sort fields that are not listed in `output_fields`.
@@ -383,6 +497,11 @@ Each `order` entry maps a key to `"asc"` or `"desc"`. Milvus evaluates multiple 
 
 To sort buckets by vector match quality, first calculate a bucket-level metric from `_score`, and then use the metric alias in `order`. You cannot use `_score` directly as a bucket-order key because each bucket can contain multiple entity scores. For example, with `COSINE` or `IP`:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 aggregation = SearchAggregation(
     fields=["brand"],
@@ -390,6 +509,15 @@ aggregation = SearchAggregation(
     metrics={"max_score": {"max": "_score"}},
     order=[{"max_score": "desc"}],
 )
+```
+
+```java
+SearchAggregation aggregation = SearchAggregation.builder()
+        .fields(Collections.singletonList("brand"))
+        .size(3)
+        .addMetric("max_score", MetricSpec.builder().op(MetricOps.MAX).fieldName("_score").build())
+        .addOrder(OrderSpec.builder().key("max_score").direction(AggDirection.DESC).build())
+        .build();
 ```
 
 With `L2`, calculate the minimum `_score` value and sort the metric alias in ascending order so that buckets with the lowest distance come first.
@@ -402,6 +530,11 @@ With `L2`, calculate the minimum `_score` value and sort the metric alias in asc
 
 To create a composite bucket key, pass multiple field names in the same list:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 aggregation = SearchAggregation(
     # highlight-start
@@ -410,6 +543,13 @@ aggregation = SearchAggregation(
     # highlight-end
     size=6,
 )
+```
+
+```java
+SearchAggregation aggregation = SearchAggregation.builder()
+        .fields(Arrays.asList("brand", "color"))
+        .size(6)
+        .build();
 ```
 
 This configuration can produce keys such as `(Brand A, black)`, `(Brand A, blue)`, and `(Brand B, white)`. Two entities share a bucket only when both values match. Milvus preserves the list order, so `brand` is the first key component and `color` is the second. When `_key` is used in `order`, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.
@@ -428,6 +568,11 @@ Include representative entities when the application needs to show actual produc
 
 Configure `TopHits` as follows:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 aggregation = SearchAggregation(
     fields=["brand"],
@@ -445,6 +590,14 @@ aggregation = SearchAggregation(
     ),
     # highlight-end
 )
+```
+
+```java
+SearchAggregation aggregation = SearchAggregation.builder().fields(Collections.singletonList("brand")).size(3)
+        .topHits(TopHitsSpec.builder().size(2)
+                .addSort(SortSpec.builder().fieldName("rating").direction(AggDirection.DESC).build())
+                .addSort(SortSpec.builder().fieldName("_score").direction(AggDirection.DESC).build()).build())
+        .build();
 ```
 
 <details>
@@ -534,6 +687,11 @@ Each level can independently use multiple fields. For example, using `fields=["b
 
 The following configuration implements this hierarchy:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 aggregation = SearchAggregation(
     fields=["category"],
@@ -560,6 +718,19 @@ aggregation = SearchAggregation(
     ),
     # highlight-end
 )
+```
+
+```java
+SearchAggregation aggregation = SearchAggregation.builder().fields(Collections.singletonList("category")).size(2)
+        .addMetric("product_count", MetricSpec.builder().op(MetricOps.COUNT).fieldName("*").build())
+        .addMetric("avg_price", MetricSpec.builder().op(MetricOps.AVG).fieldName("price").build())
+        .addOrder(OrderSpec.builder().key("product_count").direction(AggDirection.DESC).build())
+        .subAggregation(SearchAggregation.builder().fields(Collections.singletonList("brand")).size(3)
+                .addMetric("brand_count", MetricSpec.builder().op(MetricOps.COUNT).fieldName("*").build())
+                .addMetric("avg_rating", MetricSpec.builder().op(MetricOps.AVG).fieldName("rating").build())
+                .addOrder(OrderSpec.builder().key("avg_rating").direction(AggDirection.DESC).build())
+                .topHits(TopHitsSpec.builder().size(2).addSort(SortSpec.builder().fieldName("rating").direction(AggDirection.DESC).build()).build()).build())
+        .build();
 ```
 
 <details>
