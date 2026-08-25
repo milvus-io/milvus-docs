@@ -80,6 +80,7 @@ The examples below use a product collection with brand, category, color, price, 
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -288,6 +289,51 @@ private static JsonObject product(long id, float[] embedding, String name, Strin
 }
 ```
 
+```javascript
+const { DataType, MilvusClient } = require('@zilliz/milvus2-sdk-node');
+
+const client = new MilvusClient({
+  address: 'http://localhost:19530', username: 'root', password: 'Milvus',
+});
+const collectionName = 'product_search_aggregation';
+
+if ((await client.hasCollection({ collection_name: collectionName })).value) {
+  await client.dropCollection({ collection_name: collectionName });
+}
+await client.createCollection({
+  collection_name: collectionName,
+  consistency_level: 'Session',
+  fields: [
+    { name: 'id', data_type: DataType.Int64, is_primary_key: true, autoID: false },
+    { name: 'embedding', data_type: DataType.FloatVector, dim: 5 },
+    { name: 'name', data_type: DataType.VarChar, max_length: 200 },
+    { name: 'brand', data_type: DataType.VarChar, max_length: 100 },
+    { name: 'category', data_type: DataType.VarChar, max_length: 100 },
+    { name: 'color', data_type: DataType.VarChar, max_length: 50 },
+    { name: 'price', data_type: DataType.Double },
+    { name: 'rating', data_type: DataType.Double },
+    { name: 'in_stock', data_type: DataType.Bool },
+  ],
+});
+
+const data = [
+  { id: 1, embedding: [0.12, 0.42, 0.18, 0.66, 0.31], name: 'Runner A1', brand: 'Brand A', category: 'running_shoes', color: 'black', price: 129.99, rating: 4.7, in_stock: true },
+  { id: 2, embedding: [0.10, 0.39, 0.20, 0.61, 0.29], name: 'Trail A2', brand: 'Brand A', category: 'running_shoes', color: 'blue', price: 139.99, rating: 4.6, in_stock: true },
+  { id: 3, embedding: [0.14, 0.44, 0.19, 0.68, 0.33], name: 'Runner B1', brand: 'Brand B', category: 'running_shoes', color: 'white', price: 159.99, rating: 4.8, in_stock: true },
+  { id: 4, embedding: [0.16, 0.41, 0.22, 0.62, 0.30], name: 'Runner C1', brand: 'Brand C', category: 'running_shoes', color: 'red', price: 119.99, rating: 4.4, in_stock: false },
+  { id: 5, embedding: [0.48, 0.20, 0.59, 0.15, 0.71], name: 'Jacket A1', brand: 'Brand A', category: 'jackets', color: 'black', price: 99.99, rating: 4.5, in_stock: true },
+  { id: 6, embedding: [0.45, 0.18, 0.55, 0.17, 0.69], name: 'Jacket B1', brand: 'Brand B', category: 'jackets', color: 'blue', price: 89.99, rating: 4.3, in_stock: true },
+  { id: 7, embedding: [0.09, 0.38, 0.17, 0.60, 0.27], name: 'Runner A3', brand: 'Brand A', category: 'running_shoes', color: 'black', price: 159.99, rating: 4.8, in_stock: true },
+  { id: 8, embedding: [0.13, 0.43, 0.21, 0.65, 0.32], name: 'Runner A4', brand: 'Brand A', category: 'running_shoes', color: 'black', price: 149.99, rating: 4.9, in_stock: true },
+];
+await client.insert({ collection_name: collectionName, data });
+await client.createIndex({ collection_name: collectionName, field_name: 'embedding', index_type: 'AUTOINDEX', metric_type: 'COSINE' });
+await client.loadCollectionSync({ collection_name: collectionName });
+
+const queryVector = [0.11, 0.40, 0.19, 0.64, 0.30];
+const searchParams = { metric_type: 'COSINE', params: {} };
+```
+
 </details>
 
 The setup above configures `COSINE` for both the vector index and the search parameters. Therefore, later examples use `{"_score": "desc"}` to place higher cosine similarity first. For a distance metric such as `L2`, use `{"_score": "asc"}`.
@@ -303,6 +349,7 @@ The following configuration creates up to three brand buckets, calculates metric
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -349,11 +396,28 @@ SearchAggregation aggregation = SearchAggregation.builder()
         .build();
 ```
 
+```javascript
+const aggregation = {
+  fields: ['brand'],
+  size: 3,
+  metrics: {
+    product_count: { op: 'count', field_name: '*' },
+    avg_price: { op: 'avg', field_name: 'price' },
+    min_price: { op: 'min', field_name: 'price' },
+  },
+  order: [
+    { key: 'avg_price', direction: 'desc' },
+    { key: '_key', direction: 'asc' },
+  ],
+};
+```
+
 Pass the object to the `search_aggregation` parameter of `MilvusClient.search()`:
 
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -388,6 +452,20 @@ SearchResp result = client.search(SearchReq.builder()
         .build());
 
 List<AggregationBucket> buckets = result.getAggregationBuckets().get(0);
+```
+
+```javascript
+const result = await client.search({
+  collection_name: collectionName,
+  data: queryVector,
+  anns_field: 'embedding',
+  limit: 10,
+  ...searchParams,
+  output_fields: ['name', 'brand', 'category', 'color', 'price', 'rating', 'in_stock'],
+  search_aggregation: aggregation,
+});
+
+const buckets = result.agg_buckets;
 ```
 
 When `search_aggregation` is set, PyMilvus returns no ordinary entity hits in `result[0]`. Read the bucket response from `result.agg_buckets[0]` instead. The `output_fields` parameter controls which scalar fields appear in each returned `AggregationHit.fields` mapping; Milvus can still use metric-source and sort fields that are not listed in `output_fields`.
@@ -500,6 +578,7 @@ To sort buckets by vector match quality, first calculate a bucket-level metric f
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -520,6 +599,15 @@ SearchAggregation aggregation = SearchAggregation.builder()
         .build();
 ```
 
+```javascript
+const aggregation = {
+  fields: ['brand'],
+  size: 3,
+  metrics: { max_score: { op: 'max', field_name: '_score' } },
+  order: [{ key: 'max_score', direction: 'desc' }],
+};
+```
+
 With `L2`, calculate the minimum `_score` value and sort the metric alias in ascending order so that buckets with the lowest distance come first.
 
 </details>
@@ -533,6 +621,7 @@ To create a composite bucket key, pass multiple field names in the same list:
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -550,6 +639,13 @@ SearchAggregation aggregation = SearchAggregation.builder()
         .fields(Arrays.asList("brand", "color"))
         .size(6)
         .build();
+```
+
+```javascript
+const aggregation = {
+  fields: ['brand', 'color'],
+  size: 6,
+};
 ```
 
 This configuration can produce keys such as `(Brand A, black)`, `(Brand A, blue)`, and `(Brand B, white)`. Two entities share a bucket only when both values match. Milvus preserves the list order, so `brand` is the first key component and `color` is the second. When `_key` is used in `order`, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.
@@ -571,6 +667,7 @@ Configure `TopHits` as follows:
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -598,6 +695,20 @@ SearchAggregation aggregation = SearchAggregation.builder().fields(Collections.s
                 .addSort(SortSpec.builder().fieldName("rating").direction(AggDirection.DESC).build())
                 .addSort(SortSpec.builder().fieldName("_score").direction(AggDirection.DESC).build()).build())
         .build();
+```
+
+```javascript
+const aggregation = {
+  fields: ['brand'],
+  size: 3,
+  top_hits: {
+    size: 2,
+    sort: [
+      { field_name: 'rating', direction: 'desc' },
+      { field_name: '_score', direction: 'desc' },
+    ],
+  },
+};
 ```
 
 <details>
@@ -690,6 +801,7 @@ The following configuration implements this hierarchy:
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -731,6 +843,31 @@ SearchAggregation aggregation = SearchAggregation.builder().fields(Collections.s
                 .addOrder(OrderSpec.builder().key("avg_rating").direction(AggDirection.DESC).build())
                 .topHits(TopHitsSpec.builder().size(2).addSort(SortSpec.builder().fieldName("rating").direction(AggDirection.DESC).build()).build()).build())
         .build();
+```
+
+```javascript
+const aggregation = {
+  fields: ['category'],
+  size: 2,
+  metrics: {
+    product_count: { op: 'count', field_name: '*' },
+    avg_price: { op: 'avg', field_name: 'price' },
+  },
+  order: [{ key: 'product_count', direction: 'desc' }],
+  sub_aggregation: {
+    fields: ['brand'],
+    size: 3,
+    metrics: {
+      brand_count: { op: 'count', field_name: '*' },
+      avg_rating: { op: 'avg', field_name: 'rating' },
+    },
+    order: [{ key: 'avg_rating', direction: 'desc' }],
+    top_hits: {
+      size: 2,
+      sort: [{ field_name: 'rating', direction: 'desc' }],
+    },
+  },
+};
 ```
 
 <details>
