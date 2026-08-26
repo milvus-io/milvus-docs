@@ -21,6 +21,7 @@ Pattern matching expressions are written in the `filter` parameter. For example,
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -53,6 +54,19 @@ QueryResp res = client.query(QueryReq.builder()
         .filter("message =~ \"E[0-9]{4}\"")
         .outputFields(Arrays.asList("message", "severity"))
         .build());
+```
+
+```javascript
+const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
+
+const client = new MilvusClient({ address: 'http://localhost:19530' });
+
+const res = await client.query({
+  collection_name: 'log_events',
+  // highlight-next-line
+  filter: 'message =~ "E[0-9]{4}"',
+  output_fields: ['message', 'severity'],
+});
 ```
 
 The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in Milvus operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
@@ -142,6 +156,7 @@ For example:
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -150,6 +165,10 @@ filter = r'filename =~ r"\.json$"'
 
 ```java
 String filter = "filename =~ r\"\\.json$\"";
+```
+
+```javascript
+const filter = 'filename =~ r"\\.json$"';
 ```
 
 This matches strings that end with `.json`, such as `report.json`.
@@ -176,6 +195,7 @@ To match one of several words, use alternation with `|`:
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -186,11 +206,16 @@ filter = 'message =~ "error|failed|timeout"'
 String filter = "message =~ \"error|failed|timeout\"";
 ```
 
-When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python or Java source string:
+```javascript
+const filter = 'message =~ "error|failed|timeout"';
+```
+
+When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python, Java, or Node.js source string:
 
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -199,6 +224,10 @@ filter = 'email =~ "@gmail\\.com$"'
 
 ```java
 String filter = "email =~ \"@gmail\\.com$\"";
+```
+
+```javascript
+const filter = 'email =~ "@gmail\\.com$"';
 ```
 
 Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, Milvus rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
@@ -212,6 +241,7 @@ Milvus regex matching uses substring semantics. The pattern does not need to mat
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -222,11 +252,16 @@ filter = 'message =~ "E[0-9]{4}"'
 String filter = "message =~ \"E[0-9]{4}\"";
 ```
 
+```javascript
+const filter = 'message =~ "E[0-9]{4}"';
+```
+
 To match the entire field value, use the `^` and `$` anchors:
 
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -239,6 +274,11 @@ filter = 'code =~ "^E[0-9]{4}$"'
 String filter = "code =~ \"^E[0-9]{4}$\"";
 ```
 
+```javascript
+// Match only values that are exactly E followed by four digits
+const filter = 'code =~ "^E[0-9]{4}$"';
+```
+
 **Nullable VARCHAR fields**
 
 Regex filters do not match null values. This applies to both `=~` and `!~`. If you want to exclude a regex pattern but keep null values, explicitly add `OR field IS NULL`:
@@ -246,6 +286,7 @@ Regex filters do not match null values. This applies to both `=~` and `!~`. If y
 <div class="multipleCode">
   <a href="#python">Python</a>
   <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -254,6 +295,10 @@ filter = 'message !~ "^DEBUG" OR message IS NULL'
 
 ```java
 String filter = "message !~ \"^DEBUG\" OR message IS NULL";
+```
+
+```javascript
+const filter = 'message !~ "^DEBUG" OR message IS NULL';
 ```
 
 **JSON paths**
