@@ -88,13 +88,21 @@ fmt.Println(res)
 ```javascript
 const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
 
-const client = new MilvusClient({ address: 'http://localhost:19530' });
+async function main() {
+  const client = new MilvusClient({ address: 'http://localhost:19530' });
 
-const res = await client.query({
-  collection_name: 'log_events',
-  // highlight-next-line
-  filter: 'message =~ "E[0-9]{4}"',
-  output_fields: ['message', 'severity'],
+  const res = await client.query({
+    collection_name: 'log_events',
+    // highlight-next-line
+    filter: 'message =~ "E[0-9]{4}"',
+    output_fields: ['message', 'severity'],
+  });
+  console.log(res);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
 });
 ```
 
