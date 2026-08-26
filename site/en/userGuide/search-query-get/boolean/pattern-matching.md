@@ -18,6 +18,11 @@ This page describes pattern matching in scalar filter expressions used by `query
 
 Pattern matching expressions are written in the `filter` parameter. For example, the following query matches log messages that contain an error code such as `E1001`:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 from pymilvus import MilvusClient
 
@@ -29,6 +34,25 @@ res = client.query(
     filter='message =~ "E[0-9]{4}"',
     output_fields=["message", "severity"],
 )
+```
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import java.util.Arrays;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+
+QueryResp res = client.query(QueryReq.builder()
+        .collectionName("log_events")
+        // highlight-next-line
+        .filter("message =~ \"E[0-9]{4}\"")
+        .outputFields(Arrays.asList("message", "severity"))
+        .build());
 ```
 
 The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in Milvus operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
@@ -115,13 +139,22 @@ Raw string literals are recommended for regex patterns that contain backslashes.
 
 For example:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
-filter = 'message =~ r"\d{4}-\d{2}-\d{2}"'
+filter = r'filename =~ r"\.json$"'
 ```
 
-This matches strings that contain a date-like value such as `2026-07-01`.
+```java
+String filter = "filename =~ r\"\\.json$\"";
+```
 
-Without a raw string, ordinary string literals process escape sequences before the regex pattern is evaluated, so patterns such as `\d`, `\s`, or escaped literal characters may require additional backslashes.
+This matches strings that end with `.json`, such as `report.json`.
+
+Without a raw string in the Milvus filter expression, ordinary string literals process escape sequences before the regex pattern is evaluated. Escaped literal characters may therefore require additional backslashes in the host-language string.
 
 ### Common regex patterns
 
@@ -140,14 +173,32 @@ The following examples use common RE2 syntax in Milvus filter expressions. For c
 
 To match one of several words, use alternation with `|`:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 filter = 'message =~ "error|failed|timeout"'
 ```
 
-When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python filter string:
+```java
+String filter = "message =~ \"error|failed|timeout\"";
+```
+
+When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python or Java source string:
+
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
 
 ```python
 filter = 'email =~ "@gmail\\.com$"'
+```
+
+```java
+String filter = "email =~ \"@gmail\\.com$\"";
 ```
 
 Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, Milvus rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
@@ -158,23 +209,51 @@ Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax tha
 
 Milvus regex matching uses substring semantics. The pattern does not need to match the entire field value. For example, the following filter matches both `E1001` and `failed with E1001 after retry`:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 filter = 'message =~ "E[0-9]{4}"'
 ```
 
+```java
+String filter = "message =~ \"E[0-9]{4}\"";
+```
+
 To match the entire field value, use the `^` and `$` anchors:
+
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
 
 ```python
 # Match only values that are exactly E followed by four digits
 filter = 'code =~ "^E[0-9]{4}$"'
 ```
 
+```java
+// Match only values that are exactly E followed by four digits
+String filter = "code =~ \"^E[0-9]{4}$\"";
+```
+
 **Nullable VARCHAR fields**
 
 Regex filters do not match null values. This applies to both `=~` and `!~`. If you want to exclude a regex pattern but keep null values, explicitly add `OR field IS NULL`:
 
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 filter = 'message !~ "^DEBUG" OR message IS NULL'
+```
+
+```java
+String filter = "message !~ \"^DEBUG\" OR message IS NULL";
 ```
 
 **JSON paths**
