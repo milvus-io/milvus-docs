@@ -10,7 +10,7 @@ A range search improves search result relevancy by restricting the distance or s
 
 ## Overview
 
-When executing a Range Search request, Milvus uses the most similar vectors to the query vector from the ANN Search results as the center, with the **radius** specified in the Search request as the outer circle's radius, and the **range_filter** as the inner circle's radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the **range_filter** can be set to **0**, indicating that all entities within the specified similarity score (radius) will be returned.
+When executing a Range Search request, Milvus uses the most similar vectors to the query vector from the ANN Search results as the center, with the **radius** specified in the Search request as the inner circle's radius, and the **range_filter** as the outer circle's radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the **range_filter** can be set to **0**, indicating that all entities within the specified similarity score (radius) will be returned.
 
 ![Range Search](../../../../assets/range-search.png)
 
