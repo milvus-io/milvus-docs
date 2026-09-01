@@ -3061,6 +3061,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "SpiceDB",
+            "id": "integrate_with_spicedb.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
