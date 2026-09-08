@@ -10,7 +10,9 @@ Milvus can deduplicate a retried request when the client tags it with an idempot
 
 <div class="alert note">
 
-Sending an idempotency key requires a client that supports it: pymilvus with the `idempotency_key` argument, or a Go SDK with `WithIdempotencyKey`. An older client silently sends no key, and the request behaves as a normal, non-idempotent one.
+Sending an idempotency key requires a client that supports it: pymilvus with the `idempotency_key` argument, or a Go SDK with `WithIdempotencyKey`. Support is pending release in both SDKs; this page will name the minimum versions once they ship.
+
+An older client silently sends no key. On a collection where idempotent insert is off, its requests are ordinary non-idempotent ones. On a collection where idempotent insert is on, its inserts still get an automatic content-derived key, so they are deduplicated like any other keyless insert. See Explicit and automatic keys.
 
 </div>
 
@@ -67,7 +69,7 @@ An operation not in this table carries no idempotency guarantee. Over REST and i
 ## Rules that hold everywhere
 
 - **One key per logical request.** A good key names the unit of work, such as `<pipeline>-<date>-<batch>`, or a UUID you store next to the work item before you send the request.
-- **Never reuse a key for a different request.** Milvus does not compare the retry's body against the original. A reused key returns the old result and silently skips the new work.
+- **Never reuse a key for a different request.** Milvus does not compare the retry's body against the original and does not reject a reused key. A bulk import returns the original job. An insert can silently write part of the new rows; see the insert case below.
 - **Retry with the same key.** A rejected retry is not a reason to mint a new key. The exceptions are listed per operation below.
 - **At most 256 bytes, printable ASCII only.** Milvus rejects anything else on every endpoint with error code `1100` (invalid parameter). The bound is `streaming.idempotency.maxKeyLength`.
 - **Do not put secrets in the key.** Milvus stores it verbatim in the write-ahead log and in metadata.
@@ -145,7 +147,7 @@ The window is measured in **bytes of writes, not in time**. Each shard keeps up 
 
 **The global switch was turned off.** Turning off `streaming.idempotency.enabled` and restarting discards every stored insert record on every shard. Re-enabling starts from an empty window, so a retry of an insert sent before the toggle is written as a fresh insert.
 
-**The key was reused with a different payload.** Milvus returns the original result. If the retry's primary key shape does not match the original, the insert fails with "idempotency key was reused with a different payload". Either way, the new rows are not written.
+**The key was reused with a different payload.** The call reports success and returns the original result, but the write is not necessarily a no-op. Deduplication is per shard, so any shard the original insert never reached has no record of the key and applies the new rows. A reused key can therefore leave part of the new batch written while the response describes the original one, and under autoID those rows are not findable by the primary keys you were handed. Milvus raises "idempotency key was reused with a different payload" only when the original result cannot be mapped onto the new request, for example a different primary key type, or fewer rows than the original. Give every logical request its own key.
 
 **Renames and automatic keys.** An automatic key is derived from names, so a retry after a rename derives a different key and is written as a fresh insert. An explicit key is unaffected.
 
