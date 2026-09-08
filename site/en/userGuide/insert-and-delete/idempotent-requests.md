@@ -8,6 +8,12 @@ summary: "Send an idempotency key so that a retried insert or bulk import is app
 
 Milvus can deduplicate a retried request when the client tags it with an idempotency key. A retry that carries the same key as an earlier request returns the earlier request's result instead of doing the work again.
 
+<div class="alert note">
+
+Sending an idempotency key requires a client that supports it: pymilvus with the `idempotency_key` argument, or a Go SDK with `WithIdempotencyKey`. An older client silently sends no key, and the request behaves as a normal, non-idempotent one.
+
+</div>
+
 ## Why you need it
 
 A request can succeed while its response is lost: the client times out, the connection drops, or the client crashes before it saves the response. The client cannot tell "not done" from "done, response lost". Without an idempotency key, retrying does the work a **second time** and not retrying may lose it. With an idempotency key the retry resolves to the **original** request and returns its result.
@@ -21,7 +27,7 @@ Attach the key to the request as transport metadata. It is not part of the reque
 | REST      | HTTP header      | `Idempotency-Key` |
 | gRPC      | Request metadata | `idempotency-key` |
 
-Milvus reads the key the same way on both transports. A request without a key behaves exactly as before.
+Milvus reads the key the same way on both transports. On a collection where idempotency is off, a request without a key behaves exactly as before. On a collection with idempotent insert enabled, a keyless insert is deduplicated by its own content, as described under Explicit and automatic keys.
 
 ### pymilvus
 
@@ -56,14 +62,14 @@ curl -X POST "http://localhost:19530/v2/vectordb/<endpoint>" \
 | Insert      | `client.insert(..., idempotency_key=...)` | Shard |
 | Bulk import | `POST /v2/vectordb/jobs/import/create`, `bulk_import(idempotency_key=...)` | Collection |
 
-An operation not in this table carries no idempotency guarantee. It accepts a well-formed key and ignores it.
+An operation not in this table carries no idempotency guarantee. Over REST and in pymilvus it accepts a well-formed key and ignores it. The Go SDK is stricter: passing a key to `Upsert` returns a parameter error before the request is sent.
 
 ## Rules that hold everywhere
 
 - **One key per logical request.** A good key names the unit of work, such as `<pipeline>-<date>-<batch>`, or a UUID you store next to the work item before you send the request.
 - **Never reuse a key for a different request.** Milvus does not compare the retry's body against the original. A reused key returns the old result and silently skips the new work.
 - **Retry with the same key.** A rejected retry is not a reason to mint a new key. The exceptions are listed per operation below.
-- **Keep it under 256 bytes, printable ASCII only.** Milvus rejects anything else on every endpoint with error code `1100` (invalid parameter).
+- **At most 256 bytes, printable ASCII only.** Milvus rejects anything else on every endpoint with error code `1100` (invalid parameter). The bound is `streaming.idempotency.maxKeyLength`.
 - **Do not put secrets in the key.** Milvus stores it verbatim in the write-ahead log and in metadata.
 
 ## Insert
@@ -117,19 +123,27 @@ The collection holds the row once. A client that stores the returned IDs sees st
 
 ### Explicit and automatic keys
 
-Send a key the same way as for any other operation. If you send none, Milvus derives one from the request itself: the database, collection, partition, and the row data as the client sent them. A byte-identical retry therefore deduplicates on its own, with no client change. Send an explicit key when your retry may differ in row order, encoding, or field order, or when you want to control the key yourself.
+Send a key the same way as for any other operation. If you send none, Milvus derives one from the request itself: the database, collection, partition, and the row data as the client sent them. A byte-identical retry therefore deduplicates on its own, with no client change. Field order does not matter, because Milvus sorts fields before hashing them; row order and encoding do. Send an explicit key when your retry may differ in those, or when you want to control the key yourself.
+
+<div class="alert note">
+
+**Two distinct inserts with the same payload are treated as one.** The automatic key is a hash of the content, so it cannot tell a retry apart from a second, intentional insert of identical rows. On a collection with idempotent insert enabled, the second one returns the first one's result, including its primary keys, and writes nothing. No error is raised. If your workload legitimately inserts identical payloads more than once, give each insert its own explicit key, or leave the collection property off.
+
+</div>
 
 ### Scope and window
 
 The key deduplicates per **shard**. A single insert fans out to one write per shard, and each shard keeps its own record. On a retry, shards that already hold the key return the original result and shards that never received it apply the write. That is the intended behavior after a partial failure.
 
-The window is measured in **bytes of writes, not in time**. Each shard keeps up to `streaming.idempotency.maxBytesPerWindow` of recent insert records in memory, backed by a durable copy that survives a restart or a failover. On a busy shard the window may span minutes; on a quiet one it may span days. There is no time limit, so an outage does not empty the window, which is exactly when a resuming client needs it.
+The window is measured in **bytes of writes, not in time**. Each shard keeps up to `streaming.idempotency.maxBytesPerWindow` of recent insert records in memory, backed by a durable copy that survives a restart or a failover. On a busy shard the window may span minutes; on a quiet one it may span days. There is no time limit, so an outage does not empty the window, which is exactly when a resuming client needs it. Turning the feature off does empty it, as described below.
 
 ### Cases to know
 
 **The collection was emptied.** `DropCollection`, `TruncateCollection`, and `DropPartition` clear the affected shard's records. A retry after one of them is a fresh write, which is correct, since the rows it would have deduplicated against are gone. `DropPartition` clears the whole shard, not only the dropped partition.
 
-**The original insert failed.** Nothing landed and the key was released. Retry with the same key and it writes normally.
+**The original insert failed.** In the usual case nothing landed, the key was released, and a retry with the same key writes normally. One exception: some message queues can persist a write while still reporting an error, so a retry after such a failure can write the rows a second time. That is the same outcome a retry without an idempotency key would produce.
+
+**The global switch was turned off.** Turning off `streaming.idempotency.enabled` and restarting discards every stored insert record on every shard. Re-enabling starts from an empty window, so a retry of an insert sent before the toggle is written as a fresh insert.
 
 **The key was reused with a different payload.** Milvus returns the original result. If the retry's primary key shape does not match the original, the insert fails with "idempotency key was reused with a different payload". Either way, the new rows are not written.
 
@@ -171,14 +185,14 @@ Milvus remembers an import key for up to 24 hours by default. A cluster with hea
 
 **The original job failed.** A retry with the same key returns the same failed `jobId` for the rest of the window. Fix the cause and send a new key. This is the one import case where a new key is correct.
 
-**The original job was already cleaned up.** Milvus keeps finished jobs for `dataCoord.import.taskRetention` seconds. If a retry lands inside the idempotency window but after the job was removed, you get the original `jobId` back, and the describe call reports that the job does not exist. The default retention is sized so that this does not happen at default settings.
+**The original job was already cleaned up.** Milvus keeps finished jobs for `dataCoord.import.taskRetention` seconds. If a retry lands inside the idempotency window but after the job was removed, you get the original `jobId` back, and the describe call reports that the job does not exist. The default retention covers up to one StreamingCoord restart per tombstone lifetime. Raise `dataCoord.import.taskRetention` if StreamingCoord restarts more often than that.
 
 ## Configuration
 
 | Parameter | Default | Effect |
 |-----------|---------|--------|
-| `streaming.idempotency.maxKeyLength` | 256 | Maximum key length in bytes, for every operation. `0` rejects every key. Lowering it mid-window rejects retries whose key is longer than the new limit. |
-| `streaming.idempotency.enabled` | `false` | Global switch for idempotent insert. Bulk import does not depend on it. |
+| `streaming.idempotency.maxKeyLength` | 256 | Maximum key length in bytes. Lowering it mid-window rejects retries whose key is longer than the new limit. `0` rejects every key on REST and on any request that reaches a coordinator, but the proxy insert path reads it as unbounded, so do not use `0` to disable the feature. Use `streaming.idempotency.enabled` for that. |
+| `streaming.idempotency.enabled` | `false` | Global switch for idempotent insert. Bulk import does not depend on it. Turning it off and restarting discards every stored insert record on every shard; re-enabling starts from an empty window. |
 | `streaming.idempotency.maxBytesPerWindow` | 16 MiB | Per-shard in-memory insert record cap. Oldest records are evicted once it is full. |
 | `streaming.idempotency.maxRetainedBytes` | 256 MiB | Per-physical-channel budget for the durable insert records. `0` disables the bound. |
 | `streaming.idempotency.maxRetainedChunks` | 256 | Per-physical-channel cap on durable record files. When it binds, the insert window is shorter than the byte budget allows. |
