@@ -17,8 +17,6 @@ This page demonstrates the procedure to import the prepared data.
 
 - You have already created a collection with the schema you use to prepare your data. If not, refer to [Manage Collections](manage-collections.md). 
 
-- If your pipeline may retry an import request after a lost response, send an idempotency key so that the retry resolves to the original import job instead of creating a second one. For details, refer to [Idempotent Requests](idempotent-requests.md).
-
 <div class="language-python">
 
 The following code snippet creates a simple collection with the given schema. For more information on parameters, refer to [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) in the SDK reference.

@@ -810,12 +810,6 @@
             "id": "delete-entities.md",
             "order": 2,
             "children": []
-          },
-          {
-            "label": "Idempotent Requests",
-            "id": "idempotent-requests.md",
-            "order": 3,
-            "children": []
           }
         ]
       },
