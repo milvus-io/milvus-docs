@@ -14,8 +14,6 @@ Entities in a collection are data records that share the same set of fields. Fie
 
 - **Duplicate handling**: The standard `insert` operation does not check for duplicate primary keys. Inserting data with an existing primary key creates a new entity with the same key, leading to data duplication and potential application issues. To update existing entities or avoid duplicates, use the **`upsert`** operation instead. For more information, refer to [Upsert Entities](upsert-entities.md).
 
-- **Safe retries**: An `insert` whose response is lost cannot be retried safely, because the retry writes the rows a second time. Enabling idempotent insert, which needs a cluster setting plus a collection property and is off by default, lets you send an idempotency key so that a retry is applied at most once and returns the original result. Sending a key before both are on is rejected. For details, refer to [Idempotent Requests](idempotent-requests.md).
-
 </div>
 
 ## Overview
