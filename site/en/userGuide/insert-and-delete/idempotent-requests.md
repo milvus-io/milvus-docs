@@ -69,7 +69,7 @@ An operation not in this table carries no idempotency guarantee. Over REST and i
 ## Rules that hold everywhere
 
 - **One key per logical request.** A good key names the unit of work, such as `<pipeline>-<date>-<batch>`, or a UUID you store next to the work item before you send the request.
-- **Never reuse a key for a different request.** Milvus does not compare the retry's body against the original and does not reject a reused key. A bulk import returns the original job. An insert can silently write part of the new rows; see the insert case below.
+- **Never reuse a key for a different request.** Milvus does not compare the retry's body against the original, and it does not refuse the request. A bulk import returns the original job. An insert can silently write part of the new rows, and may then report a mismatch after those rows are already written; see the insert case below.
 - **Retry with the same key.** A rejected retry is not a reason to mint a new key. The exceptions are listed per operation below.
 - **At most 256 bytes, printable ASCII only.** Milvus rejects anything else on every endpoint with error code `1100` (invalid parameter). The bound is `streaming.idempotency.maxKeyLength`.
 - **Do not put secrets in the key.** Milvus stores it verbatim in the write-ahead log and in metadata.
@@ -123,6 +123,8 @@ res = client.insert("events", rows, idempotency_key="order-4711")
 
 The collection holds the row once. A client that stores the returned IDs sees stable values across retries.
 
+A retry that arrives while the original insert is still being written waits for it, then returns its result. If the original fails, the retry receives that error.
+
 ### Explicit and automatic keys
 
 Send a key the same way as for any other operation. If you send none, Milvus derives one from the request itself: the database, collection, partition, and the row data as the client sent them. A byte-identical retry therefore deduplicates on its own, with no client change. Field order does not matter, because Milvus sorts fields before hashing them; row order and encoding do. Send an explicit key when your retry may differ in those, or when you want to control the key yourself.
@@ -137,7 +139,7 @@ Send a key the same way as for any other operation. If you send none, Milvus der
 
 The key deduplicates per **shard**. A single insert fans out to one write per shard, and each shard keeps its own record. On a retry, shards that already hold the key return the original result and shards that never received it apply the write. That is the intended behavior after a partial failure.
 
-The window is measured in **bytes of writes, not in time**. Each shard keeps up to `streaming.idempotency.maxBytesPerWindow` of recent insert records in memory, backed by a durable copy that survives a restart or a failover. On a busy shard the window may span minutes; on a quiet one it may span days. There is no time limit, so an outage does not empty the window, which is exactly when a resuming client needs it. Turning the feature off does empty it, as described below.
+The window is measured in **bytes of writes, not in time**. Each shard keeps up to `streaming.idempotency.maxBytesPerWindow` of recent insert records in memory, backed by a durable copy that survives a restart or a failover. On a busy shard the window may span minutes; on a quiet one it may span days. There is no time limit, so an outage by itself does not empty the window, which is exactly when a resuming client needs it. The window is shared by every writer to the shard, however, and each commit evicts the oldest records once the byte cap is reached, so a key can still be lost to other writers' traffic during that outage. Turning the feature off does empty it, as described below.
 
 ### Cases to know
 
@@ -147,7 +149,7 @@ The window is measured in **bytes of writes, not in time**. Each shard keeps up 
 
 **The global switch was turned off.** Turning off `streaming.idempotency.enabled` and restarting discards every stored insert record on every shard. Re-enabling starts from an empty window, so a retry of an insert sent before the toggle is written as a fresh insert.
 
-**The key was reused with a different payload.** The call reports success and returns the original result, but the write is not necessarily a no-op. Deduplication is per shard, so any shard the original insert never reached has no record of the key and applies the new rows. A reused key can therefore leave part of the new batch written while the response describes the original one, and under autoID those rows are not findable by the primary keys you were handed. Milvus raises "idempotency key was reused with a different payload" only when the original result cannot be mapped onto the new request, for example a different primary key type, or fewer rows than the original. Give every logical request its own key.
+**The key was reused with a different payload.** The call reports success and returns the original result, but the write is not necessarily a no-op. Deduplication is per shard, so any shard the original insert never reached has no record of the key and applies the new rows. A reused key can therefore leave part of the new batch written while the response describes the original one, and under autoID those rows are not findable by the primary keys you were handed. Milvus raises "idempotency key was reused with a different payload" only when the original result cannot be mapped onto the new request, for example a different primary key type, or fewer rows than the original. That error is reported after the writes have already gone through, so it is a warning that the two requests disagree, not a sign that nothing was written. Give every logical request its own key.
 
 **Renames and automatic keys.** An automatic key is derived from names, so a retry after a rename derives a different key and is written as a fresh insert. An explicit key is unaffected.
 
@@ -175,7 +177,7 @@ resp = bulk_import(
 4. Milvus recognizes the key, creates no new job, and returns `<job-id>` again.
 5. The orchestrator polls `/v2/vectordb/jobs/import/describe` with that `jobId` as usual.
 
-The collection receives the rows exactly once. A retry that arrives while the original job is still being registered waits for that registration to finish, so the returned `jobId` always refers to a job that exists.
+The collection receives the rows exactly once. A retry that arrives while the original job is still being registered waits for that registration to finish, so a retry never observes a half-registered job.
 
 ### Scope and window
 
@@ -198,8 +200,8 @@ Milvus remembers an import key for up to 24 hours by default. A cluster with hea
 | `streaming.idempotency.maxBytesPerWindow` | 16 MiB | Per-shard in-memory insert record cap. Oldest records are evicted once it is full. |
 | `streaming.idempotency.maxRetainedBytes` | 256 MiB | Per-physical-channel budget for the durable insert records. `0` disables the bound. |
 | `streaming.idempotency.maxRetainedChunks` | 256 | Per-physical-channel cap on durable record files. When it binds, the insert window is shorter than the byte budget allows. |
-| `streaming.walBroadcaster.tombstone.maxLifetime` | 24h | Upper bound of the bulk import window. |
-| `streaming.walBroadcaster.tombstone.maxCount` | 8192 | Record cap for the bulk import window. When exceeded, the oldest keys are forgotten before `maxLifetime`. |
+| `streaming.walBroadcaster.tombstone.maxLifetime` | 24h | Upper bound of the bulk import window. Not present in the default `milvus.yaml`; add it explicitly to change it. |
+| `streaming.walBroadcaster.tombstone.maxCount` | 8192 | Record cap for the bulk import window. When exceeded, the oldest keys are forgotten before `maxLifetime`. Not present in the default `milvus.yaml`; add it explicitly to change it. |
 | `dataCoord.import.taskRetention` | 172800 (48h) | How long finished import jobs stay queryable. Keep it at least twice `maxLifetime` while clients send keys, because a coordinator restart can extend a key's life by up to another `maxLifetime`. |
 
 Clusters whose clients never send an idempotency key can lower `taskRetention` freely. Its previous default was 10800 (3h).
