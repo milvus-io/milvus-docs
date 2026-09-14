@@ -36,6 +36,10 @@ The following table lists the mapping relationship between field data types and 
      <td><p>SPARSE_INVERTED_INDEX</p></td>
    </tr>
    <tr>
+     <td><p>MOL (Milvus 3.0.2+)</p></td>
+     <td><p><a href="pattern.md">PATTERN</a> (optional, for structural filtering)</p></td>
+   </tr>
+   <tr>
      <td><p>VARCHAR</p></td>
      <td><ul><li><p>INVERTED (Recommended)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
    </tr>

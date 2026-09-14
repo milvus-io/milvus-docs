@@ -8,6 +8,8 @@ summary: "Milvus provides a rich set of basic operators to help you filter and q
 
 Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.
 
+For structural conditions on `MOL` fields (Milvus 3.0.2+), see [Molecular Operators](molecular-operators.md). These expressions can be combined with the logical operators described here.
+
 ## Comparison operators
 
 Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.

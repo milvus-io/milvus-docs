@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="650" viewBox="0 0 1500 650">
+<rect x="0" y="0" width="1500" height="650" rx="12" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="44" y="55" fill="#182230" font-size="37" font-weight="600" text-anchor="start">Changing the argument order changes the matches</text>
+<text x="44" y="103" fill="#182230" font-size="28" font-weight="400" text-anchor="start">Reference: benzene (c1ccccc1). Three molecules from the sample library.</text>
+<rect x="620" y="135" width="250" height="246" rx="12" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="745" y="178" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Benzene</text>
+<line x1="778.00" y1="230.00" x2="754.00" y2="271.57" stroke="#182230" stroke-width="3"/>
+<line x1="754.00" y1="271.57" x2="706.00" y2="271.57" stroke="#182230" stroke-width="3"/>
+<line x1="706.00" y1="271.57" x2="682.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<line x1="682.00" y1="230.00" x2="706.00" y2="188.43" stroke="#182230" stroke-width="3"/>
+<line x1="706.00" y1="188.43" x2="754.00" y2="188.43" stroke="#182230" stroke-width="3"/>
+<line x1="754.00" y1="188.43" x2="778.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<circle cx="730" cy="230" r="25" fill="none" stroke="#182230" stroke-width="2.5"/>
+<text x="745" y="365" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">c1ccccc1</text>
+<rect x="890" y="135" width="250" height="246" rx="12" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1015" y="178" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Phenol</text>
+<line x1="1048.00" y1="230.00" x2="1024.00" y2="271.57" stroke="#182230" stroke-width="3"/>
+<line x1="1024.00" y1="271.57" x2="976.00" y2="271.57" stroke="#182230" stroke-width="3"/>
+<line x1="976.00" y1="271.57" x2="952.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<line x1="952.00" y1="230.00" x2="976.00" y2="188.43" stroke="#182230" stroke-width="3"/>
+<line x1="976.00" y1="188.43" x2="1024.00" y2="188.43" stroke="#182230" stroke-width="3"/>
+<line x1="1024.00" y1="188.43" x2="1048.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<circle cx="1000" cy="230" r="25" fill="none" stroke="#182230" stroke-width="2.5"/>
+<line x1="1048.00" y1="230.00" x2="1076.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<text x="1097.0" y="239.0" fill="#182230" font-size="27" font-weight="400" text-anchor="middle">OH</text>
+<text x="1015" y="365" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">Oc1ccccc1</text>
+<rect x="1160" y="135" width="250" height="246" rx="12" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1285" y="178" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Catechol</text>
+<line x1="1318.00" y1="230.00" x2="1294.00" y2="271.57" stroke="#182230" stroke-width="3"/>
+<line x1="1294.00" y1="271.57" x2="1246.00" y2="271.57" stroke="#182230" stroke-width="3"/>
+<line x1="1246.00" y1="271.57" x2="1222.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<line x1="1222.00" y1="230.00" x2="1246.00" y2="188.43" stroke="#182230" stroke-width="3"/>
+<line x1="1246.00" y1="188.43" x2="1294.00" y2="188.43" stroke="#182230" stroke-width="3"/>
+<line x1="1294.00" y1="188.43" x2="1318.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<circle cx="1270" cy="230" r="25" fill="none" stroke="#182230" stroke-width="2.5"/>
+<line x1="1318.00" y1="230.00" x2="1346.00" y2="230.00" stroke="#182230" stroke-width="3"/>
+<text x="1367.0" y="239.0" fill="#182230" font-size="27" font-weight="400" text-anchor="middle">OH</text>
+<line x1="1294.00" y1="271.57" x2="1308.00" y2="295.82" stroke="#182230" stroke-width="3"/>
+<text x="1318.5" y="323.00446416709053" fill="#182230" font-size="27" font-weight="400" text-anchor="middle">OH</text>
+<text x="1285" y="365" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">Oc1ccccc1O</text>
+<rect x="44" y="400" width="1366" height="86" rx="12" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="62" y="432" fill="#182230" font-size="28" font-weight="600" text-anchor="start">Stored molecule contains benzene</text>
+<text x="62" y="469" fill="#182230" font-size="27" font-weight="400" text-anchor="start">MOL_CONTAINS(mol, &#x27;c1ccccc1&#x27;)</text>
+<rect x="44" y="502" width="1366" height="86" rx="12" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="62" y="534" fill="#182230" font-size="28" font-weight="600" text-anchor="start">Benzene contains stored molecule</text>
+<text x="62" y="571" fill="#182230" font-size="27" font-weight="400" text-anchor="start">MOL_CONTAINS(&#x27;c1ccccc1&#x27;, mol)</text>
+<text x="745" y="455" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Match</text>
+<text x="1015" y="455" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Match</text>
+<text x="1285" y="455" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Match</text>
+<text x="745" y="557" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">Match</text>
+<text x="1015" y="557" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">No match</text>
+<text x="1285" y="557" fill="#182230" font-size="31" font-weight="600" text-anchor="middle">No match</text>
+<text x="44" y="631" fill="#182230" font-size="28" font-weight="400" text-anchor="start">Benzene matches itself in both directions.</text>
+</svg>
