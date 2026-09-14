@@ -1,76 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="680" viewBox="0 0 1680 680">
 <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#182230"/></marker></defs>
-<rect x="0" y="0" width="1600" height="1100" rx="0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="0"/>
-<text x="35" y="65" font-size="46" font-weight="600" fill="#182230" text-anchor="start">One molecule, two retrieval paths</text>
-<text x="35" y="159" font-size="36" font-weight="600" fill="#182230" text-anchor="start">You provide</text>
-<text x="1220" y="159" font-size="36" font-weight="600" fill="#182230" text-anchor="start">Retrieval task</text>
-<rect x="30" y="205" width="310" height="350" rx="18" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
-<text x="185" y="252" font-size="34" font-weight="600" fill="#182230" text-anchor="middle">Phenol</text>
-<line x1="185.0" y1="337.0" x2="227.43524478543748" y2="361.5" stroke="#182230" stroke-width="4"/>
-<line x1="227.43524478543748" y1="361.5" x2="227.4352447854375" y2="410.5" stroke="#182230" stroke-width="4"/>
-<line x1="227.4352447854375" y1="410.5" x2="185.0" y2="435.0" stroke="#182230" stroke-width="4"/>
-<line x1="185.0" y1="435.0" x2="142.56475521456252" y2="410.5" stroke="#182230" stroke-width="4"/>
-<line x1="142.56475521456252" y1="410.5" x2="142.56475521456252" y2="361.5" stroke="#182230" stroke-width="4"/>
-<line x1="142.56475521456252" y1="361.5" x2="185.0" y2="337.0" stroke="#182230" stroke-width="4"/>
-<circle cx="185" cy="386" r="26.950000000000003" fill="none" stroke="#182230" stroke-width="3"/>
-<line x1="185" y1="337" x2="185" y2="304" stroke="#182230" stroke-width="4"/>
-<text x="185" y="293" font-size="36" font-weight="400" fill="#182230" text-anchor="middle">OH</text>
-<text x="56" y="478" font-size="28" font-weight="400" fill="#182230" text-anchor="start">SMILES</text>
-<rect x="55" y="490" width="260" height="50" rx="8" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
-<text x="185" y="527" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">Oc1ccccc1</text>
-<rect x="430" y="115" width="700" height="930" rx="18" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
-<text x="465" y="159" font-size="36" font-weight="600" fill="#182230" text-anchor="start">Milvus collection</text>
-<rect x="570" y="205" width="410" height="350" rx="0" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
-<text x="602" y="260" font-size="38" font-weight="600" fill="#182230" text-anchor="start">mol</text>
-<text x="948" y="260" font-size="30" font-weight="400" fill="#182230" text-anchor="end">MOL</text>
-<line x1="775.0" y1="337.0" x2="817.4352447854375" y2="361.5" stroke="#182230" stroke-width="4"/>
-<line x1="817.4352447854375" y1="361.5" x2="817.4352447854375" y2="410.5" stroke="#182230" stroke-width="4"/>
-<line x1="817.4352447854375" y1="410.5" x2="775.0" y2="435.0" stroke="#182230" stroke-width="4"/>
-<line x1="775.0" y1="435.0" x2="732.5647552145625" y2="410.5" stroke="#182230" stroke-width="4"/>
-<line x1="732.5647552145625" y1="410.5" x2="732.5647552145625" y2="361.5" stroke="#182230" stroke-width="4"/>
-<line x1="732.5647552145625" y1="361.5" x2="775.0" y2="337.0" stroke="#182230" stroke-width="4"/>
-<circle cx="775" cy="386" r="26.950000000000003" fill="none" stroke="#182230" stroke-width="3"/>
-<line x1="775" y1="337" x2="775" y2="304" stroke="#182230" stroke-width="4"/>
-<text x="775" y="293" font-size="36" font-weight="400" fill="#182230" text-anchor="middle">OH</text>
-<text x="775" y="520" font-size="30" font-weight="400" fill="#182230" text-anchor="middle">Molecular structure</text>
-<text x="423" y="483" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">Insert</text>
-<line x1="315" y1="515" x2="560" y2="515" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
-<rect x="1205" y="290" width="365" height="195" rx="24" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
-<text x="1387" y="338" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">Match molecular</text>
-<text x="1387" y="380" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">structures</text>
-<text x="1387" y="445" font-size="30" font-weight="400" fill="#182230" text-anchor="middle">query(filter=...)</text>
-<line x1="980" y1="390" x2="1195" y2="390" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
-<line x1="775" y1="555" x2="775" y2="595" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
-<rect x="570" y="605" width="410" height="130" rx="28" fill="#BDE9FC" stroke="#4FC4F9" stroke-width="2"/>
-<text x="775" y="646" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">Automatically</text>
-<text x="775" y="686" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">generate fingerprint</text>
-<text x="775" y="721" font-size="27" font-weight="400" fill="#182230" text-anchor="middle">MOL_FINGERPRINT</text>
-<text x="460" y="586" font-size="28" font-weight="400" fill="#182230" text-anchor="start">When configured</text>
-<line x1="775" y1="735" x2="775" y2="785" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
-<rect x="570" y="795" width="410" height="220" rx="0" fill="#E8EFF9" stroke="#B9C7D6" stroke-width="2"/>
-<text x="602" y="841" font-size="38" font-weight="600" fill="#182230" text-anchor="start">mol_fp</text>
-<text x="602" y="882" font-size="30" font-weight="400" fill="#182230" text-anchor="start">BINARY_VECTOR</text>
-<rect x="602" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="618.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">1</text>
-<rect x="643" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="659.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">0</text>
-<rect x="684" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="700.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">1</text>
-<rect x="725" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="741.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">1</text>
-<rect x="766" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="782.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">0</text>
-<rect x="807" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="823.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">0</text>
-<rect x="848" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="864.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">1</text>
-<rect x="889" y="948" width="33" height="40" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.5"/>
-<text x="905.5" y="978" font-size="28" font-weight="400" fill="#182230" text-anchor="middle">0</text>
-<text x="775" y="921" font-size="26" font-weight="400" fill="#182230" text-anchor="middle">Illustrative bits</text>
-<rect x="1205" y="795" width="365" height="180" rx="24" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
-<text x="1387" y="846" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">Find similar</text>
-<text x="1387" y="888" font-size="32" font-weight="600" fill="#182230" text-anchor="middle">molecules</text>
-<text x="1387" y="943" font-size="30" font-weight="400" fill="#182230" text-anchor="middle">search()</text>
-<line x1="980" y1="882" x2="1195" y2="882" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="35" y="1080" font-size="30" font-weight="400" fill="#182230" text-anchor="start">Molecular fields shown; other collection fields omitted.</text>
+<rect x="0" y="0" width="1680" height="680" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<rect x="335" y="20" width="1320" height="635" rx="18" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="370" y="78" font-size="38" font-weight="600" text-anchor="start" fill="#182230">Milvus collection</text>
+<rect x="20" y="254" width="265" height="180" rx="14" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="45" y="300" font-size="34" font-weight="600" text-anchor="start" fill="#182230">SMILES</text>
+<text x="45" y="339" font-size="29" font-weight="400" text-anchor="start" fill="#182230">Input text</text>
+<text x="45" y="399" font-size="36" font-weight="600" text-anchor="start" fill="#182230">Oc1ccccc1</text>
+<line x1="285" y1="375" x2="370" y2="375" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="380" y="125" width="370" height="480" rx="0" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="406" y="173" font-size="32" font-weight="600" text-anchor="start" fill="#182230">Field name: mol</text>
+<text x="406" y="220" font-size="30" font-weight="400" text-anchor="start" fill="#182230">Data type: MOL</text>
+<text x="565" y="273" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">Stored molecular</text>
+<text x="565" y="310" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">structure</text>
+<line x1="565.0" y1="391.0" x2="604.8371685740842" y2="414.0" stroke="#182230" stroke-width="4"/>
+<line x1="604.8371685740842" y1="414.0" x2="604.8371685740842" y2="460.0" stroke="#182230" stroke-width="4"/>
+<line x1="604.8371685740842" y1="460.0" x2="565.0" y2="483.0" stroke="#182230" stroke-width="4"/>
+<line x1="565.0" y1="483.0" x2="525.1628314259158" y2="460.0" stroke="#182230" stroke-width="4"/>
+<line x1="525.1628314259158" y1="460.0" x2="525.1628314259158" y2="414.0" stroke="#182230" stroke-width="4"/>
+<line x1="525.1628314259158" y1="414.0" x2="565.0" y2="391.0" stroke="#182230" stroke-width="4"/>
+<circle cx="565" cy="437" r="27" fill="none" stroke="#182230" stroke-width="3"/>
+<line x1="565" y1="391" x2="565" y2="367" stroke="#182230" stroke-width="4"/>
+<text x="565" y="354" font-size="32" font-weight="400" text-anchor="middle" fill="#182230">OH</text>
+<text x="565" y="530" font-size="30" font-weight="600" text-anchor="middle" fill="#182230">Phenol</text>
+<text x="565" y="580" font-size="30" font-weight="600" text-anchor="middle" fill="#182230">Structural matching</text>
+<text x="985" y="218" font-size="30" font-weight="400" text-anchor="middle" fill="#182230">Optional function</text>
+<rect x="815" y="245" width="345" height="204" rx="26" fill="#BDE9FC" stroke="#4FC4F9" stroke-width="2"/>
+<text x="987" y="292" font-size="30" font-weight="600" text-anchor="middle" fill="#182230">MOL_FINGERPRINT</text>
+<text x="987" y="352" font-size="32" font-weight="400" text-anchor="middle" fill="#182230">Automatically</text>
+<text x="987" y="393" font-size="30" font-weight="400" text-anchor="middle" fill="#182230">generate fingerprint</text>
+<line x1="750" y1="375" x2="805" y2="375" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="1160" y1="375" x2="1210" y2="375" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1220" y="125" width="395" height="480" rx="0" fill="#E8EFF9" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1247" y="173" font-size="32" font-weight="600" text-anchor="start" fill="#182230">Field name: mol_fp</text>
+<text x="1247" y="220" font-size="30" font-weight="400" text-anchor="start" fill="#182230">Data type:</text>
+<text x="1247" y="260" font-size="30" font-weight="400" text-anchor="start" fill="#182230">BINARY_VECTOR</text>
+<text x="1417" y="337" font-size="31" font-weight="400" text-anchor="middle" fill="#182230">Derived fingerprint</text>
+<rect x="1247" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1264" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">1</text>
+<rect x="1289" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1306" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">0</text>
+<rect x="1331" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1348" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">1</text>
+<rect x="1373" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1390" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">1</text>
+<rect x="1415" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1432" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">0</text>
+<rect x="1457" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1474" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">0</text>
+<rect x="1499" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1516" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">1</text>
+<rect x="1541" y="376" width="34" height="44" rx="3" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1558" y="409" font-size="29" font-weight="400" text-anchor="middle" fill="#182230">0</text>
+<text x="1417" y="467" font-size="28" font-weight="400" text-anchor="middle" fill="#182230">Illustrative bits</text>
+<text x="1417" y="580" font-size="30" font-weight="600" text-anchor="middle" fill="#182230">Similarity search</text>
 </svg>
