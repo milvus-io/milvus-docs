@@ -44,7 +44,7 @@ Poll `/v2/vectordb/jobs/import/describe` with the returned `jobId` as usual. A r
 
 ## Choosing a key
 
-- **One key per logical request.** Name the unit of work, such as `orders-2026-09-07-batch-3`, or generate a UUID and store it with the work item before you send the request.
+- **One key per logical request.** Name the unit of work, such as `orders-2026-09-07-batch-3`, or generate a UUID and store it with the work item before you send the request. Include an attempt number if you may need to re-run the same work.
 - **Retry with the same key.** Minting a new key on a retry is what duplicates data. The exceptions are listed under [When to send a new key](#when-to-send-a-new-key).
 - **Never reuse a key for different files.** Milvus does not compare the two requests. You get the original `jobId` back, and the new files are not imported.
 - **Keep it short and printable.** Printable ASCII, at most 256 bytes by default (`streaming.idempotency.maxKeyLength`). Anything else is rejected with error `1100`.
@@ -63,6 +63,8 @@ Two cases, and only two:
 - **The original job failed.** Retrying the key returns that same failed `jobId` for as long as the key is remembered. Fix the cause, then send a new key.
 - **The original job was cleaned up.** Milvus keeps finished jobs for `dataCoord.import.taskRetention` (48 hours by default). If that expires while the key is still remembered, the retry hands back a `jobId` that no longer describes. Send a new key.
 
+A retry that is rejected, for example because the import job limit is full, is not one of these cases. Retry it later with the same key.
+
 ## Configuration
 
 Three parameters bound the behavior on this page. None of them needs changing for the key to work.
@@ -71,6 +73,6 @@ Three parameters bound the behavior on this page. None of them needs changing fo
 |---|---|---|
 | `streaming.walBroadcaster.tombstone.maxLifetime` | `24h` | How long an import key is remembered. Not present in the default `milvus.yaml`; add it explicitly to change it. The same store also rejects duplicate DDL submissions, so do not lower it just to shorten the import window. |
 | `streaming.walBroadcaster.tombstone.maxCount` | `8192` | How many keys and DDL records the same store holds before the oldest are dropped, whatever their age. This is what lets heavy DDL or import traffic forget a key before `maxLifetime`. Not present in the default `milvus.yaml`. |
-| `dataCoord.import.taskRetention` | `172800` (48 hours) | How long a finished import job stays queryable. Keep it comfortably above `maxLifetime`, so that a remembered key always maps to a job that still exists. |
+| `dataCoord.import.taskRetention` | `172800` (48 hours) | How long a finished import job stays queryable. Keep it at least twice `maxLifetime`. |
 
-The 48-hour default is new. The `milvus.yaml` shipped with 3.0.0 and 3.0.1 sets `taskRetention: 10800` (3 hours) explicitly, and an upgrade does not override a value in your file. If you upgraded with that file, raise `taskRetention` above `maxLifetime`; otherwise a remembered key can outlive its job by most of a day, and the second case under [When to send a new key](#when-to-send-a-new-key) becomes routine.
+The `milvus.yaml` shipped before 2.6.24 and 3.0.2 sets `taskRetention: 10800` explicitly, and an upgrade does not override a value in your file. If you upgraded with that file, raise `taskRetention` to at least twice `maxLifetime`.
