@@ -38,7 +38,7 @@ resp = bulk_import(
 resp.json()["data"]["jobId"]   # the same id on every retry
 ```
 
-`IDEMPOTENCY_KEY_HEADER` is `"Idempotency-Key"`; the raw string works too. A pymilvus older than the one that added the `headers` parameter sends no key, and the import behaves as a normal, non-idempotent one.
+`IDEMPOTENCY_KEY_HEADER` is `"Idempotency-Key"`; the raw string works too. A pymilvus older than the one that added the `headers` parameter does not fall back to a plain import: `bulk_import` raises `MilvusException` and submits nothing.
 
 Poll `/v2/vectordb/jobs/import/describe` with the returned `jobId` as usual. A retry that arrives while the original is still being registered waits for it, so a retry never observes a half-registered job.
 
@@ -65,9 +65,12 @@ Two cases, and only two:
 
 ## Configuration
 
-Two parameters bound the behavior on this page. Neither needs changing for the key to work.
+Three parameters bound the behavior on this page. None of them needs changing for the key to work.
 
 | Parameter | Default | What it does |
 |---|---|---|
 | `streaming.walBroadcaster.tombstone.maxLifetime` | `24h` | How long an import key is remembered. Not present in the default `milvus.yaml`; add it explicitly to change it. The same store also rejects duplicate DDL submissions, so do not lower it just to shorten the import window. |
+| `streaming.walBroadcaster.tombstone.maxCount` | `8192` | How many keys and DDL records the same store holds before the oldest are dropped, whatever their age. This is what lets heavy DDL or import traffic forget a key before `maxLifetime`. Not present in the default `milvus.yaml`. |
 | `dataCoord.import.taskRetention` | `172800` (48 hours) | How long a finished import job stays queryable. Keep it comfortably above `maxLifetime`, so that a remembered key always maps to a job that still exists. |
+
+The 48-hour default is new. The `milvus.yaml` shipped with 3.0.0 and 3.0.1 sets `taskRetention: 10800` (3 hours) explicitly, and an upgrade does not override a value in your file. If you upgraded with that file, raise `taskRetention` above `maxLifetime`; otherwise a remembered key can outlive its job by most of a day, and the second case under [When to send a new key](#when-to-send-a-new-key) becomes routine.
