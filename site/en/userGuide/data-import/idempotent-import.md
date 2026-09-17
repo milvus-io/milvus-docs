@@ -22,7 +22,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/jobs/import/create" \
   -H "Authorization: Bearer root:Milvus" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: nightly-2026-09-07-batch-3" \
-  -d '{"collectionName": "events", "files": [["events/part-0.parquet"]]}'
+  -d '{"collectionName": "events", "files": [["events/2026-09-07/part-0.parquet"]]}'
 ```
 
 <!-- TODO: after milvus-io/pymilvus#3784 is released, verify this example against the released API and name the minimum pymilvus version in the paragraph below. -->
@@ -60,8 +60,8 @@ Milvus remembers an import key for about a day. Treat that as nominal rather tha
 
 Two cases, and only two:
 
-- **The original job failed.** Retrying the key returns that same failed `jobId` for as long as the key is remembered. Fix the cause, then send a new key.
-- **The original job was cleaned up.** Milvus keeps finished jobs for `dataCoord.import.taskRetention` (48 hours by default). If that expires while the key is still remembered, the retry hands back a `jobId` that no longer describes. Send a new key.
+- **The original job failed or was aborted.** Retrying the key returns that same `jobId` for as long as the key is remembered. Fix the cause, then send a new key.
+- **The original job was cleaned up.** Milvus keeps finished jobs for `dataCoord.import.taskRetention` (48 hours by default). If that expires while the key is still remembered, the retry hands back a `jobId` that no longer describes. Confirm the data is missing before you send a new key.
 
 A retry that is rejected, for example because the import job limit is full, is not one of these cases. Retry it later with the same key.
 
