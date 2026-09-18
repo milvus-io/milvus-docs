@@ -327,6 +327,8 @@ Run the following command to uninstall Milvus.
 $ helm uninstall my-release
 ```
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus, you can:

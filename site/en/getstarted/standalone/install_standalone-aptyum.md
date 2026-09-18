@@ -62,6 +62,8 @@ $ sudo dpkg -P milvus
 $ sudo yum remove -y milvus
 ```
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus, you can:

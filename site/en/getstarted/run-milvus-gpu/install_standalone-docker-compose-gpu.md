@@ -182,6 +182,8 @@ To confgiure the memory pool, modify the `initMemSize` and `maxMemSize` settings
     docker start <milvus_container_id>
     ```
 
+{{fragments/storage_v3_installation_note.md}}
+
 ## What's next
 
 Having installed Milvus in Docker, you can:

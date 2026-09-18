@@ -10,7 +10,7 @@ The `upsert` operation provides a convenient way to insert or update entities in
 
 ## Overview
 
-You can use `upsert` to either insert a new entity or update an existing one, depending on whether the primary key provided in the upsert request exists in the collection. If the primary key is not found, an insert operation occurs. Otherwise, an update operation will be performed.
+You can use `upsert` to either insert a new entity or update an existing one, depending on whether the primary key provided in the upsert request exists in the collection. If the primary key is not found, an insert operation occurs. Otherwise, an update operation will be performed. Partial updates on `autoID` collections are an exception: they update existing entities only, as described below.
 
 An upsert in Milvus works in either **override** or **merge** mode.
 
@@ -20,19 +20,30 @@ An upsert request that works in override mode combines an insert and a delete. W
 
 ![Upsert In Override Mode](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png)
 
-If the target collection has `autoid` enabled on its primary field, Milvus will generate a new primary key for the data carried in the request payload before inserting it.
+If the target collection has `autoID` enabled on its primary field, the `upsert` request must still include the primary key of the target entity. Milvus uses the provided primary key to locate the entity to replace, and generates a new primary key for the data carried in the request payload before inserting it.
 
 For fields with `nullable` enabled, you can omit them in the `upsert` request if they do not require any updates.
 
 ### Upsert in merge mode | Milvus v2.6.2+
 
-You can also use the `partial_update` flag to make an upsert request work in merge mode. This allows you to include only the fields that need updating in the request payload.
+Use merge mode to update specific fields of an existing entity while keeping the other fields unchanged.
 
 ![Upsert In Merge Mode](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png)
 
-To perform a merge, set `partial_update` to `True` in the `upsert` request along with the primary key and the fields to update with their new values. 
+Set `partial_update=True` and provide the primary key and the fields you want to update.
 
-Upon receiving such a request, Milvus performs a query with strong consistency to retrieve the entity, updates the field values based on the data in the request, inserts the modified data, and then deletes the existing entity with the original primary key carried in the request.
+Milvus retrieves the existing entity with a strong-consistency query, merges your changes with the stored data, inserts the merged entity, and deletes the old entity.
+
+If the primary key does not exist, the result depends on whether `autoID` is enabled:
+
+- **With `autoID` disabled**, Milvus attempts to insert a new entity with the primary key you supplied. The request succeeds if it meets the normal insertion requirements. If a required field is missing, the request fails with a missing-field error. Nullable fields and fields with default values can be omitted, just as in a normal insert.
+- **With `autoID` enabled**, every primary key in the request must already exist. Milvus rejects the request if any primary key is missing, even if you provide all fields required for insertion. For existing entities, merge mode keeps the primary key unchanged.
+
+If a partial update fails with a missing-field error, check whether the target entity exists. Without an existing entity, Milvus cannot retrieve the values of fields you omitted.
+
+For new entities, use `insert` or an upsert in override mode. Use merge mode for subsequent updates to individual fields.
+
+For `ARRAY` fields, merge mode supports two operators in Milvus v2.6.17 and later: `ARRAY_APPEND` and `ARRAY_REMOVE`. These operators let you append elements to or remove matching elements from an existing `ARRAY` field, without first querying the entity to retrieve its current value. For details, see [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode).
 
 ### Upsert behaviors: special notes
 
@@ -66,11 +77,31 @@ There are several special notes you should consider before using the merge featu
 
     When you upsert the `extras` field of an entity with modified JSON data, note that the JSON field is treated as a whole, and you cannot update individual keys selectively. In other words, the JSON field **DOES NOT** support upsert in **merge** mode.
 
+- **Upsert an** `ARRAY` **field.**
+
+    By default, an `ARRAY` field in merge mode follows **REPLACE** semantics: the value carried in the request overwrites the existing array. For finer-grained updates, Milvus v2.6.17 and later also supports two operators:
+
+    - `ARRAY_APPEND` appends the elements in the request payload to the existing array.
+
+    - `ARRAY_REMOVE` removes every element from the existing array that matches a value in the request payload.
+
+    For operator syntax, supported element types, and other constraints, see [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode).
+
+- **Upsert a StructArray field.**
+
+    Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode.
+
+    For details, refer to [Upsert StructArray field in merge mode](upsert-entities.md#Upsert-StructArray-field-in-merge-mode).
+
 ### Limits & Restrictions
 
 Based on the above content, there are several limits and restrictions to follow:
 
-- The `upsert` request must always include the primary keys of the target entities.
+- The `upsert` request must always include the primary keys of the target entities, even when `autoID` is enabled. For `autoID` collections, primary-key handling depends on the upsert mode:
+
+    - In override mode, the primary key identifies the existing entity to replace, and Milvus generates a new primary key for the replacement entity.
+
+    - In merge mode, the primary key identifies the existing entity to update and remains unchanged. If the primary key does not exist, the request fails instead of inserting a new entity.
 
 - The target collection must be loaded and available for queries.
 
@@ -424,9 +455,7 @@ curl --request POST \
 
 ## Upsert entities in merge mode | Milvus v2.6.2+
 
-The following code example demonstrates how to upsert entities with partial updates. Provide only the fields needing updates and their new values, along with the explicit partial update flag.
-
-In the following example, the `issue` field of the entities specified in the upsert request will be updated to the values included in the request.
+The following example updates only the `issue` field of the entities with primary keys `1` and `2` in `my_collection`. Before running it, ensure that both entities already exist. Their other fields retain their current values.
 
 <div class="alert note">
 
@@ -569,3 +598,351 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/upsert" \
 # }
 ```
 
+## Upsert ARRAY fields in merge mode | Milvus 2.6.17+
+
+Before Milvus v2.6.17, updating part of an `ARRAY` field required a client-side read-modify-write flow: query the existing array, change it in application code, and upsert the full replacement value. Partial-update operators (`ARRAY_APPEND` and `ARRAY_REMOVE`) let you send only the elements to append or remove, which reduces client-side logic and avoids the extra read before the upsert.
+
+Suppose the entity with primary key `1` already has `tags = ["new", "trial"]`. Before partial-update operators, adding element `"premium"` to an array required upserting the full replacement array:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[{"pk": 1, "tags": ["new", "trial", "premium"]}],
+    partial_update=True,
+    # highlight-end
+)
+```
+
+```java
+List<JsonObject> replacementData = Collections.singletonList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"new\", \"trial\", \"premium\"]}", JsonObject.class)
+);
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .partialUpdate(true)
+        .data(replacementData)
+        // highlight-end
+        .build());
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+With `ARRAY_APPEND`, send only the element to add:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[{"pk": 1, "tags": ["premium"]}],
+    field_ops={"tags": FieldOp.array_append()},
+    # highlight-end
+)
+```
+
+```java
+List<JsonObject> appendData = Collections.singletonList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"premium\"]}", JsonObject.class)
+);
+
+UpsertReq.FieldPartialUpdateOp appendTags = UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName("tags")
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .data(appendData)
+        .fieldOps(Collections.singletonList(appendTags))
+        // highlight-end
+        .build());
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+With `ARRAY_REMOVE`, send only the matching element to remove:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[{"pk": 1, "tags": ["trial"]}],
+    field_ops={"tags": FieldOp.array_remove()},
+    # highlight-end
+)
+```
+
+```java
+List<JsonObject> removeData = Collections.singletonList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"trial\"]}", JsonObject.class)
+);
+
+UpsertReq.FieldPartialUpdateOp removeTags = UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName("tags")
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_REMOVE)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .data(removeData)
+        .fieldOps(Collections.singletonList(removeTags))
+        // highlight-end
+        .build());
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+<div class="alert note">
+
+Attaching either operator to a field via `field_ops` implicitly enables partial-update semantics. Therefore, you do **not** need to pass `partial_update=True` alongside `field_ops`.
+
+</div>
+
+### Limits
+
+- The payload values must match the `element_type` of the target `ARRAY` field. For example, if the target field is `ARRAY<VARCHAR>`, the payload must contain string values.
+
+- In Milvus v2.6.17 and later, `ARRAY_APPEND` and `ARRAY_REMOVE` support `ARRAY` fields whose `element_type` is `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`, or `VARCHAR`.
+
+- After an `ARRAY_APPEND` operation, the resulting array length must not exceed the field's `max_capacity`.
+
+- Concurrent upserts to the same entity are not atomic across requests. If two requests update the same `ARRAY` field at the same time, the later write can overwrite the earlier one. Use application-level coordination if you need to preserve all concurrent changes.
+
+### Example
+
+The following example uses a small `users` collection with a primary key `pk`, a `tags` field of type `ARRAY<VARCHAR>`, and an `embedding` vector field. It first inserts two entities with initial `tags` values, then uses `ARRAY_APPEND` and `ARRAY_REMOVE` to show how each operator changes the stored array.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import DataType, FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# 1. Create a collection with an ARRAY<VARCHAR> field
+schema = client.create_schema(enable_dynamic_field=False)
+schema.add_field("pk", DataType.INT64, is_primary=True)
+schema.add_field("embedding", DataType.FLOAT_VECTOR, dim=5)
+schema.add_field(
+    "tags",
+    DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=8,
+    max_length=32,
+)
+
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name="embedding",
+    index_type="AUTOINDEX",
+    metric_type="L2",
+)
+
+client.create_collection(
+    collection_name="users",
+    schema=schema,
+    index_params=index_params
+)
+
+# 2. Seed two entities
+client.insert(
+    collection_name="users",
+    data=[
+        {"pk": 1, "embedding": [0.1, 0.2, 0.3, 0.4, 0.5], "tags": ["new"]},
+        {"pk": 2, "embedding": [0.6, 0.7, 0.8, 0.9, 1.0], "tags": ["new", "trial"]},
+    ],
+)
+
+# 3. Append tags without reading the existing ARRAY values
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[
+        {"pk": 1, "tags": ["premium", "vip"]},
+        {"pk": 2, "tags": ["premium"]},
+    ],
+    field_ops={"tags": FieldOp.array_append()},
+    # highlight-end
+)
+
+res = client.query(
+    collection_name="users",
+    filter="pk in [1, 2]",
+    output_fields=["pk", "tags"],
+)
+print(res)
+
+# Example output:
+# data: [
+#   "{'pk': 1, 'tags': ['new', 'premium', 'vip']}",
+#   "{'pk': 2, 'tags': ['new', 'trial', 'premium']}"
+# ]
+
+# 4. Remove matching tags without replacing the full ARRAY field
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[
+        {"pk": 1, "tags": ["new"]},
+        {"pk": 2, "tags": ["trial"]},
+    ],
+    field_ops={"tags": FieldOp.array_remove()},
+    # highlight-end
+)
+
+res = client.query(
+    collection_name="users",
+    filter="pk in [1, 2]",
+    output_fields=["pk", "tags"],
+)
+print(res)
+
+# Example output:
+# data: [
+#   "{'pk': 1, 'tags': ['premium', 'vip']}",
+#   "{'pk': 2, 'tags': ['new', 'premium']}"
+# ]
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+## Upsert StructArray field in merge mode
+
+Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field.
+
+The following example demonstrates how to upsert the `chunks` field in merge mode, a StructArray field with 6 subfields. When the operation completes, the `chunks` field of the entity with id 1 is set to the array with the two-element structs provided in the request.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.upsert(
+    collection_name="books",
+    # highlight-start
+    data=[{
+        "id": 1,
+        "chunks": [
+            {
+              "text": "Use HNSW efSearch to trade recall for latency.",
+              "section": "index",
+              "page": 1,
+              "quality_score": 0.92,
+              "has_code": True,
+              "emb_list_vector": [0.11, 0.21, 0.31, 0.41]
+            },
+            {
+              "text": "Range search returns vectors within a distance boundary.",
+              "section": "search",
+              "page": 2,
+              "quality_score": 0.86,
+              "has_code": False,
+              "emb_list_vector": [0.18, 0.23, 0.29, 0.36]
+            }
+        ]
+    }],
+    # highlight-end
+    partial_update=True
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
