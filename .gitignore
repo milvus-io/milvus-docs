@@ -1,6 +1,8 @@
 node_modules
 doc_from
 doc_to
+__pycache__/
+sdk-tmp/
 
 # OS generated files
 .DS_Store
@@ -16,3 +18,18 @@ fetch/*
 pub
 .env
 .vscode
+
+# opencode auto-generated project scaffolding (plugins/runtime deps)
+.opencode/*
+!.opencode/skills
+!.opencode/skills/**
+
+# codex auto-generated project files
+.codex/*
+!.codex/skills
+!.codex/skills/**
+
+# claude-code auto-generated project files
+.claude/*
+!.claude/skills
+!.claude/skills/**

@@ -50,6 +50,7 @@ jobs:
           rm -rf "$VERSION"
           mkdir "$VERSION"
           cp -avr ../milvus-docs/** "./$VERSION"
+          rm -rf "./$VERSION/AGENTS.md"
           git add .
           git commit -m "Release new docs to master"
           git push -f origin master

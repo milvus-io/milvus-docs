@@ -43,6 +43,7 @@ jobs:
           rm -rf preview
           mkdir preview
           cp -avr ../milvus-docs/** ./preview
+          rm -rf ./preview/AGENTS.md
           git add .
           git commit -m "Release new docs  preview"
           git push -f origin master
