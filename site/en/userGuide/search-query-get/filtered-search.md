@@ -26,6 +26,8 @@ As shown in the above diagram, the search request carries `chunk like "%red%"` a
 
 - Returns top-K entities.
 
+{{fragments/vector_null_filter_note.md}}
+
 ### Iterative filtering
 
 The standard filtering process effectively narrows the search scope to a small range. However, overly complex filtering expressions may result in very high search latency. In such cases, iterative filtering can serve as an alternative, helping to reduce the workload of scalar filtering.
