@@ -16,8 +16,6 @@ Use nullable fields when:
 
 ## Limits
 
-- Vector fields that allow NULL values do not support `IS NULL` or `IS NOT NULL` filter expressions. You cannot explicitly filter entities based on whether a vector field value is NULL.
-
 - [Array of Structs](array-of-structs.md) fields do not support NULL values. You cannot mark an Array of Structs field or any field nested inside it as nullable.
 
 - The nullable attribute is defined when a field is created and cannot be modified afterward. You cannot enable or disable nullability for an existing field.
@@ -641,9 +639,9 @@ In this search:
 
 ## Query and filtering implications
 
-The previous examples focus on vector fields. This section describes how NULL values behave in **scalar filter expressions**.
+{{fragments/vector_null_filter_note.md}}
 
-Scalar fields can be defined with `nullable=True` and follow the same ingestion rules as vector fields. However, **NULL scalar values always evaluate to false in filter expressions**.
+For scalar fields defined with `nullable=True`, comparison conditions such as `age > 18` or `status == "active"` do not match entities where the compared field is NULL.
 
 For example, given a nullable scalar field `age`, the following filter selects entities whose age is greater than 18:
 
