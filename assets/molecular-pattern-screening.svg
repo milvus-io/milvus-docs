@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1305" viewBox="0 0 1500 1305">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0 0 L10 4 L0 8 z"/></marker></defs>
+<rect x="0" y="0" width="1500" height="1305" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="42" y="52" fill="#182230" font-size="38" font-weight="600" text-anchor="start">PATTERN: screen candidates, then check structures</text>
+<rect x="42" y="78" width="46" height="46" rx="10" fill="#FFFFFF" stroke="#182230" stroke-width="2"/>
+<text x="65" y="112" fill="#182230" font-size="32" font-weight="600" text-anchor="middle">1</text>
+<text x="108" y="112" fill="#182230" font-size="34" font-weight="600" text-anchor="start">Build the index</text>
+<text x="108" y="153" fill="#182230" font-size="29" font-weight="400" text-anchor="start">Molecules supplied as SMILES to mol; one fingerprint per molecule.</text>
+<rect x="48" y="178" width="318" height="225" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="207" y="220" fill="#182230" font-size="32" font-weight="600" text-anchor="middle">Benzene</text>
+<line x1="231.55" y1="270.00" x2="213.28" y2="301.65" stroke="#182230" stroke-width="3"/>
+<line x1="213.28" y1="301.65" x2="176.73" y2="301.65" stroke="#182230" stroke-width="3"/>
+<line x1="176.73" y1="301.65" x2="158.45" y2="270.00" stroke="#182230" stroke-width="3"/>
+<line x1="158.45" y1="270.00" x2="176.72" y2="238.35" stroke="#182230" stroke-width="3"/>
+<line x1="176.72" y1="238.35" x2="213.28" y2="238.35" stroke="#182230" stroke-width="3"/>
+<line x1="213.28" y1="238.35" x2="231.55" y2="270.00" stroke="#182230" stroke-width="3"/>
+<circle cx="195" cy="270" r="19.55" fill="none" stroke="#182230" stroke-width="2.5"/>
+<text x="207" y="382" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">SMILES: c1ccccc1</text>
+<line x1="207.00" y1="403.00" x2="207.00" y2="460.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="410" y="178" width="318" height="225" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="569" y="220" fill="#182230" font-size="32" font-weight="600" text-anchor="middle">Phenol</text>
+<line x1="593.55" y1="270.00" x2="575.27" y2="301.65" stroke="#182230" stroke-width="3"/>
+<line x1="575.27" y1="301.65" x2="538.73" y2="301.65" stroke="#182230" stroke-width="3"/>
+<line x1="538.73" y1="301.65" x2="520.45" y2="270.00" stroke="#182230" stroke-width="3"/>
+<line x1="520.45" y1="270.00" x2="538.73" y2="238.35" stroke="#182230" stroke-width="3"/>
+<line x1="538.73" y1="238.35" x2="575.27" y2="238.35" stroke="#182230" stroke-width="3"/>
+<line x1="575.27" y1="238.35" x2="593.55" y2="270.00" stroke="#182230" stroke-width="3"/>
+<circle cx="557" cy="270" r="19.55" fill="none" stroke="#182230" stroke-width="2.5"/>
+<line x1="593.55" y1="270.00" x2="614.80" y2="270.00" stroke="#182230" stroke-width="3"/>
+<text x="636.9" y="279.0" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">OH</text>
+<text x="569" y="382" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">SMILES: Oc1ccccc1</text>
+<line x1="569.00" y1="403.00" x2="569.00" y2="460.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="772" y="178" width="318" height="225" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="931" y="220" fill="#182230" font-size="32" font-weight="600" text-anchor="middle">Catechol</text>
+<line x1="955.55" y1="270.00" x2="937.27" y2="301.65" stroke="#182230" stroke-width="3"/>
+<line x1="937.27" y1="301.65" x2="900.73" y2="301.65" stroke="#182230" stroke-width="3"/>
+<line x1="900.73" y1="301.65" x2="882.45" y2="270.00" stroke="#182230" stroke-width="3"/>
+<line x1="882.45" y1="270.00" x2="900.73" y2="238.35" stroke="#182230" stroke-width="3"/>
+<line x1="900.73" y1="238.35" x2="937.27" y2="238.35" stroke="#182230" stroke-width="3"/>
+<line x1="937.27" y1="238.35" x2="955.55" y2="270.00" stroke="#182230" stroke-width="3"/>
+<circle cx="919" cy="270" r="19.55" fill="none" stroke="#182230" stroke-width="2.5"/>
+<line x1="955.55" y1="270.00" x2="976.80" y2="270.00" stroke="#182230" stroke-width="3"/>
+<text x="998.9" y="279.0" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">OH</text>
+<line x1="937.27" y1="301.65" x2="947.90" y2="320.06" stroke="#182230" stroke-width="3"/>
+<text x="958.95" y="348.19542976237665" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">OH</text>
+<text x="931" y="382" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">SMILES: Oc1ccccc1O</text>
+<line x1="931.00" y1="403.00" x2="931.00" y2="460.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1134" y="178" width="318" height="225" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1293" y="220" fill="#182230" font-size="32" font-weight="600" text-anchor="middle">Ethanol</text>
+<line x1="1231.00" y1="280.00" x2="1271.00" y2="256.00" stroke="#182230" stroke-width="3"/>
+<line x1="1271.00" y1="256.00" x2="1304.00" y2="275.00" stroke="#182230" stroke-width="3"/>
+<text x="1329" y="285" fill="#182230" font-size="29" font-weight="400" text-anchor="middle">OH</text>
+<text x="1293" y="382" fill="#182230" font-size="26" font-weight="400" text-anchor="middle">SMILES: CCO</text>
+<line x1="1293.00" y1="403.00" x2="1293.00" y2="460.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="42" y="465" width="1416" height="151" rx="10" fill="#E8EFF9" stroke="#B9C7D6" stroke-width="2"/>
+<text x="62" y="504" fill="#182230" font-size="30" font-weight="600" text-anchor="start">PATTERN index</text>
+<rect x="91" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="104" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="121" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="134" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="151" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="164" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="181" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="194" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="211" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="224" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="241" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="254" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="271" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="284" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="301" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="314" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="453" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="466" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="483" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="496" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="513" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="526" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="543" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="556" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="573" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="586" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="603" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="616" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="633" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="646" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="663" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="676" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="815" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="828" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="845" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="858" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="875" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="888" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="905" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="918" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="935" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="948" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="965" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="978" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="995" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1008" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1025" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1038" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1177" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1190" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="1207" y="528" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1220" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="1237" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1250" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1267" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1280" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1297" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1310" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1327" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1340" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1357" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1370" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1387" y="528" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1400" y="554" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<text x="750" y="600" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">Eight selected bit positions shown; the full fingerprints are stored.</text>
+<rect x="42" y="645" width="46" height="46" rx="10" fill="#FFFFFF" stroke="#182230" stroke-width="2"/>
+<text x="65" y="679" fill="#182230" font-size="32" font-weight="600" text-anchor="middle">2</text>
+<text x="108" y="679" fill="#182230" font-size="34" font-weight="600" text-anchor="start">Apply a molecular filter: contains a benzene ring</text>
+<rect x="42" y="704" width="1416" height="155" rx="10" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
+<line x1="166.70" y1="781.00" x2="147.35" y2="814.52" stroke="#182230" stroke-width="3"/>
+<line x1="147.35" y1="814.52" x2="108.65" y2="814.52" stroke="#182230" stroke-width="3"/>
+<line x1="108.65" y1="814.52" x2="89.30" y2="781.00" stroke="#182230" stroke-width="3"/>
+<line x1="89.30" y1="781.00" x2="108.65" y2="747.48" stroke="#182230" stroke-width="3"/>
+<line x1="108.65" y1="747.48" x2="147.35" y2="747.48" stroke="#182230" stroke-width="3"/>
+<line x1="147.35" y1="747.48" x2="166.70" y2="781.00" stroke="#182230" stroke-width="3"/>
+<circle cx="128" cy="781" r="20.7" fill="none" stroke="#182230" stroke-width="2.5"/>
+<text x="208" y="750" fill="#182230" font-size="30" font-weight="600" text-anchor="start">Benzene</text>
+<text x="208" y="792" fill="#182230" font-size="27" font-weight="400" text-anchor="start">MOL_CONTAINS(mol, &#x27;c1ccccc1&#x27;)</text>
+<line x1="793.00" y1="776.00" x2="853.00" y2="776.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="1055" y="743" fill="#182230" font-size="29" font-weight="600" text-anchor="middle">Filter Pattern fingerprint</text>
+<rect x="939" y="760" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="952" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="969" y="760" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="982" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="999" y="760" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1012" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="1029" y="760" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1042" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="1059" y="760" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1072" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="1089" y="760" width="26" height="35" rx="2" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1102" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">1</text>
+<rect x="1119" y="760" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1132" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<rect x="1149" y="760" width="26" height="35" rx="2" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1162" y="786" fill="#182230" font-size="24" font-weight="500" text-anchor="middle">0</text>
+<text x="1055" y="831" fill="#182230" font-size="27" font-weight="400" text-anchor="middle">Same bit positions as above</text>
+<text x="42" y="909" fill="#182230" font-size="31" font-weight="600" text-anchor="start">Screen with fingerprints</text>
+<rect x="48" y="931" width="318" height="85" rx="10" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="207" y="965" fill="#182230" font-size="28" font-weight="600" text-anchor="middle">Benzene</text>
+<text x="207" y="1001" fill="#182230" font-size="29" font-weight="500" text-anchor="middle">Candidate</text>
+<line x1="207.00" y1="1016.00" x2="207.00" y2="1078.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="410" y="931" width="318" height="85" rx="10" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="569" y="965" fill="#182230" font-size="28" font-weight="600" text-anchor="middle">Phenol</text>
+<text x="569" y="1001" fill="#182230" font-size="29" font-weight="500" text-anchor="middle">Candidate</text>
+<line x1="569.00" y1="1016.00" x2="569.00" y2="1078.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="772" y="931" width="318" height="85" rx="10" fill="#BDE9FC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="931" y="965" fill="#182230" font-size="28" font-weight="600" text-anchor="middle">Catechol</text>
+<text x="931" y="1001" fill="#182230" font-size="29" font-weight="500" text-anchor="middle">Candidate</text>
+<line x1="931.00" y1="1016.00" x2="931.00" y2="1078.00" stroke="#182230" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1134" y="931" width="318" height="85" rx="10" fill="#F8FAFC" stroke="#B9C7D6" stroke-width="2"/>
+<text x="1293" y="965" fill="#182230" font-size="28" font-weight="600" text-anchor="middle">Ethanol</text>
+<text x="1293" y="1001" fill="#182230" font-size="29" font-weight="500" text-anchor="middle">Excluded</text>
+<text x="750" y="1062" fill="#182230" font-size="29" font-weight="600" text-anchor="middle">Check structures</text>
+<rect x="48" y="1090" width="318" height="138" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<line x1="169.95" y1="1158.00" x2="155.97" y2="1182.21" stroke="#182230" stroke-width="3"/>
+<line x1="155.97" y1="1182.21" x2="128.03" y2="1182.21" stroke="#182230" stroke-width="3"/>
+<line x1="128.03" y1="1182.21" x2="114.05" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<line x1="114.05" y1="1158.00" x2="128.02" y2="1133.79" stroke="#182230" stroke-width="3"/>
+<line x1="128.02" y1="1133.79" x2="155.97" y2="1133.79" stroke="#182230" stroke-width="3"/>
+<line x1="155.97" y1="1133.79" x2="169.95" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<circle cx="142" cy="1158" r="14.950000000000001" fill="none" stroke="#182230" stroke-width="2.5"/>
+<text x="297" y="1168" fill="#182230" font-size="30" font-weight="600" text-anchor="middle">Match</text>
+<rect x="410" y="1090" width="318" height="138" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<line x1="531.95" y1="1158.00" x2="517.98" y2="1182.21" stroke="#182230" stroke-width="3"/>
+<line x1="517.98" y1="1182.21" x2="490.02" y2="1182.21" stroke="#182230" stroke-width="3"/>
+<line x1="490.02" y1="1182.21" x2="476.05" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<line x1="476.05" y1="1158.00" x2="490.02" y2="1133.79" stroke="#182230" stroke-width="3"/>
+<line x1="490.02" y1="1133.79" x2="517.98" y2="1133.79" stroke="#182230" stroke-width="3"/>
+<line x1="517.98" y1="1133.79" x2="531.95" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<circle cx="504" cy="1158" r="14.950000000000001" fill="none" stroke="#182230" stroke-width="2.5"/>
+<line x1="531.95" y1="1158.00" x2="548.20" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<text x="565.1" y="1167.0" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">OH</text>
+<text x="659" y="1168" fill="#182230" font-size="30" font-weight="600" text-anchor="middle">Match</text>
+<rect x="772" y="1090" width="318" height="138" rx="10" fill="#EAF7FC" stroke="#B9C7D6" stroke-width="2"/>
+<line x1="893.95" y1="1158.00" x2="879.98" y2="1182.21" stroke="#182230" stroke-width="3"/>
+<line x1="879.98" y1="1182.21" x2="852.02" y2="1182.21" stroke="#182230" stroke-width="3"/>
+<line x1="852.02" y1="1182.21" x2="838.05" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<line x1="838.05" y1="1158.00" x2="852.02" y2="1133.79" stroke="#182230" stroke-width="3"/>
+<line x1="852.02" y1="1133.79" x2="879.98" y2="1133.79" stroke="#182230" stroke-width="3"/>
+<line x1="879.98" y1="1133.79" x2="893.95" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<circle cx="866" cy="1158" r="14.950000000000001" fill="none" stroke="#182230" stroke-width="2.5"/>
+<line x1="893.95" y1="1158.00" x2="910.20" y2="1158.00" stroke="#182230" stroke-width="3"/>
+<text x="927.1" y="1167.0" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">OH</text>
+<line x1="879.98" y1="1182.21" x2="888.10" y2="1196.28" stroke="#182230" stroke-width="3"/>
+<text x="896.55" y="1219.9141521712293" fill="#182230" font-size="28" font-weight="400" text-anchor="middle">OH</text>
+<text x="1021" y="1168" fill="#182230" font-size="30" font-weight="600" text-anchor="middle">Match</text>
+<text x="1293" y="1140" fill="#182230" font-size="29" font-weight="400" text-anchor="middle">No structure</text>
+<text x="1293" y="1180" fill="#182230" font-size="29" font-weight="400" text-anchor="middle">check needed</text>
+<text x="750" y="1275" fill="#182230" font-size="30" font-weight="600" text-anchor="middle">Filter matches: benzene, phenol and catechol</text>
+</svg>
