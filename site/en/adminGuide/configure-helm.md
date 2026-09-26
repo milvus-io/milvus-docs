@@ -205,6 +205,228 @@ Having finished modifying the configuration file, you can then start Milvus with
 $ helm upgrade my-release milvus/milvus -f values.yaml
 ```
 
+## Configure multiple Deployments and strict resource group isolation
+
+Milvus Helm charts can split selected Milvus components into multiple Kubernetes Deployments. This is useful when you want to place different pods in different availability zones (AZs), attach different Kubernetes labels to each Deployment, or assign QueryNode and StreamingNode pods to static Milvus resource groups.
+
+The following components support multiple deployment groups:
+
+- `proxy.groups`
+- `dataNode.groups`
+- `queryNode.groups`
+- `streamingNode.groups`
+
+Each item in a `groups` list renders one Deployment. `mixCoordinator` always renders a single Deployment, but you can still configure `mixCoordinator.labels`, `mixCoordinator.extraEnv`, `mixCoordinator.nodeSelector`, `mixCoordinator.affinity`, `mixCoordinator.tolerations`, and `mixCoordinator.topologySpreadConstraints` for that Deployment.
+
+If a component's `groups` list is empty, Helm keeps the original behavior and renders one Deployment for that component. The legacy `replicaResourceGroups` setting is still supported for compatibility, but do not mix it with `queryNode.groups` or `streamingNode.groups` in the same release. `replicaResourceGroups` renders resource-group-specific QueryNode and StreamingNode Deployments and also writes cluster-level load settings into the generated Milvus config, while `groups` leaves the Milvus load plan under your control.
+
+The commonly used fields in a deployment group are:
+
+```yaml
+name: az1
+replicas: 2
+labels: {}
+annotations: {}
+extraEnv: []
+nodeSelector: {}
+affinity: {}
+tolerations: []
+topologySpreadConstraints: []
+```
+
+`labels` are Kubernetes Deployment and pod-template labels. They do not assign a Milvus resource group by themselves. To assign a QueryNode or StreamingNode to a Milvus resource group, set the `MILVUS_SERVER_LABEL_RESOURCE_GROUP` environment variable through `extraEnv`.
+
+### Split Deployments by AZ
+
+The following example splits Proxy and DataNode across two AZs. The group-level `replicas` field lets each AZ have a different number of pods.
+
+```yaml
+proxy:
+  groups:
+    - name: az1
+      replicas: 2
+      labels:
+        topology.milvus.io/az: az1
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+    - name: az2
+      replicas: 1
+      labels:
+        topology.milvus.io/az: az2
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1b
+
+dataNode:
+  groups:
+    - name: az1
+      replicas: 2
+      labels:
+        topology.milvus.io/az: az1
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+    - name: az2
+      replicas: 1
+      labels:
+        topology.milvus.io/az: az2
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1b
+```
+
+### Split QueryNode and StreamingNode by resource group
+
+For QueryNode and StreamingNode, use Helm deployment groups for the Kubernetes layout and use `MILVUS_SERVER_LABEL_RESOURCE_GROUP` for the Milvus resource group membership. This keeps the Kubernetes Deployment split independent from the Milvus resource group mechanism.
+
+```yaml
+queryNode:
+  groups:
+    - name: rg-blue-az1
+      replicas: 2
+      labels:
+        topology.milvus.io/az: az1
+        milvus.io/resource-group: rg-blue-a
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-a
+    - name: rg-blue-az2
+      replicas: 2
+      labels:
+        topology.milvus.io/az: az2
+        milvus.io/resource-group: rg-blue-b
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1b
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-b
+
+streamingNode:
+  groups:
+    - name: rg-blue-az1
+      replicas: 1
+      labels:
+        topology.milvus.io/az: az1
+        milvus.io/resource-group: rg-blue-a
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-a
+    - name: rg-blue-az2
+      replicas: 1
+      labels:
+        topology.milvus.io/az: az2
+        milvus.io/resource-group: rg-blue-b
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1b
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-b
+```
+
+For strict resource group isolation, configure the Milvus load plan through dynamic configuration in etcd instead of `user.yaml`. The following commands assume that the Milvus root path is `by-dev`, which is the default for Helm installations. If your release uses a different root path, replace `by-dev` with your configured root path.
+
+```bash
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadReplicaNumber 2
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadResourceGroups rg-blue-a,rg-blue-b
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadForceOverrideUserReplicaMode true
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/streaming.primaryResourceGroup rg-blue-a
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/streaming.strictResourceGroupIsolation.enabled true
+```
+
+In this model, `queryCoord.clusterLevelLoadReplicaNumber` controls the number of collection load replicas, and `queryCoord.clusterLevelLoadResourceGroups` controls where those replicas are placed. The Helm group `replicas` field only controls the number of Kubernetes pods in that Deployment.
+
+### Run a blue-green resource group switch
+
+To switch from one set of resource groups to another, first deploy both the blue and green QueryNode and StreamingNode groups with Helm, then update the dynamic configuration in etcd.
+
+```yaml
+queryNode:
+  groups:
+    - name: blue-a
+      replicas: 2
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-a
+    - name: blue-b
+      replicas: 2
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-b
+    - name: green-a
+      replicas: 2
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-green-a
+    - name: green-b
+      replicas: 2
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-green-b
+
+streamingNode:
+  groups:
+    - name: blue-a
+      replicas: 1
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-a
+    - name: blue-b
+      replicas: 1
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-blue-b
+    - name: green-a
+      replicas: 1
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-green-a
+    - name: green-b
+      replicas: 1
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-green-b
+```
+
+Then move the Milvus load plan in phases:
+
+```bash
+# Blue: two loaded replicas on the current resource groups.
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadReplicaNumber 2
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadResourceGroups rg-blue-a,rg-blue-b
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadForceOverrideUserReplicaMode true
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/streaming.primaryResourceGroup rg-blue-a
+
+# Overlap: load replicas on both blue and green resource groups.
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadReplicaNumber 4
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadResourceGroups rg-blue-a,rg-blue-b,rg-green-a,rg-green-b
+
+# Green: serve from the new resource groups.
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/streaming.primaryResourceGroup rg-green-a
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadReplicaNumber 2
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadResourceGroups rg-green-a,rg-green-b
+```
+
+After the new load plan becomes compliant, remove the blue QueryNode and StreamingNode deployment groups with another Helm upgrade.
+
+```bash
+curl http://<mixcoord-management-endpoint>/management/replica/loadconfig/compliance
+```
+
 ## Configure Milvus via command line
 
 Alternatively, you can upgrade Milvus configurations directly with the Helm command.

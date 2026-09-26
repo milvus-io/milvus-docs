@@ -44,6 +44,85 @@ Except in the following cases:
 
 Of course, if the number of QueryNodes in the cluster changes, the Milvus will continuously attempt to adjust to meet the final conditions. Therefore, you can first apply the resource group configuration changes and then perform QueryNode scaling.
 
+## Use environment-variable-based static resource groups
+
+In Kubernetes deployments, the recommended way to keep QueryNode and StreamingNode placement stable is to assign a static resource group label through an environment variable. Set `MILVUS_SERVER_LABEL_RESOURCE_GROUP` on the pod, and Milvus registers the node session with the `RESOURCE_GROUP` server label.
+
+For QueryNodes, Milvus uses this server label as the node's resource group. If the named resource group does not exist when the labeled QueryNode joins the cluster, Milvus creates it automatically with `requests.nodeNum` set to `0` and a high `limits.nodeNum` value. You can still use the declarative resource group API to adjust the resource group config later.
+
+For StreamingNodes, the same label identifies the StreamingNode resource group. This is used by streaming-related resource group isolation, including `streaming.primaryResourceGroup` and `streaming.strictResourceGroupIsolation.enabled`.
+
+This model is preferred for cloud-native and multi-AZ deployments because resource group membership follows the pod identity and scheduling rules. For example, if all pods in an AZ-specific Deployment carry the same resource group environment variable, replacement pods rejoin the same Milvus resource group without requiring a manual node-transfer operation.
+
+The following Helm values split QueryNode and StreamingNode into two static resource groups. The Kubernetes labels and `nodeSelector` values control placement, while `MILVUS_SERVER_LABEL_RESOURCE_GROUP` controls the Milvus resource group membership.
+
+```yaml
+queryNode:
+  groups:
+    - name: rg-a-az1
+      replicas: 2
+      labels:
+        topology.milvus.io/az: az1
+        milvus.io/resource-group: rg-a
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-a
+    - name: rg-b-az2
+      replicas: 2
+      labels:
+        topology.milvus.io/az: az2
+        milvus.io/resource-group: rg-b
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1b
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-b
+
+streamingNode:
+  groups:
+    - name: rg-a-az1
+      replicas: 1
+      labels:
+        topology.milvus.io/az: az1
+        milvus.io/resource-group: rg-a
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-a
+    - name: rg-b-az2
+      replicas: 1
+      labels:
+        topology.milvus.io/az: az2
+        milvus.io/resource-group: rg-b
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1b
+      extraEnv:
+        - name: MILVUS_SERVER_LABEL_RESOURCE_GROUP
+          value: rg-b
+```
+
+After the pods are running, configure the load plan through dynamic configuration in etcd. Do not use `user.yaml` for blue-green or runtime load-plan switches, because `user.yaml` is rendered by Helm and takes effect only after Milvus restarts. The following commands assume that the Milvus root path is `by-dev`, which is the default for Helm installations. If your release uses a different root path, replace `by-dev` with your configured root path.
+
+```bash
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadReplicaNumber 2
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadResourceGroups rg-a,rg-b
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/queryCoord.clusterLevelLoadForceOverrideUserReplicaMode true
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/streaming.primaryResourceGroup rg-a
+ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
+  by-dev/config/streaming.strictResourceGroupIsolation.enabled true
+```
+
+In this example, Milvus loads two query replicas and places them on `rg-a` and `rg-b`. StreamingNode assignment is also isolated by resource group. If `streaming.strictResourceGroupIsolation.enabled` is set to `true`, replicas whose resource group has no matching StreamingNode resource group will not receive a StreamingNode assignment until matching StreamingNodes become available.
+
+For more Helm examples, including multiple Deployments and blue-green resource group switching, see [Configure multiple Deployments and strict resource group isolation](configure-helm.md#Configure-multiple-Deployments-and-strict-resource-group-isolation).
+
 ## Use declarative api to manage resource group
 
 <div class="alert note">
