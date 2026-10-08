@@ -2510,6 +2510,13 @@
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
+      },
+      {
+        "label": "LibreDB Studio",
+        "id": "libredb_studio",
+        "order": 12,
+        "externalLink": "https://github.com/libredb/libredb-studio/blob/main/docs/providers/milvus.md",
+        "children": []
       }
     ]
   },
