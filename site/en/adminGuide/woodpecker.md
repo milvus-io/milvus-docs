@@ -247,7 +247,7 @@ Woodpecker **service mode** is a **Milvus 3.0** feature. For distributed/cluster
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v{{var.milvus_release_version}} \
   --set woodpecker.enabled=true \
   --set woodpecker.image.tag=v{{var.woodpecker_release_version}} \
   --set streaming.enabled=true \
