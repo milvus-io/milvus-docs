@@ -288,6 +288,8 @@ Based on the benchmarks and backend limits in [Woodpecker](woodpecker_architectu
   - Use larger batch sizes and more concurrent writers/clients.
   - Control refresh/index build timing (batch up before triggering) to avoid frequent small writes.
 
+Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
+
 ### Service mode (Milvus 3.0+)
 
 Service mode keeps the high write throughput of an object-storage-backed WAL while adding low latency (see [Latency](#Latency)). The storage-side and client-side tuning above still applies; in addition, because Woodpecker runs as its own service, you scale write capacity horizontally by adding replicas (`woodpecker.replicaCount`, default 4), and writes benefit from one-RTT quorum replication and topology-aware reads that avoid broker forwarding.
@@ -346,6 +348,8 @@ Woodpecker is a cloud-native WAL designed for object storage with trade-offs bet
 
 Note that batch insertion is triggered not only by time intervals but also by batch size, which defaults to 2MB.
 
+Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
+
 ### Service mode (Milvus 3.0+)
 
 Service mode brings **millisecond-level write latency** — on the same order as a traditional three-replica local-disk WAL — while keeping cost low. In a typical three-replica, cross-AZ deployment, write latency stays in the millisecond range. It achieves this through:
@@ -380,6 +384,8 @@ In Milvus 2.6.x, Woodpecker runs embedded in Milvus and is included in the **Mil
 | v2.6.18–v2.6.23 | `v0.1.14-0.20260519022627-fdf34b23e0d7` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.18/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.23/pkg/go.mod) |
 | v2.6.24–v2.6.25 | `v0.1.44` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod) |
 
+Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
+
 ### Service mode (Milvus 3.0+)
 
 Woodpecker service mode is supported starting with Milvus 3.0. The **Woodpecker client library** is bundled in the Milvus image, while the **Woodpecker server image** is released and deployed separately. Configure the server image version with `woodpecker.image.tag`.
@@ -394,8 +400,6 @@ The client is backward compatible with older server versions. When upgrading Mil
 | v3.0.3 | `v0.1.46` | `v0.1.46` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod) |
 
 Milvus 3.x also supports embedded mode. In that mode, the bundled Woodpecker library uses the version listed in the client column, and no separate server image is required.
-
-Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
 
 ### Latest releases and upgrade recommendations
 
