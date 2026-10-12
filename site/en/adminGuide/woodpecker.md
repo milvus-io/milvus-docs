@@ -288,8 +288,6 @@ Based on the benchmarks and backend limits in [Woodpecker](woodpecker_architectu
   - Use larger batch sizes and more concurrent writers/clients.
   - Control refresh/index build timing (batch up before triggering) to avoid frequent small writes.
 
-Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
-
 ### Service mode (Milvus 3.0+)
 
 Service mode keeps the high write throughput of an object-storage-backed WAL while adding low latency (see [Latency](#Latency)). The storage-side and client-side tuning above still applies; in addition, because Woodpecker runs as its own service, you scale write capacity horizontally by adding replicas (`woodpecker.replicaCount`, default 4), and writes benefit from one-RTT quorum replication and topology-aware reads that avoid broker forwarding.
@@ -347,8 +345,6 @@ for j in range(batch_count):
 Woodpecker is a cloud-native WAL designed for object storage with trade-offs between throughput, cost, and latency. The lightweight embedded mode prioritizes cost and throughput optimization, as most scenarios only require data to be written within a certain time rather than demanding low latency for individual write requests. Therefore, Woodpecker employs batched writes, with default intervals of 10ms for local filesystem storage backends and 200ms for MinIO-like storage backends. During slow write operations, the maximum latency equals the interval time plus flush time.
 
 Note that batch insertion is triggered not only by time intervals but also by batch size, which defaults to 2MB.
-
-Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
 
 ### Service mode (Milvus 3.0+)
 
