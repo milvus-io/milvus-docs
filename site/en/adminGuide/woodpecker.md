@@ -380,6 +380,7 @@ The following table lists the Woodpecker library bundled with each stable Milvus
 | v3.0.0 | `v0.1.33` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.0/pkg/go.mod) |
 | v3.0.1 | `v0.1.38` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.1/pkg/go.mod) |
 | v3.0.2 | `v0.1.42` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.2/pkg/go.mod) |
+| v3.0.3 | `v0.1.46` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod) |
 
 Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full to distinguish the dependency updates between Milvus patch releases.
 
@@ -390,10 +391,10 @@ As of **October 12, 2026**, the latest stable releases in the 2.6.x and 3.x seri
 | Milvus series | Latest stable Milvus release | Bundled Woodpecker library |
 | --- | --- | --- |
 | 2.6.x | [v2.6.25](https://github.com/milvus-io/milvus/releases/tag/v2.6.25) | `v0.1.44` |
-| 3.x | [v3.0.2](https://github.com/milvus-io/milvus/releases/tag/v3.0.2) | `v0.1.42` |
+| 3.x | [v3.0.3](https://github.com/milvus-io/milvus/releases/tag/v3.0.3) | `v0.1.46` |
 
 We recommend upgrading to the **latest stable patch release in your chosen Milvus release series** to receive the latest fixes, including updates to the bundled Woodpecker library. For newer releases, check the [Milvus releases](https://github.com/milvus-io/milvus/releases) and the target release's `pkg/go.mod`; the tables above describe the releases available on the stated date.
 
-For **Woodpecker service mode**, we recommend **Milvus 3.0.3 or later with Woodpecker v0.1.46 or later**. As of the date above, Milvus 3.0.3 has not yet been released; use this recommended combination once it is available. The service recommendation is separate from the bundled library versions recorded above.
+For **Woodpecker service mode**, we recommend **Milvus 3.0.3 or later with Woodpecker v0.1.46 or later**. The service recommendation is separate from the bundled library versions recorded above.
 
 For upgrade procedures, see [Upgrade Milvus Cluster with Helm](upgrade_milvus_cluster-helm.md), [Upgrade Milvus Cluster with Milvus Operator](upgrade_milvus_cluster-operator.md), or [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md).
