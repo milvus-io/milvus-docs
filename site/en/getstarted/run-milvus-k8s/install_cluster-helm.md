@@ -88,15 +88,15 @@ helm install my-release zilliztech/milvus \
 
 <div class="alert note">
 
-For Woodpecker service mode, we recommend using the upcoming Milvus 3.0.1 or a later release with Woodpecker v0.1.37 or later for compaction cleanup and group commit optimizations.
+For Woodpecker service mode, we recommend using Milvus 3.0.3 or later with Woodpecker v0.1.46 or later.
 
 </div>
 
-The following command deploys a Milvus cluster with optimized settings for v{{var.milvus_release_version}}, using Woodpecker as the recommended message queue:
+The following command deploys a Milvus 3.0.3 cluster with optimized settings, using Woodpecker as the recommended message queue:
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v{{var.milvus_release_version}} \
+  --set image.all.tag=v3.0.3 \
   --set woodpecker.enabled=true \
   --set woodpecker.image.tag=v{{var.woodpecker_release_version}} \
   --set streaming.enabled=true \
