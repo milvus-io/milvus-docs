@@ -8,6 +8,8 @@ summary: "Use comparison, range, arithmetic, logical, and NULL operators to filt
 
 Milvus provides comparison, range, arithmetic, logical, and NULL operators for filtering entities. Each operator supports specific field types.
 
+For structural conditions on `MOL` fields (Milvus 3.0.2+), see [Molecular Operators](molecular-operators.md). These expressions can be combined with the logical operators described here.
+
 ## Comparison operators
 
 Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.

@@ -19,6 +19,8 @@ When Milvus receives a search request with such a boolean expression, it parses 
 
 Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval.
 
+For structural filtering on `MOL` fields, create a [PATTERN](pattern.md) index (Milvus 3.0.2+). It screens candidate molecules before exact structure checks. It is separate from the binary vector index used for molecular fingerprint similarity search.
+
 ## Scalar field indexing algorithms
 
 Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: [auto indexing](#auto-indexing) and [inverted indexing](#inverted-indexing).

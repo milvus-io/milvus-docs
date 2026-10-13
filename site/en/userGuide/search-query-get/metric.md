@@ -174,11 +174,11 @@ By subtracting their cosine similarity from 1, you can get the cosine distance b
 
 ## JACCARD distance
 
-JACCARD distance coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
+The Jaccard similarity coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
 ![JACCARD Similarity Coefficient Formula](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png)
 
-JACCARD distance measures the dissimilarity between data sets and is obtained by subtracting the JACCARD similarity coefficient from 1. For binary variables, JACCARD distance is equivalent to the Tanimoto coefficient.
+JACCARD distance measures the dissimilarity between data sets and is obtained by subtracting the JACCARD similarity coefficient from 1. For binary fingerprints, the Tanimoto similarity coefficient is the Jaccard similarity coefficient; Milvus returns `JACCARD` distance, which is one minus that similarity. Smaller distances indicate more similar fingerprints. See [Molecular Search](molecular-search.md) for a molecular fingerprint example.
 
 ![JACCARD Distance Formula](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png)
 

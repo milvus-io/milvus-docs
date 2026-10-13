@@ -462,15 +462,34 @@
             ]
           },
           {
+            "label": "MOL Field",
+            "id": "mol-field",
+            "order": 9,
+            "children": [
+              {
+                "label": "MOL Field Overview",
+                "id": "mol-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Molecular Search",
+                "id": "molecular-search.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Array Field",
             "id": "array_data_type.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "StructArray",
             "id": "structarray",
-            "order": 10,
+            "order": 11,
             "children": [
               {
                 "label": "StructArray Overview",
@@ -507,37 +526,37 @@
           {
             "label": "Geometry Field",
             "id": "geometry-field.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "TIMESTAMPTZ Field",
             "id": "timestamptz-field.md",
-            "order": 12,
+            "order": 13,
             "children": []
           },
           {
             "label": "Dynamic Field",
             "id": "enable-dynamic-field.md",
-            "order": 13,
+            "order": 14,
             "children": []
           },
           {
             "label": "Nullable Fields",
             "id": "nullable-and-default.md",
-            "order": 14,
+            "order": 15,
             "children": []
           },
           {
             "label": "Default Values",
             "id": "default-values.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 16,
+            "order": 17,
             "children": [
               {
                 "label": "Analyzer Overview",
@@ -751,26 +770,26 @@
           {
             "label": "Alter Collection Field",
             "id": "alter-collection-field.md",
-            "order": 16,
+            "order": 18,
             "children": []
           },
           {
             "label": "Alter Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 17,
+            "order": 19,
             "children": []
           },
           {
             "label": "Alter External Collection Schema",
             "id": "alter-external-collection-schema.md",
-            "order": 18,
+            "order": 20,
             "children": []
           },
           {
             "label": "Best Practices",
             "id": "best-practices",
             "isMenu": true,
-            "order": 19,
+            "order": 21,
             "children": [
               {
                 "label": "Data Model Design for Search",
@@ -976,15 +995,21 @@
                 "children": []
               },
               {
+                "label": "PATTERN",
+                "id": "pattern.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               }
             ]
@@ -1139,6 +1164,12 @@
                 "label": "Geometry Operators",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "Molecular Operators",
+                "id": "molecular-operators.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1341,9 +1372,15 @@
             "children": []
           },
           {
+            "label": "Molecular Fingerprints",
+            "id": "mol-fingerprint-function.md",
+            "order": 3,
+            "children": []
+          },
+          {
             "label": "Rerank Functions",
             "id": "reranking",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {

@@ -213,6 +213,8 @@ The `dim` paramter in the above code snippets indicates the dimensionality of th
 
 ## Add Scalar Fields​
 
+For molecular structures, use a `MOL` field (Milvus 3.0.2+). Supply values as SMILES strings and filter by molecular structure. See [MOL Field Overview](mol-field-overview.md) for the data model and [Molecular Search](molecular-search.md) for collection setup and retrieval.
+
 In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Milvus supports multiple scalar field types, including **VARCHAR**, **TEXT**, **Boolean**, **Int**, Float, **Double**, **Array**, and JSON.​
 
 ### Add VARCHAR Fields​

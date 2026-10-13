@@ -9,7 +9,11 @@ beta: Milvus 2.6.x
 
 The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external embedding service providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.
 
+This page covers model-based text embedding with `TEXTEMBEDDING`. To generate binary fingerprints from molecular structures without an external model provider, use `MOL_FINGERPRINT` (Milvus 3.0.2+). See [Molecular Fingerprints](mol-fingerprint-function.md) for configuration and [Molecular Search](molecular-search.md) for a complete workflow.
+
 ## Limits
+
+The following limits apply to the model-based text embedding function described on this page.
 
 - Any input field that the Function module embeds must always contain a value; if a null is supplied, the module will throw an error.
 

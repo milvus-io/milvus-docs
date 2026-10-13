@@ -40,6 +40,8 @@ Although binary vectors excel in specific scenarios, they have limitations in th
 
 </div>
 
+For molecular similarity search, the built-in `MOL_FINGERPRINT` function can generate binary fingerprints from a `MOL` field (Milvus 3.0.2+). See [Molecular Fingerprints](mol-fingerprint-function.md) for configuration and [Molecular Search](molecular-search.md) for automatic generation during insertion and search.
+
 ## Use binary vectors
 
 ### Add vector field

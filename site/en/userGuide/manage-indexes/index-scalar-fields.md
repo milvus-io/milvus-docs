@@ -11,7 +11,7 @@ In Milvus, a scalar index is used to speed up metafiltering by a specific non-ve
 
 <div class="alert warning">
 
-This page has been deprecated. For the latest implementation, refer to [BITMAP](bitmap.md), [INVERTED](inverted.md), [NGRAM](ngram.md), [RTREE](rtree.md) [STL_SORT](stl-sort.md), and more.
+This page has been deprecated. For the latest implementation, refer to [BITMAP](bitmap.md), [INVERTED](inverted.md), [NGRAM](ngram.md), [RTREE](rtree.md), [STL_SORT](stl-sort.md), and more. For structural filtering on `MOL` fields in Milvus 3.0.2+, see [PATTERN](pattern.md).
 
 </div>
 
