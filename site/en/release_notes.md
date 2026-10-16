@@ -16,22 +16,12 @@ Release date: October 14, 2026
 | -------------- | ------------------ | ------------------- | ---------------- | -------------- |
 | 3.0.3          | 3.0.2              | 3.0.6               | 3.0.10           | 3.0.0          |
 
-The Go SDK version refers to the independently tagged `github.com/milvus-io/milvus/client/v3` module, whose patch versions differ from the server.
-
-Milvus v3.0.3 brings Function Chain to Hybrid Search, element-level partial updates for Array, Struct, and JSON fields, and `IS NULL` filtering on nullable vector fields, along with security hardening and a broad set of stability fixes.
-
-### Upgrade notes
-
-- **Legacy REST routes:** The non-underscore `/api/v1/*` routes on the metrics port, including `/api/v1/health`, have been removed regardless of configuration. Before upgrading, migrate clients to REST v2 where equivalent operations exist, or to a gRPC SDK. Replace `/api/v1/health` probes with `/healthz` or `/livez`. The new `proxy.http.enableV1` setting defaults to `true` and controls the remaining `/api/v1/_*` and `/v1/vector/*` routes; changes require a restart. ([#54028](https://github.com/milvus-io/milvus/pull/54028))
-- **Binlog import privileges:** Roles that perform binlog (`backup=true`) or L0 (`l0_import=true`) imports need the cluster-level `ImportBinlog` privilege in addition to collection-level `Import`. Grant it with `db_name="*"` and `collection_name="*"`; otherwise, these imports fail with `PrivilegeNotPermitted`. Ordinary imports must use paths outside Milvus internal storage directories. ([#53680](https://github.com/milvus-io/milvus/pull/53680))
-- **Pulsar compatibility:** `pulsar.producerAccessMode` now defaults to `exclusive`. Exclusive access requires Pulsar 2.8.0 or later for enforcement. Setting it to `shared` retains the previous behavior but does not provide exclusive-producer fencing. ([#53539](https://github.com/milvus-io/milvus/pull/53539))
-- **Full upsert with AutoID:** Load the target collection before performing full upserts. Existing entities now keep their primary keys; lookup keys that do not exist receive newly generated IDs. Applications that relied on every upsert generating a new primary key must account for this change. ([#53511](https://github.com/milvus-io/milvus/pull/53511))
-- **REST insert and upsert values:** `proxy.http.compatibilityMode` defaults to `false`. Corrected conversion preserves JSON values and rejects inputs that previously changed value silently. Audit clients that rely on implicit conversions or JSON string output. Setting this option to `true` temporarily restores legacy conversion, including its value-changing behavior; the upgrade does not repair previously stored data. ([#54072](https://github.com/milvus-io/milvus/pull/54072))
+We are excited to announce the release of Milvus v3.0.3! This release brings Function Chain to Hybrid Search, element-level partial updates for Array, Struct, and JSON fields, and `IS NULL` filtering on nullable vector fields, along with security hardening and a broad set of stability fixes; note the breaking changes to legacy V1 REST routes on the metrics port, binlog import privileges, and the default Pulsar producer access mode.
 
 ### Features
 
 - Added Function Chain support to Hybrid Search, letting a top-level L2 chain starting with `merge` define fusion and reranking and letting each sub-search run its own L0/L1 chain before fusion ([#53541](https://github.com/milvus-io/milvus/pull/53541))
-- Added support for replacing individual Array elements, Struct array elements or their sub-fields, and JSON paths in partial updates, available through REST v2 and the Go client source in this release. The new path-replacement helpers are not included in the tagged Go SDK v3.0.0 ([#53746](https://github.com/milvus-io/milvus/pull/53746))
+- Added support for replacing individual Array elements, Struct array elements or their sub-fields, and JSON paths in partial updates, available in the Go SDK and REST v2 ([#53746](https://github.com/milvus-io/milvus/pull/53746))
 - Added dynamic field support to function chains in search and hybrid search ([#54011](https://github.com/milvus-io/milvus/pull/54011))
 - Added support for `IS NULL` and `IS NOT NULL` filter expressions on nullable vector fields, with batched validity checks for efficient evaluation ([#54020](https://github.com/milvus-io/milvus/pull/54020))
 
@@ -74,7 +64,7 @@ Milvus v3.0.3 brings Function Chain to Hybrid Search, element-level partial upda
 - Fixed an issue where `phrase_match` could match documents containing a repeated query term only once, and improved phrase-match performance by upgrading Tantivy ([#54030](https://github.com/milvus-io/milvus/pull/54030))
 - Fixed an issue where a malformed sparse vector in a Search or HybridSearch request could cause a heap out-of-bounds write in the query node; such requests are now rejected with `ParameterInvalid` ([#54035](https://github.com/milvus-io/milvus/pull/54035))
 - Fixed an issue where index build progress could miss committed import data or report Finished while flushed segments were still waiting to be sorted and indexed ([#54037](https://github.com/milvus-io/milvus/pull/54037))
-- Fixed an issue where RESTful insert and upsert returned success but stored JSON strings without quotes or silently rewrote numeric values; such inputs are now preserved or rejected, the `proxy.http.compatibilityMode` option restores the legacy conversion, and previously written rows are not repaired ([#54072](https://github.com/milvus-io/milvus/pull/54072))
+- Fixed an issue where RESTful insert and upsert returned success but stored JSON strings without quotes or silently rewrote numeric values; such inputs are now preserved or rejected, a `compatibilityMode` option restores the legacy conversion, and previously written rows are not repaired ([#54072](https://github.com/milvus-io/milvus/pull/54072))
 
 ## v3.0.2
 
