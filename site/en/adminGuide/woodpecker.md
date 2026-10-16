@@ -216,7 +216,7 @@ Follow [Run Milvus with Docker Compose](install_standalone-docker-compose.md). E
 
 ```bash
 mkdir milvus-wp-compose && cd milvus-wp-compose
-wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_version}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_version}}/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 # By default, the Docker Compose standalone uses Woodpecker
 sudo docker compose up -d
 # If you need to change Woodpecker parameters further, write an override:
