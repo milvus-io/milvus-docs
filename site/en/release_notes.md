@@ -16,21 +16,10 @@ Release date: September 29, 2026
 | -------------- | ------------------ | ------------------- | ---------------- | -------------- |
 | 2.6.25         | 2.6.17             | 2.6.17              | 2.6.25           | 2.6.5          |
 
-The Go SDK version refers to the independently tagged `github.com/milvus-io/milvus/client/v2` module, whose patch versions differ from the server.
-
-Milvus v2.6.25 tightens security with stricter RBAC checks, a new `ImportBinlog` privilege, and masking of sensitive configuration values. It also adds snappy and s2 gRPC compression, and fixes stability issues around shard leader movement, scalar index replacement, and Pulsar channel takeover.
-
-### Upgrade notes
-
-- **Legacy REST routes:** The non-underscore `/api/v1/*` routes on the metrics port, including `/api/v1/health`, have been removed regardless of configuration. Before upgrading, migrate clients to REST v2 where equivalent operations exist, or to a gRPC SDK. Replace `/api/v1/health` probes with `/healthz` or `/livez`. The new `proxy.http.enableV1` setting defaults to `true` and controls the remaining `/api/v1/_*` and `/v1/vector/*` routes; changes require a restart. ([#53475](https://github.com/milvus-io/milvus/pull/53475))
-- **Binlog import privileges:** Roles that perform binlog (`backup=true`) or L0 (`l0_import=true`) imports need the cluster-level `ImportBinlog` privilege in addition to collection-level `Import`. Grant it with `db_name="*"` and `collection_name="*"`; otherwise, these imports fail with `PrivilegeNotPermitted`. Ordinary imports must use paths outside Milvus internal storage directories. ([#53681](https://github.com/milvus-io/milvus/pull/53681))
-- **Pulsar compatibility:** `pulsar.producerAccessMode` now defaults to `exclusive`. Exclusive access requires Pulsar 2.8.0 or later for enforcement. Setting it to `shared` retains the previous behavior but does not provide exclusive-producer fencing. ([#53540](https://github.com/milvus-io/milvus/pull/53540))
-- **Scalar index replacement:** Upgrade both QueryCoord and QueryNode for the complete fix. Avoid dropping and recreating scalar indexes until the QueryNode rollout finishes; replacement can remain pending on older QueryNodes during a rolling upgrade. ([#53537](https://github.com/milvus-io/milvus/pull/53537))
+We are excited to announce the release of Milvus v2.6.25! This release tightens security with stricter RBAC checks, a new `ImportBinlog` privilege, and masking of sensitive configuration values. It also adds snappy and s2 gRPC compression, and fixes stability issues around shard leader movement, scalar index replacement, and Pulsar channel takeover.
 
 ### Improvements
 
-- Removed the legacy non-underscore `/api/v1/*` routes from the metrics port and added `proxy.http.enableV1` to control the remaining V1 APIs. See the upgrade notes above for migration requirements. ([#53475](https://github.com/milvus-io/milvus/pull/53475))
-- Added an opt-in metrics-only management port mode through `common.security.managementMetricsOnly` (default `false`). Set it on every process and restart to restrict the port to metrics and health/readiness probes; other management operations, including `/management/stop`, become unavailable. ([#53475](https://github.com/milvus-io/milvus/pull/53475))
 - Added per-resource-group load config convergence reporting to the management API, covering replica distribution, serviceability, query visibility, and residual resources ([#53518](https://github.com/milvus-io/milvus/pull/53518))
 - Added snappy and s2 gRPC compression, made the zstd codec configurable (`grpc.client.compressionAlgorithm`, `compressionLevel`, `compressionCRC`, `compressionConcurrency`), and hardened zstd decompression against oversized messages ([#53599](https://github.com/milvus-io/milvus/pull/53599))
 - Masked sensitive values and omitted undeclared keys in configuration views and diagnostic logs, so credentials and unrelated environment variables are no longer exposed ([#53613](https://github.com/milvus-io/milvus/pull/53613))
