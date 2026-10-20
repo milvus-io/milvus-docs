@@ -177,13 +177,13 @@ Sorted by:
 
 ## Download an installation file
 
-Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml), and save it as `docker-compose.yml`.
+Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yaml), and save it as `docker-compose.yml`.
 
 You can also simply run the following command.
 
 ```
 # For Milvus standalone
-$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v{{var.milvus_release_tag}}/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 ```
 
 ## Modify the installation file
