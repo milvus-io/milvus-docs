@@ -24,7 +24,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/jobs/import/create" \
   -d '{"collectionName": "events", "files": [["events/2026-09-07/part-0.parquet"]]}'
 ```
 
-<!-- TODO: milvus-io/pymilvus#3784 (master) and its backports milvus-io/pymilvus#3807 (3.0) and milvus-io/pymilvus#3808 (2.6) are not released yet. After they are released, verify this example against the released API and name the minimum pymilvus version for each release line in the paragraph below. -->
+<!-- TODO: the `headers` parameter and `IDEMPOTENCY_KEY_HEADER` are merged but not released: milvus-io/pymilvus#3784 (master), milvus-io/pymilvus#3807 (3.0), milvus-io/pymilvus#3808 (2.6). They are expected in pymilvus v3.0.3 and v2.6.18. After those tags exist, verify this example against the released API and name the minimum pymilvus version for each release line in the paragraph below. -->
 ```python
 from pymilvus.bulk_writer import IDEMPOTENCY_KEY_HEADER, bulk_import
 
