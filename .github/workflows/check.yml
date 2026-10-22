@@ -21,3 +21,7 @@ jobs:
         run: |
           npm install
           node check-link.js
+      - name: Check named-block markers
+        run: |
+          sudo npm install -g @zilliz/mdtomd@1.3.0
+          md2md-blocks check site/en
