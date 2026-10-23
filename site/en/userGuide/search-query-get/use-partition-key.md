@@ -30,9 +30,11 @@ To use the Partition Key, you need to
 
 - [Set the Partition Key](use-partition-key.md#Set-Partition-Key),
 
-- [Set the number of partitions to create](use-partition-key.md#Set-Partition-Numbers) (Optional), and
+- [Set the number of partitions to create](use-partition-key.md#Set-Partition-Numbers) (Optional),
 
-- [Create a filtering condition based on the Partition Key](use-partition-key.md#Create-Filtering-Condition).
+- [Create a filtering condition based on the Partition Key](use-partition-key.md#Create-Filtering-Condition), and
+
+- [Index the Partition Key](use-partition-key.md#Index-Partition-Key) (Recommended).
 
 ### Set Partition Key
 
@@ -343,6 +345,107 @@ You have to replace `partition_key` with the name of the field that is designate
 
 </div>
 
+### Index Partition Key
+
+We recommend that you create a scalar index on the Partition Key field.
+
+The Partition Key narrows a search down to the partitions that hold the matching Partition Key values. However, each partition usually holds entities with many different Partition Key values, so Milvus still evaluates the Partition-Key-based filter against every entity in the partitions it searches. Without a scalar index on the field, that evaluation is a full scan of the field values, which can take up a large share of search latency on large collections. With a scalar index, Milvus looks up the matching entities in the index instead.
+
+Choose the index type based on the Partition Key field:
+
+- [INVERTED](inverted.md) suits most Partition Key fields, because Partition-Key-based filters use `==` and `in` conditions.
+
+- [BITMAP](bitmap.md) suits fields with few distinct values. As a general guideline, use it only when the field holds fewer than 500 distinct values.
+
+- [STL_SORT](stl-sort.md) is an alternative for numeric and `VARCHAR` fields.
+
+The following examples add an `INVERTED` index on the Partition Key field to the index parameters of the collection, alongside the index on the vector field.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name="vector",
+    index_type="AUTOINDEX",
+    metric_type="COSINE"
+)
+
+# Index the partition key
+index_params.add_index(
+    field_name="my_varchar",
+    # highlight-next-line
+    index_type="INVERTED"
+)
+```
+
+```java
+import io.milvus.v2.common.IndexParam;
+import java.util.*;
+
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(IndexParam.builder()
+        .fieldName("vector")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+// Index the partition key
+indexParams.add(IndexParam.builder()
+        .fieldName("my_varchar")
+        // highlight-next-line
+        .indexType(IndexParam.IndexType.INVERTED)
+        .build());
+```
+
+```go
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption("my_collection", "vector",
+        index.NewAutoIndex(entity.COSINE)),
+    // Index the partition key
+    milvusclient.NewCreateIndexOption("my_collection", "my_varchar",
+        index.NewInvertedIndex()),
+}
+```
+
+```javascript
+const index_params = [{
+    field_name: "vector",
+    index_type: "AUTOINDEX",
+    metric_type: "COSINE"
+},{
+    // Index the partition key
+    field_name: "my_varchar",
+    // highlight-next-line
+    index_type: "INVERTED"
+}]
+```
+
+```bash
+export indexParams='[
+        {
+            "fieldName": "vector",
+            "metricType": "COSINE",
+            "indexName": "vector",
+            "indexType": "AUTOINDEX"
+        },
+        {
+            "fieldName": "my_varchar",
+            "indexName": "my_varchar",
+            "indexType": "INVERTED"
+        }
+    ]'
+```
+
+Pass these index parameters when you create the collection, or create the index on an existing collection. For details, refer to [Create Collection](create-collection.md).
+
 ## Use Partition Key Isolation
 
 In the multi-tenancy scenario, you can designate the scalar field related to tenant identities as the partition key and create a filter based on a specific value in this scalar field. To further improve search performance in similar scenarios, Milvus introduces the Partition Key Isolation feature.
@@ -358,6 +461,8 @@ Once you have enabled Partition Key Isolation, you must include only one specifi
 Currently, the Partition-Key Isolation feature applies only to searches with the index type set to HNSW.
 
 </div>
+
+Partition Key Isolation does not replace the scalar index on the Partition Key field. Milvus still evaluates the Partition-Key-based filter to locate the matching index, so we recommend that you also [index the Partition Key](use-partition-key.md#Index-Partition-Key).
 
 ### Enable Partition Key Isolation
 
