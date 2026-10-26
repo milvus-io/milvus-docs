@@ -52,6 +52,37 @@ one field per line.
 - Introduce every list and table with a sentence ending in a colon; keep list
   items parallel in structure.
 
+## Timeless writing
+
+The docs outlive the release cycle: prose that reads correctly today and
+wrongly the day a tag lands is a bug. State facts so they survive releases.
+
+- **Anchor compatibility to minimum versions, not release status:**
+  - Good: "The `headers` parameter requires pymilvus v3.0.3 or later on the
+    3.x line."
+  - Bad: "…was pending release when this page was written." (becomes false the
+    day it ships)
+  - Bad: "requires a recent pymilvus" (unverifiable).
+- **Never narrate the writing moment or the future.** No "at the time of
+  writing", "as of this writing", "not yet released", "expected in v3.0.3",
+  "will ship in the next release", "upcoming". Unpublished features don't get
+  prose: keep the material on a branch, and put the contingency (release PRs,
+  expected versions, verify-after-release notes) in an HTML comment
+  (`<!-- TODO: … -->`) — comments don't render, so they may say things prose
+  may not.
+- **Avoid transient-status words in prose**: "currently", "for now",
+  "recently", "soon", "the latest version". Name the version or describe the
+  behavior instead.
+- **Versioned history is fine when the version is the fact**: "Partition Key
+  Isolation applies only to HNSW" and "Materialized View is enabled by default
+  since 2.5.4" are timeless — they pin behavior to a version, not to the
+  calendar.
+
+`verify.py` enforces the mechanical subset on added lines: writing-time
+self-reference and release-status narration fail the run; transient-status
+words are reported as warnings. Front matter, fenced code blocks, and HTML
+comments are exempt.
+
 ## Reuse mechanisms — prefer these over duplicating content
 
 - **Fragments** — reusable blocks in `site/en/fragments/`, included with
