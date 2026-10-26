@@ -198,6 +198,31 @@ private static CreateCollectionReq.CollectionSchema createSchema() {
 }
 ```
 
+## StructArray fields in source files
+
+A [StructArray](array-of-structs.md) field is carried differently by each source file format. The import reader expects one of the following shapes:
+
+| Format | StructArray field shape |
+| --- | --- |
+| JSON, JSONL | The field value is a list of objects, one per Struct element, keyed by subfield name: `"chunks": [{"text": "...", "section": "index", "emb": [0.1, 0.2]}, ...]`. |
+| CSV | The cell holds the same JSON text as the JSON format. The `nullkey` configured for the import job or a JSON `null` marks a null StructArray value. |
+| Parquet | One column per StructArray field with the type `list<struct<...>>`, one struct child per subfield. A scalar subfield is a scalar child, a vector subfield is a list of its element type, such as `list<float32>`, and an array subfield (Milvus 3.1.0 and later) is a `list<T>` child. |
+| NumPy | Not supported. NumPy files hold one file per top-level field and have no representation for a StructArray field, so a NumPy import into a collection that has a StructArray field is rejected. |
+
+The following rules apply to StructArray values in all supported formats:
+
+- Use subfield names inside each Struct element, not paths such as `chunks[text]`. Flat columns or keys named `chunks[text]` are rejected.
+
+- A Struct element itself cannot be null, such as `[null, {...}]`. A whole StructArray value can be null only when the field is nullable.
+
+- Keys or Parquet children that are not subfields of the collection, including dropped subfields, are ignored.
+
+- Starting in Milvus 3.1.0, a missing key or a `null` value for a subfield created with `element_nullable=True` imports as a null value for that Struct element, so files written before a subfield was added import without it. A `null` anywhere else fails the import. For an array subfield, `null` is a null inner array, and `null` inside the inner array is a null inner value when the subfield allows it.
+
+- Starting in Milvus 3.1.0, binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar array subfields.
+
+For the schema-side limits, see [StructArray Limits](structarray-limits.md#Import-and-storage-limits).
+
 ## Set up BulkWriter
 
 **BulkWriter** is a tool designed to convert raw datasets into a format suitable for importing via the RESTful Import API. It offers two types of writers:

@@ -131,6 +131,39 @@ client.create_index(
 
 Scalar indexes are optional but useful when StructArray scalar subfields appear frequently in filters, such as `element_filter(chunks, $[quality_score] > 0.9)` or `MATCH_ANY(chunks, $[section] == "index")`.
 
+Starting in Milvus 3.1.0, scalar indexes are not supported on subfields created with `element_nullable=True` or on scalar `ARRAY` subfields. Filters on these subfields run without an index.
+
+## Index element-nullable and added vector subfields | Milvus 3.1.0
+
+Starting in Milvus 3.1.0, a vector subfield can be created with `element_nullable=True`, and a vector subfield can be added to an existing StructArray field. Both cases change how you index the subfield:
+
+- An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as `COSINE`, `IP`, or `L2`. `MAX_SIM*` metrics and EmbeddingList indexes are rejected on it, and `AUTOINDEX` does not select a `MAX_SIM*` metric for it. Null vectors are skipped when the index is built and during search.
+
+- A vector subfield added to an existing StructArray field is always element-nullable, so the same metric rule applies. You cannot bind an index in the add request; create the index separately after the subfield exists.
+
+- A load that includes a vector subfield requires an index on it, as for any vector field. Create the index on an added vector subfield before you load the collection with that subfield included. Queries can return the new subfield before the index exists.
+
+```python
+index_params = client.prepare_index_params()
+
+# Element-level index on an added, element-nullable vector subfield.
+index_params.add_index(
+    field_name="chunks[summary_emb]",
+    index_name="chunks_summary_emb_cosine",
+    index_type="HNSW",
+    metric_type="COSINE",
+    params={
+        "M": 16,
+        "efConstruction": 200,
+    },
+)
+
+client.create_index(
+    collection_name="tech_articles",
+    index_params=index_params,
+)
+```
+
 ## Index metric compatibility
 
 Use the following tables to choose an index type and metric type for a StructArray vector subfield. Start from the target, then choose the metric family by search mode.
@@ -192,7 +225,8 @@ print(index)
 | One vector subfield accepts one index. | Use separate vector subfields if you need different metric families. |
 | Use `MAX_SIM*` metrics for EmbeddingList search. | EmbeddingList query data requires an index built with a `MAX_SIM*` metric. |
 | Use regular vector metrics for element-level search. | Element-level search uses regular vector query data and metrics such as `COSINE`, `IP`, or `L2`. |
-| Index scalar subfields that appear in filters. | Use scalar index types supported by your target. |
+| Index scalar subfields that appear in filters. | Use scalar index types supported by your target. Element-nullable subfields and scalar `ARRAY` subfields cannot be indexed. |
+| Use element-level metrics on element-nullable vector subfields. | A vector subfield with `element_nullable=True`, including any vector subfield added to an existing StructArray field, rejects `MAX_SIM*` metrics. |
 | Keep vector-field limits in mind. | The total number of vector fields and vector subfields is limited. See StructArray Limits before adding many vector subfields. |
 
 ## Common mistakes

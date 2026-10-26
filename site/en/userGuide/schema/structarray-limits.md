@@ -15,13 +15,14 @@ Most StructArray limits come from one of three places: the StructArray schema mo
 | --- | --- |
 | Schema shape | A Struct can be used only as the element type of an Array field. Struct is not supported as a top-level collection field. |
 | Subfield schema | All Struct elements in the same StructArray field share one predefined Struct schema. |
+| Nested subfields | Starting in Milvus 3.1.0, a Struct can contain scalar `ARRAY` subfields with one nesting level. Nested `Struct`, `ArrayOfStruct`, and JSON subfields are not supported in any version. |
 | Capacity | `max_capacity` is required and limits how many Struct elements one entity can store in the StructArray field. |
-| Subfield changes | After a StructArray field is created, you cannot add subfields to that existing StructArray field. |
+| Subfield changes | Starting in Milvus 3.1.0, you can add an element-nullable subfield to an existing StructArray field or drop a subfield from it. Earlier versions require dropping and re-adding the whole StructArray field. |
 | Subfield path | Use `structArray[subfield]` paths, such as `chunks[emb]`, for indexes, search targets, output fields, and filters. Do not use `chunks.emb`. |
 | Insert shape | Insert a StructArray field as an array of objects. Do not use path syntax inside insert payloads. |
 | Vector indexes | A vector field or vector subfield accepts only one index. Use separate vector subfields for EmbeddingList search and element-level search. |
 | Functions | Field functions are not supported for fields or subfields inside a StructArray field. |
-| Nullable fields | Nullable StructArray fields are version-gated. When supported, null applies to the whole StructArray field, not to an individual Struct element independently. |
+| Nullable fields | Nullable StructArray fields are version-gated. Row-level null applies to the whole StructArray field. Starting in Milvus 3.1.0, a subfield can also set `element_nullable=True` so that its value in an individual Struct element can be null. A Struct element itself cannot be null. |
 | Dynamic add field | Adding a StructArray field to an existing collection is version-gated and requires the added field to be nullable. |
 
 ## Schema limits
@@ -31,9 +32,12 @@ Most StructArray limits come from one of three places: the StructArray schema mo
 | Struct is not a top-level field type. | Create a StructArray field as `datatype=DataType.ARRAY` with `element_type=DataType.STRUCT` and a `struct_schema`. |
 | All elements share one schema. | Every Struct element in a StructArray field follows the same subfield list and subfield data types. |
 | `max_capacity` is required. | The number of Struct elements in one entity must not exceed the `max_capacity` configured for the StructArray field. |
-| Existing subfields are fixed. | You cannot append new subfields to an existing StructArray field. To change the subfield schema, drop the StructArray field and add it again with the updated schema. |
-| Nested StructArray is not supported. | A StructArray field cannot contain nested `Array`, `ArrayOfVector`, `Struct`, or `ArrayOfStruct` subfields. |
+| All subfields share one `max_capacity`. | The `max_capacity` of the StructArray field applies to every subfield. The value must be greater than 0 and must not exceed `proxy.maxArrayCapacity`. |
+| Subfields can evolve in Milvus 3.1.0 and later. | Add a subfield with `element_nullable=True`, or drop a subfield by its path, such as `chunks[lang]`. You cannot drop the last subfield of a StructArray field, the last vector field of the collection, or a subfield used by a Function. In earlier versions, drop the StructArray field and add it again with the updated schema. |
+| Nested Struct is not supported. | A Struct cannot contain nested `Struct`, `ArrayOfStruct`, or JSON subfields. Starting in Milvus 3.1.0, a Struct can contain scalar `ARRAY` subfields with one nesting level. An `ARRAY` subfield cannot hold vectors. |
 | Functions are not supported inside StructArray. | Do not define field functions for StructArray fields or their subfields. |
+| Text analysis is not supported on subfields. | `enable_match` and `enable_analyzer` are rejected on Struct subfields because text indexes are built only for top-level fields. |
+| Field properties are limited on StructArray fields. | `alter_collection_field()` on a StructArray field or on a subfield path accepts only `mmap.enabled`, `field.description`, and `warmup`. Other properties, such as `max_capacity` and `max_length`, are rejected. |
 
 For schema creation examples, see [Create a StructArray Field](create-structarray-field.md).
 
@@ -58,7 +62,8 @@ StructArray subfields map to physical array-style storage. The following table l
 | `Array` | Not supported | Geometry subfields and GIS functions are not supported in StructArray fields. |
 | `Array` | Not supported | Text subfields are not supported in StructArray fields. |
 | `Array` | Not supported | Timestamptz subfields and time-specific expressions are not supported in StructArray fields. |
-| Nested `Array`, `ArrayOfVector`, `Struct`, or `ArrayOfStruct` | Not supported | StructArray fields do not support nested array, vector-array, Struct, or Array-of-Struct subfields. |
+| `Array` of `Array` | Supported in Milvus 3.1.0 and later | Define the subfield as `DataType.ARRAY` with a scalar `element_type` and a `max_capacity` for the inner array. Each Struct element then holds one inner array. Set `element_nullable=True` on the subfield to allow a null inner array. |
+| `Array` of `Array` of `Array`, `Array` of vectors, `Struct`, or `ArrayOfStruct` | Not supported | Array nesting inside a Struct is limited to one level, the inner array cannot hold vectors, and nested Struct or Array-of-Struct subfields are not supported. |
 
 ## Nullable and dynamic schema limits
 
@@ -69,12 +74,17 @@ Nullable StructArray behavior and dynamic StructArray field addition are version
 | Nullable StructArray field | Supported in Milvus 3.0.0 and later. Set `nullable=True` on the StructArray parent; do not configure Struct subfields as nullable independently. |
 | Null value in Python | Use `None` to insert a null StructArray value in Python. Do not use `Null` or `null`. |
 | Null scope | Null applies to the whole StructArray field. For example, `chunks=None` is valid only when `chunks` is nullable. |
-| Partially null StructArray value | When a StructArray field contains a valid array value, do not mix null subfield arrays with valid subfield arrays in the same value. |
+| Element-level null | Supported in Milvus 3.1.0 and later. Set `element_nullable=True` on a scalar, vector, or `ARRAY` subfield to allow a null value for that subfield in individual Struct elements. The row-level `nullable` setting still comes from the StructArray parent and cannot be set on a subfield. |
+| Null Struct element | A Struct element itself cannot be null, such as `[null, {...}]`. Set the subfield values of the element to null instead. |
+| Omitted subfields | Starting in Milvus 3.1.0, you can omit a subfield that has `element_nullable=True` from a Struct element, and Milvus stores null for it. A subfield without `element_nullable` must be present in every Struct element. In earlier versions, every Struct element must provide every subfield. |
 | Dynamic add StructArray field | Supported in Milvus 3.0.0 and later. |
 | Nullable requirement for dynamic add | A StructArray field added to an existing collection must be nullable because existing entities have no value for the new field. |
 | Existing entities after dynamic add | Existing entities return `null` for the added StructArray field. |
+| Dynamic add subfield | Supported in Milvus 3.1.0 and later. An added subfield must have `element_nullable=True`. Existing entities return null for the new subfield in each of their Struct elements, and entities whose StructArray field is null stay null. |
 
 Milvus 3.0.0 and later releases support nullable StructArray fields, nullable vector arrays, and dynamic StructArray field addition in both Standalone and Distributed deployments. Earlier Milvus versions do not support these capabilities.
+
+Milvus 3.1.0 and later releases additionally support element-level null values, scalar `ARRAY` subfields, and adding or dropping subfields of an existing StructArray field. These capabilities require Storage V2 and are not available in external collections.
 
 In Zilliz Cloud, these capabilities are available on On-Demand Clusters running Milvus 3.0.0 or later. Serving Clusters do not support them.
 
@@ -86,7 +96,7 @@ For insert examples with nullable StructArray fields, see [Insert Data into Stru
 | --- | --- |
 | Payload shape | Insert the StructArray field as an array of Struct objects, such as `chunks: [{"text": "...", "emb": [...]}]`. |
 | Subfield names | Inside each Struct object, use subfield names such as `text` and `emb`, not paths such as `chunks[text]`. |
-| Schema alignment | Each Struct element must match the Struct schema. |
+| Schema alignment | Each Struct element must match the Struct schema. Starting in Milvus 3.1.0, a subfield with `element_nullable=True` can be omitted or set to `null` in a Struct element. |
 | Capacity | The number of Struct elements in one entity must not exceed `max_capacity`. |
 | Vector dimensions | Vector values must match the `dim` configured for their vector subfields. |
 | Search-mode duplication | If you need both EmbeddingList search and element-level search, write vectors to two separate vector subfields. |
@@ -103,6 +113,8 @@ A StructArray vector subfield can be indexed for either EmbeddingList search or 
 Use separate vector subfields when both modes are required. For example, use `chunks[emb_list_vector]` for EmbeddingList search and `chunks[emb]` for element-level search.
 
 StructArray vector subfields count as vector subfields when you plan your collection schema. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.
+
+Starting in Milvus 3.1.0, a vector subfield with `element_nullable=True` supports only element-level search with regular vector metrics. `MAX_SIM*` metrics, EmbeddingList indexes, and EmbeddingList search are rejected on element-nullable vector subfields, and `AUTOINDEX` does not select a `MAX_SIM*` metric for them. Null vectors do not participate in search. Scalar indexes are not supported on element-nullable subfields or on scalar `ARRAY` subfields.
 
 For the supported index-type and metric-type matrix, see [Index StructArray Fields](index-structarray-fields.md).
 
@@ -131,9 +143,20 @@ At a high level:
 
 - Do not use vector subfields as `$[...]` scalar predicate inputs.
 
-- JSON path syntax, JSON functions, array container functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates.
+- JSON path syntax, JSON functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates. Starting in Milvus 3.1.0, `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length` are supported on `$[subfield]` for scalar `ARRAY` subfields, and `$[subfield] is null` / `is not null` is supported for every subfield type.
+
+- Starting in Milvus 3.1.0, a null subfield value in a Struct element makes the element predicate unknown rather than false. `element_filter` keeps only elements whose predicate is true, and `MATCH_*` counts an unknown element as a miss. For details, see [StructArray Operators](struct-array-operators.md).
 
 - Prefer explicit boolean comparisons such as `$[has_code] == true` instead of bare boolean expressions.
+
+## Import and storage limits
+
+| Limit | Details |
+| --- | --- |
+| Source file formats | JSON, JSONL, CSV, and Parquet files can carry StructArray fields. NumPy files cannot represent a StructArray field, so NumPy import into a collection that has a StructArray field is rejected. For file shapes, see [Prepare Source Data](prepare-source-data.md#StructArray-fields-in-source-files). |
+| Storage format | Element-nullable subfields and scalar `ARRAY` subfields require Storage V2. |
+| External collections | Element-nullable subfields and scalar `ARRAY` subfields are not supported in external collections. |
+| Backup and snapshot import | Binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar `ARRAY` subfields. |
 
 ## Related pages
 
