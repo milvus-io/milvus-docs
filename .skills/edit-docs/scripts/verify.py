@@ -2,24 +2,28 @@
 """Post-edit verifier for milvus-docs changes.
 
 Complements ``node check-link.js`` with checks CI does not run, scoped to the
-files this session changed (tracked-modified plus untracked, from
-``git status --porcelain``):
+files this session changed: uncommitted working-tree changes (from
+``git status --porcelain``), plus — with ``--diff <rev>`` — committed changes
+against ``<rev>`` (e.g. the base version branch). With nothing to check the
+run exits non-zero instead of printing a vacuous OK:
 
 1. menuStructure en.json (only when it was changed):
    - parses as JSON
    - every node has label / id / order / children
    - ids unique across the tree
    - order values are integers, unique within each sibling group
-   Issues are compared against the --base revision (default HEAD): failures
-   that already exist at --base are reported as PRE-EXISTING warnings and do
-   not fail the run; only newly-introduced issues exit non-zero.
+   Issues are compared against the --base revision (default: the --diff
+   revision when given, else HEAD): failures that already exist at --base are
+   reported as PRE-EXISTING warnings and do not fail the run; only
+   newly-introduced issues exit non-zero.
 2. changed markdown pages under site/en/ (fragments/ and template/ excluded):
    must carry front matter whose ``id`` equals the filename.
 3. NEW pages (untracked) under site/en/integrations/ or site/en/tutorials/
    whose id appears in the menu: must also be referenced in the matching
    overview table (integrations_overview.md / tutorials-overview.md).
 
-Run from the repository root before committing.
+Run from the repository root before committing, or with ``--diff <rev>``
+after committing.
 """
 
 import argparse
@@ -41,8 +45,9 @@ def git(*args):
     return subprocess.run(["git", *args], capture_output=True, text=True).stdout
 
 
-def changed_files():
-    """Return (changed, untracked) path sets from git status."""
+def changed_files(diff_rev=None):
+    """Return (changed, untracked) path sets from git status, plus committed
+    changes against diff_rev (three-dot) when given."""
     changed, untracked = set(), set()
     for line in git("status", "--porcelain").splitlines():
         if len(line) < 4:
@@ -51,6 +56,11 @@ def changed_files():
         if path.endswith("/"):
             continue
         untracked.add(path) if st.strip() == "??" else changed.add(path)
+    if diff_rev:
+        for line in git("diff", "--name-only", f"{diff_rev}...HEAD").splitlines():
+            path = line.strip().strip('"')
+            if path and not path.endswith("/"):
+                changed.add(path)
     return changed, untracked
 
 
@@ -127,13 +137,18 @@ def frontmatter_id(path):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--menu", default=MENU)
-    ap.add_argument("--base", default="HEAD", help="revision to classify pre-existing issues (default: HEAD)")
+    ap.add_argument("--diff", default=None, metavar="REV",
+                    help="also check changes committed against REV (e.g. origin/v3.0.x); "
+                         "without it only uncommitted working-tree changes are checked")
+    ap.add_argument("--base", default=None,
+                    help="revision to classify pre-existing issues (default: REV of --diff, else HEAD)")
     args = ap.parse_args()
 
     errors, warnings = [], []
-    changed, untracked = changed_files()
+    base = args.base or args.diff or "HEAD"
+    changed, untracked = changed_files(args.diff)
 
-    check_menu(changed, args.base, args.menu, errors, warnings)
+    check_menu(changed, base, args.menu, errors, warnings)
 
     pages = sorted(
         p for p in (changed | untracked)
@@ -161,7 +176,13 @@ def main():
                     errors.append(f"{p}: new page is in the menu but missing from {overview}")
 
     if not (changed | untracked):
-        print("verify.py: no changed files to check")
+        print(
+            "verify.py: FAIL: no changed files to check, so nothing was verified. "
+            "Run before committing, or pass --diff <base> (e.g. --diff origin/v3.0.x) "
+            "to check committed changes.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
     for w in warnings:
         print(f"verify.py: warning: {w}")
     if errors:
