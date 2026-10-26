@@ -265,7 +265,7 @@ import { FunctionType } from "@zilliz/milvus2-sdk-node";
 const ranker = {
   name: "rrf",
   input_field_names: [],
-  function_type: FunctionType.RERANK,
+  type: FunctionType.RERANK,
   params: {
     reranker: "rrf",
     k: 100,
@@ -434,7 +434,7 @@ const image_search = {
 const ranker = {
   name: "rrf",
   input_field_names: [],
-  function_type: FunctionType.RERANK,
+  type: FunctionType.RERANK,
   params: {
     reranker: "rrf",
     k: 100,
