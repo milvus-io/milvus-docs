@@ -349,7 +349,9 @@ You have to replace `partition_key` with the name of the field that is designate
 
 We recommend that you create a scalar index on the Partition Key field.
 
-The Partition Key narrows a search down to the partitions that hold the matching Partition Key values. However, each partition usually holds entities with many different Partition Key values, so Milvus still evaluates the Partition-Key-based filter against every entity in the partitions it searches. Without a scalar index on the field, that evaluation is a full scan of the field values, which can take up a large share of search latency on large collections. With a scalar index, Milvus looks up the matching entities in the index instead.
+The Partition Key narrows a search down to the partitions that may hold the matching Partition Key values. However, each partition usually holds entities with many different Partition Key values, so Milvus still evaluates the Partition-Key-based filter against every entity in the partitions it searches. Without a scalar index on the field, that evaluation is a full scan of the field values, which can take up a large share of search latency on large collections. With a scalar index, Milvus looks up the matching entities in the index instead.
+
+This evaluation happens regardless of the vector index type. Milvus can embed Partition Key values into HNSW-family vector indexes so that a Partition-Key-filtered search traverses only the relevant sub-indexes, but that optimization narrows the vector traversal — it does not remove the filter evaluation. Searches that filter on scalar fields alone have no equivalent shortcut. In both cases, a scalar index on the Partition Key field is what keeps the evaluation fast.
 
 Choose the index type based on the Partition Key field:
 
@@ -384,10 +386,16 @@ index_params.add_index(
     # highlight-next-line
     index_type="INVERTED"
 )
+
+client.create_index(
+    collection_name="my_collection",
+    index_params=index_params
+)
 ```
 
 ```java
 import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
 import java.util.*;
 
 List<IndexParam> indexParams = new ArrayList<>();
@@ -403,6 +411,11 @@ indexParams.add(IndexParam.builder()
         // highlight-next-line
         .indexType(IndexParam.IndexType.INVERTED)
         .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("my_collection")
+        .indexParams(indexParams)
+        .build());
 ```
 
 ```go
@@ -413,19 +426,32 @@ indexOptions := []milvusclient.CreateIndexOption{
     milvusclient.NewCreateIndexOption("my_collection", "my_varchar",
         index.NewInvertedIndex()),
 }
+
+for _, opt := range indexOptions {
+    indexTask, err := client.CreateIndex(ctx, opt)
+    if err != nil {
+        fmt.Println(err.Error())
+        // handle error
+    }
+    err = indexTask.Await(ctx)
+}
 ```
 
 ```javascript
 const index_params = [{
+    collection_name: "my_collection",
     field_name: "vector",
     index_type: "AUTOINDEX",
     metric_type: "COSINE"
 },{
+    collection_name: "my_collection",
     // Index the partition key
     field_name: "my_varchar",
     // highlight-next-line
     index_type: "INVERTED"
 }]
+
+await client.createIndex(index_params)
 ```
 
 ```bash
@@ -442,6 +468,16 @@ export indexParams='[
             "indexType": "INVERTED"
         }
     ]'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "{
+    \"collectionName\": \"my_collection\",
+    \"indexParams\": $indexParams
+}"
 ```
 
 Pass these index parameters when you create the collection, or create the index on an existing collection. For details, refer to [Create Collection](create-collection.md).
@@ -462,7 +498,7 @@ Currently, the Partition-Key Isolation feature applies only to searches with the
 
 </div>
 
-Partition Key Isolation does not replace the scalar index on the Partition Key field. Milvus still evaluates the Partition-Key-based filter to locate the matching index, so we recommend that you also [index the Partition Key](use-partition-key.md#Index-Partition-Key).
+Partition Key Isolation does not replace the scalar index on the Partition Key field. The Partition Key value in the filter locates the matching sub-index, but Milvus still evaluates the filter itself to identify the matching entities, so we recommend that you also [index the Partition Key](use-partition-key.md#Index-Partition-Key).
 
 ### Enable Partition Key Isolation
 
