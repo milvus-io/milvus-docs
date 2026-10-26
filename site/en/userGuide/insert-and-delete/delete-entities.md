@@ -27,8 +27,8 @@ When deleting multiple entities that share some attributes in a batch, you can u
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 res = client.delete(
@@ -50,8 +50,8 @@ import io.milvus.v2.service.vector.request.DeleteReq;
 import io.milvus.v2.service.vector.response.DeleteResp;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
         .build());
 
 DeleteResp deleteResp = client.delete(DeleteReq.builder()
@@ -71,7 +71,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "{{var.example_endpoint}}"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -91,7 +91,7 @@ if err != nil {
 ```rust
 use milvus::v2::prelude::*;
 
-let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.example_token}}");
 let client = ClientV2::new(&config).await?;
 
 let request = DeleteRequest::builder()
@@ -107,7 +107,7 @@ println!("{:?}", response.delete_count());
 
 auto client = milvus::MilvusClientV2::Create();
 
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
@@ -126,8 +126,8 @@ if (!status.IsOk()) {
 ```javascript
 const { MilvusClient, DataType } = require("@zilliz/milvus2-sdk-node")
 
-const address = "http://localhost:19530";
-const token = "root:Milvus";
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
 const client = new MilvusClient({address, token});
 
 // 7. Delete entities
@@ -153,9 +153,8 @@ using Milvus.Client.V2.Responses.Dml;
 
 var config = new ConnectConfig
 {
-    Uri = "http://localhost:19530",
-    Username = "root",
-    Password = "Milvus"
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
 };
 using var client = new MilvusClientV2(config);
 await client.ConnectAsync();
@@ -169,8 +168,8 @@ Console.WriteLine(res.DeleteCount);
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/delete" \
@@ -289,8 +288,8 @@ Console.WriteLine(res.DeleteCount);
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/delete" \
@@ -416,8 +415,8 @@ Console.WriteLine(res.DeleteCount);
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/delete" \
