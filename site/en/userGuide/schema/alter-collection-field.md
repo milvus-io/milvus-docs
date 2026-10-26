@@ -16,6 +16,8 @@ This page covers field property changes, not schema-shape changes such as adding
 
 - Each collection can have only one partition key. Once set during collection creation, you cannot change the partition key.
 
+- For a [StructArray](array-of-structs.md) field or one of its subfield paths, such as `chunks[text]`, you can alter only `mmap.enabled`, `field.description`, and `warmup`. Other properties, such as `max_capacity` and `max_length`, are rejected.
+
 </div>
 
 ## Alter VarChar field
