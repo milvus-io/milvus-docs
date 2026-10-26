@@ -24,6 +24,8 @@ This guide covers schema changes for user-defined fields and for Functions with 
 
 - Adding StructArray fields is supported in Milvus 3.0.0 and later. Added StructArray fields must be nullable.
 
+- Adding a sub-field to an existing StructArray field is supported in Milvus 3.1.0 and later. The added sub-field must have `element_nullable=True`, cannot have a default value, and cannot be bound to an index in the same request.
+
 - Field names must be unique among fields in the collection.
 
 **Add a Function and its generated vector field**
@@ -44,7 +46,7 @@ This guide covers schema changes for user-defined fields and for Functions with 
 
 - You cannot drop the primary key field, partition key field, clustering key field, or the last vector field in a collection.
 
-- You can drop a whole `ARRAY<STRUCT>` field, but you cannot drop an individual sub-field inside an `ARRAY<STRUCT>` field.
+- You can drop a whole `ARRAY<STRUCT>` field. Starting in Milvus 3.1.0, you can also drop an individual sub-field by its path, such as `chunks[lang]`, except the last sub-field of the `ARRAY<STRUCT>` field.
 
 - You cannot directly drop a field that is used as a Function input field or generated as a Function output field. To remove a Function output field, drop the Function that generates it.
 
@@ -69,6 +71,8 @@ Choose the workflow based on whether you are adding a user-defined field or a Fu
 - [Add user-defined scalar fields](#add-user-defined-scalar-fields--milvus-26x) when you need new metadata for filtering, query output, or application logic.
 
 - [Add StructArray fields](#add-structarray-fields--milvus-300) when you need an array field whose elements share the same Struct schema.
+
+- [Add a sub-field to an existing StructArray field](#add-a-sub-field-to-an-existing-structarray-field--milvus-310) when existing Struct elements need a new attribute.
 
 - [Add user-defined vector fields](#add-user-defined-vector-fields--milvus-2618) when your application generates embeddings and writes vector values to Milvus.
 
@@ -174,7 +178,53 @@ client.add_collection_struct_field(
 # highlight-end
 ```
 
-After the StructArray field is added, entities that already exist in the collection return `NULL` for `chunks` across all its sub-fields. When you insert a new entity, ensure that all sub-fields are either `NULL` or have valid values. Inserting an entity with some sub-fields set to `NULL` and others set to valid values results in errors.
+After the StructArray field is added, entities that already exist in the collection return `NULL` for `chunks` across all its sub-fields. When you insert a new entity, every Struct element must provide a value for every sub-field, and a Struct element itself cannot be `NULL`. Starting in Milvus 3.1.0, sub-fields created with `element_nullable=True` may hold `NULL` in individual Struct elements; for details, refer to [Create a StructArray Field](create-structarray-field.md#allow-null-values-in-struct-elements--milvus-310).
+
+### Add a sub-field to an existing StructArray field | Milvus 3.1.0
+
+Use `add_collection_field()` with the sub-field path as the field name to add a sub-field to a StructArray field that already holds data. To add a sub-field, do as follows:
+
+1. Name the field with the path `structArrayField[subField]`, such as `chunks[lang]`.
+
+1. Choose a scalar, vector, or scalar array data type supported by StructArray.
+
+1. Set `element_nullable=True` in the request. The sub-field inherits the row-level `nullable` setting and the `max_capacity` of the StructArray field.
+
+**Example: Add an element-nullable sub-field**
+
+```python
+from pymilvus import DataType, MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530")
+
+# highlight-start
+client.add_collection_field(
+    collection_name="books",
+    field_name="chunks[lang]",
+    data_type=DataType.VARCHAR,
+    max_length=16,
+    element_nullable=True,
+)
+# highlight-end
+```
+
+After the sub-field is added, entities that already exist return `NULL` for `chunks[lang]` in each of their Struct elements, and entities whose `chunks` field is `NULL` stay `NULL`. New entities can omit the sub-field or set it to `NULL` in any Struct element.
+
+The following rules apply:
+
+- The added sub-field must have `element_nullable=True` and cannot have a default value.
+
+- You cannot bind an index while adding the sub-field. Create the index with a separate `create_index()` call. An added vector sub-field supports element-level metrics only, not `MAX_SIM*`, and the collection must have an index on it before you load the collection with the new sub-field included.
+
+- Adding a sub-field to a loaded collection does not release the collection. Queries can return the new sub-field before its index exists.
+
+- Clients that pin a schema timestamp receive a schema-mismatch error and must refresh, as for any added field.
+
+<div class="alert note">
+
+In the Go SDK, call `AddCollectionField` with a field named `chunks[lang]`; in the RESTful API, call `fields/add` with `"fieldName": "chunks[lang]"` and `"elementNullable": true`.
+
+</div>
 
 ### Add user-defined vector fields | Milvus 2.6.18+
 
@@ -396,6 +446,27 @@ client.drop_collection_field(
 
 If `image_vector` is the last vector field in the collection, the drop operation is rejected.
 
+### Drop a StructArray sub-field | Milvus 3.1.0
+
+Starting in Milvus 3.1.0, you can drop an individual sub-field from a StructArray field with `drop_collection_field()` by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in [When is storage space reclaimed after dropping a field?](#when-is-storage-space-reclaimed-after-dropping-a-field).
+
+The following example assumes that `chunks` is a StructArray field in `my_collection` with a `lang` sub-field, and drops only that sub-field.
+
+```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530")
+
+# highlight-start
+client.drop_collection_field(
+    collection_name="my_collection",
+    field_name="chunks[lang]",
+)
+# highlight-end
+```
+
+You cannot drop the last sub-field of a StructArray field, the last vector field of the collection, or a sub-field used by a Function. To remove the whole StructArray field, drop it by name, as shown in the previous example. After a sub-field is dropped, insert and upsert requests that still carry the sub-field are rejected.
+
 <a id="drop-vector-fields-generated-by-functions--milvus-30x"></a>
 
 ### Drop a Function and its generated vector field | Milvus 3.0.x
@@ -447,7 +518,7 @@ For a user-defined scalar field, existing entities return `NULL` unless you set 
 
 For a user-defined vector field, existing entities have `NULL` for the new vector field. Vector search on the added field skips entities whose vector value is `NULL`. To make existing entities searchable through the new vector field, write non-NULL vector values through upsert or a backfill workflow. New entities can include the new vector field during insert.
 
-For a StructArray field, existing entities return `NULL` for the new StructArray field across all its sub-fields. New entities must provide either `NULL` for all sub-fields or valid values for all sub-fields.
+For a StructArray field, existing entities return `NULL` for the new StructArray field across all its sub-fields. New entities must provide either `NULL` for the whole field or a valid value for every sub-field in every Struct element, except sub-fields created with `element_nullable=True` in Milvus 3.1.0 and later. For a sub-field added to an existing StructArray field, existing entities return `NULL` for that sub-field in each Struct element.
 
 ### Can I add BM25 lexical search to an existing collection?
 

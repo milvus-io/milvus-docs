@@ -185,14 +185,67 @@ client.insert(
 )
 ```
 
-When a nullable StructArray field contains a valid StructArray value, all subfields in that value should either be null or have valid values. Inserting an entity with some subfields set to null and others set to valid values results in an error.
+A Struct element itself cannot be null. In Milvus v3.0.x, every Struct element in a valid StructArray value must provide a value for every subfield. Starting in Milvus 3.1.0, subfields created with `element_nullable=True` can hold null values in individual Struct elements, as described in the next section.
 
 <div class="alert note">
 
 Warning
-Nullable StructArray fields are available only in Milvus v3.0.x. If you dynamically add a StructArray field to an existing collection, the added field must be nullable, and existing entities return `null` for the new field across all its subfields.
+Nullable StructArray fields are available only in Milvus v3.0.x and later. If you dynamically add a StructArray field to an existing collection, the added field must be nullable, and existing entities return `null` for the new field across all its subfields.
 
 </div>
+
+## Insert null values for individual Struct elements | Milvus 3.1.0
+
+Starting in Milvus 3.1.0, a subfield created with `element_nullable=True` can hold a null value in some Struct elements and a valid value in others. The following example assumes that the `chunks` Struct schema also defines a `lang` VARCHAR subfield and a `tags` array subfield, both with `element_nullable=True`. For the schema definition, see [Create a StructArray Field](create-structarray-field.md).
+
+In a Struct element, set an element-nullable subfield to `None` or omit it. Both store a null value.
+
+```python
+client.insert(
+    collection_name="tech_articles",
+    data=[
+        {
+            "doc_id": 11,
+            "title": "Chunks with missing attributes",
+            "category": "search",
+            "title_vector": [0.07, 0.11, 0.17, 0.21],
+            "chunks": [
+                {
+                    "text": "Detected language and tags are present.",
+                    "section": "search",
+                    "page": 1,
+                    "quality_score": 0.90,
+                    "has_code": False,
+                    "lang": "en",
+                    "tags": ["search", "tuning"],
+                    "emb_list_vector": [0.12, 0.22, 0.32, 0.42],
+                    "emb": [0.12, 0.22, 0.32, 0.42],
+                },
+                {
+                    "text": "Language is unknown and tags are omitted.",
+                    "section": "search",
+                    "page": 2,
+                    "quality_score": 0.84,
+                    "has_code": False,
+                    "lang": None,
+                    "emb_list_vector": [0.14, 0.24, 0.34, 0.44],
+                    "emb": [0.14, 0.24, 0.34, 0.44],
+                },
+            ],
+        }
+    ],
+)
+```
+
+In the second Struct element, `lang` is explicitly null and `tags` is omitted, so Milvus stores null for both in that element. The other subfields still require a value in every Struct element, and a Struct element itself cannot be null. On an array subfield, `None` stores a null inner array, while `[]` stores an empty inner array.
+
+Null subfield values behave as follows in later operations:
+
+- Query results return `null` for the subfield value in that element.
+
+- In filters, a null value makes the element predicate unknown rather than false. Use `$[lang] is null` or `$[lang] is not null` inside `element_filter` or `MATCH_*` to test it. For details, see [StructArray Operators](struct-array-operators.md).
+
+- Null vectors in an element-nullable vector subfield do not participate in search.
 
 ## Validate inserted data
 
@@ -223,7 +276,7 @@ Use StructArray field paths, such as `chunks[text]`, only when you query, search
 | --- | --- |
 | Use an array of objects for a StructArray field. | The value of `chunks` is a list, and each item in the list is a Struct element. |
 | Use subfield names inside each Struct element. | Insert `{"text": "...", "emb": [...]}` inside `chunks`, not `{"chunks[text]": "..."}`. |
-| Match the Struct schema. | Each Struct element must use the subfields defined in the Struct schema. |
+| Match the Struct schema. | Each Struct element must use the subfields defined in the Struct schema. Starting in Milvus 3.1.0, a subfield with `element_nullable=True` can be omitted or set to `None` in a Struct element. |
 | Match vector dimensions. | Vector values must match the `dim` configured for their vector subfields. |
 | Respect `max_capacity`. | The number of Struct elements in one entity must not exceed the `max_capacity` of the StructArray field. |
 | Use separate vector subfields for separate search modes. | If both EmbeddingList search and element-level search are required, write vector values to both vector subfields. |
@@ -233,13 +286,13 @@ Use StructArray field paths, such as `chunks[text]`, only when you query, search
 
 - Using field paths such as `chunks[text]` in insert payloads.
 
-- Omitting required subfields from a Struct element.
+- Omitting a subfield that is not element-nullable from a Struct element.
 
 - Inserting vectors with the wrong dimension.
 
 - Inserting more Struct elements than `max_capacity` allows.
 
-- Setting only one subfield to `null` while other subfields in the same StructArray value are valid.
+- Setting a subfield to `None` in a Struct element when the subfield is not element-nullable, or inserting a null Struct element such as `[None, {...}]`.
 
 - Writing vectors only to `emb_list_vector` and then trying to run element-level search on `chunks[emb]`.
 

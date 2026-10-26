@@ -89,7 +89,7 @@ There are several special notes you should consider before using the merge featu
 
 - **Upsert a StructArray field.**
 
-    Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode.
+    Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode. Starting in Milvus 3.1.0, you can omit subfields created with `element_nullable=True`; Milvus stores null for them in that Struct element.
 
     For details, refer to [Upsert StructArray field in merge mode](upsert-entities.md#Upsert-StructArray-field-in-merge-mode).
 
@@ -889,7 +889,7 @@ print(res)
 
 ## Upsert StructArray field in merge mode
 
-Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field.
+Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field. Starting in Milvus 3.1.0, subfields created with `element_nullable=True` can be omitted or set to `None` in a Struct element, and Milvus stores null for them. A request that still carries a dropped subfield is rejected.
 
 The following example demonstrates how to upsert the `chunks` field in merge mode, a StructArray field with 6 subfields. When the operation completes, the `chunks` field of the entity with id 1 is set to the array with the two-element structs provided in the request.
 
