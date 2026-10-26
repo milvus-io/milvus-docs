@@ -1,5 +1,6 @@
 ---
 id: idempotent-import.md
+order: 2
 title: "Idempotent Bulk Import"
 summary: "Send an idempotency key so that a retried bulk import resolves to the original job instead of creating a second one."
 ---
@@ -24,7 +25,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/jobs/import/create" \
   -d '{"collectionName": "events", "files": [["events/2026-09-07/part-0.parquet"]]}'
 ```
 
-<!-- TODO: the `headers` parameter and `IDEMPOTENCY_KEY_HEADER` are merged but not released: milvus-io/pymilvus#3784 (master), milvus-io/pymilvus#3807 (3.0), milvus-io/pymilvus#3808 (2.6). They are expected in pymilvus v3.0.3 and v2.6.18. After those tags exist, verify this example against the released API and name the minimum pymilvus version for each release line in the paragraph below. -->
+<!-- TODO: the `headers` parameter and `IDEMPOTENCY_KEY_HEADER` are merged but not released: milvus-io/pymilvus#3784 (master), milvus-io/pymilvus#3807 (3.0), milvus-io/pymilvus#3808 (2.6). They are expected in pymilvus v3.0.3 and v2.6.18. After those tags exist, verify this example against the released API. -->
 ```python
 from pymilvus.bulk_writer import IDEMPOTENCY_KEY_HEADER, bulk_import
 
@@ -37,7 +38,7 @@ resp = bulk_import(
 resp.json()["data"]["jobId"]   # the same id on every retry
 ```
 
-`IDEMPOTENCY_KEY_HEADER` is `"Idempotency-Key"`; the raw string works too. A pymilvus older than the one that added the `headers` parameter does not fall back to a plain import. The `import` line above raises `ImportError`. With the raw string, `bulk_import` raises `MilvusException`. In both cases nothing is submitted.
+`IDEMPOTENCY_KEY_HEADER` is `"Idempotency-Key"`; the raw string works too. The `headers` parameter requires a recent pymilvus: v3.0.3 or later on the 3.x line, or v2.6.18 or later on the 2.6 line. Both were pending release when this page was written. On an older pymilvus, the `import` line above fails with an `ImportError` at the `IDEMPOTENCY_KEY_HEADER` lookup, and what passing `headers` to `bulk_import` does is undefined — the call may error, or the import may be submitted without the key. Check your pymilvus version before relying on the key.
 
 Poll `/v2/vectordb/jobs/import/describe` with the returned `jobId` as usual. A retry that arrives while the original is still being registered waits for it, so a retry never observes a half-registered job.
 
@@ -73,6 +74,6 @@ Four parameters bound the behavior on this page. None of them needs changing for
 | `streaming.walBroadcaster.tombstone.maxLifetime` | `24h` | How long an import key is remembered. Not present in the default `milvus.yaml`; add it explicitly to change it. The same store also rejects duplicate DDL submissions, so do not lower it just to shorten the import window. |
 | `streaming.walBroadcaster.tombstone.maxCount` | `8192` | How many keys and DDL records the same store holds before the oldest are dropped, whatever their age. This is what lets heavy DDL or import traffic forget a key before `maxLifetime`. Not present in the default `milvus.yaml`. |
 | `dataCoord.import.taskRetention` | `172800` (48 hours) since 2.6.24 and 3.0.2; `10800` before | How long a finished import job stays queryable. Keep it at least twice `maxLifetime`. |
-| `streaming.idempotency.maxKeyLength` | `256` | The maximum key length in bytes. A longer key is rejected with error `1100`. `0` rejects every key. Not present in the default `milvus.yaml`. |
+| `streaming.idempotency.maxKeyLength` | `256` | The maximum key length in bytes. A longer key is rejected with error `1100`. `0` disables the bound. Not present in the default `milvus.yaml`. |
 
 The `milvus.yaml` shipped before 2.6.24 and 3.0.2 sets `taskRetention: 10800` explicitly, and an upgrade does not override a value in your file. If you upgraded with that file, raise `taskRetention` to at least twice `maxLifetime`. The new value applies only to jobs that finish after the change.
