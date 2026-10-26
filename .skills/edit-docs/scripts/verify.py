@@ -21,6 +21,13 @@ run exits non-zero instead of printing a vacuous OK:
 3. NEW pages (untracked) under site/en/integrations/ or site/en/tutorials/
    whose id appears in the menu: must also be referenced in the matching
    overview table (integrations_overview.md / tutorials-overview.md).
+4. timeless-writing check on the ADDED lines of changed pages (whole file for
+   new pages): writing-time self-reference ("when this page was written"),
+   release-status narration ("pending release", "not yet released",
+   "expected in v3.0.3") and future-release phrasing fail the run; rot-prone
+   words ("currently", "recently", "the latest version", ...) are reported as
+   warnings. Front matter, fenced code blocks, and HTML comments are exempt —
+   a TODO comment may say "not yet released"; the prose may not.
 
 Run from the repository root before committing, or with ``--diff <rev>``
 after committing.
@@ -134,6 +141,96 @@ def frontmatter_id(path):
     return idm.group(1).strip() if idm else None
 
 
+# Prose that goes stale the day a tag lands (see "Timeless writing" in
+# references/doc-standards.md). The blocking tier is high-precision narration;
+# the warning tier is softer phrasing that deserves a look.
+TIMELESS_BLOCKING = [
+    (re.compile(r"when this (?:page|document|doc|guide|section) was written"), "writing-time self-reference"),
+    (re.compile(r"at the time of (?:this )?writing"), "writing-time self-reference"),
+    (re.compile(r"as of (?:this )?writing"), "writing-time self-reference"),
+    (re.compile(r"pending release"), "release-status narration"),
+    (re.compile(r"not yet (?:been )?(?:released|shipped|published|generally available)"), "release-status narration"),
+    (re.compile(r"expected in (?:pymilvus |milvus |Milvus |PyMilvus )?v?\d"), "release-status narration"),
+    (re.compile(r"will (?:be released|ship|become available|land in)"), "future-release narration"),
+]
+TIMELESS_WARNINGS = [
+    (re.compile(r"\bcurrently\b", re.I), '"currently" rots — name the version or behavior instead'),
+    (re.compile(r"\b(?:for now|at the moment|right now|as of today)\b", re.I), "time-sensitive phrase — prefer timeless wording"),
+    (re.compile(r"\b(?:recently|newly)\b|\ba recent\b", re.I), "relative time — anchor to a version"),
+    (re.compile(r"\b(?:upcoming|soon)\b", re.I), "future-event narration"),
+    (re.compile(r"\bthe latest version\b", re.I), "unpinned version reference — name the minimum version"),
+]
+
+
+def prose_lines(path):
+    """1-based line numbers of prose lines: front matter, fenced code blocks,
+    and HTML comments excluded (those may legitimately mention releases)."""
+    try:
+        lines = open(path, encoding="utf-8").read().splitlines()
+    except OSError:
+        return set()
+    prose, in_front, in_fence, in_comment = set(), False, False, False
+    for i, line in enumerate(lines, start=1):
+        s = line.strip()
+        if i == 1 and s == "---":
+            in_front = True
+            continue
+        if in_front:
+            in_front = s != "---"
+            continue
+        if in_comment:
+            if "-->" in s:
+                in_comment = False
+            continue
+        if s.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        if "<!--" in s:
+            in_comment = "-->" not in s.split("<!--", 1)[1]
+            continue
+        prose.add(i)
+    return prose
+
+
+def added_lines(base, path):
+    """(lineno, text) of lines added in `path` relative to `base`, comparing
+    the working tree so pre-commit and post-commit runs behave alike."""
+    added, lineno = [], None
+    for line in git("diff", "--unified=0", base, "--", path).splitlines():
+        if line.startswith("@@"):
+            m = re.search(r"\+(\d+)", line)
+            lineno = int(m.group(1)) if m else None
+        elif lineno is not None and line.startswith("+") and not line.startswith("+++"):
+            added.append((lineno, line[1:]))
+            lineno += 1
+    return added
+
+
+def check_timeless(pages, untracked, base, errors, warnings):
+    """Flag time-sensitive narration on added lines of changed pages."""
+    seen = set()
+    for p in pages:
+        if p in untracked:
+            try:
+                candidates = list(enumerate(open(p, encoding="utf-8").read().splitlines(), start=1))
+            except OSError:
+                continue
+        else:
+            candidates = added_lines(base, p)
+        prose = prose_lines(p)
+        for lineno, text in candidates:
+            if lineno not in prose:
+                continue
+            for tier, patterns in (("timeless", TIMELESS_BLOCKING), ("timeless-warn", TIMELESS_WARNINGS)):
+                for rx, reason in patterns:
+                    if rx.search(text) and (p, lineno, tier, reason) not in seen:
+                        seen.add((p, lineno, tier, reason))
+                        msg = f"{p}:{lineno}: {tier}({reason}): {text.strip()[:120]}"
+                        (errors if tier == "timeless" else warnings).append(msg)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--menu", default=MENU)
@@ -162,6 +259,8 @@ def main():
             errors.append(f"{p}: missing front matter or missing 'id' field")
         elif fid != name:
             errors.append(f"{p}: front matter id {fid!r} != filename {name!r}")
+
+    check_timeless(pages, untracked, base, errors, warnings)
 
     if untracked:
         menu_text = open(args.menu, encoding="utf-8").read()
