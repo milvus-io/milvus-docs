@@ -195,7 +195,7 @@ Sorted by:
 
 </div>
 
-For other parameters specifically to Kubernetes installation, See [Milvus Helm Chart Configuration](https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration).
+For other parameters specifically to Kubernetes installation, See [Milvus Helm Chart Configuration](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus#configuration).
 
 ### Start Milvus
 
@@ -206,6 +206,12 @@ $ helm upgrade my-release milvus/milvus -f values.yaml
 ```
 
 ## Configure multiple Deployments and strict resource group isolation
+
+<div class="alert note">
+
+> Deployment groups require a Milvus Helm chart release that supports them. Chart releases up to and including v5.0.x silently ignore the `groups` field and render a single Deployment per component. Check your chart's [README](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) before using the configuration on this page.
+
+</div>
 
 Milvus Helm charts can split selected Milvus components into multiple Kubernetes Deployments. This is useful when you want to place different pods in different availability zones (AZs), attach different Kubernetes labels to each Deployment, or assign QueryNode and StreamingNode pods to static Milvus resource groups.
 
@@ -421,11 +427,13 @@ ETCDCTL_API=3 etcdctl --endpoints=http://<etcd-endpoint>:2379 put \
   by-dev/config/queryCoord.clusterLevelLoadResourceGroups rg-green-a,rg-green-b
 ```
 
-After the new load plan becomes compliant, remove the blue QueryNode and StreamingNode deployment groups with another Helm upgrade.
+Before removing the blue groups, check that the new load plan is compliant:
 
 ```bash
 curl http://<mixcoord-management-endpoint>/management/replica/loadconfig/compliance
 ```
+
+After the load plan becomes compliant, remove the blue QueryNode and StreamingNode deployment groups with another Helm upgrade.
 
 ## Configure Milvus via command line
 

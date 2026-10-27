@@ -46,6 +46,12 @@ Of course, if the number of QueryNodes in the cluster changes, the Milvus will c
 
 ## Use environment-variable-based static resource groups
 
+<div class="alert note">
+
+> Setting `MILVUS_SERVER_LABEL_RESOURCE_GROUP` through Helm deployment groups requires a Milvus Helm chart release that supports [deployment groups](configure-helm.md#Configure-multiple-Deployments-and-strict-resource-group-isolation). Chart releases up to and including v5.0.x silently ignore the `groups` field. On other Kubernetes setups, set the environment variable directly in the pod spec.
+
+</div>
+
 In Kubernetes deployments, the recommended way to keep QueryNode and StreamingNode placement stable is to assign a static resource group label through an environment variable. Set `MILVUS_SERVER_LABEL_RESOURCE_GROUP` on the pod, and Milvus registers the node session with the `RESOURCE_GROUP` server label.
 
 For QueryNodes, Milvus uses this server label as the node's resource group. If the named resource group does not exist when the labeled QueryNode joins the cluster, Milvus creates it automatically with `requests.nodeNum` set to `0` and a high `limits.nodeNum` value. You can still use the declarative resource group API to adjust the resource group config later.
