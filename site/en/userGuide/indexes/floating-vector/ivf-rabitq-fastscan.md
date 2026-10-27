@@ -67,6 +67,8 @@ Once the index is built and entities are inserted, you can perform similarity se
 Set `nprobe` to control how many IVF clusters are searched. If the index was built with refinement, use `refine_k` to control the candidate pool passed to the FP32 refiner.
 
 ```python
+client = MilvusClient(uri="http://localhost:19530") # Replace with your Milvus server address
+
 search_params = {
     # highlight-start
     "params": {
@@ -76,9 +78,9 @@ search_params = {
     # highlight-end
 }
 
-res = MilvusClient.search(
+res = client.search(
     collection_name="your_collection_name", # Collection name
-    anns_field="vector_field", # Vector field name
+    anns_field="your_vector_field_name", # Vector field name
     data=[[0.1, 0.2, 0.3, 0.4, 0.5]], # Query vector
     limit=3, # TopK results to return
     # highlight-next-line
