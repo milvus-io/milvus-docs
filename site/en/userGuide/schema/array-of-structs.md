@@ -81,14 +81,14 @@ Use the following matrix to choose the right StructArray path.
 <table>
   <thead>
     <tr>
-      <th scope="col"><h3>EmbeddingList search</h3></th>
-      <th scope="col"><h3>Element-level search</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">EmbeddingList search</h3></th>
+      <th scope="col"><h3 id="element-level-search">Element-level search</h3></th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <p>EmbeddingList search treats the vectors inside a StructArray vector subfield as one embedding list for the parent entity. The query is also an embedding list. Milvus compares the query embedding list with the stored embedding list by using a <code>MAX_SIM*</code> metric and returns matching entities.</p>
+        <p>EmbeddingList search treats the vectors inside a StructArray vector subfield as one embedding list for the parent entity. The query is also an embedding list. {{var.product_name}} compares the query embedding list with the stored embedding list by using a <code>MAX_SIM*</code> metric and returns matching entities.</p>
         <ul>
           <li>Query data: embedding list.</li>
           <li>Metric family: <code>MAX_SIM*</code>.</li>
