@@ -289,7 +289,7 @@ client = MilvusClient(
 )
 
 # Sample text to analyze
-sample_text = "The vector database is built for scale!"
+sample_text = "The Milvus vector database is built for scale!"
 
 # Run the standard analyzer with the defined configuration
 result = client.run_analyzer(sample_text, analyzer_params)
@@ -312,7 +312,7 @@ ConnectConfig config = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(config);
 
 List<String> texts = new ArrayList<>();
-texts.add("The vector database is built for scale!");
+texts.add("The Milvus vector database is built for scale!");
 
 RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
         .texts(texts)
@@ -339,7 +339,7 @@ if err != nil {
     // handle error
 }
 
-texts := []string{"The vector database is built for scale!"}
+texts := []string{"The Milvus vector database is built for scale!"}
 option := milvusclient.NewRunAnalyzerOption(texts...).
     WithAnalyzerParams(analyzerParams)
 
@@ -359,7 +359,7 @@ let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.e
 
 let client = ClientV2::new(&config).await?;
 
-let sample_text = "The vector database is built for scale!";
+let sample_text = "The Milvus vector database is built for scale!";
 
 let result = client
     .run_analyzer(
@@ -385,7 +385,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-std::string text = "The vector database is built for scale!";
+std::string text = "The Milvus vector database is built for scale!";
 auto request = milvus::RunAnalyzerRequest()
                        .AddText(text)
                        .WithAnalyzerParams(analyzer_params);
@@ -402,7 +402,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const client = new MilvusClient({ address: "{{var.example_endpoint}}", token: "{{var.example_token}}" });
 
-const sampleText = "The vector database is built for scale!";
+const sampleText = "The Milvus vector database is built for scale!";
 
 const result = await client.runAnalyzer({
     text: sampleText,
@@ -425,7 +425,7 @@ MilvusClientV2 client = new(new ConnectConfig
 });
 
 // Sample text to analyze
-string sampleText = "The vector database is built for scale!";
+string sampleText = "The Milvus vector database is built for scale!";
 
 // Run the standard analyzer with the defined configuration
 RunAnalyzerResp result = await client.RunAnalyzerAsync(new RunAnalyzerReq
@@ -451,7 +451,7 @@ curl --request POST \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
 -d '{
-    "text": ["The vector database is built for scale!"],
+    "text": ["The Milvus vector database is built for scale!"],
     "analyzerParams": "{\"tokenizer\": \"standard\", \"filter\": [\"lowercase\"]}"
 }'
 ```
@@ -459,5 +459,5 @@ curl --request POST \
 ### Expected output
 
 ```plaintext
-['the', 'vector', 'database', 'is', 'built', 'for', 'scale']
+['the', 'milvus', 'vector', 'database', 'is', 'built', 'for', 'scale']
 ```
