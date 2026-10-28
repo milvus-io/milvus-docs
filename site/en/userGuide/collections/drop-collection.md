@@ -154,6 +154,7 @@ console.log(res.error_code);
 
 ```csharp
 using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
 using Milvus.Client.V2.Requests.Collection;
 
 const string CLUSTER_ENDPOINT = "{{var.example_endpoint}}";
