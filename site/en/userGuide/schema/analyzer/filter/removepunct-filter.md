@@ -329,6 +329,7 @@ console.log("Analyzer output:", result);
 
 ```csharp
 using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
 using Milvus.Client.V2.Requests.Utility;
 using Milvus.Client.V2.Responses.Utility;
 
