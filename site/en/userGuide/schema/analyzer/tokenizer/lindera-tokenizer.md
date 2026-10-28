@@ -56,11 +56,10 @@ This two-stage process—segmentation followed by POS-based filtering—enables 
 
 ## Prerequisites
 
-<div class="alert note">
+Milvus 2.6 and later include all dictionaries pre-compiled in the official release.
 
-**Milvus 2.6+ users**: You can skip this section. All dictionaries are pre-compiled and included in the official release.
-
-</div>
+<details>
+<summary>Milvus 2.5.x: Compile Milvus with dictionaries</summary>
 
 For Milvus 2.5.x, you need to compile Milvus with specific dictionaries enabled. All dictionaries must be explicitly included during compilation.
 
@@ -110,6 +109,8 @@ For example, to enable all dictionaries:
 ```bash
 make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
 ```
+
+</details>
 
 <!-- doc:block:end id="lindera-compile-prerequisites" -->
 
