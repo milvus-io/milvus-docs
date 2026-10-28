@@ -1,12 +1,12 @@
 ---
 id: standard-tokenizer.md
 title: "Standard Tokenizer"
-summary: "The standard tokenizer in Milvus groups consecutive Unicode letters and numeric characters into tokens, splitting at other characters."
+summary: "The standard tokenizer in {{var.product_name}} groups consecutive Unicode letters and numeric characters into tokens, splitting at other characters."
 ---
 
 # Standard Tokenizer
 
-The `standard` tokenizer in Milvus groups consecutive Unicode letters and numeric characters into tokens, splitting at other characters.
+The `standard` tokenizer in {{var.product_name}} groups consecutive Unicode letters and numeric characters into tokens, splitting at other characters.
 
 ## Tokenization rules
 
@@ -42,8 +42,11 @@ To configure an analyzer using the `standard` tokenizer, set `tokenizer` to `sta
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -54,8 +57,27 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "standard");
+```
+
+```go
+analyzerParams := map[string]any{"tokenizer": "standard"}
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard"
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"}
+};
 ```
 
 ```javascript
@@ -64,8 +86,13 @@ const analyzer_params = {
 };
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "standard"}
+```csharp
+using System.Collections.Generic;
+
+Dictionary<string, object> analyzerParams = new()
+{
+    ["tokenizer"] = "standard"
+};
 ```
 
 ```bash
@@ -80,8 +107,11 @@ The `standard` tokenizer can work in conjunction with one or more filters. For e
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -93,9 +123,31 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "standard");
 analyzerParams.put("filter", Collections.singletonList("lowercase"));
+```
+
+```go
+analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
 ```
 
 ```javascript
@@ -105,8 +157,14 @@ const analyzer_params = {
 };
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
+```csharp
+using System.Collections.Generic;
+
+Dictionary<string, object> analyzerParams = new()
+{
+    ["tokenizer"] = "standard",
+    ["filter"] = new List<object> { "lowercase" }
+};
 ```
 
 ```bash
@@ -125,7 +183,7 @@ For simpler setup, you may choose to use the [`standard`](standard-analyzer.md) 
 
 </div>
 
-After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
+After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows {{var.product_name}} to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
 ## Examples
 
@@ -136,8 +194,11 @@ Before applying the analyzer configuration to your collection schema, verify its
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -149,21 +210,59 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "standard");
 analyzerParams.put("filter", Collections.singletonList("lowercase"));
 ```
 
-```javascript
-// javascript
+```go
+analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
+```
+
+```javascript
+const analyzer_params = {
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+};
+```
+
+```csharp
+using System.Collections.Generic;
+
+Dictionary<string, object> analyzerParams = new()
+{
+    ["tokenizer"] = "standard",
+    ["filter"] = new List<object> { "lowercase" }
+};
 ```
 
 ```bash
 # restful
+
+analyzerParams='{
+  "tokenizer": "standard",
+  "filter": [
+    "lowercase"
+  ]
+}'
 ```
 
 ### Verification using `run_analyzer`
@@ -171,8 +270,11 @@ analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowerc
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -182,12 +284,12 @@ from pymilvus import (
 )
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 # Sample text to analyze
-sample_text = "The Milvus vector database is built for scale!"
+sample_text = "The vector database is built for scale!"
 
 # Run the standard analyzer with the defined configuration
 result = client.run_analyzer(sample_text, analyzer_params)
@@ -195,19 +297,22 @@ print("Standard analyzer output:", result)
 ```
 
 ```java
+import java.util.ArrayList;
+import java.util.List;
+
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.RunAnalyzerReq;
 import io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
 ConnectConfig config = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 
 List<String> texts = new ArrayList<>();
-texts.add("The Milvus vector database is built for scale!");
+texts.add("The vector database is built for scale!");
 
 RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
         .texts(texts)
@@ -216,29 +321,25 @@ RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
 List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
-```javascript
-// javascript
-```
-
 ```go
 import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx := context.Background()
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
-    APIKey:  "root:Milvus",
+    Address: "{{var.example_endpoint}}",
+    APIKey:  "{{var.example_token}}",
 })
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
 
-texts := []string{"The Milvus vector database is built for scale!"}
+texts := []string{"The vector database is built for scale!"}
 option := milvusclient.NewRunAnalyzerOption(texts...).
     WithAnalyzerParams(analyzerParams)
 
@@ -247,15 +348,116 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+fmt.Println(result)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.example_token}}");
+
+let client = ClientV2::new(&config).await?;
+
+let sample_text = "The vector database is built for scale!";
+
+let result = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(vec![sample_text])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
+
+println!("Standard analyzer output: {:?}", result);
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+std::string text = "The vector database is built for scale!";
+auto request = milvus::RunAnalyzerRequest()
+                       .AddText(text)
+                       .WithAnalyzerParams(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({ address: "{{var.example_endpoint}}", token: "{{var.example_token}}" });
+
+const sampleText = "The vector database is built for scale!";
+
+const result = await client.runAnalyzer({
+    text: sampleText,
+    analyzer_params,
+});
+
+console.log("Standard analyzer output:", result);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
+
+MilvusClientV2 client = new(new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
+});
+
+// Sample text to analyze
+string sampleText = "The vector database is built for scale!";
+
+// Run the standard analyzer with the defined configuration
+RunAnalyzerResp result = await client.RunAnalyzerAsync(new RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = [sampleText]
+});
+
+foreach (AnalyzerToken t in result.Results.SelectMany(r => r.Tokens))
+{
+    Console.WriteLine(t.Token);
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "text": ["The vector database is built for scale!"],
+    "analyzerParams": "{\"tokenizer\": \"standard\", \"filter\": [\"lowercase\"]}"
+}'
 ```
 
 ### Expected output
 
 ```plaintext
-['the', 'milvus', 'vector', 'database', 'is', 'built', 'for', 'scale']
+['the', 'vector', 'database', 'is', 'built', 'for', 'scale']
 ```
-
