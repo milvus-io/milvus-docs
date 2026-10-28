@@ -8,6 +8,12 @@ summary: "You can drop a collection if it is no longer needed."
 
 You can drop a collection if it is no longer needed.
 
+<div class="alert note">
+
+Unlike dropping a managed collection, which removes both the collection and the data, dropping an external collection only removes the collection and keeps the data intact.
+
+</div>
+
 ## Examples
 
 The following code snippets assume that you have a collection named **my_collection**.
@@ -15,8 +21,11 @@ The following code snippets assume that you have a collection named **my_collect
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -24,8 +33,8 @@ The following code snippets assume that you have a collection named **my_collect
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 client.drop_collection(
@@ -38,10 +47,10 @@ import io.milvus.v2.service.collection.request.DropCollectionReq;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 
-String CLUSTER_ENDPOINT = "http://localhost:19530";
-String TOKEN = "root:Milvus";
+String CLUSTER_ENDPOINT = "{{var.example_endpoint}}";
+String TOKEN = "{{var.example_token}}";
 
-// 1. Connect to Milvus server
+// 1. Connect to {{var.product_name}}
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -49,47 +58,26 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-DropCollectionReq dropQuickSetupParam = DropCollectionReq.builder()
+DropCollectionReq dropCollectionParam = DropCollectionReq.builder()
         .collectionName("my_collection")
         .build();
 
-client.dropCollection(dropQuickSetupParam);
-```
-
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const address = "http://localhost:19530";
-const token = "root:Milvus";
-const client = new MilvusClient({address, token});
-
-// 10. Drop the collection
-res = await client.dropCollection({
-    collection_name: "my_collection"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
+client.dropCollection(dropCollectionParam);
 ```
 
 ```go
 import (
     "context"
     "fmt"
-    "log"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    milvusclient "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "127.0.0.1:19530"
-token := "root:Milvus"
+milvusAddr := "{{var.example_endpoint}}"
+token := "{{var.example_token}}"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
@@ -108,9 +96,82 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}"),
+)
+.await?;
+
+client
+    .drop_collection(
+        DropCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->DropCollection(milvus::DropCollectionRequest()
+                                    .WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
+const client = new MilvusClient({address, token});
+
+const res = await client.dropCollection({
+    collection_name: "my_collection"
+});
+
+console.log(res.error_code);
+
+// Output
+//
+// Success
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+using Milvus.Client.V2.Requests.Collection;
+
+const string CLUSTER_ENDPOINT = "{{var.example_endpoint}}";
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = CLUSTER_ENDPOINT,
+    ApiKey = "{{var.example_token}}"
+});
+await client.ConnectAsync();
+
+await client.DropCollectionAsync(new DropCollectionReq { CollectionName = "my_collection" });
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/drop" \
@@ -126,4 +187,3 @@ curl --request POST \
 #     "data": {}
 # }
 ```
-
