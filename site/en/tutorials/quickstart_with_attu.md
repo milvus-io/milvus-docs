@@ -116,9 +116,10 @@ client = MilvusClient(uri="http://localhost:19530")
 
 collection_name = "attu_tutorial"
 
-# Use a new collection name to avoid deleting existing data.
+# Drop the tutorial collection if it exists so the steps can be rerun from the top.
+# Choose a different collection_name if "attu_tutorial" already holds data you want to keep.
 if client.has_collection(collection_name):
-    raise ValueError(f"Collection {collection_name!r} already exists. Choose a new name.")
+    client.drop_collection(collection_name)
 
 # Create a new collection
 client.create_collection(

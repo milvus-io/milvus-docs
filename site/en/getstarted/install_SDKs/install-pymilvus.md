@@ -12,9 +12,9 @@ This page describes how to install PyMilvus, the Python SDK for Milvus, and choo
 
 ## Requirements
 
-- PyMilvus 3.0.2 requires Python 3.9 or later for connecting to a remote Milvus server.
+- PyMilvus {{var.milvus_python_sdk_real_version}} requires Python 3.9 or later for connecting to a remote Milvus server.
 - The local Milvus Lite {{var.milvus_lite_version}} examples require Python 3.10 or later and a supported platform. See [Run Milvus Lite Locally](milvus_lite.md).
-- Install dependencies through `pip`. PyMilvus 3.0.2 requires `protobuf>=5.27.2`; do not separately pin `protobuf==3.20.0`. You do not need `grpcio-tools` to use the SDK.
+- Install dependencies through `pip`. PyMilvus {{var.milvus_python_sdk_real_version}} requires `protobuf>=5.27.2`; do not separately pin `protobuf==3.20.0`. You do not need `grpcio-tools` to use the SDK.
 
 ## Install PyMilvus via pip
 
@@ -42,7 +42,7 @@ For embedding helpers, install the separate `model` extra:
 python3 -m pip install "pymilvus[model]=={{var.milvus_python_sdk_real_version}}"
 ```
 
-The PyMilvus 3.0.2 `milvus-lite` extra excludes native Windows. Use a remote server from Windows, or follow the local Lite guide in WSL 2.
+On Windows, pip skips the `milvus-lite` extra of PyMilvus {{var.milvus_python_sdk_real_version}} because of its platform marker. The command above names `milvus-lite` explicitly, so it installs on Windows as long as wheels for `faiss-cpu` and `pyarrow` exist for your Python version.
 
 ## Verify installation
 

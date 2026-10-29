@@ -21,13 +21,13 @@ Choose one path: use Milvus Lite for a local example, or connect to a Milvus ser
 
 This guide uses Milvus Lite, an optional dependency of the PyMilvus Python SDK that runs locally. For a server deployment, see [Docker](install_standalone-docker.md) or [Kubernetes](install_cluster-milvusoperator.md).
 
-Use Python 3.10 or later on macOS or Linux, with binary wheels available for Milvus Lite's dependencies. The examples use PyMilvus {{var.milvus_python_sdk_real_version}} and Milvus Lite {{var.milvus_lite_version}}. Install both packages explicitly:
+Use Python 3.10 or later on macOS, Linux, or Windows, with binary wheels available for Milvus Lite's dependencies such as `faiss-cpu` and `pyarrow`. The examples use PyMilvus {{var.milvus_python_sdk_real_version}} and Milvus Lite {{var.milvus_lite_version}}. Install both packages explicitly:
 
 ```bash
 python3 -m pip install "pymilvus[milvus-lite]=={{var.milvus_python_sdk_real_version}}" "milvus-lite=={{var.milvus_lite_version}}"
 ```
 
-On Windows, use a remote Milvus server or run this local tutorial in WSL 2. For SDK-only installation requirements, see [Install Milvus Python SDK](install-pymilvus.md).
+On Windows, pip skips the `milvus-lite` extra of PyMilvus {{var.milvus_python_sdk_real_version}}; the command above names `milvus-lite` explicitly, so the local path works there as well. For SDK-only installation requirements, see [Install Milvus Python SDK](install-pymilvus.md).
 
 <div class="alert note">
 
@@ -37,7 +37,7 @@ On Windows, use a remote Milvus server or run this local tutorial in WSL 2. For 
 
 ### Use an existing Milvus server
 
-If you have already installed Milvus with Docker or Kubernetes, or have a Zilliz Cloud endpoint, install only the SDK. PyMilvus 3.0.2 requires Python 3.9 or later; you do not need the local Lite dependency for this path:
+If you have already installed Milvus with Docker or Kubernetes, or have a Zilliz Cloud endpoint, install only the SDK. PyMilvus {{var.milvus_python_sdk_real_version}} requires Python 3.9 or later; you do not need the local Lite dependency for this path:
 
 ```bash
 python3 -m pip install "pymilvus=={{var.milvus_python_sdk_real_version}}"
@@ -354,7 +354,7 @@ Milvus Lite is great for getting started with a local python program. If you hav
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
-To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite).
+To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](milvus_lite.md#Migrating-data-from-Milvus-Lite).
 
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
 

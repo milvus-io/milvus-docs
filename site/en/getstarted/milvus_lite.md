@@ -25,10 +25,10 @@ Milvus Lite uses the `MilvusClient` API for supported operations, including vect
 This guide uses PyMilvus **{{var.milvus_python_sdk_real_version}}** and Milvus Lite **{{var.milvus_lite_version}}**. Prepare the following environment:
 
 - Python 3.10 or newer. The local Lite backend has a higher minimum Python version than the remote PyMilvus client.
-- macOS or Linux, with compatible wheels for dependencies such as `faiss-cpu` and `pyarrow`. The operating system and architecture must satisfy those dependencies; the Lite package alone does not determine compatibility.
+- macOS, Linux, or Windows, with compatible wheels for dependencies such as `faiss-cpu` and `pyarrow`. Milvus Lite {{var.milvus_lite_version}} is a pure-Python package, so the operating system and architecture must satisfy those dependencies rather than the Lite package itself.
 - A writable local directory for database storage.
 
-The `milvus-lite` extra in this PyMilvus release excludes Windows. On Windows, use a [remote Milvus deployment](install-overview.md) for the workflow in this guide. For other package and platform combinations, consult the [Milvus Lite release requirements](https://github.com/milvus-io/milvus-lite/blob/v{{var.milvus_lite_version}}/README.md#requirements).
+On Windows, pip skips the `milvus-lite` extra of PyMilvus {{var.milvus_python_sdk_real_version}} because of its platform marker, so `milvus-lite` must be named explicitly. The install command below already does this. For other package and platform combinations, consult the [Milvus Lite release requirements](https://github.com/milvus-io/milvus-lite/blob/v{{var.milvus_lite_version}}/README.md#requirements).
 
 ## Set up Milvus Lite
 
@@ -40,7 +40,7 @@ source .venv/bin/activate
 python -m pip install "pymilvus[milvus-lite]=={{var.milvus_python_sdk_real_version}}" "milvus-lite=={{var.milvus_lite_version}}"
 ```
 
-Quote the extras expression so shells such as zsh do not interpret the brackets. The explicit versions keep the SDK and local backend aligned with this guide.
+Quote the extras expression so shells such as zsh do not interpret the brackets. On Windows PowerShell, activate the environment with `.venv\Scripts\Activate.ps1` instead of `source .venv/bin/activate`. The explicit versions keep the SDK and local backend aligned with this guide.
 
 <div class="alert note">
 

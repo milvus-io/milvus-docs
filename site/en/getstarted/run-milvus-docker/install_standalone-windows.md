@@ -172,7 +172,7 @@ To deal with the error prompted during Milvus startup that reads "Read config fa
 
 ## What's next
 
-Having installed Milvus in Docker, follow the **Use an existing Milvus server** path in [Quickstart](quickstart.md) and connect the SDK to `http://localhost:19530`. The native Windows SDK path does not require Milvus Lite; do not copy the local `.db` connection block.
+Having installed Milvus in Docker, follow the **Use an existing Milvus server** path in [Quickstart](quickstart.md) and connect the SDK to `http://localhost:19530`. This server path does not need Milvus Lite; the local `.db` connection block would start a separate local database instead of using this container.
 
 You can also:
 

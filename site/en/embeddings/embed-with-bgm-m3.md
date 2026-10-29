@@ -111,6 +111,6 @@ Generating embeddings is the first step. To use these outputs for retrieval, def
 - Map `docs_embeddings["dense"]` to a `FLOAT_VECTOR` field with dimension `bge_m3_ef.dim["dense"]`.
 - Map `docs_embeddings["sparse"]` to a `SPARSE_FLOAT_VECTOR` field, which does not require a fixed dimension in the Milvus schema. Use an `IP` metric for these learned sparse vectors. See [Sparse Vector](sparse_vector.md).
 - Store each document's ID and source text or metadata alongside its vectors so search results can be traced back to the source.
-- Encode queries with the same model and settings as the documents. Search the dense and sparse fields separately, then combine their candidates with a reranker.
+- Encode queries with the same model and settings as the documents. Issue a single `hybrid_search()` request with one `AnnSearchRequest` for the dense field and one for the sparse field, and let a server-side ranker such as RRF or a weighted ranker fuse the results.
 
 Follow [Hybrid Search with Milvus](hybrid_search_with_milvus.md) for the collection schema, indexes, insertion, and hybrid-search requests. The examples on this page use the wrapper's dense and sparse outputs; they do not demonstrate BGE-M3's optional ColBERT multi-vector output.

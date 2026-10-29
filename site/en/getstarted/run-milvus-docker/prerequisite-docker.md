@@ -37,7 +37,7 @@ The installation method determines how dependencies are provided. Use the image 
 
 | Component | Docker script | Docker Compose |
 | --------- | ------------- | -------------- |
-| etcd | Embedded in the Milvus container | Separate container; see [additional disk requirements](#additional-disk-requirements). |
+| etcd | Embedded in the Milvus container | Separate container; see [additional disk requirements](#Additional-disk-requirements). |
 | Object storage | Local filesystem; no MinIO container | MinIO container with its image pinned in the Compose file |
 | Woodpecker | Bundled with Milvus; local-filesystem WAL backend | Bundled with Milvus; MinIO/object-storage WAL backend |
 | Pulsar | Optional external service; not installed by default | Optional external service; not installed by default |

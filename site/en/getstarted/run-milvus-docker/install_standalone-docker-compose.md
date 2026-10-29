@@ -113,11 +113,19 @@ $ sudo rm -rf volumes
 
 ## Upgrade an existing deployment
 
-For a Milvus 2.6.x standalone deployment, follow [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md). Back up metadata and persistent data, preserve the existing dependencies and configuration, and validate the documented source-to-target upgrade path before changing the Milvus image.
-
-The 2.5.x-to-2.6.x message-queue instructions are not a procedure for upgrading directly to v{{var.milvus_release_version}}. Do not replace an older deployment's Compose file with the new-installation configuration above or change its message queue as part of an upgrade.
+For a Milvus 2.6.x standalone deployment, follow [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md). Back up metadata and persistent data, preserve the existing dependencies and configuration, and validate the documented source-to-target upgrade path before changing the Milvus image. Do not replace an older deployment's Compose file with the new-installation configuration above.
 
 {{fragments/mq_upgrade_limitation.md}}
+
+Milvus 2.6.x and later default to Woodpecker, while 2.5.x deployments default to **RocksMQ**. If the deployment you are upgrading still runs RocksMQ, pin it in `user.yaml` before changing the Milvus image, so the upgraded instance keeps its existing message queue instead of starting with the new default:
+
+```yaml
+# user.yaml — keep RocksMQ across the upgrade
+mq:
+  type: rocksmq
+```
+
+After the upgraded instance is running on v{{var.milvus_release_version}}, you can move from RocksMQ to Woodpecker with [Switch Message Queue](switch-mq-type.md), which is available in Milvus 3.0 and later.
 
 ## Optional dependencies
 
