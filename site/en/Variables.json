@@ -8,6 +8,7 @@
   "milvus_rpm_arm64": "milvus_3.0.2-1_arm64.rpm",
   "milvus_python_sdk_version": "3.0.x",
   "milvus_python_sdk_real_version": "3.0.2",
+  "milvus_lite_version": "3.2.2",
   "milvus_node_sdk_version": "3.0.x",
   "milvus_node_sdk_real_version": "3.0.6",
   "milvus_go_sdk_version": "3.0.x",
