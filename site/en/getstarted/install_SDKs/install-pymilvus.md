@@ -8,15 +8,13 @@ title: Install Milvus Python SDK
 
 # Install Milvus Python SDK
 
-This topic describes how to install Milvus python SDK pymilvus for Milvus.
-
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+This page describes how to install PyMilvus, the Python SDK for Milvus, and choose optional dependencies for local databases or embedding models.
 
 ## Requirements
 
-- Python 3.7 or later is required.
-- Google protobuf is installed. You can install it with the command `pip3 install protobuf==3.20.0`.
-- grpcio-tools is installed. You can install it with the command `pip3 install grpcio-tools`.
+- PyMilvus {{var.milvus_python_sdk_real_version}} requires Python 3.9 or later for connecting to a remote Milvus server.
+- The local Milvus Lite {{var.milvus_lite_version}} examples require Python 3.10 or later and a supported platform. See [Run Milvus Lite Locally](milvus_lite.md).
+- Install dependencies through `pip`. PyMilvus {{var.milvus_python_sdk_real_version}} requires `protobuf>=5.27.2`; do not separately pin `protobuf==3.20.0`. You do not need `grpcio-tools` to use the SDK.
 
 ## Install PyMilvus via pip
 
@@ -26,17 +24,35 @@ PyMilvus is available in [Python Package Index](https://pypi.org/project/pymilvu
 It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="release_notes.md">Release Notes</a>.
 </div>
 
+```bash
+python3 -m pip install "pymilvus=={{var.milvus_python_sdk_real_version}}"
 ```
-$ python3 -m pip install pymilvus=={{var.milvus_python_sdk_real_version}}
+
+This installs the client for a remote Milvus server. It does not install Milvus Lite or an embedding model.
+
+For the local database used in [Quickstart](quickstart.md), install the `milvus-lite` extra and the matching Lite package:
+
+```bash
+python3 -m pip install "pymilvus[milvus-lite]=={{var.milvus_python_sdk_real_version}}" "milvus-lite=={{var.milvus_lite_version}}"
 ```
+
+For embedding helpers, install the separate `model` extra:
+
+```bash
+python3 -m pip install "pymilvus[model]=={{var.milvus_python_sdk_real_version}}"
+```
+
+On Windows, pip skips the `milvus-lite` extra of PyMilvus {{var.milvus_python_sdk_real_version}} because of its platform marker. The command above names `milvus-lite` explicitly, so it installs on Windows as long as wheels for `faiss-cpu` and `pyarrow` exist for your Python version.
 
 ## Verify installation
 
 If PyMilvus is correctly installed, no exception will be raised when you run the following command.
 
+```bash
+python3 -c "from pymilvus import MilvusClient"
 ```
-$ python3 -c "from pymilvus import Collection"
-```
+
+This checks the SDK import, not a server connection. Follow [Quickstart](quickstart.md) to create a local collection, insert data, and run a search.
 
 
 
