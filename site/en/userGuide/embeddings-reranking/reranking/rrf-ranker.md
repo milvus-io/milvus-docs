@@ -590,14 +590,14 @@ const milvusClient = new MilvusClient({
 const text_search = {
     data: ["modern dining table"],
     anns_field: "text_vector",
-    param: {},
+    params: {},
     limit: 10,
 };
 
 const image_search = {
   data: [image_embedding],
   anns_field: "image_vector",
-  param: {},
+  params: {},
   limit: 10,
 };
 
