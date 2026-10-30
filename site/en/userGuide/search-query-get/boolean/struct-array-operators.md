@@ -5,8 +5,6 @@ summary: "StructArray operators filter entities by evaluating predicates on scal
 ---
 # StructArray Operators
 
-<!-- doc:block:start id="structarray-filter-overview" -->
-
 StructArray operators filter entities by evaluating predicates on scalar subfields inside a StructArray field. Use this page as a syntax reference for `element_filter`, the `MATCH_*` operator family, and row-level predicates on StructArray paths.
 
 StructArray filtering has two operator families and a set of row-level path predicates:
@@ -19,13 +17,9 @@ StructArray filtering has two operator families and a set of row-level path pred
 
 Use scalar subfields in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.
 
-<!-- doc:block:end id="structarray-filter-overview" -->
-
 ## When to use which operator
 
 Choose an operator according to your filtering goal:
-
-<!-- doc:block:start id="structarray-operator-selection" -->
 
 | Goal | Use |
 | --- | --- |
@@ -37,8 +31,6 @@ Choose an operator according to your filtering goal:
 | Check the Struct element at a specific position, such as the first chunk. | A positional path such as `chunks[0][section]` |
 | Filter by the number of Struct elements in an entity. | `array_length(chunks)` |
 | Check whether any Struct element holds a subfield value, without combining conditions on the same element. | `array_contains`, `array_contains_any`, or `array_contains_all` on a subfield path such as `chunks[section]` |
-
-<!-- doc:block:end id="structarray-operator-selection" -->
 
 ## Example data
 
@@ -205,8 +197,6 @@ Neither entity matches because neither has an element with `section` set to `"fi
 
 For `MATCH_EXACT`, `threshold` can be zero or a positive integer.
 
-<!-- doc:block:start id="structarray-row-level-predicates" -->
-
 ## Row-level predicates on StructArray paths
 
 Besides `element_filter` and `MATCH_*`, a regular filter expression can reference a StructArray field or one of its scalar subfields directly. These predicates evaluate at the entity level and do not return element offsets.
@@ -307,8 +297,6 @@ chunks is not null
 
 For applicability, see [Nullable and dynamic schema limits](structarray-limits.md#Nullable-and-dynamic-schema-limits). Entity A and Entity B both have non-NULL StructArray values.
 
-<!-- doc:block:end id="structarray-row-level-predicates" -->
-
 ## Supported predicates
 
 The `$[...]` syntax represents the scalar value of the current Struct element. Predicate support depends on the scalar subfield type:
@@ -331,11 +319,7 @@ Element-level `$[...]` predicates do not support:
 
 - JSON path syntax, `exists` on JSON paths, or JSON functions such as `json_contains`, `json_contains_all`, or `json_contains_any`.
 
-<!-- doc:block:start id="structarray-array-predicate-limit" -->
-
 - Array container functions such as `array_contains`, `array_contains_all`, `array_contains_any`, or `array_length` on `$[subfield]`. Use these functions on a subfield path such as `chunks[section]` in a row-level predicate instead.
-
-<!-- doc:block:end id="structarray-array-predicate-limit" -->
 
 - `$[subfield] is null` or `$[subfield] is not null`.
 
@@ -352,8 +336,6 @@ Element-level `$[...]` predicates do not support:
 ## Syntax rules
 
 Follow these syntax rules:
-
-<!-- doc:block:start id="structarray-syntax-rules" -->
 
 - `MATCH_*` operator names are case-insensitive.
 
@@ -372,8 +354,6 @@ Follow these syntax rules:
 - `MATCH_ANY` on an empty StructArray returns `false`.
 
 - `MATCH_ALL` on an empty StructArray returns `true`.
-
-<!-- doc:block:end id="structarray-syntax-rules" -->
 
 ## See also
 

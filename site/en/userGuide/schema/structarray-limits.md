@@ -76,7 +76,7 @@ The following table describes nullable StructArray behavior and dynamic StructAr
 | Partially null StructArray value | When a StructArray field contains a valid array value, do not mix null subfield arrays with valid subfield arrays in the same value. |
 | Dynamic add StructArray field | Subject to the availability statement below. |
 | Nullable requirement for dynamic add | A StructArray field added to an existing collection must be nullable because existing entities have no value for the new field. |
-| Existing entities after dynamic add | Existing entities return `null` for the added StructArray field across its subfields. |
+| Existing entities after dynamic add | Existing entities return `null` for the added StructArray field. |
 
 <!-- doc:block:start id="structarray-availability" -->
 
@@ -135,11 +135,7 @@ At a high level:
 
 - Use `$[subfield]` only inside StructArray operators.
 
-<!-- doc:block:start id="structarray-row-level-summary" -->
-
 - Row-level filter expressions can also reference StructArray paths directly: `chunks[0][section]` for one element position, `array_length(chunks)` for the element count, `array_contains(chunks[section], ...)` for subfield values across elements, and `chunks is null` on a nullable StructArray field.
-
-<!-- doc:block:end id="structarray-row-level-summary" -->
 
 - Use scalar subfields for scalar predicates.
 
