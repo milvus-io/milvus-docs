@@ -366,6 +366,6 @@ curl -X POST "{{var.example_endpoint}}/v2/vectordb/common/run_analyzer" \
 
 ### Expected output
 
-```python
+```plaintext
 ['Cafe', 'Moller', 'serves', 'creme', 'brulee', 'and', 'pinatas']
 ```
