@@ -11,7 +11,7 @@ This page uses the `tech_articles` collection from [Create a StructArray Field](
 
 ## Before you begin
 
-Make sure the collection schema already contains the `chunks` StructArray field. The vector fields in these examples have four dimensions. Use the same language throughout the insertion and validation steps; later snippets reuse the client initialized in **Insert rows**.
+Make sure the collection schema already contains the `chunks` StructArray field.
 
 | Field | Type | Insert value |
 | --- | --- | --- |
