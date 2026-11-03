@@ -1,7 +1,7 @@
 ---
 id: rtree.md
 title: "RTREE"
-summary: "The RTREE index is a tree-based data structure that accelerates queries on GEOMETRY fields in Milvus. If your collection stores geometric objects such as points, lines, or polygons in Well-known text (WKT) format and you want to accelerate spatial filtering, RTREE is an ideal choice."
+summary: "The RTREE index is a tree-based data structure that accelerates queries on GEOMETRY fields. If your collection stores geometric objects such as points, lines, or polygons in Well-known text (WKT) format and you want to accelerate spatial filtering, RTREE is an ideal choice."
 beta: Milvus 2.6.4+
 ---
 

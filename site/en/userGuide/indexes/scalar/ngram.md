@@ -1,7 +1,7 @@
 ---
 id: ngram.md
 title: "NGRAM"
-summary: "The NGRAM index in Milvus accelerates LIKE queries and eligible regex filters on VARCHAR fields or specific JSON paths within JSON fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length n, known as n-grams. At query time, Milvus uses these n-grams to narrow candidate entities before verifying the original filter condition."
+summary: "The NGRAM index accelerates LIKE queries and eligible regex filters on VARCHAR fields or specific JSON paths within JSON fields. Before building the index, text is split into short, overlapping substrings of a fixed length n, known as n-grams. At query time, these n-grams narrow the candidate entities before the original filter condition is verified."
 ---
 
 # NGRAM

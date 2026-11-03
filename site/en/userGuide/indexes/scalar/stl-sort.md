@@ -1,7 +1,7 @@
 ---
 id: stl-sort.md
 title: "STL_SORT"
-summary: "The STL_SORT index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.), VARCHAR fields, or TIMESTAMPTZ fields within Milvus by organizing the data in a sorted order."
+summary: "The STL_SORT index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.), VARCHAR fields, or TIMESTAMPTZ fields by organizing the data in a sorted order."
 ---
 
 # STL_SORT

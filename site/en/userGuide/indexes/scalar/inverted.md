@@ -1,7 +1,7 @@
 ---
 id: inverted.md
 title: "INVERTED"
-summary: "When you need to perform frequent filter queries on your data, INVERTED indexes can dramatically improve query performance. Instead of scanning through all documents, Milvus uses inverted indexes to quickly locate the exact records that match your filter conditions."
+summary: "When you need to perform frequent filter queries on your data, INVERTED indexes can dramatically improve query performance. Instead of scanning through all documents, an inverted index quickly locates the exact records that match your filter conditions."
 ---
 
 # INVERTED
