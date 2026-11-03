@@ -1,12 +1,12 @@
 ---
 id: single-vector-search.md
 title: "Basic Vector Search"
-summary: "Run basic ANN searches in Milvus with query vectors, output fields, filters, ranges, and iterators."
+summary: "Run basic ANN searches in {{var.product_name}} with query vectors, output fields, filters, ranges, and iterators."
 ---
 
 # Basic Vector Search
 
-Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Milvus provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.
+Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, {{var.product_name}} provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.
 
 <div class="alert note">
 
@@ -20,39 +20,47 @@ The ANN and the k-Nearest Neighbors (kNN) search are the usual methods in vector
 
 Unlike kNN searches, an ANN search algorithm asks for an **index** file that records the sorted order of vector embeddings. When a search request comes in, you can use the index file as a reference to quickly locate a subgroup probably containing vector embeddings most similar to the query vector. Then, you can use the specified **metric type** to measure the similarity between the query vector and those in the subgroup, sort the group members based on similarity to the query vector, and figure out the **top-K** group members.
 
-ANN searches depend on pre-built indexes, and the search throughput, memory usage, and search correctness may vary with the index types you choose. You need to balance search performance and correctness. 
+ANN searches depend on pre-built indexes, and the search throughput, memory usage, and search correctness may vary with the index types you choose. You need to balance search performance and correctness.
 
-To reduce the learning curve, Milvus provides **AUTOINDEX**. With **AUTOINDEX**, Milvus can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness. 
+To reduce the learning curve, {{var.product_name}} provides **AUTOINDEX**. With **AUTOINDEX**, {{var.product_name}} can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness.
 
+<!-- doc:block:start id="single-vector-search-toc" -->
 In this section, you will find detailed information about the following topics:
 
 - [Single-vector search](single-vector-search.md#Single-Vector-Search)
 
 - [Bulk-vector search](single-vector-search.md#Bulk-Vector-Search)
 
+- [Primary-key search](single-vector-search.md#Primary-Key-Search)
+
 - [ANN search in partitions](single-vector-search.md#ANN-Search-in-Partition)
 
 - [Use output fields](single-vector-search.md#Use-Output-Fields)
 
+- [Sort search results by scalar fields](single-vector-search.md#Sort-Search-Results-by-Scalar-Fields)
+
 - [Use limit and offset](single-vector-search.md#Use-Limit-and-Offset)
 
-- [Use level](single-vector-search.md#Use-Level)
-
-- [Get Recall Rate](single-vector-search.md#Get-Recall-Rate)
+- [Temporarily set a timezone for a search](single-vector-search.md#Temporarily-set-a-timezone-for-a-search)
 
 - [Enhancing ANN search](single-vector-search.md#Enhancing-ANN-Search)
 
+<!-- doc:block:end id="single-vector-search-toc" -->
+
 ## Single-Vector Search
 
-In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Milvus will find the top-K vectors most similar to the query vector.
+In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, {{var.product_name}} will find the top-K vectors most similar to the query vector.
 
-In this section, you will learn how to conduct a single-vector search. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.
+In this section, you will learn how to conduct a single-vector search. The search request carries a single query vector and asks {{var.product_name}} to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.
 
+<!-- doc:block:start id="basic-vector-search-single" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -61,8 +69,8 @@ In this section, you will learn how to conduct a single-vector search. The searc
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 # 4. Single vector search
@@ -110,10 +118,10 @@ import io.milvus.v2.service.vector.response.SearchResp;
 import java.util.*;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
         .build());
-    
+
 FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 SearchReq searchReq = SearchReq.builder()
         .collectionName("quick_setup")
@@ -151,8 +159,8 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
-token := "root:Milvus"
+milvusAddr := "{{var.example_endpoint}}"
+token := "{{var.example_token}}"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
@@ -183,11 +191,37 @@ for _, resultSet := range resultSets {
 
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.example_token}}");
+let client = ClientV2::new(&config).await?;
+
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
-const address = "http://localhost:19530";
-const token = "root:Milvus";
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
 const client = new MilvusClient({address, token});
 
 // 4. Single vector search
@@ -208,6 +242,38 @@ console.log(res.results)
 // ]
 ```
 
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
+});
+await client.ConnectAsync();
+
+// 4. Single vector search
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Vectors = queryVector,
+    Limit = 3
+});
+
+var single = res.SingleResults?.FirstOrDefault();
+if (single is not null)
+{
+    for (int i = 0; i < single.Scores.Count; i++)
+    {
+        Console.WriteLine($"id={single.Ids.LongIds?[i]}, score={single.Scores[i]}");
+    }
+}
+```
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -215,7 +281,7 @@ console.log(res.results)
 #include "milvus/MilvusClientV2.h"
 
 auto client = milvus::MilvusClientV2::Create();
-auto status = client->Connect(milvus::ConnectParam("http://localhost:19530", "root:Milvus"));
+auto status = client->Connect(milvus::ConnectParam("{{var.example_endpoint}}", "{{var.example_token}}"));
 if (!status.IsOk()) {
     std::cerr << "Failed to connect: " << status.Message() << std::endl;
     return;
@@ -248,8 +314,8 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -283,8 +349,9 @@ curl --request POST \
 #     ]
 # }
 ```
+<!-- doc:block:end id="basic-vector-search-single" -->
 
-Milvus ranks the search results by their similarity scores to the query vector in descending order. The similarity score is also termed the distance to the query vector, and its value ranges vary with the metric types in use.
+{{var.product_name}} ranks the search results by their similarity scores to the query vector in descending order. The similarity score is also termed the distance to the query vector, and its value ranges vary with the metric types in use.
 
 The following table lists the applicable metric types and the corresponding distance ranges.
 
@@ -323,13 +390,16 @@ The following table lists the applicable metric types and the corresponding dist
 
 ## Bulk-Vector Search
 
-Similarly, you can include multiple query vectors in a search request. Milvus will conduct ANN searches for the query vectors in parallel and return two sets of results.
+Similarly, you can include multiple query vectors in a search request. {{var.product_name}} will conduct ANN searches for the query vectors in parallel and return two sets of results.
 
+<!-- doc:block:start id="basic-vector-search-bulk" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -396,10 +466,12 @@ for hits in res:
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.BaseVector;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.List;
 
 List<BaseVector> queryVectors = Arrays.asList(
         new FloatVec(new float[]{0.041732933f, 0.013779674f, -0.027564144f, -0.013061441f, 0.009748648f}),
@@ -455,10 +527,40 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// 7. Search with multiple vectors
+// 7.1. Prepare query vectors
+let query_vectors = vec![
+    vec![0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648],
+    vec![0.0039737443, 0.003020432, -0.0006188639, 0.03913546, -0.00089768134],
+];
+
+// 7.2. Start search
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(query_vectors))
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    println!("TopK results:");
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
 ```javascript
 // 7. Search with multiple vectors
 const query_vectors = [
-    [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], 
+    [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
     [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104]
 ]
 
@@ -471,7 +573,7 @@ res = await client.search({
 console.log(res.results)
 
 // Output
-// 
+//
 // [
 //   [
 //     { score: 0.08821295201778412, id: '551' },
@@ -484,6 +586,28 @@ console.log(res.results)
 //     { score: 0.04221535101532936, id: '232' },
 //   ]
 // ]
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+// 7. Search with multiple vectors
+// 7.1. Prepare query vectors
+var queryVectors = new[]
+{
+    new ReadOnlyMemory<float>(new[] { 0.041732933f, 0.013779674f, -0.027564144f, -0.013061441f, 0.009748648f }),
+    new ReadOnlyMemory<float>(new[] { 0.0039737443f, 0.003020432f, -0.0006188639f, 0.03913546f, -0.00089768134f })
+};
+
+// 7.2. Start search
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Vectors = queryVectors,
+    Limit = 3
+});
 ```
 
 ```cpp
@@ -515,8 +639,8 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -568,16 +692,22 @@ curl --request POST \
 #     "topks":[3]
 # }
 ```
+<!-- doc:block:end id="basic-vector-search-bulk" -->
 
-## Primary-Key Search | Milvus 2.6.9+
+<!-- doc:block:start id="basic-vector-search-primary-key-heading" -->
+## Primary-Key Search
+<!-- doc:block:end id="basic-vector-search-primary-key-heading" -->
 
 Instead of setting query vectors, you can use primary keys if the query vectors already exist in the target collection.
 
+<!-- doc:block:start id="basic-vector-search-primary-key" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -632,6 +762,20 @@ const res = await client.search({
 console.log(res.results)
 ```
 
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Ids = new object[] { 551L, 296L, 43L },
+    Limit = 3,
+    MetricType = MetricType.Ip
+});
+```
+
 ```go
 import (
     "fmt"
@@ -655,6 +799,27 @@ if err != nil {
 for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .ids(Ids::Int64(vec![551, 296, 43]))
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 
@@ -685,10 +850,10 @@ for (const auto& result : searchResponse.Results().Results()) {
 
 ```bash
 # restful
-curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+curl -X POST "{{var.example_endpoint}}/v2/vectordb/entities/search" \
   -H "Content-Type: application/json" \
   -H "Request-Timeout: 10" \
-  -H "Authorization: Bearer root:Milvus" \
+  -H "Authorization: Bearer {{var.example_token}}" \
   -d '{
     "collectionName": "quick_setup",
     "annsField": "vector",
@@ -699,6 +864,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
     }
   }'
 ```
+<!-- doc:block:end id="basic-vector-search-primary-key" -->
 
 ## ANN Search in Partition
 
@@ -706,11 +872,14 @@ Suppose you have created multiple partitions in a collection, and you can narrow
 
 The following code snippet assumes a partition named **PartitionA** in your collection.
 
+<!-- doc:block:start id="basic-vector-search-partition" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -753,9 +922,11 @@ for hits in res:
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Collections;
+import java.util.List;
 
 FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 SearchReq searchReq = SearchReq.builder()
@@ -803,6 +974,31 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .partition_names(["partitionA"])
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    println!("TopK results:");
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
 ```javascript
 // 4. Single vector search
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
@@ -822,6 +1018,21 @@ console.log(res.results)
 //   { score: 0.0800950899720192, id: '296' },
 //   { score: 0.07794742286205292, id: '43' }
 // ]
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Vectors = queryVector,
+    Limit = 3,
+    Parameters = new SearchParameters { PartitionNames = { "partitionA" } }
+});
 ```
 
 ```cpp
@@ -849,8 +1060,8 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -886,29 +1097,33 @@ curl --request POST \
 #     "topks":[3]
 # }
 ```
+<!-- doc:block:end id="basic-vector-search-partition" -->
 
 ## Use Output Fields
 
-In a search result, Milvus includes the primary field values and similarity distances/scores of the entities that contain the top-K vector embeddings by default. You can include the names of the target fields, including both the vector and scalar fields, in a search request as the output fields to make the search results carry the values from other fields in these entities.
+In a search result, {{var.product_name}} includes the primary field values and similarity distances/scores of the entities that contain the top-K vector embeddings by default. You can include the names of the target fields, including both the vector and scalar fields, in a search request as the output fields to make the search results carry the values from other fields in these entities.
 
+<!-- doc:block:start id="basic-vector-search-output-fields" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 # 4. Single vector search
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
 
 res = client.search(
     collection_name="quick_setup",
     data=[query_vector],
     limit=3, # The number of results to return
-    search_params={"metric_type": "IP"}，
+    search_params={"metric_type": "IP"},
     # highlight-next-line
     output_fields=["color"]
 )
@@ -943,9 +1158,11 @@ print(res)
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Collections;
+import java.util.List;
 
 FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 SearchReq searchReq = SearchReq.builder()
@@ -994,6 +1211,30 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .output_fields(["color"])
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
 ```javascript
 // 4. Single vector search
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
@@ -1013,6 +1254,21 @@ console.log(res.results)
 //   { score: 0.0800950899720192, id: '296' entity: {"color": "red_4794"}},
 //   { score: 0.07794742286205292, id: '43' entity: {"color": "grey_8510"}}
 // ]
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Vectors = queryVector,
+    Limit = 3,
+    Parameters = new SearchParameters { OutputFields = { "color" } }
+});
 ```
 
 ```cpp
@@ -1043,8 +1299,8 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -1083,20 +1339,26 @@ curl --request POST \
 #     "topks":[3]
 # }
 ```
+<!-- doc:block:end id="basic-vector-search-output-fields" -->
 
-## Sort Search Results by Scalar Fields | Milvus 3.0.x
+<!-- doc:block:start id="basic-vector-search-sort-heading" -->
+## Sort Search Results by Scalar Fields
+<!-- doc:block:end id="basic-vector-search-sort-heading" -->
 
-By default, Milvus orders search results by their similarity score to the query vector. If you want the returned entities to follow a scalar field order, add `order_by_fields` to the search request.
+By default, {{var.product_name}} orders search results by their similarity score to the query vector. If you want the returned entities to follow a scalar field order, add `order_by_fields` to the search request.
 
-Each item in `order_by_fields` specifies a scalar field and a sort direction. Use `"asc"` for ascending order or `"desc"` for descending order. If you omit `order`, Milvus sorts the field in ascending order.
+Each item in `order_by_fields` specifies a scalar field and a sort direction. Use `"asc"` for ascending order or `"desc"` for descending order. If you omit `order`, {{var.product_name}} sorts the field in ascending order.
 
 The following example sorts search results by `price` from low to high. Include the sort field in `output_fields` if you want to inspect the field value in the response.
 
+<!-- doc:block:start id="basic-vector-search-sort-single" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1163,6 +1425,25 @@ const res = await client.search({
 console.log(res.results)
 ```
 
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.35803764f, -0.6023496f, 0.18414013f, -0.26286206f, 0.90294385f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "product_catalog",
+    VectorFieldName = "embedding",
+    Vectors = queryVector,
+    Limit = 20,
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "id", "price", "rating", "category" },
+        ExtraParameters = { ["order_by_fields"] = "price:asc" }
+    }
+});
+```
+
 ```go
 import (
     "fmt"
@@ -1187,6 +1468,30 @@ if err != nil {
 for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Prices: ", resultSet.GetColumn("price").FieldData().GetScalars())
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let query_vector = vec![0.35803764, -0.6023496, 0.18414013, -0.26286206, 0.90294385];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("product_catalog")
+            .vector_field("embedding")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(20)
+            .output_fields(["id", "price", "rating", "category"])
+            .order_by_fields(vec![OrderByField::new().field_name("price").direction(AggDirection::Asc)])
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 
@@ -1221,14 +1526,18 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```bash
 # restful
 ```
+<!-- doc:block:end id="basic-vector-search-sort-single" -->
 
-You can also sort by multiple scalar fields. Milvus applies the fields in the order that you specify. In the following example, Milvus sorts results by `price` in ascending order. For entities with the same `price`, Milvus then sorts by `rating` in descending order.
+You can also sort by multiple scalar fields. {{var.product_name}} applies the fields in the order that you specify. In the following example, {{var.product_name}} sorts results by `price` in ascending order. For entities with the same `price`, {{var.product_name}} then sorts by `rating` in descending order.
 
+<!-- doc:block:start id="basic-vector-search-sort-multi" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1301,6 +1610,25 @@ const res = await client.search({
 console.log(res.results)
 ```
 
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.35803764f, -0.6023496f, 0.18414013f, -0.26286206f, 0.90294385f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "product_catalog",
+    VectorFieldName = "embedding",
+    Vectors = queryVector,
+    Limit = 20,
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "id", "price", "rating", "category" },
+        ExtraParameters = { ["order_by_fields"] = "price:asc,rating:desc" }
+    }
+});
+```
+
 ```go
 import (
     "fmt"
@@ -1326,6 +1654,33 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Prices: ", resultSet.GetColumn("price").FieldData().GetScalars())
     fmt.Println("Ratings: ", resultSet.GetColumn("rating").FieldData().GetScalars())
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let query_vector = vec![0.35803764, -0.6023496, 0.18414013, -0.26286206, 0.90294385];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("product_catalog")
+            .vector_field("embedding")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(20)
+            .output_fields(["id", "price", "rating", "category"])
+            .order_by_fields(vec![
+                OrderByField::new().field_name("price").direction(AggDirection::Asc),
+                OrderByField::new().field_name("rating").direction(AggDirection::Desc),
+            ])
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 
@@ -1364,8 +1719,9 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```bash
 # restful
 ```
+<!-- doc:block:end id="basic-vector-search-sort-multi" -->
 
-For entities with the same values in all specified order-by fields, Milvus keeps the original similarity-score order.
+For entities with the same values in all specified order-by fields, {{var.product_name}} keeps the original similarity-score order.
 
 ## Use Limit and Offset
 
@@ -1405,11 +1761,14 @@ The table below outlines how to set the **Limit** and **Offset** parameters for 
 
 Note that, the sum of `limit` and `offset` in a single ANN search should be less than 16,384.
 
+<!-- doc:block:start id="basic-vector-search-limit-offset" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1423,7 +1782,7 @@ res = client.search(
     data=[query_vector],
     limit=3, # The number of results to return
     search_params={
-        "metric_type": "IP", 
+        "metric_type": "IP",
         # highlight-next-line
         "offset": 10 # The records to skip
     }
@@ -1431,9 +1790,11 @@ res = client.search(
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Collections;
+import java.util.List;
 
 FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 SearchReq searchReq = SearchReq.builder()
@@ -1481,6 +1842,30 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .offset(10)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
 ```javascript
 // 4. Single vector search
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
@@ -1492,6 +1877,21 @@ res = await client.search({
     // highlight-next-line
     offset: 10 // The record to skip.
 })
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Vectors = queryVector,
+    Limit = 3,
+    Parameters = new SearchParameters { Offset = 10 }
+});
 ```
 
 ```cpp
@@ -1519,8 +1919,8 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -1537,6 +1937,7 @@ curl --request POST \
     "offset": 10
 }'
 ```
+<!-- doc:block:end id="basic-vector-search-limit-offset" -->
 
 ## Temporarily set a timezone for a search
 
@@ -1546,11 +1947,14 @@ The value of `timezone` must be a valid [IANA time zone identifier](https://en.w
 
 The example below shows how to temporarily set a timezone for a search operation:
 
+<!-- doc:block:start id="basic-vector-search-timezone" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1603,6 +2007,21 @@ const res = await client.search({
 console.log(res.results)
 ```
 
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new[] { new ReadOnlyMemory<float>(new[] { 0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f }) };
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "quick_setup",
+    VectorFieldName = "vector",
+    Vectors = queryVector,
+    Limit = 3,
+    Parameters = new SearchParameters { Timezone = "America/Havana" }
+});
+```
+
 ```go
 import (
     "fmt"
@@ -1628,6 +2047,29 @@ if err != nil {
 for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Event times: ", resultSet.GetColumn("event_time").FieldData().GetScalars())
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let query_vector = vec![0.35803764, -0.6023496, 0.18414013, -0.26286206, 0.90294385];
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .timezone("America/Havana")
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 
@@ -1662,7 +2104,7 @@ for (const auto& result : searchResponse.Results().Results()) {
 # restful
 export QUERY_VECTOR='[0.1, 0.2, 0.3, 0.4]'
 
-curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+curl -X POST "{{var.example_endpoint}}/v2/vectordb/entities/search" \
 -H "Content-Type: application/json" \
 -H "Request-Timeout: 10" \
 -d '{
@@ -1676,20 +2118,22 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   }
 }'
 ```
+<!-- doc:block:end id="basic-vector-search-timezone" -->
 
+<!-- doc:block:start id="basic-vector-search-enhancing" -->
 ## Enhancing ANN Search
 
-AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, Milvus works out the following search enhancements.
+AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, {{var.product_name}} works out the following search enhancements.
 
 - Filtered Search
 
-    You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.
+    You can include filtering conditions in a search request so that {{var.product_name}} conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.
 
     For more about metadata filtering and filtering conditions, refer to [Filtered Search](filtered-search.md), [Filtering Explained](boolean.md), and related topics.
 
 - Range Search
 
-    You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Milvus, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Milvus returns all vector embeddings that fall within the outer circle but not the inner circle.
+    You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In {{var.product_name}}, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and {{var.product_name}} returns all vector embeddings that fall within the outer circle but not the inner circle.
 
     For more about range search, refer to [Range Search](range-search.md).
 
@@ -1719,13 +2163,13 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
 - Text Match
 
-    Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
+    Keyword match in {{var.product_name}} enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
 
     For details on keyword match, refer to [Keyword Match](keyword-match.md).
 
 - Use Partition Key
 
-    Involving multiple scalar fields in metadata filtering and using a rather complicated filtering condition may affect search efficiency. Once you set a scalar field as the partition key and use a filtering condition involving the partition key in the search request, it can help restrict the search scope within the partitions corresponding to the specified partition key values. 
+    Involving multiple scalar fields in metadata filtering and using a rather complicated filtering condition may affect search efficiency. Once you set a scalar field as the partition key and use a filtering condition involving the partition key in the search request, it can help restrict the search scope within the partitions corresponding to the specified partition key values.
 
     For details on the partition key, refer to [Use Partition Key](use-partition-key.md).
 
@@ -1740,3 +2184,5 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 - Use reranking
 
     For details on using rankers to enhance search result relevance, refer to [Decay Ranker Overview](decay-ranker-overview.md) and [Model Ranker Overview](model-ranker-overview.md).
+
+<!-- doc:block:end id="basic-vector-search-enhancing" -->
