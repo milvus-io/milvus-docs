@@ -6,7 +6,7 @@ summary: "Text match in Milvus enables precise document retrieval based on speci
 
 # Text Match
 
-Text match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
+Text match in {{var.product_name}} enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
 
 <div class="alert note">
 
@@ -18,11 +18,11 @@ Text match in Milvus enables precise document retrieval based on specific terms.
 ## Overview
 <!-- doc:block:end id="text-match-overview-heading" -->
 
-Milvus integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power its underlying inverted index and term-based text search. For each text entry, Milvus indexes it following the procedure:
+{{var.product_name}} integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power its underlying inverted index and term-based text search. For each text entry, {{var.product_name}} indexes it following the procedure:
 
-1. [Analyzer](analyzer-overview.md): The analyzer processes input text by tokenizing it into individual words, or tokens, and then applying filters as needed. This allows Milvus to build an index based on these tokens.
+1. [Analyzer](analyzer-overview.md): The analyzer processes input text by tokenizing it into individual words, or tokens, and then applying filters as needed. This allows {{var.product_name}} to build an index based on these tokens.
 
-1. [Indexing](index-explained.md): After text analysis, Milvus creates an inverted index that maps each unique token to the documents containing it.
+1. [Indexing](index-explained.md): After text analysis, {{var.product_name}} creates an inverted index that maps each unique token to the documents containing it.
 
 When a user performs a text match, the inverted index is used to quickly retrieve all documents containing the terms. This is much faster than scanning through each document individually.
 
@@ -30,11 +30,13 @@ When a user performs a text match, the inverted index is used to quickly retriev
 
 ## Enable text match
 
+<!-- doc:block:start id="text-match-enable-intro" -->
 Text match works on match-enabled string fields. The examples on this page use [`VARCHAR`](string.md), which is supported across client SDKs. In Milvus 3.0.x, [`TEXT`](text.md) fields also support text match when Storage V3 is enabled. For either field type, set both `enable_analyzer` and `enable_match` to `True`, and then optionally configure an [analyzer](analyzer-overview.md) when defining your collection schema.
+<!-- doc:block:end id="text-match-enable-intro" -->
 
 ### Set `enable_analyzer` and `enable_match`
 
-To enable text match for a specific `VARCHAR` field, set both the `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This instructs Milvus to tokenize text and create an inverted index for the specified field, allowing fast and efficient text matches.
+To enable text match for a specific `VARCHAR` field, set both the `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This instructs {{var.product_name}} to tokenize text and create an inverted index for the specified field, allowing fast and efficient text matches.
 
 <!-- doc:block:start id="text-match-schema" -->
 <div class="multipleCode">
@@ -185,7 +187,7 @@ schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTO
 
 The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.
 
-By default, Milvus uses the `standard` analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to [Standard](standard-analyzer.md).
+By default, {{var.product_name}} uses the `standard` analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to [Standard](standard-analyzer.md).
 
 In cases where a different analyzer is required, you can configure one using the `analyzer_params` parameter. For example, to apply the `english` analyzer for processing English text:
 
@@ -302,7 +304,7 @@ nlohmann::json analyzer_params = {{"type", "english"}};
 schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(200).EnableAnalyzer(true).WithAnalyzerParams(analyzer_params).EnableMatch(true));
 ```
 
-Milvus also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
+{{var.product_name}} also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
 
 ## Use text match
 
@@ -440,10 +442,13 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     ```cpp
     std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
     ```
+<!-- doc:block:end id="text-match-and-not" -->
 
+<!-- doc:block:start id="text-match-fuzzy-heading" -->
 ### TEXT_MATCH_FUZZY expression syntax | Milvus 3.0.0+
+<!-- doc:block:end id="text-match-fuzzy-heading" -->
 
-Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. Milvus analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
+Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. {{var.product_name}} analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
 
 The syntax is as follows:
 
@@ -458,7 +463,6 @@ std::string filter = "TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)"
 ```bash
 export filter="\"TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\""
 ```
-<!-- doc:block:end id="text-match-and-not" -->
 
 - `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
@@ -599,8 +603,8 @@ const result = await client.search({
 ```bash
 export filter="\"TEXT_MATCH(text, 'keyword1 keyword2')\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -717,8 +721,8 @@ const result = await client.query({
 ```bash
 export filter="\"TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
