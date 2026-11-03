@@ -96,7 +96,7 @@ schema.addField(AddFieldReq.builder()
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import "github.com/milvus-io/milvus/client/v3/entity"
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(false)
 schema.WithField(entity.NewField().
@@ -209,6 +209,11 @@ schema.add_field(
 ```
 
 ```java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("type", "english");
 schema.addField(AddFieldReq.builder()
@@ -525,12 +530,17 @@ result = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+
 String filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
 
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .annsField("embeddings")
-        .data(Collections.singletonList(queryVector)))
+        .data(Collections.singletonList(queryVector))
         // highlight-next-line
         .filter(filter)
         .topK(10)
@@ -559,7 +569,7 @@ if err != nil {
 const filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
 
 // Assuming 'embeddings' is the vector field and 'text' is the VARCHAR field
-const result = await client.search(
+const result = await client.search({
     collection_name: "my_collection", // Your collection name
     anns_field: "embeddings", // Vector field name
     data: [query_vector], // Query vector
@@ -568,7 +578,7 @@ const result = await client.search(
     params: {"nprobe": 10},
     limit: 10, // Max. number of results to return
     output_fields: ["id", "text"] //Fields to return
-);
+});
 ```
 
 ```bash
@@ -648,6 +658,10 @@ result = client.query(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import java.util.Arrays;
+
 String filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
 
 QueryResp queryResp = client.query(QueryReq.builder()
@@ -675,12 +689,12 @@ if err != nil {
 // Match entities with both `keyword1` and `keyword2`
 const filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
 
-const result = await client.query(
+const result = await client.query({
     collection_name: "my_collection",
     // highlight-next-line
     filter: filter, 
     output_fields: ["id", "text"]
-)
+})
 ```
 
 ```bash
