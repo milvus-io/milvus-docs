@@ -323,8 +323,7 @@ using Milvus.Client.V2.Types;
 MilvusClientV2 client = new(new ConnectConfig
 {
     Uri = "{{var.example_endpoint}}",
-    Username = "root",
-    Password = "Milvus"
+    ApiKey = "{{var.example_token}}"
 });
 
 CollectionSchema schema = new()
@@ -1074,8 +1073,7 @@ using Milvus.Client.V2.Types;
 MilvusClientV2 client = new(new ConnectConfig
 {
     Uri = "{{var.example_endpoint}}",
-    Username = "root",
-    Password = "Milvus"
+    ApiKey = "{{var.example_token}}"
 });
 
 CollectionSchema schema = new()
