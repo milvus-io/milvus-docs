@@ -546,69 +546,72 @@ When `search_aggregation` is set, PyMilvus returns no ordinary entity hits in `r
 
 <summary>View the example bucket output</summary>
 
-The following excerpt shows the response to the request above, serialized as JSON for readability (`cost` omitted). Unless the request sets the `Accept-Type-Allow-Int64` header, REST returns int64 values such as `count`, `fieldId`, and `count`-type metrics as strings. PyMilvus returns `AggregationBucket` objects rather than JSON, exposing each key component as a `field_name`/`field_id`/`value` dict. Either way, the `key` value is always an ordered list of key components, even when `fields` contains only one field. This preserves field order for composite keys.
+The following response was captured from the request above and serialized as JSON for readability. PyMilvus returns `AggregationBucket` objects rather than JSON, exposing each key component as a `field_name`/`field_id`/`value` dict. Either way, the `key` value is always an ordered list of key components, even when `fields` contains only one field. This preserves field order for composite keys.
 
 ```json
 {
+  "aggTopks": [
+    3
+  ],
   "code": 0,
+  "cost": 0,
   "data": [
     {
       "buckets": [
         {
+          "count": 1,
+          "hits": [],
           "key": [
             {
+              "fieldId": 103,
               "fieldName": "brand",
-              "fieldId": "104",
               "value": "Brand B"
             }
           ],
-          "count": "1",
           "metrics": {
-            "product_count": "1",
             "avg_price": 159.99,
-            "min_price": 159.99
+            "min_price": 159.99,
+            "product_count": 1
           },
-          "hits": [],
           "subGroups": []
         },
         {
+          "count": 1,
+          "hits": [],
           "key": [
             {
+              "fieldId": 103,
               "fieldName": "brand",
-              "fieldId": "104",
               "value": "Brand A"
             }
           ],
-          "count": "1",
           "metrics": {
-            "product_count": "1",
             "avg_price": 129.99,
-            "min_price": 129.99
+            "min_price": 129.99,
+            "product_count": 1
           },
-          "hits": [],
           "subGroups": []
         },
         {
+          "count": 1,
+          "hits": [],
           "key": [
             {
+              "fieldId": 103,
               "fieldName": "brand",
-              "fieldId": "104",
               "value": "Brand C"
             }
           ],
-          "count": "1",
           "metrics": {
-            "product_count": "1",
             "avg_price": 119.99,
-            "min_price": 119.99
+            "min_price": 119.99,
+            "product_count": 1
           },
-          "hits": [],
           "subGroups": []
         }
       ]
     }
-  ],
-  "aggTopks": [3]
+  ]
 }
 ```
 
@@ -833,6 +836,7 @@ const aggregation = {
 payload='{
   "collectionName": "product_search_aggregation",
   "data": [[0.11, 0.40, 0.19, 0.64, 0.30]], "annsField": "embedding", "limit": 10,
+  "outputFields": ["name", "brand", "category", "color", "price", "rating", "in_stock"],
   "searchParams": {"metric_type": "COSINE", "params": {}},
   "searchAggregation": {"fields": ["brand"], "size": 3, "topHits": {"size": 2, "sort": [{"fieldName": "rating", "direction": "desc"}, {"fieldName": "_score", "direction": "desc"}]}}
 }'
@@ -847,39 +851,39 @@ The following Brand A bucket was captured from the request above and serialized 
 
 ```json
 {
-  "key": [
-    {
-      "fieldName": "brand",
-      "fieldId": "104",
-      "value": "Brand A"
-    }
-  ],
-  "count": "2",
-  "metrics": {},
+  "count": 2,
   "hits": [
     {
-      "id": "1",
-      "distance": 0.99976646900177,
-      "name": "Runner A1",
       "brand": "Brand A",
       "category": "running_shoes",
       "color": "black",
+      "distance": 0.99976647,
+      "id": 1,
+      "in_stock": true,
+      "name": "Runner A1",
       "price": 129.99,
-      "rating": 4.7,
-      "in_stock": true
+      "rating": 4.7
     },
     {
-      "id": "2",
-      "distance": 0.9997048377990723,
-      "name": "Trail A2",
       "brand": "Brand A",
       "category": "running_shoes",
       "color": "blue",
+      "distance": 0.99970484,
+      "id": 2,
+      "in_stock": true,
+      "name": "Trail A2",
       "price": 139.99,
-      "rating": 4.6,
-      "in_stock": true
+      "rating": 4.6
     }
   ],
+  "key": [
+    {
+      "fieldId": 103,
+      "fieldName": "brand",
+      "value": "Brand A"
+    }
+  ],
+  "metrics": {},
   "subGroups": []
 }
 ```
@@ -1004,6 +1008,7 @@ const aggregation = {
 payload='{
   "collectionName": "product_search_aggregation",
   "data": [[0.11, 0.40, 0.19, 0.64, 0.30]], "annsField": "embedding", "limit": 10,
+  "outputFields": ["name", "brand", "category", "color", "price", "rating", "in_stock"],
   "searchParams": {"metric_type": "COSINE", "params": {}},
   "searchAggregation": {
     "fields": ["category"], "size": 2,
@@ -1023,46 +1028,46 @@ The following serialized excerpt shows the `running_shoes` parent bucket and its
 
 ```json
 {
+  "count": 4,
+  "hits": [],
   "key": [
     {
+      "fieldId": 104,
       "fieldName": "category",
-      "fieldId": "105",
       "value": "running_shoes"
     }
   ],
-  "count": "4",
   "metrics": {
     "avg_price": 137.49,
-    "product_count": "4"
+    "product_count": 4
   },
-  "hits": [],
   "subGroups": [
     {
-      "key": [
-        {
-          "fieldName": "brand",
-          "fieldId": "104",
-          "value": "Brand B"
-        }
-      ],
-      "count": "1",
-      "metrics": {
-        "avg_rating": 4.8,
-        "brand_count": "1"
-      },
+      "count": 1,
       "hits": [
         {
-          "id": "3",
-          "distance": 0.9994542598724365,
-          "name": "Runner B1",
           "brand": "Brand B",
           "category": "running_shoes",
           "color": "white",
+          "distance": 0.99945426,
+          "id": 3,
+          "in_stock": true,
+          "name": "Runner B1",
           "price": 159.99,
-          "rating": 4.8,
-          "in_stock": true
+          "rating": 4.8
         }
       ],
+      "key": [
+        {
+          "fieldId": 103,
+          "fieldName": "brand",
+          "value": "Brand B"
+        }
+      ],
+      "metrics": {
+        "avg_rating": 4.8,
+        "brand_count": 1
+      },
       "subGroups": []
     }
   ]
