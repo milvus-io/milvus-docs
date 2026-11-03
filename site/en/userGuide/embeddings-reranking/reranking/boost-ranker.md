@@ -570,7 +570,7 @@ Once the Boost Ranker function is ready, you can reference it in a search reques
 ```python
 from pymilvus import MilvusClient
 
-# Connect to {{var.product_name}} server
+# Connect to {{var.connection_target}}
 client = MilvusClient(
     uri="{{var.example_endpoint}}",
     token="{{var.example_token}}"
@@ -693,7 +693,7 @@ if (!status.IsOk()) {
 ```javascript
 import { MilvusClient } from '@zilliz/milvus2-sdk-node';
 
-// Connect to {{var.product_name}} server
+// Connect to {{var.connection_target}}
 const client = new MilvusClient({
   address: '{{var.example_endpoint}}',
   token: '{{var.example_token}}'
