@@ -505,6 +505,9 @@ auto status = client->HasPartition(milvus::HasPartitionRequest()
                                     .WithCollectionName("my_collection")
                                     .WithPartitionName("partitionA"),
                                    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 std::cout << response.Has() << std::endl;
 ```
 
@@ -679,7 +682,7 @@ status = client->GetLoadState(milvus::GetLoadStateRequest()
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << std::to_string(response.State()) << std::endl;
+std::cout << milvus::to_string(response.State()) << std::endl;
 ```
 
 ```javascript
@@ -873,7 +876,7 @@ status = client->GetLoadState(milvus::GetLoadStateRequest()
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << std::to_string(response.State()) << std::endl;
+std::cout << milvus::to_string(response.State()) << std::endl;
 ```
 
 ```javascript
