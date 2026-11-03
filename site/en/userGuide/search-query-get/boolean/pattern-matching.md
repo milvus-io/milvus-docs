@@ -1,14 +1,14 @@
 ---
 id: pattern-matching.md
 title: "Pattern Matching"
-summary: "Milvus supports string pattern matching with LIKE wildcard patterns and RE2 regular expressions. Use pattern filters to match prefixes, suffixes, substrings, structured codes, email domains, URL paths, and other string patterns in VARCHAR fields, JSON string paths, or ARRAY elements."
+summary: "{{var.product_name}} supports string pattern matching with LIKE wildcard patterns and RE2 regular expressions. Use pattern filters to match prefixes, suffixes, substrings, structured codes, email domains, URL paths, and other string patterns in VARCHAR fields, JSON string paths, or ARRAY elements."
 ---
 
 # Pattern Matching
 
 In agentic search applications, vector search and grep-style pattern matching often complement each other. Vector search retrieves entities that are semantically relevant, while pattern matching narrows those results by exact string structures, such as error codes, log prefixes, email domains, URL paths, or identifiers.
 
-In Milvus, you can express these pattern constraints in scalar filters with `LIKE` for simple wildcard matching, and `=~` or `!~` for [RE2](https://github.com/google/re2/wiki/syntax) regular expressions. You can combine these filters with `query`, `search`, or hybrid search.
+In {{var.product_name}}, you can express these pattern constraints in scalar filters with `LIKE` for simple wildcard matching, and `=~` or `!~` for [RE2](https://github.com/google/re2/wiki/syntax) regular expressions. You can combine these filters with `query`, `search`, or hybrid search.
 
 <div class="alert note">
 
@@ -18,19 +18,22 @@ This page describes pattern matching in scalar filter expressions used by `query
 
 Pattern matching expressions are written in the `filter` parameter. For example, the following query matches log messages that contain an error code such as `E1001`:
 
+<!-- doc:block:start id="pattern-match-query" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="{{var.example_endpoint}}")
 
 res = client.query(
     collection_name="log_events",
@@ -48,7 +51,7 @@ import io.milvus.v2.service.vector.response.QueryResp;
 import java.util.Arrays;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
+        .uri("{{var.example_endpoint}}")
         .build());
 
 QueryResp res = client.query(QueryReq.builder()
@@ -64,12 +67,12 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx := context.Background()
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "{{var.example_endpoint}}",
 })
 if err != nil {
     // handle error
@@ -86,40 +89,24 @@ if err != nil {
 fmt.Println(res)
 ```
 
-```javascript
-const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
+```rust
+use milvus::v2::prelude::*;
 
-async function main() {
-  const client = new MilvusClient({ address: 'http://localhost:19530' });
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}");
+let client = ClientV2::new(&config).await?;
 
-  const res = await client.query({
-    collection_name: 'log_events',
-    // highlight-next-line
-    filter: 'message =~ "E[0-9]{4}"',
-    output_fields: ['message', 'severity'],
-  });
-  console.log(res);
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("log_events")
+        // highlight-next-line
+        .filter(r#"message =~ "E[0-9]{4}""#)
+        .output_fields(["message", "severity"])
+        .build()?,
+).await?;
+
+for row in res.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
 }
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
-```
-
-```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
-
-curl --request POST \
-  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
-  --header "Authorization: Bearer ${TOKEN}" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "collectionName": "log_events",
-    "filter": "message =~ \"E[0-9]{4}\"",
-    "outputFields": ["message", "severity"]
-  }'
 ```
 
 ```cpp
@@ -128,7 +115,7 @@ curl --request POST \
 
 auto client = milvus::MilvusClientV2::Create();
 
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
@@ -147,7 +134,76 @@ if (!status.IsOk()) {
 }
 ```
 
-The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in Milvus operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
+```javascript
+const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
+
+async function main() {
+  const client = new MilvusClient({ address: '{{var.example_endpoint}}' });
+
+  const res = await client.query({
+    collection_name: 'log_events',
+    // highlight-next-line
+    filter: 'message =~ "E[0-9]{4}"',
+    output_fields: ['message', 'severity'],
+  });
+  console.log(res);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var config = new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+QueryResp res = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "log_events",
+    Expression = "message =~ \"E[0-9]{4}\"",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "message", "severity" }
+    }
+});
+```
+
+```bash
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+  --header "Authorization: Bearer ${TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "collectionName": "log_events",
+    "filter": "message =~ \"E[0-9]{4}\"",
+    "outputFields": ["message", "severity"]
+  }'
+```
+<!-- doc:block:end id="pattern-match-query" -->
+
+The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in {{var.product_name}} operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
+
+<div class="alert note">
+
+The literal on the left-hand side of a filtering expression can either be a collection field name, such as `message`, `email`, etc., used in examples below, or the name of a StructArray subfield at a specific element index, as in `filter = 'struct[0][subfield] =~ "E[0-9]{4}"'`.
+
+For details on scalar filtering in a StructArray field, refer to [StructArray Operators](struct-array-operators.md).
+
+</div>
 
 ## Supported field types
 
@@ -212,11 +268,13 @@ In `LIKE` patterns, `%` matches zero or more characters and `_` matches exactly 
 - `name LIKE r"\_%"` matches values that start with a literal `_`.
 - `name LIKE r"\\%"` matches values that start with a literal backslash.
 
-Raw string literals, written as `r"..."` or `r'...'`, keep backslashes verbatim in Milvus filter expressions. They are recommended for `LIKE` and regex patterns that contain backslashes. Without a raw string, ordinary string literals still process escape sequences before the pattern is evaluated, so more backslashes may be required.
+Raw string literals, written as `r"..."` or `r'...'`, keep backslashes verbatim in {{var.product_name}} filter expressions. They are recommended for `LIKE` and regex patterns that contain backslashes. Without a raw string, ordinary string literals still process escape sequences before the pattern is evaluated, so more backslashes may be required.
 
+<!-- doc:block:start id="use-regex-heading" -->
 ## Use regex | Milvus 3.0.x
+<!-- doc:block:end id="use-regex-heading" -->
 
-Use regex filters when the pattern requires regular expression features such as character classes, repetition, alternation, anchors, or case-insensitive matching. Milvus applies an [RE2](https://github.com/google/re2/wiki/syntax) regular expression to a string value.
+Use regex filters when the pattern requires regular expression features such as character classes, repetition, alternation, anchors, or case-insensitive matching. {{var.product_name}} applies an [RE2](https://github.com/google/re2/wiki/syntax) regular expression to a string value.
 
 The right side of `=~` or `!~` must be a string literal.
 
@@ -225,19 +283,22 @@ The right side of `=~` or `!~` must be a string literal.
 | `=~` | Matches values that satisfy the regex pattern. | `filter = 'message =~ "E[0-9]{4}"'` |
 | `!~` | Excludes values that satisfy the regex pattern. | `filter = 'message !~ "^DEBUG"'` |
 
-### Use raw string literals
+### Using raw string literals
 
 Raw string literals are recommended for regex patterns that contain backslashes. In a raw string, written as `r"..."` or `r'...'`, backslashes are passed to the regex engine verbatim. This avoids the extra escaping required by ordinary string literals.
 
 For example:
 
+<!-- doc:block:start id="pattern-raw-string" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -252,25 +313,34 @@ String filter = "filename =~ r\"\\.json$\"";
 filter := `filename =~ r"\.json$"`
 ```
 
-```javascript
-const filter = 'filename =~ r"\\.json$"';
-```
-
-```bash
-filter='filename =~ r"\.json$"'
+```rust
+let filter = r#"filename =~ r"\.json$""#;
 ```
 
 ```cpp
 std::string filter = R"(filename =~ r"\.json$")";
 ```
 
+```javascript
+const filter = 'filename =~ r"\\.json$"';
+```
+
+```csharp
+string filter = "filename =~ r\"\\.json$\"";
+```
+
+```bash
+filter='filename =~ r"\.json$"'
+```
+<!-- doc:block:end id="pattern-raw-string" -->
+
 This matches strings that end with `.json`, such as `report.json`.
 
-Without a raw string in the Milvus filter expression, ordinary string literals process escape sequences before the regex pattern is evaluated. Escaped literal characters may therefore require additional backslashes in the host-language string.
+Without a raw string in the {{var.product_name}} filter expression, ordinary string literals process escape sequences before the regex pattern is evaluated. Escaped literal characters may therefore require additional backslashes in the host-language string.
 
 ### Common regex patterns
 
-The following examples use common RE2 syntax in Milvus filter expressions. For complete regex syntax, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
+The following examples use common RE2 syntax in {{var.product_name}} filter expressions. For complete regex syntax, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
 
 | Requirement | Pattern | Filter example |
 | --- | --- | --- |
@@ -285,13 +355,16 @@ The following examples use common RE2 syntax in Milvus filter expressions. For c
 
 To match one of several words, use alternation with `|`:
 
+<!-- doc:block:start id="pattern-alternation" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -306,27 +379,39 @@ String filter = "message =~ \"error|failed|timeout\"";
 filter := `message =~ "error|failed|timeout"`
 ```
 
-```javascript
-const filter = 'message =~ "error|failed|timeout"';
-```
-
-```bash
-filter='message =~ "error|failed|timeout"'
+```rust
+let filter = r#"message =~ "error|failed|timeout""#;
 ```
 
 ```cpp
 std::string filter = R"(message =~ "error|failed|timeout")";
 ```
 
+```javascript
+const filter = 'message =~ "error|failed|timeout"';
+```
+
+```csharp
+string filter = "message =~ \"error|failed|timeout\"";
+```
+
+```bash
+filter='message =~ "error|failed|timeout"'
+```
+<!-- doc:block:end id="pattern-alternation" -->
+
 When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python, Java, Go, or Node.js source string:
 
+<!-- doc:block:start id="pattern-escape" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -341,33 +426,45 @@ String filter = "email =~ \"@gmail\\.com$\"";
 filter := `email =~ "@gmail\\.com$"`
 ```
 
-```javascript
-const filter = 'email =~ "@gmail\\.com$"';
-```
-
-```bash
-filter='email =~ "@gmail\\.com$"'
+```rust
+let filter = r#"email =~ "@gmail\.com$""#;
 ```
 
 ```cpp
 std::string filter = R"(email =~ "@gmail\\.com$")";
 ```
 
-Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, Milvus rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
+```javascript
+const filter = 'email =~ "@gmail\\.com$"';
+```
+
+```csharp
+string filter = "email =~ \"@gmail\\.com$\"";
+```
+
+```bash
+filter='email =~ "@gmail\\.com$"'
+```
+<!-- doc:block:end id="pattern-escape" -->
+
+Note: {{var.product_name}} regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, {{var.product_name}} rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
 
 ### Matching behavior
 
 **Substring matching**
 
-Milvus regex matching uses substring semantics. The pattern does not need to match the entire field value. For example, the following filter matches both `E1001` and `failed with E1001 after retry`:
+{{var.product_name}} regex matching uses substring semantics. The pattern does not need to match the entire field value. For example, the following filter matches both `E1001` and `failed with E1001 after retry`:
 
+<!-- doc:block:start id="pattern-substring" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -382,27 +479,39 @@ String filter = "message =~ \"E[0-9]{4}\"";
 filter := `message =~ "E[0-9]{4}"`
 ```
 
-```javascript
-const filter = 'message =~ "E[0-9]{4}"';
-```
-
-```bash
-filter='message =~ "E[0-9]{4}"'
+```rust
+let filter = r#"message =~ "E[0-9]{4}""#;
 ```
 
 ```cpp
 std::string filter = R"(message =~ "E[0-9]{4}")";
 ```
 
+```javascript
+const filter = 'message =~ "E[0-9]{4}"';
+```
+
+```csharp
+string filter = "message =~ \"E[0-9]{4}\"";
+```
+
+```bash
+filter='message =~ "E[0-9]{4}"'
+```
+<!-- doc:block:end id="pattern-substring" -->
+
 To match the entire field value, use the `^` and `$` anchors:
 
+<!-- doc:block:start id="pattern-anchors" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -420,31 +529,45 @@ String filter = "code =~ \"^E[0-9]{4}$\"";
 filter := `code =~ "^E[0-9]{4}$"`
 ```
 
-```javascript
+```rust
 // Match only values that are exactly E followed by four digits
-const filter = 'code =~ "^E[0-9]{4}$"';
-```
-
-```bash
-# Match only values that are exactly E followed by four digits
-filter='code =~ "^E[0-9]{4}$"'
+let filter = r#"code =~ "^E[0-9]{4}$""#;
 ```
 
 ```cpp
 std::string filter = R"(code =~ "^E[0-9]{4}$")";
 ```
 
+```javascript
+// Match only values that are exactly E followed by four digits
+const filter = 'code =~ "^E[0-9]{4}$"';
+```
+
+```csharp
+// Match only values that are exactly E followed by four digits
+string filter = "code =~ \"^E[0-9]{4}$\"";
+```
+
+```bash
+# Match only values that are exactly E followed by four digits
+filter='code =~ "^E[0-9]{4}$"'
+```
+<!-- doc:block:end id="pattern-anchors" -->
+
 **Nullable VARCHAR fields**
 
 Regex filters do not match null values. This applies to both `=~` and `!~`. If you want to exclude a regex pattern but keep null values, explicitly add `OR field IS NULL`:
 
+<!-- doc:block:start id="pattern-null" -->
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -459,17 +582,26 @@ String filter = "message !~ \"^DEBUG\" OR message IS NULL";
 filter := `message !~ "^DEBUG" OR message IS NULL`
 ```
 
-```javascript
-const filter = 'message !~ "^DEBUG" OR message IS NULL';
-```
-
-```bash
-filter='message !~ "^DEBUG" OR message IS NULL'
+```rust
+let filter = r#"message !~ "^DEBUG" OR message IS NULL"#;
 ```
 
 ```cpp
 std::string filter = R"(message !~ "^DEBUG" OR message IS NULL)";
 ```
+
+```javascript
+const filter = 'message !~ "^DEBUG" OR message IS NULL';
+```
+
+```csharp
+string filter = "message !~ \"^DEBUG\" OR message IS NULL";
+```
+
+```bash
+filter='message !~ "^DEBUG" OR message IS NULL'
+```
+<!-- doc:block:end id="pattern-null" -->
 
 **JSON paths**
 
@@ -482,14 +614,14 @@ For JSON paths, regex filters behave differently when the path is missing, null,
 
 ## Accelerate pattern matching with indexes
 
-Milvus supports several index types on string fields that can be used together with `LIKE` and regex filters on `VARCHAR` fields or JSON string paths, such as `NGRAM`, `STL_SORT`, `INVERTED`, and `BITMAP`. Pattern matching can work without an index, but an index can improve performance on large datasets.
+{{var.product_name}} supports several index types on string fields that can be used together with `LIKE` and regex filters on `VARCHAR` fields or JSON string paths, such as `NGRAM`, `STL_SORT`, `INVERTED`, and `BITMAP`. Pattern matching can work without an index, but an index can improve performance on large datasets.
 
-Index effectiveness depends on the pattern expression, whether Milvus can extract fixed literal substrings, and the cardinality and distribution of the target field. Prefix-style patterns such as `name LIKE "Prod%"` may benefit from different index strategies than infix or suffix patterns such as `description LIKE "%vector%"` or `filename LIKE "%.json"`.
+Index effectiveness depends on the pattern expression, whether {{var.product_name}} can extract fixed literal substrings, and the cardinality and distribution of the target field. Prefix-style patterns such as `name LIKE "Prod%"` may benefit from different index strategies than infix or suffix patterns such as `description LIKE "%vector%"` or `filename LIKE "%.json"`.
 
 Use the following table as a starting point, then benchmark with your own workload:
 
 | Pattern or data characteristic | Index to consider | Notes |
 | --- | --- | --- |
-| Contains fixed literal substrings, such as `message =~ "error.*timeout"` or `message LIKE "%database%"` | `NGRAM` | Helps when Milvus can extract meaningful literal substrings from the pattern. For details, refer to [NGRAM](ngram.md). |
+| Contains fixed literal substrings, such as `message =~ "error.*timeout"` or `message LIKE "%database%"` | `NGRAM` | Helps when {{var.product_name}} can extract meaningful literal substrings from the pattern. For details, refer to [NGRAM](ngram.md). |
 | Prefix, exact, or equality-like string filters, especially on fields with low to moderate cardinality | `STL_SORT`, `INVERTED`, or `BITMAP` | May be more effective when the field has repeated values or when the filter is close to exact matching. For details, refer to [STL_SORT](stl-sort.md), [INVERTED](inverted.md), and [BITMAP](bitmap.md). |
 | Regex patterns without fixed literals, or patterns dominated by character classes, short tokens, or wildcards | Benchmark before relying on index acceleration | These patterns may provide limited index selectivity and can fall back to broader scans. |
