@@ -74,7 +74,7 @@ results = client.search(
 
 When highlighting is enabled, Milvus returns highlighted text in a dedicated `highlight` field of each search result. The `highlight` object maps each highlighted field name to an object that contains a `fragments` list and a matching `scores` list. By default, highlighted output is returned as a fragment starting from the first matched term.
 
-In this example, the search term is `"BM25"`, so it is highlighted in the returned result:
+In this example, the search term is `"BM25"`, so it is highlighted in the returned result. `fragments` holds the highlighted text and `scores` holds the corresponding numeric score of each fragment; the score values shown on this page are illustrative.
 
 ```json
 {
@@ -84,7 +84,7 @@ In this example, the search term is `"BM25"`, so it is highlighted in the return
             "fragments": [
                 "{BM25} for keyword relevance. Filters can narrow results."
             ],
-            "scores": ["..."]
+            "scores": [0.72]
         }
     }
 }
@@ -159,7 +159,7 @@ In this example, the first matched term is `"text"`, so the returned highlighted
             "fragments": [
                 "{text} {filtering} works in Milvus."
             ],
-            "scores": ["..."]
+            "scores": [0.72]
         }
     }
 }
@@ -225,7 +225,7 @@ With fragment-based highlighting enabled, Milvus returns highlighted text as fra
             "fragments": [
                 "Use {BM25} for keyword relevance. Filters can narrow results."
             ],
-            "scores": ["..."]
+            "scores": [0.72]
         }
     }
 }
