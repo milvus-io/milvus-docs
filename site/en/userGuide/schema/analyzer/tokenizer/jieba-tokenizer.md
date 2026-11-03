@@ -328,11 +328,14 @@ analyzerParams='{
    </tr>
 </table>
 
+<!-- doc:block:start id="jieba-dict-file-reference" -->
 To load a large custom vocabulary from an external file instead of inlining it via `dict`, see [Custom configuration with a dictionary file](jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file) below.
+<!-- doc:block:end id="jieba-dict-file-reference" -->
 
 After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows {{var.product_name}} to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
 <!-- This section is published to both Cloud manuals, so the heading stays product-neutral. -->
+<!-- doc:block:start id="jieba-dict-file-section" -->
 ### Custom configuration with a dictionary file
 
 For large custom vocabularies — domain glossaries, product terminology, or proper-noun lists — store the words in a file and register the file as a remote file resource, then reference it from the tokenizer via the `extra_dict_file` parameter. The analyzer loads these words into its vocabulary on top of the built-in dictionary.
@@ -346,7 +349,6 @@ The file is plain UTF‑8 text with one term per line. For example:
 
 Upload the file to the object store that your {{var.product_name}} cluster is configured to use, then register it:
 
-<!-- doc:block:start id="jieba-file-resource-cli" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -493,7 +495,6 @@ curl --request POST \
     "path": "file/zh_terms.txt"
   }'
 ```
-<!-- doc:block:end id="jieba-file-resource-cli" -->
 
 Reference the registered resource in the tokenizer via `extra_dict_file`:
 
@@ -721,6 +722,7 @@ The `extra_dict_file` parameter accepts an object with the following fields:
 </table>
 
 Words added via `extra_dict_file` are merged with the built-in dictionary, so jieba's segmentation algorithm sees them alongside existing entries. Whether any specific term surfaces as a standalone token depends on jieba's probability-weighted DAG selection — a long custom term such as `向量数据库` may still be split into `向量` + `数据库` if those shorter entries have higher frequencies in the built-in dictionary.
+<!-- doc:block:end id="jieba-dict-file-section" -->
 
 ## Examples
 
