@@ -10,11 +10,11 @@ A range search improves search result relevancy by restricting the distance or s
 
 ## Overview
 
-When executing a Range Search request, Milvus uses the most similar vectors to the query vector from the ANN Search results as the center, with the **radius** specified in the Search request as the outer circle's radius, and the **range_filter** as the inner circle's radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the **range_filter** can be set to **0**, indicating that all entities within the specified similarity score (radius) will be returned.
+When executing a Range Search request, {{var.product_name}} uses the most similar vectors to the query vector from the ANN Search results as the center, with the **radius** specified in the Search request as the outer circle's radius, and the **range_filter** as the inner circle's radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the **range_filter** can be set to **0**, indicating that all entities within the specified similarity score (radius) will be returned.
 
 ![Range Search](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/range-search.png)
 
-The above diagram shows that a range search request carries two parameters: **radius** and **range_filter**. Upon receiving a range search request, Milvus does the following:
+The above diagram shows that a range search request carries two parameters: **radius** and **range_filter**. Upon receiving a range search request, {{var.product_name}} does the following:
 
 - Use the specified metric type (**COSINE**) to find all vector embeddings most similar to the query vector.
 
@@ -61,13 +61,18 @@ The way to set **radius** and **range_filter** varies with the metric type of th
 
 This section demonstrates how to conduct a range search. The search requests in the following code snippets do not carry a metric type, indicating the default metric type **COSINE** applies. In this case, ensure that the **radius** value is smaller than the **range_filter** value.
 
-In the following code snippets, set `radius` to `0.4` and `range_filter` to `0.6` so that Milvus returns all entities whose distances or scores to the query vector fall within **0.4** to **0.6**.
+In the following code snippets, set `radius` to `0.4` and `range_filter` to `0.6` so that {{var.product_name}} returns all entities whose distances or scores to the query vector fall within **0.4** to **0.6**.
+
+<!-- doc:block:start id="range-search-examples" -->
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -75,8 +80,8 @@ In the following code snippets, set `radius` to `0.4` and `range_filter` to `0.6
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
@@ -104,13 +109,17 @@ for hits in res:
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
- io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
         .build());
 
 FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
@@ -144,7 +153,7 @@ for (List<SearchResp.SearchResult> results : searchResults) {
 import (
     "context"
     "fmt"
-    
+
     "github.com/milvus-io/milvus/client/v2/index"
     "github.com/milvus-io/milvus/client/v2/entity"
     "github.com/milvus-io/milvus/client/v2/milvusclient"
@@ -153,7 +162,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "{{var.example_endpoint}}"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -186,11 +195,80 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.example_token}}");
+let client = ClientV2::new(&config).await?;
+
+let query_vector = vec![0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(5)
+            .radius(0.4)
+            .range_filter(0.6)
+            .build()?,
+    )
+    .await?;
+
+println!("TopK results:");
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+auto status = client->Connect(milvus::ConnectParam("{{var.example_endpoint}}", "{{var.example_token}}"));
+if (!status.IsOk()) {
+    std::cerr << "Failed to connect: " << status.Message() << std::endl;
+    return;
+}
+
+std::vector<float> queryVector = {
+    0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F
+};
+
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("my_collection")
+                         .WithAnnsField("vector")
+                         .WithLimit(5)
+                         .WithRadius(0.4)
+                         .WithRangeFilter(0.6)
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
-const address = "http://localhost:19530";
-const token = "root:Milvus";
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
 const client = new MilvusClient({address, token});
 
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
@@ -208,9 +286,40 @@ res = await client.search({
 })
 ```
 
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+MilvusClientV2 client = new(new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
+});
+await client.ConnectAsync();
+
+float[] queryVector = [0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f];
+
+SearchResp res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "vector",
+    Vectors = [queryVector],
+    Limit = 5,
+    Parameters = new SearchParameters
+    {
+        // highlight-start
+        Radius = "0.4",
+        RangeFilter = "0.6",
+        // highlight-end
+        OutputFields = { "color" }
+    }
+});
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -233,6 +342,8 @@ curl --request POST \
 }'
 # {"code":0,"cost":0,"data":[]}
 ```
+
+<!-- doc:block:end id="range-search-examples" -->
 
 <div class="alert note">
 
