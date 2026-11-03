@@ -105,7 +105,7 @@ Gaussian decay can be applied to both standard vector search and hybrid search o
 
 <div class="alert note">
 
-Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to [Tutorial: Implement Time-based Ranking in Milvus](tutorial-implement-a-time-based-ranking-in-milvus.md).
+Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to [Tutorial: Implement Time-based Ranking in {{var.product_name}}](tutorial-implement-a-time-based-ranking-in-milvus.md).
 
 </div>
 
