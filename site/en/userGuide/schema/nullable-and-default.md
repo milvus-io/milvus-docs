@@ -6,7 +6,7 @@ summary: "Configure nullable fields and default values, including schema, insert
 
 # Nullable Fields
 
-Milvus supports nullable fields, which allow a field value to be missing or explicitly set to NULL. Nullability is defined at the schema level and applies consistently across data ingestion, indexing, search, and query operations.
+{{var.product_name}} supports nullable fields, which allow a field value to be missing or explicitly set to NULL. Nullability is defined at the schema level and applies consistently across data ingestion, indexing, search, and query operations.
 
 Use nullable fields when:
 
@@ -14,35 +14,43 @@ Use nullable fields when:
 - Some metadata is optional or only available for part of the dataset.
 - Vector embeddings are generated asynchronously and inserted later.
 
+<!-- doc:block:start id="nullable-limits" -->
+
 ## Limits
 
 - Vector fields that allow NULL values do not support `IS NULL` or `IS NOT NULL` filter expressions. You cannot explicitly filter entities based on whether a vector field value is NULL.
 
-- Starting in Milvus 3.0.0, the parent [StructArray](array-of-structs.md) field can be nullable. Set `nullable=True` on the parent StructArray field, not on individual subfields. NULL applies to the whole StructArray field, not to an individual Struct element, and Milvus propagates the parent's nullability to its subfields internally. A StructArray field added to an existing collection must be nullable so existing entities can return NULL for the new field. For details, refer to [StructArray Limits](structarray-limits.md#Nullable-and-dynamic-schema-limits).
+- Starting in Milvus 3.0.0, the parent [StructArray](array-of-structs.md) field can be nullable. Set `nullable=True` on the parent StructArray field, not on individual subfields. NULL applies to the whole StructArray field, not to an individual Struct element, and {{var.product_name}} propagates the parent's nullability to its subfields internally. A StructArray field added to an existing collection must be nullable so existing entities can return NULL for the new field. For details, refer to [StructArray Limits](structarray-limits.md#Nullable-and-dynamic-schema-limits).
 
 - The nullable attribute is defined when a field is created and cannot be modified afterward. You cannot enable or disable nullability for an existing field.
 
 - Fields marked as nullable cannot be used as partition keys. Partition key fields must always contain valid, non-null values. For more information, refer to [Use Partition Key](use-partition-key.md).
 
+<!-- doc:block:end id="nullable-limits" -->
+
 ## What is a nullable field?
 
-In Milvus, whether a field is allowed to store a NULL value is controlled by a schema-level field attribute named `nullable`.
+In {{var.product_name}}, whether a field is allowed to store a NULL value is controlled by a schema-level field attribute named `nullable`.
 
-When a field is defined with `nullable=True`, Milvus allows the field value to be missing during data ingestion. In practice, Milvus treats the following two inputs as equivalent and stores the field value as NULL:
+When a field is defined with `nullable=True`, {{var.product_name}} allows the field value to be missing during data ingestion. In practice, {{var.product_name}} treats the following two inputs as equivalent and stores the field value as NULL:
 
 - The field is omitted from the input entity.
 - The field is explicitly set to NULL (for example, `None` in Python).
 
 If a field is not defined as nullable (the default behavior), every entity must provide a valid value for that field. Omitting the field or explicitly assigning a NULL value will cause the insert or import operation to fail.
 
-The nullable attribute is supported for both **scalar and vector fields** in a collection schema. Starting in Milvus 3.0.0, it is also supported on the parent StructArray field. Do not configure Struct subfields as nullable independently; define nullability on the StructArray parent and Milvus propagates that setting to its subfields internally.
+<!-- doc:block:start id="nullable-structarray-scope" -->
+
+The nullable attribute is supported for both **scalar and vector fields** in a collection schema. Starting in Milvus 3.0.0, it is also supported on the parent StructArray field. Do not configure Struct subfields as nullable independently; define nullability on the StructArray parent and {{var.product_name}} propagates that setting to its subfields internally.
+
+<!-- doc:block:end id="nullable-structarray-scope" -->
 
 <div class="alert note">
 
 Nullability determines whether a field value may be missing; it does not define what value is used when a field is missing.
 
 - If a nullable field is configured without a default value, omitting the field results in a stored NULL value.
-- If a default value is configured, Milvus may store the default value instead. For details, see [Default Values](default-values.md).
+- If a default value is configured, {{var.product_name}} may store the default value instead. For details, see [Default Values](default-values.md).
 
 </div>
 
@@ -55,8 +63,11 @@ In this example, the collection schema defines a vector field named `embedding` 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -64,8 +75,8 @@ In this example, the collection schema defines a vector field named `embedding` 
 from pymilvus import MilvusClient, DataType
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 # Define schema fields
@@ -93,8 +104,8 @@ import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
         .build());
 
 CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
@@ -119,33 +130,6 @@ client.createCollection(CreateCollectionReq.builder()
         .build());
 ```
 
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const client = new MilvusClient({
-  address: "http://localhost:19530",
-  token: "root:Milvus",
-});
-
-await client.createCollection({
-  collection_name: "my_collection",
-  fields: [
-    {
-      name: "id",
-      data_type: DataType.Int64,
-      is_primary_key: true,
-      autoID: false,
-    },
-    {
-      name: "embedding",
-      data_type: DataType.FloatVector,
-      dim: 4,
-      nullable: true,
-    },
-  ],
-});
-```
-
 ```go
 import (
     "context"
@@ -159,7 +143,8 @@ ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "{{var.example_endpoint}}",
+    APIKey:  "{{var.example_token}}",
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -187,9 +172,112 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::error::Result;
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.example_token}}");
+let client = ClientV2::new(&config).await?;
+
+let schema = CollectionSchema::new()
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("embedding")
+            .data_type(DataType::FloatVector)
+            .dimension(4)
+            // highlight-next-line
+            .nullable(true),
+    );
+
+client.create_collection(
+    CreateCollectionRequest::builder()
+        .collection_name("my_collection")
+        .schema(schema)
+        .build()?,
+).await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <memory>
+
+auto client = milvus::MilvusClientV2::Create();
+auto status = client->Connect(milvus::ConnectParam("{{var.example_endpoint}}").WithToken("{{var.example_token}}"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4).WithNullable(true));
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                    .WithCollectionName("my_collection")
+                                    .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+  address: "{{var.example_endpoint}}",
+  token: "{{var.example_token}}",
+});
+
+await client.createCollection({
+  collection_name: "my_collection",
+  fields: [
+    {
+      name: "id",
+      data_type: DataType.Int64,
+      is_primary_key: true,
+      autoID: false,
+    },
+    {
+      name: "embedding",
+      data_type: DataType.FloatVector,
+      dim: 4,
+      nullable: true,
+    },
+  ],
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
+});
+
+// Define schema fields
+var schema = new CollectionSchema { Name = "my_collection" };
+schema.Fields.Add(new FieldSchema("id", DataType.Int64, isPrimaryKey: true)); // Primary field
+schema.Fields.Add(new FieldSchema("embedding", DataType.FloatVector) { Dimension = 4, Nullable = true }); // Enable the nullable attribute; defaults to false
+
+await client.CreateCollectionAsync(new CreateCollectionReq { CollectionName = "my_collection", Schema = schema });
+```
+
 ```bash
-export TOKEN="root:Milvus"
-export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="{{var.example_token}}"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
 
 export pkField='{
   "fieldName": "id",
@@ -200,7 +288,7 @@ export pkField='{
 export embeddingField='{
   "fieldName": "embedding",
   "dataType": "FloatVector",
-  "typeParams": {"dim": "4"},
+  "elementTypeParams": {"dim": 4},
   "nullable": true
 }'
 
@@ -236,8 +324,11 @@ Scalar fields can also be defined as nullable using the same `nullable` attribut
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -259,17 +350,44 @@ schema.addField(AddFieldReq.builder()
         .build());
 ```
 
-```javascript
-// Add to the fields array when calling createCollection:
-// { name: "age", data_type: DataType.Int64, nullable: true },
-```
-
 ```go
 schema.WithField(entity.NewField().
     WithName("age").
     WithDataType(entity.FieldTypeInt64).
     WithNullable(true),
 )
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let schema = schema.add_field(
+    FieldSchema::new()
+        .name("age")
+        .data_type(DataType::Int64)
+        // highlight-next-line
+        .nullable(true),
+);
+```
+
+```cpp
+schema->AddField(milvus::FieldSchema("age", milvus::DataType::INT64).WithNullable(true));
+```
+
+```javascript
+// Add to the fields array when calling createCollection:
+// { name: "age", data_type: DataType.Int64, nullable: true },
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+schema.Fields.Add(new FieldSchema("age", DataType.Int64) { Nullable = true });
 ```
 
 ```bash
@@ -281,15 +399,18 @@ schema.WithField(entity.NewField().
 
 ## Insert behavior with missing or NULL values
 
-Once a field is defined as nullable in the collection schema, Milvus allows the field value to be missing or explicitly set to NULL during data ingestion.
+Once a field is defined as nullable in the collection schema, {{var.product_name}} allows the field value to be missing or explicitly set to NULL during data ingestion.
 
-The example below inserts three entities into the collection created in [Define a nullable field in the collection schema](#define-a-nullable-field-in-the-collection-schema), demonstrating these different cases.
+The example below inserts three entities into the collection created in [Define a nullable field in the collection schema](#Define-a-nullable-field-in-the-collection-schema), demonstrating these different cases.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -344,6 +465,67 @@ client.insert(InsertReq.builder()
         .build());
 ```
 
+```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+// Assumes `client` is the {{var.product_name}} client from the Go schema example above.
+ctx := context.Background()
+
+rows := []any{
+    map[string]any{"id": int64(1), "embedding": []float32{0.1, 0.2, 0.3, 0.4}},
+    map[string]any{"id": int64(2), "embedding": nil},
+    map[string]any{"id": int64(3)},
+}
+
+_, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption("my_collection", rows...))
+if err != nil {
+    fmt.Println(err.Error())
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+use serde_json::json;
+
+let rows = vec![
+    json!({"id": 1, "embedding": [0.1, 0.2, 0.3, 0.4]}),
+    json!({"id": 2, "embedding": None::<Vec<f32>>}),
+    json!({"id": 3}),
+];
+
+client.insert(
+    InsertRequest::builder()
+        .collection_name("my_collection")
+        .rows(rows)
+        .build()?,
+).await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <vector>
+
+milvus::EntityRows data = {
+    {{"id", 1}, {"embedding", std::vector<float>{0.1, 0.2, 0.3, 0.4}}},
+    {{"id", 2}, {"embedding", nullptr}},
+    {{"id", 3}},
+};
+
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(data)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 const data = [
   { id: 1, embedding: [0.1, 0.2, 0.3, 0.4] },
@@ -357,27 +539,26 @@ await client.insert({
 });
 ```
 
-```go
-import (
-    "context"
-    "fmt"
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
+var data = new List<IDictionary<string, object?>>
+{
+    new Dictionary<string, object?> { ["id"] = 1L, ["embedding"] = new[] { 0.1f, 0.2f, 0.3f, 0.4f } },
+    new Dictionary<string, object?> { ["id"] = 2L, ["embedding"] = null },   // Explicitly set to NULL
+    new Dictionary<string, object?> { ["id"] = 3L },                         // Field omitted; stored as NULL
+};
 
-// Assumes `client` is the Milvus client from the Go schema example above.
-ctx := context.Background()
-
-rows := []any{
-    map[string]any{"id": int64(1), "embedding": []float32{0.1, 0.2, 0.3, 0.4}},
-    map[string]any{"id": int64(2), "embedding": nil},
-    map[string]any{"id": int64(3)},
-}
-
-_, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption("my_collection", rows...))
-if err != nil {
-    fmt.Println(err.Error())
-}
+await client.InsertAsync(new InsertReq
+{
+    CollectionName = "my_collection",
+    RowsData = data
+});
 ```
 
 ```bash
@@ -400,11 +581,11 @@ In this example:
 
 - Entity **id = 1** provides a valid vector value.
 - Entity **id = 2** explicitly assigns a NULL value to the `embedding` field.
-- Entity **id = 3** omits the `embedding` field entirely; Milvus stores it as NULL.
+- Entity **id = 3** omits the `embedding` field entirely; {{var.product_name}} stores it as NULL.
 
 ## Index behavior on nullable fields
 
-After inserting data, you can build an index on a nullable field as usual. The key difference is how Milvus handles NULL values during index construction:
+After inserting data, you can build an index on a nullable field as usual. The key difference is how {{var.product_name}} handles NULL values during index construction:
 
 - Only entities with non-null values are added to the index.
 - Entities with NULL values are skipped and do not participate in index building.
@@ -414,8 +595,11 @@ For a nullable vector field, this means only entities with valid vectors become 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -462,20 +646,6 @@ client.loadCollection(LoadCollectionReq.builder()
         .build());
 ```
 
-```javascript
-await client.createIndex({
-  collection_name: "my_collection",
-  field_name: "embedding",
-  index_name: "embedding_idx",
-  index_type: "AUTOINDEX",
-  metric_type: "COSINE",
-});
-
-await client.loadCollection({
-  collection_name: "my_collection",
-});
-```
-
 ```go
 import (
     "context"
@@ -486,7 +656,7 @@ import (
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-// Assumes `client` is the Milvus client from the Go schema example above.
+// Assumes `client` is the {{var.product_name}} client from the Go schema example above.
 ctx := context.Background()
 
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "embedding",
@@ -501,6 +671,76 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_col
 if err != nil {
     fmt.Println(err.Error())
 }
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client.create_index(
+    CreateIndexRequest::builder()
+        .collection_name("my_collection")
+        .index_param(
+            IndexParam::new()
+                .field_name("embedding")
+                .index_type(IndexType::AutoIndex)
+                .metric_type(MetricType::Cosine),
+        )
+        .build()?,
+).await?;
+
+client.load_collection(
+    LoadCollectionRequest::builder()
+        .collection_name("my_collection")
+        .build()?,
+).await?;
+```
+
+```cpp
+status = client->CreateIndex(milvus::CreateIndexRequest()
+                                .WithCollectionName("my_collection")
+                                .AddIndex(milvus::IndexDesc("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE))
+                                .WithSync(true));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->LoadCollection(milvus::LoadCollectionRequest()
+                                .WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.createIndex({
+  collection_name: "my_collection",
+  field_name: "embedding",
+  index_name: "embedding_idx",
+  index_type: "AUTOINDEX",
+  metric_type: "COSINE",
+});
+
+await client.loadCollection({
+  collection_name: "my_collection",
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+await client.CreateIndexAsync(new CreateIndexReq
+{
+    CollectionName = "my_collection",
+    Indexes = [new IndexParam("embedding", "embedding_index", IndexType.AutoIndex, MetricType.Cosine)]
+});
+
+// Load collection for future search operations
+await client.LoadCollectionAsync(new LoadCollectionReq { CollectionName = "my_collection" });
 ```
 
 ```bash
@@ -535,21 +775,24 @@ At this point:
 
 ## Search behavior with nullable fields
 
-When you perform search operations on a nullable field, Milvus evaluates only entities with non-null values for the field used in the search. Entities whose vector field is NULL are skipped automatically.
+When you perform search operations on a nullable field, {{var.product_name}} evaluates only entities with non-null values for the field used in the search. Entities whose vector field is NULL are skipped automatically.
 
 For a nullable vector field such as `embedding` in this example:
 
 - Only entities with valid vector values are evaluated and ranked.
 - Entities with NULL vectors do not cause errors.
-- If the number of valid vectors is smaller than the requested `topK` (`limit`), Milvus may return fewer results than `limit`.
+- If the number of valid vectors is smaller than the requested `topK` (`limit`), {{var.product_name}} may return fewer results than `limit`.
 
 The following example performs a vector search on the nullable vector field `embedding`:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -585,19 +828,6 @@ SearchResp res = client.search(SearchReq.builder()
 System.out.println(res);
 ```
 
-```javascript
-const res = await client.search({
-  collection_name: "my_collection",
-  data: [[0.1, 0.2, 0.3, 0.4]],
-  anns_field: "embedding",
-  limit: 3,
-  search_params: { metric_type: "COSINE" },
-  output_fields: ["embedding"],
-});
-
-console.log(res);
-```
-
 ```go
 import (
     "context"
@@ -607,7 +837,7 @@ import (
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-// Assumes `client` is the Milvus client from the Go schema example above.
+// Assumes `client` is the {{var.product_name}} client from the Go schema example above.
 ctx := context.Background()
 
 query := []float32{0.1, 0.2, 0.3, 0.4}
@@ -621,6 +851,76 @@ if err != nil {
     fmt.Println(err.Error())
 }
 fmt.Println(resultSets)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let search_results = client.search(
+    SearchRequest::builder()
+        .collection_name("my_collection")
+        .vector_field("embedding")
+        .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.3, 0.4]]))
+        .output_fields(["embedding"])
+        .limit(3)
+        .build()?,
+).await?;
+for result in search_results.results().iter() {
+    for row in result.get_output_rows()? {
+        println!("{:?}", row);
+    }
+}
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <vector>
+
+std::vector<float> query_vector = {0.1, 0.2, 0.3, 0.4};
+milvus::SearchResponse search_response;
+status = client->Search(milvus::SearchRequest()
+                            .WithCollectionName("my_collection")
+                            .WithAnnsField("embedding")
+                            .WithLimit(3)
+                            .AddOutputField("embedding")
+                            .AddFloatVector(query_vector),
+                        search_response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const res = await client.search({
+  collection_name: "my_collection",
+  data: [[0.1, 0.2, 0.3, 0.4]],
+  anns_field: "embedding",
+  limit: 3,
+  search_params: { metric_type: "COSINE" },
+  output_fields: ["embedding"],
+});
+
+console.log(res);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "embedding",
+    Vectors = new[] { new ReadOnlyMemory<float>(new[] { 0.1f, 0.2f, 0.3f, 0.4f }) },
+    Limit = 3,
+    Parameters = new SearchParameters { OutputFields = { "embedding" } }
+});
+
+Console.WriteLine(res);
 ```
 
 ```bash
@@ -649,15 +949,18 @@ In this search:
 
 The previous examples focus on vector fields. This section describes how NULL values behave in **scalar filter expressions**.
 
-Scalar fields can be defined with `nullable=True` and follow the same ingestion rules as vector fields. However, **NULL scalar values always evaluate to false in filter expressions**.
+Scalar fields can be defined with `nullable=True` and follow the same ingestion rules as vector fields. However, **NULL scalar values always evaluate to false in filter expressions**. Use `IS NULL` or `IS NOT NULL` to select entities by whether a scalar field is NULL.
 
 For example, given a nullable scalar field `age`, the following filter selects entities whose age is greater than 18:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -669,12 +972,31 @@ expr = "age > 18"
 String filter = "age > 18";
 ```
 
+```go
+filter := "age > 18"
+```
+
+```rust
+let expr = "age > 18";
+```
+
+```cpp
+std::string expr = "age > 18";
+```
+
 ```javascript
 const expr = "age > 18";
 ```
 
-```go
-filter := "age > 18"
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+string filter = "age > 18";
 ```
 
 ```bash
@@ -689,8 +1011,11 @@ Similarly, equality checks do not match NULL values. For example:
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -702,12 +1027,31 @@ expr = 'status == "active"'
 String filter = "status == \"active\"";
 ```
 
+```go
+filter := `status == "active"`
+```
+
+```rust
+let expr = "status == \"active\"";
+```
+
+```cpp
+std::string expr = "status == \"active\"";
+```
+
 ```javascript
 const expr = 'status == "active"';
 ```
 
-```go
-filter := `status == "active"`
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+string filter = "status == \"active\"";
 ```
 
 ```bash
@@ -718,7 +1062,7 @@ Entities where `status` is NULL are excluded from the results.
 
 ## Nullable fields and default values
 
-When both `nullable` and `default_value` are configured for a field, the following rules determine how Milvus handles NULL input or missing field values during insertion.
+When both `nullable` and `default_value` are configured for a field, the following rules determine how {{var.product_name}} handles NULL input or missing field values during insertion.
 
 | Nullable enabled | Default value | User input (NULL or omitted) | Result |
 | ---------------- | ------------- | ---------------------------- | -------- |
