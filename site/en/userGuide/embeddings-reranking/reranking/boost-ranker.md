@@ -9,7 +9,7 @@ beta: Milvus v2.6.2+
 
 Instead of relying solely on semantic similarity calculated based on vector distances, Boost Rankers allow you to influence search results in a meaningful way. It is ideal for quickly adjusting search results using metadata filtering.
 
-When a search request includes a Boost Ranker function, Milvus uses the optional filtering condition within the function to find matches among search result candidates and boosts the scores of those matches by applying the specified weight, helping promote or demote the rankings of the matched entities in the final result. 
+When a search request includes a Boost Ranker function, {{var.product_name}} uses the optional filtering condition within the function to find matches among search result candidates and boosts the scores of those matches by applying the specified weight, helping promote or demote the rankings of the matched entities in the final result.
 
 ## When to use Boost Ranker
 
@@ -42,7 +42,7 @@ The following diagram illustrates the main workflow of Boost Rankers.
 
 When you insert data, {{var.product_name}} distributes it across segments. During a search, each segment returns a set of candidates, and {{var.product_name}} ranks these candidates from all segments to produce the final results. When a search request includes a Boost Ranker, {{var.product_name}} applies it to the candidate results from each segment to prevent potential precision loss and improve recall.
 
-Before finalizing the results, Milvus processes these candidates with the Boost Ranker as follows:
+Before finalizing the results, {{var.product_name}} processes these candidates with the Boost Ranker as follows:
 
 1. Applies the optional filtering expression specified in the Boost Ranker to identify the entities that match the expression.
 
@@ -60,9 +60,9 @@ You cannot use Boost Ranker as the ranker in a multi-vector hybrid search. Howev
 
 The following example illustrates the use of a Boost Ranker in a single-vector search that requires returning the top five most relevant entities and adding weights to the scores of entities with the abstract doc type.
 
-1. **Collect search result candidates in segments.** 
+1. **Collect search result candidates in segments.**
 
-    The following table assumes Milvus distributes entities into two segments (**0001** and **0002**), with each segment returning five candidates.
+    The following table assumes {{var.product_name}} distributes entities into two segments (**0001** and **0002**), with each segment returning five candidates.
 
     <table>
        <tr>
@@ -146,7 +146,7 @@ The following example illustrates the use of a Boost Ranker in a single-vector s
 
 1. **Apply the filtering expression specified in the Boost Ranker** (`doctype='abstract'`).
 
-    As denoted by the `DocType` field in the following table, Milvus will mark all entities with their `doctype` set to `abstract` for further processing.
+    As denoted by the `DocType` field in the following table, {{var.product_name}} will mark all entities with their `doctype` set to `abstract` for further processing.
 
     <table>
        <tr>
@@ -230,7 +230,7 @@ The following example illustrates the use of a Boost Ranker in a single-vector s
 
 1. **Apply the weight specified in the Boost Ranker** (`weight=0.5`).
 
-    All identified entities in the previous step will be multiplied by the weight specified in the Boost Ranker, resulting in changes in their ranks. 
+    All identified entities in the previous step will be multiplied by the weight specified in the Boost Ranker, resulting in changes in their ranks.
 
     <table>
        <tr>
@@ -324,7 +324,7 @@ The following example illustrates the use of a Boost Ranker in a single-vector s
     </table>
 
     <div class="alert note">
-    
+
     The weight must be a floating-point number that you choose. In cases like the above example, where a smaller score indicates greater relevance, use a weight less than **1**. Otherwise, use a weight greater than **1**.
 
     </div>
@@ -410,7 +410,7 @@ rerank = Function(
     params={
         "reranker": "boost",
         "filter": "doctype == 'abstract'",
-        "random_score": { 
+        "random_score": {
             "seed": 126,
             "field": "id"
         },
@@ -570,7 +570,7 @@ Once the Boost Ranker function is ready, you can reference it in a search reques
 ```python
 from pymilvus import MilvusClient
 
-# Connect to the Milvus server
+# Connect to {{var.product_name}} server
 client = MilvusClient(
     uri="{{var.example_endpoint}}",
     token="{{var.example_token}}"
@@ -693,7 +693,7 @@ if (!status.IsOk()) {
 ```javascript
 import { MilvusClient } from '@zilliz/milvus2-sdk-node';
 
-// Connect to the Milvus server
+// Connect to {{var.product_name}} server
 const client = new MilvusClient({
   address: '{{var.example_endpoint}}',
   token: '{{var.example_token}}'
@@ -752,7 +752,7 @@ curl --request POST \
 
 You can combine multiple Boost Rankers in a single search to influence the search results. To do so, create several Boost Rankers, reference them in a **FunctionScore** instance, and use the **FunctionScore** instance as the ranker in the search request.
 
-The following example shows how to modify the scores of all identified entities by applying a weight between **0.8** and **1.2**. 
+The following example shows how to modify the scores of all identified entities by applying a weight between **0.8** and **1.2**.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -795,7 +795,7 @@ random_weight_ranker = Function(
 # Create a Function Score
 ranker = FunctionScore(
     functions=[
-        fix_weight_ranker, 
+        fix_weight_ranker,
         random_weight_ranker
     ],
     params={
@@ -1065,7 +1065,7 @@ curl --request POST \
 }'
 ```
 
-Specifically, there are two Boost Rankers: one applies a fixed weight to all found entities, while the other assigns a random weight to them. Then, we reference these two rankers in a **FunctionScore**, which also defines how the weights influence the scores of the found entities. 
+Specifically, there are two Boost Rankers: one applies a fixed weight to all found entities, while the other assigns a random weight to them. Then, we reference these two rankers in a **FunctionScore**, which also defines how the weights influence the scores of the found entities.
 
 The following table lists the parameters required to create a **FunctionScore** instance.
 

@@ -269,7 +269,7 @@ var rerank = new DecayRerank("event_relevance") // Function identifier
 ```
 
 ```bash
-# Note: The RESTful API does not expose the decay/rerank operation as of Milvus v3.0.x.
+# Note: The RESTful API does not expose the decay/rerank operation as of v3.0.x.
 ```
 
 ### Apply to standard vector search
@@ -417,5 +417,5 @@ var result = await client.SearchAsync(new SearchReq
 ```
 
 ```bash
-# Note: The RESTful API does not expose the decay/rerank operation as of Milvus v3.0.x.
+# Note: The RESTful API does not expose the decay/rerank operation as of v3.0.x.
 ```
