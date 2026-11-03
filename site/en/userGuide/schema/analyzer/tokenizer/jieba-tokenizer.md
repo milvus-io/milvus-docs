@@ -346,6 +346,7 @@ The file is plain UTF‑8 text with one term per line. For example:
 
 Upload the file to the object store that your {{var.product_name}} cluster is configured to use, then register it:
 
+<!-- doc:block:start id="jieba-file-resource-cli" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -492,6 +493,7 @@ curl --request POST \
     "path": "file/zh_terms.txt"
   }'
 ```
+<!-- doc:block:end id="jieba-file-resource-cli" -->
 
 Reference the registered resource in the tokenizer via `extra_dict_file`:
 
