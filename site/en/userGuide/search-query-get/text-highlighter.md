@@ -1,7 +1,7 @@
 ---
 id: text-highlighter.md
 title: "Text Highlighter"
-summary: "The Highlighter in Milvus annotates matched terms in text fields by wrapping them with customizable tags. Highlighting helps explain why a document matches, improves result readability, and supports rich rendering in search and RAG applications."
+summary: "The Highlighter in {{var.product_name}} annotates matched terms in text fields by wrapping them with customizable tags. Highlighting helps explain why a document matches, improves result readability, and supports rich rendering in search and RAG applications."
 beta: Milvus 2.6.8+
 ---
 

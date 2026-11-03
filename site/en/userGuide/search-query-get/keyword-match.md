@@ -1,7 +1,7 @@
 ---
 id: keyword-match.md
 title: "Text Match"
-summary: "Text match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria."
+summary: "Text match in {{var.product_name}} enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria."
 ---
 
 # Text Match
