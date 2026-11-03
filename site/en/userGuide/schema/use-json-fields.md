@@ -1,16 +1,16 @@
 ---
 id: use-json-fields.md
 title: "JSON Field"
-summary: "Milvus allows you to store and index structured data within a single field using the JSON data type. This enables flexible schemas with nested attributes while still allowing efficient filtering via JSON indexing."
+summary: "{{var.product_name}} allows you to store and index structured data within a single field using the JSON data type. This enables flexible schemas with nested attributes while still allowing efficient filtering via JSON indexing."
 ---
 
 # JSON Field
 
-Milvus allows you to store and index structured data within a single field using the `JSON` data type. This enables flexible schemas with nested attributes while still allowing efficient filtering via JSON indexing.
+{{var.product_name}} allows you to store and index structured data within a single field using the `JSON` data type. This enables flexible schemas with nested attributes while still allowing efficient filtering via JSON indexing.
 
 ## What is a JSON field?
 
-A JSON field is a schema-defined field in Milvus that stores structured key-value data. The values can include strings, numbers, booleans, arrays, or deeply nested objects.
+A JSON field is a schema-defined field in {{var.product_name}} that stores structured key-value data. The values can include strings, numbers, booleans, arrays, or deeply nested objects.
 
 Here’s an example of what a JSON field might look like in a document:
 
@@ -64,7 +64,7 @@ The example below creates a collection with its schema containing these fields:
 ```python
 from pymilvus import MilvusClient, DataType
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="{{var.example_endpoint}}")
 
 # Create schema with a JSON field
 schema = client.create_schema(auto_id=False, enable_dynamic_field=True)
@@ -86,7 +86,7 @@ import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 
 ConnectConfig config = ConnectConfig.builder()
-        .uri("http://localhost:19530")
+        .uri("{{var.example_endpoint}}")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 
@@ -121,7 +121,7 @@ client.createCollection(requestCreate);
 import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
 
 const client = new MilvusClient({
-  address: 'localhost:19530'
+  address: '{{var.example_endpoint}}'
 });
 
 // Create collection
@@ -162,7 +162,7 @@ ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "{{var.example_endpoint}}",
 })
 if err != nil {
     return err
@@ -170,7 +170,7 @@ if err != nil {
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(true)
 schema.WithField(entity.NewField().
-    WithName("product_id").pk
+    WithName("product_id").
     WithDataType(entity.FieldTypeInt64).
     WithIsPrimaryKey(true),
 ).WithField(entity.NewField().
@@ -191,8 +191,8 @@ if err != nil {
 
 ```bash
 # restful
-export TOKEN="root:Milvus"
-export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="{{var.example_token}}"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
 
 # 字段定义
 export productIdField='{
@@ -205,7 +205,7 @@ export productIdField='{
 export vectorField='{
   "fieldName": "vector",
   "dataType": "FloatVector",
-  "typeParams": {
+  "elementTypeParams": {
     "dim": 5
   }
 }'
@@ -330,7 +330,7 @@ const entities = [
         "metadata": {
             "category": "electronics",
             "brand": "BrandA",
-            "in_stock": True,
+            "in_stock": true,
             "price": 99.99,
             "string_price": "99.99",
             "tags": ["clearance", "summer_sale"],
@@ -362,7 +362,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("product_cat
         []byte(`{
             "category": "electronics",
             "brand": "BrandA",
-            "in_stock": True,
+            "in_stock": true,
             "price": 99.99,
             "string_price": "99.99",
             "tags": ["clearance", "summer_sale"],
@@ -384,8 +384,8 @@ if err != nil {
 
 ```bash
 # restful
-export TOKEN="root:Milvus"
-export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="{{var.example_token}}"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
 
 export entities='[
   {
@@ -423,7 +423,7 @@ curl --request POST \
 
 ## Index values inside the JSON field
 
-To accelerate scalar filtering on JSON fields, Milvus supports the following types of indexes:
+To accelerate scalar filtering on JSON fields, {{var.product_name}} supports the following types of indexes:
 
 - **JSON path index** – index specific JSON paths with a declared scalar type.
 
@@ -436,6 +436,12 @@ Indexing JSON fields is **optional**. You can still query or filter by JSON path
 </div>
 
 ### Choose between path index and flat index | Milvus 2.6.x
+
+<div class="alert warning">
+
+Whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated starting in 3.0.0. Existing indexes and new index-creation requests remain supported for compatibility, but this mode is no longer recommended for new workloads. Create JSON path indexes for known query paths.
+
+</div>
 
 <table>
    <tr>
@@ -509,9 +515,9 @@ To create a JSON path index, specify:
 
         This defines where the indexing engine should look inside the JSON structure.
 
-- **JSON cast type** (`json_cast_type`): The data type that Milvus should use when interpreting and indexing the value at the specified path.
+- **JSON cast type** (`json_cast_type`): The data type that {{var.product_name}} should use when interpreting and indexing the value at the specified path.
 
-    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion).
+    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514).
 
     - For a complete list, see [below](use-json-fields.md#Supported-JSON-cast-types).
 
@@ -801,11 +807,11 @@ export stringToDoubleIndex='{
 
 ### JSON flat indexing | Milvus 2.6.x
 
-For **JSON flat indexing**, Milvus indexes all key–value pairs within a JSON object path (including nested objects) by *flattening* the JSON structure and automatically inferring the type of each value.
+For **JSON flat indexing**, {{var.product_name}} indexes all key–value pairs within a JSON object path (including nested objects) by *flattening* the JSON structure and automatically inferring the type of each value.
 
 #### How flattening and type inference work
 
-When you create a JSON flat index on an object path, Milvus will:
+When you create a JSON flat index on an object path, {{var.product_name}} will:
 
 1. **Flatten** – Recursively traverse the object starting from the specified `json_path` and extract nested key–value pairs as fully qualified paths. Using the earlier `metadata` example:
 
@@ -825,7 +831,7 @@ When you create a JSON flat index on an object path, Milvus will:
     metadata["supplier"]["country"] = "USA"
     ```
 
-1. **Infer types automatically** – For each value, Milvus determines its type in the following order:
+1. **Infer types automatically** – For each value, {{var.product_name}} determines its type in the following order:
 
     ```plaintext
     unsigned integer → signed integer → floating-point → string
@@ -882,19 +888,83 @@ index_params.add_index(
 ```
 
 ```java
-// java
+Map<String,Object> extraParams4 = new HashMap<>();
+extraParams4.put("json_path", "metadata");
+extraParams4.put("json_cast_type", "JSON");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("metadata_flat")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams4)
+        .build());
+
+Map<String,Object> extraParams5 = new HashMap<>();
+extraParams5.put("json_path", "metadata[\"supplier\"]");
+extraParams5.put("json_cast_type", "JSON");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("metadata_supplier_flat")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams5)
+        .build());
 ```
 
 ```javascript
-// nodejs
+indexParams.push(
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "metadata_flat",
+    index_type: "AUTOINDEX", // Can also use "INVERTED"
+    extra_params: {
+      json_path: "metadata",
+      json_cast_type: "JSON",
+    },
+  },
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "metadata_supplier_flat",
+    index_type: "AUTOINDEX", // Can also use "INVERTED"
+    extra_params: {
+      json_path: 'metadata["supplier"]',
+      json_cast_type: "JSON",
+    },
+  }
+);
 ```
 
 ```go
-// go
+jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, "JSON", `metadata`).
+    WithIndexName("metadata_flat")
+jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, "JSON", `metadata["supplier"]`).
+    WithIndexName("metadata_supplier_flat")
+
+indexOpt4 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex4)
+indexOpt5 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex5)
 ```
 
 ```bash
 # restful
+export metadataFlatIndex='{
+  "fieldName": "metadata",
+  "indexName": "metadata_flat",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata",
+    "json_cast_type": "JSON"
+  }
+}'
+
+export metadataSupplierFlatIndex='{
+  "fieldName": "metadata",
+  "indexName": "metadata_supplier_flat",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\"supplier\"]",
+    "json_cast_type": "JSON"
+  }
+}'
 ```
 
 ### Apply indexes to the collection
@@ -942,6 +1012,14 @@ indexTask3, err := client.CreateIndex(ctx, indexOpt3)
 if err != nil {
     return err
 }
+indexTask4, err := client.CreateIndex(ctx, indexOpt4)
+if err != nil {
+    return err
+}
+indexTask5, err := client.CreateIndex(ctx, indexOpt5)
+if err != nil {
+    return err
+}
 ```
 
 ```bash
@@ -949,7 +1027,9 @@ if err != nil {
 export indexParams="[
   $categoryIndex,
   $tagsArrayIndex,
-  $stringToDoubleIndex
+  $stringToDoubleIndex,
+  $metadataFlatIndex,
+  $metadataSupplierFlatIndex
 ]"
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
@@ -983,21 +1063,21 @@ filter = 'json_contains(metadata["tags"], "featured")'
 ```
 
 ```java
-String filter = 'metadata["category"] == "electronics"';
-String filter = 'metadata["price"] > 50';
-String filter = 'json_contains(metadata["tags"], "featured")';
+String filterCategory = "metadata[\"category\"] == \"electronics\"";
+String filterPrice = "metadata[\"price\"] > 50";
+String filterTags = "json_contains(metadata[\"tags\"], \"featured\")";
 ```
 
 ```javascript
-let filter = 'metadata["category"] == "electronics"'
-let filter = 'metadata["price"] > 50'
-let filter = 'json_contains(metadata["tags"], "featured")'
+const filterCategory = 'metadata["category"] == "electronics"';
+const filterPrice = 'metadata["price"] > 50';
+const filterTags = 'json_contains(metadata["tags"], "featured")';
 ```
 
 ```go
-filter := 'metadata["category"] == "electronics"'
-filter := 'metadata["price"] > 50'
-filter := 'json_contains(metadata["tags"], "featured")'
+filterCategory := `metadata["category"] == "electronics"`
+filterPrice := `metadata["price"] > 50`
+filterTags := `json_contains(metadata["tags"], "featured")`
 ```
 
 ```bash
@@ -1065,9 +1145,9 @@ Yes, to ensure compatibility with queries and indexing:
 
 - Incompatible keys may cause parsing issues in filter expressions.
 
-### How does Milvus handle string values in JSON fields?
+### How does {{var.product_name}} handle string values in JSON fields?
 
-Milvus stores string values exactly as they appear in the JSON input—without semantic transformation. Improperly quoted strings may result in errors during parsing.
+{{var.product_name}} stores string values exactly as they appear in the JSON input—without semantic transformation. Improperly quoted strings may result in errors during parsing.
 
 **Examples of valid strings**:
 
@@ -1081,7 +1161,7 @@ Milvus stores string values exactly as they appear in the JSON input—without s
 'a"b', 'a\'b'
 ```
 
-### What filtering logic does Milvus use for indexed JSON paths?
+### What filtering logic does {{var.product_name}} use for indexed JSON paths?
 
 - **Numeric Indexing**:
 
@@ -1097,7 +1177,7 @@ Milvus stores string values exactly as they appear in the JSON input—without s
 
 ### What about numeric precision when indexing JSON fields?
 
-Milvus stores all indexed numeric values as doubles.
+{{var.product_name}} stores all indexed numeric values as doubles.
 
 If a numeric value exceeds **2^53**, it may lose precision. This loss of precision can result in filter queries not matching out-of-range values exactly.
 
