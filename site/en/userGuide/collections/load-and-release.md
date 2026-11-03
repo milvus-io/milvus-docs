@@ -8,17 +8,32 @@ summary: "Loading a collection is the prerequisite to conducting similarity sear
 
 Loading a collection is the prerequisite to conducting similarity searches and queries in collections. This page focuses on the procedures for loading and releasing a collection.
 
-## Load Collection
+## Prerequisites
 
-When you load a collection, Milvus loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.
+Before loading a collection, verify the following:
+
+<!-- doc:block:start id="load-prerequisites" -->
+
+- You have at least indexed all vector fields, and optionally certain scalar fields.
+
+<!-- doc:block:end id="load-prerequisites" -->
+
+<!-- doc:block:start id="load-collection-heading" -->
+## Load Collection
+<!-- doc:block:end id="load-collection-heading" -->
+
+When you load a collection, {{var.product_name}} loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.
 
 The following code snippets demonstrate how to load a collection.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -26,8 +41,8 @@ The following code snippets demonstrate how to load a collection.
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 # 7. Load the collection
@@ -54,10 +69,10 @@ import io.milvus.v2.service.collection.request.GetLoadStateReq;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 
-String CLUSTER_ENDPOINT = "http://localhost:19530";
-String TOKEN = "root:Milvus";
+String CLUSTER_ENDPOINT = "{{var.example_endpoint}}";
+String TOKEN = "{{var.example_token}}";
 
-// 1. Connect to Milvus server
+// 1. Connect to {{var.product_name}}
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -65,14 +80,14 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 6. Load the collection
+// 7. Load the collection
 LoadCollectionReq loadCollectionReq = LoadCollectionReq.builder()
         .collectionName("my_collection")
         .build();
 
 client.loadCollection(loadCollectionReq);
 
-// 7. Get load state of the collection
+// Get load state of the collection
 GetLoadStateReq loadStateReq = GetLoadStateReq.builder()
         .collectionName("my_collection")
         .build();
@@ -84,61 +99,34 @@ System.out.println(res);
 // true
 ```
 
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const address = "http://localhost:19530";
-const token = "root:Milvus";
-const client = new MilvusClient({address, token});
-
-// 7. Load the collection
-res = await client.loadCollection({
-    collection_name: "my_collection"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-
-res = await client.getLoadState({
-    collection_name: "my_collection"
-})
-
-console.log(res.state)
-
-// Output
-// 
-// LoadStateLoaded
-// 
-```
-
 ```go
 import (
     "context"
     "fmt"
-    
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
+
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "{{var.example_endpoint}}"
+token := "{{var.example_token}}"
+
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey:  token,
 })
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
 defer client.Close(ctx)
-    
+
 loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle err
+    // handle error
 }
 
 // sync wait collection to be loaded
@@ -153,12 +141,131 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
-fmt.Println(state)
+fmt.Println(state.State)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}"),
+)
+.await?;
+
+// 7. Load the collection
+client
+    .load_collection(
+        LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+let res = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.state());
+```
+
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->LoadCollection(milvus::LoadCollectionRequest()
+                                    .WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                  .WithCollectionName("my_collection"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << std::to_string(response.State()) << std::endl;
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
+const client = new MilvusClient({address, token});
+
+// 7. Load the collection
+let res = await client.loadCollection({
+    collection_name: "my_collection"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+
+res = await client.getLoadState({
+    collection_name: "my_collection"
+})
+
+console.log(res.state)
+
+// Output
+//
+// LoadStateLoaded
+//
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Responses.Collection;
+using Milvus.Client.V2.Types;
+
+const string CLUSTER_ENDPOINT = "{{var.example_endpoint}}";
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = CLUSTER_ENDPOINT,
+    ApiKey = "{{var.example_token}}"
+});
+await client.ConnectAsync();
+
+// 7. Load the collection
+await client.LoadCollectionAsync(new LoadCollectionReq
+{
+    CollectionName = "my_collection"
+});
+
+// Get load state of the collection
+GetLoadStateResp res = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection"
+});
+Console.WriteLine(res.State);
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
@@ -195,21 +302,26 @@ curl --request POST \
 
 ## Load Specific Fields
 
-Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.
+{{var.product_name}} can load only the fields involved in searches and queries, reducing memory usage and improving search performance.
 
+<!-- doc:block:start id="partial-load-beta-note" -->
 <div class="alert note">
 
 Partial collection loading is currently in beta and not recommended for production use.
 
 </div>
+<!-- doc:block:end id="partial-load-beta-note" -->
 
 The following code snippet assumes that you have created a collection named **my_collection**, and there are two fields named **my_id** and **my_vector** in the collection.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,7 +329,7 @@ The following code snippet assumes that you have created a collection named **my
 client.load_collection(
     collection_name="my_collection",
     # highlight-next-line
-    load_fields=["my_id", "my_vector"] # Load only the specified fields
+    load_fields=["my_id", "my_vector"], # Load only the specified fields
     skip_load_dynamic_field=True # Skip loading the dynamic field
 )
 
@@ -235,15 +347,20 @@ print(res)
 ```
 
 ```java
-// 6. Load the collection
+import io.milvus.v2.service.collection.request.GetLoadStateReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import java.util.Arrays;
+
+// Load the collection
 LoadCollectionReq loadCollectionReq = LoadCollectionReq.builder()
         .collectionName("my_collection")
         .loadFields(Arrays.asList("my_id", "my_vector"))
+        .skipLoadDynamicField(true)
         .build();
 
 client.loadCollection(loadCollectionReq);
 
-// 7. Get load state of the collection
+// Get load state of the collection
 GetLoadStateReq loadStateReq = GetLoadStateReq.builder()
         .collectionName("my_collection")
         .build();
@@ -252,23 +369,16 @@ Boolean res = client.getLoadState(loadStateReq);
 System.out.println(res);
 ```
 
-```javascript
-await client.load_collection({
-  collection_name: "my_collection",
-  load_fields: ["my_id", "my_vector"], // Load only the specified fields
-  skip_load_dynamic_field: true //Skip loading the dynamic field
-});
-
-const loadState = client.getCollectionLoadState({
-    collection_name: "my_collection",
-})
-
-console.log(loadState);
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection").
-        WithLoadFields("my_id", "my_vector"))
+    WithLoadFields("my_id", "my_vector").
+    WithSkipLoadDynamicField(true))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
@@ -286,17 +396,99 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
-fmt.Println(state)
+fmt.Println(state.State)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .load_collection(
+        LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            .load_fields(["my_id", "my_vector"])
+            .skip_load_dynamic_field(true)
+            .build()?,
+    )
+    .await?;
+
+let res = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.state());
+```
+
+```cpp
+auto status = client->LoadCollection(milvus::LoadCollectionRequest()
+                                        .WithCollectionName("my_collection")
+                                        .AddLoadField("my_id")
+                                        .AddLoadField("my_vector")
+                                        .WithSkipDynamicField(true));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                  .WithCollectionName("my_collection"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << std::to_string(response.State()) << std::endl;
+```
+
+```javascript
+await client.loadCollection({
+  collection_name: "my_collection",
+  load_fields: ["my_id", "my_vector"], // Load only the specified fields
+  skip_load_dynamic_field: true // Skip loading the dynamic field
+});
+
+const res = await client.getLoadState({
+    collection_name: "my_collection",
+});
+
+console.log(res.state);
+
+// Output
+//
+// LoadStateLoaded
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Responses.Collection;
+using Milvus.Client.V2.Types;
+
+// Load the collection
+await client.LoadCollectionAsync(new LoadCollectionReq
+{
+    CollectionName = "my_collection",
+    LoadFields = new[] { "my_id", "my_vector" }, // Load only the specified fields
+    SkipLoadDynamicField = true // Skip loading the dynamic field
+});
+
+// Get load state of the collection
+GetLoadStateResp res = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection"
+});
+Console.WriteLine(res.State);
 ```
 
 ```bash
-# REST
-Not support yet
+# The RESTful API does not expose partial collection loading.
 ```
 
 If you choose to load specific fields, it is worth noting that only the fields included in `load_fields` can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in `load_fields`.
 
-You can also use `skip_load_dynamic_field` to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named **$meta** and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set `skip_load_dynamic_field` to `True`.
+You can also use `skip_load_dynamic_field` to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named **\$meta** and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set `skip_load_dynamic_field` to `True`.
 
 To load more fields after the collection load, you need to release the collection first to avoid possible errors prompted because of index changes.
 
@@ -309,8 +501,11 @@ The following code snippet demonstrates how to release a collection.
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -334,6 +529,7 @@ print(res)
 ```
 
 ```java
+import io.milvus.v2.service.collection.request.GetLoadStateReq;
 import io.milvus.v2.service.collection.request.ReleaseCollectionReq;
 
 // 8. Release the collection
@@ -353,32 +549,13 @@ System.out.println(res);
 // false
 ```
 
-```javascript
-// 8. Release the collection
-res = await client.releaseCollection({
-    collection_name: "my_collection"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-
-res = await client.getLoadState({
-    collection_name: "my_collection"
-})
-
-console.log(res.state)
-
-// Output
-// 
-// LoadStateNotLoad
-// 
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.ReleaseCollection(ctx, milvusclient.NewReleaseCollectionOption("my_collection"))
 if err != nil {
     fmt.Println(err.Error())
@@ -390,12 +567,96 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
-fmt.Println(state)
+fmt.Println(state.State)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 8. Release the collection
+client
+    .release_collection(
+        ReleaseCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+let res = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.state());
+```
+
+```cpp
+auto status = client->ReleaseCollection(milvus::ReleaseCollectionRequest()
+                                            .WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                  .WithCollectionName("my_collection"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << std::to_string(response.State()) << std::endl;
+```
+
+```javascript
+// 8. Release the collection
+let res = await client.releaseCollection({
+    collection_name: "my_collection"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+
+res = await client.getLoadState({
+    collection_name: "my_collection"
+})
+
+console.log(res.state)
+
+// Output
+//
+// LoadStateNotLoad
+//
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Responses.Collection;
+using Milvus.Client.V2.Types;
+
+// 8. Release the collection
+await client.ReleaseCollectionAsync(new ReleaseCollectionReq
+{
+    CollectionName = "my_collection"
+});
+
+// Get load state of the collection
+GetLoadStateResp res = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection"
+});
+Console.WriteLine(res.State);
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/release" \
@@ -423,9 +684,7 @@ curl --request POST \
 # {
 #     "code": 0,
 #     "data": {
-#         "loadProgress": 0,
-#         "loadState": "LoadStateNotLoaded",
-#         "message": ""
+#         "loadState": "LoadStateNotLoad"
 #     }
 # }
 ```

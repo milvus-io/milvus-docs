@@ -6,7 +6,7 @@ summary: "On Milvus, you can create multiple collections to manage your data, an
 
 # Collection Explained
 
-On Milvus, you can create multiple collections to manage your data, and insert your data as entities into the collections. Collection and entity are similar to tables and records in relational databases. This page helps you to learn about the collection and related concepts.
+On {{var.product_name}}, you can create multiple collections to manage your data, and insert your data as entities into the collections. Collection and entity are similar to tables and records in relational databases. This page helps you to learn about the collection and related concepts.
 
 ## Collection
 
@@ -36,13 +36,17 @@ Similar to the primary field in a relational database, a collection has a primar
 
 As shown in the above chart, the field named **id** serves as the primary field, and the first ID **0** corresponds to an entity titled *The Mortality Rate of Coronavirus is Not Important*. There will not be any other entity that has the primary field of 0. 
 
-A primary field accepts only integers or strings. When inserting entities, you should include the primary field values by default. However, if you have enabled **AutoId** upon collection creation, Milvus will generate those values upon data insertion. In such a case, exclude the primary field values from the entities to be inserted.
+A primary field accepts only integers or strings. When inserting entities, you should include the primary field values by default. However, if you have enabled **AutoId** upon collection creation, {{var.product_name}} will generate those values upon data insertion. In such a case, exclude the primary field values from the entities to be inserted.
 
 For more information, please refer to [Primary Field & AutoId](primary-field.md).
 
 ## Index
 
+<!-- doc:block:start id="index-intro" -->
+
 Creating indexes on specific fields improves search efficiency. You are advised to create indexes for all the fields your service relies on, among which indexes on vector fields are mandatory.
+
+<!-- doc:block:end id="index-intro" -->
 
 ## Entity
 
@@ -54,7 +58,7 @@ For more information, refer to [Schema Explained](schema.md).
 
 ## Load and Release
 
-Loading a collection is the prerequisite to conducting similarity searches and queries in collections. When you load a collection, Milvus loads all index files and the raw data in each field into memory for fast response to searches and queries.
+Loading a collection is the prerequisite to conducting similarity searches and queries in collections. When you load a collection, {{var.product_name}} loads all index files and the raw data in each field into memory for fast response to searches and queries.
 
 Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.
 
@@ -62,7 +66,7 @@ For more details, refer to [Load & Release](load-and-release.md).
 
 ## Search and Query
 
-Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, Milvus uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.
+Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, {{var.product_name}} uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.
 
 You can also include metadata filtering within searches and queries to improve the relevancy of the results. Note that, metadata filtering conditions are mandatory in queries but optional in searches.
 
@@ -88,7 +92,7 @@ For more information about searches and queries, refer to the articles in the Se
 
 - [Text Match](keyword-match.md)
 
-In addition, Milvus also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are
+In addition, {{var.product_name}} also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are
 
 - [Use Partition Key](use-partition-key.md)
 
@@ -100,7 +104,7 @@ In addition, Milvus also provides enhancements to improve search performance and
 
 Partitions are subsets of a collection, which share the same field set with its parent collection, each containing a subset of entities.
 
-By allocating entities into different partitions, you can create entity groups. You can conduct searches and queries in specific partitions to have Milvus ignore entities in other partitions, and improve search efficiency.
+By allocating entities into different partitions, you can create entity groups. You can conduct searches and queries in specific partitions to have {{var.product_name}} ignore entities in other partitions, and improve search efficiency.
 
 For details, refer to [Manage Partitions](manage-partitions.md).
 
@@ -112,17 +116,21 @@ For details on how to set the shard number, refer to [Create Collection](create-
 
 ## Alias
 
-You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias. Upon receiving a request against a collection, Milvus locates the collection based on the provided name. If the collection by the provided name does not exist, Milvus continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.
+You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias. Upon receiving a request against a collection, {{var.product_name}} locates the collection based on the provided name. If the collection by the provided name does not exist, {{var.product_name}} continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.
 
 For more details, refer to [Manage Aliases](manage-aliases.md).
 
 ## Function
 
-You can set functions for Milvus to derive fields upon collection creation. For example, the full-text search function uses the user-defined function to derive a sparse vector field from a specific varchar field. For more information on full-text search, refer to [Full Text Search](full-text-search.md).
+You can set functions for {{var.product_name}} to derive fields upon collection creation. For example, the full-text search function uses the user-defined function to derive a sparse vector field from a specific varchar field. For more information on full-text search, refer to [Full Text Search](full-text-search.md).
 
 ## Consistency Level
 
 Distributed database systems usually use the consistency level to define the data sameness across data nodes and replicas. You can set separate consistency levels when you create a collection or conduct similarity searches within the collection. The applicable consistency levels are **Strong**, **Bounded Staleness**, **Session**, and **Eventually**.
 
- For details on these consistency levels, refer to [Consistency Level](tune_consistency.md).
+<!-- doc:block:start id="consistency-level-details" -->
+
+For details on these consistency levels, refer to [Consistency Level](tune_consistency.md).
+
+<!-- doc:block:end id="consistency-level-details" -->
 
