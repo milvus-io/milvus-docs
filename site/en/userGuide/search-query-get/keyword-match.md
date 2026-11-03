@@ -14,7 +14,9 @@ Text match in Milvus enables precise document retrieval based on specific terms.
 
 </div>
 
+<!-- doc:block:start id="text-match-overview-heading" -->
 ## Overview
+<!-- doc:block:end id="text-match-overview-heading" -->
 
 Milvus integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power its underlying inverted index and term-based text search. For each text entry, Milvus indexes it following the procedure:
 
@@ -34,6 +36,7 @@ Text match works on match-enabled string fields. The examples on this page use [
 
 To enable text match for a specific `VARCHAR` field, set both the `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This instructs Milvus to tokenize text and create an inverted index for the specified field, allowing fast and efficient text matches.
 
+<!-- doc:block:start id="text-match-schema" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -176,6 +179,7 @@ schema->AddField({"id", milvus::DataType::INT64, "", true, true});
 schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true).EnableMatch(true));
 schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
 ```
+<!-- doc:block:end id="text-match-schema" -->
 
 ### Optional: Configure an analyzer
 
@@ -185,6 +189,7 @@ By default, Milvus uses the `standard` analyzer, which tokenizes text based on w
 
 In cases where a different analyzer is required, you can configure one using the `analyzer_params` parameter. For example, to apply the `english` analyzer for processing English text:
 
+<!-- doc:block:start id="text-match-analyzer" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -318,6 +323,7 @@ std::string filter = "TEXT_MATCH(field_name, text)";
 ```bash
 export filter="\"TEXT_MATCH(field_name, text)\""
 ```
+<!-- doc:block:end id="text-match-analyzer" -->
 
 - `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
@@ -325,6 +331,7 @@ export filter="\"TEXT_MATCH(field_name, text)\""
 
 By default, `TEXT_MATCH` uses the **OR** matching logic, meaning it will return documents that contain any of the specified terms. For example, to search for documents containing the term `machine` or `deep` in the `text` field, use the following expression:
 
+<!-- doc:block:start id="text-match-syntax" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -357,11 +364,13 @@ export filter="\"TEXT_MATCH(text, 'machine deep')\""
 ```cpp
 std::string filter = "TEXT_MATCH(text, 'machine deep')";
 ```
+<!-- doc:block:end id="text-match-syntax" -->
 
 You can also combine multiple `TEXT_MATCH` expressions using logical operators to perform **AND** matching. 
 
 - To search for documents containing both `machine` and `deep` in the `text` field, use the following expression:
 
+<!-- doc:block:start id="text-match-and" -->
     <div class="multipleCode">
         <a href="#python">Python</a>
         <a href="#java">Java</a>
@@ -394,9 +403,11 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     ```cpp
     std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
     ```
+<!-- doc:block:end id="text-match-and" -->
 
 - To search for documents containing both `machine` and `learning` but without `deep` in the `text` field, use the following expressions:
 
+<!-- doc:block:start id="text-match-and-not" -->
     <div class="multipleCode">
         <a href="#python">Python</a>
         <a href="#java">Java</a>
@@ -447,6 +458,7 @@ std::string filter = "TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)"
 ```bash
 export filter="\"TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\""
 ```
+<!-- doc:block:end id="text-match-and-not" -->
 
 - `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
@@ -456,6 +468,7 @@ export filter="\"TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\""
 
 For example, the following expression matches tokens within one edit of `machne`, including `machine`:
 
+<!-- doc:block:start id="text-match-fuzzy" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -488,6 +501,7 @@ export filter="\"TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)\""
 ```cpp
 std::string filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
 ```
+<!-- doc:block:end id="text-match-fuzzy" -->
 
 `TEXT_MATCH_FUZZY` is part of the filter-expression syntax, so client SDKs do not require a dedicated fuzzy-match method. Pass the expression through the same `filter` parameter used for `TEXT_MATCH` in search or query operations.
 
@@ -503,6 +517,7 @@ You can highlight the matched terms in search results by configuring a text high
 
 </div>
 
+<!-- doc:block:start id="text-match-search" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -629,6 +644,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+<!-- doc:block:end id="text-match-search" -->
 
 ### Query with text match
 
@@ -636,6 +652,7 @@ Text match can also be used for scalar filtering in query operations. By specify
 
 The example below retrieves documents where the `text` field contains both terms `keyword1` and `keyword2`.
 
+<!-- doc:block:start id="text-match-query" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -732,6 +749,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+<!-- doc:block:end id="text-match-query" -->
 
 ## Considerations
 
