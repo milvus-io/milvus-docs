@@ -307,6 +307,14 @@ The BM25 function converts tokenized text into sparse vectors that support BM25 
 Define the function and add it to your schema:
 
 <!-- doc:block:start id="bm25-function-block" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 bm25_function = Function(
     name="text_bm25_emb", # Function name
@@ -396,6 +404,14 @@ export schema='{
 After defining the schema with necessary fields and the built-in function, set up the index for your collection.
 
 <!-- doc:block:start id="bm25-index" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 index_params = client.prepare_index_params()
 
@@ -474,6 +490,14 @@ export indexParams='[
 Now create the collection using the schema and index parameters defined:
 
 <!-- doc:block:start id="bm25-create" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 client.create_collection(
     collection_name='my_collection',
@@ -558,6 +582,14 @@ Once the collection with a BM25 function is created, you can insert text and per
 After setting up your collection and index, you're ready to insert text data. In this process, you need only to provide the raw text. The BM25 function we defined earlier automatically generates the sparse vector for each text entry.
 
 <!-- doc:block:start id="bm25-insert" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 client.insert('my_collection', [
     {'text': 'information retrieval is a field of study.'},
@@ -633,6 +665,14 @@ curl --request POST \
 Once you've inserted data into your collection, you can perform full text searches using raw text queries. {{var.product_name}} automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (`limit`) results.
 
 <!-- doc:block:start id="bm25-search" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 search_params = {
     "metric_type": "BM25",
