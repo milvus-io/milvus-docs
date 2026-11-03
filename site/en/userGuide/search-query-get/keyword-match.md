@@ -303,6 +303,7 @@ export schema='{
 nlohmann::json analyzer_params = {{"type", "english"}};
 schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(200).EnableAnalyzer(true).WithAnalyzerParams(analyzer_params).EnableMatch(true));
 ```
+<!-- doc:block:end id="text-match-analyzer" -->
 
 {{var.product_name}} also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
 
@@ -325,7 +326,6 @@ std::string filter = "TEXT_MATCH(field_name, text)";
 ```bash
 export filter="\"TEXT_MATCH(field_name, text)\""
 ```
-<!-- doc:block:end id="text-match-analyzer" -->
 
 - `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
@@ -373,75 +373,75 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
 - To search for documents containing both `machine` and `deep` in the `text` field, use the following expression:
 
 <!-- doc:block:start id="text-match-and" -->
-    <div class="multipleCode">
-        <a href="#python">Python</a>
-        <a href="#java">Java</a>
-        <a href="#go">Go</a>
-        <a href="#javascript">NodeJS</a>
-        <a href="#bash">cURL</a>
-        <a href="#cpp">C++</a>
-    </div>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
 
-    ```python
-    filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-    ```
+```python
+filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+```
 
-    ```java
-    String filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
-    ```
+```java
+String filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+```
 
-    ```go
-    filter := "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-    ```
+```go
+filter := "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+```
 
-    ```javascript
-    const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-    ```
+```javascript
+const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+```
 
-    ```bash
-    export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
-    ```
+```bash
+export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
+```
 
-    ```cpp
-    std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
-    ```
+```cpp
+std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+```
 <!-- doc:block:end id="text-match-and" -->
 
 - To search for documents containing both `machine` and `learning` but without `deep` in the `text` field, use the following expressions:
 
 <!-- doc:block:start id="text-match-and-not" -->
-    <div class="multipleCode">
-        <a href="#python">Python</a>
-        <a href="#java">Java</a>
-        <a href="#go">Go</a>
-        <a href="#javascript">NodeJS</a>
-        <a href="#bash">cURL</a>
-        <a href="#cpp">C++</a>
-    </div>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
 
-    ```python
-    filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
-    ```
+```python
+filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
+```
 
-    ```java
-    String filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
-    ```
+```java
+String filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+```
 
-    ```go
-    filter := "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
-    ```
+```go
+filter := "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
+```
 
-    ```javascript
-    const filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
-    ```
+```javascript
+const filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+```
 
-    ```bash
-    export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
-    ```
+```bash
+export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
+```
 
-    ```cpp
-    std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
-    ```
+```cpp
+std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+```
 <!-- doc:block:end id="text-match-and-not" -->
 
 <!-- doc:block:start id="text-match-fuzzy-heading" -->
