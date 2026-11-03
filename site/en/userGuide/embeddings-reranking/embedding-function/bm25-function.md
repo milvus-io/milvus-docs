@@ -203,10 +203,10 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -267,7 +267,7 @@ const schema = [
   },
 ];
 
-console.log(res.results)
+console.log(schema)
 ```
 
 ```bash
@@ -347,7 +347,7 @@ const functions = [
       output_field_names: ['sparse'],
       params: {},
     },
-]；
+];
 ```
 
 ```bash
@@ -417,7 +417,7 @@ params.put("bm25_b", 0.75);
 List<IndexParam> indexes = new ArrayList<>();
 indexes.add(IndexParam.builder()
         .fieldName("sparse")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
         .extraParams(params)
         .build());
@@ -425,10 +425,10 @@ indexes.add(IndexParam.builder()
 
 ```go
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse",
-    index.NewAutoIndex(entity.MetricType(entity.BM25)))
-    .WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
-    .WithExtraParam("bm25_k1", 1.2)
-    .WithExtraParam("bm25_b", 0.75)
+    index.NewSparseInvertedIndex(entity.BM25, 0.05))
+indexOption.WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
+indexOption.WithExtraParam("bm25_k1", 1.2)
+indexOption.WithExtraParam("bm25_b", 0.75)
 ```
 
 ```javascript
@@ -451,7 +451,7 @@ export indexParams='[
         {
             "fieldName": "sparse",
             "metricType": "BM25",
-            "indexType": "AUTOINDEX",
+            "indexType": "SPARSE_INVERTED_INDEX",
             "params":{
                "inverted_index_algo": "DAAT_MAXSCORE",
                "bm25_k1": 1.2,
@@ -471,10 +471,13 @@ client.create_collection(
     schema=schema,
     index_params=index_params
 )
+
+client.load_collection('my_collection')
 ```
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .collectionName("my_collection")
@@ -482,6 +485,9 @@ CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName("my_collection")
+        .build());
 ```
 
 ```go
@@ -492,15 +498,23 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```javascript
-await client.create_collection(
+await client.createCollection({
     collection_name: 'my_collection',
     schema: schema,
     index_params: index_params,
-    functions: functions
-);
+    functions: functions,
+});
+
+await client.loadCollection({ collection_name: 'my_collection' });
 ```
 
 ```bash
@@ -517,6 +531,14 @@ curl --request POST \
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data '{
+    "collectionName": "my_collection"
+}'
 ```
 
 Once the collection with a BM25 function is created, you can insert text and perform lexical searches based on text query.
@@ -553,17 +575,28 @@ client.insert(InsertReq.builder()
 ```
 
 ```go
-// go
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithVarcharColumn("text", []string{
+        "information retrieval is a field of study.",
+        "information retrieval focuses on finding relevant information in large datasets.",
+        "data mining and information retrieval overlap in research.",
+    }),
+)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```javascript
 await client.insert({
-collection_name: 'my_collection',
-data: [
-    {'text': 'information retrieval is a field of study.'},
-    {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
-    {'text': 'data mining and information retrieval overlap in research.'},
-]);
+    collection_name: 'my_collection',
+    data: [
+        {'text': 'information retrieval is a field of study.'},
+        {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
+        {'text': 'data mining and information retrieval overlap in research.'},
+    ],
+});
 ```
 
 ```bash
@@ -589,7 +622,7 @@ Once you've inserted data into your collection, you can perform full text search
 
 ```python
 search_params = {
-
+    "metric_type": "BM25",
 }
 
 res = client.search(
@@ -612,6 +645,7 @@ import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.response.SearchResp;
 
 Map<String,Object> searchParams = new HashMap<>();
+searchParams.put("metric_type", "BM25");
 
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
@@ -625,6 +659,7 @@ SearchResp searchResp = client.search(SearchReq.builder()
 
 ```go
 annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam("metric_type", "BM25")
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     "my_collection", // collectionName
     3,               // limit
@@ -646,14 +681,14 @@ for _, resultSet := range resultSets {
 ```
 
 ```javascript
-await client.search(
+await client.search({
     collection_name: 'my_collection',
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
     output_fields: ['text'],
+    params: { metric_type: 'BM25' },
     limit: 3,
-
-)
+});
 ```
 
 ```bash
@@ -673,6 +708,7 @@ curl --request POST \
         "text"
     ],
     "searchParams":{
+        "metric_type": "BM25",
         "params":{}
     }
 }'
