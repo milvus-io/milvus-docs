@@ -8,11 +8,11 @@ summary: "The BM25 function enables full text search by transforming raw text in
 
 The **BM25 function** enables [full text search](full-text-search.md) by transforming raw text into **sparse vectors** and scoring documents based on lexical relevance. It applies term-based matching and frequency-aware weighting to support efficient retrieval of text documents that closely match query terms.
 
-As a local text function, the BM25 function runs within Milvus and does not require model inference or external integrations. It provides a deterministic and transparent retrieval mechanism for text-based search scenarios.
+As a local text function, the BM25 function runs within {{var.product_name}} and does not require model inference or external integrations. It provides a deterministic and transparent retrieval mechanism for text-based search scenarios.
 
 ## How BM25 works
 
-The [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm is a term-based relevance scoring algorithm widely used in full text retrieval. In Milvus, BM25 is implemented as a sparse retrieval pipeline that converts text into term-weight representations and retrieves top *K* documents using distributed sparse indexes.
+The [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm is a term-based relevance scoring algorithm widely used in full text retrieval. In {{var.product_name}}, BM25 is implemented as a sparse retrieval pipeline that converts text into term-weight representations and retrieves top *K* documents using distributed sparse indexes.
 
 The overall workflow consists of two symmetric paths: **document ingestion** and **query text processing**, which share the same text analysis logic.
 
@@ -42,7 +42,7 @@ Each document is then represented as a term frequency (TF) representation, which
 }
 ```
 
-At the same time, Milvus updates corpus-level statistics, including:
+At the same time, {{var.product_name}} updates corpus-level statistics, including:
 
 - the document frequency (DF) of each term
 
@@ -68,7 +68,7 @@ can be analyzed into:
 ["who", "love", "milvus"]
 ```
 
-For each query term, Milvus looks up its [inverse document frequency](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (IDF) from corpus statistics. IDF reflects how informative a term is across the entire dataset: rarer terms receive higher weights, while common terms receive lower weights.
+For each query term, {{var.product_name}} looks up its [inverse document frequency](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (IDF) from corpus statistics. IDF reflects how informative a term is across the entire dataset: rarer terms receive higher weights, while common terms receive lower weights.
 
 Conceptually, this produces a set of IDF-weighted query terms, such as:
 
@@ -126,7 +126,7 @@ Before using the BM25 function, plan your collection schema to ensure it support
 
     The text field must have an analyzer enabled. The analyzer defines how text is tokenized and normalized before lexical relevance is computed by the BM25 function.
 
-    By default, Milvus provides a built-in analyzer that tokenizes text based on whitespace and punctuation. If your application requires custom tokenization or normalization behavior, you can define a custom analyzer. See [Choose the Right Analyzer for Your Use Case](choose-the-right-analyzer-for-your-use-case.md) for details.
+    By default, {{var.product_name}} provides a built-in analyzer that tokenizes text based on whitespace and punctuation. If your application requires custom tokenization or normalization behavior, you can define a custom analyzer. See [Choose the Right Analyzer for Your Use Case](choose-the-right-analyzer-for-your-use-case.md) for details.
 
 - **A sparse vector for BM25 output**
 
@@ -138,16 +138,19 @@ After these schema-level considerations are figured out, proceed to create the c
 
 To use the BM25 function, you must define it when creating the collection. The function becomes part of the collection schema and is applied automatically during data insertion and search.
 
+<!-- doc:block:start id="bm25-step1-schema-heading" -->
 #### Define schema fields
+<!-- doc:block:end id="bm25-step1-schema-heading" -->
 
 Your collection schema must include at least three required fields:
 
 - **Primary field**: Uniquely identifies each entity in the collection.
 
-- **Text field** (`VARCHAR`): Stores raw text documents. Must set `enable_analyzer=True` so Milvus can process the text for BM25 relevance ranking. By default, Milvus uses the [`standard`](standard-analyzer.md)[ analyzer](standard-analyzer.md) for text analysis. To configure a different analyzer, refer to [Analyzer Overview](analyzer-overview.md).
+- **Text field** (`VARCHAR`): Stores raw text documents. Must set `enable_analyzer=True` so {{var.product_name}} can process the text for BM25 relevance ranking. By default, {{var.product_name}} uses the [`standard`](standard-analyzer.md)[ analyzer](standard-analyzer.md) for text analysis. To configure a different analyzer, refer to [Analyzer Overview](analyzer-overview.md).
 
 - **Sparse vector field** (`SPARSE_FLOAT_VECTOR`): Stores sparse embeddings automatically generated by the BM25 function.
 
+<!-- doc:block:start id="bm25-schema" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -160,8 +163,8 @@ Your collection schema must include at least three required fields:
 from pymilvus import MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 schema = client.create_schema()
@@ -203,17 +206,17 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "http://localhost:19530"
-token := "root:Milvus"
+milvusAddr := "{{var.example_endpoint}}"
+token := "{{var.example_token}}"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
@@ -245,8 +248,8 @@ schema.WithField(entity.NewField().
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
-const address = "http://localhost:19530";
-const token = "root:Milvus";
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
 const client = new MilvusClient({address, token});
 const schema = [
   {
@@ -267,7 +270,7 @@ const schema = [
   },
 ];
 
-console.log(res.results)
+console.log(schema)
 ```
 
 ```bash
@@ -295,12 +298,22 @@ export schema='{
         ]
     }'
 ```
+<!-- doc:block:end id="bm25-schema" -->
 
 #### Define the BM25 function
 
 The BM25 function converts tokenized text into sparse vectors that support BM25 scoring.
 
 Define the function and add it to your schema:
+
+<!-- doc:block:start id="bm25-function-block" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 bm25_function = Function(
@@ -347,7 +360,7 @@ const functions = [
       output_field_names: ['sparse'],
       params: {},
     },
-]；
+];
 ```
 
 ```bash
@@ -384,10 +397,20 @@ export schema='{
         ]
     }'
 ```
+<!-- doc:block:end id="bm25-function-block" -->
 
 #### Configure the index
 
 After defining the schema with necessary fields and the built-in function, set up the index for your collection.
+
+<!-- doc:block:start id="bm25-index" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 index_params = client.prepare_index_params()
@@ -417,7 +440,7 @@ params.put("bm25_b", 0.75);
 List<IndexParam> indexes = new ArrayList<>();
 indexes.add(IndexParam.builder()
         .fieldName("sparse")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
         .extraParams(params)
         .build());
@@ -425,10 +448,10 @@ indexes.add(IndexParam.builder()
 
 ```go
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse",
-    index.NewAutoIndex(entity.MetricType(entity.BM25)))
-    .WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
-    .WithExtraParam("bm25_k1", 1.2)
-    .WithExtraParam("bm25_b", 0.75)
+    index.NewSparseInvertedIndex(entity.BM25, 0.05))
+indexOption.WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
+indexOption.WithExtraParam("bm25_k1", 1.2)
+indexOption.WithExtraParam("bm25_b", 0.75)
 ```
 
 ```javascript
@@ -451,7 +474,7 @@ export indexParams='[
         {
             "fieldName": "sparse",
             "metricType": "BM25",
-            "indexType": "AUTOINDEX",
+            "indexType": "SPARSE_INVERTED_INDEX",
             "params":{
                "inverted_index_algo": "DAAT_MAXSCORE",
                "bm25_k1": 1.2,
@@ -460,10 +483,20 @@ export indexParams='[
         }
     ]'
 ```
+<!-- doc:block:end id="bm25-index" -->
 
 #### Create the collection
 
 Now create the collection using the schema and index parameters defined:
+
+<!-- doc:block:start id="bm25-create" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 client.create_collection(
@@ -471,10 +504,13 @@ client.create_collection(
     schema=schema,
     index_params=index_params
 )
+
+client.load_collection('my_collection')
 ```
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .collectionName("my_collection")
@@ -482,6 +518,9 @@ CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName("my_collection")
+        .build());
 ```
 
 ```go
@@ -492,20 +531,28 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```javascript
-await client.create_collection(
+await client.createCollection({
     collection_name: 'my_collection',
     schema: schema,
     index_params: index_params,
-    functions: functions
-);
+    functions: functions,
+});
+
+await client.loadCollection({ collection_name: 'my_collection' });
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -517,13 +564,31 @@ curl --request POST \
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data '{
+    "collectionName": "my_collection"
+}'
 ```
+<!-- doc:block:end id="bm25-create" -->
 
 Once the collection with a BM25 function is created, you can insert text and perform lexical searches based on text query.
 
 ## Step 2: Insert text data into the collection
 
 After setting up your collection and index, you're ready to insert text data. In this process, you need only to provide the raw text. The BM25 function we defined earlier automatically generates the sparse vector for each text entry.
+
+<!-- doc:block:start id="bm25-insert" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 client.insert('my_collection', [
@@ -553,17 +618,28 @@ client.insert(InsertReq.builder()
 ```
 
 ```go
-// go
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithVarcharColumn("text", []string{
+        "information retrieval is a field of study.",
+        "information retrieval focuses on finding relevant information in large datasets.",
+        "data mining and information retrieval overlap in research.",
+    }),
+)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```javascript
 await client.insert({
-collection_name: 'my_collection',
-data: [
-    {'text': 'information retrieval is a field of study.'},
-    {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
-    {'text': 'data mining and information retrieval overlap in research.'},
-]);
+    collection_name: 'my_collection',
+    data: [
+        {'text': 'information retrieval is a field of study.'},
+        {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
+        {'text': 'data mining and information retrieval overlap in research.'},
+    ],
+});
 ```
 
 ```bash
@@ -582,14 +658,24 @@ curl --request POST \
 }'
 
 ```
+<!-- doc:block:end id="bm25-insert" -->
 
 ## Step 3: Search with text query
 
-Once you've inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (`limit`) results.
+Once you've inserted data into your collection, you can perform full text searches using raw text queries. {{var.product_name}} automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (`limit`) results.
+
+<!-- doc:block:start id="bm25-search" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 search_params = {
-
+    "metric_type": "BM25",
 }
 
 res = client.search(
@@ -612,6 +698,7 @@ import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.response.SearchResp;
 
 Map<String,Object> searchParams = new HashMap<>();
+searchParams.put("metric_type", "BM25");
 
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
@@ -625,6 +712,7 @@ SearchResp searchResp = client.search(SearchReq.builder()
 
 ```go
 annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam("metric_type", "BM25")
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     "my_collection", // collectionName
     3,               // limit
@@ -646,14 +734,14 @@ for _, resultSet := range resultSets {
 ```
 
 ```javascript
-await client.search(
+await client.search({
     collection_name: 'my_collection',
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
     output_fields: ['text'],
+    params: { metric_type: 'BM25' },
     limit: 3,
-
-)
+});
 ```
 
 ```bash
@@ -673,7 +761,9 @@ curl --request POST \
         "text"
     ],
     "searchParams":{
+        "metric_type": "BM25",
         "params":{}
     }
 }'
 ```
+<!-- doc:block:end id="bm25-search" -->

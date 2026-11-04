@@ -17,11 +17,11 @@ Powered by the [Tantivy](https://github.com/quickwit-oss/tantivy) search engine 
 
 ![Phrase Match Workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png)
 
-1. **Document Tokenization**: When you insert documents into Milvus, the text is split into tokens (individual words or terms) using an analyzer, with positional information recorded for each token. For example, **doc_1** is tokenized into **["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]**. For more information on analyzers, refer to [Analyzer Overview](analyzer-overview.md).
+1. **Document Tokenization**: When you insert documents into {{var.product_name}}, the text is split into tokens (individual words or terms) using an analyzer, with positional information recorded for each token. For example, **doc_1** is tokenized into **["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]**. For more information on analyzers, refer to [Analyzer Overview](analyzer-overview.md).
 
-1. **Inverted Index Creation**: Milvus builds an inverted index, mapping each token to the document(s) in which it appears and the token's positions in those documents.
+1. **Inverted Index Creation**: {{var.product_name}} builds an inverted index, mapping each token to the document(s) in which it appears and the token's positions in those documents.
 
-1. **Phrase Matching**: When a phrase query is executed, Milvus looks up each token in the inverted index and checks their positions to determine if they appear in the correct order and proximity. The `slop` parameter controls the maximum number of positions allowed between matching tokens:
+1. **Phrase Matching**: When a phrase query is executed, {{var.product_name}} looks up each token in the inverted index and checks their positions to determine if they appear in the correct order and proximity. The `slop` parameter controls the maximum number of positions allowed between matching tokens:
 
     - **slop = 0** means the tokens must appear **in the exact order and immediately adjacent** (i.e., no extra words in between).
 
@@ -35,11 +35,11 @@ Powered by the [Tantivy](https://github.com/quickwit-oss/tantivy) search engine 
 
 ## Enable phrase match
 
-Phrase match works with the `VARCHAR` field type, the string data type in Milvus. To enable phrase matching, configure your collection schema by setting both `enable_analyzer` and `enable_match` parameters to `True`, similar to [text match](keyword-match.md).
+Phrase match works with the `VARCHAR` field type, the string data type in {{var.product_name}}. To enable phrase matching, configure your collection schema by setting both `enable_analyzer` and `enable_match` parameters to `True`, similar to [text match](keyword-match.md).
 
 ### Set `enable_analyzer` and `enable_match`
 
-To enable phrase match for a specific `VARCHAR` field, set both `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This configuration instructs Milvus to tokenize the text and create an inverted index with positional information required for efficient phrase matching.
+To enable phrase match for a specific `VARCHAR` field, set both `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This configuration instructs {{var.product_name}} to tokenize the text and create an inverted index with positional information required for efficient phrase matching.
 
 Here's an example schema definition to enable phrase match:
 
@@ -109,7 +109,7 @@ schema.addField(AddFieldReq.builder()
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import "github.com/milvus-io/milvus/client/v3/entity"
 
 // Create a schema for a new collection
 schema := entity.NewSchema().WithDynamicFieldEnabled(false)
@@ -189,18 +189,18 @@ export schema='{
 ```
 
 ```cpp
-#include "milvus/types/CollectionSchema.h"
+#include "milvus/MilvusClientV2.h"
 
 // Create a schema for a new collection
-milvus::CollectionSchema schema("tech_articles");
-schema.SetEnableDynamicField(false);
-schema.AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
 // Add a VARCHAR field configured for phrase matching
-schema.AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
                     .WithMaxLength(1000)    // Maximum length of the string in bytes
                     .EnableAnalyzer(true)   // Enables text analysis (tokenization)
                     .EnableMatch(true));    // Enables inverted indexing for phrase matching
-schema.AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
                     .WithDimension(5));
 ```
 
@@ -208,7 +208,7 @@ schema.AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR
 
 Phrase matching accuracy depends significantly on the analyzer used to tokenize your text data. Different analyzers suit different languages and text formats, affecting tokenization and positional accuracy. Selecting an appropriate analyzer for your specific use case will optimize your phrase matching results.
 
-By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to [Standard Analyzer](standard-analyzer.md) for details.
+By default, {{var.product_name}} uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to [Standard Analyzer](standard-analyzer.md) for details.
 
 If your application requires a specific analyzer, configure it using the `analyzer_params` parameter. For example, here's how to configure the `english` analyzer for phrase matching in English text:
 
@@ -317,7 +317,7 @@ schema.AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name 
                     .EnableMatch(true));                // Enables inverted indexing for phrase matching
 ```
 
-Milvus supports several analyzers tailored for different languages and use cases. For detailed information, refer to [Analyzer Overview](analyzer-overview.md).
+{{var.product_name}} supports several analyzers tailored for different languages and use cases. For detailed information, refer to [Analyzer Overview](analyzer-overview.md).
 
 ## Use phrase match
 
@@ -475,8 +475,8 @@ const result = await client.query({
 ```bash
 export filter="\"PHRASE_MATCH(text, 'machine learning')\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
@@ -552,6 +552,13 @@ result_slop1 = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 // Example: Filter documents containing "learning machine" with slop=1
 String filter = "PHRASE_MATCH(text, 'learning machine', 1)";
 
@@ -605,8 +612,8 @@ const result = await client.search({
 ```bash
 export filter="\"PHRASE_MATCH(text, 'learning machine', 1)\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -696,6 +703,13 @@ result_slop2 = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 // Example: Filter documents containing "machine learning" with slop=2
 String filter = "PHRASE_MATCH(text, 'machine learning', 2)";
 
@@ -749,8 +763,8 @@ const result = await client.search({
 ```bash
 export filter="\"PHRASE_MATCH(text, 'machine learning', 2)\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -824,7 +838,7 @@ In this example, a slop of 3 provides even more flexibility. The filter searches
 # Example: Filter documents containing "machine learning" with slop=3
 filter_slop3 = "PHRASE_MATCH(text, 'machine learning', 3)"
 
-result_slop2 = client.search(
+result_slop3 = client.search(
     collection_name="tech_articles",
     anns_field="embeddings",             # Vector field name
     data=[query_vector],                 # Query vector
@@ -836,6 +850,13 @@ result_slop2 = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 // Example: Filter documents containing "machine learning" with slop=3
 String filter = "PHRASE_MATCH(text, 'machine learning', 3)";
 
@@ -889,8 +910,8 @@ const result = await client.search({
 ```bash
 export filter="\"PHRASE_MATCH(text, 'machine learning', 3)\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -961,7 +982,7 @@ if (!status.IsOk()) {
 
 - Once you've defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.
 
-- Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the `run_analyzer` method to review the tokenization output. For more information, refer to [Analyzer Overview](analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT).
+- Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the `run_analyzer` method to review the tokenization output. For more information, refer to [Example use](analyzer-overview.md#Example-use).
 
 - Escape rules in `filter` expressions:
 

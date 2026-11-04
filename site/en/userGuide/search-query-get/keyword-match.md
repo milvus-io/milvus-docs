@@ -1,12 +1,12 @@
 ---
 id: keyword-match.md
 title: "Text Match"
-summary: "Text match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria."
+summary: "Text match in {{var.product_name}} enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria."
 ---
 
 # Text Match
 
-Text match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
+Text match in {{var.product_name}} enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
 
 <div class="alert note">
 
@@ -14,13 +14,15 @@ Text match in Milvus enables precise document retrieval based on specific terms.
 
 </div>
 
+<!-- doc:block:start id="text-match-overview-heading" -->
 ## Overview
+<!-- doc:block:end id="text-match-overview-heading" -->
 
-Milvus integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power its underlying inverted index and term-based text search. For each text entry, Milvus indexes it following the procedure:
+{{var.product_name}} integrates [Tantivy](https://github.com/quickwit-oss/tantivy) to power its underlying inverted index and term-based text search. For each text entry, {{var.product_name}} indexes it following the procedure:
 
-1. [Analyzer](analyzer-overview.md): The analyzer processes input text by tokenizing it into individual words, or tokens, and then applying filters as needed. This allows Milvus to build an index based on these tokens.
+1. [Analyzer](analyzer-overview.md): The analyzer processes input text by tokenizing it into individual words, or tokens, and then applying filters as needed. This allows {{var.product_name}} to build an index based on these tokens.
 
-1. [Indexing](index-explained.md): After text analysis, Milvus creates an inverted index that maps each unique token to the documents containing it.
+1. [Indexing](index-explained.md): After text analysis, {{var.product_name}} creates an inverted index that maps each unique token to the documents containing it.
 
 When a user performs a text match, the inverted index is used to quickly retrieve all documents containing the terms. This is much faster than scanning through each document individually.
 
@@ -28,12 +30,15 @@ When a user performs a text match, the inverted index is used to quickly retriev
 
 ## Enable text match
 
+<!-- doc:block:start id="text-match-enable-intro" -->
 Text match works on match-enabled string fields. The examples on this page use [`VARCHAR`](string.md), which is supported across client SDKs. In Milvus 3.0.x, [`TEXT`](text.md) fields also support text match when Storage V3 is enabled. For either field type, set both `enable_analyzer` and `enable_match` to `True`, and then optionally configure an [analyzer](analyzer-overview.md) when defining your collection schema.
+<!-- doc:block:end id="text-match-enable-intro" -->
 
 ### Set `enable_analyzer` and `enable_match`
 
-To enable text match for a specific `VARCHAR` field, set both the `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This instructs Milvus to tokenize text and create an inverted index for the specified field, allowing fast and efficient text matches.
+To enable text match for a specific `VARCHAR` field, set both the `enable_analyzer` and `enable_match` parameters to `True` when defining the field schema. This instructs {{var.product_name}} to tokenize text and create an inverted index for the specified field, allowing fast and efficient text matches.
 
+<!-- doc:block:start id="text-match-schema" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -96,7 +101,7 @@ schema.addField(AddFieldReq.builder()
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import "github.com/milvus-io/milvus/client/v3/entity"
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(false)
 schema.WithField(entity.NewField().
@@ -176,15 +181,17 @@ schema->AddField({"id", milvus::DataType::INT64, "", true, true});
 schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true).EnableMatch(true));
 schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
 ```
+<!-- doc:block:end id="text-match-schema" -->
 
 ### Optional: Configure an analyzer
 
 The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.
 
-By default, Milvus uses the `standard` analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to [Standard](standard-analyzer.md).
+By default, {{var.product_name}} uses the `standard` analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to [Standard](standard-analyzer.md).
 
 In cases where a different analyzer is required, you can configure one using the `analyzer_params` parameter. For example, to apply the `english` analyzer for processing English text:
 
+<!-- doc:block:start id="text-match-analyzer" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -209,6 +216,11 @@ schema.add_field(
 ```
 
 ```java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("type", "english");
 schema.addField(AddFieldReq.builder()
@@ -291,8 +303,9 @@ export schema='{
 nlohmann::json analyzer_params = {{"type", "english"}};
 schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(200).EnableAnalyzer(true).WithAnalyzerParams(analyzer_params).EnableMatch(true));
 ```
+<!-- doc:block:end id="text-match-analyzer" -->
 
-Milvus also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
+{{var.product_name}} also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
 
 ## Use text match
 
@@ -320,6 +333,7 @@ export filter="\"TEXT_MATCH(field_name, text)\""
 
 By default, `TEXT_MATCH` uses the **OR** matching logic, meaning it will return documents that contain any of the specified terms. For example, to search for documents containing the term `machine` or `deep` in the `text` field, use the following expression:
 
+<!-- doc:block:start id="text-match-syntax" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -352,82 +366,89 @@ export filter="\"TEXT_MATCH(text, 'machine deep')\""
 ```cpp
 std::string filter = "TEXT_MATCH(text, 'machine deep')";
 ```
+<!-- doc:block:end id="text-match-syntax" -->
 
 You can also combine multiple `TEXT_MATCH` expressions using logical operators to perform **AND** matching. 
 
 - To search for documents containing both `machine` and `deep` in the `text` field, use the following expression:
 
-    <div class="multipleCode">
-        <a href="#python">Python</a>
-        <a href="#java">Java</a>
-        <a href="#go">Go</a>
-        <a href="#javascript">NodeJS</a>
-        <a href="#bash">cURL</a>
-        <a href="#cpp">C++</a>
-    </div>
+<!-- doc:block:start id="text-match-and" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
 
-    ```python
-    filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-    ```
+```python
+filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+```
 
-    ```java
-    String filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
-    ```
+```java
+String filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+```
 
-    ```go
-    filter := "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-    ```
+```go
+filter := "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+```
 
-    ```javascript
-    const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-    ```
+```javascript
+const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+```
 
-    ```bash
-    export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
-    ```
+```bash
+export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
+```
 
-    ```cpp
-    std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
-    ```
+```cpp
+std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+```
+<!-- doc:block:end id="text-match-and" -->
 
 - To search for documents containing both `machine` and `learning` but without `deep` in the `text` field, use the following expressions:
 
-    <div class="multipleCode">
-        <a href="#python">Python</a>
-        <a href="#java">Java</a>
-        <a href="#go">Go</a>
-        <a href="#javascript">NodeJS</a>
-        <a href="#bash">cURL</a>
-        <a href="#cpp">C++</a>
-    </div>
+<!-- doc:block:start id="text-match-and-not" -->
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
 
-    ```python
-    filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
-    ```
+```python
+filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
+```
 
-    ```java
-    String filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
-    ```
+```java
+String filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+```
 
-    ```go
-    filter := "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
-    ```
+```go
+filter := "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
+```
 
-    ```javascript
-    const filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
-    ```
+```javascript
+const filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+```
 
-    ```bash
-    export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
-    ```
+```bash
+export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
+```
 
-    ```cpp
-    std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
-    ```
+```cpp
+std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+```
+<!-- doc:block:end id="text-match-and-not" -->
 
+<!-- doc:block:start id="text-match-fuzzy-heading" -->
 ### TEXT_MATCH_FUZZY expression syntax | Milvus 3.0.0+
+<!-- doc:block:end id="text-match-fuzzy-heading" -->
 
-Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. Milvus analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
+Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. {{var.product_name}} analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
 
 The syntax is as follows:
 
@@ -451,6 +472,7 @@ export filter="\"TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\""
 
 For example, the following expression matches tokens within one edit of `machne`, including `machine`:
 
+<!-- doc:block:start id="text-match-fuzzy" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -483,6 +505,7 @@ export filter="\"TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)\""
 ```cpp
 std::string filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
 ```
+<!-- doc:block:end id="text-match-fuzzy" -->
 
 `TEXT_MATCH_FUZZY` is part of the filter-expression syntax, so client SDKs do not require a dedicated fuzzy-match method. Pass the expression through the same `filter` parameter used for `TEXT_MATCH` in search or query operations.
 
@@ -498,6 +521,7 @@ You can highlight the matched terms in search results by configuring a text high
 
 </div>
 
+<!-- doc:block:start id="text-match-search" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -525,12 +549,17 @@ result = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+
 String filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
 
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .annsField("embeddings")
-        .data(Collections.singletonList(queryVector)))
+        .data(Collections.singletonList(queryVector))
         // highlight-next-line
         .filter(filter)
         .topK(10)
@@ -559,7 +588,7 @@ if err != nil {
 const filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
 
 // Assuming 'embeddings' is the vector field and 'text' is the VARCHAR field
-const result = await client.search(
+const result = await client.search({
     collection_name: "my_collection", // Your collection name
     anns_field: "embeddings", // Vector field name
     data: [query_vector], // Query vector
@@ -568,14 +597,14 @@ const result = await client.search(
     params: {"nprobe": 10},
     limit: 10, // Max. number of results to return
     output_fields: ["id", "text"] //Fields to return
-);
+});
 ```
 
 ```bash
 export filter="\"TEXT_MATCH(text, 'keyword1 keyword2')\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -619,6 +648,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+<!-- doc:block:end id="text-match-search" -->
 
 ### Query with text match
 
@@ -626,6 +656,7 @@ Text match can also be used for scalar filtering in query operations. By specify
 
 The example below retrieves documents where the `text` field contains both terms `keyword1` and `keyword2`.
 
+<!-- doc:block:start id="text-match-query" -->
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -648,6 +679,10 @@ result = client.query(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import java.util.Arrays;
+
 String filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
 
 QueryResp queryResp = client.query(QueryReq.builder()
@@ -675,19 +710,19 @@ if err != nil {
 // Match entities with both `keyword1` and `keyword2`
 const filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
 
-const result = await client.query(
+const result = await client.query({
     collection_name: "my_collection",
     // highlight-next-line
     filter: filter, 
     output_fields: ["id", "text"]
-)
+})
 ```
 
 ```bash
 export filter="\"TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')\""
 
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
@@ -718,6 +753,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+<!-- doc:block:end id="text-match-query" -->
 
 ## Considerations
 
