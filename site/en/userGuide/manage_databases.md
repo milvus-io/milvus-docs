@@ -1,26 +1,33 @@
 ---
 id: manage_databases.md
 title: "Database"
-summary: "Milvus introduces a database layer above collections, providing a more efficient way to manage and organize your data while supporting multi-tenancy."
+summary: "{{var.product_name}} introduces a database layer above collections, providing a more efficient way to manage and organize your data while supporting multi-tenancy."
 ---
 
+<!-- doc:block:start id="database-heading" -->
 # Database
+<!-- doc:block:end id="database-heading" -->
 
-Milvus introduces a **database** layer above collections, providing a more efficient way to manage and organize your data while supporting multi-tenancy.
+<!-- doc:block:start id="database-introduction" -->
+{{var.product_name}} introduces a **database** layer above collections, providing a more efficient way to manage and organize your data while supporting multi-tenancy.
 
 ## What is a database
 
-In Milvus, a database serves as a logical unit for organizing and managing data. To enhance data security and achieve multi-tenancy, you can create multiple databases to logically isolate data for different applications or tenants. For example, you create a database to store the data of user A and another database for user B.
+In {{var.product_name}}, a database serves as a logical unit for organizing and managing data. To enhance data security and achieve multi-tenancy, you can create multiple databases to logically isolate data for different applications or tenants. For example, you create a database to store the data of user A and another database for user B.
+<!-- doc:block:end id="database-introduction" -->
 
 ## Create database
 
-You can use the Milvus RESTful API or SDKs to create data programmatically.
+You can use the {{var.product_name}} RESTful API or SDKs to create a database programmatically.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -28,8 +35,8 @@ You can use the Milvus RESTful API or SDKs to create data programmatically.
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 client.create_database(
@@ -43,8 +50,8 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.service.database.request.*;
 
 ConnectConfig config = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 
@@ -54,23 +61,18 @@ CreateDatabaseReq createDatabaseReq = CreateDatabaseReq.builder()
 client.createDatabase(createDatabaseReq);
 ```
 
-```javascript
-import {MilvusClient} from '@zilliz/milvus2-sdk-node';
-const client = new MilvusClient({ 
-    address: "http://localhost:19530",
-    token: 'root:Milvus' 
-});
-
-await client.createDatabase({
-    db_name: "my_database_1"
- });
-```
-
 ```go
+import (
+    "context"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx := context.Background()
+
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
-    Username: "Milvus",
-    Password: "root",
+    Address: "{{var.example_endpoint}}",
+    APIKey:  "{{var.example_token}}",
 })
 if err != nil {
     // handle err
@@ -82,9 +84,74 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}"),
+)
+.await?;
+
+client
+    .create_database(
+        CreateDatabaseRequest::builder()
+            .database_name("my_database_1")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+auto status = client->Connect(milvus::ConnectParam("{{var.example_endpoint}}", "{{var.example_token}}"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+
+auto request = milvus::CreateDatabaseRequest().WithDatabaseName("my_database_1");
+status = client->CreateDatabase(request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
+```javascript
+import {MilvusClient} from '@zilliz/milvus2-sdk-node';
+const client = new MilvusClient({
+    address: "{{var.example_endpoint}}",
+    token: '{{var.example_token}}'
+});
+
+await client.createDatabase({
+    db_name: "my_database_1"
+ });
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Database;
+using Milvus.Client.V2.Types;
+
+MilvusClientV2 client = new(new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
+});
+
+await client.CreateDatabaseAsync(new CreateDatabaseReq
+{
+    DatabaseName = "my_database_1"
+});
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/create" \
@@ -96,13 +163,17 @@ curl --request POST \
 }'
 ```
 
+
 You can also set properties for the database when you create it. The following example sets the number of replicas of the database.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -125,6 +196,39 @@ CreateDatabaseReq createDatabaseReq = CreateDatabaseReq.builder()
 client.createDatabase(createDatabaseReq);
 ```
 
+```go
+err := cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption("my_database_2").WithProperty("database.replica.number", 3))
+if err != nil {
+    // handle err
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+client
+    .create_database(
+        CreateDatabaseRequest::builder()
+            .database_name("my_database_2")
+            .properties(HashMap::from([
+                ("database.replica.number".into(), "3".into()),
+            ]))
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto request = milvus::CreateDatabaseRequest()
+    .WithDatabaseName("my_database_2")
+    .AddProperty("database.replica.number", "3");
+status = client->CreateDatabase(request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
 ```javascript
 await client.createDatabase({
     db_name: "my_database_2",
@@ -134,16 +238,22 @@ await client.createDatabase({
 });
 ```
 
-```go
-err := cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption("my_database_2").WithProperty("database.replica.number", 3))
-if err != nil {
-    // handle err
-}
+```csharp
+using Milvus.Client.V2.Requests.Database;
+
+await client.CreateDatabaseAsync(new CreateDatabaseReq
+{
+    DatabaseName = "my_database_2",
+    Properties =
+    {
+        ["database.replica.number"] = "3"
+    }
+});
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/create" \
@@ -158,15 +268,19 @@ curl --request POST \
 }'
 ```
 
+
 ## View databases
 
-You can use the Milvus RESTful API or SDKs to list all existing databases and view their details.
+You can use the {{var.product_name}} RESTful API or SDKs to list all existing databases and view their details.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -196,12 +310,6 @@ DescribeDatabaseResp descDBResp = client.describeDatabase(DescribeDatabaseReq.bu
         .build());
 ```
 
-```javascript
-await client.describeDatabase({ 
-    db_name: 'default'
-});
-```
-
 ```go
 // List all existing databases
 databases, err := cli.ListDatabase(ctx, milvusclient.NewListDatabaseOption())
@@ -217,9 +325,63 @@ if err != nil {
 log.Println(db)
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let databases = client
+    .list_databases(ListDatabasesRequest::builder().build()?)
+    .await?;
+println!("{:?}", databases);
+
+let database = client
+    .describe_database(
+        DescribeDatabaseRequest::builder()
+            .database_name("default")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", database);
+```
+
+```cpp
+milvus::ListDatabasesResponse listResponse;
+status = client->ListDatabases(milvus::ListDatabasesRequest(), listResponse);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+
+milvus::DescribeDatabaseResponse describeResponse;
+status = client->DescribeDatabase(
+    milvus::DescribeDatabaseRequest().WithDatabaseName("default"),
+    describeResponse);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.describeDatabase({
+    db_name: 'default'
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Database;
+using Milvus.Client.V2.Responses.Database;
+
+ListDatabasesResp databases = await client.ListDatabasesAsync(new ListDatabasesReq());
+Console.WriteLine(string.Join(",", databases.DatabaseNames));
+
+DescribeDatabaseResp database = await client.DescribeDatabaseAsync(new DescribeDatabaseReq
+{
+    DatabaseName = "default"
+});
+Console.WriteLine(database.DatabaseName);
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/describe" \
@@ -231,10 +393,12 @@ curl --request POST \
 }'
 ```
 
+
 ## Manage database properties
 
 Each database has its own properties, you can set the properties of a database when you create the database as described in [Create database](manage_databases.md#Create-database) or you can alter and drop the properties of any existing database.
 
+<!-- doc:block:start id="database-properties-table" -->
 The following table lists possible database properties.
 
 <table>
@@ -279,6 +443,7 @@ The following table lists possible database properties.
      <td><p>Specifies the default timezone applied to time-sensitive operations within the database, particularly for <code>TIMESTAMPTZ</code> fields. Collections inherit the database timezone unless a collection-level timezone is set. A query-level timezone parameter can temporarily override both database and collection defaults. The value must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code>TIMESTAMPTZ</code> field, refer to <a href="timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></td>
    </tr>
 </table>
+<!-- doc:block:end id="database-properties-table" -->
 
 ### Alter database properties
 
@@ -287,8 +452,11 @@ You can alter the properties of an existing database as follows. The following e
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -302,30 +470,70 @@ client.alter_database_properties(
 ```
 
 ```java
+import io.milvus.v2.service.database.request.AlterDatabasePropertiesReq;
+
 client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
         .databaseName("my_database_1")
         .property("database.max.collections", "10")
         .build());
 ```
 
-```javascript
-await milvusClient.alterDatabaseProperties({
-  db_name: "my_database_1",
-  properties: {"database.max.collections", "10" },
-})
-```
-
 ```go
 err := cli.AlterDatabaseProperties(ctx, milvusclient.NewAlterDatabasePropertiesOption("my_database_1").
-    WithProperty("database.max.collections", 1))
+    WithProperty("database.max.collections", 10))
 if err != nil {
     // handle err
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .alter_database_properties(
+        AlterDatabasePropertiesRequest::builder()
+            .database_name("my_database_1")
+            .property("database.max.collections", "10")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto request = milvus::AlterDatabasePropertiesRequest()
+    .WithDatabaseName("my_database_1")
+    .AddProperty("database.max.collections", "10");
+status = client->AlterDatabaseProperties(request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.alterDatabaseProperties({
+  db_name: "my_database_1",
+  properties: {
+    "database.max.collections": 10,
+  },
+})
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Database;
+
+await client.AlterDatabasePropertiesAsync(new AlterDatabasePropertiesReq
+{
+    DatabaseName = "my_database_1",
+    Properties =
+    {
+        ["database.max.collections"] = "10"
+    }
+});
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/alter" \
@@ -333,12 +541,13 @@ curl --request POST \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
 -d '{
-    "dbName": "my_database",
+    "dbName": "my_database_1",
     "properties": {
         "database.max.collections": 10
     }
 }'
 ```
+
 
 ### Drop database properties
 
@@ -347,8 +556,11 @@ You can also reset a database property by dropping it as follows. The following 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -362,17 +574,13 @@ client.drop_database_properties(
 ```
 
 ```java
+import io.milvus.v2.service.database.request.DropDatabasePropertiesReq;
+import java.util.Collections;
+
 client.dropDatabaseProperties(DropDatabasePropertiesReq.builder()
         .databaseName("my_database_1")
         .propertyKeys(Collections.singletonList("database.max.collections"))
         .build());
-```
-
-```javascript
-await milvusClient.dropDatabaseProperties({
-  db_name: my_database_1,
-  properties: ["database.max.collections"],
-});
 ```
 
 ```go
@@ -382,9 +590,49 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .drop_database_properties(
+        DropDatabasePropertiesRequest::builder()
+            .database_name("my_database_1")
+            .property_keys(["database.max.collections"])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto request = milvus::DropDatabasePropertiesRequest()
+    .WithDatabaseName("my_database_1")
+    .AddPropertyKey("database.max.collections");
+status = client->DropDatabaseProperties(request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.dropDatabaseProperties({
+  db_name: "my_database_1",
+  property_keys: ["database.max.collections"],
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Database;
+
+await client.DropDatabasePropertiesAsync(new DropDatabasePropertiesReq
+{
+    DatabaseName = "my_database_1",
+    DeleteKeys = ["database.max.collections"]
+});
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/alter" \
@@ -392,28 +640,32 @@ curl --request POST \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
 -d '{
-    "dbName": "my_database",
+    "dbName": "my_database_1",
     "propertyKeys": [
         "database.max.collections"
     ]
 }'
 ```
 
+
 ## Use database
 
-You can switch from one database to another without disconnecting from Milvus.
+You can switch from one database to another without disconnecting from {{var.product_name}}.
 
 <div class="alert note">
 
-RESTful API does not support this operation.
+RESTful API does not support switching databases on a persistent connection. For RESTful API requests, specify the target database in each request body when the operation supports `dbName`.
 
 </div>
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -427,12 +679,6 @@ client.use_database(
 client.useDatabase("my_database_2");
 ```
 
-```javascript
-await milvusClient.useDatabase({
-  db_name: "my_database_2",
-});
-```
-
 ```go
 err = cli.UseDatabase(ctx, milvusclient.NewUseDatabaseOption("my_database_2"))
 if err != nil {
@@ -440,10 +686,37 @@ if err != nil {
 }
 ```
 
+```rust
+client.use_database("my_database_2").await?;
+```
+
+```cpp
+status = client->UseDatabase("my_database_2");
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.useDatabase({
+  db_name: "my_database_2",
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Utility;
+
+await client.UseDatabaseAsync(new UseDatabaseReq
+{
+    DatabaseName = "my_database_2"
+});
+```
+
 ```bash
 # This operation is unsupported because RESTful does not provide a persistent connection.
 # As a workaround, initiate the required request again with the target database.
 ```
+
 
 ## Drop database
 
@@ -453,13 +726,16 @@ Once a database is no longer needed, you can drop the database. Note that:
 
 - Before dropping a database, you need to drop all collections in the database first.
 
-You can use the Milvus RESTful API or SDKs to create data programmatically.
+You can use the {{var.product_name}} RESTful API or SDKs to drop a database programmatically.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -475,12 +751,6 @@ client.dropDatabase(DropDatabaseReq.builder()
         .build());
 ```
 
-```javascript
-await milvusClient.dropDatabase({
-  db_name: "my_database_2",
-});
-```
-
 ```go
 err = cli.DropDatabase(ctx, milvusclient.NewDropDatabaseOption("my_database_2"))
 if err != nil {
@@ -488,9 +758,44 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .drop_database(
+        DropDatabaseRequest::builder()
+            .database_name("my_database_2")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto request = milvus::DropDatabaseRequest().WithDatabaseName("my_database_2");
+status = client->DropDatabase(request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.dropDatabase({
+  db_name: "my_database_2",
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Database;
+
+await client.DropDatabaseAsync(new DropDatabaseReq
+{
+    DatabaseName = "my_database_2"
+});
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/drop" \
@@ -498,18 +803,19 @@ curl --request POST \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
 -d '{
-    "dbName": "my_database"
+    "dbName": "my_database_2"
 }'
 ```
 
+
+<!-- doc:block:start id="database-faq" -->
 ## FAQ
 
 ### How do I manage permissions for a database?
 
-Milvus uses Role-Based Access Control (RBAC) to manage permissions. You can create roles with specific privileges and assign them to users, thus controlling their access to different databases. For more details, refer to the [RBAC documentation](rbac.md).
+{{var.product_name}} uses Role-Based Access Control (RBAC) to manage permissions. You can create roles with specific privileges and assign them to users, thus controlling their access to different databases. For more details, refer to the [RBAC documentation](rbac.md).
 
 ### Are there any quota limitations for a database?
 
-Yes, Milvus allows you to set quota limitations for a database, such as the maximum number of collections. For a comprehensive list of limitations, please refer to the [Milvus Limits documentation](limitations.md).
-
-
+Yes, {{var.product_name}} allows you to set quota limitations for a database, such as the maximum number of collections. For a comprehensive list of limitations, please refer to the [{{var.product_name}} Limits documentation](limitations.md).
+<!-- doc:block:end id="database-faq" -->

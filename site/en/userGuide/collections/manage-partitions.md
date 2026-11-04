@@ -10,7 +10,7 @@ A partition is a subset of a collection. Each partition shares the same data str
 
 ## Overview
 
-When creating a collection, Milvus also creates a partition named **_default** in the collection. If you are not going to add any other partitions, all entities inserted into the collection go into the default partition, and all searches and queries are also carried out within the default partition.
+When creating a collection, {{var.product_name}} also creates a partition named **_default** in the collection. If you are not going to add any other partitions, all entities inserted into the collection go into the default partition, and all searches and queries are also carried out within the default partition.
 
 You can add more partitions and insert entities into them based on certain criteria. Then you can restrict your searches and queries within certain partitions, improving search performance.
 
@@ -18,7 +18,7 @@ A collection can have a maximum of 1,024 partitions.
 
 <div class="alert note">
 
-The **Partition Key** feature is a search optimization based on partitions and allows Milvus to distribute entities into different partitions based on the values in a specific scalar field. This feature helps implement partition-oriented multi-tenancy and improves search performance.
+The **Partition Key** feature is a search optimization based on partitions and allows {{var.product_name}} to distribute entities into different partitions based on the values in a specific scalar field. This feature helps implement partition-oriented multi-tenancy and improves search performance.
 
 This feature will not be discussed on this page. To find more, refer to [Use Partition Key](use-partition-key.md).
 
@@ -26,13 +26,16 @@ This feature will not be discussed on this page. To find more, refer to [Use Par
 
 ## List Partitions
 
-When creating a collection, Milvus also creates a partition named **_default** in the collection. You can list the partitions in a collection as follows.
+When creating a collection, {{var.product_name}} also creates a partition named **_default** in the collection. You can list the partitions in a collection as follows.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -40,8 +43,8 @@ When creating a collection, Milvus also creates a partition named **_default** i
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}"
 )
 
 res = client.list_partitions(
@@ -62,10 +65,10 @@ import io.milvus.v2.client.MilvusClientV2;
 
 import java.util.*;
 
-String CLUSTER_ENDPOINT = "http://localhost:19530";
-String TOKEN = "root:Milvus";
+String CLUSTER_ENDPOINT = "{{var.example_endpoint}}";
+String TOKEN = "{{var.example_token}}";
 
-// 1. Connect to Milvus server
+// 1. Connect to {{var.product_name}}
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -84,34 +87,17 @@ System.out.println(partitionNames);
 // [_default]
 ```
 
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const address = "http://localhost:19530";
-const token = "root:Milvus";
-const client = new MilvusClient({address, token});
-
-let res = await client.listPartitions({
-    collection_name: "my_collection"
-})
-
-console.log(res);
-
-// Output
-// ["_default"]
-```
-
 ```go
 import (
     "context"
     
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "{{var.example_endpoint}}"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
@@ -131,9 +117,97 @@ if err != nil {
 fmt.Println(partitionNames)
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}"),
+)
+.await?;
+
+let partitions = client
+    .list_partitions(
+        ListPartitionsRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", partitions.partition_names());
+
+// Output
+//
+// ["_default"]
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListPartitionsResponse response;
+status = client->ListPartitions(milvus::ListPartitionsRequest()
+                                    .WithCollectionName("my_collection"),
+                                response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (auto& info : response.PartitionInfos()) {
+    std::cout << "\t" << info.Name() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const address = "{{var.example_endpoint}}";
+const token = "{{var.example_token}}";
+const client = new MilvusClient({address, token});
+
+let res = await client.listPartitions({
+    collection_name: "my_collection"
+})
+
+console.log(res);
+
+// Output
+// ["_default"]
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Partition;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "{{var.example_endpoint}}",
+    ApiKey = "{{var.example_token}}"
+});
+await client.ConnectAsync();
+
+var res = await client.ListPartitionsAsync(new ListPartitionsReq
+{
+    CollectionName = "my_collection"
+});
+foreach (var name in res.PartitionNames)
+{
+    Console.WriteLine(name);
+}
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/partitions/list" \
@@ -152,6 +226,7 @@ curl --request POST \
 # }
 ```
 
+
 ## Create Partition
 
 You can add more partitions to the collection and insert entities into these partitions based on certain criteria.
@@ -159,8 +234,11 @@ You can add more partitions to the collection and insert entities into these par
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -202,27 +280,11 @@ System.out.println(partitionNames);
 // [_default, partitionA]
 ```
 
-```javascript
-await client.createPartition({
-    collection_name: "my_collection",
-    partition_name: "partitionA"
-})
-
-res = await client.listPartitions({
-    collection_name: "my_collection"
-})
-
-console.log(res)
-
-// Output
-// ["_default", "partitionA"]
-```
-
 ```go
 import (
     "fmt"
     
-    client "github.com/milvus-io/milvus/client/v2/milvusclient"
+    milvusclient "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -245,9 +307,89 @@ fmt.Println(partitionNames)
 // ["_default", "partitionA"]
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .create_partition(
+        CreatePartitionRequest::builder()
+            .collection_name("my_collection")
+            .partition_name("partitionA")
+            .build()?,
+    )
+    .await?;
+
+let partitions = client
+    .list_partitions(
+        ListPartitionsRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", partitions.partition_names());
+
+// Output
+//
+// ["_default", "partitionA"]
+```
+
+```cpp
+auto status = client->CreatePartition(milvus::CreatePartitionRequest()
+                                         .WithCollectionName("my_collection")
+                                         .WithPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListPartitionsResponse response;
+status = client->ListPartitions(milvus::ListPartitionsRequest().WithCollectionName("my_collection"), response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (auto& info : response.PartitionInfos()) {
+    std::cout << "\t" << info.Name() << std::endl;
+}
+```
+
+```javascript
+await client.createPartition({
+    collection_name: "my_collection",
+    partition_name: "partitionA"
+})
+
+res = await client.listPartitions({
+    collection_name: "my_collection"
+})
+
+console.log(res)
+
+// Output
+// ["_default", "partitionA"]
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Partition;
+
+await client.CreatePartitionAsync(new CreatePartitionReq
+{
+    CollectionName = "my_collection",
+    PartitionName = "partitionA"
+});
+
+var res = await client.ListPartitionsAsync(new ListPartitionsReq
+{
+    CollectionName = "my_collection"
+});
+foreach (var name in res.PartitionNames)
+{
+    Console.WriteLine(name);
+}
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/partitions/create" \
@@ -282,6 +424,7 @@ curl --request POST \
 # }
 ```
 
+
 ## Check for a Specific Partition
 
 The following code snippets demonstrate how to check whether a partition exists in a specific collection.
@@ -289,8 +432,11 @@ The following code snippets demonstrate how to check whether a partition exists 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -322,18 +468,6 @@ System.out.println(hasPartitionRes);
 // true
 ```
 
-```javascript
-res = await client.hasPartition({
-    collection_name: "my_collection",
-    partition_name: "partitionA"
-})
-
-console.log(res.value)
-
-// Output
-// true
-```
-
 ```go
 result, err := client.HasPartition(ctx, milvusclient.NewHasPartitionOption("my_collection", "partitionA"))
 if err != nil {
@@ -347,9 +481,62 @@ fmt.Println(result)
 // true
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let has = client
+    .has_partition(
+        HasPartitionRequest::builder()
+            .collection_name("my_collection")
+            .partition_name("partitionA")
+            .build()?,
+    )
+    .await?;
+println!("{}", has.exists());
+
+// Output
+//
+// true
+```
+
+```cpp
+milvus::HasPartitionResponse response;
+auto status = client->HasPartition(milvus::HasPartitionRequest()
+                                    .WithCollectionName("my_collection")
+                                    .WithPartitionName("partitionA"),
+                                   response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << response.Has() << std::endl;
+```
+
+```javascript
+res = await client.hasPartition({
+    collection_name: "my_collection",
+    partition_name: "partitionA"
+})
+
+console.log(res.value)
+
+// Output
+// true
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Partition;
+
+var hasResp = await client.HasPartitionAsync(new HasPartitionReq
+{
+    CollectionName = "my_collection",
+    PartitionName = "partitionA"
+});
+Console.WriteLine(hasResp.Has);
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/partitions/has" \
@@ -369,6 +556,7 @@ curl --request POST \
 # }
 ```
 
+
 ## Load and Release Partitions
 
 You can separately load or release one or certain partitions.
@@ -380,8 +568,11 @@ You can separately load specific partitions in a collection. It is worth noting 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -426,25 +617,6 @@ System.out.println(getLoadStateRes);
 // True
 ```
 
-```javascript
-await client.loadPartitions({
-    collection_name: "my_collection",
-    partition_names: ["partitionA"]
-})
-
-res = await client.getLoadState({
-    collection_name: "my_collection",
-    partition_name: "partitionA"
-})
-
-console.log(res)
-
-// Output
-// 
-// LoadStateLoaded
-// 
-```
-
 ```go
 task, err := client.LoadPartitions(ctx, milvusclient.NewLoadPartitionsOption("my_collection", "partitionA"))
 if err != nil {
@@ -467,9 +639,92 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .load_partitions(
+        LoadPartitionsRequest::builder()
+            .collection_name("my_collection")
+            .partition_names(["partitionA"])
+            .build()?,
+    )
+    .await?;
+
+let state = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .partition_names(["partitionA"])
+            .build()?,
+    )
+    .await?;
+println!("{:?}", state.state());
+
+// Output
+//
+// Loaded
+```
+
+```cpp
+auto status = client->LoadPartitions(milvus::LoadPartitionsRequest()
+                                        .WithCollectionName("my_collection")
+                                        .AddPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                .WithCollectionName("my_collection")
+                                .AddPartitionName("partitionA"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << milvus::to_string(response.State()) << std::endl;
+```
+
+```javascript
+await client.loadPartitions({
+    collection_name: "my_collection",
+    partition_names: ["partitionA"]
+})
+
+res = await client.getLoadState({
+    collection_name: "my_collection",
+    partition_name: "partitionA"
+})
+
+console.log(res)
+
+// Output
+//
+// LoadStateLoaded
+//
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Partition;
+
+await client.LoadPartitionsAsync(new LoadPartitionsReq
+{
+    CollectionName = "my_collection",
+    PartitionNames = new[] { "partitionA" }
+});
+
+var loadStateResp = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection",
+    PartitionNames = new[] { "partitionA" }
+});
+Console.WriteLine(loadStateResp.State);
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/partitions/load" \
@@ -506,6 +761,7 @@ curl --request POST \
 # }
 ```
 
+
 ### Release Partitions
 
 You can also release specific partitions.
@@ -513,8 +769,11 @@ You can also release specific partitions.
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -559,6 +818,67 @@ System.out.println(getLoadStateRes);
 // False
 ```
 
+```go
+err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions("my_collection", "partitionA"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption("my_collection", "partitionA"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(state)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .release_partitions(
+        ReleasePartitionsRequest::builder()
+            .collection_name("my_collection")
+            .partition_names(["partitionA"])
+            .build()?,
+    )
+    .await?;
+
+let state = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .partition_names(["partitionA"])
+            .build()?,
+    )
+    .await?;
+println!("{:?}", state.state());
+
+// Output
+//
+// NotLoad
+```
+
+```cpp
+auto status = client->ReleasePartitions(milvus::ReleasePartitionsRequest()
+                                .WithCollectionName("my_collection")
+                                .AddPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                .WithCollectionName("my_collection")
+                                .AddPartitionName("partitionA"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << milvus::to_string(response.State()) << std::endl;
+```
+
 ```javascript
 await client.releasePartitions({
     collection_name: "my_collection",
@@ -578,24 +898,27 @@ console.log(res)
 // 
 ```
 
-```go
-err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions("my_collection", "partitionA"))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Partition;
 
-state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption("my_collection", "partitionA"))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-fmt.Println(state)
+await client.ReleasePartitionsAsync(new ReleasePartitionsReq
+{
+    CollectionName = "my_collection",
+    PartitionNames = new[] { "partitionA" }
+});
+
+var loadStateResp = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection",
+    PartitionNames = new[] { "partitionA" }
+});
+Console.WriteLine(loadStateResp.State);
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/partitions/release" \
@@ -632,6 +955,7 @@ curl --request POST \
 # }
 ```
 
+
 ## Data Operations Within Partitions
 
 ### Insert and Delete Entities
@@ -659,8 +983,11 @@ You can drop partitions that are no longer needed. Before dropping a partition, 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -714,27 +1041,6 @@ System.out.println(partitionNames);
 // [_default]
 ```
 
-```javascript
-await client.releasePartitions({
-    collection_name: "my_collection",
-    partition_names: ["partitionA"]
-})
-
-await client.dropPartition({
-    collection_name: "my_collection",
-    partition_name: "partitionA"
-})
-
-res = await client.listPartitions({
-    collection_name: "my_collection"
-})
-
-console.log(res)
-
-// Output
-// ["_default"]
-```
-
 ```go
 err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions("my_collection", "partitionA"))
 if err != nil {
@@ -756,9 +1062,118 @@ if err != nil {
 fmt.Println(partitionNames)
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .release_partitions(
+        ReleasePartitionsRequest::builder()
+            .collection_name("my_collection")
+            .partition_names(["partitionA"])
+            .build()?,
+    )
+    .await?;
+
+client
+    .drop_partition(
+        DropPartitionRequest::builder()
+            .collection_name("my_collection")
+            .partition_name("partitionA")
+            .build()?,
+    )
+    .await?;
+
+let partitions = client
+    .list_partitions(
+        ListPartitionsRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", partitions.partition_names());
+
+// Output
+//
+// ["_default"]
+```
+
+```cpp
+auto status = client->ReleasePartitions(milvus::ReleasePartitionsRequest()
+                                            .WithCollectionName("my_collection")
+                                            .AddPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->DropPartition(milvus::DropPartitionRequest()
+                                .WithCollectionName("my_collection")
+                                .WithPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListPartitionsResponse response;
+status = client->ListPartitions(milvus::ListPartitionsRequest()
+                                    .WithCollectionName("my_collection"),
+                                response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (auto& info : response.PartitionInfos()) {
+    std::cout << "\t" << info.Name() << std::endl;
+}
+```
+
+```javascript
+await client.releasePartitions({
+    collection_name: "my_collection",
+    partition_names: ["partitionA"]
+})
+
+await client.dropPartition({
+    collection_name: "my_collection",
+    partition_name: "partitionA"
+})
+
+res = await client.listPartitions({
+    collection_name: "my_collection"
+})
+
+console.log(res)
+
+// Output
+// ["_default"]
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Partition;
+
+await client.ReleasePartitionsAsync(new ReleasePartitionsReq
+{
+    CollectionName = "my_collection",
+    PartitionNames = new[] { "partitionA" }
+});
+
+await client.DropPartitionAsync(new DropPartitionReq
+{
+    CollectionName = "my_collection",
+    PartitionName = "partitionA"
+});
+
+var res = await client.ListPartitionsAsync(new ListPartitionsReq
+{
+    CollectionName = "my_collection"
+});
+foreach (var name in res.PartitionNames)
+{
+    Console.WriteLine(name);
+}
+```
+
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/partitions/release" \
@@ -806,4 +1221,3 @@ curl --request POST \
 #     ]
 # }
 ```
-

@@ -1,18 +1,18 @@
 ---
 id: multi_tenancy.md
 title: "Implement Multi-tenancy"
-summary: "In Milvus, multi-tenancy means multiple customers or teams—referred to as tenants— share the same cluster while maintaining isolated data environments."
+summary: "In {{var.product_name}}, multi-tenancy means multiple customers or teams—referred to as tenants— share the same cluster while maintaining isolated data environments."
 ---
 
 # Implement Multi-tenancy
 
-In Milvus, multi-tenancy means multiple customers or teams—referred to as **tenants**— share the same cluster while maintaining isolated data environments. 
+In {{var.product_name}}, multi-tenancy means multiple customers or teams—referred to as **tenants**— share the same cluster while maintaining isolated data environments.
 
-Milvus supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.
+{{var.product_name}} supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.
 
 ## Multi-tenancy strategies
 
-Milvus supports multi-tenancy at four levels: **Database**, **Collection**, **Partition**, and **Partition Key**. 
+{{var.product_name}} supports multi-tenancy at four levels: **Database**, **Collection**, **Partition**, and **Partition Key**.
 
 ### Database-level multi-tenancy
 
@@ -20,6 +20,7 @@ With database-level multi-tenancy, each tenant receives a corresponding [databas
 
 ![Database Level Multi Tenancy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png)
 
+<!-- doc:block:start id="multi-tenancy-database-level" -->
 - **Scalability**: The database-level multi-tenancy strategy  supports a maximum of 64 tenants by default.
 
 - **Data isolation**: The data in each database is fully separated, offering enterprise-grade data isolation ideal for regulated environments or customers with strict compliance needs.
@@ -27,6 +28,7 @@ With database-level multi-tenancy, each tenant receives a corresponding [databas
 - **Flexibility**: Each database can have collections with different schemas, offering highly flexible data organization and allowing each tenant to have its own data schema.
 
 - **Others**: This strategy also supports RBAC, enabling fine-grained control over user access per tenant. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.
+<!-- doc:block:end id="multi-tenancy-database-level" -->
 
 ### Collection-level multi-tenancy
 
@@ -34,6 +36,7 @@ With collection-level multi-tenancy, each tenant is assigned a [collection](mana
 
 ![Collection Level Multi Tenancy](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png)
 
+<!-- doc:block:start id="multi-tenancy-collection-level" -->
 - **Scalability**: Since a cluster can hold up to 65,536 collections by default, this strategy can accommodate the same number of tenants within the cluster.
 
 - **Data isolation**: Collections are physically isolated from one another. This strategy provides strong data isolation.
@@ -41,6 +44,7 @@ With collection-level multi-tenancy, each tenant is assigned a [collection](mana
 - **Flexibility**: This strategy allows each collection to have its own schema, accommodating tenants with different data schemas.
 
 - **Others**: This strategy also supports RBAC, allowing for granular access control over tenants. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.
+<!-- doc:block:end id="multi-tenancy-collection-level" -->
 
 ### Partition-level multi-tenancy
 
@@ -72,7 +76,7 @@ With this strategy, all tenants share a single collection and schema, but each t
 
 <div class="alert note">
 
-We recommend that you create a scalar index on the partition key field. Because each physical partition holds multiple tenants, Milvus evaluates the tenant filter against every entity in the searched partitions, and without an index this is a full scan. For details, refer to [Index Partition Key](use-partition-key.md#Index-Partition-Key).
+We recommend that you create a scalar index on the partition key field. Because each physical partition holds multiple tenants, {{var.product_name}} evaluates the tenant filter against every entity in the searched partitions, and without an index this is a full scan. For details, refer to [Index Partition Key](use-partition-key.md#Index-Partition-Key).
 
 </div>
 
@@ -80,6 +84,7 @@ We recommend that you create a scalar index on the partition key field. Because 
 
 The table below offers a comprehensive comparison between the four levels of multi-tenancy strategies.
 
+<!-- doc:block:start id="multi-tenancy-comparison-table" -->
 <table>
    <tr>
      <th></th>
@@ -138,8 +143,9 @@ The table below offers a comprehensive comparison between the four levels of mul
      <td><p>No Currently, not supported for the partition key-level strategy.</p></td>
    </tr>
 </table>
+<!-- doc:block:end id="multi-tenancy-comparison-table" -->
 
-There are several factors to consider when you choose the multi-tenancy strategy in Milvus.
+There are several factors to consider when you choose the multi-tenancy strategy in {{var.product_name}}.
 
 1. **Scalability:** Partition Key > Partition > Collection > Database
 
@@ -153,11 +159,12 @@ There are several factors to consider when you choose the multi-tenancy strategy
 
     Database-level and collection-level strategies provide full flexibility in data schemas. If your tenants' data structures are different, choose database-level or collection-level multi-tenancy.
 
+<!-- doc:block:start id="multi-tenancy-choosing-factors" -->
 1. **Others**
 
-    1. **Performance:** Search performance is determined by various factors, including indexes, search parameters, and machine configurations. Milvus also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.
+    1. **Performance:** Search performance is determined by various factors, including indexes, search parameters, and machine configurations. {{var.product_name}} also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.
 
     1. **Effective handling of hot and cold data**: Currently, the database-level, collection-level, and partition-level strategies all support hot and cold data handling. 
 
     1. **Cross-tenant searches**: Only the partition-level and partition-key-level strategies support cross-tenant queries.
-
+<!-- doc:block:end id="multi-tenancy-choosing-factors" -->
