@@ -156,6 +156,7 @@ Your collection schema must include at least three required fields:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -298,6 +299,23 @@ export schema='{
         ]
     }'
 ```
+
+```c++
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"YOUR_CLUSTER_ENDPOINT", "YOUR_CLUSTER_TOKEN"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+```
 <!-- doc:block:end id="bm25-schema" -->
 
 #### Define the BM25 function
@@ -312,6 +330,7 @@ Define the function and add it to your schema:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -397,6 +416,13 @@ export schema='{
         ]
     }'
 ```
+
+```c++
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("sparse");
+schema->AddFunction(function);
+```
 <!-- doc:block:end id="bm25-function-block" -->
 
 #### Configure the index
@@ -409,6 +435,7 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -483,6 +510,13 @@ export indexParams='[
         }
     ]'
 ```
+
+```c++
+auto index_params = milvus::IndexDesc("sparse", "", milvus::IndxType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+index_params.AddExtraParam("bm25_k1", "1.2");
+index_params.AddExtraParam("bm25_b", "0.75");
+```
 <!-- doc:block:end id="bm25-index" -->
 
 #### Create the collection
@@ -495,6 +529,7 @@ Now create the collection using the schema and index parameters defined:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -573,6 +608,16 @@ curl --request POST \
     "collectionName": "my_collection"
 }'
 ```
+
+```c++
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                    .WithCollectionName("my_collection")
+                                    .WithCollectionSchema(schema))
+                                    .AddIndex(std::move(index_params));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
 <!-- doc:block:end id="bm25-create" -->
 
 Once the collection with a BM25 function is created, you can insert text and perform lexical searches based on text query.
@@ -587,6 +632,7 @@ After setting up your collection and index, you're ready to insert text data. In
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -658,6 +704,23 @@ curl --request POST \
 }'
 
 ```
+
+```c++
+milvus::EntityRows data = {
+    {{"text", "information retrieval is a field of study."}},
+    {{"text", "information retrieval focuses on finding relevant information in large datasets."}},
+    {{"text", "data mining and information retrieval overlap in research."}}
+};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName("my_collection")
+                                .WithRowsData(std::move(data))
+                                , response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
 <!-- doc:block:end id="bm25-insert" -->
 
 ## Step 3: Search with text query
@@ -670,6 +733,7 @@ Once you've inserted data into your collection, you can perform full text search
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -765,5 +829,20 @@ curl --request POST \
         "params":{}
     }
 }'
+```
+
+```c++
+auto request = milvus::SearchRequest()
+                       .WithCollectionName("my_collection")
+                       .AddEmbeddedText("whats the focus of information retrieval?")
+                       .WithLimit(3)
+                       .WithAnnsField("sparse")
+                       .AddOutputField("text");
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 <!-- doc:block:end id="bm25-search" -->
