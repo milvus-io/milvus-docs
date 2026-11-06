@@ -11,7 +11,9 @@ A snapshot is a point-in-time image of a Milvus collection. It captures the coll
 
 Snapshots are not a substitute for backups. They are quick to create and restore, making them suitable for short-term needs such as fast rollbacks, versioning, and testing (**days to weeks**), whereas backups are independent, complete copies stored separately for long-term disaster recovery (**weeks to years**) and better protection against total storage failure.
 
+<!-- doc:block:start id="snapshots-backup-link" -->
 To create backups, refer to [Milvus Backup](milvus_backup_overview.md).
+<!-- doc:block:end id="snapshots-backup-link" -->
 
 ## Snapshot anatomy
 
