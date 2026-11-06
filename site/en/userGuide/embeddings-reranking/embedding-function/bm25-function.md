@@ -155,7 +155,7 @@ Your collection schema must include at least three required fields:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -246,6 +246,30 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```rust
+let schema = CollectionSchema::new()
+    .add_field(FieldSchema::new().name("id").data_type(DataType::Int64).primary_key(true).auto_id(true))
+    .add_field(FieldSchema::new().name("text").data_type(DataType::VarChar).max_length(1000).enable_analyzer(true))
+    .add_field(FieldSchema::new().name("sparse").data_type(DataType::SparseFloatVector));
+```
+
+```c++
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -299,23 +323,6 @@ export schema='{
         ]
     }'
 ```
-
-```c++
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
-schema->AddField({"id", milvus::DataType::INT64, "", true, true});
-schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
-schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
-```
 <!-- doc:block:end id="bm25-schema" -->
 
 #### Define the BM25 function
@@ -329,7 +336,7 @@ Define the function and add it to your schema:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -367,6 +374,23 @@ function := entity.NewFunction().
     WithOutputFields("sparse").
     WithType(entity.FunctionTypeBM25)
 schema.WithFunction(function)
+```
+
+```rust
+let bm25_function = Function::new()
+    .name("text_bm25_emb")
+    .function_type(FunctionType::Bm25)
+    .input_fields(["text"])
+    .output_fields(["sparse"]);
+
+let schema = schema.add_function(bm25_function);
+```
+
+```c++
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("sparse");
+schema->AddFunction(function);
 ```
 
 ```javascript
@@ -416,13 +440,6 @@ export schema='{
         ]
     }'
 ```
-
-```c++
-milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
-function->AddInputFieldName("text");
-function->AddOutputFieldName("sparse");
-schema->AddFunction(function);
-```
 <!-- doc:block:end id="bm25-function-block" -->
 
 #### Configure the index
@@ -434,7 +451,7 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -481,6 +498,25 @@ indexOption.WithExtraParam("bm25_k1", 1.2)
 indexOption.WithExtraParam("bm25_b", 0.75)
 ```
 
+```rust
+let index_params = IndexParam::new()
+    .field_name("sparse")
+    .index_type(IndexType::SparseInvertedIndex)
+    .metric_type(MetricType::Bm25)
+    .extra_params(HashMap::from([
+        ("inverted_index_algo".into(), "DAAT_MAXSCORE".into()),
+        ("bm25_k1".into(), "1.2".into()),
+        ("bm25_b".into(), "0.75".into()),
+    ]));
+```
+
+```c++
+auto index_params = milvus::IndexDesc("sparse", "", milvus::IndxType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+index_params.AddExtraParam("bm25_k1", "1.2");
+index_params.AddExtraParam("bm25_b", "0.75");
+```
+
 ```javascript
 const index_params = [
   {
@@ -510,13 +546,6 @@ export indexParams='[
         }
     ]'
 ```
-
-```c++
-auto index_params = milvus::IndexDesc("sparse", "", milvus::IndxType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
-index_params.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
-index_params.AddExtraParam("bm25_k1", "1.2");
-index_params.AddExtraParam("bm25_b", "0.75");
-```
 <!-- doc:block:end id="bm25-index" -->
 
 #### Create the collection
@@ -528,7 +557,7 @@ Now create the collection using the schema and index parameters defined:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -574,6 +603,33 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+use serde_json::json;
+
+client.create_collection(
+    CreateCollectionRequest::builder()
+        .collection_name("my_collection")
+        .schema(schema)
+        .index_param(index_params)
+        .build()?,
+)
+.await?;
+
+client.load_collection(LoadCollectionRequest::builder().collection_name("my_collection").build()?).await?;
+```
+
+```c++
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                    .WithCollectionName("my_collection")
+                                    .WithCollectionSchema(schema))
+                                    .AddIndex(std::move(index_params));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 await client.createCollection({
     collection_name: 'my_collection',
@@ -608,16 +664,6 @@ curl --request POST \
     "collectionName": "my_collection"
 }'
 ```
-
-```c++
-auto status = client->CreateCollection(milvus::CreateCollectionRequest()
-                                    .WithCollectionName("my_collection")
-                                    .WithCollectionSchema(schema))
-                                    .AddIndex(std::move(index_params));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
 <!-- doc:block:end id="bm25-create" -->
 
 Once the collection with a BM25 function is created, you can insert text and perform lexical searches based on text query.
@@ -631,7 +677,7 @@ After setting up your collection and index, you're ready to insert text data. In
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -677,6 +723,37 @@ if err != nil {
 }
 ```
 
+```rust
+client.insert(
+    InsertRequest::builder()
+        .collection_name("my_collection")
+        .rows(vec![
+            json!({"text": "information retrieval is a field of study."}),
+            json!({"text": "information retrieval focuses on finding relevant information in large datasets."}),
+            json!({"text": "data mining and information retrieval overlap in research."}),
+        ])
+        .build()?,
+)
+.await?;
+```
+
+```c++
+milvus::EntityRows data = {
+    {{"text", "information retrieval is a field of study."}},
+    {{"text", "information retrieval focuses on finding relevant information in large datasets."}},
+    {{"text", "data mining and information retrieval overlap in research."}}
+};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName("my_collection")
+                                .WithRowsData(std::move(data))
+                                , response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 await client.insert({
     collection_name: 'my_collection',
@@ -704,23 +781,6 @@ curl --request POST \
 }'
 
 ```
-
-```c++
-milvus::EntityRows data = {
-    {{"text", "information retrieval is a field of study."}},
-    {{"text", "information retrieval focuses on finding relevant information in large datasets."}},
-    {{"text", "data mining and information retrieval overlap in research."}}
-};
-
-milvus::InsertResponse response;
-auto status = client->Insert(milvus::InsertRequest()
-                                .WithCollectionName("my_collection")
-                                .WithRowsData(std::move(data))
-                                , response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
 <!-- doc:block:end id="bm25-insert" -->
 
 ## Step 3: Search with text query
@@ -732,7 +792,7 @@ Once you've inserted data into your collection, you can perform full text search
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -797,6 +857,37 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+let res = client.search(
+    SearchRequest::builder()
+        .collection_name("my_collection")
+        .vector_field("sparse")
+        .vectors(SearchVectors::EmbeddedText(vec!["whats the focus of information retrieval?".to_string()]))
+        .metric_type(MetricType::Bm25)
+        .limit(3)
+        .output_fields(["text"])
+        .build()?,
+)
+.await?;
+
+println!("{:?}", res.results());
+```
+
+```c++
+auto request = milvus::SearchRequest()
+                       .WithCollectionName("my_collection")
+                       .AddEmbeddedText("whats the focus of information retrieval?")
+                       .WithLimit(3)
+                       .WithAnnsField("sparse")
+                       .AddOutputField("text");
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 await client.search({
     collection_name: 'my_collection',
@@ -829,20 +920,5 @@ curl --request POST \
         "params":{}
     }
 }'
-```
-
-```c++
-auto request = milvus::SearchRequest()
-                       .WithCollectionName("my_collection")
-                       .AddEmbeddedText("whats the focus of information retrieval?")
-                       .WithLimit(3)
-                       .WithAnnsField("sparse")
-                       .AddOutputField("text");
-
-milvus::SearchResponse response;
-auto status = client->Search(request, response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
 ```
 <!-- doc:block:end id="bm25-search" -->
