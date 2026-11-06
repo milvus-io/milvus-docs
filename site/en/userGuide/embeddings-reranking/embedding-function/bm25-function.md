@@ -305,7 +305,7 @@ export schema='{
 
 auto client = milvus::MilvusClientV2::Create();
 
-milvus::ConnectParam connect_param{"YOUR_CLUSTER_ENDPOINT", "YOUR_CLUSTER_TOKEN"};
+milvus::ConnectParam connect_param{"{{var.example_endpoint}}", "{{var.example_token}}"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
