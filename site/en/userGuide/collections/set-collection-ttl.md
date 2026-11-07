@@ -2082,6 +2082,16 @@ await client.AlterCollectionPropertiesAsync(new AlterCollectionPropertiesReq
     CollectionName = "my_collection",
     Properties = { ["ttl_field"] = "expire_at" }
 });
+// Step 3 (optional) — backfill expiration timestamps for historical rows
+var vector = Enumerable.Repeat(0.1f, 128).ToArray();
+await client.UpsertAsync(new UpsertReq
+{
+    CollectionName = "my_collection",
+    RowsData =
+    [
+        new Dictionary<string, object?> { ["id"] = 1L, ["vector"] = vector, ["expire_at"] = "2026-12-31T00:00:00Z" }
+    ]
+});
 ```
 
 ```bash
@@ -2557,6 +2567,16 @@ await client.AlterCollectionPropertiesAsync(new AlterCollectionPropertiesReq
 {
     CollectionName = "my_collection",
     Properties = { ["ttl_field"] = "expire_at" }
+});
+// Step 4 (optional) — backfill expiration timestamps for historical entities
+var vector = Enumerable.Repeat(0.1f, 128).ToArray();
+await client.UpsertAsync(new UpsertReq
+{
+    CollectionName = "my_collection",
+    RowsData =
+    [
+        new Dictionary<string, object?> { ["id"] = 1L, ["vector"] = vector, ["expire_at"] = "2026-12-31T00:00:00Z" }
+    ]
 });
 ```
 
