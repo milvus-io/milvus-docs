@@ -207,13 +207,9 @@ A [StructArray](array-of-structs.md) field is carried differently by each source
 | JSON, JSONL | The field value is a list of objects, one per Struct element, keyed by subfield name: `"chunks": [{"text": "...", "section": "index", "emb": [0.1, 0.2]}, ...]`. |
 | CSV | The cell holds the same JSON text as the JSON format. The `nullkey` configured for the import job or a JSON `null` marks a null StructArray value. |
 | Parquet | One column per StructArray field with the type `list<struct<...>>`, one struct child per subfield. A scalar subfield is a scalar child, a vector subfield is a list of its element type, such as `list<float32>`, and an array subfield (Milvus 3.0.6 and later) is a `list<T>` child. |
-| NumPy | Not supported. NumPy files hold one file per top-level field and have no representation for a StructArray field, so a NumPy import into a collection that has a StructArray field is rejected. |
+| NumPy | Not supported. NumPy files hold one file per top-level field and have no representation for a StructArray field. Use JSON, CSV, or Parquet files for collections that have a StructArray field. |
 
 The following rules apply to StructArray values in all supported formats:
-
-- Use subfield names inside each Struct element, not paths such as `chunks[text]`. Flat columns or keys named `chunks[text]` are rejected.
-
-- A Struct element itself cannot be null, such as `[null, {...}]`. A whole StructArray value can be null only when the field is nullable.
 
 - Keys or Parquet children that are not subfields of the collection, including dropped subfields, are ignored.
 

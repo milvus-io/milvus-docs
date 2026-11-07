@@ -36,12 +36,10 @@ StructArray schemas have the following limits:
 | Struct is not a top-level field type. | Create a StructArray field as `datatype=DataType.ARRAY` with `element_type=DataType.STRUCT` and a `struct_schema`. |
 | All elements share one schema. | Every Struct element in a StructArray field follows the same subfield list and subfield data types. |
 | `max_capacity` is required. | The number of Struct elements in one entity must not exceed the `max_capacity` configured for the StructArray field. |
-| All subfields share one `max_capacity`. | The `max_capacity` of the StructArray field applies to every subfield. The value must be greater than 0 and must not exceed `proxy.maxArrayCapacity`, which defaults to 4096. |
 | Subfields can evolve in Milvus 3.0.6 and later. | Add an element-nullable subfield, or drop a subfield by its path, such as `chunks[lang]`. You cannot drop the last subfield of a StructArray field, the last vector field of the collection, or a subfield used by a Function. In earlier versions, drop the StructArray field and add it again with the updated schema. |
 | Nested Struct is not supported. | A Struct cannot contain nested `Struct`, `ArrayOfStruct`, or JSON subfields. Starting in Milvus 3.0.6, a Struct can contain scalar `ARRAY` subfields with one nesting level. An `ARRAY` subfield cannot hold vectors. |
 | Functions are not supported inside StructArray. | Do not define field functions for StructArray fields or their subfields. |
-| Text analysis is not supported on subfields. | `enable_match` and `enable_analyzer` are rejected on Struct subfields because text indexes are built only for top-level fields. |
-| Field properties are limited on StructArray fields. | `alter_collection_field()` on a StructArray field or on a subfield path accepts only `mmap.enabled`, `field.description`, and `warmup`. Other properties, such as `max_capacity` and `max_length`, are rejected. |
+| Field properties are limited on StructArray fields. | Starting in Milvus 3.0.6, `alter_collection_field()` on a StructArray field or on a subfield path accepts only `mmap.enabled`, `field.description`, and `warmup`. Other properties, such as `max_capacity` and `max_length`, are rejected. |
 
 For schema creation examples, see [Create a StructArray Field](create-structarray-field.md).
 
@@ -166,7 +164,6 @@ At a high level:
 
 | Limit | Details |
 | --- | --- |
-| Source file formats | JSON, JSONL, CSV, and Parquet files can carry StructArray fields. NumPy files cannot represent a StructArray field, so NumPy import into a collection that has a StructArray field is rejected. For file shapes, see [Prepare Source Data](prepare-source-data.md#StructArray-fields-in-source-files). |
 | Storage format | Element-nullable subfields and scalar `ARRAY` subfields require Storage V2. Storage V1 cannot be reached for collections that use these subfields: creating the collection and inserting data can appear to succeed, but the data fails at flush, which is not a supported state. Storage V3 with `common.storage.enableGrowingSourceFlush` set to `true` rejects requests that use element-nullable subfields or scalar `ARRAY` subfields. |
 | External collections | Element-nullable subfields and scalar `ARRAY` subfields are not supported in external collections. |
 | Backup and snapshot import | Binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar `ARRAY` subfields. |
