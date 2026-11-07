@@ -17,7 +17,7 @@ Milvus 3.0.0 and later support nullable StructArray fields and adding StructArra
 
 <!-- doc:block:end id="structarray-create-availability" -->
 
-The creation, nullable creation, and field-addition examples are alternative workflows. Do not run them sequentially against the same collection. Reuse the client initialization for your selected language in the later examples.
+The creation, nullable creation, element-null creation, and field-addition examples are alternative workflows. Do not run them sequentially against the same collection. Reuse the client initialization for your selected language in the later examples.
 
 This page uses a collection named `tech_articles`. Each entity represents one technical article, and the `chunks` field stores chunk-level data as Struct elements.
 
@@ -634,12 +634,88 @@ Array subfields follow these rules:
 
 Starting in Milvus 3.0.6, a scalar, vector, or array subfield can allow a null value for that subfield in individual Struct elements (an **element-nullable subfield**). Set `nullable=True` on a scalar or vector subfield. On an array subfield, set `nullable=True` to allow a null inner array and `element_nullable=True` to allow null values inside the inner array. For example, a chunk can have no detected language while its other subfields hold values.
 
+The following example creates `tech_articles` with the complete schema that the element-level-null examples in [Insert Data into StructArray Fields](insert-data-into-structarray-fields.md) assume: the subfields from the first example, plus an element-nullable `lang` subfield and an element-nullable `tags` array subfield.
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 ```python
+from pymilvus import MilvusClient, DataType
+
+client = MilvusClient(
+    uri="{{var.example_endpoint}}",
+    token="{{var.example_token}}",
+)
+
+schema = client.create_schema(
+    auto_id=False,
+    enable_dynamic_field=False,
+)
+
+# Collection-level fields.
+schema.add_field(
+    field_name="doc_id",
+    datatype=DataType.INT64,
+    is_primary=True,
+)
+schema.add_field(
+    field_name="title",
+    datatype=DataType.VARCHAR,
+    max_length=512,
+)
+schema.add_field(
+    field_name="category",
+    datatype=DataType.VARCHAR,
+    max_length=128,
+)
+schema.add_field(
+    field_name="title_vector",
+    datatype=DataType.FLOAT_VECTOR,
+    dim=4,
+)
+
+# Struct schema used by each element in the StructArray field.
+chunk_schema = client.create_struct_field_schema()
+chunk_schema.add_field(
+    field_name="text",
+    datatype=DataType.VARCHAR,
+    max_length=65535,
+)
+chunk_schema.add_field(
+    field_name="section",
+    datatype=DataType.VARCHAR,
+    max_length=128,
+)
+chunk_schema.add_field(
+    field_name="page",
+    datatype=DataType.INT64,
+)
+chunk_schema.add_field(
+    field_name="quality_score",
+    datatype=DataType.FLOAT,
+)
+chunk_schema.add_field(
+    field_name="has_code",
+    datatype=DataType.BOOL,
+)
+
+# Vector subfield for EmbeddingList search.
+chunk_schema.add_field(
+    field_name="emb_list_vector",
+    datatype=DataType.FLOAT_VECTOR,
+    dim=4,
+)
+
+# Vector subfield for element-level search.
+chunk_schema.add_field(
+    field_name="emb",
+    datatype=DataType.FLOAT_VECTOR,
+    dim=4,
+)
+
+# An element-nullable scalar subfield.
 chunk_schema.add_field(
     field_name="lang",
     datatype=DataType.VARCHAR,
@@ -647,7 +723,8 @@ chunk_schema.add_field(
     nullable=True,
 )
 
-# An array subfield with element-level null.
+# An element-nullable array subfield: nullable=True allows a null inner
+# array and element_nullable=True allows null values inside the inner array.
 chunk_schema.add_field(
     field_name="tags",
     datatype=DataType.ARRAY,
@@ -657,16 +734,100 @@ chunk_schema.add_field(
     nullable=True,
     element_nullable=True,
 )
+
+# Add the StructArray field. nullable=True applies to the whole field.
+schema.add_field(
+    field_name="chunks",
+    datatype=DataType.ARRAY,
+    element_type=DataType.STRUCT,
+    struct_schema=chunk_schema,
+    max_capacity=1000,
+    nullable=True,
+)
+
+client.create_collection(
+    collection_name="tech_articles",
+    schema=schema,
+)
 ```
 
 ```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "{{var.example_endpoint}}",
+    APIKey:  "{{var.example_token}}",
+})
+if err != nil {
+    fmt.Println(err)
+    return
+}
+
+schema := entity.NewSchema().WithDynamicFieldEnabled(false)
+
+// Collection-level fields.
+schema.WithField(entity.NewField().
+        WithName("doc_id").
+        WithDataType(entity.FieldTypeInt64).
+        WithIsPrimaryKey(true))
+schema.WithField(entity.NewField().
+        WithName("title").
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(512))
+schema.WithField(entity.NewField().
+        WithName("category").
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(128))
+schema.WithField(entity.NewField().
+        WithName("title_vector").
+        WithDataType(entity.FieldTypeFloatVector).
+        WithDim(4))
+
+// Struct schema used by each element in the StructArray field.
+chunkSchema := entity.NewStructSchema()
+chunkSchema.WithField(entity.NewField().
+        WithName("text").
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(65535))
+chunkSchema.WithField(entity.NewField().
+        WithName("section").
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(128))
+chunkSchema.WithField(entity.NewField().
+        WithName("page").
+        WithDataType(entity.FieldTypeInt64))
+chunkSchema.WithField(entity.NewField().
+        WithName("quality_score").
+        WithDataType(entity.FieldTypeFloat))
+chunkSchema.WithField(entity.NewField().
+        WithName("has_code").
+        WithDataType(entity.FieldTypeBool))
+chunkSchema.WithField(entity.NewField().
+        WithName("emb_list_vector").
+        WithDataType(entity.FieldTypeFloatVector).
+        WithDim(4))
+chunkSchema.WithField(entity.NewField().
+        WithName("emb").
+        WithDataType(entity.FieldTypeFloatVector).
+        WithDim(4))
+
+// An element-nullable scalar subfield.
 chunkSchema.WithField(entity.NewField().
         WithName("lang").
         WithDataType(entity.FieldTypeVarChar).
         WithMaxLength(16).
         WithNullable(true))
 
-// An array subfield with element-level null.
+// An element-nullable array subfield: WithNullable(true) allows a null
+// inner array and WithElementNullable(true) allows null values inside it.
 chunkSchema.WithField(entity.NewField().
         WithName("tags").
         WithDataType(entity.FieldTypeArray).
@@ -675,6 +836,21 @@ chunkSchema.WithField(entity.NewField().
         WithMaxLength(64).
         WithNullable(true).
         WithElementNullable(true))
+
+// Add the StructArray field. WithNullable(true) applies to the whole field.
+schema.WithField(entity.NewField().
+        WithName("chunks").
+        WithDataType(entity.FieldTypeArray).
+        WithElementType(entity.FieldTypeStruct).
+        WithMaxCapacity(1000).
+        WithNullable(true).
+        WithStructSchema(chunkSchema))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("tech_articles", schema))
+if err != nil {
+    fmt.Println(err)
+    return
+}
 ```
 
 ```bash
@@ -705,7 +881,7 @@ curl --request POST \
             {"fieldName": "quality_score", "dataType": "Array", "elementDataType": "Float"},
             {"fieldName": "has_code", "dataType": "Array", "elementDataType": "Bool"},
             {"fieldName": "lang", "dataType": "Array", "elementDataType": "VarChar", "elementNullable": true, "elementTypeParams": {"max_length": "16"}},
-            {"fieldName": "tags", "dataType": "Array", "elementDataType": "VarChar", "elementNullable": true, "elementTypeParams": {"max_length": "64"}},
+            {"fieldName": "tags", "dataType": "Array", "elementDataType": "Array", "elementNullable": true, "typeSchema": {"arrayElement": {"typeParams": {"max_capacity": "16"}, "arrayElement": {"leafType": "VarChar", "nullable": true, "typeParams": {"max_length": "64"}}}}},
             {"fieldName": "emb_list_vector", "dataType": "ArrayOfVector", "elementDataType": "FloatVector", "elementTypeParams": {"dim": "4"}},
             {"fieldName": "emb", "dataType": "ArrayOfVector", "elementDataType": "FloatVector", "elementTypeParams": {"dim": "4"}}
           ]

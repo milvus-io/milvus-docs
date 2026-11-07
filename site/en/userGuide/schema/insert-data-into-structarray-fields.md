@@ -1031,7 +1031,7 @@ For version and deployment availability, see [StructArray Limits](structarray-li
 
 ## Insert null values for individual Struct elements | Milvus 3.0.6
 
-Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in some Struct elements and a valid value in others. The following example assumes that the `chunks` Struct schema also defines a `lang` VARCHAR subfield with `nullable=True` and a `tags` array subfield with `nullable=True` and `element_nullable=True`. For the schema definition, see [Create a StructArray Field](create-structarray-field.md).
+Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in some Struct elements and a valid value in others. The following example assumes that the `chunks` Struct schema defines a `lang` VARCHAR subfield with `nullable=True` and a `tags` array subfield with `nullable=True` and `element_nullable=True`. For the complete schema definition, see [Allow null values in Struct elements](create-structarray-field.md#allow-null-values-in-Struct-elements--milvus-306).
 
 In a Struct element, set an element-nullable subfield to `None` or omit it. Both store a null value.
 
