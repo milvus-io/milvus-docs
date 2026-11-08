@@ -71,8 +71,10 @@ Once Milvus references a segment or index file in a snapshot, it does not garbag
 - Restored historical data may conflict with TTL policies. You are advised to disable TTL or adjust TTL settings before creating snapshots.
 - To use a snapshot as a `milvus-table` external source, the source snapshot must come from a normal StorageV3 Milvus collection. Snapshots of external collections are not supported as `milvus-table` sources.
 
+<!-- doc:block:start id="snapshots-further-readings" -->
 ## Further readings
 
 - [Manage Snapshots](manage-snapshots.md) — create, list, describe, pin, restore, and delete snapshots.
 - [Snapshot Use Cases](snapshot-use-cases.md) — common patterns and workflows.
 - [Milvus Backup](milvus_backup_overview.md) — long-term backup and restore across clusters.
+<!-- doc:block:end id="snapshots-further-readings" -->
