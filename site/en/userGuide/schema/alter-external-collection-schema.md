@@ -28,6 +28,16 @@ Unlike managed collections, values for the added field are read from the externa
 
 Use `add_collection_field()` to add a scalar field when you want to return the field in query results or use it in filters. The following example adds a `score` field that maps to the `score` field in the external data source.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">CSharp</a>
+    <a href="#bash">cURL</a>
+</div>
 ```python
 from pymilvus import DataType, MilvusClient
 
@@ -127,6 +137,16 @@ You can also add a vector field if the external data source already contains the
 
 The following example adds a dense vector field named `image_embedding_v2`.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">CSharp</a>
+    <a href="#bash">cURL</a>
+</div>
 ```python
 client.add_collection_field(
     collection_name="product_embeddings",
@@ -200,6 +220,16 @@ await client.addCollectionField({
 
 If you plan to run vector search on the added vector field, create an index for the field before refreshing the external collection.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">CSharp</a>
+    <a href="#bash">cURL</a>
+</div>
 ```python
 index_params = client.prepare_index_params()
 
