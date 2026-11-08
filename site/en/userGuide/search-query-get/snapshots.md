@@ -69,7 +69,9 @@ Once {{var.product_name}} references a segment or index file in a snapshot, it d
 - You can restore a snapshot only to a new collection within the same cluster as the original.
 - Restored collections retain the same schema, number of shards, and partition count.
 - Restored historical data may conflict with TTL policies. You are advised to disable TTL or adjust TTL settings before creating snapshots.
+<!-- doc:block:start id="snapshots-milvus-table" -->
 - To use a snapshot as a `milvus-table` external source, the source snapshot must come from a normal StorageV3 Milvus collection. Snapshots of external collections are not supported as `milvus-table` sources.
+<!-- doc:block:end id="snapshots-milvus-table" -->
 
 <!-- doc:block:start id="snapshots-further-readings" -->
 ## Further readings
