@@ -93,7 +93,7 @@ client.add_collection_field(
 ).await?;
 ```
 
-```c++
+```cpp
 // Note: milvus-sdk-cpp does not support adding a field to an external
 // collection as of v3.0.3 (AddCollectionField() routes through
 // AlterCollectionSchema, which rejects external collections).
@@ -187,7 +187,7 @@ client.add_collection_field(
 ).await?;
 ```
 
-```c++
+```cpp
 // Note: milvus-sdk-cpp does not support adding a field to an external
 // collection as of v3.0.3 (AddCollectionField() routes through
 // AlterCollectionSchema, which rejects external collections).
@@ -315,7 +315,7 @@ client.create_index(
 ).await?;
 ```
 
-```c++
+```cpp
 #include 
 #include "milvus/MilvusClientV2.h"
 
