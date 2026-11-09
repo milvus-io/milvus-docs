@@ -22,7 +22,11 @@ This guide covers schema changes for user-defined fields and for Functions with 
 
 - Adding user-defined scalar fields is supported in Milvus 2.6.x and later. Adding user-defined vector fields is supported in Milvus 2.6.18 and later.
 
+<!-- doc:block:start id="alter-schema-struct-availability" -->
+
 - Adding StructArray fields is supported in Milvus 3.0.0 and later. Added StructArray fields must be nullable.
+
+<!-- doc:block:end id="alter-schema-struct-availability" -->
 
 - Adding a sub-field to an existing StructArray field is supported in Milvus 3.0.6 and later. The added sub-field must allow element-level null (`nullable=True` on a scalar or vector sub-field, `element_nullable=True` on an array sub-field), cannot have a default value, and cannot be bound to an index in the same request.
 
@@ -40,7 +44,7 @@ This guide covers schema changes for user-defined fields and for Functions with 
 
 - The input fields used by the Function must already exist in the collection.
 
-- When adding a BM25 or MinHash Function to an existing collection, the Function input must be a `VARCHAR` field. A `TEXT` input is not supported in this workflow because Milvus cannot backfill the generated output for existing entities from that input type.
+- When adding a BM25 or MinHash Function to an existing collection, the Function input must be a `VARCHAR` field. A `TEXT` input is not supported in this workflow because {{var.product_name}} cannot backfill the generated output for existing entities from that input type.
 
 **Drop user-defined fields**
 
@@ -68,19 +72,31 @@ For schema changes outside supported add and drop operations, recreate or migrat
 
 Choose the workflow based on whether you are adding a user-defined field or a Function that generates a vector field:
 
-- [Add user-defined scalar fields](#add-user-defined-scalar-fields--milvus-26x) when you need new metadata for filtering, query output, or application logic.
+<!-- doc:block:start id="alter-schema-workflow-links" -->
 
-- [Add StructArray fields](#add-structarray-fields--milvus-300) when you need an array field whose elements share the same Struct schema.
+- [Add user-defined scalar fields](#Add-user-defined-scalar-fields--Milvus-26x) when you need new metadata for filtering, query output, or application logic.
 
-- [Add a sub-field to an existing StructArray field](#add-a-sub-field-to-an-existing-structarray-field--milvus-306) when existing Struct elements need a new attribute.
+- [Add StructArray fields](#Add-StructArray-fields--Milvus-300) when you need an array field whose elements share the same Struct schema.
 
-- [Add user-defined vector fields](#add-user-defined-vector-fields--milvus-2618) when your application generates embeddings and writes vector values to Milvus.
+- [Add user-defined vector fields](#Add-user-defined-vector-fields--Milvus-2618) when your application generates embeddings and writes vector values to {{var.product_name}}.
 
-- [Add a Function and its generated vector field](#add-a-function-and-its-generated-vector-field--milvus-30x) when Milvus should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.
+- [Add a Function and its generated vector field](#Add-a-Function-and-its-generated-vector-field--Milvus-30x) when {{var.product_name}} should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.
 
-In all cases, the new field name must not already exist in the collection, and the total number of fields cannot exceed the Milvus field-count limit. For details, refer to [Milvus Limits](limitations.md#number-of-resources-in-a-collection).
+<!-- doc:block:end id="alter-schema-workflow-links" -->
+
+- [Add a sub-field to an existing StructArray field](#Add-a-sub-field-to-an-existing-StructArray-field--Milvus-306) when existing Struct elements need a new attribute.
+
+<!-- doc:block:start id="alter-schema-field-limit" -->
+
+In all cases, the new field name must not already exist in the collection, and the total number of fields cannot exceed the {{var.product_name}} field-count limit. For details, refer to [{{var.product_name}} Limits](limitations.md#number-of-resources-in-a-collection).
+
+<!-- doc:block:end id="alter-schema-field-limit" -->
+
+<!-- doc:block:start id="alter-schema-scalar-heading" -->
 
 ### Add user-defined scalar fields | Milvus 2.6.x
+
+<!-- doc:block:end id="alter-schema-scalar-heading" -->
 
 Use `add_collection_field()` to add a user-defined scalar field to an existing collection.
 
@@ -98,10 +114,21 @@ Scalar filter expressions do not match `NULL` scalar values. For details, refer 
 
 The following example adds a nullable `source` field to an existing collection named `product_catalog`.
 
-```python
-from pymilvus import DataType, MilvusClient
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 
-client = MilvusClient(uri="http://localhost:19530")
+```python
+from pymilvus import DataType, MilvusClient, Function, FunctionType
+
+client = MilvusClient(uri="{{var.example_endpoint}}", token="{{var.example_token}}")
 
 # highlight-start
 client.add_collection_field(
@@ -114,17 +141,177 @@ client.add_collection_field(
 # highlight-end
 ```
 
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddCollectionFieldReq;
+import io.milvus.v2.service.collection.request.AddCollectionStructFieldReq;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import java.util.HashMap;
+import java.util.Map;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+import java.util.Collections;
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.AddFunctionFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionFieldReq;
+import io.milvus.v2.service.collection.request.DropFunctionFieldReq;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("{{var.example_endpoint}}")
+        .token("{{var.example_token}}")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+client.addCollectionField(AddCollectionFieldReq.builder()
+        .collectionName("product_catalog")
+        .fieldName("source")
+        .dataType(DataType.VarChar)
+        .maxLength(128)
+        .isNullable(true)
+        .build());
+```
+
+```go
+import (
+    "context"
+    "log"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/index"
+)
+
+ctx := context.Background()
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "{{var.example_endpoint}}",
+    APIKey: "{{var.example_token}}",
+})
+if err != nil {
+    log.Fatal("failed to connect to milvus server: ", err.Error())
+}
+
+newField := entity.NewField().
+    WithName("source").
+    WithDataType(entity.FieldTypeVarChar).
+    WithNullable(true).
+    WithMaxLength(128)
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption("product_catalog", newField))
+if err != nil {
+    log.Fatal("failed to add field: ", err.Error())
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("{{var.example_endpoint}}").token("{{var.example_token}}");
+let client = ClientV2::new(&config).await?;
+client
+    .add_collection_field(
+        AddCollectionFieldRequest::builder()
+            .collection_name("product_catalog")
+            .field(
+                FieldSchema::new()
+                    .name("source")
+                    .data_type(DataType::VarChar)
+                    .max_length(128)
+                    .nullable(true),
+            )
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+auto status = client->Connect(milvus::ConnectParam("{{var.example_endpoint}}").WithToken("{{var.example_token}}"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::FieldSchema field = milvus::FieldSchema("source", milvus::DataType::VARCHAR)
+                                .WithMaxLength(128)
+                                .WithNullable(true);
+status = client->AddCollectionField(
+    milvus::AddCollectionFieldRequest().WithCollectionName("product_catalog").WithField(std::move(field)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({ address: "{{var.example_endpoint}}", token: "{{var.example_token}}" });
+
+await client.addCollectionField({
+    collection_name: "product_catalog",
+    field: {
+        name: "source",
+        data_type: "VarChar",
+        max_length: 128,
+        nullable: true,
+    },
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+using Milvus.Client.V2.Requests.Index;
+
+using var client = new MilvusClientV2(new ConnectConfig { Uri = "{{var.example_endpoint}}", ApiKey = "{{var.example_token}}" });
+await client.ConnectAsync();
+
+await client.AddCollectionFieldAsync(new AddCollectionFieldReq
+{
+    CollectionName = "product_catalog",
+    Field = FieldSchema.CreateVarchar("source", maxLength: 128, nullable: true)
+});
+```
+
+```bash
+curl --request POST \
+     --url "{{var.example_endpoint}}/v2/vectordb/collections/fields/add" \
+     --header "Authorization: Bearer {{var.example_token}}" \
+     --header "Content-Type: application/json" \
+     -d '{
+       "collectionName": "product_catalog",
+       "schema": {
+         "fieldName": "source",
+         "dataType": "VarChar",
+         "nullable": true,
+         "elementTypeParams": {
+           "max_length": 128
+         }
+       }
+     }'
+```
+
 After the field is added, entities that already existed in the collection return `NULL` for `source`. New entities can set `source` during insert or upsert.
 
 **Example: Add a scalar field with a default value**
 
 If existing entities should return a concrete value instead of `NULL`, specify `default_value` when adding a scalar field. The following example adds a `review_status` field and uses `"unreviewed"` as the default value.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
-from pymilvus import DataType, MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 # highlight-start
 client.add_collection_field(
     collection_name="product_catalog",
@@ -137,9 +324,107 @@ client.add_collection_field(
 # highlight-end
 ```
 
+```java
+client.addCollectionField(AddCollectionFieldReq.builder()
+        .collectionName("product_catalog")
+        .fieldName("review_status")
+        .dataType(DataType.VarChar)
+        .maxLength(32)
+        .isNullable(true)
+        .defaultValue("unreviewed")
+        .build());
+```
+
+```go
+newField := entity.NewField().
+    WithName("review_status").
+    WithDataType(entity.FieldTypeVarChar).
+    WithNullable(true).
+    WithMaxLength(32).
+    WithDefaultValueString("unreviewed")
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption("product_catalog", newField))
+if err != nil {
+    log.Fatal("failed to add field: ", err.Error())
+}
+```
+
+```rust
+client
+    .add_collection_field(
+        AddCollectionFieldRequest::builder()
+            .collection_name("product_catalog")
+            .field(
+                FieldSchema::new()
+                    .name("review_status")
+                    .data_type(DataType::VarChar)
+                    .max_length(32)
+                    .nullable(true)
+                    .default_value(DefaultValue::String("unreviewed".into())),
+            )
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+milvus::FieldSchema field = milvus::FieldSchema("review_status", milvus::DataType::VARCHAR)
+                                .WithMaxLength(32)
+                                .WithNullable(true)
+                                .WithDefaultValue("unreviewed");
+status = client->AddCollectionField(
+    milvus::AddCollectionFieldRequest().WithCollectionName("product_catalog").WithField(std::move(field)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.addCollectionField({
+    collection_name: "product_catalog",
+    field: {
+        name: "review_status",
+        data_type: "VarChar",
+        max_length: 32,
+        nullable: true,
+        default_value: "unreviewed",
+    },
+});
+```
+
+```csharp
+await client.AddCollectionFieldAsync(new AddCollectionFieldReq
+{
+    CollectionName = "product_catalog",
+    Field = FieldSchema.CreateVarchar("review_status", maxLength: 32, nullable: true, defaultValue: "unreviewed")
+});
+```
+
+```bash
+curl --request POST \
+     --url "{{var.example_endpoint}}/v2/vectordb/collections/fields/add" \
+     --header "Authorization: Bearer {{var.example_token}}" \
+     --header "Content-Type: application/json" \
+     -d '{
+       "collectionName": "product_catalog",
+       "schema": {
+         "fieldName": "review_status",
+         "dataType": "VarChar",
+         "nullable": true,
+         "defaultValue": "unreviewed",
+         "elementTypeParams": {
+           "max_length": 32
+         }
+       }
+     }'
+```
+
 After the field is added, entities that already existed in the collection return `"unreviewed"` for `review_status`. New entities can set a different value or use the default value when no value is provided.
 
+<!-- doc:block:start id="alter-schema-struct-heading" -->
+
 ### Add StructArray fields | Milvus 3.0.0
+
+<!-- doc:block:end id="alter-schema-struct-heading" -->
 
 Use `add_collection_struct_field()` to add a StructArray field that accepts arrays of Struct elements. To add a StructArray field, do as follows:
 
@@ -151,19 +436,25 @@ Use `add_collection_struct_field()` to add a StructArray field that accepts arra
 
 **Example: Add a nullable StructArray field**
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import DataType, MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
-# Create a Struct schema.
+# Create a struct schema
 struct_schema = client.create_struct_field_schema()
 
-# Add scalar fields to the Struct.
+# add a scalar field to the struct
 struct_schema.add_field("text", DataType.VARCHAR, max_length=65535)
 struct_schema.add_field("chapter", DataType.VARCHAR, max_length=512)
 
-# Add vector fields to the Struct with mmap enabled.
+# add a vector field to the struct with mmap enabled
 struct_schema.add_field("text_vector", DataType.FLOAT_VECTOR, mmap_enabled=True, dim=5)
 struct_schema.add_field("chapter_vector", DataType.FLOAT_VECTOR, mmap_enabled=True, dim=5)
 
@@ -173,9 +464,179 @@ client.add_collection_struct_field(
     field_name="chunks",
     struct_schema=struct_schema,
     max_capacity=1024,
-    nullable=True,
+    nullable=True
 )
 # highlight-end
+```
+
+```java
+// Create a struct schema and add its subfields
+// add a vector subfield with mmap enabled
+Map<String, String> mmapParams = new HashMap<>();
+mmapParams.put("mmap.enabled", "true");
+client.addCollectionStructField(AddCollectionStructFieldReq.builder()
+        .collectionName("books")
+        .fieldName("chunks")
+        .maxCapacity(1024)
+        .nullable(true)
+        .addStructField(AddFieldReq.builder()
+                .fieldName("text")
+                .dataType(DataType.VarChar)
+                .maxLength(65535)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName("chapter")
+                .dataType(DataType.VarChar)
+                .maxLength(512)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName("text_vector")
+                .dataType(DataType.FloatVector)
+                .dimension(5)
+                .typeParams(mmapParams)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName("chapter_vector")
+                .dataType(DataType.FloatVector)
+                .dimension(5)
+                .typeParams(mmapParams)
+                .build())
+        .build());
+```
+
+```go
+// Create a struct schema and add its subfields
+// add a vector subfield with mmap enabled
+structSchema := entity.NewStructSchema().
+    WithField(entity.NewField().WithName("text").WithDataType(entity.FieldTypeVarChar).WithMaxLength(65535)).
+    WithField(entity.NewField().WithName("chapter").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512)).
+    WithField(entity.NewField().WithName("text_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5).WithTypeParams("mmap.enabled", "true")).
+    WithField(entity.NewField().WithName("chapter_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5).WithTypeParams("mmap.enabled", "true"))
+newField := entity.NewField().
+    WithName("chunks").
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeStruct).
+    WithNullable(true).
+    WithMaxCapacity(1024).
+    WithStructSchema(structSchema)
+err = client.AddCollectionStructField(ctx, milvusclient.NewAddCollectionStructFieldOption("books", newField))
+if err != nil {
+    log.Fatal("failed to add struct field: ", err.Error())
+}
+```
+
+```rust
+// Create a struct schema and add its subfields
+// add a vector subfield with mmap enabled
+let struct_schema = StructFieldSchema::new()
+    .name("chunks")
+    .max_capacity(1024)
+    .nullable(true)
+    .add_field(
+        FieldSchema::new()
+            .name("text")
+            .data_type(DataType::VarChar)
+            .max_length(65535),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("chapter")
+            .data_type(DataType::VarChar)
+            .max_length(512),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("text_vector")
+            .data_type(DataType::FloatVector)
+            .dimension(5)
+            .type_params(
+                std::collections::HashMap::from([("mmap.enabled".to_string(), "true".to_string())]),
+            ),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("chapter_vector")
+            .data_type(DataType::FloatVector)
+            .dimension(5)
+            .type_params(
+                std::collections::HashMap::from([("mmap.enabled".to_string(), "true".to_string())]),
+            ),
+    );
+client
+    .add_collection_struct_field(
+        AddCollectionStructFieldRequest::builder()
+            .collection_name("books")
+            .struct_field(struct_schema)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Create a struct schema and add its subfields
+// add a vector subfield with mmap enabled
+milvus::StructFieldSchema struct_schema = milvus::StructFieldSchema("chunks")
+                                              .WithMaxCapacity(1024)
+                                              .WithNullable(true)
+                                              .AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(65535))
+                                              .AddField(milvus::FieldSchema("chapter", milvus::DataType::VARCHAR).WithMaxLength(512))
+                                              .AddField(milvus::FieldSchema("text_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5).AddTypeParam("mmap.enabled", "true"))
+                                              .AddField(milvus::FieldSchema("chapter_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5).AddTypeParam("mmap.enabled", "true"));
+status = client->AddCollectionStructField(
+    milvus::AddCollectionStructFieldRequest().WithCollectionName("books").WithStructField(std::move(struct_schema)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+// Create a struct schema and add its subfields
+// add a vector subfield with mmap enabled
+
+await client.addCollectionField({
+    collection_name: "books",
+    field: {
+        name: "chunks",
+        data_type: "Array",
+        element_type: "Struct",
+        max_capacity: 1024,
+        nullable: true,
+        fields: [
+            { name: "text", data_type: "VarChar", max_length: 65535 },
+            { name: "chapter", data_type: "VarChar", max_length: 512 },
+            { name: "text_vector", data_type: "FloatVector", dim: 5, "mmap.enabled": true },
+            { name: "chapter_vector", data_type: "FloatVector", dim: 5, "mmap.enabled": true },
+        ],
+    },
+});
+```
+
+```csharp
+// Create a struct schema
+var structSchema = new StructFieldSchema("chunks")
+{
+    MaxCapacity = 1024,
+    Nullable = true
+};
+
+// add a scalar field to the struct
+structSchema.Fields.Add(FieldSchema.CreateVarchar("text", maxLength: 65535));
+structSchema.Fields.Add(FieldSchema.CreateVarchar("chapter", maxLength: 512));
+
+// add a vector field to the struct with mmap enabled
+var textVector = FieldSchema.CreateFloatVector("text_vector", dimension: 5);
+textVector.TypeParams["mmap.enabled"] = "true";
+structSchema.Fields.Add(textVector);
+
+var chapterVector = FieldSchema.CreateFloatVector("chapter_vector", dimension: 5);
+chapterVector.TypeParams["mmap.enabled"] = "true";
+structSchema.Fields.Add(chapterVector);
+
+await client.AddCollectionStructFieldAsync(new AddCollectionStructFieldReq
+{
+    CollectionName = "books",
+    StructField = structSchema
+});
 ```
 
 After the StructArray field is added, entities that already exist in the collection return `NULL` for `chunks` across all its sub-fields. When you insert a new entity, every Struct element must provide a value for every sub-field, and a Struct element itself cannot be `NULL`. Starting in Milvus 3.0.6, element-nullable sub-fields may hold `NULL` in individual Struct elements; for details, refer to [Create a StructArray Field](create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306).
@@ -275,9 +736,13 @@ The following rules apply:
 
 - Clients that pin a schema timestamp receive a schema-mismatch error and must refresh, as for any added field.
 
+<!-- doc:block:start id="alter-schema-vector-heading" -->
+
 ### Add user-defined vector fields | Milvus 2.6.18+
 
-Use `add_collection_field()` to add a user-defined vector field when your application generates embeddings and writes vector values to Milvus.
+<!-- doc:block:end id="alter-schema-vector-heading" -->
+
+Use `add_collection_field()` to add a user-defined vector field when your application generates embeddings and writes vector values to {{var.product_name}}.
 
 Every added user-defined vector field must be nullable. Existing entities have `NULL` for the new vector field until you write vector values through upsert or a backfill workflow. New entities can include the vector field during insert. Vector search skips entities whose vector value is `NULL`. For details, refer to [Nullable Fields](nullable-and-default.md).
 
@@ -285,11 +750,18 @@ Every added user-defined vector field must be nullable. Existing entities have `
 
 The following example adds a nullable dense vector field named `embedding_v2` to an existing collection. Set `dim` to the dimensionality of the embeddings generated by your application.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
-from pymilvus import DataType, MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 # highlight-start
 client.add_collection_field(
     collection_name="product_catalog",
@@ -301,7 +773,109 @@ client.add_collection_field(
 # highlight-end
 ```
 
+```java
+client.addCollectionField(AddCollectionFieldReq.builder()
+        .collectionName("product_catalog")
+        .fieldName("embedding_v2")
+        .dataType(DataType.FloatVector)
+        .dimension(768)
+        .isNullable(true)
+        .build());
+```
+
+```go
+newField := entity.NewField().
+    WithName("embedding_v2").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithNullable(true).
+    WithDim(768)
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption("product_catalog", newField))
+if err != nil {
+    log.Fatal("failed to add field: ", err.Error())
+}
+```
+
+```rust
+client
+    .add_collection_field(
+        AddCollectionFieldRequest::builder()
+            .collection_name("product_catalog")
+            .field(
+                FieldSchema::new()
+                    .name("embedding_v2")
+                    .data_type(DataType::FloatVector)
+                    .dimension(768)
+                    .nullable(true),
+            )
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+milvus::FieldSchema field = milvus::FieldSchema("embedding_v2", milvus::DataType::FLOAT_VECTOR)
+                                .WithDimension(768)
+                                .WithNullable(true);
+status = client->AddCollectionField(
+    milvus::AddCollectionFieldRequest().WithCollectionName("product_catalog").WithField(std::move(field)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.addCollectionField({
+    collection_name: "product_catalog",
+    field: {
+        name: "embedding_v2",
+        data_type: "FloatVector",
+        dim: 768,
+        nullable: true,
+    },
+});
+```
+
+```csharp
+var embeddingV2 = FieldSchema.CreateFloatVector("embedding_v2", dimension: 768);
+embeddingV2.Nullable = true;
+
+await client.AddCollectionFieldAsync(new AddCollectionFieldReq
+{
+    CollectionName = "product_catalog",
+    Field = embeddingV2
+});
+```
+
+```bash
+curl --request POST \
+     --url "{{var.example_endpoint}}/v2/vectordb/collections/fields/add" \
+     --header "Authorization: Bearer {{var.example_token}}" \
+     --header "Content-Type: application/json" \
+     -d '{
+       "collectionName": "product_catalog",
+       "schema": {
+         "fieldName": "embedding_v2",
+         "dataType": "FloatVector",
+         "nullable": true,
+         "elementTypeParams": {
+           "dim": 768
+         }
+       }
+     }'
+```
+
 After the field is added, create an index on the new vector field before searching it:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 index_params = client.prepare_index_params()
@@ -318,13 +892,98 @@ client.create_index(
 )
 ```
 
+```java
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("product_catalog")
+        .indexParams(Collections.singletonList(IndexParam.builder()
+                .fieldName("embedding_v2")
+                .indexType(IndexParam.IndexType.AUTOINDEX)
+                .metricType(IndexParam.MetricType.COSINE)
+                .build()))
+        .build());
+```
+
+```go
+indexOpt := milvusclient.NewCreateIndexOption("product_catalog", "embedding_v2", index.NewAutoIndex(entity.COSINE))
+_, err = client.CreateIndex(ctx, indexOpt)
+if err != nil {
+    log.Fatal("failed to create index: ", err.Error())
+}
+```
+
+```rust
+client
+    .create_index(
+        CreateIndexRequest::builder()
+            .collection_name("product_catalog")
+            .index_param(
+                IndexParam::new()
+                    .field_name("embedding_v2")
+                    .index_type(IndexType::AutoIndex)
+                    .metric_type(MetricType::Cosine),
+            )
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+milvus::IndexDesc index_desc("embedding_v2", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+status = client->CreateIndex(
+    milvus::CreateIndexRequest().WithCollectionName("product_catalog").AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.createIndex({
+    collection_name: "product_catalog",
+    field_name: "embedding_v2",
+    index_type: "AUTOINDEX",
+    metric_type: "COSINE",
+});
+```
+
+```csharp
+await client.CreateIndexAsync(new CreateIndexReq
+{
+    CollectionName = "product_catalog",
+    Indexes = new[]
+    {
+        new IndexParam("embedding_v2", "embedding_v2", IndexType.AutoIndex, MetricType.Cosine)
+    }
+});
+```
+
+```bash
+curl --request POST \
+     --url "{{var.example_endpoint}}/v2/vectordb/indexes/create" \
+     --header "Authorization: Bearer {{var.example_token}}" \
+     --header "Content-Type: application/json" \
+     -d '{
+       "collectionName": "product_catalog",
+       "indexParams": [
+         {
+           "fieldName": "embedding_v2",
+           "params": {"index_type": "AUTOINDEX"},
+           "metricType": "COSINE"
+         }
+       ]
+     }'
+```
+
 Existing entities have `NULL` for `embedding_v2` and are skipped when you search on this field. To make existing entities searchable through `embedding_v2`, write non-NULL vector values through upsert or a backfill workflow. New entities can include `embedding_v2` during insert.
 
 <a id="add-vector-fields-generated-by-functions--milvus-30x"></a>
 
+<!-- doc:block:start id="alter-schema-function-heading" -->
+
 ### Add a Function and its generated vector field | Milvus 3.0.x
 
-Use this workflow when Milvus should generate a new vector field from data already stored in an existing collection. The operation adds three related schema elements:
+<!-- doc:block:end id="alter-schema-function-heading" -->
+
+Use this workflow when {{var.product_name}} should generate a new vector field from data already stored in an existing collection. The operation adds three related schema elements:
 
 - A Function definition that reads from one or more existing input fields.
 
@@ -334,9 +993,13 @@ Use this workflow when Milvus should generate a new vector field from data alrea
 
 For example, a BM25 Function reads an existing `VARCHAR` field and generates a `SPARSE_FLOAT_VECTOR` field for lexical search. A MinHash Function generates a `BINARY_VECTOR` field for near-duplicate detection. This workflow does not add or replace the Function input field.
 
+<!-- doc:block:start id="alter-schema-function-prerequisites" -->
+
 {{fragments/storage_v3_feature_note.md}}
 
-Adding a Function and its generated vector field to an existing collection also requires schema version compaction and storage version compaction. Milvus rejects the request if either setting is disabled. These additional prerequisites apply only when modifying an existing collection; defining the Function in the initial collection schema does not use this existing-data backfill workflow.
+Adding a Function and its generated vector field to an existing collection also requires schema version compaction and storage version compaction. {{var.product_name}} rejects the request if either setting is disabled. These additional prerequisites apply only when modifying an existing collection; defining the Function in the initial collection schema does not use this existing-data backfill workflow.
+
+<!-- doc:block:end id="alter-schema-function-prerequisites" -->
 
 The supported Function determines the generated vector field type:
 
@@ -353,11 +1016,17 @@ The generated vector field must not already exist in the collection, and it cann
 
 The following example adds a BM25 Function named `text_bm25` and its generated sparse vector field named `text_sparse` to an existing collection. The collection must already have a `VARCHAR` field named `text` with analyzer enabled.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import DataType, Function, FunctionType, MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 sparse_field = client.create_field_schema(
     name="text_sparse",
     data_type=DataType.SPARSE_FLOAT_VECTOR,
@@ -394,7 +1063,130 @@ client.add_function_field(
 # highlight-end
 ```
 
-The `index_params` object must contain exactly one index definition for the new Function output field. Milvus adds the Function, its generated vector field, and the bound index definition in the same schema change. Do not call `create_index()` separately after `add_function_field()`.
+```java
+// Add a BM25 function, its generated sparse vector field, and the bound index
+client.addFunctionField(AddFunctionFieldReq.builder()
+        .collectionName("product_catalog")
+        .fieldName("text_sparse")
+        .dataType(DataType.SparseFloatVector)
+        .indexParam(IndexParam.builder()
+                .fieldName("text_sparse")
+                .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+                .metricType(IndexParam.MetricType.BM25)
+                .build())
+        .function(CreateCollectionReq.Function.builder()
+                .name("text_bm25")
+                .functionType(FunctionType.BM25)
+                .inputFieldNames(Collections.singletonList("text"))
+                .outputFieldNames(Collections.singletonList("text_sparse"))
+                .build())
+        .build());
+```
+
+```go
+// Add a BM25 function, its generated sparse vector field, and the bound index
+field := entity.NewField().
+    WithName("text_sparse").
+    WithDataType(entity.FieldTypeSparseVector)
+function := entity.NewFunction().
+    WithName("text_bm25").
+    WithType(entity.FunctionTypeBM25).
+    WithInputFields("text").
+    WithOutputFields("text_sparse")
+boundIndex := index.NewSparseInvertedIndex(entity.BM25, 0.2)
+err = client.AddFunctionField(ctx, milvusclient.NewAddFunctionFieldOption("product_catalog", field, function, boundIndex))
+if err != nil {
+    log.Fatal("failed to add function field: ", err.Error())
+}
+```
+
+```rust
+// Add a BM25 function, its generated sparse vector field, and the bound index
+client
+    .add_function_field(
+        AddFunctionFieldRequest::builder()
+            .collection_name("product_catalog")
+            .field(
+                FieldSchema::new()
+                    .name("text_sparse")
+                    .data_type(DataType::SparseFloatVector),
+            )
+            .function(
+                Function::new()
+                    .name("text_bm25")
+                    .function_type(FunctionType::Bm25)
+                    .input_fields(["text"])
+                    .output_fields(["text_sparse"]),
+            )
+            .index(
+                IndexParam::new()
+                    .field_name("text_sparse")
+                    .index_type(IndexType::SparseInvertedIndex)
+                    .metric_type(MetricType::Bm25),
+            )
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Add a BM25 function, its generated sparse vector field, and the bound index
+milvus::FieldSchema sparse_field("text_sparse", milvus::DataType::SPARSE_FLOAT_VECTOR);
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("text_sparse");
+milvus::IndexDesc index("text_sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+status = client->AddFunctionField(milvus::AddFunctionFieldRequest()
+                                      .WithCollectionName("product_catalog")
+                                      .WithField(std::move(sparse_field))
+                                      .WithFunction(function)
+                                      .WithIndex(std::move(index)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+// Add a BM25 function, its generated sparse vector field, and the bound index
+
+await client.addFunctionField({
+    collection_name: "product_catalog",
+    field: {
+        name: "text_sparse",
+        data_type: "SparseFloatVector",
+    },
+    function: {
+        name: "text_bm25",
+        type: "BM25",
+        input_field_names: ["text"],
+        output_field_names: ["text_sparse"],
+    },
+    extra_params: {
+        index_type: "SPARSE_INVERTED_INDEX",
+        metric_type: "BM25",
+        params: {
+            inverted_index_algo: "DAAT_MAXSCORE",
+            bm25_k1: 1.2,
+            bm25_b: 0.75,
+        },
+    },
+});
+```
+
+```csharp
+await client.AddFunctionFieldAsync(new AddFunctionFieldReq
+{
+    CollectionName = "product_catalog",
+    Field = FieldSchema.CreateSparseFloatVector("text_sparse", description: "BM25-generated sparse vector field"),
+    Function = FunctionSchema.CreateBm25("text_bm25", "text", "text_sparse"),
+    IndexParam = new IndexParam("text_sparse", "text_sparse", IndexType.SparseInvertedIndex, MetricType.Bm25)
+    {
+        ExtraParams = { ["inverted_index_algo"] = "DAAT_MAXSCORE", ["bm25_k1"] = "1.2", ["bm25_b"] = "0.75" }
+    }
+});
+```
+
+The `index_params` object must contain exactly one index definition for the new Function output field. {{var.product_name}} adds the Function, its generated vector field, and the bound index definition in the same schema change. Do not call `create_index()` separately after `add_function_field()`.
 
 Conceptually, this operation adds the following Function, generated output field, and bound index definitions:
 
@@ -416,17 +1208,21 @@ Bound index:
   metric_type: BM25
 ```
 
-After the request succeeds, `describe_collection()` returns both the new `text_bm25` Function and its generated `text_sparse` vector field in the collection schema. Milvus generates the Function output for new entities as they are written. For existing entities, Milvus populates the generated vector field asynchronously through background compaction. Schema visibility confirms that the schema update succeeded, but does not indicate that backfill has completed for every existing entity. For the complete BM25 search workflow, refer to [Full Text Search](full-text-search.md).
+After the request succeeds, `describe_collection()` returns both the new `text_bm25` Function and its generated `text_sparse` vector field in the collection schema. {{var.product_name}} generates the Function output for new entities as they are written. For existing entities, {{var.product_name}} populates the generated vector field asynchronously through background compaction. Schema visibility confirms that the schema update succeeded, but does not indicate that backfill has completed for every existing entity. For the complete BM25 search workflow, refer to [Full Text Search](full-text-search.md).
 
-Milvus also supports MinHash Functions and their generated binary vector fields for near-duplicate detection. A MinHash Function uses `FunctionType.MINHASH` and writes to a new `BINARY_VECTOR` output field. For configuration details, refer to [MinHash Function](minhash-function.md).
+{{var.product_name}} also supports MinHash Functions and their generated binary vector fields for near-duplicate detection. A MinHash Function uses `FunctionType.MINHASH` and writes to a new `BINARY_VECTOR` output field. For configuration details, refer to [MinHash Function](minhash-function.md).
 
 <a id="drop-fields-from-an-existing-collection"></a>
 
 ## Drop fields and Functions from an existing collection
 
-You can remove user-defined fields directly when they are no longer part of your collection model. To remove a Function and its generated vector field, drop the Function; Milvus removes the generated field and its index in the same schema change.
+You can remove user-defined fields directly when they are no longer part of your collection model. To remove a Function and its generated vector field, drop the Function; {{var.product_name}} removes the generated field and its index in the same schema change.
+
+<!-- doc:block:start id="alter-schema-drop-heading" -->
 
 ### Drop user-defined fields | Milvus 3.0.x
+
+<!-- doc:block:end id="alter-schema-drop-heading" -->
 
 Use `drop_collection_field()` to remove a user-defined scalar, vector, or StructArray field that is no longer part of your collection model.
 
@@ -436,17 +1232,23 @@ Dropping a field first changes the collection schema and field visibility:
 
 - Indexes built on the dropped field are cleaned up as part of the schema update.
 
-Storage cleanup is handled separately from schema cleanup. For details, refer to [When is storage space reclaimed after dropping a field?](#when-is-storage-space-reclaimed-after-dropping-a-field).
+Storage cleanup is handled separately from schema cleanup. For details, refer to [When is storage space reclaimed after dropping a field?](#When-is-storage-space-reclaimed-after-dropping-a-field).
 
 **Example: Drop a user-defined scalar field**
 
 The following example assumes that `experiment_tag` is a user-defined scalar field in `product_catalog`, and drops it from the collection.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 # highlight-start
 client.drop_collection_field(
     collection_name="product_catalog",
@@ -455,17 +1257,72 @@ client.drop_collection_field(
 # highlight-end
 ```
 
+```java
+client.dropCollectionField(DropCollectionFieldReq.builder()
+        .collectionName("product_catalog")
+        .fieldName("experiment_tag")
+        .build());
+```
+
+```go
+err = client.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption("product_catalog", "experiment_tag"))
+if err != nil {
+    log.Fatal("failed to drop field: ", err.Error())
+}
+```
+
+```rust
+client
+    .drop_collection_field(
+        DropCollectionFieldRequest::builder()
+            .collection_name("product_catalog")
+            .field_name("experiment_tag")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+status = client->DropCollectionField(milvus::DropCollectionFieldRequest()
+                                         .WithCollectionName("product_catalog")
+                                         .WithFieldName("experiment_tag"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.dropCollectionField({
+    collection_name: "product_catalog",
+    field_name: "experiment_tag",
+});
+```
+
+```csharp
+await client.DropCollectionFieldAsync(new DropCollectionFieldReq
+{
+    CollectionName = "product_catalog",
+    FieldName = "experiment_tag"
+});
+```
+
 After dropping a field, you can call `describe_collection()` to verify that the field is no longer part of the schema.
 
 **Example: Drop a StructArray field**
 
 The following example assumes that `chunks` is a StructArray field in `my_collection`, and drops it from the collection.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 # highlight-start
 client.drop_collection_field(
     collection_name="my_collection",
@@ -474,23 +1331,127 @@ client.drop_collection_field(
 # highlight-end
 ```
 
+```java
+client.dropCollectionField(DropCollectionFieldReq.builder()
+        .collectionName("my_collection")
+        .fieldName("chunks")
+        .build());
+```
+
+```go
+err = client.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption("my_collection", "chunks"))
+if err != nil {
+    log.Fatal("failed to drop field: ", err.Error())
+}
+```
+
+```rust
+client
+    .drop_collection_field(
+        DropCollectionFieldRequest::builder()
+            .collection_name("my_collection")
+            .field_name("chunks")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+status = client->DropCollectionField(milvus::DropCollectionFieldRequest()
+                                         .WithCollectionName("my_collection")
+                                         .WithFieldName("chunks"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.dropCollectionField({
+    collection_name: "my_collection",
+    field_name: "chunks",
+});
+```
+
+```csharp
+await client.DropCollectionFieldAsync(new DropCollectionFieldReq
+{
+    CollectionName = "my_collection",
+    FieldName = "chunks"
+});
+```
+
 **Example: Drop a user-defined vector field**
 
 You can drop a vector field with the same `drop_collection_field()` method, but the collection must still contain at least one vector field after the drop. This is useful for collections that temporarily carry multiple vector representations and later standardize on one of them.
 
 The following example assumes that `image_vector` is a user-defined vector field in `hybrid_catalog`, and that the collection still retains another vector field, such as `text_vector`.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 # highlight-start
 client.drop_collection_field(
     collection_name="hybrid_catalog",
     field_name="image_vector",
 )
 # highlight-end
+```
+
+```java
+client.dropCollectionField(DropCollectionFieldReq.builder()
+        .collectionName("hybrid_catalog")
+        .fieldName("image_vector")
+        .build());
+```
+
+```go
+err = client.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption("hybrid_catalog", "image_vector"))
+if err != nil {
+    log.Fatal("failed to drop field: ", err.Error())
+}
+```
+
+```rust
+client
+    .drop_collection_field(
+        DropCollectionFieldRequest::builder()
+            .collection_name("hybrid_catalog")
+            .field_name("image_vector")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+status = client->DropCollectionField(milvus::DropCollectionFieldRequest()
+                                         .WithCollectionName("hybrid_catalog")
+                                         .WithFieldName("image_vector"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.dropCollectionField({
+    collection_name: "hybrid_catalog",
+    field_name: "image_vector",
+});
+```
+
+```csharp
+await client.DropCollectionFieldAsync(new DropCollectionFieldReq
+{
+    CollectionName = "hybrid_catalog",
+    FieldName = "image_vector"
+});
 ```
 
 If `image_vector` is the last vector field in the collection, the drop operation is rejected.
@@ -562,27 +1523,86 @@ Dropping a sub-field while queries are still running against it can fail transie
 
 <a id="drop-vector-fields-generated-by-functions--milvus-30x"></a>
 
+<!-- doc:block:start id="alter-schema-drop-function-heading" -->
+
 ### Drop a Function and its generated vector field | Milvus 3.0.x
+
+<!-- doc:block:end id="alter-schema-drop-function-heading" -->
 
 Use this operation when you no longer need a Function or its generated vector field, such as a BM25 Function and its generated sparse vector field.
 
-Call `drop_function_field()` with the Function name. Milvus removes the Function, its generated vector field, and the associated index while preserving the Function input fields.
+Call `drop_function_field()` with the Function name. {{var.product_name}} removes the Function, its generated vector field, and the associated index while preserving the Function input fields.
 
 **Example: Drop a BM25 Function and its generated sparse vector field**
 
 The following example assumes that `text_bm25` is a BM25 Function in `product_catalog` and generates a sparse vector output field named `text_sparse`.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
 # highlight-start
 client.drop_function_field(
     collection_name="product_catalog",
     function_name="text_bm25",
 )
 # highlight-end
+```
+
+```java
+client.dropFunctionField(DropFunctionFieldReq.builder()
+        .collectionName("product_catalog")
+        .functionName("text_bm25")
+        .build());
+```
+
+```go
+err = client.DropFunctionField(ctx, milvusclient.NewDropFunctionFieldOption("product_catalog", "text_bm25"))
+if err != nil {
+    log.Fatal("failed to drop function field: ", err.Error())
+}
+```
+
+```rust
+client
+    .drop_function_field(
+        DropFunctionFieldRequest::builder()
+            .collection_name("product_catalog")
+            .function_name("text_bm25")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+status = client->DropFunctionField(milvus::DropFunctionFieldRequest()
+                                       .WithCollectionName("product_catalog")
+                                       .WithFunctionName("text_bm25"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.dropFunctionField({
+    collection_name: "product_catalog",
+    function_name: "text_bm25",
+});
+```
+
+```csharp
+await client.DropFunctionFieldAsync(new DropFunctionFieldReq
+{
+    CollectionName = "product_catalog",
+    FunctionName = "text_bm25"
+});
 ```
 
 After the operation succeeds, `describe_collection()` no longer returns the dropped Function or its generated vector field. The Function input fields remain in the schema.
@@ -601,7 +1621,7 @@ Use `add_function_field()` to add a Function, its generated vector field, and th
 
 ### Why must added user-defined fields be nullable?
 
-Existing entities were inserted before the new field existed, so they do not have values for that field. Setting `nullable=True` lets Milvus represent the missing value as `NULL` until your application writes a value or, for scalar fields, until a default value applies.
+Existing entities were inserted before the new field existed, so they do not have values for that field. Setting `nullable=True` lets {{var.product_name}} represent the missing value as `NULL` until your application writes a value or, for scalar fields, until a default value applies.
 
 This rule applies to user-defined scalar fields and user-defined vector fields added with `add_collection_field()`, and to StructArray fields added with `add_collection_struct_field()`. It does not apply to a Function's generated vector field, which cannot be nullable.
 
@@ -615,19 +1635,19 @@ For a StructArray field, existing entities return `NULL` for the new StructArray
 
 ### Can I add BM25 lexical search to an existing collection?
 
-Yes. If the collection already has a `VARCHAR` field with analyzer enabled, you can add a BM25 Function and its generated sparse vector field for lexical search. In this workflow, Milvus adds the Function, the new `SPARSE_FLOAT_VECTOR` output field, and the bound index definition in the same schema change. You cannot use an existing `TEXT` field as the BM25 input in this schema-change workflow. To use a `TEXT` input, define the field and BM25 Function when you create the collection.
+Yes. If the collection already has a `VARCHAR` field with analyzer enabled, you can add a BM25 Function and its generated sparse vector field for lexical search. In this workflow, {{var.product_name}} adds the Function, the new `SPARSE_FLOAT_VECTOR` output field, and the bound index definition in the same schema change. You cannot use an existing `TEXT` field as the BM25 input in this schema-change workflow. To use a `TEXT` input, define the field and BM25 Function when you create the collection.
 
-When calling `add_function_field()`, provide an `index_params` object that contains one `SPARSE_INVERTED_INDEX` index with `metric_type="BM25"` for the new output field. Milvus binds the index definition to the generated field as part of the same schema change.
+When calling `add_function_field()`, provide an `index_params` object that contains one `SPARSE_INVERTED_INDEX` index with `metric_type="BM25"` for the new output field. {{var.product_name}} binds the index definition to the generated field as part of the same schema change.
 
 ### How do I drop a Function and its generated vector field?
 
-Call `drop_function_field()` with the Function name. In this schema-change workflow, Milvus removes the Function, its generated vector field, and the associated index together while preserving the Function input fields.
+Call `drop_function_field()` with the Function name. In this schema-change workflow, {{var.product_name}} removes the Function, its generated vector field, and the associated index together while preserving the Function input fields.
 
 ### Do I need to wait after altering a collection schema?
 
-Usually, no manual wait is required. If your next operation depends on the updated schema, you can call `describe_collection()` first to confirm the schema that Milvus currently returns.
+Usually, no manual wait is required. If your next operation depends on the updated schema, you can call `describe_collection()` first to confirm the schema that {{var.product_name}} currently returns.
 
-In a distributed deployment, there can be a short propagation window while Milvus components refresh collection metadata. If an operation immediately after the schema change fails with a schema-related error, refresh the schema and retry the operation.
+In a distributed deployment, there can be a short propagation window while {{var.product_name}} components refresh collection metadata. If an operation immediately after the schema change fails with a schema-related error, refresh the schema and retry the operation.
 
 ### Why does an added vector sub-field fail with a FieldNotLoaded error?
 
@@ -637,7 +1657,7 @@ After you add a vector sub-field and create its index, queries against the new s
 
 Dropping a field removes it from the current schema and normal query/search visibility, but historical data for that field is not physically deleted from object storage immediately.
 
-Storage space can be reclaimed later during compaction. Compaction is a background process that reorganizes existing data files into new, more compact files. After a field is dropped, newly compacted files follow the current schema and omit the dropped field. Milvus does not guarantee an immediate or fixed-time storage-space reduction after dropping a field.
+Storage space can be reclaimed later during compaction. Compaction is a background process that reorganizes existing data files into new, more compact files. After a field is dropped, newly compacted files follow the current schema and omit the dropped field. {{var.product_name}} does not guarantee an immediate or fixed-time storage-space reduction after dropping a field.
 
 ### What happens if I add a scalar field with the same name as a dynamic field key?
 

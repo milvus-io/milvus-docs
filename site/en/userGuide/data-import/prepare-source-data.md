@@ -211,6 +211,10 @@ A [StructArray](array-of-structs.md) field is carried differently by each source
 
 The following rules apply to StructArray values in all supported formats:
 
+- Use subfield names inside each Struct element, not paths such as `chunks[text]`. Flat columns or keys named `chunks[text]` are rejected.
+
+- A Struct element itself cannot be null, such as `[null, {...}]`. A whole StructArray value can be null only when the StructArray field is nullable. Before Milvus 3.0.6, every Struct element must provide every subfield.
+
 - Keys or Parquet children that are not subfields of the collection, including dropped subfields, are ignored.
 
 - Starting in Milvus 3.0.6, a missing key or a `null` value for an element-nullable subfield imports as a null value for that Struct element, so files written before a subfield was added import without it. A `null` anywhere else fails the import. For an array subfield, `null` is a null inner array, and `null` inside the inner array is a null inner value when the subfield allows it.

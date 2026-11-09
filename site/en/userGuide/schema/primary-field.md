@@ -1121,7 +1121,9 @@ In this config, `clusterID` specifies the unique identifier used in AutoID gener
 
 ## Reference: How AutoID works
 
+<!-- doc:block:start id="autoid-reference-intro" -->
 Understanding how AutoID generates unique identifiers internally can help you [configure cluster IDs](primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters) correctly and troubleshoot ID-related issues.
+<!-- doc:block:end id="autoid-reference-intro" -->
 
 AutoID uses a structured 64-bit format to guarantee uniqueness:
 
