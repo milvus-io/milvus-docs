@@ -273,20 +273,14 @@ rerank := milvusclient.NewRRFReranker().WithK(100)
 ```rust
 use milvus::v2::prelude::*;
 
-let rerank = Function::new()
-    .name("rrf")
-    .function_type(FunctionType::Rerank)
-    .param("reranker", "rrf")
-    .param("k", "100");
+let rerank = RRFRerank::new().k(100);
 ```
 
 ```cpp
 #include <memory>
 #include "milvus/MilvusClientV2.h"
 
-auto rerank = std::make_shared<milvus::Function>("rrf", milvus::FunctionType::RERANK);
-rerank->AddParam("reranker", "rrf");
-rerank->AddParam("k", "100");
+auto rerank = std::make_shared<milvus::RRFRerank>(100);
 ```
 
 ```javascript
