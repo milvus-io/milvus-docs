@@ -313,7 +313,7 @@ var rerank = new RrfReranker(100);
 functions='[
   {
     "name": "rrf",
-    "type": "RERANK",
+    "type": "Rerank",
     "inputFieldNames": [],
     "params": {
       "reranker": "rrf",
