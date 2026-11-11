@@ -481,7 +481,6 @@ Starting in Milvus 3.0.6, a vector subfield can be created with element-level nu
 
 <!-- doc:block:start id="structarray-index-element-null-rules" -->
 - An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as `COSINE`, `IP`, or `L2`. `MAX_SIM*` metrics and EmbeddingList indexes are rejected on it, and `AUTOINDEX` does not select a `MAX_SIM*` metric for it. Null vectors are skipped when the index is built and during search.
-<!-- doc:block:end id="structarray-index-element-null-rules" -->
 
 
 - A vector subfield added to an existing StructArray field is always element-nullable, so the same metric rule applies. You cannot bind an index in the add request; create the index separately after the subfield exists.
@@ -491,6 +490,8 @@ Starting in Milvus 3.0.6, a vector subfield can be created with element-level nu
 - History segments receive an added subfield and its index through schema-version compaction. Set `dataCoord.compaction.bumpSchemaVersion.enabled` to `true` (it is `false` by default); otherwise the added subfield's index does not cover history segments.
 
 - Milvus builds the vector index for a segment of an element-nullable vector subfield only when the segment holds at least 1,024 valid (non-null) elements. A segment below this threshold builds no index, and queries on it run brute-force search.
+
+<!-- doc:block:end id="structarray-index-element-null-rules" -->
 
 ```python
 index_params = client.prepare_index_params()
