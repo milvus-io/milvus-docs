@@ -113,7 +113,11 @@ The dataset structure is as follows:
 
 You can find that the structure of the CoVLA dataset is highly hierarchical, dividing the collected data into multiple `.jsonl` files, along with the video clips in the `.mp4` format.
 
+<!-- doc:block:start id="struct-model-nesting-paragraph" -->
+
 In {{var.product_name}}, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested Structs; starting in Milvus 3.0.6, it can contain scalar array subfields with one nesting level. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the {{var.product_name}} collection schema.
+
+<!-- doc:block:end id="struct-model-nesting-paragraph" -->
 
 The diagram below illustrates how we can model this dataset using the schema illustrated in the following schema:
 
