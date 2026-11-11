@@ -49,7 +49,13 @@ A vector field or vector subfield accepts only one index. If you need both Embed
 
 ## Supported subfield data types
 
+<!-- doc:block:start id="structarray-subfield-type-families" -->
+
 A StructArray field stores one array value for each Struct subfield. When you define a Struct schema, choose subfield types from the supported scalar, scalar array (Milvus 3.0.6 and later), and vector families.
+<!-- doc:block:end id="structarray-subfield-type-families" -->
+
+
+<!-- doc:block:start id="structarray-subfield-types-table" -->
 
 | Struct subfield physical type | Support | Notes |
 | --- | --- | --- |
@@ -70,6 +76,8 @@ A StructArray field stores one array value for each Struct subfield. When you de
 | `Array` | Not supported | Timestamptz subfields and time-specific expressions are not supported in StructArray fields. |
 | `Array` of `Array` | Supported in Milvus 3.0.6 and later | Define the subfield as `DataType.ARRAY` with a scalar `element_type` and a `max_capacity` for the inner array. Each Struct element then holds one inner array. |
 | `Array` of `Array` of `Array`, `Array` of vectors, `Struct`, or `ArrayOfStruct` | Not supported | Array nesting inside a Struct is limited to one level, the inner array cannot hold vectors, and a Struct cannot contain nested Struct or Array-of-Struct subfields. |
+<!-- doc:block:end id="structarray-subfield-types-table" -->
+
 
 For version-specific support, nullable behavior, and other limits, see [StructArray Limits](structarray-limits.md).
 
@@ -606,9 +614,13 @@ curl --request POST \
     }
   }'
 ```
+<!-- doc:block:start id="structarray-scalar-array-subfield-intro" -->
+
 ## Add a scalar array subfield | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, a Struct subfield can be a scalar `ARRAY`. Each Struct element then holds one inner array, such as a list of tags for each chunk. Define the subfield with `DataType.ARRAY`, a scalar `element_type`, and a `max_capacity` for the inner array.
+<!-- doc:block:end id="structarray-scalar-array-subfield-intro" -->
+
 
 ```python
 chunk_schema.add_field(
@@ -630,9 +642,13 @@ Array subfields follow these rules:
 
 - In filters, use `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length` on `$[tags]` inside `element_filter` or `MATCH_*`, or on a positional path such as `chunks[0][tags]`. For details, see [StructArray Operators](struct-array-operators.md).
 
+<!-- doc:block:start id="structarray-element-null-intro" -->
+
 ## Allow null values in Struct elements | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, a scalar, vector, or array subfield can allow a null value for that subfield in individual Struct elements (an **element-nullable subfield**). Set `nullable=True` on a scalar or vector subfield. On an array subfield, set `nullable=True` to allow a null inner array and `element_nullable=True` to allow null values inside the inner array. For example, a chunk can have no detected language while its other subfields hold values.
+<!-- doc:block:end id="structarray-element-null-intro" -->
+
 
 The following example creates `tech_articles` with the complete schema that the element-level-null examples in [Insert Data into StructArray Fields](insert-data-into-structarray-fields.md) assume: the subfields from the first example, plus an element-nullable `lang` subfield and an element-nullable `tags` array subfield.
 
@@ -1447,11 +1463,15 @@ curl --request POST \
   }'
 ```
 
+<!-- doc:block:start id="structarray-null-summary-note" -->
+
 <div class="alert note">
 
 NULL applies to the whole StructArray field. Do not configure individual Struct subfields as row-level nullable independently. When supplying a valid StructArray value, do not mix null subfield arrays with valid subfield arrays. A Struct element itself cannot be null. Starting in Milvus 3.0.6, element-nullable subfields can hold null values in individual Struct elements; see [Allow null values in Struct elements](#allow-null-values-in-struct-elements--milvus-306). For details, see [StructArray Limits](structarray-limits.md).
 
 </div>
+<!-- doc:block:end id="structarray-null-summary-note" -->
+
 
 ## Add a StructArray field to an existing collection
 
@@ -1713,9 +1733,13 @@ curl --request POST \
 
 After the StructArray field is added, existing entities return NULL for the new field until you populate it.
 
+<!-- doc:block:start id="structarray-add-subfield-intro" -->
+
 ### Add a subfield to an existing StructArray field | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, you can add a subfield to a StructArray field that already holds data. Call `add_collection_field()` with the subfield path as the field name and set `nullable=True` on the new subfield (required for every added subfield, and what allows element-level null). On an array subfield, additionally set `element_nullable=True` to allow null values inside the inner array. The new subfield inherits the row-level `nullable` setting and the `max_capacity` of the StructArray field.
+<!-- doc:block:end id="structarray-add-subfield-intro" -->
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1771,7 +1795,11 @@ Adding a subfield follows these rules:
 
 - Clients that omit the new subfield when inserting keep working, because Milvus stores null for omitted element-nullable subfields.
 
+<!-- doc:block:start id="structarray-add-subfield-history" -->
+
 In versions before Milvus 3.0.6, subfields cannot be appended to an existing StructArray field. The following separate example replaces `chunks` with a schema that contains the original seven subfields and a new `source` string subfield.
+<!-- doc:block:end id="structarray-add-subfield-history" -->
+
 
 Dropping a field removes its data; adding it again does not restore the old values. Preserve the data you need, follow the prerequisites in [Alter Collection Schema](add-fields-to-an-existing-collection.md), then repopulate and reindex the replacement field. This example retains the collection-level `title_vector` field so that dropping `chunks` does not remove every vector field from the collection.
 
@@ -2070,9 +2098,13 @@ curl --request POST \
     }
   }'
 ```
+<!-- doc:block:start id="structarray-drop-subfield-intro" -->
+
 ### Drop a subfield from a StructArray field | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, you can drop a subfield from an existing StructArray field by its path. Milvus removes the subfield, its data, and its index.
+<!-- doc:block:end id="structarray-drop-subfield-intro" -->
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -2111,6 +2143,8 @@ Dropping a subfield while queries are still running against it can fail transien
 
 ## Schema rules
 
+<!-- doc:block:start id="structarray-create-rules-table" -->
+
 | Rule | Explanation |
 | --- | --- |
 | Struct is used as an Array element type. | Create a StructArray field as an Array field with `element_type=STRUCT`. Do not create Struct as a top-level collection field. |
@@ -2123,6 +2157,8 @@ Dropping a subfield while queries are still running against it can fail transien
 | All subfields share one `max_capacity`. | The StructArray field's `max_capacity` applies to every subfield. An added subfield inherits it. |
 | Functions are not supported inside Struct. | Do not define functions for fields or subfields inside a StructArray field. |
 | Scalar subfields should match filter needs. | Add fields such as `section`, `quality_score`, or `has_code` only when you need to filter, group, or output them later. |
+<!-- doc:block:end id="structarray-create-rules-table" -->
+
 
 ## Common mistakes
 
@@ -2140,7 +2176,11 @@ Dropping a subfield while queries are still running against it can fail transien
 
 - Treating vector subfields as `$[...]` scalar predicate inputs. Use vector subfields for vector search, and scalar subfields for scalar predicates.
 
+<!-- doc:block:start id="structarray-mistake-subfield-evolution" -->
+
 - Assuming new subfields can be added to an existing StructArray field before Milvus 3.0.6, or adding a subfield that does not allow element-level null.
+<!-- doc:block:end id="structarray-mistake-subfield-evolution" -->
+
 
 - Setting row-level null on a subfield. Row-level null is set on the StructArray parent only. For null values inside Struct elements, set `nullable=True` on a scalar or vector subfield, and `element_nullable=True` on an array subfield.
 

@@ -15,7 +15,11 @@ StructArray filtering has two operator families and a set of row-level path pred
 | `MATCH_*` | Select entities by how many Struct elements satisfy a scalar predicate. | Row-level filtering. These operators do not return element offsets by themselves. |
 | Row-level path predicates | Test one element position, count Struct elements, or test subfield values across elements without a `$[...]` predicate. | Row-level filtering. These predicates do not return element offsets. |
 
+<!-- doc:block:start id="structarray-operators-subfield-scope" -->
+
 Use scalar subfields, and array subfields in Milvus 3.0.6 and later, in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.
+<!-- doc:block:end id="structarray-operators-subfield-scope" -->
+
 
 ## When to use which operator
 
@@ -235,9 +239,13 @@ Positional paths support comparison, `in`, `not in`, and chained range predicate
 
 ### ARRAY operators
 
+<!-- doc:block:start id="structarray-positional-array-subfield" -->
+
 #### Access array subfields by position | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, a positional path can also reference a scalar `ARRAY` subfield. `chunks[0][tags]` is the inner array of the first Struct element. It supports `==` and `!=` with an array literal, `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length`. Comparison operators, `in`, `like`, and arithmetic on it are rejected.
+<!-- doc:block:end id="structarray-positional-array-subfield" -->
+
 
 ```python
 # The first chunk is tagged "tuning".
@@ -318,6 +326,8 @@ For applicability, see [Nullable and dynamic schema limits](structarray-limits.m
 
 The `$[...]` syntax represents the scalar value of the current Struct element. Predicate support depends on the scalar subfield type:
 
+<!-- doc:block:start id="structarray-element-predicate-table" -->
+
 | Subfield type | Element-level predicate support |
 | --- | --- |
 | `BOOL` | Scalar predicates such as `$[has_code] == true` or `!($[has_code] == true)`. Avoid bare boolean expressions such as `$[has_code]`. |
@@ -327,12 +337,18 @@ The `$[...]` syntax represents the scalar value of the current Struct element. P
 | Scalar `ARRAY` subfields (Milvus 3.0.6 and later) | `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length` on `$[tags]`, plus `$[tags] is null` and `$[tags] is not null`. Comparison operators, `in`, and `like` on `$[tags]` are rejected. |
 | Any element-nullable subfield (Milvus 3.0.6 and later) | `$[subfield] is null` and `$[subfield] is not null` test whether the value in the current Struct element is null. On a subfield that cannot hold null values, `is null` is always false. |
 | Vector subfields | Not supported as `$[...]` scalar predicate inputs, except `$[emb] is null` and `$[emb] is not null` on an element-nullable vector subfield in Milvus 3.0.6 and later. Use vector subfields through EmbeddingList search or element-level vector search instead. |
+<!-- doc:block:end id="structarray-element-predicate-table" -->
+
 
 Logical operators such as `&&`, `||`, and `!` apply to predicate expressions. For example, write `!($[has_code] == true)` instead of `!$[has_code]`.
+
+<!-- doc:block:start id="structarray-null-predicates-intro" -->
 
 ## Null values in element-level predicates | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in a Struct element. Null values follow three-valued logic in StructArray predicates:
+<!-- doc:block:end id="structarray-null-predicates-intro" -->
+
 
 - A comparison, `in`, `like`, or arithmetic predicate on a null subfield value is unknown rather than false. `&&`, `\|\|`, and `!` propagate unknown results, so `!($[lang] == "en")` is still unknown when `$[lang]` is null.
 
@@ -397,7 +413,11 @@ Follow these syntax rules:
 
 - In positional paths, write the element position before the subfield name: `chunks[0][section]`, not `chunks[section][0]`.
 
+<!-- doc:block:start id="structarray-null-usage-note" -->
+
 - Use `IS NULL` and `IS NOT NULL` only on the whole StructArray field, such as `chunks is null`, or, starting in Milvus 3.0.6, on `$[subfield]` inside `element_filter` or `MATCH_*`. Do not use them on a subfield path such as `chunks[section]`.
+<!-- doc:block:end id="structarray-null-usage-note" -->
+
 
 - Do not subscript into an array subfield. `$[tags][0]` and `chunks[0][tags][0]` are not supported.
 
