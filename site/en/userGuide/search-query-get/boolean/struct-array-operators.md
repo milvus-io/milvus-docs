@@ -381,9 +381,12 @@ Element-level `$[...]` predicates do not support:
 
 - JSON path syntax, `exists` on JSON paths, or JSON functions such as `json_contains`, `json_contains_all`, or `json_contains_any`.
 
+<!-- doc:block:start id="structarray-null-predicate-exclusions" -->
 - Array container functions such as `array_contains`, `array_contains_all`, `array_contains_any`, or `array_length` on `$[subfield]` of a scalar subfield. Use these functions on a subfield path such as `chunks[section]` in a row-level predicate instead. Starting in Milvus 3.0.6, they are supported on `$[tags]` for scalar `ARRAY` subfields.
 
 - `$[subfield] is null` or `$[subfield] is not null` before Milvus 3.0.6.
+<!-- doc:block:end id="structarray-null-predicate-exclusions" -->
+
 
 - A subscript into an array subfield, such as `$[tags][0]`, and `like` on `$[tags]`.
 
