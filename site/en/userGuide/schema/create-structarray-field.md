@@ -4,8 +4,11 @@ title: "Create a StructArray Field"
 summary: "Create a StructArray field when one entity needs to contain an ordered list of structured elements. A StructArray field is an Array field whose element type is Struct. Each Struct element follows the same schema and can contain scalar subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array subfields."
 ---
 # Create a StructArray Field
+<!-- doc:block:start id="structarray-create-intro" -->
 
 Create a StructArray field when one entity needs to contain an ordered list of structured elements. A StructArray field is an Array field whose element type is Struct. Each Struct element follows the same schema and can contain scalar subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array subfields.
+<!-- doc:block:end id="structarray-create-intro" -->
+
 
 This page shows how to define a Struct schema, add it as a StructArray field, choose subfields for later search and filtering, and understand the schema rules that apply before you insert or index data.
 
@@ -1789,11 +1792,14 @@ Adding a subfield follows these rules:
 
 - The added subfield must be created with `nullable=True`, and an added array subfield additionally takes `element_nullable=True` to allow null values inside the inner array. It cannot have a default value. Existing entities return null for the new subfield in each of their Struct elements, and entities whose StructArray field is null stay null.
 
+<!-- doc:block:start id="structarray-add-subfield-rules" -->
 - The subfield can be a scalar, a vector, or a scalar array. Milvus appends it after the existing subfields.
 
 - You cannot bind an index while adding the subfield. Create the index with a separate `create_index()` call. An added vector subfield supports element-level metrics only, and the collection must have an index on it before you load the collection with the new subfield included.
 
 - Clients that omit the new subfield when inserting keep working, because Milvus stores null for omitted element-nullable subfields.
+<!-- doc:block:end id="structarray-add-subfield-rules" -->
+
 
 <!-- doc:block:start id="structarray-add-subfield-history" -->
 
