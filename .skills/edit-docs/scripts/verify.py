@@ -28,6 +28,12 @@ run exits non-zero instead of printing a vacuous OK:
    words ("currently", "recently", "the latest version", ...) are reported as
    warnings. Front matter, fenced code blocks, and HTML comments are exempt —
    a TODO comment may say "not yet released"; the prose may not.
+5. fence/comment adjacency: a ``` fence line directly next to an HTML comment
+   line (no blank line between them) — the renderer can swallow the fence into
+   the comment, so the code disappears from the page.
+6. multipleCode blocks: the tab anchors must match the following fenced code
+   blocks by count and language order, and no block may be an empty stub.
+   Issues that already exist at --base are warnings; new ones fail the run.
 
 Run from the repository root before committing, or with ``--diff <rev>``
 after committing.
@@ -231,6 +237,128 @@ def check_timeless(pages, untracked, base, errors, warnings):
                         (errors if tier == "timeless" else warnings).append(msg)
 
 
+MULTIPLE_CODE = '<div class="multipleCode">'
+LANG_ALIASES = {"javascript": "nodejs", "bash": "curl", "c++": "cpp"}
+
+
+def scan_multiple_code(lines):
+    """Yield (lineno, anchors, fences) for every multipleCode block.
+
+    anchors: href targets of the tab links; fences: (lang, has_body, lineno).
+    """
+    i, n = 0, len(lines)
+    while i < n:
+        if MULTIPLE_CODE not in lines[i]:
+            i += 1
+            continue
+        start = i
+        j = i + 1
+        anchors = []
+        while j < n and "</div>" not in lines[j]:
+            m = re.search(r'href="#([^"]+)"', lines[j])
+            if m:
+                anchors.append(m.group(1))
+            j += 1
+        j += 1
+        fences = []
+        k = j
+        while k < n:
+            s = lines[k].strip()
+            if s.startswith("```") and s != "```":
+                lang = s[3:].strip()
+                fno = k + 1
+                k += 1
+                body = []
+                while k < n and not lines[k].strip().startswith("```"):
+                    body.append(lines[k])
+                    k += 1
+                fences.append((lang, any(b.strip() for b in body), fno))
+                k += 1
+                continue
+            if s == "" or s.startswith("<!--"):
+                k += 1
+                continue
+            break
+        yield start + 1, anchors, fences
+        i = k if k > start else start + 1
+
+
+def multiple_code_issues(lines):
+    """Structural issues of every multipleCode block, keyed by message."""
+    issues = {}
+    for lineno, anchors, fences in scan_multiple_code(lines):
+        if len(fences) < len(anchors):
+            key = f"multipleCode advertises {len(anchors)} SDKs but has {len(fences)} code blocks"
+            issues.setdefault(key, lineno)
+        for lang, has_body, fno in fences:
+            if not has_body:
+                issues.setdefault(f"empty {lang or 'unlabelled'} code stub", fno)
+        if len(fences) >= len(anchors) and anchors:
+            want = [LANG_ALIASES.get(a.lower(), a.lower()) for a in anchors]
+            got = [LANG_ALIASES.get(l.lower(), l.lower()) for l, _, _ in fences[:len(anchors)]]
+            if want != got:
+                issues.setdefault(
+                    f"multipleCode tab order {anchors} != code order {[l for l, _, _ in fences[:len(anchors)]]}",
+                    lineno,
+                )
+    return issues
+
+
+def check_multiple_code(pages, untracked, base, errors, warnings):
+    """Flag multipleCode stubs and tab/code order mismatches on changed pages."""
+    for p in pages:
+        try:
+            cur = open(p, encoding="utf-8").read().splitlines()
+        except OSError:
+            continue
+        cur_issues = multiple_code_issues(cur)
+        base_issues = set()
+        if p not in untracked:
+            base_text = git("show", f"{base}:{p}")
+            if base_text:
+                base_issues = set(multiple_code_issues(base_text.splitlines()))
+        for msg, lineno in sorted(cur_issues.items(), key=lambda kv: kv[1]):
+            if msg in base_issues:
+                warnings.append(f"{p}:{lineno}: PRE-EXISTING (also at {base}): {msg}")
+            else:
+                errors.append(f"{p}:{lineno}: {msg}")
+
+
+def check_fence_comment(pages, errors):
+    """Flag fence lines directly adjacent to an HTML comment line."""
+    for p in pages:
+        try:
+            lines = open(p, encoding="utf-8").read().splitlines()
+        except OSError:
+            continue
+        in_fence = False
+        for i, line in enumerate(lines):
+            s = line.strip()
+            if in_fence:
+                if s.startswith("```"):
+                    in_fence = False
+                    nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
+                    if nxt.startswith("<!--"):
+                        errors.append(
+                            f"{p}:{i + 1}: closing fence is directly followed by an HTML comment; add a blank line"
+                        )
+                continue
+            if s.startswith("```"):
+                in_fence = True
+                prev = lines[i - 1].strip() if i else ""
+                if prev.endswith("-->") and not prev.startswith("<!--"):
+                    errors.append(
+                        f"{p}:{i + 1}: opening fence is directly preceded by an HTML comment; add a blank line"
+                    )
+                continue
+            if s.startswith("<!--") and i + 1 < len(lines):
+                nxt = lines[i + 1].strip()
+                if nxt.startswith("```"):
+                    errors.append(
+                        f"{p}:{i + 1}: HTML comment is directly followed by a fence; add a blank line"
+                    )
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--menu", default=MENU)
@@ -261,6 +389,8 @@ def main():
             errors.append(f"{p}: front matter id {fid!r} != filename {name!r}")
 
     check_timeless(pages, untracked, base, errors, warnings)
+    check_fence_comment(pages, errors)
+    check_multiple_code(pages, untracked, base, errors, warnings)
 
     if untracked:
         menu_text = open(args.menu, encoding="utf-8").read()
