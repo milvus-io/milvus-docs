@@ -44,9 +44,9 @@ To use auto indexing, omit the __index_type__ parameter in [`createIndex()`](htt
 For mappings between scalar data types and default indexing algorithms, refer to [Scalar field indexing algorithms](https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms).
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python
@@ -122,9 +122,9 @@ To use custom indexing, specify a particular index type using the __index_type__
 The example below creates an inverted index for the scalar field `scalar_2`.
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python
@@ -287,9 +287,9 @@ Use the `listIndexes()` method to verify the creation of scalar indexes:
 </div>
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python

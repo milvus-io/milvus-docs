@@ -82,19 +82,19 @@ Choose the workflow based on whether you are adding a user-defined field or a Fu
 
 <!-- doc:block:start id="alter-schema-workflow-links" -->
 
-- [Add user-defined scalar fields](#Add-user-defined-scalar-fields--Milvus-26x) when you need new metadata for filtering, query output, or application logic.
+- [Add user-defined scalar fields](#add-user-defined-scalar-fields--milvus-26x) when you need new metadata for filtering, query output, or application logic.
 
-- [Add StructArray fields](#Add-StructArray-fields--Milvus-300) when you need an array field whose elements share the same Struct schema.
+- [Add StructArray fields](#add-structarray-fields--milvus-300) when you need an array field whose elements share the same Struct schema.
 
-- [Add user-defined vector fields](#Add-user-defined-vector-fields--Milvus-2618) when your application generates embeddings and writes vector values to {{var.product_name}}.
+- [Add user-defined vector fields](#add-user-defined-vector-fields--milvus-2618) when your application generates embeddings and writes vector values to {{var.product_name}}.
 
-- [Add a Function and its generated vector field](#Add-a-Function-and-its-generated-vector-field--Milvus-30x) when {{var.product_name}} should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.
+- [Add a Function and its generated vector field](#add-a-function-and-its-generated-vector-field--milvus-30x) when {{var.product_name}} should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.
 
 <!-- doc:block:end id="alter-schema-workflow-links" -->
 
 <!-- doc:block:start id="alter-schema-workflow-struct-link" -->
 
-- [Add a sub-field to an existing StructArray field](#Add-a-sub-field-to-an-existing-StructArray-field--Milvus-306) when existing Struct elements need a new attribute.
+- [Add a sub-field to an existing StructArray field](#add-a-sub-field-to-an-existing-structarray-field--milvus-306) when existing Struct elements need a new attribute.
 
 <!-- doc:block:end id="alter-schema-workflow-struct-link" -->
 
@@ -440,7 +440,7 @@ After the field is added, entities that already existed in the collection return
 
 Use `add_collection_struct_field()` to add a StructArray field that accepts arrays of Struct elements. To add a StructArray field, do as follows:
 
-1. Create a Struct schema that contains the necessary sub-fields of supported data types. For applicable data types, refer to [StructArray Limits](structarray-limits.md#Supported-subfield-data-types).
+1. Create a Struct schema that contains the necessary sub-fields of supported data types. For applicable data types, refer to [StructArray Limits](structarray-limits.md#supported-subfield-data-types).
 
 1. Reference the Struct schema created above and set the maximum capacity of the field in `add_collection_struct_field()`.
 
@@ -1252,7 +1252,7 @@ Dropping a field first changes the collection schema and field visibility:
 
 - Indexes built on the dropped field are cleaned up as part of the schema update.
 
-Storage cleanup is handled separately from schema cleanup. For details, refer to [When is storage space reclaimed after dropping a field?](#When-is-storage-space-reclaimed-after-dropping-a-field).
+Storage cleanup is handled separately from schema cleanup. For details, refer to [When is storage space reclaimed after dropping a field?](#when-is-storage-space-reclaimed-after-dropping-a-field).
 
 **Example: Drop a user-defined scalar field**
 

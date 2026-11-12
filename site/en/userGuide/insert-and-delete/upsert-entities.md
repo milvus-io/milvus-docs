@@ -49,7 +49,7 @@ For new entities, use `insert` or an upsert in override mode. Use merge mode for
 
 <!-- doc:block:start id="upsert-array-availability" -->
 
-For `ARRAY` fields, merge mode supports two operators in Milvus v2.6.17 and later: `ARRAY_APPEND` and `ARRAY_REMOVE`. These operators let you append elements to or remove matching elements from an existing `ARRAY` field, without first querying the entity to retrieve its current value. For details, see [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617).
+For `ARRAY` fields, merge mode supports two operators in Milvus v2.6.17 and later: `ARRAY_APPEND` and `ARRAY_REMOVE`. These operators let you append elements to or remove matching elements from an existing `ARRAY` field, without first querying the entity to retrieve its current value. For details, see [Upsert ARRAY fields in merge mode](upsert-entities.md#upsert-array-fields-in-merge-mode--milvus-2617).
 
 <!-- doc:block:end id="upsert-array-availability" -->
 
@@ -95,7 +95,7 @@ There are several special notes you should consider before using the merge featu
 
     - `ARRAY_REMOVE` removes every element from the existing array that matches a value in the request payload.
 
-    For operator syntax, supported element types, and other constraints, see [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617).
+    For operator syntax, supported element types, and other constraints, see [Upsert ARRAY fields in merge mode](upsert-entities.md#upsert-array-fields-in-merge-mode--milvus-2617).
 
 <!-- doc:block:end id="upsert-array-replace-note" -->
 
@@ -105,7 +105,7 @@ There are several special notes you should consider before using the merge featu
 
     Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode. Starting in Milvus 3.0.6, you can omit element-nullable subfields; Milvus stores null for them in that Struct element.
 
-    For details, refer to [Upsert StructArray field in merge mode](upsert-entities.md#Upsert-StructArray-field-in-merge-mode).
+    For details, refer to [Upsert StructArray field in merge mode](upsert-entities.md#upsert-structarray-field-in-merge-mode).
 
 <!-- doc:block:end id="upsert-structarray-note" -->
 
