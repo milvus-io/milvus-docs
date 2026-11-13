@@ -166,7 +166,19 @@ if err != nil {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "analyzerParams": "{\"type\": \"standard\", \"stop_words\": [\"a\", \"an\", \"for\"]}",
+    "text": ["An efficient system relies on a robust analyzer to correctly process text for various applications."],
+    "withDetail": true
+}'
 ```
 
 The output will be:
@@ -536,7 +548,8 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
 ```
 
 ### Step 2: Define and verify analyzer configurations
@@ -619,7 +632,19 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     ```
 
     ```bash
-    # restful
+    export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+    export TOKEN="{{var.example_token}}"
+
+    curl --request POST \
+    --url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+    --header "Authorization: Bearer ${TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Request-Timeout: 10" \
+    -d '{
+        "analyzerParams": "{\"type\": \"english\"}",
+        "text": ["Milvus simplifies text analysis for search."],
+        "withDetail": true
+    }'
     ```
 
 1. **Configure and verify a custom analyzer:**
@@ -737,7 +762,19 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     ```
 
     ```bash
-    # curl
+    export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+    export TOKEN="{{var.example_token}}"
+
+    curl --request POST \
+    --url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+    --header "Authorization: Bearer ${TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Request-Timeout: 10" \
+    -d '{
+        "analyzerParams": "{\"tokenizer\": \"standard\", \"filter\": [\"lowercase\", {\"type\": \"length\", \"max\": 40}, {\"type\": \"stop\", \"stop_words\": [\"of\", \"for\"]}]}",
+        "text": ["Milvus provides flexible, customizable analyzers for robust text processing."],
+        "withDetail": true
+    }'
     ```
 
 ### Step 3: Add fields to the schema
@@ -861,7 +898,60 @@ schema.WithField(entity.NewField().
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "schema": {
+        "autoID": true,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "title_en",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true,
+                    "enable_match": true,
+                    "analyzer_params": {"type": "english"}
+                }
+            },
+            {
+                "fieldName": "title",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true,
+                    "enable_match": true,
+                    "analyzer_params": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase",
+                            {"type": "length", "max": 40},
+                            {"type": "stop", "stop_words": ["of", "for"]}
+                        ]
+                    }
+                }
+            },
+            {
+                "fieldName": "embedding",
+                "dataType": "FloatVector",
+                "elementTypeParams": {"dim": 3}
+            },
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            }
+        ]
+    }
+}'
 ```
 
 ### Step 4: Prepare index parameters and create the collection
@@ -939,7 +1029,25 @@ if err != nil {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "indexParams": [
+        {
+            "fieldName": "embedding",
+            "indexName": "embedding",
+            "metricType": "COSINE",
+            "indexType": "AUTOINDEX"
+        }
+    ]
+}'
 ```
 
 ## What's next
