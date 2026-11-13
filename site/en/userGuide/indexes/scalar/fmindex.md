@@ -51,7 +51,6 @@ The example below shows how to create an `FMINDEX` index on a `VARCHAR` field:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
@@ -138,33 +137,6 @@ _, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption("log_catalog", "
 if err != nil {
     log.Fatal("failed to create index: ", err.Error())
 }
-```
-
-```rust
-use milvus::v2::prelude::*;
-use std::collections::HashMap;
-
-let config = ConnectConfig::new().uri("{{var.example_endpoint}}");
-
-let client = ClientV2::new(&config).await?;
-
-client
-    .create_index(
-        CreateIndexRequest::builder()
-            .collection_name("log_catalog")
-            .index_param(
-                IndexParam::new()
-                    .field_name("text")
-                    .index_type(IndexType::FmIndex)
-                    .index_name("fmindex_index")
-                    .extra_params(HashMap::from([
-                        ("fm_sa_sample_rate".to_string(), "8".to_string()),
-                        ("fm_block_bytes".to_string(), "64".to_string()),
-                    ])),
-            )
-            .build()?,
-    )
-    .await?;
 ```
 
 ```cpp
@@ -289,7 +261,6 @@ Use the `drop_index()` method to remove an existing index from a collection.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
@@ -340,23 +311,6 @@ err = cli.DropIndex(ctx, milvusclient.NewDropIndexOption("log_catalog", "fmindex
 if err != nil {
     log.Fatal("failed to drop index: ", err.Error())
 }
-```
-
-```rust
-use milvus::v2::prelude::*;
-
-let config = ConnectConfig::new().uri("{{var.example_endpoint}}");
-
-let client = ClientV2::new(&config).await?;
-
-client
-    .drop_index(
-        DropIndexRequest::builder()
-            .collection_name("log_catalog")
-            .index_name("fmindex_index")
-            .build()?,
-    )
-    .await?;
 ```
 
 ```cpp
@@ -416,6 +370,8 @@ curl --request POST \
 - **Field types:** Works with `VARCHAR` fields only. For more information on data types, refer to [String Field](string.md).
 
 - **Version compatibility:** `FMINDEX` requires scalar index engine version 5 or newer.
+
+- **SDK availability:** The Rust v2 SDK does not yet include the `FMINDEX` index type.
 
 - **Exact matching:** Anchored prefix, suffix, and infix `LIKE` literals return exact matches with no candidate recheck.
 
