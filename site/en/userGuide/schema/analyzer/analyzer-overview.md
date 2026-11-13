@@ -163,6 +163,8 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+fmt.Println(result)
 ```
 
 ```bash
@@ -542,7 +544,7 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
-defer client.Close(ctx)
+defer cli.Close(ctx)
 
 schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 ```

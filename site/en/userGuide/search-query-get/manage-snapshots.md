@@ -325,14 +325,17 @@ job_id = client.restore_snapshot(
 
 ```go
 restoreOpt := milvusclient.NewRestoreSnapshotOption(
-    "backup_20240101",
-    "restored_collection"
+    "backup_20240101",     // snapshot name
+    "my_collection",       // source collection holding the snapshot
+    "restored_collection", // target collection
 )
 
 jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 if err != nil {
     log.Fatal(err)
 }
+
+fmt.Println(jobID)
 ```
 
 ```javascript

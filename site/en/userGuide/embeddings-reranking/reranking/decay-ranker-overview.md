@@ -494,9 +494,9 @@ import (
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, // collection name
+    collectionName, // collection name
     10,              // limit
-    []entity.Vector{your_query_vector}, // query vector
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, // query vector
 ).WithANNSField("vector_field").
     WithFunctionScore(functionScore).
     WithOutputFields("document", "timestamp"))
