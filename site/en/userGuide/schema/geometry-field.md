@@ -163,7 +163,7 @@ if err != nil {
 }
 defer cli.Close(ctx)
 
-dim := 8
+dim := int64(8)
 schema := entity.NewSchema().
     WithName("geo_collection").
     WithDynamicFieldEnabled(true).
@@ -437,14 +437,22 @@ await milvusClient.loadCollection({
 import "github.com/milvus-io/milvus/client/v3/index"
 
 idxOpt := milvusclient.NewCreateIndexOption("geo_collection", "embeddings", index.NewAutoIndex(entity.L2))
-_, err = cli.CreateIndex(ctx, idxOpt, false)
+indexTask, err := cli.CreateIndex(ctx, idxOpt)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+if err = indexTask.Await(ctx); err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 
-err = cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("geo_collection"))
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("geo_collection"))
 if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+if err = loadTask.Await(ctx); err != nil {
     fmt.Println(err.Error())
     // handle error
 }

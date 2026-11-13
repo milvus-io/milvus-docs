@@ -389,8 +389,12 @@ if err != nil {
     // handle error
 }
 
-err = cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("dedup_collection"))
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("dedup_collection"))
 if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+if err = loadTask.Await(ctx); err != nil {
     fmt.Println(err.Error())
     // handle error
 }

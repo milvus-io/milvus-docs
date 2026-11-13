@@ -66,17 +66,21 @@ client.create_snapshot(
 ```go
 import (
     "context"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 client, err := milvusclient.New(context.Background(), &milvusclient.ClientConfig{
-    Address: "localhost:19530",
-    Token: "root:Milvus",
+    Address:  "localhost:19530",
+    Username: "root",
+    Password: "Milvus",
 })
 
 // Recommended: Flush data before creating snapshot to ensure all data is included
-err = client.Flush(context.Background(), milvusclient.NewFlushOption("my_collection"))
+flushTask, err := client.Flush(context.Background(), milvusclient.NewFlushOption("my_collection"))
 if err != nil {
+    log.Fatal(err)
+}
+if err = flushTask.Await(context.Background()); err != nil {
     log.Fatal(err)
 }
 
@@ -132,10 +136,13 @@ snapshots = client.list_snapshots(
 
 ```go
 // List snapshots for collection
-listOpt := milvusclient.NewListSnapshotsOption().
-    WithCollectionName("my_collection")
+listOpt := milvusclient.NewListSnapshotsOption("my_collection")
 
 snapshots, err := client.ListSnapshots(context.Background(), listOpt)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Println(snapshots)
 ```
 
 ```javascript
@@ -185,11 +192,12 @@ print(f"Description: {snapshot_info.description}")
 ```
 
 ```go
-describeOpt := milvusclient.NewDescribeSnapshotOption("backup_20240101")
+describeOpt := milvusclient.NewDescribeSnapshotOption("backup_20240101", "my_collection")
 resp, err := client.DescribeSnapshot(context.Background(), describeOpt)
 
-fmt.Printf("Snapshot ID: %d\n", resp.GetSnapshotInfo().GetId())
-fmt.Printf("Collection: %s\n", resp.GetSnapshotInfo().GetCollectionName())
+fmt.Printf("Snapshot: %s\n", resp.GetName())
+fmt.Printf("Collection: %s\n", resp.GetCollectionName())
+fmt.Printf("Created at: %d\n", resp.GetCreateTs())
 ```
 
 ```javascript
@@ -383,8 +391,8 @@ client.drop_snapshot(
 ```
 
 ```go
-dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101")
-err := client.DropSnapshot(context.Background(), dropOpt)
+dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101", "my_collection")
+err = client.DropSnapshot(context.Background(), dropOpt)
 ```
 
 ```javascript
@@ -436,23 +444,23 @@ jobs = client.list_restore_snapshot_jobs(collection_name="my_collection")
 
 ```go
 // List all restore jobs
-listOpt := milvusclient.NewListRestoreSnapshotJobsOption()
-jobs, err := client.ListRestoreSnapshotJobs(context.Background(), listOpt)
+jobsOpt := milvusclient.NewListRestoreSnapshotJobsOption()
+jobs, err := client.ListRestoreSnapshotJobs(context.Background(), jobsOpt)
 if err != nil {
     log.Fatal(err)
 }
 
 for _, job := range jobs {
-    fmt.Printf("Job %d: %s -> Collection %d\n",
-        job.GetJobId(), job.GetSnapshotName(), job.GetCollectionId())
+    fmt.Printf("Job %d: %s -> Collection %s\n",
+        job.GetJobId(), job.GetSnapshotName(), job.GetCollectionName())
     fmt.Printf("  State: %s, Progress: %d%%\n",
         job.GetState(), job.GetProgress())
 }
 
 // List restore jobs for a specific collection
-listOpt = milvusclient.NewListRestoreSnapshotJobsOption().
+jobsOpt = milvusclient.NewListRestoreSnapshotJobsOption().
     WithCollectionName("my_collection")
-jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
+jobs, err = client.ListRestoreSnapshotJobs(context.Background(), jobsOpt)
 ```
 
 ```javascript
@@ -520,10 +528,10 @@ if err != nil {
 
 fmt.Printf("Job ID: %d\n", state.GetJobId())
 fmt.Printf("Snapshot Name: %s\n", state.GetSnapshotName())
-fmt.Printf("Collection ID: %d\n", state.GetCollectionId())
+fmt.Printf("Collection: %s\n", state.GetCollectionName())
 fmt.Printf("State: %s\n", state.GetState())
 fmt.Printf("Progress: %d%%\n", state.GetProgress())
-if state.GetState() == milvuspb.RestoreSnapshotState_RestoreSnapshotFailed {
+if state.GetState().String() == "RestoreSnapshotFailed" {
     fmt.Printf("Failure Reason: %s\n", state.GetReason())
 }
 fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())

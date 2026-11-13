@@ -231,7 +231,7 @@ if err != nil {
     fmt.Printf("Failed to connect to Milvus: %s\n", err.Error())
     return
 }
-defer client.Close()
+defer client.Close(context.Background())
 
 schema := entity.NewSchema().
     WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true).WithIsAutoID(false)).

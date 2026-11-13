@@ -150,15 +150,25 @@ import (
     "encoding/json"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
+
+ctx := context.Background()
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer cli.Close(ctx)
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []string{"An efficient system relies on a robust analyzer to correctly process text for various applications."}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(string(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
@@ -528,10 +538,9 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )  
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -617,21 +626,24 @@ export TOKEN="root:Milvus"
     
     ```
 
-    ```go
+```go
     analyzerParams := map[string]any{"type": "english"}
 
     bs, _ := json.Marshal(analyzerParams)
     texts := []string{"Milvus simplifies text analysis for search."}
-    option := milvusclient.NewRunAnalyzerOption(texts).
-        WithAnalyzerParams(string(bs))
+    option := milvusclient.NewRunAnalyzerOption(texts...).
+        WithAnalyzerParamsStr(string(bs))
     
-    result, err := client.RunAnalyzer(ctx, option)
+    result, err := cli.RunAnalyzer(ctx, option)
     if err != nil {
         fmt.Println(err.Error())
         // handle error
     }
     
-    ```
+    
+
+fmt.Println(result)
+```
 
     ```bash
     export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
@@ -740,8 +752,8 @@ export TOKEN="root:Milvus"
     });
     ```
 
-    ```go
-    analyzerParams = map[string]any{"tokenizer": "standard",
+```go
+    analyzerParams := map[string]any{"tokenizer": "standard",
         "filter": []any{"lowercase",
         map[string]any{
             "type": "length",
@@ -754,15 +766,18 @@ export TOKEN="root:Milvus"
         
     bs, _ := json.Marshal(analyzerParams)
     texts := []string{"Milvus provides flexible, customizable analyzers for robust text processing."}
-    option := milvusclient.NewRunAnalyzerOption(texts).
-        WithAnalyzerParams(string(bs))
+    option := milvusclient.NewRunAnalyzerOption(texts...).
+        WithAnalyzerParamsStr(string(bs))
     
-    result, err := client.RunAnalyzer(ctx, option)
+    result, err := cli.RunAnalyzer(ctx, option)
     if err != nil {
         fmt.Println(err.Error())
         // handle error
     }
-    ```
+    
+
+fmt.Println(result)
+```
 
     ```bash
     export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
@@ -1022,7 +1037,7 @@ console.log("Collection created successfully!");
 idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "embedding", idx)
 
-err = client.CreateCollection(ctx,
+err = cli.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption("my_collection", schema).
         WithIndexOptions(indexOption))
 if err != nil {

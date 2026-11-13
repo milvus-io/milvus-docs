@@ -421,8 +421,6 @@ await client.alterIndexProperties({
 import (
     "context"
     "fmt"
-
-    "github.com/milvus-io/milvus/client/v3/entity"
     "github.com/milvus-io/milvus/client/v3/index"
     "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
@@ -660,8 +658,6 @@ await client.loadCollection({
 import (
     "context"
     "fmt"
-
-    "github.com/milvus-io/milvus/client/v3/entity"
     "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
