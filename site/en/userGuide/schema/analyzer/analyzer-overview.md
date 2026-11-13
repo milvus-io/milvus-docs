@@ -626,7 +626,7 @@ export TOKEN="root:Milvus"
     
     ```
 
-```go
+    ```go
     analyzerParams := map[string]any{"type": "english"}
 
     bs, _ := json.Marshal(analyzerParams)
@@ -642,8 +642,8 @@ export TOKEN="root:Milvus"
     
     
 
-fmt.Println(result)
-```
+    fmt.Println(result)
+    ```
 
     ```bash
     export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
@@ -752,7 +752,7 @@ fmt.Println(result)
     });
     ```
 
-```go
+    ```go
     analyzerParams := map[string]any{"tokenizer": "standard",
         "filter": []any{"lowercase",
         map[string]any{
@@ -776,8 +776,8 @@ fmt.Println(result)
     }
     
 
-fmt.Println(result)
-```
+    fmt.Println(result)
+    ```
 
     ```bash
     export CLUSTER_ENDPOINT="{{var.example_endpoint}}"

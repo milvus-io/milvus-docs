@@ -315,23 +315,19 @@ import "github.com/milvus-io/milvus/client/v3/index"
 idxOpt := milvusclient.NewCreateIndexOption(collectionName, "vec", index.NewAutoIndex(entity.COSINE))
 indexTask, err := cli.CreateIndex(ctx, idxOpt)
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 if err = indexTask.Await(ctx); err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 fmt.Println("Index created successfully.")
 
 loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(collectionName))
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 if err = loadTask.Await(ctx); err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 fmt.Printf("Collection '%s' loaded successfully.\n", collectionName)
 ```
