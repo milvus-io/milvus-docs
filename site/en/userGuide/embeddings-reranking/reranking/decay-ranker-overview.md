@@ -328,7 +328,64 @@ var rerank = new DecayRerank("time_decay")     // Function identifier
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "your_collection",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "document",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 65535
+                }
+            },
+            {
+                "fieldName": "timestamp",
+                "dataType": "Int64"
+            },
+            {
+                "fieldName": "vector_field",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": 768
+                }
+            }
+        ],
+        "functions": [
+            {
+                "name": "time_decay",
+                "type": "Rerank",
+                "inputFieldNames": [
+                    "timestamp"
+                ],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "decay",
+                    "function": "gauss",
+                    "origin": 1735689600,
+                    "scale": 604800,
+                    "offset": 86400,
+                    "decay": 0.5
+                }
+            }
+        ]
+    }
+}'
 ```
 
 <table>
@@ -545,5 +602,50 @@ SearchResp results = await client.SearchAsync(new SearchReq
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "your_collection",
+    "data": [
+        [
+            0.1,
+            0.2,
+            0.3,
+            0.4
+        ]
+    ],
+    "annsField": "vector_field",
+    "limit": 10,
+    "outputFields": [
+        "document",
+        "timestamp"
+    ],
+    "consistencyLevel": "Strong",
+    "functionScore": {
+        "functions": [
+            {
+                "name": "time_decay",
+                "type": "Rerank",
+                "inputFieldNames": [
+                    "timestamp"
+                ],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "decay",
+                    "function": "gauss",
+                    "origin": 1735689600,
+                    "scale": 604800,
+                    "offset": 86400,
+                    "decay": 0.5
+                }
+            }
+        ]
+    }
+}'
 ```

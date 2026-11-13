@@ -184,11 +184,105 @@ ModelRanker ranker = ModelRanker.builder()
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName("semantic_ranker").
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields("document").
+    WithParam("reranker", "model").
+    WithParam("provider", "tei").
+    WithParam("queries", []string{"machine learning for time series"}).
+    WithParam("endpoint", "http://model-service:8080")
+
+schema := entity.NewSchema().
+    WithName("your_collection").
+    WithDynamicFieldEnabled(false).
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("document").WithDataType(entity.FieldTypeVarChar).WithMaxLength(65535)).
+    WithField(entity.NewField().WithName("dense_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(768)).
+    WithFunction(ranker)
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("your_collection", schema))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "your_collection",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "document",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 65535
+                }
+            },
+            {
+                "fieldName": "dense_vector",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": 768
+                }
+            }
+        ],
+        "functions": [
+            {
+                "name": "semantic_ranker",
+                "type": "Rerank",
+                "inputFieldNames": [
+                    "document"
+                ],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "model",
+                    "provider": "tei",
+                    "queries": [
+                        "machine learning for time series"
+                    ],
+                    "endpoint": "http://model-service:8080"
+                }
+            }
+        ]
+    }
+}'
 ```
 
 <table>
@@ -305,9 +399,64 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```go
-// go
+functionScore := entity.NewFunctionScore().AddFunction(model_ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "your_collection", // collection name
+    10,            // limit
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField("vector_field").
+    WithOutputFields("document").
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, rs := range resultSets {
+    fmt.Println("IDs: ", rs.IDs)
+    fmt.Println("Scores: ", rs.Scores)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "your_collection",
+    "data": [
+        [
+            0.1,
+            0.2,
+            0.3,
+            0.4
+        ]
+    ],
+    "annsField": "vector_field",
+    "limit": 10,
+    "outputFields": [
+        "document"
+    ],
+    "consistencyLevel": "Bounded",
+    "functionScore": {
+        "functions": [
+            {
+                "name": "semantic_ranker",
+                "type": "Rerank",
+                "inputFieldNames": [
+                    "document"
+                ],
+                "outputFieldNames": [],
+                "params": {}
+            }
+        ]
+    }
+}'
 ```
