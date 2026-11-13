@@ -197,7 +197,7 @@ curl --request POST \
         "fields": [
             {"fieldName": "id", "dataType": "Int64", "isPrimary": true},
             {"fieldName": "embeddings", "dataType": "FloatVector", "elementTypeParams": {"dim": 8}},
-            {"fieldName": "geo", "dataType": "Geometry", "isNullable": true},
+            {"fieldName": "geo", "dataType": "Geometry", "nullable": true},
             {"fieldName": "name", "dataType": "VarChar", "elementTypeParams": {"max_length": 128}}
         ]
     },

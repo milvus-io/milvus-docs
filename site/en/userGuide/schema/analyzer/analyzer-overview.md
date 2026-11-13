@@ -740,10 +740,11 @@ export TOKEN="root:Milvus"
 
     ```go
     analyzerParams = map[string]any{"tokenizer": "standard",
-        "filter": []any{"lowercase", 
+        "filter": []any{"lowercase",
         map[string]any{
             "type": "length",
             "max":  40,
+        },
         map[string]any{
             "type": "stop",
             "stop_words": []string{"of", "to"},
