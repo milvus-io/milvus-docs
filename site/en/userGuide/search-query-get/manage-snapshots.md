@@ -92,7 +92,19 @@ err = client.CreateSnapshot(context.Background(), createOpt)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101",
+    "description": "Daily backup for January 1st, 2024"
+}'
 ```
 
 ## List snapshots
@@ -131,7 +143,17 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 ```
 
 ```bash
-# bash
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/list" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection"
+}'
 ```
 
 ## Describe snapshot
@@ -175,7 +197,18 @@ fmt.Printf("Collection: %s\n", resp.GetSnapshotInfo().GetCollectionName())
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/describe" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101"
+}'
 ```
 
 ## Pin/unpin snapshot data
@@ -232,7 +265,29 @@ defer func() {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+# The pin response carries the pinId that the unpin request needs
+PIN_ID=$(curl --silent --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/pin" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101",
+    "ttlSeconds": 3600
+}' | jq -r '.data.pinId')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/unpin" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "{
+    \"pinId\": \"${PIN_ID}\"
+}"
 ```
 
 ## Restore snapshot
@@ -285,7 +340,19 @@ if err != nil {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/restore" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "sourceCollectionName": "my_collection",
+    "targetCollectionName": "restored_collection",
+    "snapshotName": "backup_20240101"
+}'
 ```
 
 For details on monitoring the progress of a restoration job, refer to [Get restoration state](#Get-restoration-state).
@@ -322,7 +389,18 @@ err := client.DropSnapshot(context.Background(), dropOpt)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/drop" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101"
+}'
 ```
 
 ## List restoration jobs
@@ -379,7 +457,26 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+# List all restore jobs
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/snapshot/list" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{}'
+
+# List restore jobs for a specific collection
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/snapshot/list" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection"
+}'
 ```
 
 ## Get restoration state
@@ -434,5 +531,15 @@ fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/snapshot/describe" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "jobId": "12345"
+}'
 ```
