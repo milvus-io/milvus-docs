@@ -180,27 +180,6 @@ curl --request POST \
                     "dim": 768
                 }
             }
-        ],
-        "functions": [
-            {
-                "name": "siliconflow_semantic_ranker",
-                "type": "Rerank",
-                "inputFieldNames": [
-                    "document"
-                ],
-                "outputFieldNames": [],
-                "params": {
-                    "reranker": "model",
-                    "provider": "siliconflow",
-                    "model_name": "BAAI/bge-reranker-v2-m3",
-                    "queries": [
-                        "renewable energy developments"
-                    ],
-                    "max_client_batch_size": 128,
-                    "max_chunks_per_doc": 5,
-                    "overlap_tokens": 50
-                }
-            }
         ]
     }
 }'
@@ -326,7 +305,7 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```go
-functionScore := entity.NewFunctionScore().AddFunction(siliconflow_ranker)
+functionScore := entity.NewFunctionScore().AddFunction(ranker)
 
 resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     "your_collection", // collection name
@@ -346,39 +325,47 @@ if err != nil {
 export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
 export TOKEN="{{var.example_token}}"
 
+# The ranker configuration is passed with the search request
+export rankerFunction='{
+    "name": "siliconflow_semantic_ranker",
+    "type": "Rerank",
+    "inputFieldNames": [
+        "document"
+    ],
+    "outputFieldNames": [],
+    "params": {
+        "reranker": "model",
+        "provider": "siliconflow",
+        "model_name": "BAAI/bge-reranker-v2-m3",
+        "queries": [
+            "renewable energy developments"
+        ],
+        "max_client_batch_size": 128,
+        "max_chunks_per_doc": 5,
+        "overlap_tokens": 50
+    }
+}'
+
+# A query vector matching the collection dimension
+export QUERY_VECTOR=$(jq -n '[range(768) | 0.01]')
+
+request=$(jq -n \
+--argjson vec "$QUERY_VECTOR" \
+--argjson fn "$rankerFunction" \
+'{
+    collectionName: "your_collection",
+    data: [$vec],
+    annsField: "dense_vector",
+    limit: 5,
+    outputFields: ["document"],
+    consistencyLevel: "Bounded",
+    functionScore: {functions: [$fn]}
+}')
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
--d '{
-    "collectionName": "your_collection",
-    "data": [
-        [
-            0.1,
-            0.2,
-            0.3,
-            0.4
-        ]
-    ],
-    "annsField": "dense_vector",
-    "limit": 5,
-    "outputFields": [
-        "document"
-    ],
-    "consistencyLevel": "Bounded",
-    "functionScore": {
-        "functions": [
-            {
-                "name": "siliconflow_semantic_ranker",
-                "type": "Rerank",
-                "inputFieldNames": [
-                    "document"
-                ],
-                "outputFieldNames": [],
-                "params": {}
-            }
-        ]
-    }
-}'
+-d "$request"
 ```

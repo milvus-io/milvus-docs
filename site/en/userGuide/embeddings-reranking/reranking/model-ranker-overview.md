@@ -262,24 +262,6 @@ curl --request POST \
                     "dim": 768
                 }
             }
-        ],
-        "functions": [
-            {
-                "name": "semantic_ranker",
-                "type": "Rerank",
-                "inputFieldNames": [
-                    "document"
-                ],
-                "outputFieldNames": [],
-                "params": {
-                    "reranker": "model",
-                    "provider": "tei",
-                    "queries": [
-                        "machine learning for time series"
-                    ],
-                    "endpoint": "http://model-service:8080"
-                }
-            }
         ]
     }
 }'
@@ -399,7 +381,7 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```go
-functionScore := entity.NewFunctionScore().AddFunction(model_ranker)
+functionScore := entity.NewFunctionScore().AddFunction(ranker)
 
 resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     "your_collection", // collection name
@@ -424,39 +406,44 @@ for _, rs := range resultSets {
 export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
 export TOKEN="{{var.example_token}}"
 
+# The ranker configuration is passed with the search request
+export rankerFunction='{
+    "name": "semantic_ranker",
+    "type": "Rerank",
+    "inputFieldNames": [
+        "document"
+    ],
+    "outputFieldNames": [],
+    "params": {
+        "reranker": "model",
+        "provider": "tei",
+        "queries": [
+            "machine learning for time series"
+        ],
+        "endpoint": "http://model-service:8080"
+    }
+}'
+
+# A query vector matching the collection dimension
+export QUERY_VECTOR=$(jq -n '[range(768) | 0.01]')
+
+request=$(jq -n \
+--argjson vec "$QUERY_VECTOR" \
+--argjson fn "$rankerFunction" \
+'{
+    collectionName: "your_collection",
+    data: [$vec],
+    annsField: "vector_field",
+    limit: 10,
+    outputFields: ["document"],
+    consistencyLevel: "Bounded",
+    functionScore: {functions: [$fn]}
+}')
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
--d '{
-    "collectionName": "your_collection",
-    "data": [
-        [
-            0.1,
-            0.2,
-            0.3,
-            0.4
-        ]
-    ],
-    "annsField": "vector_field",
-    "limit": 10,
-    "outputFields": [
-        "document"
-    ],
-    "consistencyLevel": "Bounded",
-    "functionScore": {
-        "functions": [
-            {
-                "name": "semantic_ranker",
-                "type": "Rerank",
-                "inputFieldNames": [
-                    "document"
-                ],
-                "outputFieldNames": [],
-                "params": {}
-            }
-        ]
-    }
-}'
+-d "$request"
 ```
