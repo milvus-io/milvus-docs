@@ -504,6 +504,8 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+fmt.Println(resultSets)
 ```
 
 ```rust

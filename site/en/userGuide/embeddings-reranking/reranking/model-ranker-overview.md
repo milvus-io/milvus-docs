@@ -218,8 +218,7 @@ schema := entity.NewSchema().
     WithDynamicFieldEnabled(false).
     WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
     WithField(entity.NewField().WithName("document").WithDataType(entity.FieldTypeVarChar).WithMaxLength(65535)).
-    WithField(entity.NewField().WithName("dense_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(768)).
-    WithFunction(ranker)
+    WithField(entity.NewField().WithName("dense_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(768))
 
 err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("your_collection", schema))
 if err != nil {
@@ -347,7 +346,7 @@ After defining your model ranker, you can apply it during search operations by p
 results = client.search(
     collection_name,
     data=[your_query_vector], # Number of query vectors must match that specified in model_ranker.params["queries"] 
-    anns_field="vector_field",
+    anns_field="dense_vector",
     limit=10,
     output_fields=["document"],  # Include the text field in outputs
     #  highlight-next-line
@@ -365,7 +364,7 @@ import io.milvus.v2.service.vector.request.data.EmbeddedText;
 SearchReq searchReq = SearchReq.builder()
         .collectionName(COLLECTION_NAME)
         .data(Collections.singletonList(new EmbeddedText("machine learning for time series")))
-        .annsField("vector_field")
+        .annsField("dense_vector")
         .limit(10)
         .outputFields(Collections.singletonList(document))
         .functionScore(FunctionScore.builder()
@@ -387,7 +386,7 @@ resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     "your_collection", // collection name
     10,            // limit
     []entity.Vector{entity.FloatVector(yourQueryVector)},
-).WithANNSField("vector_field").
+).WithANNSField("dense_vector").
     WithOutputFields("document").
     WithFunctionScore(functionScore).
     WithConsistencyLevel(entity.ClBounded))
@@ -433,7 +432,7 @@ request=$(jq -n \
 '{
     collectionName: "your_collection",
     data: [$vec],
-    annsField: "vector_field",
+    annsField: "dense_vector",
     limit: 10,
     outputFields: ["document"],
     consistencyLevel: "Bounded",

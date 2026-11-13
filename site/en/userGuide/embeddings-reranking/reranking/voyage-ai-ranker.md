@@ -133,8 +133,7 @@ schema := entity.NewSchema().
     WithDynamicFieldEnabled(false).
     WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
     WithField(entity.NewField().WithName("document").WithDataType(entity.FieldTypeVarChar).WithMaxLength(65535)).
-    WithField(entity.NewField().WithName("dense_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(768)).
-    WithFunction(ranker)
+    WithField(entity.NewField().WithName("dense_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(768))
 
 err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("your_collection", schema))
 if err != nil {
@@ -308,6 +307,8 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+fmt.Println(resultSets)
 ```
 
 ```bash
