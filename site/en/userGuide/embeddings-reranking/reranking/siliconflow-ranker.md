@@ -114,8 +114,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -141,7 +140,7 @@ schema := entity.NewSchema().
 err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("your_collection", schema))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
@@ -316,7 +315,7 @@ resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     WithConsistencyLevel(entity.ClBounded))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 fmt.Println(resultSets)

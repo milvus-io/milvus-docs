@@ -158,8 +158,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -176,7 +175,7 @@ err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("geo_coll
     WithConsistencyLevel(entity.ClStrong))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
@@ -343,7 +342,7 @@ _, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("geo_collection
     ))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
@@ -592,7 +591,7 @@ resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption("geo_collection").
     WithOutputFields("name", "geo"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 fmt.Println(resultSet.GetColumn("name"))
@@ -692,7 +691,7 @@ _, err = cli.Query(ctx, milvusclient.NewQueryOption("geo_collection").
     WithOutputFields("name", "geo"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
@@ -796,7 +795,7 @@ resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     WithOutputFields("name", "geo"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 for _, rs := range resultSets {

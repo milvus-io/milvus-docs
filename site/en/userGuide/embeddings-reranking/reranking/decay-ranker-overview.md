@@ -502,7 +502,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     WithOutputFields("document", "timestamp"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 fmt.Println(resultSets)

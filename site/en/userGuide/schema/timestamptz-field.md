@@ -96,8 +96,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -105,13 +104,13 @@ collectionName := "timestamptz_test123"
 has, err := cli.HasCollection(ctx, milvusclient.NewHasCollectionOption(collectionName))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 if has {
     err = cli.DropCollection(ctx, milvusclient.NewDropCollectionOption(collectionName))
     if err != nil {
         fmt.Println(err.Error())
-        // handle error
+        return
     }
 }
 
@@ -125,7 +124,7 @@ err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(collectio
     WithConsistencyLevel(entity.ClSession))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 fmt.Printf("Collection '%s' with a TimestampTz field created successfully.\n", collectionName)
 ```
@@ -236,7 +235,7 @@ _, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(collectionName)
     ))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 fmt.Println("Data inserted successfully.")
 ```
@@ -407,7 +406,7 @@ resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption(collectionName).
     WithLimit(10))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 fmt.Println("Query result: ", resultSet.GetColumn("tsz"))
 ```
@@ -485,7 +484,7 @@ resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption(collectionName).
     WithLimit(10))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 fmt.Println("Query result: ", resultSet.GetColumn("tsz"))
 ```
@@ -580,7 +579,7 @@ resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     WithOutputFields("id", "tsz"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 for _, rs := range resultSets {

@@ -129,8 +129,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -386,7 +385,7 @@ err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("dedup_co
     WithIndexOptions(indexOption))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("dedup_collection"))
@@ -471,7 +470,7 @@ _, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("dedup_collecti
     })))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
@@ -554,7 +553,7 @@ resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     WithOutputFields("document_content"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 for _, rs := range resultSets {

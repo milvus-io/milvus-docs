@@ -158,8 +158,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -171,7 +170,7 @@ option := milvusclient.NewRunAnalyzerOption(texts...).
 result, err := cli.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 fmt.Println(result)
@@ -536,6 +535,7 @@ const client = new MilvusClient("http://localhost:19530");
 ```go
 import (
     "context"
+    "encoding/json"
     "fmt"
 
     "github.com/milvus-io/milvus/client/v3/entity"
@@ -550,8 +550,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle err
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -637,10 +636,8 @@ export TOKEN="root:Milvus"
     result, err := cli.RunAnalyzer(ctx, option)
     if err != nil {
         fmt.Println(err.Error())
-        // handle error
+        return
     }
-    
-    
 
     fmt.Println(result)
     ```
@@ -772,9 +769,8 @@ export TOKEN="root:Milvus"
     result, err := cli.RunAnalyzer(ctx, option)
     if err != nil {
         fmt.Println(err.Error())
-        // handle error
+        return
     }
-    
 
     fmt.Println(result)
     ```
@@ -1042,7 +1038,7 @@ err = cli.CreateCollection(ctx,
         WithIndexOptions(indexOption))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 

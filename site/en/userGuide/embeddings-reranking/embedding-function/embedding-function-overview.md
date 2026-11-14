@@ -262,8 +262,7 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer cli.Close(ctx)
 
@@ -532,7 +531,7 @@ err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("demo", s
     WithIndexOptions(indexOption))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("demo"))
@@ -614,7 +613,7 @@ _, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("demo").
     ))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
@@ -682,7 +681,7 @@ resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
     WithOutputFields("document"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 for _, rs := range resultSets {
@@ -783,7 +782,7 @@ textResults, err := cli.Search(ctx, milvusclient.NewSearchOption(
 ).WithANNSField("dense"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 // Pre-computed vector: yourQueryVector must have the same dimension as the stored embeddings
@@ -794,7 +793,7 @@ vectorResults, err := cli.Search(ctx, milvusclient.NewSearchOption(
 ).WithANNSField("dense"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 
 fmt.Println(textResults, vectorResults)
