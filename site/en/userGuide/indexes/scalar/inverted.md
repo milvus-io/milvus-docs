@@ -1,42 +1,64 @@
 ---
 id: inverted.md
 title: "INVERTED"
-summary: "When you need to perform frequent filter queries on your data, INVERTED indexes can dramatically improve query performance. Instead of scanning through all documents, an inverted index quickly locates the exact records that match your filter conditions."
+summary: "Use INVERTED indexes for value filtering on scalar fields, arrays, and typed JSON paths."
 ---
 
 # INVERTED
 
-When you need to perform frequent filter queries on your data, `INVERTED` indexes can dramatically improve query performance. Instead of scanning through all documents, {{var.product_name}} uses inverted indexes to quickly locate the exact records that match your filter conditions.
+`INVERTED` maps field values to the entities containing them to accelerate scalar filtering.
 
-## When to use INVERTED indexes
+## Overview
 
-Use INVERTED indexes when you need to:
+<a id="When-to-use-INVERTED-indexes"></a>
 
-- **Filter by specific values**: Find all records where a field equals a specific value (e.g., `category == "electronics"`)
+Use `INVERTED` for equality, membership, and range filters on compatible fields or JSON paths, such as `category == "electronics"`.
 
-- **Filter text content**: Perform efficient searches on `VARCHAR` fields
+<a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a>
 
-- **Query JSON field values**: Filter on specific keys within JSON structures
+### Index targets and filters
 
-**Performance benefit**: INVERTED indexes can reduce query time from seconds to milliseconds on large datasets by eliminating the need for full collection scans.
+The following table pairs supported `INVERTED` index targets with the filters the index can help evaluate:
 
-## How INVERTED indexes work
+| Index target | Filters that can use the index |
+| --- | --- |
+| `BOOL` field | Equality (`==`, `!=`) and membership (`in`, `not in`). |
+| Numeric field (`INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`) | Equality, membership, and ranges (`<`, `<=`, `>`, `>=`). |
+| `VARCHAR` field | Equality, membership, ranges, prefix matching such as `name LIKE "abc%"`, and general LIKE such as `name LIKE "a%b_c"`. |
+| Ordinary `ARRAY` field with `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`, or `VARCHAR` elements | Element containment and eligible whole-array comparisons. See [Array index support](array_data_type.md#Array-index-support). |
+| Typed JSON path | Filters appropriate to the indexed cast. Specify path and cast parameters; see [JSON Indexing](json-indexing.md#Understand-cast-types) for cast compatibility and [JSON filter details](json-indexing.md#Supported-filters) for query behavior. |
 
-An **INVERTED index** in {{var.product_name}} maps each unique field value (term) to the set of document IDs where that value occurs. This structure enables fast lookups for fields with repeated or categorical values.
+{{fragments/scalar-array-index-requirements.md}}
 
-As shown in the diagram, the process works in two steps:
+Simple suffix (`LIKE "%abc"`) and substring (`LIKE "%abc%"`) filters use a scan path, even though more complex LIKE patterns can use this index. Regex filters do not use direct INVERTED pattern lookup. These rules apply after [query-planning simplifications](pattern-matching.md#Accelerate-pattern-matching-with-indexes).
 
-1. **Forward mapping (ID → Term):** Each document ID points to the field value it contains.
+A scalar `INVERTED` index does not enable token-based `TEXT_MATCH` or `PHRASE_MATCH`; see [Text Match](keyword-match.md).
 
-1. **Inverted mapping (Term → IDs):** {{var.product_name}} collects unique terms and builds a reverse mapping from each term to all IDs that contain it.
+{{fragments/scalar-index-filter-execution.md}}
 
-For example, the value **"electronics"** maps to IDs **1** and **3**, while **"books"** maps to IDs **2** and **5**.
+### Memory considerations
+
+For a rough loaded-memory estimate, use `S` bytes, where `S` is the size of the built index before storage compression. Build an index on representative data to obtain `S`; raw field data size is not a substitute.
+
+{{fragments/scalar-index-memory-estimates.md}}
+
+<a id="How-INVERTED-indexes-work"></a>
+
+### How INVERTED works
+
+<details>
+<summary><strong>View a value lookup example</strong></summary>
+
+An inverted index reverses the mapping from entity IDs to field values. In the diagram, **"electronics"** maps to IDs **1** and **3**, while **"books"** maps to IDs **2** and **5**.
 
 ![How Inverted Index Works](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png)
 
-When you filter for a specific value (e.g., `category == "electronics"`), {{var.product_name}} simply looks up the term in the index and retrieves the matching IDs directly. This avoids scanning the full dataset and enables fast filtering, especially for categorical or repeated values.
+For `category == "electronics"`, {{var.product_name}} retrieves IDs **1** and **3** from the index rather than checking every entity's category.
 
-INVERTED indexes support all scalar field types, such as **BOOL**, **INT8**, **INT16**, **INT32**, **INT64**, **FLOAT**, **DOUBLE**, **VARCHAR**, **JSON**, and **ARRAY**. However, the index parameters for indexing a JSON field are slightly different from regular scalar fields.
+</details>
 
 ## Create indexes on non-JSON fields
 
@@ -295,6 +317,7 @@ To create an index on a non-JSON field, follow these steps:
     ```
 
 <!-- doc:block:start id="inverted-json-heading" -->
+
 ## Create indexes on JSON fields | Milvus 2.5.11+
 <!-- doc:block:end id="inverted-json-heading" -->
 
@@ -465,13 +488,7 @@ For detailed information about JSON field indexing, including supported paths, d
 Use the `drop_index()` method to remove an existing index from a collection.
 
 <!-- doc:block:start id="inverted-drop-note" -->
-<div class="alert note">
-
-- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
-
-- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
-
-</div>
+{{fragments/scalar-index-drop-compatibility.md}}
 <!-- doc:block:end id="inverted-drop-note" -->
 
 <div class="multipleCode">
@@ -584,20 +601,13 @@ curl --request POST \
 }'
 ```
 
-## Best practices
-
-- **Create indexes after loading data**: Build indexes on collections that already contain data for better performance
-
-- **Use descriptive index names**: Choose names that clearly indicate the field and purpose
-
-- **Monitor index performance**: Check query performance before and after creating indexes
-
-- **Consider your query patterns**: Create indexes on fields you frequently filter by
+<a id="Best-practices"></a>
 
 <!-- doc:block:start id="inverted-next-steps" -->
+
 ## Next steps
 
-- Learn about [other index types](index-explained.md)
+- Compare scalar indexes and plan resources in [Scalar Index](scalar_index.md#Whats-next).
 
 - See [JSON Indexing](json-indexing.md) for advanced JSON indexing scenarios
 <!-- doc:block:end id="inverted-next-steps" -->

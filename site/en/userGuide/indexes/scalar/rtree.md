@@ -1,19 +1,46 @@
 ---
 id: rtree.md
 title: "RTREE"
-summary: "The RTREE index is a tree-based data structure that accelerates queries on GEOMETRY fields. If your collection stores geometric objects such as points, lines, or polygons in Well-known text (WKT) format and you want to accelerate spatial filtering, RTREE is an ideal choice."
+summary: "Use RTREE to accelerate spatial filtering on GEOMETRY fields."
 beta: Milvus 2.6.4+
 ---
 
 # RTREE
 
-The `RTREE` index is a tree-based data structure that accelerates queries on `GEOMETRY` fields in {{var.product_name}}. If your collection stores geometric objects such as points, lines, or polygons in [Well-known text (WKT)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) format and you want to accelerate spatial filtering, `RTREE` is an ideal choice.
+`RTREE` accelerates spatial filtering on `GEOMETRY` fields containing points, lines, or polygons in [Well-known text (WKT)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) format.
 
-## How it works
+## Overview
+
+### Supported data types
+
+`GEOMETRY` fields. See [Geometry Field](geometry-field.md) for field definitions.
+
+<a id="Supported-filters"></a>
+
+### Filter acceleration
+
+`RTREE` finds candidates using bounding boxes, then {{var.product_name}} checks the exact spatial relation. It supports the following [geometry operators](geometry-operators.md):
+
+- `ST_EQUALS`, `ST_INTERSECTS`, `ST_CONTAINS`, and `ST_WITHIN`.
+- `ST_TOUCHES`, `ST_OVERLAPS`, `ST_CROSSES`, and `ST_DWITHIN`.
+
+`ST_ISVALID` does not use `RTREE`. Without an eligible index, spatial filters scan the field.
+
+{{fragments/scalar-index-filter-execution.md}}
+
+<a id="How-it-works"></a>
+
+### How RTREE works
+
+<a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a>
+
+<details>
+<summary><strong>View the build and query process</strong></summary>
 
 {{var.product_name}} uses an `RTREE` index to efficiently organize and filter geometry data, following a two-phase process:
 
-### Phase 1: Build the index
+**Phase 1: Build the index**
 
 1. **Create leaf nodes:** For each geometry object, calculate its [Minimum Bounding Rectangle](https://en.wikipedia.org/wiki/Minimum_bounding_rectangle) (MBR), which is the smallest rectangle that fully contains the object, and store it as a leaf node.
 
@@ -23,7 +50,7 @@ The `RTREE` index is a tree-based data structure that accelerates queries on `GE
 
 ![How Retree Works](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-retree-works.png)
 
-### Phase 2: Accelerate queries
+**Phase 2: Accelerate queries**
 
 1. **Form the query MBR:** Calculate the MBR for your query geometry.
 
@@ -32,6 +59,8 @@ The `RTREE` index is a tree-based data structure that accelerates queries on `GE
 1. **Collect candidates:** Descend into intersecting branches to gather candidate leaf nodes.
 
 1. **Exact match:** For each candidate, perform an exact spatial predicate to determine true matches.
+
+</details>
 
 ## Create an RTREE index
 
@@ -234,9 +263,7 @@ curl --request POST \
 
 ## Query with RTREE
 
-You filter with geometry operators in the `filter` expression. When an `RTREE` exists on the target `GEOMETRY` field, {{var.product_name}} uses it to prune candidates automatically. Without the index, the filter falls back to a full scan.
-
-For a full list of available geometry-specific operators, refer to [Geometry Operators](geometry-operators.md).
+The following examples use an indexed `GEOMETRY` field named `geo`.
 
 ### Example 1: Filter only
 
@@ -557,13 +584,7 @@ For more information on how to use a `GEOMETRY` field, refer to [Geometry Field]
 Use the `drop_index()` method to remove an existing index from a collection.
 
 <!-- doc:block:start id="rtree-drop-note" -->
-<div class="alert note">
-
-- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
-
-- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
-
-</div>
+{{fragments/scalar-index-drop-compatibility.md}}
 <!-- doc:block:end id="rtree-drop-note" -->
 
 <div class="multipleCode">
