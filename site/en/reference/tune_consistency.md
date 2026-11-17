@@ -130,7 +130,7 @@ curl --request POST \
 }"
 ```
 
-Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, `Session`, and `Customized`.
+Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.
 
 ### Alter the Collection Consistency Level
 
@@ -253,7 +253,7 @@ curl --request POST \
 }'
 ```
 
-This parameter is also available in hybrid searches and the search iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, `Session`, and `Customized`.
+This parameter is also available in hybrid searches and the search iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.
 
 ### Set Consistency Level in Query
 
@@ -316,4 +316,4 @@ curl --request POST \
 }'
 ```
 
-This parameter is also available in the query iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, `Session`, and `Customized`.
+This parameter is also available in the query iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.
