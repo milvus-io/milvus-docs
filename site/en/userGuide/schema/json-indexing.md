@@ -26,7 +26,9 @@ Choose the key to index with `json_path`, such as `metadata["price"]`. Set `json
 <a id="BITMAP"></a>
 <a id="NGRAM"></a>
 
+<!-- doc:block:start id="json-index-compatibility-intro" -->
 Choose a cast and one of its supported index types. This table lists the JSON path combinations supported in Milvus 3.0.6 with the default automatic type mapping; options marked * require the [opt-in setup](#Index-requirements):
+<!-- doc:block:end id="json-index-compatibility-intro" -->
 
 | Cast type | Values at the path | Supported index types |
 | --- | --- | --- |
@@ -50,11 +52,12 @@ Check these conditions before creating an index:
 
 - **One index per path:** Each `(field, json_path)` pair supports at most one index across all cast and index types.
 - **Matching query types:** A query must target the indexed path with a compatible value type to use the index. Incompatible filters can fall back to scanning.
-- **Array casts:** Specify `INVERTED` explicitly for `ARRAY_BOOL`, `ARRAY_DOUBLE`, and `ARRAY_VARCHAR`. The default 3.0.6 automatic type mapping does not accept these casts.
+- **Array casts:** Specify `INVERTED` explicitly for `ARRAY_BOOL`, `ARRAY_DOUBLE`, and `ARRAY_VARCHAR`. The default automatic type mapping does not accept these casts.
 - **String-pattern indexes:** For a `NGRAM` index, use a `VARCHAR` cast and supply `min_gram` and `max_gram`. See [NGRAM on a JSON path](ngram.md#Example-2-Create-on-a-JSON-path) for parameters and creation examples.
 
 <a id="AUTOINDEX"></a>
 
+<!-- doc:block:start id="json-index-opt-in" -->
 JSON scalar `BITMAP`, `STL_SORT`, and cardinality-based automatic selection are available from Milvus 3.0.0. Before using the options marked * or cardinality-based `AUTOINDEX`, have your administrator complete the [index opt-in setup in the compatibility notes](release_notes.md#Compatibility-and-behavior-notes).
 
 <div class="alert note">
@@ -62,6 +65,7 @@ JSON scalar `BITMAP`, `STL_SORT`, and cardinality-based automatic selection are 
 > Without the opt-in setup, `AUTOINDEX` uses `INVERTED` for scalar JSON paths, and explicit JSON `BITMAP` or `STL_SORT` requests fail. `INVERTED` and `NGRAM` do not require this setup. For automatic-selection rules and administrator overrides, see [AUTOINDEX behavior](scalar_index.md#AUTOINDEX-behavior).
 
 </div>
+<!-- doc:block:end id="json-index-opt-in" -->
 
 <details id="Supported-filters">
 <summary><strong>JSON filter execution details</strong></summary>
@@ -1476,7 +1480,7 @@ For `AUTOINDEX` entries, the `index_type` field in this response is reported as 
 <details id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold">
 <summary><strong>Advanced: Tune automatic selection for a JSON path</strong></summary>
 
-This example changes the cardinality threshold for `metadata["category"]`. It applies only after the [opt-in setup](#Index-requirements) enables cardinality-based `AUTOINDEX`. For the parameter range, layout choices, and explicit-index behavior, see [Cardinality threshold](scalar_index.md#Cardinality-threshold):
+This example changes the cardinality threshold for `metadata["category"]`. It requires cardinality-based `AUTOINDEX`; check the [index requirements](#Index-requirements) before using it. For the parameter range, layout choices, and explicit-index behavior, see [Cardinality threshold](scalar_index.md#Cardinality-threshold):
 
 <div class="multipleCode">
     <a href="#python">Python</a>

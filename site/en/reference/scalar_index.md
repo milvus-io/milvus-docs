@@ -47,6 +47,7 @@ An index serves only eligible expressions; other filters can scan the data. Arit
 <a id="Array-JSON-and-spatial-predicates"></a>
 <a id="JSON-field-indexing"></a>
 
+<!-- doc:block:start id="scalar-index-field-compatibility" -->
 Find your field's data type to see its supported explicit indexes. In array rows, `ARRAY<T>` means `ARRAY` with `element_type=T`:
 
 | Field type | Explicit index types | Conditions |
@@ -64,6 +65,7 @@ Find your field's data type to see its supported explicit indexes. In array rows
 | `JSON` | Depends on the indexed path and cast type. | Check [JSON path compatibility and requirements](json-indexing.md#Understand-cast-types). |
 | StructArray non-vector subfields | Depends on the subfield's data type. | Index subfields separately; `BOOL` subfields cannot use explicit `STL_SORT`. See [subfield rules](index-structarray-fields.md#Create-scalar-indexes). |
 | `TEXT` | None | User-created scalar indexes, including `AUTOINDEX`, are unavailable. |
+<!-- doc:block:end id="scalar-index-field-compatibility" -->
 
 {{fragments/scalar-array-index-requirements.md}}
 
@@ -87,6 +89,7 @@ Ranges on `VARCHAR` use string ordering, even when strings contain numbers. Inde
 
 ## AUTOINDEX behavior
 
+<!-- doc:block:start id="scalar-auto-defaults" -->
 Set `index_type` to `AUTOINDEX` in each selected field's index definition. {{var.product_name}} chooses a type using the data type and, where applicable, the number of distinct values in each index build:
 
 | Field type | Default selection |
@@ -99,6 +102,7 @@ Set `index_type` to `AUTOINDEX` in each selected field's index definition. {{var
 | `TIMESTAMPTZ` | `STL_SORT` |
 | `GEOMETRY` | `RTREE` |
 | `TEXT` | Not supported. |
+<!-- doc:block:end id="scalar-auto-defaults" -->
 
 <div class="alert note">
 
@@ -109,11 +113,13 @@ Set `index_type` to `AUTOINDEX` in each selected field's index definition. {{var
 <a id="Version-compatibility"></a>
 
 <details>
-<summary><strong>Selection details and administrator settings</strong></summary>
+<summary><strong>Selection details</strong></summary>
 
 - **Internal layouts:** `AUTOINDEX` can select layouts unavailable as explicit choices, such as bitmap indexing for `FLOAT` and `DOUBLE`. The cardinality-based strategy is called `HYBRID` internally; you cannot specify it directly. The selected index determines which filters can use it.
-- **Cardinality threshold:** <a id="Cardinality-threshold"></a>Set `bitmap_cardinality_limit` (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the table's high-cardinality layout applies. Explicit `INVERTED`, `STL_SORT`, and `BITMAP` builds bypass cardinality-based selection and ignore this threshold.
+- **Cardinality threshold:** <a id="Cardinality-threshold"></a>Set `bitmap_cardinality_limit` (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the data type's high-cardinality layout applies. Explicit `INVERTED`, `STL_SORT`, and `BITMAP` builds bypass cardinality-based selection and ignore this threshold.
+<!-- doc:block:start id="scalar-auto-admin-settings" -->
 - **Administrator overrides:** Change type mappings through `scalarAutoIndex.params.build`. `scalarAutoIndex.enable=false` (default) still allows explicit `AUTOINDEX`; `true` also applies automatic selection to valid manual requests.
+<!-- doc:block:end id="scalar-auto-admin-settings" -->
 
 </details>
 
@@ -128,9 +134,11 @@ Choose a guide for your next task:
 - **Plan resources:** See memory guidance for [STL_SORT](stl-sort.md#Memory-considerations), [BITMAP](bitmap.md#Memory-considerations), [INVERTED](inverted.md#Memory-considerations), or [NGRAM](ngram.md#Memory-considerations). Compare memory use, build time, and query latency with representative data and filters.
 - **Configure text search:** [Text Match](keyword-match.md) and [Full Text Search](full-text-search.md) cover text analysis, BM25, `TEXT_MATCH`, and `PHRASE_MATCH`. A scalar `INVERTED` index does not enable these mechanisms.
 
+<!-- doc:block:start id="scalar-index-drop-compatibility" -->
 <details id="Drop-index-compatibility">
 <summary><strong>Dropping scalar indexes on older Milvus releases</strong></summary>
 
 In Milvus v2.6.3 or earlier, release the collection before dropping a scalar index. From v2.6.4 onward, you can drop it without releasing the collection.
 
 </details>
+<!-- doc:block:end id="scalar-index-drop-compatibility" -->
