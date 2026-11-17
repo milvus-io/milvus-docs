@@ -369,7 +369,7 @@ Set `params.weights` to give each search path a different influence on the fused
 <!-- doc:block:start id="rrf-weights-version-note" -->
 <div class="alert note">
 
-Weighted RRF requires Milvus 3.0.1 or later, or Milvus 2.6.24 or later in the 2.6.x line. Earlier versions ignore the `weights` parameter without returning an error and rank results with classic RRF.
+Weighted RRF requires Milvus 3.0.1 or later, or Milvus 2.6.23 or later in the 2.6.x line. Earlier versions ignore the `weights` parameter without returning an error and rank results with classic RRF.
 
 </div>
 <!-- doc:block:end id="rrf-weights-version-note" -->
