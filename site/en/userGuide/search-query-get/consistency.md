@@ -48,7 +48,7 @@ Milvus uses Bounded Staleness as the default consistency level. If the Guarantee
 
 ## Set Consistency Level​
 
-You can set different consistency levels when you create a collection as well as perform searches and queries.​
+You can set the consistency level when you create a collection, alter it after the collection is created, or override it for individual searches and queries.​
 
 ### Set Consistency Level upon Creating Collection​
 
@@ -123,7 +123,63 @@ curl --request POST \​
 
 ```
 
-Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.​
+Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, `Session`, and `Customized`.​
+
+### Alter the Collection Consistency Level
+
+You can change the default consistency level of an existing collection by altering its `consistency_level` property. The new level applies to subsequent searches and queries on the collection that do not specify a consistency level of their own, and changing it does not require releasing the collection. The following code example alters the consistency level to **Eventually**.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.alter_collection_properties(
+    collection_name="my_collection",
+    # highlight-next
+    properties={"consistency_level": "Eventually"}
+)
+```
+
+```java
+import io.milvus.v2.service.collection.request.AlterCollectionReq;
+import java.util.HashMap;
+import java.util.Map;
+
+Map<String, String> properties = new HashMap<>();
+// highlight-next
+properties.put("consistency_level", "Eventually");
+
+AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+        .collectionName("my_collection")
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+```
+
+```go
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty("consistency_level", "Eventually"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "my_collection",
+    "properties": {
+        "consistency_level": "Eventually"
+    }
+}'
+```
 
 ### Set Consistency Level in Search​
 
@@ -177,7 +233,7 @@ curl --request POST \​
 
 ```
 
-This parameter is also available in hybrid searches and the search iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.​
+This parameter is also available in hybrid searches and the search iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, `Session`, and `Customized`.​
 
 ### Set Consistency Level in Query​
 
@@ -214,4 +270,4 @@ QueryReq queryReq = QueryReq.builder()​
 
 ```
 
-This parameter is also available in the query iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.​
+This parameter is also available in the query iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, `Session`, and `Customized`.​
