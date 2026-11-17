@@ -1524,7 +1524,22 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "product_catalog",
+    "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    "annsField": "embedding",
+    "limit": 20,
+    "outputFields": ["id", "price", "rating", "category"],
+    "orderByFields": ["price:asc"]
+}'
 ```
 <!-- doc:block:end id="basic-vector-search-sort-single" -->
 
@@ -1717,7 +1732,22 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "product_catalog",
+    "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    "annsField": "embedding",
+    "limit": 20,
+    "outputFields": ["id", "price", "rating", "category"],
+    "orderByFields": ["price:asc", "rating:desc"]
+}'
 ```
 <!-- doc:block:end id="basic-vector-search-sort-multi" -->
 
