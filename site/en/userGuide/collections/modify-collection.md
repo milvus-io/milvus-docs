@@ -283,7 +283,7 @@ You can modify collection-level properties after a collection is created.
    </tr>
    <tr>
      <td><p><code>consistency_level</code></p></td>
-     <td><p>Alters the default consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), <strong>Eventually</strong>, or <strong>Customized</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="tune_consistency.md">Consistency Level</a>.</p></td>
+     <td><p>Alters the default consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), or <strong>Eventually</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="tune_consistency.md">Consistency Level</a>.</p></td>
    </tr>
 </table>
 <!-- doc:block:end id="supported-properties" -->
