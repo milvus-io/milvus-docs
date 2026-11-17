@@ -1,101 +1,136 @@
 ---
 id: scalar_index.md
 related_key: scalar_index
-summary: Scalar index in Milvus.
+summary: Compare scalar index types, check field compatibility, and understand automatic index selection.
 title: Scalar Index
 ---
 
 # Scalar Index
 
-Milvus supports filtered searches combining both scalar and vector fields. To enhance the efficiency of searches involving scalar fields, Milvus introduced scalar field indexing starting from version 2.1.0. This article provides an overview of scalar field indexing in Milvus, helping you understand its significance and implementation.
+Scalar indexes can accelerate [filtering](boolean.md) on non-vector fields. Use this overview to choose an index, check field compatibility, and understand automatic selection.
 
-## Overview
+Consider indexing fields used in frequent or slow filters. For each field you include in the index-creation request, choose one of two options:
 
-Once conducting vector similarity searches in Milvus, you can use logical operators to organize scalar fields into boolean expressions.
+- **Specify an index type:** Choose one compatible with the field's data type and your filters.
+- **Use `AUTOINDEX`:** Set `index_type` to `AUTOINDEX` to let {{var.product_name}} choose a type. See [AUTOINDEX behavior](#AUTOINDEX-behavior).
 
-When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a [bitset](bitset.md) as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.
+## Index types
 
-![Attribute filtering in a segment](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png)
+<a id="Supported-predicates"></a>
+<a id="Comparisons-and-membership"></a>
+<a id="String-patterns"></a>
 
-Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval.
+Open an index guide for its supported filters, parameters, and creation steps:
 
-## Scalar field indexing algorithms
+| Index type | Use for |
+| --- | --- |
+| [INVERTED](inverted.md) | Equality, membership, and range filters. |
+| [BITMAP](bitmap.md) | Fields with few distinct values, such as status codes. |
+| [STL_SORT](stl-sort.md) | Value lookups and range filters. |
+| [TRIE](trie.md) | Exact string lookups and prefix matching on `VARCHAR` fields. |
+| [NGRAM](ngram.md) | LIKE and eligible regex filters. |
+| [RTREE](rtree.md) | Spatial filters on `GEOMETRY` fields. |
 
-Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: [auto indexing](#auto-indexing) and [inverted indexing](#inverted-indexing).
+Check the field compatibility table below and the selected index's filter support before creating an index.
 
-### Auto indexing
+<details id="Filter-execution">
+<summary><strong>How filters use indexes</strong></summary>
 
-Milvus provides the `AUTOINDEX` option to free you from having to manually choose an index type. When calling the `create_index` method, if the `index_type` is not specified, Milvus automatically selects the most suitable index type based on the data type.
+An index serves only eligible expressions; other filters can scan the data. Arithmetic and comparisons between fields do not inherit literal-lookup acceleration. For logical combinations and NULL tests, see [Basic Operators](basic-operators.md).
 
-The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.
+</details>
 
-| Data type |   Auto indexing algorithm  |
-|-----------|----------------------------|
-| VARCHAR   | Inverted index             |
-| INT8      | Inverted index             |
-| INT16     | Inverted index             |
-| INT32     | Inverted index             |
-| INT64     | Inverted index             |
-| FLOAT     | Inverted index             |
-| DOUBLE    | Inverted index             |
+<a id="Choosing-a-scalar-index"></a>
 
-### Inverted indexing
+## Supported field types
 
-Inverted indexing offers a flexible way to create an index for a scalar field by manually specifying index parameters. This method works well for various scenarios, including point queries, pattern match queries, full-text searches, JSON searches, Boolean searches, and even prefix match queries.
+<a id="Array-JSON-and-spatial-predicates"></a>
+<a id="JSON-field-indexing"></a>
 
-The inverted indexes implemented in Milvus are powered by [Tantivy](https://github.com/quickwit-oss/tantivy), a full-text search engine library. Tantivy ensures that inverted indexing in Milvus is both efficient and fast.
+Find your field's data type to see its supported explicit indexes. In array rows, `ARRAY<T>` means `ARRAY` with `element_type=T`:
 
-An inverted index has two main components: a term dictionary and an inverted list. The term dictionary includes all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This setup makes point queries and range queries much faster and more efficient than brute-force searches.
+| Field type | Explicit index types | Conditions |
+| --- | --- | --- |
+| `BOOL` | `INVERTED`, `BITMAP` | Scalar Boolean fields do not support `STL_SORT`. |
+| `INT8`, `INT16`, `INT32`, `INT64` | `INVERTED`, `BITMAP`, `STL_SORT` | `BITMAP` is unavailable on primary-key fields. |
+| `FLOAT`, `DOUBLE` | `INVERTED`, `STL_SORT` | Explicit `BITMAP` is unavailable. |
+| `VARCHAR` | `INVERTED`, `BITMAP`, `STL_SORT`, `TRIE`, `NGRAM` | `BITMAP` is unavailable on primary-key fields. See [index selection by filter](#String-pattern-indexes). |
+| `TIMESTAMPTZ` | `STL_SORT` | See [TIMESTAMPTZ Field](timestamptz-field.md). |
+| `GEOMETRY` | `RTREE` | See [RTREE](rtree.md). |
+| `ARRAY<BOOL>` | `INVERTED`, `BITMAP` | See [Array index support](array_data_type.md#Array-index-support). |
+| `ARRAY<INT8>`, `ARRAY<INT16>`, `ARRAY<INT32>`, `ARRAY<INT64>` | `INVERTED`, `BITMAP` | See [Array index support](array_data_type.md#Array-index-support). |
+| `ARRAY<FLOAT>`, `ARRAY<DOUBLE>` | `INVERTED` | See [Array index support](array_data_type.md#Array-index-support). |
+| `ARRAY<VARCHAR>` | `INVERTED`, `BITMAP` | See [Array index support](array_data_type.md#Array-index-support). |
+| `JSON` | Depends on the indexed path and cast type. | Check [JSON path compatibility and requirements](json-indexing.md#Understand-cast-types). |
+| StructArray non-vector subfields | Depends on the subfield's data type. | Index subfields separately; `BOOL` subfields cannot use explicit `STL_SORT`. See [subfield rules](index-structarray-fields.md#Create-scalar-indexes). |
+| `TEXT` | None | User-created scalar indexes, including `AUTOINDEX`, are unavailable. |
 
-![Inverted index diagram](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png)
+{{fragments/scalar-array-index-requirements.md}}
 
-The advantages of using an inverted index are particularly evident in the following operations:
+<details id="String-pattern-indexes">
+<summary><strong>Choose an index for VARCHAR filters</strong></summary>
 
-- **Point query**: For example, when searching for documents containing the word **Milvus**, the process begins by checking if **Milvus** is present in the term dictionary. If it is not found, no documents contain the word. However, if it is found, the inverted list associated with **Milvus** is retrieved, indicating the documents that contain the word. This method is far more efficient than a brute-force search through a million documents, as the sorted term dictionary significantly reduces the time complexity of finding the word **Milvus**.
-- **Range query**: The efficiency of range queries, such as finding documents with words alphabetically greater than **very**, is also enhanced by the sorted term dictionary. This approach is more efficient than a brute-force search, providing quicker and more accurate results.
+For a `VARCHAR` field, compare compatible indexes based on your filters:
 
-### Test results
+| Filtering need | Index guides and conditions |
+| --- | --- |
+| Exact string lookups and prefixes | [TRIE](trie.md#Queries-accelerated-by-TRIE), [STL_SORT](stl-sort.md#Queries-accelerated-by-STLSORT), or [INVERTED](inverted.md#Queries-accelerated-by-INVERTED). |
+| Few distinct string values | [BITMAP](bitmap.md#Queries-accelerated-by-BITMAP); patterns are evaluated against indexed values. |
+| LIKE or regex with suitable fixed literals | [NGRAM](ngram.md#Queries-accelerated-by-NGRAM) on `VARCHAR` fields or JSON string paths, subject to gram-length and recheck conditions. |
+| Regex without usable fixed literals | The query can scan data or evaluate many indexed values; check the selected index's conditions. |
 
-To demonstrate the performance improvements provided by scalar indexes in Milvus, an experiment was conducted comparing the performance of several expressions using inverted indexing and brute-force search on raw data.
+Ranges on `VARCHAR` use string ordering, even when strings contain numbers. Index use depends on query planning, extractable literals, cardinality, and data distribution. See [Pattern Matching](pattern-matching.md#Accelerate-pattern-matching-with-indexes) for planning rules. For JSON string paths, check the path and cast requirements in [JSON Indexing](json-indexing.md).
 
-The experiment involved testing various expressions under two conditions: with an inverted index and with a brute-force search. To ensure fairness, the same data distribution was maintained across tests, using the same collection each time. Before each test, the collection was released, and the index was dropped and rebuilt. Additionally, a warm query was performed before each test to minimize the impact of cold and hot data, and each query was executed multiple times to ensure accuracy.
+</details>
 
-For a dataset of **1 million** records, using an **inverted index** can provide up to a **30x** performance improvement for point queries. The performance gains can be even more significant for larger datasets.
+<a id="How-AUTOINDEX-selects"></a>
 
-## Performance recommandations
+## AUTOINDEX behavior
 
-To take full advantage of Milvus' capability in scalar field indexing and unleash its power in vector similarity searches, you may need a model to estimate the size of memory required based on the data you have.
+Set `index_type` to `AUTOINDEX` in each selected field's index definition. {{var.product_name}} chooses a type using the data type and, where applicable, the number of distinct values in each index build:
 
-The following tables list the estimation functions for all the data types that Milvus supports.
+| Field type | Default selection |
+| --- | --- |
+| `BOOL`, `ARRAY<BOOL>` | `BITMAP` |
+| `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`, `VARCHAR` | `BITMAP` for fewer than 100 distinct values; otherwise `STL_SORT`. |
+| `ARRAY` with `element_type` set to `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`, or `VARCHAR` | `BITMAP` for fewer than 100 distinct elements; otherwise `INVERTED`. |
+| `JSON` paths cast to `BOOL`, `DOUBLE`, or `VARCHAR` | `INVERTED` by default in 3.0. The [JSON opt-in setup](json-indexing.md#Index-requirements) enables the scalar bitmap/sorted strategy above. |
+| `JSON` paths cast to `ARRAY_BOOL`, `ARRAY_DOUBLE`, or `ARRAY_VARCHAR` | Use explicit `INVERTED`; the default 3.0.6 mapping rejects automatic selection for these casts. |
+| `TIMESTAMPTZ` | `STL_SORT` |
+| `GEOMETRY` | `RTREE` |
+| `TEXT` | Not supported. |
 
-- Numeric fields
+<div class="alert note">
 
-    | Data type                      | Memory estimation function (MB)      |
-    | ------------------------------ | ------------------------------------ |
-    | INT8                           | numOfRows * **12** / 1024 / 1024     |
-    | INT16                          | numOfRows * **12** / 1024 / 1024     |
-    | INT32                          | numOfRows * **12** / 1024 / 1024     |
-    | INT64                          | numOfRows * **24** / 1024 / 1024     |
-    | FLOAT32                        | numOfRows * **12** / 1024 / 1024     |
-    | DOUBLE                         | numOfRows * **24** / 1024 / 1024     |
+> For a supported scalar field, an index definition that omits `index_type` also requests automatic selection. Fields not included in the request are not indexed.
 
-- String fields
+</div>
 
-    | String length                  | Memory estimation function (MB)      |
-    | ------------------------------ | ------------------------------------ |
-    | (0, 8]                         | numOfRows * **128** / 1024 / 1024    |
-    | (8, 16]                        | numOfRows * **144** / 1024 / 1024    |
-    | (16, 32]                       | numOfRows * **160** / 1024 / 1024    |
-    | (32, 64]                       | numOfRows * **192** / 1024 / 1024    |
-    | (64, 128]                      | numOfRows * **256** / 1024 / 1024    |
-    | (128, 65535]                   | numOfRows * **strLen * 1.5** / 1024 / 1024    |
+<a id="Version-compatibility"></a>
+
+<details>
+<summary><strong>Selection details and administrator settings</strong></summary>
+
+- **Internal layouts:** `AUTOINDEX` can select layouts unavailable as explicit choices, such as bitmap indexing for `FLOAT` and `DOUBLE`. The cardinality-based strategy is called `HYBRID` internally; you cannot specify it directly. The selected index determines which filters can use it.
+- **Cardinality threshold:** <a id="Cardinality-threshold"></a>Set `bitmap_cardinality_limit` (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the table's high-cardinality layout applies. Explicit `INVERTED`, `STL_SORT`, and `BITMAP` builds bypass cardinality-based selection and ignore this threshold.
+- **Administrator overrides:** Change type mappings through `scalarAutoIndex.params.build`. `scalarAutoIndex.enable=false` (default) still allows explicit `AUTOINDEX`; `true` also applies automatic selection to valid manual requests.
+
+</details>
 
 ## What's next
 
-- To index a scalar field, read [Build an Index on Scalars](index-scalar-fields.md).
-- To learn more about the related terms and rules mentioned above, read
+<a id="Performance-considerations"></a>
+<a id="Estimating-memory-requirements"></a>
 
-    - [Bitset](bitset.md)
-    - [Hybrid search](multi-vector-search.md)
-    - [Boolean expression rules](boolean.md)
-    - [Supported data types](schema.md#Supported-data-type)
+Choose a guide for your next task:
+
+- **Create an index:** Use the [index guide](#Index-types) for parameters and creation examples.
+- **Plan resources:** See memory guidance for [STL_SORT](stl-sort.md#Memory-considerations), [BITMAP](bitmap.md#Memory-considerations), [INVERTED](inverted.md#Memory-considerations), or [NGRAM](ngram.md#Memory-considerations). Compare memory use, build time, and query latency with representative data and filters.
+- **Configure text search:** [Text Match](keyword-match.md) and [Full Text Search](full-text-search.md) cover text analysis, BM25, `TEXT_MATCH`, and `PHRASE_MATCH`. A scalar `INVERTED` index does not enable these mechanisms.
+
+<details id="Drop-index-compatibility">
+<summary><strong>Dropping scalar indexes on older Milvus releases</strong></summary>
+
+In Milvus v2.6.3 or earlier, release the collection before dropping a scalar index. From v2.6.4 onward, you can drop it without releasing the collection.
+
+</details>

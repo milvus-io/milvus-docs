@@ -958,33 +958,45 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Overview",
+                "id": "scalar_index.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "BITMAP",
                 "id": "bitmap.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "INVERTED",
                 "id": "inverted.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "NGRAM",
-                "id": "ngram.md",
                 "order": 2,
-                "children": []
-              },
-              {
-                "label": "RTREE",
-                "id": "rtree.md",
-                "order": 3,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "RTREE",
+                "id": "rtree.md",
+                "order": 7,
                 "children": []
               }
             ]
