@@ -422,7 +422,7 @@ curl --request POST \
 --header "Request-Timeout: 10" \
 -d '{
     "collectionName": "timestamptz_test123",
-    "filter": "tsz != ISO '2025-01-03T00:00:00+08:00'",
+    "filter": "tsz != ISO '\''2025-01-03T00:00:00+08:00'\''",
     "outputFields": ["id", "tsz"],
     "limit": 10
 }'
@@ -500,7 +500,7 @@ curl --request POST \
 --header "Request-Timeout: 10" \
 -d '{
     "collectionName": "timestamptz_test123",
-    "filter": "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'",
+    "filter": "tsz + INTERVAL '\''P0D'\'' != ISO '\''2025-01-03T00:00:00+08:00'\''",
     "outputFields": ["id", "tsz"],
     "limit": 10
 }'
@@ -601,7 +601,7 @@ curl --request POST \
     "collectionName": "timestamptz_test123",
     "data": [[0.1, 0.2, 0.3, 0.4]],
     "limit": 5,
-    "filter": "tsz > ISO '2025-01-05T00:00:00+08:00'",
+    "filter": "tsz > ISO '\''2025-01-05T00:00:00+08:00'\''",
     "outputFields": ["id", "tsz"],
     "searchParams": {"metricType": "COSINE"}
 }'

@@ -609,7 +609,7 @@ curl --request POST \
 --header "Request-Timeout: 10" \
 -d '{
     "collectionName": "geo_collection",
-    "filter": "st_within(geo, 'POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))')",
+    "filter": "st_within(geo, '\''POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))'\'')",
     "outputFields": ["name", "geo"]
 }'
 ```
@@ -706,7 +706,7 @@ curl --request POST \
 --header "Request-Timeout: 10" \
 -d '{
     "collectionName": "geo_collection",
-    "filter": "st_dwithin(geo, 'POINT(13.403683 52.520711)', 1000.0)",
+    "filter": "st_dwithin(geo, '\''POINT(13.403683 52.520711)'\'', 1000.0)",
     "outputFields": ["name", "geo"]
 }'
 ```
@@ -817,7 +817,7 @@ curl --request POST \
     "collectionName": "geo_collection",
     "data": [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
     "limit": 3,
-    "filter": "st_within(geo, 'POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))')",
+    "filter": "st_within(geo, '\''POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))'\'')",
     "outputFields": ["name", "geo"],
     "searchParams": {"metricType": "L2"}
 }'
