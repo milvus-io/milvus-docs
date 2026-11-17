@@ -139,7 +139,7 @@ Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `
 
 ### Alter the Collection Consistency Level
 
-You can change the default consistency level of an existing collection by altering its `consistency_level` property. The new level applies to subsequent searches and queries on the collection that do not specify a consistency level of their own, and changing it does not require releasing the collection. The following code example alters the consistency level to **Eventually**.
+You can change the consistency level of an existing collection by altering its `consistency_level` property. The new level applies to subsequent searches and queries on the collection that do not specify a consistency level of their own, and changing it does not require releasing the collection. The following code example alters the consistency level to **Eventually**.
 
 <div class="multipleCode">
     <a href="#python">Python</a>

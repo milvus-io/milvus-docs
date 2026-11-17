@@ -186,7 +186,7 @@ curl --request POST \
 }'
 ```
 
-The following code snippet alters the default consistency level of an existing collection to **Eventually**. The new level applies to subsequent searches and queries on this collection that do not explicitly set a consistency level; per-request settings still take precedence. For details, refer to [Consistency Level](tune_consistency.md).
+The following code snippet alters the consistency level of an existing collection to **Eventually**. The new level applies to subsequent searches and queries on this collection that do not explicitly set a consistency level; per-request settings still take precedence. For details, refer to [Consistency Level](tune_consistency.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -273,7 +273,7 @@ The applicable collection properties are as follows:
    </tr>
    <tr>
      <td><p><code>consistency_level</code></p></td>
-     <td><p>Alters the default consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), or <strong>Eventually</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="tune_consistency.md">Consistency Level</a>.</p></td>
+     <td><p>Alters the consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), or <strong>Eventually</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="tune_consistency.md">Consistency Level</a>.</p></td>
    </tr>
 </table>
 
