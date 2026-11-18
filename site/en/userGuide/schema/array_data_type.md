@@ -27,7 +27,9 @@ Here's an example of how ARRAY fields store data:
 <!-- doc:block:end id="structarray-array-subfield-scope" -->
 
 
-- **Array Capacity**: The number of elements in an ARRAY field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value should be an integer within the range from **1** to **4096**.
+- **Array Capacity**: The number of elements in an ARRAY field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value must be greater than 0 and must not exceed `proxy.maxArrayCapacity`, which defaults to **4096**.
+
+- **Text Match**: `TEXT_MATCH`, `TEXT_MATCH_FUZZY`, and `PHRASE_MATCH` support only `VARCHAR` and `TEXT` fields; applying them to an ARRAY field returns an error. `enable_analyzer` and `enable_match` have no effect on ARRAY fields. For details on text match, refer to [Text Match](keyword-match.md).
 
 - **String Handling**: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, `'a"b'`, `"a'b"`, `'a\'b'`, and `"a\"b"` are stored as entered, while `'a'b'` and `"a"b"` are considered invalid values.
 
