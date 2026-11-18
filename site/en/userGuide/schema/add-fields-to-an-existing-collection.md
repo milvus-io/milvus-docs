@@ -997,6 +997,8 @@ curl --request POST \
 
 Existing entities have `NULL` for `embedding_v2` and are skipped when you search on this field. To make existing entities searchable through `embedding_v2`, write non-NULL vector values through upsert or a backfill workflow. New entities can include `embedding_v2` during insert.
 
+{{fragments/vector_null_filter_note.md}}
+
 <a id="add-vector-fields-generated-by-functions--milvus-30x"></a>
 
 <!-- doc:block:start id="alter-schema-function-heading" -->
