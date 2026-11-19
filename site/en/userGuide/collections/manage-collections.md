@@ -98,8 +98,6 @@ In addition, {{var.product_name}} also provides enhancements to improve search p
 
 - [Use mmap](mmap.md)
 
-- [Clustering Compaction](clustering-compaction.md)
-
 ## Partition
 
 Partitions are subsets of a collection, which share the same field set with its parent collection, each containing a subset of entities.
