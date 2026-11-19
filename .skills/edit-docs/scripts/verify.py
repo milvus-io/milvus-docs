@@ -34,6 +34,13 @@ run exits non-zero instead of printing a vacuous OK:
 6. multipleCode blocks: the tab anchors must match the following fenced code
    blocks by count and language order, and no block may be an empty stub.
    Issues that already exist at --base are warnings; new ones fail the run.
+7. doc:block reserved markers on changed pages (see AGENTS.md and
+   *Reserved markers* in references/doc-standards.md): a page that loses a
+   ``doc:block`` marker pair relative to the --base revision fails the run
+   (deleting a reserved marker is a regression), as does a malformed pair —
+   unbalanced start/end, a marker line carrying other content, a marker
+   inside a fenced code block. A deleted page that carried markers fails the
+   run. Issues already present at --base are PRE-EXISTING warnings.
 
 Run from the repository root before committing, or with ``--diff <rev>``
 after committing.
@@ -324,6 +331,80 @@ def check_multiple_code(pages, untracked, base, errors, warnings):
                 errors.append(f"{p}:{lineno}: {msg}")
 
 
+DOC_BLOCK = re.compile(r'^\s*<!--\s*doc:block:(start|end)\s+id="([^"]+)"\s*-->\s*$')
+DOC_BLOCK_ANY = re.compile(r'<!--\s*doc:block:(start|end)\s+id="([^"]+)"')
+
+
+def doc_block_report(text):
+    """(start ids -> first line, end ids -> first line, structural issues) for
+    doc:block reserved markers in one page's text."""
+    starts, ends, issues = {}, {}, []
+    in_fence = False
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        stripped = raw.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+        m = DOC_BLOCK.match(raw)
+        if m:
+            kind, mid = m.groups()
+            table = starts if kind == "start" else ends
+            if mid in table:
+                issues.append((lineno, f"duplicate doc:block:{kind} id {mid!r}"))
+            table[mid] = lineno
+            if in_fence:
+                issues.append(
+                    (
+                        lineno,
+                        "doc:block marker inside a fenced code block — a pair must sit outside the fence or fully contain it",
+                    )
+                )
+            continue
+        if "doc:block:" not in stripped or "`" in stripped:
+            continue
+        if DOC_BLOCK_ANY.search(raw) and stripped.startswith("<!--"):
+            issues.append((lineno, "marker line carries other content — keep the marker standalone"))
+    for mid, lineno in starts.items():
+        if mid not in ends:
+            issues.append((lineno, f"doc:block:start {mid!r} has no matching doc:block:end"))
+    for mid, lineno in ends.items():
+        if mid not in starts:
+            issues.append((lineno, f"doc:block:end {mid!r} has no matching doc:block:start"))
+    return starts, ends, issues
+
+
+def check_doc_block_markers(pages, untracked, base, errors, warnings):
+    """Reserved-marker preservation on changed pages: a page must not lose a
+    doc:block marker pair it had at base, and every pair must be well-formed
+    (see check 7 in the module docstring)."""
+    for p in pages:
+        try:
+            cur_text = open(p, encoding="utf-8").read()
+        except OSError:
+            cur_text = None  # deleted in the working tree
+        base_text = "" if p in untracked else git("show", f"{base}:{p}")
+        base_starts, _b, base_issues = doc_block_report(base_text or "")
+        if cur_text is None:
+            if base_starts:
+                errors.append(
+                    f"{p}: page deleted but carried doc:block marker pair(s) {sorted(base_starts)} "
+                    "— coordinate before removing (see AGENTS.md, Reserved markers)"
+                )
+            continue
+        cur_starts, _c, cur_issues = doc_block_report(cur_text)
+        dropped = sorted(set(base_starts) - set(cur_starts))
+        if dropped:
+            errors.append(
+                f"{p}: deletes doc:block marker pair(s) {dropped} present at {base} — "
+                "never delete a reserved marker (see AGENTS.md / references/doc-standards.md)"
+            )
+        base_msgs = {msg for _ln, msg in base_issues}
+        for lineno, msg in sorted(cur_issues, key=lambda kv: (kv[1], kv[0])):
+            if msg in base_msgs:
+                warnings.append(f"{p}:{lineno}: PRE-EXISTING (also at {base}): {msg}")
+            else:
+                errors.append(f"{p}:{lineno}: {msg}")
+
+
 def check_fence_comment(pages, errors):
     """Flag fence lines directly adjacent to an HTML comment line."""
     for p in pages:
@@ -391,6 +472,7 @@ def main():
     check_timeless(pages, untracked, base, errors, warnings)
     check_fence_comment(pages, errors)
     check_multiple_code(pages, untracked, base, errors, warnings)
+    check_doc_block_markers(pages, untracked, base, errors, warnings)
 
     if untracked:
         menu_text = open(args.menu, encoding="utf-8").read()

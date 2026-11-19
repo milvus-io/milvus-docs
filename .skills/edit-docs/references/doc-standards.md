@@ -131,6 +131,42 @@ comments are exempt.
   (`python`, `java`, `go`, `javascript`, `cpp`, `bash`). Not every page needs
   every language — mirror the page's existing set.
 
+## Reserved markers (doc:block)
+
+Many pages carry paired HTML-comment markers:
+
+```markdown
+<!-- doc:block:start id="some-lowercase-id" -->
+...page content...
+<!-- doc:block:end id="some-lowercase-id" -->
+```
+
+They are **load-bearing region anchors**, not leftover comments: the Zilliz
+Cloud documentation pipeline (zilliztech/zdoc, shared-docs renderer) pins
+commits of this repository and applies content transforms (insert / replace /
+remove) *inside* these named regions to produce the Zilliz Cloud variants of
+these pages on docs.zilliz.com / docs.zilliz.com.cn. The repo `AGENTS.md`
+("Reserved markers (`doc:block`)") is the canonical rule text; for page edits:
+
+- **Never delete a marker pair** — not when reflowing, reformatting, renaming
+  headings, restructuring, or "tidying up" leftover comments.
+- Never change a marker `id`, move content across markers, or reorder marked
+  regions relative to surrounding content without coordinating with the
+  Zilliz Cloud docs team.
+- Keep markers as standalone lines (they may be indented); a marker line
+  carries nothing else. A marker pair must not split a fenced code block:
+  `start` and `end` sit outside the fence or fully contain it.
+- **Editing inside a marked region is welcome** — the content is normal
+  documentation. If a change substantially rewrites a marked region, note it
+  in the PR description so the downstream consumer can re-pin.
+- Adding new markers: coordinate with the Zilliz Cloud docs team first; use a
+  lowercase kebab-case `id` unique within the page.
+- `verify.py` enforces this mechanically: a changed page that loses a marker
+  pair relative to the base revision fails the run, as does a malformed pair
+  (unbalanced start/end, marker line carrying other content, marker split by
+  a fence); issues already present at the base revision are reported as
+  PRE-EXISTING warnings.
+
 ## Links
 
 - Links to pages in this repo/branch are markdown-file references the way
