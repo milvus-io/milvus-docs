@@ -6,26 +6,26 @@ summary: "Find the exact lines that match a string or regular expression in stor
 
 # Find Matching Lines with Grep
 
-When you investigate a failed request, you may have an error code or a request ID but need the log line that shows what happened. The same problem comes up when you know a function name and need to find where it appears across stored code excerpts.
+You may know what text to search for and still need to find the line where it appears. In service logs, an error code or request ID can help you locate the line that records a failed request. In source code, a function's old name can help you find references to update after a rename.
 
-Grep in {{var.product_name}} brings [`grep`](https://www.gnu.org/software/grep/manual/html_node/Introduction.html)-style line matching to text stored in a collection. Use a metadata filter to narrow the search, for example to a time range or repository, then match a literal string or regular expression against the remaining text. The result includes the matching entities, the exact lines, and their positions within the stored text.
+Grep in {{var.product_name}} finds matching lines in stored logs or source code, much like the [`grep`](https://www.gnu.org/software/grep/manual/html_node/Introduction.html) command. A metadata filter can narrow the search to a service or repository. Grep matches a literal string or regular expression against the text. It returns the matching entities with each matching line and its position in the stored text.
 
 ## Limits
 
 - **Input fields.** Grep searches one `VARCHAR` or `TEXT` field defined in the collection schema. For help choosing a field type, see [Choose TEXT or VARCHAR](text.md#choose-text-or-varchar).
-- **Matching scope.** Grep evaluates each line independently within its field value. A match cannot span lines or entities. Grep searches stored field values and does not open files by path.
-- **Supported options.** Grep uses the [ripgrep](https://github.com/BurntSushi/ripgrep) matching library and accepts a subset of its options. Passing a pattern or file path as a positional argument causes an error. Unsupported options such as `-C` for context lines and `-U` for multiline matching also cause an error.
-- **Query combinations.** Grep runs as part of a [Query](get-and-scalar-query.md). Grep queries do not support aggregation, explicit ordering, or query iterators.
+- **Matching scope.** Grep matches one line at a time. A match cannot continue onto the next line or into another entity.
+- **Supported options.** Grep uses the [ripgrep](https://github.com/BurntSushi/ripgrep) matching library and supports a subset of ripgrep's command-line options. See [Matching options and result limits](#matching-options-and-result-limits) for the supported options and examples.
+- **Query combinations.** The `grep()` method runs a [Query](get-and-scalar-query.md) with text matching. If you supply a filter, the query applies it before Grep searches the selected text field. Grep queries do not support Query Aggregation, [`ORDER BY`](get-and-scalar-query.md#Sort-Query-Results), or Query Iterator.
 
 ## Prepare the text to search
 
-Store the original text in a field and keep any metadata you need to narrow the search or locate the source. If your data is already stored in a loaded collection, [find matching lines](#find-matching-lines) using your own field and collection names.
+Store the original text in a field. Keep the metadata you need to narrow the search or locate the source. If your data is in a loaded collection, use your own field and collection names to [find matching lines](#find-matching-lines).
 
 <details>
 
 <summary><strong>Set up the example collection</strong></summary>
 
-Create a collection using an unused name. The next code block supplies the sample log lines. The `content` field holds the text Grep will search, and `demo_vector` is an auxiliary field for setting up the example collection.
+Create a collection with an unused name. The insert example below supplies the sample log lines. The `content` field holds the text that Grep searches. The example uses `demo_vector` as an auxiliary field for the collection.
 
 ```python
 from pymilvus import DataType, MilvusClient
@@ -58,7 +58,9 @@ client.create_collection(
 )
 ```
 
-In the code below, the three sample lines represent lines 41 through 43 of `payment.log`. Insert them as one entity and preserve the line breaks in `content`. The example stores `41` in `source_start_line` because the first line of the fragment came from line 41 of the file. Grep searches from the first line of `content`. Use `source_start_line` after the query to locate a match in the source file.
+In the code below, the three sample lines represent lines 41 through 43 of `payment.log`. Keep the line breaks in `content`. Insert the three lines as one entity.
+
+Set `source_start_line` to `41` to record where the fragment starts in the file. Grep searches from the first line of `content`. Use `source_start_line` after the query to locate a match in the source file.
 
 Load the collection after inserting the sample data so you can query it.
 
@@ -105,19 +107,21 @@ results = client.grep(
     # highlight-start
     # Search the original text stored in this field.
     text_field="content",
-    # Match the literal error code.
+    # Put -e before the pattern you want to find.
+    # Use -F to match the pattern as plain text.
     args="-F -e ERROR_TIMEOUT",
     # Search only entities from this host and file.
     filter=log_filter,
     # highlight-end
     output_fields=output_fields,
+    # Return up to 10 matching entities.
     limit=10,
 )
 ```
 
-Pass the matching options and pattern together as one string in `args`. In this example, `-e` specifies the pattern and `-F` matches it as literal text. `limit=10` returns up to 10 matching entities. For more ways to write `args`, see [Matching options and result limits](#matching-options-and-result-limits).
+For more examples, see [Matching options and result limits](#matching-options-and-result-limits).
 
-To query your own data, use a connected client and a loaded collection. Replace the collection and field names, including the fields in `output_fields`. Adjust `filter` to narrow the search or omit it to search all entities in the collection.
+To query your own data, use a connected client and a loaded collection. Replace the collection and field names, including the fields in `output_fields`. To narrow the search, adjust `filter`. To search all entities in the collection, omit `filter`.
 
 <details>
 
@@ -125,23 +129,35 @@ To query your own data, use a connected client and a loaded collection. Replace 
 
 <a id="matching-options-and-result-limits"></a>
 
-**Write the `args` string**
+**Build the `args` string**
 
-- **Specify a pattern.** Put `-e` or `--regexp` before each pattern.
-- **Quote patterns with spaces.** In the first example below, the outer double quotes delimit the Python string. The inner single quotes keep `request started` together as one pattern.
-- **Preserve regex escapes.** In Python, use a raw string (`r"..."`) to pass backslashes such as `\d` and `\b` to Grep. In an ordinary Python string, write them as `\\d` and `\\b`.
-- **Match any of several patterns.** Repeat `-e` for each pattern in the same `args` string. Options such as `-F` and `-i` apply to all the patterns in that request.
+Pass the matching options and patterns in one string. Separate them with spaces.
 
-| To find | Python value for `args` |
+- **`-e` (`--regexp`).** Put this option before each search pattern. Include at least one pattern. Passing a pattern or file path as a positional argument causes an error. Grep returns a line if it matches any of the patterns. By default, Grep treats each pattern as a case-sensitive regular expression.
+- **`-F` (`--fixed-strings`).** Use uppercase `-F` to match all patterns as plain text.
+- **`-i` (`--ignore-case`) or `-s` (`--case-sensitive`).** Use `-i` to ignore case or `-s` to match case. If you pass both, the last one takes effect.
+- **`-w` (`--word-regexp`) or `-x` (`--line-regexp`).** Use `-w` to match whole words or `-x` to match the entire line. Grep returns an error if you combine these options.
+
+**Choose a result limit**
+
+- **`limit` on the `grep()` call.** Set the maximum number of matching entities to return. An entity can still have several lines in `matches`.
+- **`-m` (`--max-count`) inside `args`.** If your deployment supports this option, pass a non-negative integer to return up to that many matching lines per entity. With `-m 0`, Grep returns no entities.
+
+**Examples**
+
+The examples show the contents of `args` as Grep receives them. The last example also sets `limit` on the `grep()` call. If a pattern contains spaces, put single or double quotes around the pattern inside `args`. In SDK code, follow your language's string rules to preserve those quotes and regex backslashes such as `\d` and `\b`.
+
+| Goal | What to pass |
 | --- | --- |
-| The literal text `request started` | `"-F -e 'request started'"` |
-| `ERROR_TIMEOUT` regardless of case | `"-F -i -e ERROR_TIMEOUT"` |
-| `order=` followed by one or more digits | `r"-e 'order=\d+'"` |
-| Either `ERROR_TIMEOUT` or `CONNECTION_RESET` | `"-F -e ERROR_TIMEOUT -e CONNECTION_RESET"` |
-
-Grep uses case-sensitive regular expressions by default. Add `-F` for literal matching, `-i` to ignore case, or `-s` to explicitly match case. Use either `-w` for whole words or `-x` for whole lines.
-
-**Limit matching lines per entity.** If an entity has two matching lines, a request with `limit=1` can still return both lines in that entity's `matches`. If your deployment supports `-m` (`--max-count`), add `-m 1` to `args` to retain only the first matching line per entity. For example, `args="-F -m 1 -e ERROR_TIMEOUT"` keeps the first line containing that error code in each returned entity.
+| Text such as `v1.2` or `v1-2` (`.` matches any character on the line) | `-e v1.2` |
+| The literal text `v1.2` (`.` matches a period) | `-F -e v1.2` |
+| The literal phrase `request started` | `-F -e 'request started'` or `-F -e "request started"` |
+| `ERROR_TIMEOUT` regardless of case | `-F -i -e ERROR_TIMEOUT` |
+| `order=` followed by one or more digits | `-e 'order=\d+'` |
+| Either `ERROR_TIMEOUT` or `CONNECTION_RESET` | `-F -e ERROR_TIMEOUT -e CONNECTION_RESET` |
+| The whole word `timeout`, as in `request timeout` | `-F -w -e timeout` |
+| A line consisting entirely of `timeout` | `-F -x -e timeout` |
+| Return the first line containing `ERROR_TIMEOUT` from each of up to 10 matching entities | Set `limit=10` on the call and pass `-F -m 1 -e ERROR_TIMEOUT` in `args`. |
 
 </details>
 
@@ -168,7 +184,7 @@ The sample query returns entity `201` and one entry in `matches`.
 ]
 ```
 
-The entity's `id` identifies the stored log fragment. The `line_number` starts at 1 for each field value, so `2` means the second line of this fragment. Because the fragment preserves consecutive lines from the source file, you can calculate the original line as `source_start_line + line_number - 1`.
+The entity's `id` identifies the log fragment. Grep numbers the lines in each field value starting at 1. In this example, `line_number=2` identifies the second line of the fragment. The fragment preserves consecutive lines from the source file. Calculate the source line as `source_start_line + line_number - 1`.
 
 ```python
 for entity in results:
@@ -181,13 +197,13 @@ for entity in results:
 payment.log:42: ERROR_TIMEOUT order=4182
 ```
 
-To highlight the exact match, use `starts` and `ends` as paired UTF-8 byte offsets within the returned line. The start is inclusive and the end is exclusive. In this example, bytes `[0, 13)` contain `ERROR_TIMEOUT`. To locate those bytes in the stored fragment, add `line_start_offset`, the byte offset of the start of the line within the field value.
+To highlight the match, use `starts` and `ends` as paired UTF-8 byte offsets within the returned line. The start is inclusive. The end is exclusive. In this example, bytes `[0, 13)` contain `ERROR_TIMEOUT`. To locate those bytes in the stored fragment, add `line_start_offset` to both offsets. `line_start_offset` points to the first byte of the returned line within the field value.
 
 <details>
 
 <summary><strong>Store one log line per entity</strong></summary>
 
-Both layouts store the same three log lines. In the main example, the error is the second line of a three-line entity. If you store each line as its own entity, the error is the only line in the matching entity, so Grep reports `line_number=1`.
+Both layouts store the same three log lines. In the main example, the error is the second line of a three-line entity. If you store each line as a separate entity, the matching entity contains only the error line. Grep therefore reports `line_number=1`.
 
 | Storage layout | Entities written | Matching entity ID | `line_number` | Source file line |
 | --- | ---: | ---: | ---: | ---: |
