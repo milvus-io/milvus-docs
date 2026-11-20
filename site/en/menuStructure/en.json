@@ -1083,9 +1083,15 @@
             "children": []
           },
           {
+            "label": "Find Matching Lines (Grep)",
+            "id": "grep.md",
+            "order": 8,
+            "children": []
+          },
+          {
             "label": "Filtering",
             "id": "filtering",
-            "order": 8,
+            "order": 9,
             "children": [
               {
                 "label": "Filtering Explained",
@@ -1152,31 +1158,31 @@
           {
             "label": "Full Text Search",
             "id": "full-text-search.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Text Match",
             "id": "keyword-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Text Highlighter",
             "id": "text-highlighter.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Phrase Match",
             "id": "phrase-match.md",
-            "order": 12,
+            "order": 13,
             "children": []
           },
           {
             "label": "Search with StructArray",
             "id": "search-with-structarray",
-            "order": 13,
+            "order": 14,
             "children": [
               {
                 "label": "Basic Vector Search with StructArray",
@@ -1225,19 +1231,19 @@
           {
             "label": "Elasticsearch Queries to Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 14,
+            "order": 15,
             "children": []
           },
           {
             "label": "Search Iterators",
             "id": "with-iterators.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "Use Partition Key",
             "id": "use-partition-key.md",
-            "order": 16,
+            "order": 17,
             "children": []
           }
         ]

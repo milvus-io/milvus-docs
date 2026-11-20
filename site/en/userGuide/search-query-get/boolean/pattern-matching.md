@@ -12,7 +12,7 @@ In Milvus, you can express these pattern constraints in scalar filters with `LIK
 
 <div class="alert note">
 
-This page describes pattern matching in scalar filter expressions used by `query`, `search`, and hybrid search. These expressions evaluate field values and do not change the tokens produced by an analyzer. To filter tokens during text analysis, refer to [Regex Analyzer Filter](regex-filter.md).
+This page describes pattern matching in scalar filter expressions used by `query`, `search`, and hybrid search. These expressions evaluate field values and do not change the tokens produced by an analyzer. To filter tokens during text analysis, refer to [Regex Analyzer Filter](regex-filter.md). To retrieve matching lines and positions from a text field, use [Grep](grep.md).
 
 </div>
 
