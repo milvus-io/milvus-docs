@@ -96,6 +96,12 @@
                 "id": "install_standalone-windows.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
