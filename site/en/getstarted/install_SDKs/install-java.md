@@ -10,7 +10,7 @@ title: Install Milvus Java SDK
 
 This topic describes how to install Milvus Java SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+Milvus provides SDKs for Python, Go, Java, Node.js, and C#, and a RESTful API.
 
 ## Requirement
 

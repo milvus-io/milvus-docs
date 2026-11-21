@@ -91,7 +91,7 @@ In the above setup,
 - The primary key and vector fields use their default names ("id" and "vector").
 - The metric type (vector distance definition) is set to its default value ([COSINE](https://milvus.io/docs/metric.md#Cosine-Similarity)).
 - The primary key field accepts integers and does not automatically increment (namely, not using [auto-id feature](https://milvus.io/docs/schema.md)).
-  Alternatively, you can formally define the schema of the collection by following this [instruction](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md).
+  Alternatively, you can formally define the schema of the collection by following this [instruction](https://milvus.io/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/MilvusClient/Collections/create_schema.md).
 
 ## Prepare Data
 
@@ -348,7 +348,7 @@ After completing the local example, choose a next step:
 - Design fields and filters for your own data with [Data Model Design for Search](schema-hands-on.md).
 - Compare local and server requirements with [Milvus Deployment Options](install-overview.md).
 
-Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
+Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
 
 ```python
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
