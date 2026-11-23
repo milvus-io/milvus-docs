@@ -195,7 +195,7 @@ client.list_users()
 
 ## Protect the metrics port
 
-The metrics port (default `9091`) serves `/management/*`, `/log/level`, `/eventlog`, `/debug/pprof/*`, and the web console. The `common.security.adminAuthEnabled` setting controls whether these endpoints require `root` HTTP Basic authentication. It defaults to `false`. To turn it on, add the following to the Milvus configuration file:
+The metrics port (default `9091`) serves `/management/*`, `/log/level`, `/eventlog`, `/telemetry`, `/debug/pprof/*`, and the web console. The `common.security.adminAuthEnabled` setting controls whether these endpoints require `root` HTTP Basic authentication. It defaults to `false`. To turn it on, add the following to the Milvus configuration file:
 
 ```yaml
 common:
@@ -209,7 +209,7 @@ With this setting, health probes and metrics scrapes remain open. Requests that 
 
 ### Username requirements
 
-Usernames must not be empty or exceed 32 characters. They must start with a letter and contain only letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`).
+Usernames must not be empty or exceed 32 characters. They must start with a letter or underscore and contain only letters, numbers, underscores (`_`), and any extra characters configured in `proxy.nameValidation.allowedChars` (`$` by default).
 
 ### Password requirements
 

@@ -18,7 +18,7 @@ For daily operations, we recommend creating users instead of using the root user
 
 Connect as `root` and create a user with the username `user_1` and password `P@ssw0rd`. When choosing credentials, follow these rules:
 
-- Username: Must start with a letter and can only include uppercase or lowercase letters, numbers, underscores (`_`), hyphens (`-`), and periods (`.`).
+- Username: Must start with a letter or underscore and can only include uppercase or lowercase letters, numbers, underscores (`_`), and any extra characters configured in `proxy.nameValidation.allowedChars` (`$` by default).
 
 - Password: Must be 6–72 UTF-8 bytes long by default. Your deployment may configure different [password length limits](authenticate.md#Password-requirements).
 
