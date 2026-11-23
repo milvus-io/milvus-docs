@@ -20,4 +20,4 @@ Birdwatcher is a debugging tool for Milvus. Using it to connect to etcd, you can
 
 ## Latest release
 
-[Release v1.0.2](https://github.com/milvus-io/birdwatcher/releases/tag/v{{var.birdwatcher_release}})
+[Release v{{var.birdwatcher_release}}](https://github.com/milvus-io/birdwatcher/releases/tag/v{{var.birdwatcher_release}})

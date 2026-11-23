@@ -16,7 +16,7 @@ This guide describes how to upgrade a Milvus 2.6.x standalone deployment to v{{v
 
 <div class="alert note">
 
-This procedure has been validated with the official Milvus 2.6.20 standalone Docker Compose configuration. The upgrade retained etcd, MinIO, Woodpecker, and the existing data directories, and changed only the Milvus image to `milvusdb/milvus:v{{var.milvus_release_tag}}`.
+This procedure was validated with the official Milvus 2.6.20 standalone Docker Compose configuration with an image-only change. Step 2 additionally adds the data directory ownership service from the v{{var.milvus_release_version}} Compose configuration, which that validation did not cover.
 
 </div>
 
@@ -31,7 +31,9 @@ This procedure has been validated with the official Milvus 2.6.20 standalone Doc
 
 <div class="alert warning">
 
-Do not replace your current Compose file or change dependency versions as part of this procedure. Keep the existing etcd, object storage, message queue, volumes, and configuration. Update only the Milvus image tag.
+Do not replace your current Compose file or change dependency versions as part of this procedure. Keep the existing etcd, object storage, message queue, volumes, and configuration. Update the Milvus image tag and add the data directory ownership service described in Step 2.
+
+If your Compose file uses `minio/minio:{{var.minio_release}}` and Docker cannot pull this image, change it to `milvusdb/minio:{{var.minio_release}}`, which the v{{var.milvus_release_version}} Compose configuration uses. Keep the same release tag.
 
 This procedure does not validate a downgrade or rollback by changing the Milvus image back to 2.6.x. After v{{var.milvus_release_version}} writes data, an image-only rollback can fail to read the updated state. If the upgrade fails, stop writes and use a recovery plan that restores the pre-upgrade metadata and persistent data backups. Validate the recovery plan in a non-production environment first.
 
@@ -55,22 +57,53 @@ docker compose ps
 
 ### Step 2: Update the Milvus image
 
-In the existing Compose file, update only the image for the `standalone` service:
+In the existing Compose file, update the image of the `standalone` service, replace its `depends_on` entries with the ones below, and add the `milvus-volume-init` service. Use the same image for both services, and mount the same host directory that the `standalone` service mounts at `/var/lib/milvus`. Keep the other settings of the `standalone` service:
 
 ```yaml
 services:
+  milvus-volume-init:
+    image: milvusdb/milvus:v{{var.milvus_release_tag}}
+    user: "0:0"
+    network_mode: none
+    read_only: true
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -eu
+        uid="$$(id -u milvus)"
+        gid="$$(id -g milvus)"
+        marker="/var/lib/milvus/.milvus-volume-owner-$${uid}-$${gid}"
+        if [ ! -e "$${marker}" ]; then
+          echo "Preparing /var/lib/milvus for $${uid}:$${gid}"
+          chown -R "$${uid}:$${gid}" /var/lib/milvus
+          touch "$${marker}"
+          chown "$${uid}:$${gid}" "$${marker}"
+        fi
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+
   standalone:
     image: milvusdb/milvus:v{{var.milvus_release_tag}}
+    depends_on:
+      milvus-volume-init:
+        condition: service_completed_successfully
+      etcd:
+        condition: service_started
+      minio:
+        condition: service_started
 ```
 
-Pull the target image and recreate only the Milvus container:
+Milvus v{{var.milvus_release_version}} images run Milvus as the non-root `milvus` user, while Milvus 2.6.x images do not set a user and run Milvus as `root`. The `milvus-volume-init` service comes from the v{{var.milvus_release_version}} Compose configuration. It runs once as `root` before Milvus starts and changes the owner of `/var/lib/milvus` and its contents to the `milvus` user and group, so that Milvus can write to the files that the 2.6.x deployment created. It then writes a `.milvus-volume-owner-<uid>-<gid>` marker file to `/var/lib/milvus` and makes no changes on later runs while the marker file exists. If you later restore files owned by a different user into the data directory, remove the marker file so that the service runs again.
+
+Pull the target image and recreate the Milvus container. Because the `standalone` service depends on `milvus-volume-init`, Docker Compose runs `milvus-volume-init` to completion before it starts the new Milvus container:
 
 ```bash
 docker compose pull standalone
 docker compose up --detach standalone
 ```
 
-Docker Compose keeps the existing etcd and object-storage containers running and reuses the configured data directories.
+Docker Compose keeps the existing etcd and object-storage containers running and reuses the configured data directories. If you changed the configuration of a dependency, for example the MinIO image, Compose recreates that container and keeps its mounted volumes.
 
 ## Verify the upgrade
 
@@ -85,3 +118,5 @@ docker compose logs --tail 100 standalone
 ```
 
 Verify that the `standalone` service is healthy, its image is `milvusdb/milvus:v{{var.milvus_release_tag}}`, and the existing collections remain queryable and searchable. Complete these checks before you enable any v{{var.milvus_release_version}}-specific feature.
+
+{{fragments/storage_v3_upgrade_note.md}}
