@@ -64,7 +64,7 @@ docker compose up
 
 ## Configure Pulsar with Helm
 
-For Milvus clusters on K8s, you can configure Pulsar in the same command that starts Milvus. Alternatively, you can configure Pulsar using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/milvus-{{var.milvus_helm_chart_version}}) repository before you start Milvus.
+For Milvus clusters on K8s, you can configure Pulsar in the same command that starts Milvus. Alternatively, you can configure Pulsar using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) repository before you start Milvus.
 
 For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
 
@@ -94,12 +94,12 @@ extraConfigFiles:
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Pulsar configurations.
 
 ```shell
-helm install <your_release_name> zilliztech/milvus --version {{var.milvus_helm_chart_version}} -f values.yaml
+helm install <your_release_name> zilliztech/milvus -f values.yaml
 ```
 
 ## Configure Woodpecker with Helm
 
-For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/milvus-{{var.milvus_helm_chart_version}}) repository before you start Milvus.
+For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) repository before you start Milvus.
 
 For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](woodpecker.md).
 
@@ -149,12 +149,12 @@ extraConfigFiles:
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Woodpecker configurations.
 
 ```shell
-helm install <your_release_name> zilliztech/milvus --version {{var.milvus_helm_chart_version}} -f values.yaml
+helm install <your_release_name> zilliztech/milvus -f values.yaml
 ```
 
 ## Configure Kafka with Helm
 
-For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/milvus-{{var.milvus_helm_chart_version}}) repository before you start Milvus.
+For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) repository before you start Milvus.
 
 For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
 
@@ -177,7 +177,7 @@ extraConfigFiles:
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the Kafka configurations.
 
 ```shell
-helm install <your_release_name> zilliztech/milvus --version {{var.milvus_helm_chart_version}} -f values.yaml
+helm install <your_release_name> zilliztech/milvus -f values.yaml
 ```
 
 ## Configure RocksMQ with Helm
