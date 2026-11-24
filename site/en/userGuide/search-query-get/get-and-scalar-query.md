@@ -233,6 +233,8 @@ if (!status.IsOk()) {
 
 ## Use Query
 
+To retrieve the matching lines and their positions from a text field, use [Grep](grep.md).
+
 ### Basic Query
 
 When you need to find entities by custom filtering conditions, use the **Query** method. The following code examples assume there are three fields named `id`, `vector`, and `color` and return the specified number of entities that hold a `color` value starting with `red`.
