@@ -25,3 +25,7 @@ jobs:
         run: |
           sudo npm install -g @zilliz/mdtomd@1.3.0
           md2md-blocks check site/en
+      - name: Check REST v2 example contract
+        run: |
+          # --check is required: without it the linter only reports violations and exits 0
+          node scripts/check-rest-v2-contract.js --check
