@@ -801,6 +801,91 @@ curl -X POST "{{var.example_endpoint}}/v2/vectordb/entities/upsert" \
 # }
 ```
 
+## Conditional upserts | Milvus 3.0.7+
+
+<!-- Conditional upserts: milvus-io/milvus#55589 (server milestone 3.0.7, commit 8cc69fe18 on the 3.0 release branch).
+     REST contract live-verified on 2026-11-24 against a 3.0 branch build. When PyMilvus ships write_condition
+     support (pymilvus#3896), add a Python tab to the example and update the SDK warning below. -->
+
+A conditional upsert is a partial update that writes each row only when the version value carried in the request passes a comparison against the stored version of that row. Use it to apply updates that can arrive out of order: a row carrying a stale business version is skipped instead of overwriting newer data.
+
+Adding a write condition to an upsert request turns it into a partial update: fields omitted from the request retain their stored values, so you do not need to set `partialUpdate`.
+
+| Parameter | Description |
+| --- | --- |
+| `field` | The version column to compare: an ordinary integer field (`INT8`, `INT16`, `INT32`, or `INT64`) that must be present in the request. The primary key, partition key, clustering key, dynamic field, and struct subfields are rejected. |
+| `op` | `gt` writes the row when the incoming version is greater than the stored version. `gte` also accepts an equal version. |
+| `onMissing` | Policy for rows whose primary key does not exist: `insert` (default) inserts them as new entities, `skip` treats them as successful no-ops, and `error` fails the request. |
+
+Outcome of the comparison for a row that exists:
+
+| Stored version | `gt` | `gte` |
+| --- | --- | --- |
+| `NULL` | Updated | Updated |
+| Lower than incoming | Updated | Updated |
+| Equal to incoming | Skipped | Updated |
+| Higher than incoming | Skipped | Skipped |
+
+Skipped rows are successful no-ops: they are never written and do not fail the request.
+
+Additional rules:
+
+- An incoming version of `NULL` fails the request unless the field has a default value. A stored `NULL` version compares as older than any incoming version, so such rows are updated.
+- The version column must be replaced as a whole: you cannot apply the `ARRAY_APPEND` or `ARRAY_REMOVE` operators to it. With `gte`, every field in the request must use `REPLACE`; with `gt`, the other fields may also use the operators described in [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617).
+- All rows in the request must carry the same set of fields, as in merge mode.
+- Each request must contain unique primary keys.
+- The comparison covers the partition that the request targets. Rows with the same primary key in other partitions are not protected.
+- Deleted rows lose their version history: a later insert of the same primary key accepts any version.
+
+The following example updates `my_collection`, which stores an integer `version` column. Before running it, the collection contains `id=1` with `version=3` and `id=2` with `version=9`. The row with `id=1` carries a newer version and is written; the row with `id=2` carries a stale version and is skipped.
+
+```bash
+export CLUSTER_ENDPOINT="{{var.example_endpoint}}"
+export TOKEN="{{var.example_token}}"
+
+curl --request POST \
+--url "${{CLUSTER_ENDPOINT}}/v2/vectordb/entities/upsert" \
+--header "Authorization: Bearer ${{TOKEN}}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{{
+    "collectionName": "my_collection",
+    "data": [
+        {{"id": 1, "vector": [0.1, 0.2, 0.3, 0.4, 0.5], "title": "What Is Milvus", "issue": "vol.15", "version": 4}},
+        {{"id": 2, "vector": [0.2, 0.3, 0.4, 0.5, 0.6], "title": "Hollow Man", "issue": "vol.7", "version": 2}}
+    ],
+    "writeCondition": {{"field": "version", "op": "gt", "onMissing": "insert"}}
+}}'
+
+# {{
+#     "code": 0,
+#     "data": {{
+#         "succIndex": [
+#             0
+#         ],
+#         "upsertCount": 1,
+#         "upsertIds": [
+#             1
+#         ]
+#     }}
+# }}
+```
+
+The response reports only the written rows: `upsertCount` and `upsertIds` count the entities actually written, and conditional requests add `succIndex`, which holds the original request indexes of those rows in ascending order. A request in which every row is skipped returns code `0` with `upsertCount` `0` and empty arrays.
+
+### Failure handling
+
+- Invalid conditions fail before any write with code `1100` (invalid parameter): unknown field, excluded or non-integer field, an incoming version of `NULL` without a default, a request without the version column, duplicate primary keys, or `onMissing` set to `error` on a nonexistent primary key.
+- Code `112` (conditional upsert execution failed) reports a failure that may have partially committed. Do not automatically replay such a request: query the affected rows to determine the outcome.
+
+<div class="alert warning">
+
+Every serving Milvus proxy must support conditional upserts before you send them: a proxy older than Milvus 3.0.7 silently ignores the write condition and performs an unconditional upsert, which can overwrite newer data with older data. Do not send conditional upserts during a mixed-version upgrade, and stop sending them before downgrading.
+
+Client SDKs released before write-condition support are equally unsafe. For example, PyMilvus releases through v3.0.3 accept and silently ignore a `write_condition` keyword argument and perform an unconditional upsert. Until your SDK documents write-condition support, use RESTful v2 for conditional upserts and apply version checks client-side everywhere else.
+
+</div>
+
 <!-- doc:block:start id="upsert-array-heading" -->
 
 ## Upsert ARRAY fields in merge mode | Milvus 2.6.17+
